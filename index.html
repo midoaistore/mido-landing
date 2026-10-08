@@ -22,3 +22,75 @@ Error generating stack: `+u.message+`
   
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mido AI Store - البحث الذكي الحقيقي</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,Tahoma;background:#0a0a0f;color:#fff;min-height:100vh}
+.header{padding:22px;text-align:center;background:linear-gradient(135deg,#667eea,#764ba2)}
+.header h1{font-size:26px;margin-bottom:6px}
+.header p{opacity:.9;font-size:14px}
+.search-box{max-width:700px;margin:28px auto;padding:0 16px;display:flex;gap:10px}
+.search-box input{flex:1;padding:16px 18px;border-radius:28px;border:1px solid #2a2a35;background:#16161f;color:#fff;font-size:15px;outline:none}
+.search-box button{padding:14px 22px;border-radius:28px;border:none;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-weight:bold;cursor:pointer;white-space:nowrap}
+#results{max-width:800px;margin:0 auto 40px;padding:0 16px}
+.card{background:#15151f;border:1px solid #23232f;border-radius:16px;padding:16px;margin-bottom:12px}
+.card h3{color:#a2b0ff;margin-bottom:8px;font-size:16px;line-height:1.4}
+.card p{color:#c7c7d0;line-height:1.7;font-size:14px}
+.card a{color:#7c8cff;text-decoration:none;font-size:12px;word-break:break-all;display:block;margin-top:8px}
+.loading{text-align:center;padding:36px;color:#888}
+.badge{display:inline-block;background:#1e1e2a;padding:4px 10px;border-radius:20px;font-size:11px;margin:3px;color:#9a9ab0}
+.answer{border-color:#667eea;background:linear-gradient(135deg,#1a1a2e,#151528)}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>☆ Mido AI Store - البحث الذكي الحقيقي ☆</h1>
+<p>اسأل عن أي شيء - إجابات حية من الإنترنت الآن</p>
+</div>
+<div class="search-box">
+<input id="q" placeholder="مثلا: ما هي أفضل كاميرات التصوير 2024؟" onkeydown="if(event.key==='Enter')search()">
+<button onclick="search()">بحث 🔍</button>
+</div>
+<div id="results"><div class="loading">اكتب أي سؤال ودوس بحث - النتائج حقيقية 100%<br><br>جرب: أفضل أنواع كاميرات التصوير، أفضل لابتوب للألعاب، ما هي أفضل الاختراعات؟</div></div>
+<script>
+const TAVILY_KEY = "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";
+async function search(){
+ const query = document.getElementById('q').value.trim();
+ if(!query) return;
+ const resDiv = document.getElementById('results');
+ resDiv.innerHTML = '<div class="loading">🔍 جاري البحث الحقيقي عن:<br><b>'+query+'</b><br><br>ثواني وبتطلع النتائج الحية...</div>';
+ try{
+   const r = await fetch("https://api.tavily.com/search",{
+     method:"POST",
+     headers:{"Content-Type":"application/json"},
+     body: JSON.stringify({api_key:TAVILY_KEY, query: query, search_depth:"advanced", include_answer:true, max_results:8, include_images:false})
+   });
+   const data = await r.json();
+   if(!r.ok) throw new Error(data.error||"خطأ في البحث");
+   let html = "";
+   if(data.answer){
+     html += '<div class="card answer"><h3>✨ الإجابة الذكية المباشرة</h3><p>'+data.answer+'</p></div>';
+   }
+   if(data.results && data.results.length>0){
+     data.results.forEach(item=>{
+       const host = (()=>{ try{ return new URL(item.url).hostname }catch(e){ return "" } })();
+       html += '<div class="card"><h3>'+(item.title||"بدون عنوان")+'</h3><p>'+(item.content||"")+'</p><a href="'+item.url+'" target="_blank">🔗 '+item.url+'</a><div style="margin-top:8px"><span class="badge">'+host+'</span><span class="badge">Score: '+(item.score||0).toFixed(2)+'</span></div></div>';
+     });
+   } else {
+     html += '<div class="card"><p>لم أجد نتائج، جرب صيغة سؤال أخرى</p></div>';
+   }
+   resDiv.innerHTML = html;
+ }catch(e){
+   resDiv.innerHTML = '<div class="card" style="border-color:#ff4444"><h3>❌ حصل خطأ</h3><p>'+e.message+'</p><p style="font-size:12px;color:#666;margin-top:8px">تأكد من النت شغال وجرب تاني</p></div>';
+   console.error(e);
+ }
+}
+</script>
+</body>
+</html>
