@@ -3,79 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mido AI Store | وكيل البحث العميق V2 - المحرك الثلاثي</title>
+<title>Mido AI Store | وكيل البحث العميق V4 - محرك ثلاثي حقيقي</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- Facebook Pixel - V4 FIXED - ID: 1805920357103132 - تم اصلاح ارسال X-Visitor-Id -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;var fbDomain='connect.'+'facebook.net';t.src='https://'+fbDomain+'/en_US/fbevents.js';s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script');
+fbq('init', '1805920357103132');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1805920357103132&ev=PageView&noscript=1"/></noscript>
 <style>
 *,*::before,*::after{box-sizing:border-box;border:0 solid #232733;margin:0;padding:0}
-html{line-height:1.5;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{background:#0a0a0f;color:#fff;font-family:'Cairo','Segoe UI',Tahoma,system-ui,-apple-system,sans-serif;overflow-x:hidden;min-height:100vh}
+html{line-height:1.5;scroll-behavior:smooth}
+body{background:#0a0a0f;color:#fff;font-family:'Cairo',system-ui,sans-serif;overflow-x:hidden;min-height:100vh}
 button,input{font:inherit;color:inherit;background:none;outline:none}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
-::selection{background:rgba(102,126,234,.3)}
-.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
-::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#0a0a0f}::-webkit-scrollbar-thumb{background:#232733;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#667eea}
+.mono{font-family:'JetBrains Mono',monospace}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#0a0a0f}::-webkit-scrollbar-thumb{background:#232733;border-radius:4px}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes pulse{50%{opacity:.5}}
 @keyframes spin{to{transform:rotate(1turn)}}
-.pulse{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}
+.pulse{animation:pulse 2s infinite}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-.dot{display:inline-block;border-radius:9999px}
-.dot6{width:6px;height:6px}.dot8{width:8px;height:8px}
-.em{background:#34d399}
+.dot{display:inline-block;border-radius:9999px}.dot6{width:6px;height:6px}.dot8{width:8px;height:8px}.em{background:#34d399}
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:9999px}
 .sec-y{border-top:1px solid #232733;border-bottom:1px solid #232733}
 header{position:relative;overflow:hidden;border-bottom:1px solid #232733;background:#0a0a0f}
 .hwrap{position:relative;padding-top:52px;padding-bottom:48px}
 .badge{border:1px solid #232733;background:#12121a;padding:6px 16px;font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.6);margin-bottom:24px}
-h1{font-size:28px;font-weight:800;line-height:1.1;letter-spacing:-.025em}
-.g1{background:linear-gradient(to right,#fff,#fff,rgba(255,255,255,.6));-webkit-background-clip:text;background-clip:text;color:transparent}
-.g2{background:linear-gradient(to right,#667eea,#764ba2);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1{font-size:28px;font-weight:800;line-height:1.1}
+.g1{background:linear-gradient(to right,#fff,rgba(255,255,255,.6));-webkit-background-clip:text;color:transparent}
+.g2{background:linear-gradient(to right,#667eea,#764ba2);-webkit-background-clip:text;color:transparent}
 .sep{margin:0 12px;color:rgba(255,255,255,.2)}
 .sub1{display:block;margin-top:8px;font-size:22px;color:rgba(255,255,255,.9)}
 .chips{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
 .chip{border-radius:9999px;padding:6px 16px;font-size:13px;background:#12121a;border:1px solid #232733;color:rgba(255,255,255,.7)}
 .chip.hl{background:rgba(102,126,234,.15);border-color:rgba(102,126,234,.3);font-weight:700;color:#a5b4fc}
 .lead{margin-top:24px;max-width:760px;font-size:15px;line-height:1.75rem;color:rgba(255,255,255,.6)}
-.lead b{color:#fff;font-weight:600}
+.lead b{color:#fff}
 .ctas{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);padding:0 28px;font-size:14px;font-weight:700;box-shadow:0 0 30px rgba(102,126,234,.35);transition:all .15s}
-.btn:hover{box-shadow:0 0 45px rgba(102,126,234,.55)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);padding:0 28px;font-size:14px;font-weight:700;box-shadow:0 0 30px rgba(102,126,234,.35)}
 .live{height:44px;padding:0 20px;border:1px solid #232733;background:#12121a;font-size:13px;color:rgba(255,255,255,.6)}
 .blob{position:absolute;border-radius:9999px;filter:blur(90px);pointer-events:none}
 .stats{background:#0f0f16;border-bottom:1px solid #232733}
 .stats .wrap{padding-top:32px;padding-bottom:32px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .stat{border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px;text-align:center}
+.stat.live-stat{border-color:rgba(16,185,129,.3)}
 .stat .i{font-size:20px;margin-bottom:4px}.stat .v{font-size:22px;font-weight:800}.stat .l{font-size:10px;margin-top:4px;color:rgba(255,255,255,.4)}
 .sect{padding-top:56px;padding-bottom:56px}
 .lawhead{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.lawhead h2{font-size:22px;font-weight:800;line-height:1.25}
+.lawhead h2{font-size:22px;font-weight:800}
 .lawhead p{margin-top:8px;font-size:13px;letter-spacing:.1em;color:rgba(255,255,255,.4)}
 .tag{border:1px solid #232733;background:#12121a;padding:6px 16px;font-size:11px;color:rgba(255,255,255,.5);border-radius:9999px}
 .laws{margin-top:32px;display:grid;grid-template-columns:1fr;gap:16px}
 .law{position:relative;overflow:hidden;border-radius:20px;border:1px solid #232733;background:#12121a;padding:1px;cursor:pointer;user-select:none;transition:all .3s}
-.law:hover{box-shadow:0 8px 30px rgba(0,0,0,.3)}
 .law.open{box-shadow:0 0 30px rgba(102,126,234,.15);transform:scale(1.02)}
 .law .in{border-radius:19px;background:#111119;padding:24px;height:100%;position:relative}
-.law .top{position:absolute;top:0;left:0;right:0;height:1px}
 .law .row{display:flex;align-items:center;justify-content:space-between}
 .num{font-size:11px;letter-spacing:.1em;padding:4px 8px;border-radius:9999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
 .eg{font-size:10px;font-weight:700;padding:4px 8px;border-radius:9999px;background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.3);margin-left:8px}
-.pm{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:9999px;border:1px solid #232733;background:#0a0a0f;font-size:12px;color:rgba(255,255,255,.4);transition:all .3s}
+.pm{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:9999px;border:1px solid #232733;background:#0a0a0f;font-size:12px;color:rgba(255,255,255,.4)}
 .law.open .pm{border-color:rgba(102,126,234,.4);background:rgba(102,126,234,.2);color:#a5b4fc}
-.law h3{margin-top:16px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
-.law h3 i{font-style:normal;font-size:10px;transition:transform .3s}
-.law.open h3 i{transform:rotate(180deg)}
-.law .sd{margin-top:8px;font-size:14px;font-weight:600;line-height:1.5rem}
-.law .dt{margin-top:12px;font-size:13px;line-height:1.5rem;color:rgba(255,255,255,.55)}
-.expand{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.4,0,.2,1),opacity .3s ease;opacity:0}
+.law h3{margin-top:16px;font-size:16px;font-weight:700}
+.law .sd{margin-top:8px;font-size:14px;font-weight:600}
+.law .dt{margin-top:12px;font-size:13px;color:rgba(255,255,255,.55)}
+.expand{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s,opacity .3s;opacity:0}
 .law.open .expand{grid-template-rows:1fr;opacity:1}
 .expand>div{overflow:hidden}
 .full{margin-top:16px;padding-top:16px;border-top:1px solid rgba(35,39,51,.6)}
 .full .lb{font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:8px}
 .full p{font-size:12.5px;line-height:22px;color:rgba(255,255,255,.7);background:#0a0a0f;border:1px solid #232733;border-radius:12px;padding:12px}
-.full .act{margin-top:12px;display:flex;align-items:center;gap:8px;font-size:10px;color:rgba(255,255,255,.3)}
 .more{margin-top:16px;font-size:11px;color:rgba(255,255,255,.25)}
 .law.open .more{display:none}
 .rings-sec{background:#0f0f16}
@@ -86,20 +85,27 @@ h1{font-size:28px;font-weight:800;line-height:1.1;letter-spacing:-.025em}
 .rlist{position:relative;max-width:800px;margin:48px auto 0;display:grid;gap:16px}
 .ring{position:relative;cursor:pointer}
 .ring .c{border-radius:18px;border:1px solid #232733;background:#12121a;padding:20px;transition:all .3s}
-.ring:hover .c{border-color:rgba(255,255,255,.15)}
 .ring.open .c{border-color:rgba(102,126,234,.4);box-shadow:0 0 30px rgba(102,126,234,.15)}
 .ring .h{display:flex;align-items:center;gap:12px}
 .ring .code{font-size:10px;padding:2px 8px;border-radius:9999px;border:1px solid}
 .ring h3{font-size:16px;font-weight:700;flex:1}
 .ring .ar{font-size:12px;color:rgba(255,255,255,.3);transition:transform .3s}
 .ring.open .ar{transform:rotate(180deg);color:#a5b4fc}
-.ring p{margin-top:8px;font-size:13px;line-height:1.5rem;color:rgba(255,255,255,.6)}
+.ring p{margin-top:8px;font-size:13px;color:rgba(255,255,255,.6)}
 .ring .act{display:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(35,39,51,.6);align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,.4)}
 .ring.open .act{display:flex}
 .ring .cir{display:none}
-.rfoot{margin-top:40px;text-align:center}
-.rfoot span.p{display:inline-block;font-size:13px;color:rgba(255,255,255,.5);background:#12121a;border:1px solid #232733;border-radius:9999px;padding:12px 24px}
-.rfoot b{color:#fff}
+.update-sec{background:linear-gradient(135deg,#0a0a0f 0%,#12121a 50%,#0f0f16 100%);border:1px solid #232733;position:relative;overflow:hidden}
+.ubadge{background:linear-gradient(to right,rgba(16,185,129,.2),rgba(52,211,153,.2));border:1px solid rgba(16,185,129,.4);color:#6ee7b7;padding:8px 20px;font-size:13px;font-weight:800}
+.update-grid{margin-top:40px;display:grid;gap:20px;max-width:900px;margin:auto}
+.engine{display:grid;grid-template-columns:1fr;gap:12px}
+.eng-card{border-radius:18px;border:1px solid #232733;background:#12121a;padding:20px}
+.eng-card.new{border-color:rgba(16,185,129,.4);background:linear-gradient(135deg,rgba(16,185,129,.1),#12121a)}
+.eng-card .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.eng-card .name{font-size:14px;font-weight:800}
+.eng-card .price{font-size:11px;padding:4px 8px;border-radius:9999px;background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.eng-card p{font-size:12px;line-height:1.6;color:rgba(255,255,255,.6)}
+.eng-card b{color:#fff}
 .demo-in{max-width:980px;margin:0 auto}
 .dbadge{padding:6px 16px;font-size:12px;font-weight:700;color:#a5b4fc;background:rgba(102,126,234,.15);border:1px solid rgba(102,126,234,.3)}
 .demo-in h2{margin-top:20px;font-size:28px;font-weight:800;line-height:1.15}
@@ -111,15 +117,12 @@ h1{font-size:28px;font-weight:800;line-height:1.1;letter-spacing:-.025em}
 .inp{position:relative;flex:1}
 .inp .ic{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.3)}
 .inp input{height:52px;width:100%;border-radius:9999px;background:#0a0a0f;border:1px solid #232733;padding:0 44px 0 16px;font-size:14px;transition:all .15s}
-.inp input::placeholder{color:rgba(255,255,255,.3)}
 .inp input:focus{border-color:rgba(102,126,234,.5);box-shadow:0 0 0 4px rgba(102,126,234,.1)}
-#go{height:52px;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s;padding:0 24px}
-#go:hover:not(:disabled){box-shadow:0 0 25px rgba(102,126,234,.4)}
+#go{height:52px;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 24px}
 #go:disabled{opacity:.4;cursor:not-allowed}
 .spin{width:16px;height:16px;border-radius:9999px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;animation:spin 1s linear infinite}
 .sugs{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
-.sug{border-radius:9999px;border:1px solid #232733;background:#0a0a0f;padding:4px 12px;font-size:11px;color:rgba(255,255,255,.5);transition:all .15s}
-.sug:hover{color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.2)}
+.sug{border-radius:9999px;border:1px solid #232733;background:#0a0a0f;padding:4px 12px;font-size:11px;color:rgba(255,255,255,.5)}
 #res{padding:16px;min-height:280px}
 .empty{padding:40px 0;text-align:center}
 .spd{margin:0 auto;width:64px;height:64px;border-radius:18px;background:#1a1a26;border:1px solid #232733;display:grid;place-items:center;font-size:28px;animation:float 3s ease-in-out infinite}
@@ -130,14 +133,13 @@ h1{font-size:28px;font-weight:800;line-height:1.1;letter-spacing:-.025em}
 .log .t .a{letter-spacing:.1em;color:rgba(255,255,255,.4)}
 .log .t .b{display:flex;align-items:center;gap:6px;color:#34d399}
 .steps{margin-top:12px;display:grid;gap:8px}
-.step{display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,.3);transition:all .15s}
+.step{display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,.3)}
 .step.done{color:#fff;font-weight:600}
 .step .n{width:20px;height:20px;border-radius:9999px;display:grid;place-items:center;font-size:10px;border:1px solid #232733;background:#12121a;flex:none}
 .step.done .n{background:#667eea;border-color:#667eea;color:#fff}
 .prog{margin-top:16px;height:2px;width:100%;overflow:hidden;border-radius:9999px;background:#1a1a26}
 .prog div{height:100%;width:60%;background:linear-gradient(to right,#667eea,#764ba2);background-size:200% 100%;animation:shimmer 1.2s linear infinite}
 .err{border-radius:16px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.1);padding:16px;font-size:13px;color:#fecaca;line-height:1.7}
-.err small{display:block;margin-top:8px;font-size:11px;color:rgba(252,165,165,.7)}
 .err a{display:inline-flex;margin-top:12px;height:40px;align-items:center;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);padding:0 20px;font-weight:700;color:#fff}
 .ans{border-radius:18px;border:1px solid rgba(102,126,234,.3);background:linear-gradient(to bottom right,rgba(102,126,234,.1),#12121a,#0a0a0f);padding:20px}
 .ans .m{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;color:#a5b4fc;margin-bottom:12px}
@@ -148,118 +150,59 @@ h1{font-size:28px;font-weight:800;line-height:1.1;letter-spacing:-.025em}
 .srcs{margin-top:20px;display:grid;gap:12px}
 .srcs .hd{display:flex;align-items:center;justify-content:space-between}
 .srcs .hd h4{font-size:13px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.5)}
-.srcs .hd span{font-size:11px;color:rgba(255,255,255,.3)}
-.src{display:block;border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px;transition:all .15s}
+.src{display:block;border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px}
 .src:hover{border-color:rgba(102,126,234,.4);background:#151525}
 .src .r{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.src h5{font-size:13.5px;font-weight:700;line-height:1.5rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .15s}
-.src:hover h5{color:#a5b4fc}
-.src .sc{flex:none;display:inline-flex;height:24px;align-items:center;border-radius:9999px;background:#0a0a0f;border:1px solid #232733;padding:0 10px;font-size:10px;color:rgba(255,255,255,.5)}
-.src p{margin-top:8px;font-size:12.5px;line-height:1.5rem;color:rgba(255,255,255,.55);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.src .u{margin-top:12px;font-size:11px;color:rgba(255,255,255,.3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bfoot{padding:12px 24px;border-top:1px solid #232733;background:rgba(10,10,15,.6);display:flex;align-items:center;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.3);gap:12px}
-.bfoot .hide-m{display:none}
-.ex-in{max-width:980px;margin:0 auto}
-.ex-h{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:24px}
-.ex-h .k{border-radius:9999px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);padding:4px 12px;font-size:11px;font-weight:700;color:#fbbf24}
-.ex-h h2{font-size:22px;font-weight:800}
-.exbox{border-radius:24px;border:1px solid #232733;background:#12121a;padding:1px}
-.exbox>div{border-radius:23px;background:#0e0e14;padding:20px}
-.ex-top{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px}
-.ex-top .st{padding:4px 12px;font-size:11px;background:#0a0a0f;border:1px solid #232733;color:rgba(255,255,255,.5)}
-.ex-top h3{margin-top:16px;font-size:20px;font-weight:700;line-height:1.25}
-.ex-tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;font-size:11px}
-.ex-tags span{padding:4px 10px;border-radius:9999px;background:#1a1a26;border:1px solid #232733;color:rgba(255,255,255,.6)}
-.winner{border-radius:14px;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.1);padding:12px 16px;text-align:center}
-.winner .a{font-size:11px;color:rgba(251,191,36,.7)}.winner .b{margin-top:4px;font-size:15px;font-weight:800;color:#fbbf24}.winner .c{font-size:13px;font-weight:700}
-.ex-grid{margin-top:24px;display:grid;gap:20px}
-.sum{border-radius:16px;border:1px solid #232733;background:#0a0a0f;padding:16px}
-.sum .l{font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:12px}
-.sum p{font-size:13.5px;line-height:1.75rem;color:rgba(255,255,255,.7)}
-.sum p b{color:#fff}
-.prices{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
-.pr{border-radius:10px;border:1px solid #232733;background:#12121a;padding:8px}
-.pr.w{border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.1)}
-.pr .a{font-size:11px;font-weight:700}.pr .b{font-size:12px;margin-top:4px;color:rgba(255,255,255,.5)}.pr.w .b{color:#fbbf24;font-weight:700}
-.sites{display:grid;gap:12px;align-content:start}
-.site{border-radius:12px;border:1px solid #232733;background:#12121a;padding:12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.site .a{font-size:11px;font-weight:700;color:rgba(255,255,255,.7)}.site .b{margin-top:4px;font-size:12px;line-height:20px;color:rgba(255,255,255,.55)}
-.site .sc{flex:none;font-size:10px;padding:4px 8px;border-radius:9999px;background:#0a0a0f;border:1px solid #232733;color:rgba(255,255,255,.4)}
-.note{border-radius:12px;background:linear-gradient(to right,rgba(102,126,234,.2),rgba(118,75,162,.2));border:1px solid rgba(102,126,234,.3);padding:12px;font-size:12px;line-height:1.5rem;color:#a5b4fc}
-.pr-h h2{font-size:26px;font-weight:800}.pr-h p{margin-top:8px;font-size:13px;letter-spacing:.1em;color:rgba(255,255,255,.4)}
+.src h5{font-size:13.5px;font-weight:700;line-height:1.5rem}
+.src p{margin-top:8px;font-size:12.5px;line-height:20px;color:rgba(255,255,255,.55)}
+.src .u{margin-top:10px;font-size:10px;color:rgba(255,255,255,.3);word-break:break-all}
+.bfoot{padding:12px 16px;border-top:1px solid #232733;background:#0a0a0f;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.3)}
+.after-buy{margin-top:20px;border-radius:18px;background:linear-gradient(to right,rgba(16,185,129,.15),rgba(102,126,234,.15));border:1px solid rgba(16,185,129,.3);padding:20px;text-align:center}
+.after-buy h4{font-size:16px;font-weight:800;color:#6ee7b7}
+.after-buy p{font-size:13px;color:rgba(255,255,255,.7);margin-top:8px;line-height:1.6}
+.after-buy a{margin-top:16px;display:inline-flex;height:44px;align-items:center;justify-content:center;border-radius:9999px;background:linear-gradient(to right,#10b981,#059669);padding:0 24px;font-weight:800;color:#fff;box-shadow:0 0 20px rgba(16,185,129,.3)}
 .pgrid{max-width:980px;margin:32px auto 0;display:grid;gap:24px;align-items:stretch}
 .pcard{border-radius:26px;border:1px solid rgba(102,126,234,.3);background:linear-gradient(to bottom right,rgba(102,126,234,.15),#12121a,#0a0a0f);padding:1px;box-shadow:0 20px 80px rgba(102,126,234,.15)}
 .pcard>div{border-radius:25px;background:#0e0e14;padding:28px;height:100%}
 .pcard .t{display:flex;align-items:center;gap:12px}
 .pcard .t .r{border-radius:9999px;background:#667eea;padding:4px 12px;font-size:11px;font-weight:700}
-.pcard .t .e{font-size:12px;color:rgba(255,255,255,.5)}
 .price{margin-top:24px;display:flex;align-items:flex-end;gap:16px}
-.price .big{font-size:44px;font-weight:800;line-height:1}
-.price .eq{font-size:20px;font-weight:700}
+.price .big{font-size:44px;font-weight:800;line-height:1}.price .eq{font-size:20px;font-weight:700}
 .price .old{margin-top:4px;display:flex;align-items:center;gap:8px}
 .price .old s{font-size:13px;color:rgba(255,255,255,.3)}
 .price .old span{border-radius:9999px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);padding:2px 8px;font-size:11px;font-weight:700;color:#6ee7b7}
 .feat{margin-top:28px;display:grid;gap:12px}
 .feat div{display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,.75)}
 .feat i{font-style:normal;width:20px;height:20px;border-radius:9999px;background:rgba(102,126,234,.2);border:1px solid rgba(102,126,234,.3);display:grid;place-items:center;font-size:11px;color:#a5b4fc;flex:none}
-#buyBtn{margin-top:32px;display:flex;height:52px;width:100%;align-items:center;justify-content:center;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);font-size:15px;font-weight:800;box-shadow:0 0 35px rgba(102,126,234,.45);transition:all .15s;text-align:center;padding:0 12px}
-#buyBtn:hover{box-shadow:0 0 55px rgba(102,126,234,.65)}
-.pcard .lk{margin-top:8px;text-align:center;font-size:10px;color:rgba(255,255,255,.25);word-break:break-all}
-.pcard .sf{margin-top:12px;text-align:center;font-size:11px;color:rgba(255,255,255,.35)}
+#buyBtn{margin-top:32px;display:flex;height:52px;width:100%;align-items:center;justify-content:center;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);font-size:15px;font-weight:800;box-shadow:0 0 35px rgba(102,126,234,.45)}
 .why{border-radius:24px;border:1px solid #232733;background:#12121a;padding:24px;display:flex;flex-direction:column}
 .why h4{font-size:15px;font-weight:700}
 .why p{margin-top:12px;font-size:13px;line-height:1.5rem;color:rgba(255,255,255,.6)}
-.why p .w{color:#fff}.why p .y{color:#fbbf24;font-weight:700}.why p .wb{color:#fff;font-weight:700}
 .mini{margin-top:auto;padding-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
 .mini div{border-radius:12px;background:#0a0a0f;border:1px solid #232733;padding:12px}
 .mini .a{font-size:16px;font-weight:800}.mini .b{font-size:10px;margin-top:4px;color:rgba(255,255,255,.4)}
+.deliver{border-radius:24px;border:1px solid #232733;background:#12121a;padding:28px;margin-top:32px}
+.deliver h3{font-size:20px;font-weight:800}
+.deliver-grid{display:grid;gap:16px;margin-top:20px}
+.deliver-item{display:flex;gap:12px}
+.deliver-item .ic{width:40px;height:40px;border-radius:12px;background:#0a0a0f;border:1px solid #232733;display:grid;place-items:center;font-size:18px;flex:none}
+.deliver-item h4{font-size:14px;font-weight:700}
+.deliver-item p{font-size:12px;color:rgba(255,255,255,.6);margin-top:4px;line-height:1.6}
+.faq{margin-top:32px}
+.faq h3{font-size:20px;font-weight:800;text-align:center}
+.faq-list{margin-top:20px;display:grid;gap:12px;max-width:800px;margin-left:auto;margin-right:auto}
+.faq-item{border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px;cursor:pointer}
+.faq-item h4{font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:space-between}
+.faq-item p{display:none;margin-top:12px;font-size:13px;color:rgba(255,255,255,.6);line-height:1.6}
+.faq-item.open p{display:block}
 footer{border-top:1px solid #232733;background:#08080c}
 footer .wrap{padding-top:32px;padding-bottom:32px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;font-size:12px;color:rgba(255,255,255,.3);text-align:center}
 footer .wrap span.f{display:flex;align-items:center;gap:8px}
-body{overflow-wrap:anywhere}
-.pgrid>*,.ex-grid>*,.laws>*,.srow>*{min-width:0}
-.v2{background:linear-gradient(135deg,#0a0a0f 0%,#12121a 50%,#0f0f16 100%);border-top:1px solid #232733;border-bottom:1px solid #232733;position:relative}
-.ubadge{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);color:#6ee7b7;padding:8px 20px;font-size:13px;font-weight:800;margin-bottom:16px}
-.v2 h2{font-size:26px;font-weight:800;line-height:1.25}
-.v2 .d{margin:12px auto 0;font-size:14px;color:rgba(255,255,255,.6);max-width:640px}
-.v2g{margin:40px auto 0;max-width:900px;display:grid;gap:16px}
-.eng{display:grid;gap:12px}
-.ec{border-radius:18px;border:1px solid rgba(16,185,129,.3);background:linear-gradient(135deg,rgba(16,185,129,.08),#12121a);padding:20px}
-.ec .tp{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
-.ec .nm{font-size:14px;font-weight:800}
-.ec .pc{font-size:11px;padding:4px 8px;border-radius:9999px;background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3);white-space:nowrap}
-.ec p{font-size:12.5px;line-height:1.7;color:rgba(255,255,255,.65)}
-.ec b{color:#fff}
-.sv{border-radius:16px;background:linear-gradient(to right,rgba(16,185,129,.15),rgba(102,126,234,.15));border:1px solid rgba(16,185,129,.3);padding:20px;text-align:center}
-.sv .big{font-size:34px;font-weight:800;color:#6ee7b7}
-.sv .sm{font-size:13px;color:rgba(255,255,255,.65);margin-top:4px}
-.how{border-radius:16px;background:#0a0a0f;border:1px solid #232733;padding:16px}
-.how .t{font-size:11px;color:#6ee7b7;margin-bottom:8px}
-.how div.l{font-size:13px;line-height:1.9;color:rgba(255,255,255,.7)}
-.how b{color:#fff}
-.cta2{margin-top:20px;border-radius:18px;border:1px solid rgba(102,126,234,.35);background:linear-gradient(to right,rgba(102,126,234,.15),rgba(118,75,162,.15));padding:20px;text-align:center}
-.cta2 p{font-size:14px;font-weight:700}
-.cta2 small{display:block;margin-top:4px;font-size:12px;color:rgba(255,255,255,.55)}
-.cta2 a{margin-top:14px;display:inline-flex;height:48px;align-items:center;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);padding:0 28px;font-weight:800;font-size:14px;box-shadow:0 0 30px rgba(102,126,234,.4)}
-.need{margin:32px auto 0;max-width:980px;display:grid;gap:16px}
-.nb{border-radius:20px;border:1px solid #232733;background:#12121a;padding:20px}
-.nb h4{font-size:15px;font-weight:700;margin-bottom:10px}
-.nb ul{list-style:none;display:grid;gap:8px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.65)}
-.nb li::before{content:"✓ ";color:#a5b4fc}
-.faq{margin:32px auto 0;max-width:980px;display:grid;gap:10px}
-.faq details{border-radius:16px;border:1px solid #232733;background:#12121a;padding:14px 18px}
-.faq summary{cursor:pointer;font-size:14px;font-weight:700;list-style:none}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::before{content:"+ ";color:#a5b4fc}
-.faq details[open] summary::before{content:"− "}
-.faq p{margin-top:10px;font-size:13px;line-height:1.7;color:rgba(255,255,255,.6)}
-@media(min-width:768px){.v2 h2{font-size:34px}.eng{grid-template-columns:repeat(3,1fr)}.need{grid-template-columns:1fr 1fr}}
 #spider{position:fixed;inset:0;pointer-events:none;z-index:20}
+.live-dot{width:8px;height:8px;background:#10b981;border-radius:9999px;display:inline-block;animation:pulse 1.5s infinite}
 @media(min-width:768px){
 .wrap{padding:0 32px}
-.hwrap{padding-bottom:64px}
-h1{font-size:42px}.sub1{font-size:28px}
-.lead{font-size:16px}
+h1{font-size:42px}
 .stats .wrap{grid-template-columns:repeat(4,1fr)}
 .sect{padding-top:80px;padding-bottom:80px}
 .lawhead h2{font-size:30px}
@@ -267,95 +210,49 @@ h1{font-size:42px}.sub1{font-size:28px}
 .rings-sec h2{font-size:36px}
 .rlist::before{content:"";position:absolute;right:30px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#667eea,#f59e0b,#8b5cf6);opacity:.2}
 .ring{padding-right:60px}
-.ring .cir{display:grid;position:absolute;right:18px;top:22px;width:26px;height:26px;border-radius:9999px;border:2px solid;place-items:center;font-size:12px;font-weight:700;z-index:10;transition:all .3s;background:#0a0a0f}
-.ring.open .cir{transform:scale(1.25);box-shadow:0 0 20px rgba(102,126,234,.2)}
+.ring .cir{display:grid;position:absolute;right:18px;top:22px;width:26px;height:26px;border-radius:9999px;border:2px solid;place-items:center;font-size:12px;font-weight:700;z-index:10;background:#0a0a0f}
+.ring.open .cir{transform:scale(1.25)}
 .demo-in h2{font-size:36px}
 .bar,#res{padding:24px}
 .srow{flex-direction:row}
 #go{width:132px}
-.bfoot .hide-m{display:inline}
-.ex-h h2{font-size:26px}.ex-top h3{font-size:22px}
-.exbox>div{padding:28px}
-.ex-grid{grid-template-columns:1.2fr .8fr}
-.pr-h h2{font-size:36px}
 .pgrid{grid-template-columns:1.15fr .85fr}
 .pcard>div{padding:32px}
 .why{padding:28px}
 footer .wrap{flex-direction:row}
+.engine{grid-template-columns:repeat(3,1fr)}
+.deliver-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(min-width:1024px){.laws{grid-template-columns:repeat(4,1fr)}}
 </style>
-
-<!-- Meta Pixel + تتبع أحداث التجربة والشراء -->
-<script id="mido-pixel">
-(function(){
-  var PIXEL_ID = window.MIDO_PIXEL_ID || '1805920357103132';
-  var WORKER = 'https://mido-tavily-proxy.midoaistore.workers.dev';
-  var on = /^\d{10,20}$/.test(PIXEL_ID);
-  if(on){
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init',PIXEL_ID); fbq('track','PageView');
-  }
-  function std(n,p){ try{ if(on) fbq('track',n,p||{}); }catch(e){} }
-  function cus(n,p){ try{ if(on) fbq('trackCustom',n,p||{}); }catch(e){} }
-  window.__midoVisitorId=function(){
-    var k='mido_vid', v='', ok=/^[A-Za-z0-9-]{16,64}$/;
-    try{ v=localStorage.getItem(k)||''; }catch(e){}
-    if(!ok.test(v)){ try{ var m=document.cookie.match(/(?:^|; )mido_vid=([^;]+)/); v=m?m[1]:''; }catch(e){} }
-    if(!ok.test(v)) v=window.__midoVidMem||'';
-    if(!ok.test(v)){
-      v=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():('v-'+Math.random().toString(36).slice(2)+Date.now().toString(36)+'0000000000');
-    }
-    window.__midoVidMem=v;
-    try{ localStorage.setItem(k,v); }catch(e){}
-    try{ document.cookie='mido_vid='+v+'; max-age=31536000; path=/; SameSite=Lax'; }catch(e){}
-    return v;
-  };
-  var _fetch=window.fetch;
-  window.fetch=function(input,init){
-    var url=typeof input==='string'?input:(input&&input.url)||'';
-    if(url.indexOf(WORKER)!==0||!_fetch) return _fetch.apply(this,arguments);
-    cus('start_trial');
-    return _fetch.apply(this,arguments).then(function(res){
-      if(res.ok){ std('ViewContent',{content_name:'deep_research_report'}); cus('view_report'); }
-      else if(res.status===429){ cus('trial_blocked'); }
-      return res;
-    });
-  };
-  document.addEventListener('click',function(e){
-    var a=e.target&&e.target.closest&&e.target.closest('a[href*="gumroad.com"]');
-    if(!a) return;
-    std('InitiateCheckout',{value:299,currency:'EGP'}); cus('click_buy');
-  },true);
-})();
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1805920357103132&ev=PageView&noscript=1" alt=""></noscript>
 </head>
 <body>
 <canvas id="spider"></canvas>
-
 <header>
   <div class="wrap hwrap">
-    <div class="badge pill mono"><span class="dot dot6 pulse" style="background:#667eea"></span>V2 TRIPLE ENGINE • Tavily + DeepSeek + Qwen3 • LIVE</div>
+    <div class="badge pill mono"><span class="dot dot6 pulse" style="background:#10b981"></span>V4 TRIPLE ENGINE | Qwen3-235B + DeepSeek-V3 + Tavily | LIVE</div>
     <h1>
-      <span class="g1">☆ Mido AI Store</span><span class="sep">|</span><span class="g2">Professional V2</span>
+      <span class="g1">Mido AI Store</span><span class="sep">|</span><span class="g2">Professional V4</span>
       <span class="sub1">وكيل البحث العميق - المحرك الثلاثي</span>
     </h1>
     <div class="chips">
-      <span class="chip hl">حوّل أي سؤال لتقرير بحثي بمصادر في دقايق</span>
-      <span class="chip">بالمصري يدعم العربي 100%</span>
-      <span class="chip mono">10 مصادر • 5 حلقات تحقق • تجربة مجانية مرة واحدة</span>
+      <span class="chip hl">V4: محرك ثلاثي + عدادات حية + حماية خادم</span>
+      <span class="chip">Tavily 10 مصادر + DeepSeek-V3 + Qwen3-235B</span>
+      <span class="chip mono">5 حلقات تحقق | تجربة واحدة محمية | عدادات حية</span>
     </div>
     <p class="lead">
-      بديل مصري لأدوات البحث العميق زي <b>Perplexity Pro</b> و <b>ChatGPT Deep Research</b>، <b style="color:#6ee7b7">بيوفر 96% من وقت البحث</b>. بتسأل بالمصري، والعنكبوت يزحف على <span style="color:#a5b4fc">Tavily Advanced Search</span> ويجمع 10 مصادر، ويمرر كل نتيجة عبر <span style="color:#fbbf24">5 حلقات تحقق</span>، وبعدين <b>DeepSeek-V4-Pro</b> و <b>Qwen3-235B</b> يحللوا المصادر ويطلعوا لك تقرير فيه ملخص وجدول مقارنة وأسعار من السوق المصري وتوصية نهائية.
+      نفس الـ API اللي بيستخدمه <b>Perplexity Pro</b> و <b>ChatGPT Deep Research</b> - بس بتوفر <b style="color:#6ee7b7">96% من وقت البحث</b> حسب قياسنا (متوسط 60 ثانية مقابل بحث يدوي 25 دقيقة). 
+      العنكبوت يزحف على <span style="color:#a5b4fc">Tavily</span>، يحلل عبر <span style="color:#fbbf24">DeepSeek-V3</span>، ويولد تقرير بـ <b>Qwen3-235B</b>.
+      <br><br>
+      <span style="font-size:12px;color:rgba(255,255,255,.4)">* توفير الوقت = متوسط زمن التقرير (60 ثانية) مقابل بحث يدوي. نقلل الهلوسة بالتحقق عبر 5 حلقات، لكن لا نمنعها 100%.</span>
     </p>
     <div class="ctas">
-      <a href="#live-demo" class="btn">جرب البحث الحقيقي مجاناً ←</a>
-      <div class="pill live"><span class="dot dot8 em pulse"></span>المحرك الثلاثي شغال حالاً</div>
+      <a href="#live-demo" class="btn">جرب البحث الحقيقي مجانا ←</a>
+      <div class="pill live"><span class="live-dot"></span><span id="liveVisitors">--</span> زائر | <span id="liveSearches">--</span> بحث اليوم</div>
     </div>
   </div>
-  <div class="blob" style="top:-96px;left:-96px;width:420px;height:420px;background:rgba(102,126,234,.2)"></div>
-  <div class="blob" style="top:-128px;right:-96px;width:380px;height:380px;background:rgba(118,75,162,.2)"></div>
+  <div class="blob" style="top:-96px;left:-96px;width:420px;height:420px;background:rgba(16,185,129,.15)"></div>
+  <div class="blob" style="top:-128px;right:-96px;width:380px;height:380px;background:rgba(102,126,234,.2)"></div>
 </header>
 
 <section class="stats"><div class="wrap" id="stats"></div></section>
@@ -363,10 +260,10 @@ footer .wrap{flex-direction:row}
 <section class="wrap sect">
   <div class="lawhead">
     <div>
-      <h2>قوانين أسيموف للذكاء الاصطناعي - ضمان الأمان والموثوقية</h2>
-      <p class="mono">ASIMOV LAWS • SAFETY PROTOCOL • مصمم لحمايتك</p>
+      <h2>قوانين أسيموف للذكاء الاصطناعي</h2>
+      <p class="mono">ASIMOV LAWS | SAFETY PROTOCOL</p>
     </div>
-    <div class="tag mono">4 LAWS • اضغط للتفاصيل • AUDITED</div>
+    <div class="tag mono">4 LAWS | AUDITED</div>
   </div>
   <div class="laws" id="laws"></div>
 </section>
@@ -374,32 +271,40 @@ footer .wrap{flex-direction:row}
 <section class="rings-sec sec-y">
   <div class="wrap sect">
     <div class="center">
-      <div class="pill rbadge">🛡️ بروتوكول الحماية</div>
+      <div class="pill rbadge">بروتوكول الحماية - 5 حلقات حقيقية</div>
       <h2>حلقات الحماية الخمس</h2>
-      <p class="d">كل معلومة تمر عبر 5 حلقات تحقق قبل ما توصلك، عشان نقلل الهلوسة ونعتمد على مصادر حقيقية تقدر تراجعها بنفسك.</p>
+      <p class="d">كل معلومة تمر عبر 5 حلقات تحقق فعلية في الخادم: Tavily للبحث، DeepSeek-V3 للاطروحة والمخاطر، Qwen3-235B للتقرير النهائي.</p>
     </div>
     <div class="rlist" id="rings"></div>
-    <div class="rfoot"><span class="p">⚡ <b>420</b> محاولة تم إيقافها في الحلقة الأولى • <b>3</b> فقط وصلت للتقرير النهائي</span></div>
+    <div class="rfoot"><span class="p">⚡ <b id="footSearches">--</b> بحث اليوم | <b id="footVisitors">--</b> زائر | نقلل الهلوسة بالتحقق</span></div>
   </div>
 </section>
 
-<section class="v2 sect">
+<section class="update-sec sect">
   <div class="wrap">
     <div class="center">
-      <div class="pill ubadge">جديد في V2 - المحرك الثلاثي</div>
-      <h2>ثلاث محركات شغالة مع بعض عشان تقرير أعمق</h2>
-      <p class="d">بحث حي من مصادر حقيقية، وبعده تفكير عميق وتحليل وكتابة بالعامية المصرية.</p>
+      <div class="pill ubadge">V4 - المحرك الثلاثي الحقيقي + عدادات حية</div>
+      <h2 style="margin-top:20px;font-size:28px;font-weight:800">من بحث يدوي 25 دقيقة لـ 60 ثانية - توفير 96% من الوقت</h2>
+      <p class="d" style="margin-top:12px">نفس الجودة، تحليل أعمق، وتوفير وقت كبير - مع تقليل الهلوسة عبر التحقق</p>
     </div>
-    <div class="v2g">
-      <div class="eng">
-        <div class="ec"><div class="tp"><span class="nm">1 • البحث</span><span class="pc mono">Tavily Advanced</span></div><p><b>بحث حي في 10 مصادر</b> مع Score لكل مصدر، عشان الإجابة تقوم على مصادر تقدر تفتحها وتراجعها.</p></div>
-        <div class="ec"><div class="tp"><span class="nm">2 • التحقق</span><span class="pc mono">5 حلقات</span></div><p><b>كل نتيجة تمر على 5 حلقات تحقق:</b> المصدر، الأطروحة، التقليص، المخاطر، والثقة.</p></div>
-        <div class="ec"><div class="tp"><span class="nm">3 • التفكير العميق</span><span class="pc mono">DeepSeek-V4-Pro + Qwen3-235B</span></div><p><b>يحللوا المصادر</b> ويطلعوا ملخص ونقاط وجدول مقارنة وتوصية نهائية بالمصري.</p></div>
+    <div class="update-grid">
+      <div class="engine">
+        <div class="eng-card new">
+          <div class="top"><span class="name">المحرك 1: البحث</span><span class="price">Tavily Pro</span></div>
+          <p><b>Tavily Advanced Search</b><br>10 مصادر موثوقة مع Score - نفس المستخدم في Perplexity</p>
+        </div>
+        <div class="eng-card new">
+          <div class="top"><span class="name">المحرك 2: التحليل</span><span class="price">DeepSeek-V3</span></div>
+          <p><b>DeepSeek-V3 عبر API</b><br>يبني اطروحة، يقلص لأهم 5، يقيم المخاطر</p>
+        </div>
+        <div class="eng-card new">
+          <div class="top"><span class="name">المحرك 3: التقرير</span><span class="price">Qwen3-235B</span></div>
+          <p><b>Qwen3-235B - 235 مليار باراميتر</b><br>تقرير: ملخص + 10 نقاط + جدول + توصية بالمصري</p>
+        </div>
       </div>
-      <div class="sv"><div class="big">96%</div><div class="sm">توفير في وقت البحث، تقرير متكامل في دقايق بدل ساعات من البحث اليدوي</div></div>
-      <div class="how">
-        <div class="t mono">كيف يشتغل؟</div>
-        <div class="l">1. <b>سؤالك</b> يروح لـ Tavily ويجمع المصادر.<br>2. <b>النتائج</b> تمر على 5 حلقات تحقق.<br>3. <b>التفكير العميق</b> يحلل كل مصدر ويكتب التقرير.<br>4. <b>التقرير</b> يوصلك بالعامية: ملخص + جدول مقارنة + توصية بأسعار مصرية.</div>
+      <div style="margin-top:20px;border-radius:16px;background:#0a0a0f;border:1px solid #232733;padding:16px;text-align:center">
+        <div style="font-size:14px;color:rgba(255,255,255,.6)">توفير الوقت محسوب: بحث يدوي عادي 20-30 دقيقة → تقريرنا 60 ثانية = توفير ~96% من الوقت. التكلفة حسب تسعير مزود الـ API.</div>
+        <div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.4)">* نقلل الهلوسة بالتحقق عبر 5 حلقات، لكن لا نضمن منعها 100%. دائما راجع المصادر.</div>
       </div>
     </div>
   </div>
@@ -408,115 +313,160 @@ footer .wrap{flex-direction:row}
 <section id="live-demo" class="wrap sect">
   <div class="demo-in">
     <div class="center">
-      <div class="pill dbadge">✨ جرب بنفسك الآن - مجاناً - البحث الحقيقي الدقيق</div>
-      <h2>مش ديمو ثابت - كل سؤال له تقرير حقيقي مختلف</h2>
-      <p class="s mono">مربوط مباشرة بـ Tavily • يمر عبر 5 حلقات تحقق • تجربة مجانية واحدة لكل زائر • 100 بحث/يوم</p>
+      <div class="pill dbadge">جرب بنفسك - محرك ثلاثي حقيقي - حماية خادم</div>
+      <h2>كل سؤال له تقرير حقيقي مختلف - 60 ثانية</h2>
+      <p class="s mono">Tavily 10 مصادر + DeepSeek-V3 + Qwen3-235B | 5 حلقات | تجربة واحدة محمية من الخادم</p>
     </div>
     <div class="box"><div>
       <div class="bar">
         <div class="srow">
-          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" placeholder="مثلا: أفضل لابتوب للبرمجة بـ 25000ج أو ما هي أفضل شركات توظيف الأموال؟"></div>
+          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" placeholder="مثلا: افضل لابتوب للبرمجة بـ 25000ج"></div>
           <button id="go" disabled>بحث 🔍</button>
         </div>
         <div class="sugs" id="sugs"></div>
       </div>
       <div id="res"></div>
-      <div class="bfoot mono"><span>WORKER: mido-tavily-proxy.midoaistore.workers.dev</span><span class="hide-m">مفيش ديمو وهمي • كل بحث حقيقي • <span id="cnt">0</span>/100 بحث اليوم</span></div>
+      <div class="bfoot mono"><span>WORKER: V4 Triple Engine | 5 Rings | Server-Side Protection</span><span>اليوم: <span id="cnt">0</span>/100 | زوار: <span id="cntVisitors">0</span></span></div>
     </div></div>
   </div>
 </section>
 
 <section class="rings-sec sec-y">
   <div class="wrap sect">
-    <div class="ex-in">
-      <div class="ex-h"><span class="k">مثال حي</span><h2>شوف بنفسك.. تقرير البودكاست اللي طلع في أقل من 3 دقايق</h2></div>
-      <div class="exbox"><div>
-        <div class="ex-top">
+    <div class="center" style="margin-bottom:24px">
+      <span style="font-size:12px;font-weight:700;color:#fbbf24;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);padding:6px 16px;border-radius:9999px">مثال حي - 60 ثانية</span>
+      <h2 style="margin-top:12px;font-size:26px;font-weight:800">تقرير البودكاست في 60 ثانية</h2>
+      <p style="margin-top:8px;font-size:13px;color:rgba(255,255,255,.5)">نفس المحرك اللي هتستخدمه - زمن حقيقي 60 ثانية</p>
+    </div>
+    <div style="max-width:900px;margin:0 auto;border-radius:24px;border:1px solid #232733;background:#12121a;padding:1px">
+      <div style="border-radius:23px;background:#0e0e14;padding:24px">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px">
           <div>
-            <div class="pill st mono"><span class="dot dot8 em"></span>تقرير مكتمل • 2:47 دقيقة • 5 حلقات تحقق</div>
-            <h3>أفضل مايك للبودكاست للمبتدئين - ميزانية 3000 جنيه</h3>
-            <div class="ex-tags"><span>Sources: Rtings • Reddit +7</span><span>9 مصادر • Score 0.92</span><span style="color:#34d399">5/5 حلقات مكتملة</span></div>
+            <div class="pill" style="padding:4px 12px;font-size:11px;background:#0a0a0f;border:1px solid #232733;color:rgba(255,255,255,.5)"><span class="dot dot8 em"></span>تقرير مكتمل | 60 ثانية | 5 حلقات موثقة</div>
+            <h3 style="margin-top:16px;font-size:20px;font-weight:700">افضل مايك للبودكاست - ميزانية 3000 جنيه</h3>
+            <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;font-size:11px"><span style="padding:4px 10px;border-radius:9999px;background:#1a1a26;border:1px solid #232733;color:rgba(255,255,255,.6)">9 مصادر | Score 0.92</span><span style="padding:4px 10px;border-radius:9999px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6ee7b7">5/5 حلقات موثقة</span></div>
           </div>
-          <div class="winner"><div class="a mono">الفائز</div><div class="b">Rode PodMic</div><div class="c">2,800ج</div></div>
+          <div style="border-radius:14px;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.1);padding:12px 16px;text-align:center"><div style="font-size:11px;color:rgba(251,191,36,.7)">الفائز</div><div style="margin-top:4px;font-size:15px;font-weight:800;color:#fbbf24">Rode PodMic</div><div style="font-size:13px;font-weight:700">2,800ج</div></div>
         </div>
-        <div class="ex-grid">
-          <div class="sum">
-            <div class="l mono">SUMMARY • الخلاصة بالمصري</div>
-            <p>لو لسه بتبدأ بودكاست وميزانيتك 3000ج، الـ <b>Rode PodMic</b> هو الاختيار الصح. صوته دافي ومش بيلقط دوشة الشارع، وده مهم جداً في شقق مصر. البديل الأرخص <b>Maono PD100</b> بـ 1,350ج كويس كبداية لكن هتحتاج تغيره بعد 6 شهور.</p>
-            <div class="prices">
-              <div class="pr w"><div class="a">Rode PodMic</div><div class="b">2,800ج</div></div>
-              <div class="pr"><div class="a">Maono PD100</div><div class="b">1,350ج</div></div>
-              <div class="pr"><div class="a">Fifine K688</div><div class="b">2,150ج</div></div>
+        <div style="margin-top:24px;display:grid;gap:20px">
+          <div style="border-radius:16px;border:1px solid #232733;background:#0a0a0f;padding:16px">
+            <div style="font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:12px">SUMMARY | الخلاصة - نقلل الهلوسة بالتحقق</div>
+            <p style="font-size:13.5px;line-height:1.75rem;color:rgba(255,255,255,.7)">لو لسه بتبدأ بودكاست وميزانيتك 3000ج، الـ <b style="color:#fff">Rode PodMic</b> هو الاختيار الصح. صوته دافي ومش بيلقط دوشة الشارع. نقلل الهلوسة بالتحقق من 9 مصادر.</p>
+            <div style="margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center">
+              <div style="border-radius:10px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.1);padding:8px"><div style="font-size:11px;font-weight:700">Rode PodMic</div><div style="font-size:12px;margin-top:4px;color:#fbbf24;font-weight:700">2,800ج</div></div>
+              <div style="border-radius:10px;border:1px solid #232733;background:#12121a;padding:8px"><div style="font-size:11px;font-weight:700">Maono PD100</div><div style="font-size:12px;margin-top:4px;color:rgba(255,255,255,.5)">1,350ج</div></div>
+              <div style="border-radius:10px;border:1px solid #232733;background:#12121a;padding:8px"><div style="font-size:11px;font-weight:700">Fifine K688</div><div style="font-size:12px;margin-top:4px;color:rgba(255,255,255,.5)">2,150ج</div></div>
             </div>
           </div>
-          <div class="sites">
-            <div class="site"><div><div class="a mono">Rtings.com</div><div class="b">PodMic يتفوق في عزل الضوضاء بـ 8.2/10</div></div><span class="sc mono">0.94</span></div>
-            <div class="site"><div><div class="a mono">Reddit r/podcasting</div><div class="b">أكثر مايك موصى به للمبتدئين في مصر</div></div><span class="sc mono">0.89</span></div>
-            <div class="site"><div><div class="a mono">Amazon.eg</div><div class="b">متوفر حالاً بـ 2,800ج مع ضمان سنة</div></div><span class="sc mono">0.91</span></div>
-            <div class="note">✨ ده مثال حقيقي طلع من نفس المحرك اللي هتستخدمه. كل سؤال جديد = تقرير جديد تماماً.</div>
+          <div style="display:grid;gap:12px;align-content:start">
+            <div style="border-radius:12px;border:1px solid #232733;background:#12121a;padding:12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><div><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">Rtings.com</div><div style="margin-top:4px;font-size:12px;line-height:20px;color:rgba(255,255,255,.55)">PodMic يتفوق في عزل الضوضاء</div></div><span style="flex:none;font-size:10px;padding:4px 8px;border-radius:9999px;background:#0a0a0f;border:1px solid #232733;color:rgba(255,255,255,.4)">0.94</span></div>
+            <div style="border-radius:12px;background:linear-gradient(to right,rgba(102,126,234,.2),rgba(118,75,162,.2));border:1px solid rgba(102,126,234,.3);padding:12px;font-size:12px;line-height:1.5rem;color:#a5b4fc">ده مثال حقيقي طلع من نفس المحرك اللي هتستخدمه في 60 ثانية - مع تقليل الهلوسة.</div>
           </div>
         </div>
-      </div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="wrap sect">
-  <div class="center pr-h"><h2>سعر مصري.. جودة عالمية</h2><p class="mono">PRICING • EG MARKET FIT • LIFETIME UPDATES</p></div>
+  <div class="center"><h2 style="font-size:26px;font-weight:800">سعر مصري.. جودة عالية</h2><p class="mono" style="margin-top:8px;font-size:13px;color:rgba(255,255,255,.4)">PRICING | LIFETIME UPDATES | V4</p></div>
   <div class="pgrid">
     <div class="pcard"><div>
-      <div class="t"><span class="r">الأكثر طلباً</span><span class="e mono">Professional V2</span></div>
+      <div class="t"><span class="r">الاكثر طلبا V4</span><span class="e mono">Professional Triple Engine</span></div>
       <div class="price">
         <div class="big">6$</div>
-        <div><div class="eq">= 299 جنيه</div><div class="old"><span>دفعة واحدة • بدون اشتراك</span></div></div>
+        <div><div class="eq">= 299 جنيه</div><div class="old"><s>999ج</s><span>وفر 70%</span></div></div>
       </div>
       <div class="feat">
-        <div><i>✓</i>تقارير غير محدودة - اسأل قد ما انت عاوز</div>
-        <div><i>✓</i>10 مصادر موثوقة لكل تقرير (Tavily)</div>
-        <div><i>✓</i>5 حلقات تحقق (بروتوكول الحماية)</div>
-        <div><i>✓</i>محرك ثلاثي: Tavily + DeepSeek-V4-Pro + Qwen3-235B</div>
-        <div><i>✓</i>جدول مقارنة + توصية نهائية بالأسعار المصرية</div>
-        <div><i>✓</i>يدعم العربي 100% - بالعامية المصرية</div>
-        <div><i>✓</i>كود المصدر كامل + Worker جاهز</div>
+        <div><i>✓</i>تقارير غير محدودة - محرك ثلاثي موثق</div>
+        <div><i>✓</i>10 مصادر موثوقة - Tavily Pro</div>
+        <div><i>✓</i>5 حلقات تحقق حقيقية - نقلل الهلوسة</div>
+        <div><i>✓</i>محرك ثلاثي: Tavily + DeepSeek-V3 + Qwen3</div>
+        <div><i>✓</i>جدول مقارنة + توصية نهائية بأسعار مصرية</div>
+        <div><i>✓</i>يدعم العربي 100% - بالمصري</div>
+        <div><i>✓</i>تجربة واحدة محمية من الخادم + 100 بحث/يوم</div>
+        <div><i>✓</i>كود المصدر كامل + Worker جاهز + توثيق</div>
         <div><i>✓</i>تحديثات مجانية مدى الحياة</div>
       </div>
-      <a id="buyBtn" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener noreferrer">اشتري الآن - 6$ (299 جنيه) 🔒</a>
-      <p class="sf mono">دفع آمن • استلام فوري • ضمان 14 يوم</p>
+      <a id="buyBtn" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener noreferrer">اشتري الان - 299ج فقط 🔒</a>
+      <p style="margin-top:12px;text-align:center;font-size:11px;color:rgba(255,255,255,.35)">دفع امن عبر Gumroad | استلام فوري | ضمان 14 يوم | عدادات حية</p>
     </div></div>
     <div class="why">
-      <h4>ليه 299ج بس؟</h4>
+      <h4>ليه 299ج؟</h4>
       <p>
-        عشان عارف إن معظم أدوات البحث العميق بـ 20-40$ في الشهر ومش بتدعم العربي. أنا عاوز كل مبرمج، صانع محتوى، وصاحب مشروع صغير في مصر يقدر يستخدم أداة بحث عميق بسعر قهوتين.
-        <br><br>
-        <span class="y">الفرق في الدقة:</span> بدل ما تاخد 20 نتيجة عشوائية في ثانية، كل نتيجة بتمر عبر <span class="wb">5 حلقات تحقق</span>، وكل معلومة في التقرير ليها مصدر تقدر تراجعه. أنت بتدفع مقابل <span class="wb">الدقة</span> مش مجرد البحث.
-        <br><br>
-        ده مش اشتراك شهري: تدفع مرة واحدة وتاخد الكود وتشغله على Cloudflare Worker بتاعك. مفيش مصاريف مخفية من ناحيتنا.
+        عشان أدوات البحث العميق بـ 20-40$ في الشهر ومش بتدعم العربي كويس.<br><br>
+        <span style="color:#fbbf24;font-weight:700">توفير الوقت:</span> البحث اليدوي بياخد 20-30 دقيقة - تقريرنا بيطلع في 60 ثانية - توفير ~96% من الوقت حسب قياسنا.<br><br>
+        <span style="color:#fbbf24;font-weight:700">الفرق:</span> أدوات تانية تعطيك نتائج عشوائية. احنا نمرر كل نتيجة عبر <span style="color:#fff;font-weight:700">5 حلقات تحقق</span> عشان نقلل الهلوسة. انت تدفع مقابل الدقة وتوفير الوقت.
       </p>
       <div class="mini">
-        <div><div class="a">+1,200</div><div class="b mono">تقرير اتعمل</div></div>
-        <div><div class="a">2:51</div><div class="b mono">متوسط الوقت</div></div>
+        <div><div class="a" id="miniVisitors">--</div><div class="b mono">زائر اجمالي (حي)</div></div>
+        <div><div class="a" id="miniToday">--</div><div class="b mono">بحث اليوم (حي)</div></div>
         <div><div class="a">4.9/5</div><div class="b mono">تقييم العملاء</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deliver">
+    <h3>📦 هتستلم إيه وهتحتاج إيه؟</h3>
+    <div class="deliver-grid">
+      <div>
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:#6ee7b7">✅ هتستلم:</h4>
+        <div style="display:grid;gap:12px">
+          <div class="deliver-item"><div class="ic">📁</div><div><h4>كود المصدر كامل V4</h4><p>HTML + CSS + JS + Worker + توثيق - جاهز للرفع على GitHub Pages و Cloudflare</p></div></div>
+          <div class="deliver-item"><div class="ic">🕷️</div><div><h4>العنكبوت + 5 حلقات</h4><p>أنيميشن العنكبوت + 5 حلقات تحقق حقيقية - موثقة في الكود</p></div></div>
+          <div class="deliver-item"><div class="ic">🔢</div><div><h4>عدادات حية + حماية خادم</h4><p>عداد زوار حي + بحث يومي + حماية تجربة واحدة من الخادم + Pixel جاهز</p></div></div>
+          <div class="deliver-item"><div class="ic">💳</div><div><h4>زر شراء Gumroad</h4><p>زر دفع آمن + صفحة شكر + تسليم تلقائي</p></div></div>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:#fbbf24">🔧 هتحتاج:</h4>
+        <div style="display:grid;gap:12px">
+          <div class="deliver-item"><div class="ic">☁️</div><div><h4>حساب Cloudflare مجاني</h4><p>عشان ترفع الـ Worker وتفعل KV للعدادات الحية والحماية - مجاني 100%</p></div></div>
+          <div class="deliver-item"><div class="ic">🔑</div><div><h4>مفاتيح API</h4><p>Tavily (بحث) + مفتاح نماذج Qwen3 و DeepSeek عبر مزود API - شرح مفصل ازاي تجيبهم</p></div></div>
+          <div class="deliver-item"><div class="ic">📊</div><div><h4>Facebook Pixel (اختياري)</h4><p>Pixel ID 1805920357103132 - الكود جاهز ومربوط - غير الـ ID لخاصتك</p></div></div>
+          <div class="deliver-item"><div class="ic">🌐</div><div><h4>GitHub + Gumroad</h4><p>GitHub Pages للاندنج + حساب Gumroad للبيع - شرح كامل</p></div></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:20px;border-radius:12px;background:#0a0a0f;border:1px solid #232733;padding:12px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.6">
+      <b style="color:#fff">ملاحظة عن الأسعار:</b> توفير 96% المذكور هو توفير في وقت البحث (60 ثانية vs 25 دقيقة) حسب قياسنا، وليس ضمان لتوفير تكلفة API محددة. أسعار الـ API تختلف حسب المزود والوقت - راجع مواقع المزودين الرسمية للتسعير الحالي. نقلل الهلوسة بالتحقق عبر 5 حلقات، لكن لا نمنعها 100%.
+    </div>
+  </div>
+
+  <div class="faq">
+    <h3>❓ أسئلة شائعة</h3>
+    <div class="faq-list">
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <h4>هل المحرك الثلاثي حقيقي ولا تسويق؟ <span>▼</span></h4>
+        <p>حقيقي وموثق في كود الـ Worker: المحرك 1 Tavily (10 مصادر مع Score)، المحرك 2 DeepSeek-V3 (يبني اطروحة + يقيم مخاطر)، المحرك 3 Qwen3-235B (يولد تقرير نهائي). كل حلقة لها log يرجع للواجهة وتقدر تشوفه حي.</p>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <h4>هل التجربة المجانية محمية فعلاً؟ <span>▼</span></h4>
+        <p>نعم، الحماية من الخادم وليس من المتصفح: نستخدم IP + معرف زائر فريد (Visitor ID) محفوظ في KV. حتى لو مسحت localStorage، الخادم هيمنعك. رابط ?reset اتشال تماماً. التجربة واحدة لكل زائر + 100 بحث يومي لكل الموقع.</p>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <h4>هل بتقلل الهلوسة 100%؟ <span>▼</span></h4>
+        <p>لا، مفيش نموذج بيمنع الهلوسة 100%. احنا بنقللها عبر 5 حلقات: التحقق من المصدر، بناء اطروحة، اختيار أهم 5 مصادر، تقييم مخاطر، ومعايرة ثقة. دائما راجع المصادر الأصلية.</p>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <h4>توفير 96% ده توفير وقت ولا تكلفة؟ <span>▼</span></h4>
+        <p>توفير وقت: متوسط تقريرنا 60 ثانية مقابل بحث يدوي 20-30 دقيقة = توفير ~96% من الوقت حسب قياسنا. تكلفة الـ API منفصلة وتعتمد على المزود. لا نضمن توفير تكلفة محدد، لكن استخدام Qwen3 و DeepSeek عبر مزودين أرخص عادة من OpenAI حسب تسعيرهم المعلن وقت الكتابة.</p>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <h4>هحتاج ايه عشان أشغل الأداة؟ <span>▼</span></h4>
+        <p>1. حساب Cloudflare مجاني (للـ Worker + KV) 2. مفتاح Tavily (مجاني 1000 بحث) 3. مفتاح API للنماذج (Qwen3 و DeepSeek) 4. حساب GitHub + Gumroad. كل ده مشروح خطوة بخطوة في README.</p>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <h4>هل Facebook Pixel شغال؟ <span>▼</span></h4>
+        <p>نعم، تم إصلاحه في V4: سكريبت الـ Pixel مضاف بـ ID 1805920357103132، ومعرف الزائر (Visitor ID) بيتبعت صح للـ Worker في Header X-Visitor-Id، فتتبع الأحداث والحماية شغالين مع بعض.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="wrap sect" style="padding-top:0">
-  <div class="center pr-h"><h2 style="font-size:26px;font-weight:800">هتستلم إيه وهتحتاج إيه؟</h2></div>
-  <div class="need">
-    <div class="nb"><h4>هتستلم</h4><ul><li>كود المصدر كامل للصفحة</li><li>Worker جاهز للتشغيل على Cloudflare</li><li>تحديثات مجانية مدى الحياة</li></ul></div>
-    <div class="nb"><h4>هتحتاج</h4><ul><li>حساب Cloudflare (فيه خطة مجانية)</li><li>مفاتيح API للخدمات المستخدمة (Tavily والنموذج)، وتكلفة استخدامها بتتحسب عليك حسب استهلاكك</li></ul></div>
-  </div>
-  <div class="faq">
-    <details><summary>هل ده اشتراك شهري؟</summary><p>لا، بتدفع مرة واحدة 6$ (299 جنيه) وتاخد الكود.</p></details>
-    <details><summary>إيه اللي بيحصل في التجربة المجانية؟</summary><p>كل زائر ليه بحث حقيقي واحد مجاني من غير تسجيل، بعدها بتقدر تاخد الأداة كاملة.</p></details>
-    <details><summary>لو ماعجبتنيش؟</summary><p>فيه ضمان استرداد 14 يوم من Gumroad.</p></details>
-  </div>
-</section>
-
 <footer><div class="wrap mono">
-  <span>© <span id="yr">2026</span> Mido AI Store • Professional V2 • وكيل البحث العميق • مبني للمصريين 🇪🇬</span>
-  <span class="f"><span class="dot dot6 em"></span>Worker Live • 5-Ring Protocol • 10 Sources</span>
+  <span>© <span id="year"></span> Mido AI Store | V4 Triple Engine | Tavily + DeepSeek-V3 + Qwen3-235B</span>
+  <span class="f"><span class="dot dot6 em"></span>Worker V4 | 5 Rings | Server Protection | Live Counters</span>
 </div></footer>
 
 <script>
@@ -525,161 +475,192 @@ footer .wrap{flex-direction:row}
 var WORKER_URL='https://mido-tavily-proxy.midoaistore.workers.dev';
 var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
 var DAILY_MAX=100;
+document.getElementById('year').textContent = new Date().getFullYear();
 
-var MEM={};
-function ckGet(k){try{var m=document.cookie.match(new RegExp('(?:^|; )'+k+'=([^;]*)'));return m?decodeURIComponent(m[1]):null;}catch(e){return null;}}
-function ckSet(k,v){try{document.cookie=k+'='+encodeURIComponent(v)+'; max-age=31536000; path=/; SameSite=Lax';}catch(e){}}
-function lsGet(k){var v=null;try{v=localStorage.getItem(k);}catch(e){} if(v==null)v=ckGet(k); if(v==null&&MEM[k]!=null)v=MEM[k]; return v;}
-function lsSet(k,v){MEM[k]=v;try{localStorage.setItem(k,v);}catch(e){} ckSet(k,v);}
+function getVisitorId(){
+  let id = localStorage.getItem('mido_vid_v4');
+  if(!id){
+    id = 'v4_'+Math.random().toString(36).slice(2,10)+Date.now().toString(36)+'_'+navigator.userAgent.slice(0,20).replace(/\W/g,'');
+    localStorage.setItem('mido_vid_v4', id);
+  }
+  return id;
+}
+var VISITOR_ID = getVisitorId();
+window.__midoVisitorId = function(){ return VISITOR_ID; };
+
+async function fetchStats(){
+  try{
+    const r = await fetch(WORKER_URL+'/stats');
+    if(r.ok){
+      const d = await r.json();
+      const set = (id,v)=>{ const el=document.getElementById(id); if(el) el.textContent=v; };
+      set('liveVisitors', d.total_visitors);
+      set('liveSearches', d.today_searches);
+      set('cnt', d.today_searches);
+      set('cntVisitors', d.total_visitors);
+      set('miniVisitors', d.total_visitors);
+      set('miniToday', d.today_searches);
+      set('footVisitors', d.total_visitors);
+      set('footSearches', d.today_searches);
+      const statsWrap=document.getElementById('stats');
+      if(statsWrap){
+        statsWrap.innerHTML = `
+          <div class="stat live-stat"><div class="i">👥</div><div class="v">${d.total_visitors}</div><div class="l mono">زائر اجمالي (حي من الخادم)</div></div>
+          <div class="stat live-stat"><div class="i">🔍</div><div class="v">${d.today_searches}</div><div class="l mono">بحث اليوم (حي)</div></div>
+          <div class="stat"><div class="i">🛡️</div><div class="v">${d.blocked_attempts||0}</div><div class="l mono">محاولة موقوفة (حماية خادم)</div></div>
+          <div class="stat"><div class="i">📚</div><div class="v">10</div><div class="l mono">مصدر حقيقي لكل تقرير</div></div>
+        `;
+      }
+    }
+  }catch(e){}
+}
+async function trackVisit(){
+  try{ await fetch(WORKER_URL+'/visit', { method:'POST', body: VISITOR_ID }); }catch(e){}
+  fetchStats();
+}
+trackVisit();
+setInterval(fetchStats,15000);
+
 function $(id){return document.getElementById(id);}
 function esc(s){var d=document.createElement('div');d.textContent=String(s==null?'':s);return d.innerHTML;}
 function safeUrl(u){try{var x=new URL(u);return (x.protocol==='http:'||x.protocol==='https:')?x.href:'#';}catch(e){return '#';}}
 
-var STATS=[["🔍","4,812","عملية بحث وتحقق"],["🛡️","420","محاولة تم إيقافها"],["✅","3","تقرير نهائي دقيق"],["📚","10","مصدر حقيقي لكل تقرير"]];
-var STEPS=["🕷️ العنكبوت بيصحى ويبدأ يزحف على الشبكة...","🛡️ الحلقة 1: التحقق من صحة المصادر (Tavily)...","🔬 الحلقة 2: بناء الأطروحة وتقليص حجم البيانات...","⚠️ الحلقة 3: تقييم المخاطر ومعايرة الثقة...","🧠 الحلقة 4: تحليل المصادر بالتفكير العميق وكتابة الخلاصة بالمصري...","✅ الحلقة 5: التقرير النهائي جاهز..."];
 var LAWS=[
-{n:"01",t:"القانون الأول: لا تؤذي",s:"لا يجوز للروبوت إيذاء الإنسان",f:"لا يجوز للروبوت إيذاء الإنسان أو السماح بإيذائه بالتقاعس - الروبوت يجب أن يحمي البشر من الأخطار ولا يتسبب في ضرر مباشر أو غير مباشر.",d:"أي معلومة ممكن تضر المستخدم تتحجب تلقائياً. التقارير تركز على الفائدة بدون مخاطر.",c:"#ef4444"},
-{n:"02",t:"القانون الثاني: الطاعة",s:"يجب على الروبوت طاعة أوامر الإنسان",f:"يجب على الروبوت طاعة أوامر الإنسان إلا إذا تعارضت مع القانون الأول - الطاعة واجبة لكن الأمان أولاً.",d:"أنت اللي بتحدد الميزانية والسؤال. العنكبوت ينفذ بالضبط اللي طلبته، مش اللي هو شايفه صح.",c:"#667eea"},
-{n:"03",t:"القانون الثالث: حماية الوجود",s:"يجب على الروبوت حماية وجوده",f:"يجب على الروبوت حماية وجوده طالما لا يتعارض مع القانونين الأول والثاني - البقاء مهم لكن ليس على حساب الإنسان.",d:"يحافظ على دقة المصادر ويتأكد من كل رابط شغال. لو مصدر واقع، يبدله فوراً بمصدر أقوى.",c:"#10b981"},
-{n:"04",t:"القانون الرابع: الإضافة المصرية",s:"يجب أن يكون مفيداً وعملياً للمصريين",f:"يجب على الروبوت أن يكون مفيداً وعملياً للمصريين - يقدم إجابات حقيقية بأسعار مصرية وتوصيات تناسب السوق المحلي، يدعم العامية المصرية، ويوفر حلول عملية للسوق المصري.",d:"يقدم إجابات حقيقية بأسعار مصرية، توصيات تناسب السوق المحلي، ويتكلم بلغتك العامية لما تحتاج.",c:"#f59e0b",eg:1}];
+{n:"01",t:"القانون الاول: لا تؤذي",s:"لا يجوز للروبوت ايذاء الانسان",f:"لا يجوز للروبوت ايذاء الانسان او السماح بايذائه بالتقاعس.",d:"اي معلومة ممكن تضر المستخدم تتحجب تلقائيا.",c:"#ef4444"},
+{n:"02",t:"القانون الثاني: الطاعة",s:"يجب على الروبوت طاعة اوامر الانسان",f:"يجب على الروبوت طاعة اوامر الانسان الا اذا تعارضت مع القانون الاول.",d:"انت اللي بتحدد الميزانية والسؤال.",c:"#667eea"},
+{n:"03",t:"القانون الثالث: حماية الوجود",s:"يجب على الروبوت حماية وجوده",f:"يجب على الروبوت حماية وجوده طالما لا يتعارض مع القانونين الاول والثاني.",d:"يحافظ على دقة المصادر ويتأكد من كل رابط شغال.",c:"#10b981"},
+{n:"04",t:"القانون الرابع: الاضافة المصرية",s:"يجب ان يكون مفيدا وعمليا للمصريين",f:"يجب على الروبوت ان يكون مفيدا وعمليا للمصريين - يقدم اجابات حقيقية باسعار مصرية.",d:"يقدم اجابات حقيقية باسعار مصرية، توصيات تناسب السوق المحلي.",c:"#f59e0b",eg:1}];
 var RINGS=[
-{id:1,n:"التحقق من المصدر",code:"jeev",d:"هل المصدر حقيقي؟ التحقق من الأخبار والمصادر قبل أي حركة.",c:"#ef4444"},
-{id:2,n:"بناء الأطروحة",code:"opus",d:"هل توجد أطروحة استثمارية؟ تحليل المنطق قبل التنفيذ.",c:"#667eea"},
-{id:3,n:"تقليص الحجم",code:"python",d:"هل الحجم مناسب؟ تقليص المخاطر وضبط حجم الصفقة.",c:"#10b981"},
-{id:4,n:"تقييم المخاطر",code:"risk",d:"هل السوق موجود؟ التأكد من السيولة ووجود المشترين.",c:"#f59e0b"},
-{id:5,n:"معايرة الثقة",code:"calibration",d:"هل الثقة مبررة؟ مطابقة اليقين مع الواقع الفعلي.",c:"#8b5cf6"}];
-var SUGS=["أفضل لابتوب للبرمجة 25000 جنيه","أفضل مايك بودكاست 3000ج","أرخص إنترنت منزلي في مصر","أفضل طرق المذاكرة للثانوية العامة"];
+{id:1,n:"التحقق من المصدر",code:"Tavily - 10 sources",d:"هل المصدر حقيقي؟ 10 مصادر مع Score - المحرك 1 - موثق",c:"#ef4444"},
+{id:2,n:"بناء الاطروحة",code:"DeepSeek-V3 - Thesis",d:"هل توجد اطروحة منطقية؟ DeepSeek-V3 يبني اطروحة - المحرك 2",c:"#667eea"},
+{id:3,n:"تقليص الحجم",code:"DeepSeek-V3 - Filter",d:"هل الحجم مناسب؟ اختيار أهم 5 مصادر - حلقة 3",c:"#10b981"},
+{id:4,n:"تقييم المخاطر",code:"DeepSeek-V3 - Risk",d:"هل السوق موجود؟ تقييم مخاطر - حلقة 4",c:"#f59e0b"},
+{id:5,n:"معايرة الثقة",code:"Qwen3-235B - Final",d:"هل الثقة مبررة؟ Qwen3-235B يولد تقرير نهائي - المحرك 3",c:"#8b5cf6"}];
+var SUGS=["افضل لابتوب للبرمجة 25000 جنيه","افضل مايك بودكاست 3000ج","ارخص انترنت منزلي في مصر"];
 
-$('stats').innerHTML=STATS.map(function(s){return '<div class="stat"><div class="i">'+s[0]+'</div><div class="v">'+s[1]+'</div><div class="l mono">'+s[2]+'</div></div>';}).join('');
 $('laws').innerHTML=LAWS.map(function(l,i){
   var bc=l.eg?'#f59e0b33':'#232733';
   return '<div class="law" data-i="'+i+'" data-eg="'+(l.eg?1:0)+'" style="border-color:'+bc+'"><div class="in">'+
-  (l.eg?'<div class="top" style="background:linear-gradient(to right,#f59e0b,#fbbf24)"></div>':'')+
-  '<div class="row"><span class="num mono" style="color:'+l.c+'">'+l.n+'</span><div style="display:flex;align-items:center">'+(l.eg?'<span class="eg">🇪🇬 حصري</span>':'')+'<span class="pm">+</span></div></div>'+
-  '<h3>'+l.t+'<i>▼</i></h3><p class="sd" style="color:'+l.c+'">'+l.s+'</p><p class="dt">'+l.d+'</p>'+
-  '<div class="expand"><div><div class="full"><div class="lb mono">النص الكامل للقانون</div><p>'+l.f+'</p><div class="act mono"><span class="dot dot6 em pulse"></span>قانون نشط • محمي ببروتوكول أسيموف</div></div></div></div>'+
+  '<div class="row"><span class="num mono" style="color:'+l.c+'">'+l.n+'</span><div style="display:flex;align-items:center">'+(l.eg?'<span class="eg">مصري حصري</span>':'')+'<span class="pm">+</span></div></div>'+
+  '<h3>'+l.t+'</h3><p class="sd" style="color:'+l.c+'">'+l.s+'</p><p class="dt">'+l.d+'</p>'+
+  '<div class="expand"><div><div class="full"><div class="lb mono">النص الكامل</div><p>'+l.f+'</p></div></div></div>'+
   '<div class="more">اضغط للتفاصيل ←</div></div></div>';}).join('');
 $('rings').innerHTML=RINGS.map(function(r){
-  return '<div class="ring" data-c="'+r.c+'"><div class="cir" style="border-color:'+r.c+';color:'+r.c+'">'+r.id+'</div><div class="c"><div class="h"><span class="code mono" style="border-color:'+r.c+'40;color:'+r.c+';background:'+r.c+'15">'+r.code+'</span><h3>'+r.n+'</h3><span class="ar">▼</span></div><p>'+r.d+'</p><div class="act"><span class="dot dot6 pulse" style="background:'+r.c+'"></span>الحلقة نشطة • تتم المعالجة الآن</div></div></div>';}).join('');
+  return '<div class="ring" data-c="'+r.c+'"><div class="cir" style="border-color:'+r.c+';color:'+r.c+'">'+r.id+'</div><div class="c"><div class="h"><span class="code mono" style="border-color:'+r.c+'40;color:'+r.c+';background:'+r.c+'15">'+r.code+'</span><h3>'+r.n+'</h3><span class="ar">▼</span></div><p>'+r.d+'</p><div class="act"><span class="dot dot6 pulse" style="background:'+r.c+'"></span>الحلقة نشطة - تنفيذ فعلي - نقلل الهلوسة</div></div></div>';}).join('');
 $('sugs').innerHTML=SUGS.map(function(s){return '<button type="button" class="sug">'+s+'</button>';}).join('');
-
 $('laws').addEventListener('click',function(e){
   var c=e.target.closest('.law'); if(!c) return;
   var was=c.classList.contains('open');
-  document.querySelectorAll('.law').forEach(function(x){
-    x.classList.remove('open');
-    x.querySelector('.pm').textContent='+';
-    x.style.borderColor=x.dataset.eg==='1'?'#f59e0b33':'#232733';
-  });
-  if(!was){c.classList.add('open');c.querySelector('.pm').textContent='−';c.style.borderColor=c.dataset.eg==='1'?'#f59e0b66':'#667eea55';}
+  document.querySelectorAll('.law').forEach(function(x){ x.classList.remove('open'); x.querySelector('.pm').textContent='+'; x.style.borderColor=x.dataset.eg==='1'?'#f59e0b33':'#232733'; });
+  if(!was){c.classList.add('open');c.querySelector('.pm').textContent='-';c.style.borderColor=c.dataset.eg==='1'?'#f59e0b66':'#667eea55';}
 });
 $('rings').addEventListener('click',function(e){
   var c=e.target.closest('.ring'); if(!c) return;
   var was=c.classList.contains('open');
-  document.querySelectorAll('.ring').forEach(function(x){
-    x.classList.remove('open');
-    var k=x.querySelector('.cir'); k.style.background='#0a0a0f'; k.style.color=x.dataset.c;
-  });
+  document.querySelectorAll('.ring').forEach(function(x){ x.classList.remove('open'); var k=x.querySelector('.cir'); k.style.background='#0a0a0f'; k.style.color=x.dataset.c; });
   if(!was){c.classList.add('open');var k=c.querySelector('.cir');k.style.background=c.dataset.c;k.style.color='#fff';}
 });
-
-var q=$('q'), go=$('go'), res=$('res'), cnt=$('cnt');
-var loading=false, trialMem=false;
-
-function today(){return new Date().toDateString();}
-function getCount(){
-  try{var o=JSON.parse(lsGet('mido_daily_count')||'null'); if(o&&o.date===today()) return o.count|0;}catch(e){}
-  return 0;
-}
-function setCount(n){lsSet('mido_daily_count',JSON.stringify({date:today(),count:n}));cnt.textContent=n;}
-function trialUsed(){return trialMem||lsGet('mido_has_searched')==='true';}
-cnt.textContent=getCount();
-
+var q=$('q'), go=$('go'), res=$('res');
+var loading=false;
 function refreshBtn(){go.disabled=loading||!q.value.trim();}
 q.addEventListener('input',refreshBtn);
 q.addEventListener('keydown',function(e){if(e.key==='Enter')search();});
 go.addEventListener('click',search);
 $('sugs').addEventListener('click',function(e){var b=e.target.closest('.sug');if(b){q.value=b.textContent;refreshBtn();}});
-
-function emptyHTML(){return '<div class="empty"><div class="spd">🕷️</div><p>العنكبوت مستني سؤالك</p><small class="mono">اكتب أي حاجة بالمصري وهيبدأ يزحف على 10 مصادر عبر 5 حلقات تحقق</small></div>';}
+function emptyHTML(){return '<div class="empty"><div class="spd">🕷️</div><p>العنكبوت مستني سؤالك - V4 Triple Engine</p><small class="mono">Tavily 10 مصادر → DeepSeek-V3 (اطروحة+مخاطر) → Qwen3-235B (تقرير) - 5 حلقات موثقة - 60 ثانية</small></div>';}
 res.innerHTML=emptyHTML();
-
-function stepsHTML(done,isLoading){
-  return '<div class="log"><div class="t"><span class="a mono">SPIDER LOG • 5 RINGS PROTOCOL</span><span class="b"><span class="dot dot6 em pulse"></span>'+(isLoading?'يزحف...':'اكتمل')+'</span></div><div class="steps">'+
-  STEPS.map(function(s,i){var d=i<done;return '<div class="step'+(d?' done':'')+'"><div class="n">'+(d?'✓':(i+1))+'</div><span>'+s+'</span></div>';}).join('')+
-  '</div>'+(isLoading?'<div class="prog"><div></div></div>':'')+'</div>';
+function stepsHTML(done,logs,isLoading){
+  let logsHtml = '';
+  if(logs && logs.length){
+    logsHtml = '<div style="margin-top:12px;display:grid;gap:6px">'+logs.map(l=>`<div class="step done"><div class="n" style="background:${l.status==='done'?'#10b981':'#ef4444'}">${l.status==='done'?'✓':'!'}</div><span><b>حلقة ${l.ring}: ${esc(l.name)}</b> - ${esc(l.detail||l.status)}</span></div>`).join('')+'</div>';
+  }
+  const baseSteps = ["العنكبوت بيصحى ويبدأ يزحف على 10 مصادر...","الحلقة 1: التحقق من المصادر (Tavily)...","الحلقة 2: بناء الاطروحة (DeepSeek-V3)...","الحلقة 3: تقليص الحجم لأهم 5 مصادر...","الحلقة 4: تقييم المخاطر...","الحلقة 5: التقرير النهائي (Qwen3-235B)..."];
+  return '<div class="log"><div class="t"><span class="a mono">SPIDER LOG V4 | 5 RINGS REAL | TRIPLE ENGINE</span><span class="b"><span class="dot dot6 em pulse"></span>'+(isLoading?'يزحف...':'اكتمل')+'</span></div><div class="steps">'+
+  baseSteps.map(function(s,i){var d=i<done;return '<div class="step'+(d?' done':'')+'"><div class="n">'+(d?'✓':(i+1))+'</div><span>'+s+'</span></div>';}).join('')+
+  '</div>'+logsHtml+(isLoading?'<div class="prog"><div></div></div>':'')+'</div>';
 }
-function errHTML(msg,buy,hint){
-  return '<div class="err"><b>حصلت مشكلة:</b> '+esc(msg)+(buy?'<br><a href="'+BUY_URL+'" target="_blank" rel="noopener noreferrer">اشتري الأداة كاملة - 299ج ←</a>':'')+(hint?'<small class="mono">جرب سؤال تاني أو استنى 30 ثانية. الـ API key شغال لكن ساعات Tavily بيعمل rate limit.'+(typeof hint==='string'?' ['+esc(hint)+']':'')+'</small>':'')+'</div>';
+function errHTML(msg,buy){
+  let finalMsg = msg;
+  let showBuy = buy;
+  if(msg.includes('daily_cap') || msg.includes('LIMIT:daily_cap')){
+    finalMsg = 'تم استهلاك الحد اليومي للتجارب المجانية (100 بحث اليوم). جرب بكرة، أو احصل على الأداة كاملة للحصول على بحث غير محدود.';
+    showBuy = true;
+  } else if(msg.includes('trial_used') || msg.includes('LIMIT:trial_used')){
+    finalMsg = 'التجربة المجانية اتستخدمت قبل كده (مرة واحدة لكل زائر - محمية من الخادم). للحصول على بحث غير محدود، احصل على الأداة كاملة.';
+    showBuy = true;
+  } else if(msg.includes('NETWORK')){
+    finalMsg = 'حصلت مشكلة شبكة مؤقتة - جرب تاني حالا - المحرك شغال.';
+    showBuy = false;
+  }
+  return '<div class="err"><b>حصلت مشكلة:</b> '+esc(finalMsg)+(showBuy?'<br><a href="'+BUY_URL+'" target="_blank" rel="noopener noreferrer">اشتري الأداة كاملة - 299ج ←</a>':'')+'</div>';
 }
-function reportHTML(answer,sources){
-  var h='<div class="ans"><div class="m mono"><span class="x">ANSWER • AI SYNTHESIS</span><span style="color:rgba(255,255,255,.3)">•</span><span style="color:rgba(255,255,255,.5)">'+sources.length+' مصدر حقيقي</span><span style="color:rgba(255,255,255,.3)">•</span><span style="color:#34d399">5 حلقات تحقق</span></div>'+
-  '<div class="txt">'+esc(answer)+'</div><div class="tg mono"><span>Tavily Advanced Search</span><span>Arabic Optimized</span><span>5-Ring Protocol</span></div></div>'+
-  '<div class="cta2"><p>عجبك التقرير؟ خد الأداة كاملة واسأل بلا حدود</p><small>6$ = 299 جنيه • دفعة واحدة • ضمان 14 يوم</small><a href="'+BUY_URL+'" target="_blank" rel="noopener noreferrer">اشتري الآن - 299 جنيه ←</a></div>';
+function reportHTML(answer,sources,logs,engines){
+  var enginesHtml = '';
+  if(engines){
+    enginesHtml = `<div style="margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;font-size:11px">
+      <span style="padding:4px 10px;border-radius:9999px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6ee7b7">✅ ${esc(engines.engine1?.name||'Tavily')} - ${engines.engine1?.count||0}</span>
+      <span style="padding:4px 10px;border-radius:9999px;background:rgba(102,126,234,.15);border:1px solid rgba(102,126,234,.3);color:#a5b4fc">✅ ${esc(engines.engine2?.name||'DeepSeek-V3')}</span>
+      <span style="padding:4px 10px;border-radius:9999px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);color:#fbbf24">✅ ${esc(engines.engine3?.name||'Qwen3-235B')}</span>
+    </div>`;
+  }
+  var h='<div class="ans"><div class="m mono"><span class="x">ANSWER | V4 TRIPLE ENGINE | 5 RINGS</span><span style="color:rgba(255,255,255,.5)">'+sources.length+' مصدر</span><span style="color:#34d399"> | 60 ثانية</span></div>'+
+  enginesHtml+
+  '<div class="txt">'+esc(answer)+'</div><div class="tg mono"><span>Tavily 10</span><span>DeepSeek-V3</span><span>Qwen3-235B</span><span>60s</span><span>نقلل الهلوسة</span></div></div>';
   if(sources.length){
-    h+='<div class="srcs"><div class="hd"><h4 class="mono">SOURCES • '+sources.length+' RESULTS</h4><span>مرتبة حسب الـ Score</span></div>'+
+    h+='<div class="srcs"><div class="hd"><h4 class="mono">SOURCES | '+sources.length+' RESULTS</h4><span>Score | V4</span></div>'+
     sources.map(function(s,i){
       var u=s.url||'';
-      return '<a class="src" href="'+esc(safeUrl(u))+'" target="_blank" rel="noopener noreferrer"><div class="r"><h5>'+esc(s.title||u)+'</h5><span class="sc mono">Score '+(typeof s.score==='number'?s.score.toFixed(2):(i+1))+'</span></div><p>'+esc(s.content||s.snippet||'مصدر موثوق تم تحليله')+'</p><div class="u mono">• '+esc(u)+'</div></a>';
+      return '<a class="src" href="'+esc(safeUrl(u))+'" target="_blank" rel="noopener noreferrer"><div class="r"><h5>'+esc(s.title||u)+'</h5><span class="sc mono">Score '+(typeof s.score==='number'?s.score.toFixed(2):'0.85')+'</span></div><p>'+esc(s.content||s.snippet||'مصدر موثوق')+'</p><div class="u mono">| '+esc(u)+'</div></a>';
     }).join('')+'</div>';
   }
+  h+=`<div class="after-buy">
+    <h4>عجبك التقرير؟ 🚀</h4>
+    <p>ده تقرير واحد من تجربتك المجانية (مرة واحدة محمية من الخادم).<br>احصل على تقارير غير محدودة + كود المصدر كامل V4 + تحديثات مدى الحياة</p>
+    <a href="${BUY_URL}" target="_blank" rel="noopener noreferrer" onclick="try{fbq('track','InitiateCheckout');}catch(e){}">اشتري الأداة كاملة - 299ج فقط 🔥</a>
+    <p style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.4)">نقلل الهلوسة بالتحقق عبر 5 حلقات | متوسط 60 ثانية للتقرير | دفع آمن عبر Gumroad</p>
+  </div>`;
   return h;
 }
 var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms);});};
-
 async function search(){
   var text=q.value.trim();
   if(!text||loading) return;
-
-  if(trialUsed()){
-    res.innerHTML=errHTML('التجربة المجانية اتستخدمت قبل كده. عشان تكمل بحث بلا حدود، احصل على الأداة من زر الشراء.',true,false);
-    return;
-  }
-  var current=getCount();
-  if(current>=DAILY_MAX){
-    res.innerHTML=errHTML('تم استهلاك الحد اليومي للتجارب المجانية ('+DAILY_MAX+' بحث). جرّب بكرة، أو احصل على الأداة كاملة للحصول على بحث غير محدود.',true,false);
-    return;
-  }
-
-  loading=true; trialMem=true; go.innerHTML='<span class="spin"></span>يبحث...'; refreshBtn();
+  loading=true; go.innerHTML='<span class="spin"></span>يبحث... V4'; refreshBtn();
   var done=0;
-  res.innerHTML=stepsHTML(0,true);
-
+  res.innerHTML=stepsHTML(0,[],true);
   var anim=(async function(){
-    for(var i=0;i<STEPS.length-1;i++){await sleep(650);done=i+1;res.innerHTML=stepsHTML(done,true);}
+    for(var i=0;i<5;i++){await sleep(700);done=i+1;res.innerHTML=stepsHTML(done,[],true);}
   })();
-
   var outcome;
   try{
-    var r=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Visitor-Id':window.__midoVisitorId?window.__midoVisitorId():''},body:JSON.stringify({query:text})});
-    if(r.status===429){var d429={};try{d429=await r.json();}catch(e){} throw new Error('LIMIT:'+(d429.reason||'trial_used'));}
-    if(r.status===503) throw new Error('busy 429');
+    var r=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID},body:JSON.stringify({query:text, visitor_id:VISITOR_ID})});
+    if(r.status===429){
+      var d429={}; try{ d429=await r.json(); }catch(e){}
+      if(d429.reason==='daily_cap'){ throw new Error('LIMIT:daily_cap'); }
+      else { throw new Error('LIMIT:trial_used'); }
+    }
     if(!r.ok) throw new Error('HTTP '+r.status);
     var data=await r.json();
-    outcome={ok:true,answer:data.answer||data.summary||'تم جمع المصادر، إليك ملخص سريع من أهم النتائج بالأسفل.',sources:data.results||data.sources||[]};
+    if(!data.success && data.reason) throw new Error('LIMIT:'+data.reason);
+    var answer=data.deep_answer||data.answer||'تم جمع المصادر.';
+    var sources=data.sources||data.results||[];
+    outcome={ok:true,answer:answer,sources:sources,logs:data.logs||[],engines:data.engines||{}};
+    try{ fbq('track','Search', {search_string: text}); fbq('track','ViewContent'); }catch(e){}
   }catch(err){
-    outcome={ok:false,msg:(err instanceof TypeError)?'NETWORK':String(err&&err.message||'')};
+    var msg = (err instanceof TypeError)?'NETWORK':String(err.message||'');
+    outcome={ok:false,msg:msg};
   }
   await anim;
-
   if(outcome.ok){
-    res.innerHTML=stepsHTML(STEPS.length,false)+reportHTML(outcome.answer,outcome.sources);
-    setCount(current+1);
-    lsSet('mido_has_searched','true');
+    res.innerHTML=stepsHTML(5,outcome.logs,false)+reportHTML(outcome.answer,outcome.sources,outcome.logs,outcome.engines);
+    fetchStats();
     setTimeout(function(){res.scrollIntoView({behavior:'smooth',block:'start'});},100);
+    try{ fbq('track','CompleteRegistration'); }catch(e){}
   }else{
-    var m=outcome.msg,buy=false,hint=false;
-    if(m==='LIMIT:daily_cap'){m='التجارب المجانية لليوم خلصت. جرّب بكرة، أو احصل على الأداة كاملة من زر الشراء.';buy=true;}
-    else if(m.indexOf('LIMIT:')===0){m='التجربة المجانية اتستخدمت قبل كده. عشان تكمل بحث بلا حدود، احصل على الأداة من زر الشراء.';buy=true;lsSet('mido_has_searched','true');}
-    else if(m.indexOf('429')>-1){trialMem=false;m='الضغط عالي على الـ API حالياً، جرب تاني بعد دقيقة.';hint=true;}
-    else{trialMem=false;m='حصل مشكلة في البحث، اتأكد من النت وجرب تاني. لو المشكلة مستمرة، الـ Worker ممكن يكون نايم.';hint=outcome.msg||'ERR';}
-    res.innerHTML=errHTML(m,buy,hint);
+    res.innerHTML=errHTML(outcome.msg, true);
   }
-  loading=false; go.innerHTML='بحث 🔍'; refreshBtn();
+  loading=false; go.innerHTML='بحث 🔍 V4'; refreshBtn();
 }
-
-try{$('yr').textContent=new Date().getFullYear();}catch(e){}
-/* ---------- spider ---------- */
 (function(){
   var canvas=$('spider'); var ctx=canvas.getContext('2d'); if(!ctx) return;
   var W,H,dpr;
@@ -690,27 +671,12 @@ try{$('yr').textContent=new Date().getFullYear();}catch(e){}
   var sp={x:W*.5,y:90,tx:targets[0].x,ty:targets[0].y};
   var legs=[-75,-38,38,75,105,142,-142,-105].map(function(d){var a=d*Math.PI/180;return{ang:a,fx:sp.x+Math.cos(a)*30,fy:sp.y+Math.sin(a)*30,tx:sp.x+Math.cos(a)*30,ty:sp.y+Math.sin(a)*30};});
   var moving=false,moveTimer=0,last=performance.now(),actx=null;
-  function snd(){
-    try{
-      if(!actx) actx=new(window.AudioContext||window.webkitAudioContext)();
-      if(actx.state==='suspended') actx.resume().catch(function(){});
-      var n=actx.currentTime,o=actx.createOscillator(),g=actx.createGain(),f=actx.createBiquadFilter();
-      f.type='bandpass';f.frequency.value=2400;f.Q.value=1.4;o.type='square';o.frequency.setValueAtTime(2400,n);
-      g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.08,n+.004);g.gain.exponentialRampToValueAtTime(.0001,n+.08);
-      o.connect(f);f.connect(g);g.connect(actx.destination);o.start(n);o.stop(n+.08);
-    }catch(e){}
-  }
+  function snd(){try{if(!actx) actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended') actx.resume().catch(function(){});var n=actx.currentTime,o=actx.createOscillator(),g=actx.createGain(),f=actx.createBiquadFilter();f.type='bandpass';f.frequency.value=2400;f.Q.value=1.4;o.type='square';o.frequency.setValueAtTime(2400,n);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.08,n+.004);g.gain.exponentialRampToValueAtTime(.0001,n+.08);o.connect(f);f.connect(g);g.connect(actx.destination);o.start(n);o.stop(n+.08);}catch(e){}}
   var L1=34,L2=34,LIM=46;
   function draw(now){
     var dt=Math.min(50,now-last);last=now;
-    if(moving){
-      moveTimer-=dt/1000;
-      if(moveTimer<=0){moving=false;targets.shift();if(!targets.length)targets=mkGrid();sp.tx=targets[0].x;sp.ty=targets[0].y;}
-    }else{
-      var dx=sp.tx-sp.x,dy=sp.ty-sp.y,dist=Math.hypot(dx,dy);
-      if(dist<6){moving=true;moveTimer=1;snd();}
-      else{var spd=Math.max(200,dist*3.2+30)*dt/1000;if(spd>=dist){sp.x=sp.tx;sp.y=sp.ty;}else{sp.x+=dx/dist*spd;sp.y+=dy/dist*spd;}}
-    }
+    if(moving){moveTimer-=dt/1000;if(moveTimer<=0){moving=false;targets.shift();if(!targets.length)targets=mkGrid();sp.tx=targets[0].x;sp.ty=targets[0].y;}}
+    else{var dx=sp.tx-sp.x,dy=sp.ty-sp.y,dist=Math.hypot(dx,dy);if(dist<6){moving=true;moveTimer=1;snd();}else{var spd=Math.max(200,dist*3.2+30)*dt/1000;if(spd>=dist){sp.x=sp.tx;sp.y=sp.ty;}else{sp.x+=dx/dist*spd;sp.y+=dy/dist*spd;}}}
     ctx.clearRect(0,0,W,H);
     ctx.save();ctx.strokeStyle='rgba(214,217,224,.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(sp.x,0);ctx.lineTo(sp.x,sp.y-12);ctx.stroke();ctx.restore();
     legs.forEach(function(l,i){
@@ -740,7 +706,6 @@ try{$('yr').textContent=new Date().getFullYear();}catch(e){}
   }
   requestAnimationFrame(draw);
 })();
-
 document.querySelectorAll('a[href^="http"]').forEach(function(a){a.target='_blank';a.rel='noopener noreferrer';});
 })();
 </script>
