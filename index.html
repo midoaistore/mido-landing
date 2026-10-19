@@ -661,7 +661,11 @@ async function search(){
   })();
   var outcome;
   try{
-    var r=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID},body:JSON.stringify({query:text, visitor_id:VISITOR_ID})});
+    var r=await fetch(WORKER_URL,{
+  method:'POST',
+  headers:{'Content-Type':'application/json; charset=utf-8','X-Visitor-Id':VISITOR_ID},
+  body: JSON.stringify({query: text})
+});
     if(r.status===429){
       var d429={}; try{ d429=await r.json(); }catch(e){}
       if(d429.reason==='daily_cap'){ throw new Error('LIMIT:daily_cap'); }
