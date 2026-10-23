@@ -789,7 +789,6 @@ async function search(){
     requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
-})();
   // ===== Skill Tabs Logic (Fixed) =====
 var skillTabsContainer = document.getElementById('skillTabs');
 if(skillTabsContainer) {
@@ -804,7 +803,8 @@ if(skillTabsContainer) {
         CURRENT_SKILL = tab.getAttribute('data-skill');
         console.log("Skill changed to:", CURRENT_SKILL);
     });
-}
+  }
+})();
 document.querySelectorAll('a[href^="http"]').forEach(function(a){a.target='_blank';a.rel='noopener noreferrer';});
 })();
 </script>
