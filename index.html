@@ -229,8 +229,8 @@ footer .wrap{flex-direction:row}
 }
 @media(min-width:1024px){.laws{grid-template-columns:repeat(4,1fr)}}
 </style>
-</head>
-<body>
+  </head>
+  <body>
 <canvas id="spider"></canvas>
 <header>
   <div class="wrap hwrap">
@@ -313,7 +313,6 @@ footer .wrap{flex-direction:row}
           <div class="skill-tab" data-skill="summarize">⚡ تلخيص سريع</div>
           <div class="skill-tab" data-skill="compare">⚖️ جدول مقارنة</div>
         </div>
-
         <div class="srow">
           <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" placeholder="مثلا: افضل لابتوب للبرمجة بـ 25000ج"></div>
           <button id="go" disabled>بحث 🔍</button>
@@ -495,7 +494,6 @@ footer .wrap{flex-direction:row}
   <span>© <span id="year"></span> Mido AI Store | V6.0 Skills Engine | Tavily + Qwen3-235B</span>
   <span class="f"><span class="dot dot6 em"></span>Worker V6.0 | 5 Rings | 4 Protection Layers | Live Counters</span>
 </div></footer>
-
 <script>
 (function(){
 'use strict';
@@ -604,7 +602,7 @@ $('rings').addEventListener('click',function(e){
   if(!was){c.classList.add('open');var k=c.querySelector('.cir');k.style.background=c.dataset.c;k.style.color='#fff';}
 });
 
-// ===== 6. دالة البحث =====
+// ===== 5. دالة البحث =====
 var q=$('q'), go=$('go'), res=$('res');
 var loading=false;
 function refreshBtn(){go.disabled=loading||!q.value.trim();}
@@ -789,4 +787,4 @@ document.querySelectorAll('a[href^="http"]').forEach(function(a){a.target='_blan
 })();
 </script>
 </body>
-</html>
+  </html>
