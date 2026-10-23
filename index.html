@@ -203,6 +203,9 @@ footer .wrap span.f{display:flex;align-items:center;gap:8px}
 .skill-tab{padding:8px 16px;border-radius:9999px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #232733;background:#0a0a0f;color:rgba(255,255,255,.5);transition:all .2s;white-space:nowrap}
 .skill-tab.active{background:rgba(102,126,234,.2);border-color:#667eea;color:#a5b4fc}
 .skill-tab:hover:not(.active){background:#12121a;color:#fff}
+.save-skill-btn{padding:8px 16px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid rgba(16,185,129,.5);background:rgba(16,185,129,.1);color:#6ee7b7;transition:all .2s;margin-left:auto;white-space:nowrap}
+.save-skill-btn:hover{background:rgba(16,185,129,.2)}
+.save-skill-btn.saved{background:rgba(16,185,129,.3);border-color:#10b981;color:#fff}
 @media(min-width:768px){
 .wrap{padding:0 32px}
 h1{font-size:42px}
@@ -229,8 +232,8 @@ footer .wrap{flex-direction:row}
 }
 @media(min-width:1024px){.laws{grid-template-columns:repeat(4,1fr)}}
 </style>
-  </head>
-  <body>
+</head>
+<body>
 <canvas id="spider"></canvas>
 <header>
   <div class="wrap hwrap">
@@ -312,6 +315,7 @@ footer .wrap{flex-direction:row}
           <div class="skill-tab active" data-skill="deep_search">🔍 بحث عميق</div>
           <div class="skill-tab" data-skill="summarize">⚡ تلخيص سريع</div>
           <div class="skill-tab" data-skill="compare">⚖️ جدول مقارنة</div>
+          <button class="save-skill-btn" id="saveSkillBtn">💾 حفظ المهارة</button>
         </div>
         <div class="srow">
           <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" placeholder="مثلا: افضل لابتوب للبرمجة بـ 25000ج"></div>
@@ -374,11 +378,6 @@ footer .wrap{flex-direction:row}
       <h2 style="margin-top:12px;font-size:26px;font-weight:800">تقرير البودكاست في 60 ثانية</h2>
       <p style="margin-top:8px;font-size:13px;color:rgba(255,255,255,.5)">نفس المحرك اللي هتستخدمه - زمن حقيقي 60 ثانية</p>
     </div>
-
-    <div style="max-width:900px;margin:0 auto 32px auto;border-radius:24px;overflow:hidden;border:1px solid #232733;box-shadow:0 20px 80px rgba(0,0,0,.5)">
-        <img src="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview.png.webp" alt="Mido Deep Search Report Preview" style="width:100%;height:auto;display:block;">
-    </div>
-
     <div style="max-width:900px;margin:0 auto;border-radius:24px;border:1px solid #232733;background:#12121a;padding:1px">
       <div style="border-radius:23px;background:#0e0e14;padding:24px">
         <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px">
@@ -406,6 +405,13 @@ footer .wrap{flex-direction:row}
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- الصورة الجديدة - تقرير بالإنجليزي -->
+<section class="wrap sect" style="padding-top:0;">
+  <div style="max-width:900px;margin:0 auto;border-radius:24px;overflow:hidden;border:1px solid #232733;box-shadow:0 20px 80px rgba(0,0,0,.5)">
+    <img src="https://raw.githubusercontent.com/midoaistore/mido-landing/a07f30c6fc547061f39661537246f4aa5e49962d/report-preview-en.png" alt="Mido Deep Search Report Preview (English)" style="width:100%;height:auto;display:block;">
   </div>
 </section>
 
@@ -502,22 +508,49 @@ footer .wrap{flex-direction:row}
 var WORKER_URL = 'https://mido-deepsearch.midoaistore.workers.dev';
 var BUY_URL = 'https://midoaistore.gumroad.com/l/dtqpvka';
 var DAILY_MAX = 100;
-var CURRENT_SKILL = 'deep_search'; 
+var CURRENT_SKILL = localStorage.getItem('mido_saved_skill') || 'deep_search';
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // ===== 2. تشغيل أزرار المهارات =====
+function setActiveSkill(skill) {
+    CURRENT_SKILL = skill;
+    var allTabs = document.querySelectorAll('.skill-tab');
+    for (var i = 0; i < allTabs.length; i++) {
+        allTabs[i].classList.remove('active');
+        if (allTabs[i].getAttribute('data-skill') === skill) {
+            allTabs[i].classList.add('active');
+        }
+    }
+}
+
+// تفعيل المهارة المحفوظة عند التحميل
+setActiveSkill(CURRENT_SKILL);
+
 document.addEventListener('click', function(e) {
     var tab = e.target.closest('.skill-tab');
     if (!tab) return;
-    var allTabs = document.querySelectorAll('.skill-tab');
-    for (var i = 0; i < allTabs.length; i++) { allTabs[i].classList.remove('active'); }
-    tab.classList.add('active');
-    CURRENT_SKILL = tab.getAttribute('data-skill');
-    console.log("Skill changed to:", CURRENT_SKILL);
+    var skill = tab.getAttribute('data-skill');
+    setActiveSkill(skill);
+    console.log("Skill changed to:", skill);
 });
 
-// ===== 3. إدارة الزائر والعدادات =====
+// ===== 3. زر حفظ المهارة =====
+var saveBtn = document.getElementById('saveSkillBtn');
+if (saveBtn) {
+    saveBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.setItem('mido_saved_skill', CURRENT_SKILL);
+        saveBtn.textContent = '✅ تم الحفظ';
+        saveBtn.classList.add('saved');
+        setTimeout(function() {
+            saveBtn.textContent = '💾 حفظ المهارة';
+            saveBtn.classList.remove('saved');
+        }, 2000);
+    });
+}
+
+// ===== 4. إدارة الزائر والعدادات =====
 function getVisitorId() {
     var id = localStorage.getItem('mido_vid_v4');
     if (!id) {
@@ -534,19 +567,25 @@ async function fetchStats() {
         if (r.ok) {
             var d = await r.json();
             var set = function(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; };
-            set('liveVisitors', d.total_visitors); set('liveSearches', d.today_searches);
-            set('cnt', d.today_searches); set('cntVisitors', d.total_visitors);
-            set('miniVisitors', d.total_visitors); set('miniToday', d.today_searches);
-            set('footVisitors', d.total_visitors); set('footSearches', d.today_searches);
+            set('liveVisitors', d.total_visitors);
+            set('liveSearches', d.today_searches);
+            set('cnt', d.today_searches);
+            set('cntVisitors', d.total_visitors);
+            set('miniVisitors', d.total_visitors);
+            set('miniToday', d.today_searches);
+            set('footVisitors', d.total_visitors);
+            set('footSearches', d.today_searches);
             
             var statsWrap = document.getElementById('stats');
             if (statsWrap) {
                 var kvWarning = (d.kv === false) ? '<div style="grid-column:1/-1;border-radius:12px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);padding:12px;font-size:12px;color:#fbbf24;text-align:center">⚠️ KV غير مربوط — العدادات بتشتغل من الذاكرة المؤقتة.</div>' : '';
                 statsWrap.innerHTML = kvWarning + `
                     <div class="stat live-stat"><div class="i">👥</div><div class="v">${d.total_visitors}</div><div class="l mono">إجمالي الزوار الحقيقي</div></div>
-                    <div class="stat live-stat"><div class="i">🔍</div><div class="v">${d.today_searches}</div><div class="l mono">بحث اليوم (تجربة)</div></div>
-                    <div class="stat"><div class="i">🛡️</div><div class="v">${d.blocked_attempts || 0}</div><div class="l mono">محاولة موقوفة (حماية)</div></div>
-                    <div class="stat"><div class="i">📚</div><div class="v">10</div><div class="l mono">مصدر لكل تقرير</div></div>
+                    <div class="stat live-stat"><div class="i">🔍</div><div class="v">${d.today_searches}</div><div class="l mono">بحث اليوم</div></div>
+                    <div class="stat"><div class="i">✅</div><div class="v">${d.successful_trials || 0}</div><div class="l mono">تجربة ناجحة</div></div>
+                    <div class="stat"><div class="i">❌</div><div class="v">${d.failed_trials || 0}</div><div class="l mono">تجربة فاشلة</div></div>
+                    <div class="stat"><div class="i">🛡️</div><div class="v">${d.blocked_attempts || 0}</div><div class="l mono">محاولة موقوفة</div></div>
+                    <div class="stat"><div class="i">⏳</div><div class="v">${d.remaining_today || 0}</div><div class="l mono">بحث متبقي اليوم</div></div>
                 `;
             }
         }
@@ -560,7 +599,7 @@ async function trackVisit() {
 trackVisit();
 setInterval(fetchStats, 15000);
 
-// ===== 4. دوال مساعدة =====
+// ===== 5. دوال مساعدة =====
 function $(id) { return document.getElementById(id); }
 function esc(s) { var d = document.createElement('div'); d.textContent = String(s == null ? '' : s); return d.innerHTML; }
 function safeUrl(u) { try { var x = new URL(u); return (x.protocol === 'http:' || x.protocol === 'https:') ? x.href : '#'; } catch (e) { return '#'; } }
@@ -602,7 +641,7 @@ $('rings').addEventListener('click',function(e){
   if(!was){c.classList.add('open');var k=c.querySelector('.cir');k.style.background=c.dataset.c;k.style.color='#fff';}
 });
 
-// ===== 5. دالة البحث =====
+// ===== 6. دالة البحث =====
 var q=$('q'), go=$('go'), res=$('res');
 var loading=false;
 function refreshBtn(){go.disabled=loading||!q.value.trim();}
@@ -717,8 +756,7 @@ async function search(){
     if(!data.success && data.reason) throw new Error('LIMIT:'+data.reason);
     var answer=data.deep_answer||data.answer||'تم جمع المصادر.';
     var sources=data.top_sources||data.sources||data.results||[];
-    var allSources=data.sources||data.results||sources;
-    outcome={ok:true,answer:answer,sources:sources,allSources:allSources,logs:data.logs||[],engines:data.engines||{}};
+    outcome={ok:true,answer:answer,sources:sources,logs:data.logs||[],engines:data.engines||{}};
     try{ fbq('track','Search', {search_string: text}); fbq('track','ViewContent'); }catch(e){}
   }catch(err){
     var msg = (err instanceof TypeError)?'NETWORK':String(err.message||'');
@@ -736,8 +774,9 @@ async function search(){
   loading=false; go.innerHTML='بحث 🔍 V6.0'; refreshBtn();
 }
 
+// ===== 7. أنيميشن العنكبوت =====
 (function(){
-  var canvas=document.getElementById('spider'); if(!canvas) return; 
+  var canvas=document.getElementById('spider'); if(!canvas) return;
   var ctx=canvas.getContext('2d'); if(!ctx) return;
   var W,H,dpr;
   function resize(){W=innerWidth;H=innerHeight;dpr=devicePixelRatio||1;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);}
