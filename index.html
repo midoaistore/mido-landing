@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mido AI Store | الأدوات الاحترافية للذكاء الاصطناعي</title>
+<title>Mido AI Store | وكيل البحث العميق V6.0 - محرك المهارات العالمي</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <!-- Facebook Pixel -->
 <script>
@@ -200,13 +200,17 @@ footer .wrap{padding-top:32px;padding-bottom:32px;display:flex;flex-direction:co
 footer .wrap span.f{display:flex;align-items:center;gap:8px}
 #spider{position:fixed;inset:0;pointer-events:none;z-index:20}
 .live-dot{width:8px;height:8px;background:#10b981;border-radius:9999px;display:inline-block;animation:pulse 1.5s infinite}
-/* Trust Signals Section */
 .trust-sec{background:#0f0f16;border-top:1px solid #232733;border-bottom:1px solid #232733}
 .trust-grid{max-width:900px;margin:40px auto 0;display:grid;grid-template-columns:1fr;gap:16px}
 .trust-card{border-radius:20px;border:1px solid #232733;background:#12121a;padding:24px;text-align:center}
 .trust-card .ic{width:48px;height:48px;border-radius:12px;background:rgba(102,126,234,.15);border:1px solid rgba(102,126,234,.3);display:grid;place-items:center;font-size:24px;margin:0 auto 16px}
 .trust-card h4{font-size:16px;font-weight:800;color:#fff}
 .trust-card p{font-size:13px;color:rgba(255,255,255,.6);margin-top:8px;line-height:1.6}
+/* Skills UI */
+.skill-tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+.skill-tab{padding:8px 16px;border-radius:9999px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #232733;background:#0a0a0f;color:rgba(255,255,255,.5);transition:all .2s;white-space:nowrap}
+.skill-tab.active{background:rgba(102,126,234,.2);border-color:#667eea;color:#a5b4fc}
+.skill-tab:hover:not(.active){background:#12121a;color:#fff}
 @media(min-width:768px){
 .wrap{padding:0 32px}
 h1{font-size:42px}
@@ -238,19 +242,19 @@ footer .wrap{flex-direction:row}
 <canvas id="spider"></canvas>
 <header>
   <div class="wrap hwrap">
-    <div class="badge pill mono"><span class="dot dot6 pulse" style="background:#10b981"></span>V4.1 TRIPLE ENGINE | Qwen3-235B + Tavily | LIVE</div>
+    <div class="badge pill mono"><span class="dot dot6 pulse" style="background:#10b981"></span>V6.0 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE</div>
     <h1>
       <span class="g1">Mido AI Store</span><span class="sep">|</span><span class="g2">Professional Tools</span>
-      <span class="sub1">وكيل البحث العميق - المحرك الثلاثي</span>
+      <span class="sub1">وكيل البحث العميق - محرك المهارات العالمي</span>
     </h1>
     <div class="chips">
-      <span class="chip hl">محرك ثلاثي + عدادات حية + حماية خادم</span>
+      <span class="chip hl">محرك مهارات (Skills) + عدادات حية + حماية خادم</span>
       <span class="chip">Tavily 10 مصادر + Qwen3-235B</span>
-      <span class="chip mono">5 مراحل معالجة | تجربة واحدة محمية | عدادات حية</span>
+      <span class="chip mono">بحث عميق | تلخيص | مقارنة | تجربة مجانية</span>
     </div>
     <p class="lead">
       نفس الـ API اللي بيستخدمه <b>Perplexity Pro</b> و <b>ChatGPT Deep Research</b> - بس بتوفر <b style="color:#6ee7b7">96% من وقت البحث</b> حسب قياسنا (متوسط 60 ثانية مقابل بحث يدوي 25 دقيقة). 
-      العنكبوت يزحف على <span style="color:#a5b4fc">Tavily</span>، يحلل عبر <span style="color:#fbbf24">Qwen3-235B</span>، ويولد تقرير احترافي.
+      الأداة بتكتشف لغتك وعملتك تلقائياً. اكتب سؤالك وشوف النتيجة.
       <br><br>
       <span style="font-size:12px;color:rgba(255,255,255,.4)">* توفير الوقت = متوسط زمن التقرير (60 ثانية) مقابل بحث يدوي. نقلل الهلوسة بالاعتماد على مصادر حية، لكن لا نمنعها 100%.</span>
     </p>
@@ -265,7 +269,6 @@ footer .wrap{flex-direction:row}
 
 <section class="stats"><div class="wrap" id="stats"></div></section>
 
-<!-- قسم الثقة الجديد (بدل بانتظار التقييمات) -->
 <section class="trust-sec sect">
   <div class="wrap">
     <div class="center">
@@ -304,6 +307,34 @@ footer .wrap{flex-direction:row}
   <div class="laws" id="laws"></div>
 </section>
 
+<section id="live-demo" class="wrap sect">
+  <div class="demo-in">
+    <div class="center">
+      <div class="pill dbadge">جرب بنفسك - محرك مهارات - حماية خادم</div>
+      <h2>كل سؤال له تقرير حقيقي مختلف - 60 ثانية</h2>
+      <p class="s mono">Tavily 10 مصادر + Qwen3-235B | مهارات متعددة | تجربة واحدة محمية</p>
+    </div>
+    <div class="box"><div>
+      <div class="bar">
+        <!-- Skills Tabs -->
+        <div class="skill-tabs" id="skillTabs">
+          <div class="skill-tab active" data-skill="deep_search">🔍 بحث عميق</div>
+          <div class="skill-tab" data-skill="summarize">⚡ تلخيص سريع</div>
+          <div class="skill-tab" data-skill="compare">⚖️ جدول مقارنة</div>
+        </div>
+
+        <div class="srow">
+          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" placeholder="مثلا: افضل لابتوب للبرمجة بـ 25000ج"></div>
+          <button id="go" disabled>بحث 🔍</button>
+        </div>
+        <div class="sugs" id="sugs"></div>
+      </div>
+      <div id="res"></div>
+      <div class="bfoot mono"><span>WORKER: V6.0 Skills Engine | 5 Rings | Server-Side Protection</span><span>اليوم: <span id="cnt">0</span>/100 | زوار: <span id="cntVisitors">0</span></span></div>
+    </div></div>
+  </div>
+</section>
+
 <section class="rings-sec sec-y">
   <div class="wrap sect">
     <div class="center">
@@ -319,7 +350,7 @@ footer .wrap{flex-direction:row}
 <section class="update-sec sect">
   <div class="wrap">
     <div class="center">
-      <div class="pill ubadge">V4.1 - المحرك الثلاثي الحقيقي + عدادات حية</div>
+      <div class="pill ubadge">V6.0 - محرك المهارات العالمي + عدادات حية</div>
       <h2 style="margin-top:20px;font-size:28px;font-weight:800">من بحث يدوي 25 دقيقة لـ 60 ثانية - توفير 96% من الوقت</h2>
       <p class="d" style="margin-top:12px">نفس الجودة، تحليل أعمق، وتوفير وقت كبير - مع تقليل الهلوسة بالاعتماد على مصادر حية</p>
     </div>
@@ -346,35 +377,19 @@ footer .wrap{flex-direction:row}
   </div>
 </section>
 
-<section id="live-demo" class="wrap sect">
-  <div class="demo-in">
-    <div class="center">
-      <div class="pill dbadge">جرب بنفسك - محرك ثلاثي حقيقي - حماية خادم</div>
-      <h2>كل سؤال له تقرير حقيقي مختلف - 60 ثانية</h2>
-      <p class="s mono">Tavily 10 مصادر + Qwen3-235B | 5 مراحل | تجربة واحدة محمية من الخادم</p>
-    </div>
-    <div class="box"><div>
-      <div class="bar">
-        <div class="srow">
-          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" placeholder="مثلا: افضل لابتوب للبرمجة بـ 25000ج"></div>
-          <button id="go" disabled>بحث 🔍</button>
-        </div>
-        <div class="sugs" id="sugs"></div>
-      </div>
-      <div id="res"></div>
-      <div class="bfoot mono"><span>WORKER: V4.1 Triple Engine | 5 Rings | Server-Side Protection</span><span>اليوم: <span id="cnt">0</span>/100 | زوار: <span id="cntVisitors">0</span></span></div>
-    </div></div>
-  </div>
-</section>
-
 <section class="rings-sec sec-y">
   <div class="wrap sect">
     <div class="center" style="margin-bottom:24px">
       <span style="font-size:12px;font-weight:700;color:#fbbf24;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);padding:6px 16px;border-radius:9999px">مثال حي - 60 ثانية</span>
       <h2 style="margin-top:12px;font-size:26px;font-weight:800">تقرير البودكاست في 60 ثانية</h2>
       <p style="margin-top:8px;font-size:13px;color:rgba(255,255,255,.5)">نفس المحرك اللي هتستخدمه - زمن حقيقي 60 ثانية</p>
-    </div><
-    
+    </div>
+
+    <!-- Image Preview (the new one) -->
+    <div style="max-width:900px;margin:0 auto 32px auto;border-radius:24px;overflow:hidden;border:1px solid #232733;box-shadow:0 20px 80px rgba(0,0,0,.5)">
+        <img src="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview.png.webp" alt="Mido Deep Search Report Preview" style="width:100%;height:auto;display:block;">
+    </div>
+
     <div style="max-width:900px;margin:0 auto;border-radius:24px;border:1px solid #232733;background:#12121a;padding:1px">
       <div style="border-radius:23px;background:#0e0e14;padding:24px">
         <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px">
@@ -398,10 +413,7 @@ footer .wrap{flex-direction:row}
           <div style="display:grid;gap:12px;align-content:start">
             <div style="border-radius:12px;border:1px solid #232733;background:#12121a;padding:12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><div><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">Rtings.com</div><div style="margin-top:4px;font-size:12px;line-height:20px;color:rgba(255,255,255,.55)">PodMic يتفوق في عزل الضوضاء</div></div><span style="flex:none;font-size:10px;padding:4px 8px;border-radius:9999px;background:#0a0a0f;border:1px solid #232733;color:rgba(255,255,255,.4)">0.94</span></div>
             <div style="border-radius:12px;background:linear-gradient(to right,rgba(102,126,234,.2),rgba(118,75,162,.2));border:1px solid rgba(102,126,234,.3);padding:12px;font-size:12px;line-height:1.5rem;color:#a5b4fc">ده مثال حقيقي طلع من نفس المحرك اللي هتستخدمه في 60 ثانية - مع تقليل الهلوسة بالاعتماد على مصادر حية.</div>
-          </div><!-- Image Preview -->
-<div style="max-width:900px;margin:0 auto 32px auto;border-radius:24px;overflow:hidden;border:1px solid #232733;box-shadow:0 20px 80px rgba(0,0,0,.5)">
-    <img src="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview.png.webp" alt="Mido Deep Search Report Preview" style="width:100%;height:auto;display:block;">
-</div>
+          </div>
         </div>
       </div>
     </div>
@@ -409,18 +421,18 @@ footer .wrap{flex-direction:row}
 </section>
 
 <section class="wrap sect">
-  <div class="center"><h2 style="font-size:26px;font-weight:800">سعر مصري.. جودة عالية</h2><p class="mono" style="margin-top:8px;font-size:13px;color:rgba(255,255,255,.4)">PRICING | LIFETIME UPDATES | V4.1</p></div>
+  <div class="center"><h2 style="font-size:26px;font-weight:800">سعر مصري.. جودة عالية</h2><p class="mono" style="margin-top:8px;font-size:13px;color:rgba(255,255,255,.4)">PRICING | LIFETIME UPDATES | V6.0</p></div>
   <div class="pgrid">
     <div class="pcard"><div>
-      <div class="t"><span class="r">الاكثر طلبا V4.1</span><span class="e mono">Professional Triple Engine</span></div>
+      <div class="t"><span class="r">الاكثر طلبا V6.0</span><span class="e mono">Skills Engine</span></div>
       <div class="price">
         <div class="big">6$</div>
         <div><div class="eq">= 299 جنيه</div><div class="old"><s>999ج</s><span>وفر 70%</span></div></div>
       </div>
       <div class="feat">
-        <div><i>✓</i>تقارير غير محدودة - محرك ثلاثي موثق</div>
+        <div><i>✓</i>تقارير غير محدودة - محرك مهارات موثق</div>
         <div><i>✓</i>10 مصادر موثوقة - Tavily Pro</div>
-        <div><i>✓</i>5 مراحل معالجة حقيقية - نقلل الهلوسة</div>
+        <div><i>✓</i>3 مهارات (بحث عميق، تلخيص، مقارنة)</div>
         <div><i>✓</i>محرك ثلاثي: Tavily + Qwen3</div>
         <div><i>✓</i>جدول مقارنة + توصية نهائية بأسعار مصرية</div>
         <div><i>✓</i>يدعم العربي 100% - بالمصري</div>
@@ -452,24 +464,21 @@ footer .wrap{flex-direction:row}
       <div>
         <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:#6ee7b7">✅ هتستلم:</h4>
         <div style="display:grid;gap:12px">
-          <div class="deliver-item"><div class="ic">📁</div><div><h4>كود المصدر كامل V4.1</h4><p>HTML + CSS + JS + Worker + توثيق - جاهز للرفع على GitHub Pages و Cloudflare</p></div></div>
+          <div class="deliver-item"><div class="ic">📁</div><div><h4>كود المصدر كامل V6.0</h4><p>HTML + CSS + JS + Worker + توثيق - جاهز للرفع</p></div></div>
           <div class="deliver-item"><div class="ic">🕷️</div><div><h4>العنكبوت + 5 مراحل</h4><p>أنيميشن العنكبوت + 5 مراحل معالجة حقيقية - موثقة في الكود</p></div></div>
-          <div class="deliver-item"><div class="ic">🔢</div><div><h4>عدادات حية + حماية خادم</h4><p>عداد زوار حي + بحث يومي + حماية تجربة واحدة من الخادم + Pixel جاهز</p></div></div>
+          <div class="deliver-item"><div class="ic">🔢</div><div><h4>عدادات حية + حماية خادم</h4><p>عداد زوار حي + بحث يومي + حماية تجربة واحدة من الخادم</p></div></div>
           <div class="deliver-item"><div class="ic">💳</div><div><h4>زر شراء Gumroad</h4><p>زر دفع آمن + صفحة شكر + تسليم تلقائي</p></div></div>
         </div>
       </div>
       <div>
         <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:#fbbf24">🔧 هتحتاج:</h4>
         <div style="display:grid;gap:12px">
-          <div class="deliver-item"><div class="ic">☁️</div><div><h4>حساب Cloudflare مجاني</h4><p>عشان ترفع الـ Worker وتفعل KV للعدادات الحية والحماية - مجاني 100%</p></div></div>
-          <div class="deliver-item"><div class="ic">🔑</div><div><h4>مفاتيح API</h4><p>Tavily (بحث) + مفتاح نماذج Qwen3 عبر مزود API - شرح مفصل ازاي تجيبهم</p></div></div>
-          <div class="deliver-item"><div class="ic">📊</div><div><h4>Facebook Pixel (اختياري)</h4><p>Pixel ID 1805920357103132 - الكود جاهز ومربوط - غير الـ ID لخاصتك</p></div></div>
-          <div class="deliver-item"><div class="ic">🌐</div><div><h4>GitHub + Gumroad</h4><p>GitHub Pages للاندنج + حساب Gumroad للبيع - شرح كامل</p></div></div>
+          <div class="deliver-item"><div class="ic">☁️</div><div><h4>حساب Cloudflare مجاني</h4><p>عشان ترفع الـ Worker وتفعل KV للعدادات الحية - مجاني</p></div></div>
+          <div class="deliver-item"><div class="ic">🔑</div><div><h4>مفاتيح API</h4><p>Tavily (بحث) + مفتاح نماذج Qwen3 عبر مزود API</p></div></div>
+          <div class="deliver-item"><div class="ic">📊</div><div><h4>Facebook Pixel (اختياري)</h4><p>الكود جاهز ومربوط - غير الـ ID لخاصتك</p></div></div>
+          <div class="deliver-item"><div class="ic">🌐</div><div><h4>GitHub + Gumroad</h4><p>GitHub Pages للاندنج + حساب Gumroad للبيع</p></div></div>
         </div>
       </div>
-    </div>
-    <div style="margin-top:20px;border-radius:12px;background:#0a0a0f;border:1px solid #232733;padding:12px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.6">
-      <b style="color:#fff">ملاحظة عن الأسعار:</b> توفير 96% المذكور هو توفير في وقت البحث (60 ثانية vs 25 دقيقة) حسب قياسنا، وليس ضمان لتوفير تكلفة API محددة. أسعار الـ API تختلف حسب المزود والوقت - راجع مواقع المزودين الرسمية للتسعير الحالي. نقلل الهلوسة بالاعتماد على مصادر حية، لكن لا نمنعها 100%.
     </div>
   </div>
 
@@ -477,36 +486,24 @@ footer .wrap{flex-direction:row}
     <h3>❓ أسئلة شائعة</h3>
     <div class="faq-list">
       <div class="faq-item" onclick="this.classList.toggle('open')">
-        <h4>هل المحرك الثلاثي حقيقي ولا تسويق؟ <span>▼</span></h4>
-        <p>حقيقي وموثق في كود الـ Worker: المحرك 1 Tavily (10 مصادر مع Score)، المحرك 2 Qwen3-235B (يبني اطروحة + يقيم مخاطر)، المحرك 3 Qwen3-235B (يولد تقرير نهائي). كل مرحلة لها log يرجع للواجهة وتقدر تشوفه حي.</p>
+        <h4>هل محرك المهارات حقيقي ولا تسويق؟ <span>▼</span></h4>
+        <p>حقيقي وموثق في كود الـ Worker: التطبيق بيبعت الـ Skill (بحث، تلخيص، مقارنة) للخادم، والخادم بيوجه النموذج (Qwen3-235B) لتنفيذ المهارة دي. كل مرحلة لها log يرجع للواجهة.</p>
       </div>
       <div class="faq-item" onclick="this.classList.toggle('open')">
         <h4>إيه هي طبقات الحماية الموجودة؟ <span>▼</span></h4>
-        <p>4 طبقات: (1) حد 5 تجارب لكل IP في اليوم، (2) Rate Limiting — 10 طلبات/دقيقة لكل IP، (3) قفل in-flight يمنع الطلبات المتوازية من نفس الزائر، (4) تجربة واحدة لكل زائر محفوظة في KV. كل الحماية من الخادم، مش من المتصفح.</p>
-      </div>
-      <div class="faq-item" onclick="this.classList.toggle('open')">
-        <h4>هل التجربة المجانية محمية فعلاً؟ <span>▼</span></h4>
-        <p>نعم، الحماية من الخادم وليس من المتصفح: نستخدم IP + معرف زائر فريد (Visitor ID) محفوظ في KV. حتى لو مسحت localStorage، الخادم هيمنعك. التجربة واحدة لكل زائر + 100 بحث يومي لكل الموقع + حد 5 تجارب لكل IP في اليوم + Rate Limiting 10 طلبات/دقيقة.</p>
+        <p>4 طبقات: (1) حد 5 تجارب لكل IP في اليوم، (2) Rate Limiting — 10 طلبات/دقيقة، (3) قفل in-flight يمنع الطلبات المتوازية، (4) تجربة واحدة لكل زائر محفوظة في KV. كل الحماية من الخادم.</p>
       </div>
       <div class="faq-item" onclick="this.classList.toggle('open')">
         <h4>هل بتقلل الهلوسة 100%؟ <span>▼</span></h4>
-        <p>لا، مفيش نموذج بيمنع الهلوسة 100%. احنا بنقللها عبر 5 مراحل: البحث في 10 مصادر، بناء أطروحة، اختيار أعلى 5 مصادر بالـ Score، تقييم مخاطر، وكتابة التقرير النهائي. دائما راجع المصادر الأصلية.</p>
-      </div>
-      <div class="faq-item" onclick="this.classList.toggle('open')">
-        <h4>توفير 96% ده توفير وقت ولا تكلفة؟ <span>▼</span></h4>
-        <p>توفير وقت: متوسط تقريرنا 60 ثانية مقابل بحث يدوي 20-30 دقيقة = توفير ~96% من الوقت حسب قياسنا. تكلفة الـ API منفصلة وتعتمد على المزود. لا نضمن توفير تكلفة محدد، لكن استخدام Qwen3 عبر مزودين أرخص عادة من OpenAI حسب تسعيرهم المعلن وقت الكتابة.</p>
-      </div>
-      <div class="faq-item" onclick="this.classList.toggle('open')">
-        <h4>هحتاج ايه عشان أشغل الأداة؟ <span>▼</span></h4>
-        <p>1. حساب Cloudflare مجاني (للـ Worker + KV + Rate Limiting) 2. مفتاح Tavily (مجاني 1000 بحث) 3. مفتاح API للنماذج (Qwen3) 4. حساب GitHub + Gumroad. كل ده مشروح خطوة بخطوة في README.</p>
+        <p>لا، مفيش نموذج بيمنع الهلوسة 100%. احنا بنقللها عبر 5 مراحل: البحث في 10 مصادر، بناء أطروحة، اختيار أعلى 5 مصادر بالـ Score، تقييم مخاطر، وكتابة التقرير النهائي.</p>
       </div>
     </div>
   </div>
 </section>
 
 <footer><div class="wrap mono">
-  <span>© <span id="year"></span> Mido AI Store | V4.1 Triple Engine | Tavily + Qwen3-235B</span>
-  <span class="f"><span class="dot dot6 em"></span>Worker V4.1 | 5 Rings | 4 Protection Layers | Live Counters</span>
+  <span>© <span id="year"></span> Mido AI Store | V6.0 Skills Engine | Tavily + Qwen3-235B</span>
+  <span class="f"><span class="dot dot6 em"></span>Worker V6.0 | 5 Rings | 4 Protection Layers | Live Counters</span>
 </div></footer>
 
 <script>
@@ -515,7 +512,18 @@ footer .wrap{flex-direction:row}
 var WORKER_URL='https://mido-deepsearch.midoaistore.workers.dev';
 var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
 var DAILY_MAX=100;
+var CURRENT_SKILL='deep_search'; // Default Skill
+
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Skill Tabs Logic
+document.getElementById('skillTabs').addEventListener('click', function(e){
+  var tab = e.target.closest('.skill-tab');
+  if(!tab) return;
+  document.querySelectorAll('.skill-tab').forEach(function(t){ t.classList.remove('active'); });
+  tab.classList.add('active');
+  CURRENT_SKILL = tab.getAttribute('data-skill');
+});
 
 function getVisitorId(){
   let id = localStorage.getItem('mido_vid_v4');
@@ -545,13 +553,13 @@ async function fetchStats(){
       const statsWrap=document.getElementById('stats');
       if(statsWrap){
         const kvWarning = (d.kv === false) 
-          ? '<div style="grid-column:1/-1;border-radius:12px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);padding:12px;font-size:12px;color:#fbbf24;text-align:center">⚠️ KV غير مربوط — العدادات بتشتغل من الذاكرة المؤقتة وبتتصفّر. راجع إعدادات الـ Worker.</div>' 
+          ? '<div style="grid-column:1/-1;border-radius:12px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);padding:12px;font-size:12px;color:#fbbf24;text-align:center">⚠️ KV غير مربوط — العدادات بتشتغل من الذاكرة المؤقتة. راجع إعدادات الـ Worker.</div>' 
           : '';
         statsWrap.innerHTML = kvWarning + `
-          <div class="stat live-stat"><div class="i">👥</div><div class="v">${d.total_visitors}</div><div class="l mono">زائر اجمالي (حي من الخادم)</div></div>
-          <div class="stat live-stat"><div class="i">🔍</div><div class="v">${d.today_searches}</div><div class="l mono">بحث اليوم (حي)</div></div>
-          <div class="stat"><div class="i">🛡️</div><div class="v">${d.blocked_attempts||0}</div><div class="l mono">محاولة موقوفة (حماية خادم)</div></div>
-          <div class="stat"><div class="i">📚</div><div class="v">10</div><div class="l mono">مصدر حقيقي لكل تقرير</div></div>
+          <div class="stat live-stat"><div class="i">👥</div><div class="v">${d.total_visitors}</div><div class="l mono">إجمالي الزوار الحقيقي</div></div>
+          <div class="stat live-stat"><div class="i">🔍</div><div class="v">${d.today_searches}</div><div class="l mono">بحث اليوم (تجربة)</div></div>
+          <div class="stat"><div class="i">🛡️</div><div class="v">${d.blocked_attempts||0}</div><div class="l mono">محاولة موقوفة (حماية)</div></div>
+          <div class="stat"><div class="i">📚</div><div class="v">10</div><div class="l mono">مصدر لكل تقرير</div></div>
         `;
       }
     }
@@ -574,7 +582,7 @@ var LAWS=[
 {n:"03",t:"القانون الثالث: حماية الوجود",s:"يجب على الروبوت حماية وجوده",f:"يجب على الروبوت حماية وجوده طالما لا يتعارض مع القانونين الاول والثاني.",d:"يعتمد على مصادر حية بـ Score ويعرض لك الروابط عشان تراجعها بنفسك.",c:"#10b981"},
 {n:"04",t:"القانون الرابع: الاضافة المصرية",s:"يجب ان يكون مفيدا وعمليا للمصريين",f:"يجب على الروبوت ان يكون مفيدا وعمليا للمصريين - يقدم اجابات حقيقية باسعار مصرية.",d:"يقدم اجابات حقيقية باسعار مصرية، توصيات تناسب السوق المحلي.",c:"#f59e0b",eg:1}];
 var RINGS=[
-{id:1,n:"البحث في المصادر",code:"Tavily - 10 sources",d:"10 مصادر حية مع Score لكل مصدر - المحرك 1",c:"#ef4444"},
+{id:1,n:"البحث في المصادر",code:"Tavily - 10 sources",d:"10 مصادر حية مع Score - المحرك 1",c:"#ef4444"},
 {id:2,n:"بناء الاطروحة",code:"Qwen3-235B - Thesis",d:"هل توجد اطروحة منطقية؟ Qwen3-235B يبني اطروحة - المحرك 2",c:"#667eea"},
 {id:3,n:"تقليص الحجم",code:"Qwen3-235B - Top 5",d:"اختيار أعلى 5 مصادر بالـ Score - حلقة 3",c:"#10b981"},
 {id:4,n:"تقييم المخاطر",code:"Qwen3-235B - Risk",d:"هل السوق موجود؟ تقييم مخاطر - حلقة 4",c:"#f59e0b"},
@@ -610,18 +618,21 @@ q.addEventListener('input',refreshBtn);
 q.addEventListener('keydown',function(e){if(e.key==='Enter')search();});
 go.addEventListener('click',search);
 $('sugs').addEventListener('click',function(e){var b=e.target.closest('.sug');if(b){q.value=b.textContent;refreshBtn();}});
-function emptyHTML(){return '<div class="empty"><div class="spd">🕷️</div><p>العنكبوت مستني سؤالك - V4.1 Triple Engine</p><small class="mono">Tavily 10 مصادر → Qwen3-235B (تحليل) → Qwen3-235B (تقرير) - 5 مراحل موثقة - 60 ثانية</small></div>';}
+
+function emptyHTML(){return '<div class="empty"><div class="spd">🕷️</div><p>العنكبوت مستني سؤالك - V6.0 Global Skills Engine</p><small class="mono">Tavily 10 مصادر → Qwen3-235B (تحليل) → Qwen3-235B (تقرير) - 5 مراحل موثقة - 60 ثانية</small></div>';}
 res.innerHTML=emptyHTML();
+
 function stepsHTML(done,logs,isLoading){
   let logsHtml = '';
   if(logs && logs.length){
     logsHtml = '<div style="margin-top:12px;display:grid;gap:6px">'+logs.map(l=>`<div class="step done"><div class="n" style="background:${l.status==='done'?'#10b981':'#ef4444'}">${l.status==='done'?'✓':'!'}</div><span><b>مرحلة ${l.ring}: ${esc(l.name)}</b> - ${esc(l.detail||l.status)}</span></div>`).join('')+'</div>';
   }
-  const baseSteps = ["العنكبوت بيصحى ويبدأ يزحف على 10 مصادر...","المرحلة 1: البحث في المصادر (Tavily)...","المرحلة 2: بناء الاطروحة (Qwen3-235B)...","المرحلة 3: تقليص الحجم لأعلى 5 مصادر...","المرحلة 4: تقييم المخاطر...","المرحلة 5: التقرير النهائي (Qwen3-235B)..."];
-  return '<div class="log"><div class="t"><span class="a mono">SPIDER LOG V4.1 | 5 RINGS REAL | TRIPLE ENGINE</span><span class="b"><span class="dot dot6 em pulse"></span>'+(isLoading?'يزحف...':'اكتمل')+'</span></div><div class="steps">'+
+  const baseSteps = ["العنكبوت بيصحى ويبدأ يزحف على 10 مصادر...","المرحلة 1: البحث في المصادر (Tavily)...","المرحلة 2: معالجة المهارة (Qwen3-235B)...","المرحلة 3: تقليص الحجم لأعلى 5 مصادر...","المرحلة 4: تقييم المخاطر...","المرحلة 5: التقرير النهائي (Qwen3-235B)..."];
+  return '<div class="log"><div class="t"><span class="a mono">SPIDER LOG V6.0 | 5 RINGS REAL | SKILLS ENGINE</span><span class="b"><span class="dot dot6 em pulse"></span>'+(isLoading?'يزحف...':'اكتمل')+'</span></div><div class="steps">'+
   baseSteps.map(function(s,i){var d=i<done;return '<div class="step'+(d?' done':'')+'"><div class="n">'+(d?'✓':(i+1))+'</div><span>'+s+'</span></div>';}).join('')+
   '</div>'+logsHtml+(isLoading?'<div class="prog"><div></div></div>':'')+'</div>';
 }
+
 function errHTML(msg,buy){
   let finalMsg = msg;
   let showBuy = buy;
@@ -658,6 +669,7 @@ function errHTML(msg,buy){
   }
   return '<div class="err"><b>حصلت مشكلة:</b> '+esc(finalMsg)+(showBuy?'<br><a href="'+BUY_URL+'" target="_blank" rel="noopener noreferrer">اشتري الأداة كاملة - 299ج ←</a>':'')+'</div>';
 }
+
 function reportHTML(answer,sources,logs,engines){
   var enginesHtml = '';
   if(engines){
@@ -668,11 +680,11 @@ function reportHTML(answer,sources,logs,engines){
     </div>`;
   }
   var totalCount = (engines && engines.engine1 && engines.engine1.count) ? engines.engine1.count : sources.length;
-  var h='<div class="ans"><div class="m mono"><span class="x">ANSWER | V4.1 TRIPLE ENGINE | 5 RINGS</span><span style="color:rgba(255,255,255,.5)">'+totalCount+' مصدر (أعلى '+sources.length+' معروض)</span><span style="color:#34d399"> | 60 ثانية</span></div>'+
+  var h='<div class="ans"><div class="m mono"><span class="x">ANSWER | V6.0 GLOBAL SKILLS | 5 RINGS</span><span style="color:rgba(255,255,255,.5)">'+totalCount+' مصدر (أعلى '+sources.length+' معروض)</span><span style="color:#34d399"> | 60 ثانية</span></div>'+
   enginesHtml+
   '<div class="txt">'+esc(answer)+'</div><div class="tg mono"><span>Tavily 10</span><span>Qwen3-235B</span><span>Top 5</span><span>60s</span><span>نقلل الهلوسة</span></div></div>';
   if(sources.length){
-    h+='<div class="srcs"><div class="hd"><h4 class="mono">TOP SOURCES | '+sources.length+' RESULTS</h4><span>Score | V4.1</span></div>'+
+    h+='<div class="srcs"><div class="hd"><h4 class="mono">TOP SOURCES | '+sources.length+' RESULTS</h4><span>Score | V6.0</span></div>'+
     sources.map(function(s,i){
       var u=s.url||'';
       return '<a class="src" href="'+esc(safeUrl(u))+'" target="_blank" rel="noopener noreferrer"><div class="r"><h5>'+esc(s.title||u)+'</h5><span class="sc mono">Score '+(typeof s.score==='number'?s.score.toFixed(2):'0.85')+'</span></div><p>'+esc(s.content||s.snippet||'مصدر موثوق')+'</p><div class="u mono">| '+esc(u)+'</div></a>';
@@ -680,17 +692,18 @@ function reportHTML(answer,sources,logs,engines){
   }
   h+=`<div class="after-buy">
     <h4>عجبك التقرير؟ 🚀</h4>
-    <p>ده تقرير واحد من تجربتك المجانية (مرة واحدة محمية من الخادم).<br>احصل على تقارير غير محدودة + كود المصدر كامل V4.1 + تحديثات مدى الحياة</p>
+    <p>ده تقرير واحد من تجربتك المجانية (مرة واحدة محمية من الخادم).<br>احصل على تقارير غير محدودة + كود المصدر كامل V6.0 + تحديثات مدى الحياة</p>
     <a href="${BUY_URL}" target="_blank" rel="noopener noreferrer" onclick="try{fbq('track','InitiateCheckout');}catch(e){}">اشتري الأداة كاملة - 299ج فقط 🔥</a>
     <p style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.4)">نقلل الهلوسة بالاعتماد على مصادر حية | متوسط 60 ثانية للتقرير | دفع آمن عبر Gumroad</p>
   </div>`;
   return h;
 }
+
 var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms);});};
 async function search(){
   var text=q.value.trim();
   if(!text||loading) return;
-  loading=true; go.innerHTML='<span class="spin"></span>يبحث... V4.1'; refreshBtn();
+  loading=true; go.innerHTML='<span class="spin"></span>يبحث... V6.0'; refreshBtn();
   var done=0;
   res.innerHTML=stepsHTML(0,[],true);
   var anim=(async function(){
@@ -698,7 +711,7 @@ async function search(){
   })();
   var outcome;
   try{
-    var r=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID},body:JSON.stringify({query:text, visitor_id:VISITOR_ID})});
+    var r=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID},body:JSON.stringify({query:text, visitor_id:VISITOR_ID, skill: CURRENT_SKILL})});
     if(r.status===429){
       var d429={}; try{ d429=await r.json(); }catch(e){}
       if(d429.reason==='daily_cap'){ throw new Error('LIMIT:daily_cap'); }
@@ -728,8 +741,10 @@ async function search(){
   }else{
     res.innerHTML=errHTML(outcome.msg, true);
   }
-  loading=false; go.innerHTML='بحث 🔍 V4.1'; refreshBtn();
+  loading=false; go.innerHTML='بحث 🔍 V6.0'; refreshBtn();
 }
+
+// Spider Canvas Animation
 (function(){
   var canvas=$('spider'); var ctx=canvas.getContext('2d'); if(!ctx) return;
   var W,H,dpr;
