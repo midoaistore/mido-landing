@@ -790,8 +790,24 @@ async function search(){
   }
   requestAnimationFrame(draw);
 })();
+  // ===== Skill Tabs Logic (Fixed) =====
+var skillTabsContainer = document.getElementById('skillTabs');
+if(skillTabsContainer) {
+    skillTabsContainer.addEventListener('click', function(e){
+        var tab = e.target.closest('.skill-tab');
+        if(!tab) return;
+        var allTabs = document.querySelectorAll('.skill-tab');
+        for(var i=0; i<allTabs.length; i++) {
+            allTabs[i].classList.remove('active');
+        }
+        tab.classList.add('active');
+        CURRENT_SKILL = tab.getAttribute('data-skill');
+        console.log("Skill changed to:", CURRENT_SKILL);
+    });
+}
 document.querySelectorAll('a[href^="http"]').forEach(function(a){a.target='_blank';a.rel='noopener noreferrer';});
 })();
+
 </script>
 </body>
 </html>
