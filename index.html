@@ -1,526 +1,766 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mido Deep Search — Verified Research in 40 Seconds</title>
-<meta name="description" content="Mido Deep Search checks local and international sources and turns one question into a practical verified research report in 40 seconds.">
-<meta property="og:title" content="Mido Deep Search — Verified Research in 40 Seconds">
-<meta property="og:description" content="Research products, courses, markets and decisions using verified local and international sources.">
-<meta property="og:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
-<meta property="og:url" content="https://midoaistore.github.io/mido-landing/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Mido Deep Search">
-<meta name="twitter:description" content="From one question to a verified research report in 40 seconds.">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mido AI Store | Deep Search Agent</title>
+<meta name="description" content="Verified research in 35-40 seconds. Local + global sources. $6 + API keys."/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-*,*::before,*::after{box-sizing:border-box;border:0 solid #232733;margin:0;padding:0}
-html{line-height:1.5;scroll-behavior:smooth}
-body{background:#0a0a0f;color:#fff;font-family:'Cairo',system-ui,sans-serif;overflow-x:hidden;min-height:100vh}
-button,input{font:inherit;color:inherit;background:none;outline:none}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-.mono{font-family:'JetBrains Mono',monospace}
-::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#0a0a0f}::-webkit-scrollbar-thumb{background:#232733;border-radius:4px}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes pulse{50%{opacity:.5}}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#232733;--text:#fff;--muted:rgba(255,255,255,.55);--accent:#7c5cff;--green:#00ffa3;--cyan:#00d4ff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,Cairo,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+#spider{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5}
+.main{position:relative;z-index:2}
+
+.lang-switcher{position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);font-size:13px}
+.lang-dropdown{display:none;position:absolute;top:calc(100% + 6px);right:0;min-width:230px;background:#151b27;border:1px solid #2a3448;border-radius:14px;padding:6px;z-index:120;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+[dir=rtl] .lang-dropdown{right:auto;left:0}
+.lang-dropdown.open{display:block}
+.lang-option{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:10px;font-size:13px;color:var(--muted);cursor:pointer}
+.lang-option:hover,.lang-option.active{background:rgba(124,92,255,.15);color:#c4b5fd}
+
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(10,10,15,.92);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:11px 0;gap:10px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.1rem}.logo span{color:var(--accent)}
+.nav-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge{font-size:11px;padding:4px 10px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 18px;border-radius:999px;font-weight:700;font-size:13px;transition:.2s;border:1px solid transparent}
+.btn-w{background:#fff;color:#000}.btn-w:hover{background:#eaeaea}
+.btn-p{background:linear-gradient(135deg,var(--accent),#5b8cff);color:#fff}
+.btn-ghost{background:#1a1a24;color:#fff;border-color:var(--border)}
+.btn.glow,.glow-on{box-shadow:0 0 0 2px rgba(124,92,255,.55),0 0 22px rgba(124,92,255,.4)!important;border-color:rgba(124,92,255,.6)!important;animation:pg 1s ease-in-out infinite}
+@keyframes pg{50%{box-shadow:0 0 0 3px rgba(0,255,163,.45),0 0 26px rgba(0,255,163,.3)}}
+.btn.loading{opacity:.75;pointer-events:none}
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(1turn)}}
-.pulse{animation:pulse 2s infinite}
-.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-.dot{display:inline-block;border-radius:9999px}.dot6{width:6px;height:6px}.dot8{width:8px;height:8px}.em{background:#34d399}
-.pill{display:inline-flex;align-items:center;gap:8px;border-radius:9999px}
-.sec-y{border-top:1px solid #232733;border-bottom:1px solid #232733}
-header{position:relative;overflow:hidden;border-bottom:1px solid #232733;background:#0a0a0f}
-.hwrap{position:relative;padding-top:80px;padding-bottom:48px}
-.badge{border:1px solid #232733;background:#12121a;padding:6px 16px;font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.6);margin-bottom:24px}
-h1{font-size:28px;font-weight:800;line-height:1.2}
-.sub1{display:block;margin-top:8px;font-size:20px;color:rgba(255,255,255,.9);line-height:1.5}
-.lead{margin-top:24px;max-width:760px;font-size:15px;line-height:1.75rem;color:rgba(255,255,255,.7)}
-.ctas{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);padding:0 28px;font-size:14px;font-weight:700;box-shadow:0 0 30px rgba(102,126,234,.35)}
-.btn-buy{background:linear-gradient(to right,#10b981,#059669);box-shadow:0 0 30px rgba(16,185,129,.4);}
-.blob{position:absolute;border-radius:9999px;filter:blur(90px);pointer-events:none}
-.sect{padding-top:56px;padding-bottom:56px}
-.center{text-align:center}
-.demo-in{max-width:980px;margin:0 auto}
-.dbadge{padding:6px 16px;font-size:12px;font-weight:700;color:#a5b4fc;background:rgba(102,126,234,.15);border:1px solid rgba(102,126,234,.3)}
-.demo-in h2{margin-top:20px;font-size:28px;font-weight:800;line-height:1.15}
-.box{margin-top:32px;border-radius:24px;border:1px solid #232733;background:#12121a;padding:1px;box-shadow:0 20px 80px rgba(0,0,0,.5)}
-.box>div{border-radius:23px;background:#0e0e14;overflow:hidden}
-.bar{padding:16px;border-bottom:1px solid #232733;background:rgba(18,18,26,.8)}
-.srow{display:flex;flex-direction:column;gap:12px}
-.inp{position:relative;flex:1}
-.inp .ic{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.3)}
-.inp input{height:52px;width:100%;border-radius:9999px;background:#0a0a0f;border:1px solid #232733;padding:0 44px 0 16px;font-size:14px;transition:all .15s}
-.inp input:focus{border-color:rgba(102,126,234,.5);box-shadow:0 0 0 4px rgba(102,126,234,.1)}
-#go{height:52px;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 24px}
-#go:disabled{opacity:.4;cursor:not-allowed}
-.spin{width:16px;height:16px;border-radius:9999px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;animation:spin 1s linear infinite}
-#res{padding:16px;min-height:280px}
-.empty{padding:40px 0;text-align:center}
-.spd{margin:0 auto;width:64px;height:64px;border-radius:18px;background:#1a1a26;border:1px solid #232733;display:grid;place-items:center;font-size:28px;animation:float 3s ease-in-out infinite}
-.empty p{margin-top:16px;font-size:14px;font-weight:700;color:rgba(255,255,255,.7)}
-.empty small{display:block;margin-top:4px;font-size:12px;color:rgba(255,255,255,.4)}
-.progress-container{margin-top:16px;padding:16px;border-radius:16px;background:#0a0a0f;border:1px solid #232733;}
-.progress-label{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.6);margin-bottom:8px;}
-.progress-bar-outer{height:6px;width:100%;background:#1a1a26;border-radius:9999px;overflow:hidden;}
-.progress-bar-inner{height:100%;width:0%;background:linear-gradient(to right,#667eea,#764ba2);border-radius:9999px;transition:width 0.5s ease-out;}
-.progress-timer{margin-top:8px;font-size:11px;color:rgba(255,255,255,.4);text-align:center;}
-.err{border-radius:16px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.1);padding:16px;font-size:13px;color:#fecaca;line-height:1.7}
-.ans{border-radius:18px;border:1px solid rgba(102,126,234,.3);background:linear-gradient(to bottom right,rgba(102,126,234,.1),#12121a,#0a0a0f);padding:20px}
-.ans .m{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;color:#a5b4fc;margin-bottom:12px}
-.ans .txt{font-size:14.5px;line-height:1.75rem;color:rgba(255,255,255,.85);white-space:pre-wrap;word-break:break-word}
-.srcs{margin-top:20px;display:grid;gap:12px}
-.src{display:block;border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px}
-.src .r{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.src h5{font-size:13.5px;font-weight:700;line-height:1.5rem}
-.src p{margin-top:8px;font-size:12.5px;line-height:20px;color:rgba(255,255,255,.55)}
-.bfoot{padding:12px 16px;border-top:1px solid #232733;background:#0a0a0f;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.3)}
-footer{border-top:1px solid #232733;background:#08080c}
-footer .wrap{padding-top:32px;padding-bottom:32px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;font-size:12px;color:rgba(255,255,255,.3);text-align:center}
-#spider{position:fixed;inset:0;pointer-events:none;z-index:20}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;position:relative;z-index:30}
-.topbar-left{display:flex;align-items:center;gap:8px}
-.currency-badge{display:flex;align-items:center;gap:6px;background:rgba(18,18,26,.95);border:1px solid #232733;border-radius:9999px;padding:6px 14px;font-size:12px;font-weight:700;color:rgba(255,255,255,.85);}
-.remaining-badge{display:flex;align-items:center;gap:6px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:9999px;padding:6px 14px;font-size:12px;font-weight:700;color:#6ee7b7;}
-.lang-switcher{position:relative;}
-.lang-btn{display:flex;align-items:center;gap:8px;background:rgba(18,18,26,.95);border:1px solid #232733;border-radius:9999px;padding:6px 14px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
-.lang-btn:hover{border-color:#667eea;}
-.lang-btn .flag{font-size:16px;}
-.lang-btn .arrow{font-size:9px;color:rgba(255,255,255,.5);}
-.lang-dropdown{display:none;position:absolute;top:44px;left:0;background:rgba(18,18,26,.98);border:1px solid #232733;border-radius:16px;padding:8px;min-width:200px;box-shadow:0 20px 60px rgba(0,0,0,.5);max-height:350px;overflow-y:auto;z-index:100;}
-.lang-dropdown.active{display:block;}
-.lang-option{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;color:rgba(255,255,255,.8);font-size:12px;cursor:pointer;transition:all .15s;}
-.lang-option:hover{background:rgba(102,126,234,.15);color:#fff;}
-.lang-option .flag{font-size:16px;}
-.price-card{max-width:600px;margin:40px auto 0;border-radius:24px;border:1px solid rgba(16,185,129,.4);background:linear-gradient(to bottom right,rgba(16,185,129,.1),#12121a);padding:32px;text-align:center;}
-.price-card .price{font-size:56px;font-weight:800;color:#fff;line-height:1;}
-.price-card .price-sub{font-size:14px;color:rgba(255,255,255,.6);margin-top:8px;}
-.price-card .what-you-get{text-align:right;margin-top:24px;display:grid;gap:8px;font-size:14px;color:rgba(255,255,255,.8);}
-.price-card .what-you-get div{display:flex;align-items:center;gap:8px;}
-.price-card .btn-buy{margin-top:24px;width:100%;height:56px;font-size:16px;}
-.trial-note{font-size:12px;color:rgba(255,255,255,.4);margin-top:12px;}
-.case-study{border-radius:24px;border:1px solid #232733;background:#12121a;padding:24px;margin-top:32px;}
-.case-study table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;}
-.case-study th{background:#1a1a26;padding:10px;text-align:right;border:1px solid #232733;}
-.case-study td{padding:10px;border:1px solid #232733;color:rgba(255,255,255,.8);}
-.case-study .tag{display:inline-block;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:700;margin-left:4px;}
-.tag-eg{background:rgba(16,185,129,.15);color:#6ee7b7;}
-.tag-int{background:rgba(102,126,234,.15);color:#a5b4fc;}
-.faq-item{border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px;margin-bottom:8px;cursor:pointer;}
-.faq-item h4{font-size:14px;font-weight:700;display:flex;justify-content:space-between;}
-.faq-item p{display:none;margin-top:12px;font-size:13px;color:rgba(255,255,255,.6);}
-.faq-item.open p{display:block;}
-@media(min-width:768px){.wrap{padding:0 32px}h1{font-size:40px}}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;padding:16px 0}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:11px;text-align:center}
+.stat .v{font-size:19px;font-weight:800}.stat .l{font-size:10px;color:var(--muted);margin-top:2px}
+.stat.live{border-color:rgba(0,255,163,.3)}
+
+.hero{text-align:center;padding:42px 0 24px}
+.pill{display:inline-flex;padding:5px 12px;border-radius:999px;background:#12121a;border:1px solid var(--border);color:var(--muted);font-size:12px;margin-bottom:12px}
+.hero h1{font-size:clamp(1.55rem,4vw,2.5rem);line-height:1.22;font-weight:800;margin-bottom:12px}
+.hero h1 .g{background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{max-width:640px;margin:0 auto 16px;color:var(--muted);font-size:14.5px}
+.cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.trust{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+
+.sec{padding:34px 0}
+.sec-t{text-align:center;font-size:1.4rem;font-weight:800;margin-bottom:6px}
+.sec-s{text-align:center;color:var(--muted);font-size:13px;max-width:620px;margin:0 auto 18px}
+
+.skills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.skill{padding:8px 14px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);font-size:12px;color:var(--muted);cursor:pointer;transition:.2s}
+.skill:hover,.skill.on{background:rgba(124,92,255,.15);border-color:rgba(124,92,255,.5);color:#c4b5fd}
+.skill.on.glow-on{color:#fff}
+
+.demo{background:linear-gradient(180deg,#12121a,#0a0a0f);border:1px solid var(--border);border-radius:20px;padding:18px;max-width:860px;margin:0 auto}
+.search-row{display:flex;gap:8px;flex-wrap:wrap}
+.search-row input{flex:1;min-width:170px;height:46px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);padding:0 15px;color:#fff;font-size:14px;outline:none}
+.search-row input:focus{border-color:var(--accent)}
+.sugs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.sug{padding:5px 11px;border-radius:999px;border:1px solid var(--border);background:#0a0a0f;font-size:11px;color:var(--muted);cursor:pointer}
+.demo-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:11px;padding-top:11px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)}
+#res{margin-top:12px;min-height:40px}
+.log{border-radius:12px;border:1px solid var(--border);background:#0a0a0f;padding:12px}
+.steps{display:grid;gap:6px}
+.step{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.step.done,.step.active{color:#fff}
+.step .n{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;border:1px solid var(--border);background:#12121a}
+.step.done .n{background:var(--accent);border-color:var(--accent)}
+.step.active .n{border-color:var(--green);box-shadow:0 0 12px rgba(0,255,163,.5)}
+.prog{height:3px;background:#1a1a24;border-radius:99px;margin-top:10px;overflow:hidden}
+.prog>div{height:100%;width:45%;background:linear-gradient(90deg,var(--accent),var(--green));background-size:200% 100%;animation:sh 1.1s linear infinite}
+@keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.ans{margin-top:10px;border-radius:14px;border:1px solid rgba(124,92,255,.3);background:rgba(124,92,255,.08);padding:14px;font-size:13px;white-space:pre-wrap;word-break:break-word}
+.err{margin-top:10px;border-radius:12px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.1);padding:12px;font-size:13px;color:#fecaca}
+.srcs{margin-top:10px;display:grid;gap:8px}
+.src{display:block;border-radius:12px;border:1px solid var(--border);background:#12121a;padding:10px}
+.src h5{font-size:12px}.src p{font-size:11px;color:var(--muted);margin-top:3px}
+
+.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px;margin-top:14px}
+.stage{background:#0a0a0f;border:1px solid var(--border);border-radius:14px;padding:11px;cursor:pointer;transition:.2s}
+.stage.on,.stage:hover{border-color:rgba(124,92,255,.5);background:#1a1a24}
+.stage.on{box-shadow:0 0 18px rgba(124,92,255,.18)}
+.stage .num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:#12121a;border:1px solid var(--border);margin-bottom:7px}
+.stage.on .num{background:var(--accent);border-color:var(--accent)}
+.stage h4{font-size:12px}.stage p{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* expandable cards */
+.xcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:.2s}
+.xcard:hover,.xcard.open{border-color:rgba(124,92,255,.45)}
+.xcard.open{box-shadow:0 0 20px rgba(124,92,255,.15);background:#151522}
+.xcard .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.xcard .num{font-size:10px;letter-spacing:.08em;color:var(--accent);font-weight:700}
+.xcard h3{font-size:14px;margin-top:6px}
+.xcard .short{font-size:12px;color:var(--muted);margin-top:4px}
+.xcard .detail{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:rgba(255,255,255,.72);line-height:1.7}
+.xcard.open .detail{display:block}
+.xcard .chev{font-size:12px;color:var(--muted);transition:.2s}
+.xcard.open .chev{transform:rotate(180deg);color:#c4b5fd}
+.trust-note{margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(0,255,163,.06);border:1px solid rgba(0,255,163,.2);font-size:12.5px;color:rgba(255,255,255,.75);text-align:center}
+
+.report{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.report-h{padding:13px 15px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;background:linear-gradient(90deg,rgba(124,92,255,.12),rgba(0,212,255,.05))}
+.report-h h3{font-size:14.5px}
+.tag{font-size:10px;padding:3px 9px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);color:var(--muted)}
+.tag.g{color:var(--green);border-color:rgba(0,255,163,.3);background:rgba(0,255,163,.1)}
+.report-b{padding:15px}
+.qt{background:#0a0a0f;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px}
+.qt h4{font-size:12px;color:var(--green);margin-bottom:6px}
+.qt ul{padding-inline-start:18px;font-size:12.5px;color:var(--muted)}
+.qt li{margin-bottom:5px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+th,td{padding:8px;border-bottom:1px solid #1a1a24;text-align:start}
+th{font-size:10px;color:var(--muted);background:#0a0a0f}
+.recs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:10px}
+.rec{background:#0a0a0f;border:1px solid var(--border);border-radius:12px;padding:10px}
+.rec h5{font-size:12px}.rec p{font-size:11px;color:var(--muted);margin-top:3px}
+.rec .pr{color:var(--green);font-weight:700;font-size:12px;margin-top:4px;display:block}
+
+.price-box{max-width:480px;margin:0 auto;text-align:center;padding:22px;border-radius:18px;border:1px solid var(--border);background:linear-gradient(180deg,#12121a,#0a0a0f)}
+.price-box .pr{font-size:2.5rem;font-weight:800}
+.feats{text-align:start;margin:12px 0;list-style:none}
+.feats li{padding:7px 0;border-bottom:1px solid #1a1a24;font-size:13px;display:flex;gap:8px}
+.feats li:last-child{border-bottom:none}
+.ck{color:var(--green);font-weight:700}
+details{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 14px;margin-bottom:7px}
+summary{cursor:pointer;font-weight:600;font-size:13px;list-style:none}
+details p{margin-top:7px;font-size:12.5px;color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:20px 0;text-align:center;font-size:12px;color:var(--muted)}
+
+.modal{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;padding:14px}
+.modal.open{display:flex}
+.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.75)}
+.modal-box{position:relative;width:min(900px,100%);max-height:90vh;overflow:auto;background:#12121a;border:1px solid var(--border);border-radius:18px;padding:18px}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a24;border:1px solid rgba(0,255,163,.35);color:#fff;padding:10px 16px;border-radius:999px;font-size:12.5px;z-index:300;display:none;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.toast.show{display:block}
+
+@media(max-width:640px){.search-row{flex-direction:column}.stats{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 <canvas id="spider"></canvas>
-
+<div class="main">
 <header>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="topbar-left">
-        <div class="currency-badge"><span id="currencyFlag">🇪🇬</span> <span id="currencyCode">EGP</span></div>
-        <div class="remaining-badge"><span id="remainingLeft">100</span> <span data-i18n="remaining_left">متبقي</span></div>
-      </div>
-      <div class="lang-switcher" id="langSwitcher">
-        <button class="lang-btn" id="langBtn">
-          <span class="flag" id="currentFlag">🇪🇬</span>
-          <span id="currentLang">مصر - عربي</span>
-          <span class="arrow">▼</span>
-        </button>
-        <div class="lang-dropdown" id="langDropdown">
-          <div class="lang-option" data-lang="ar" data-country="EG" data-currency="EGP" data-flag="🇪🇬" data-name="مصر - عربي"><span class="flag">🇪🇬</span> مصر - عربي</div>
-          <div class="lang-option" data-lang="ar" data-country="SA" data-currency="SAR" data-flag="🇸🇦" data-name="السعودية - عربي"><span class="flag">🇸🇦</span> السعودية - عربي</div>
-          <div class="lang-option" data-lang="en" data-country="US" data-currency="USD" data-flag="🇺🇸" data-name="USA - English"><span class="flag">🇺🇸</span> USA - English</div>
-          <div class="lang-option" data-lang="fr" data-country="FR" data-currency="EUR" data-flag="🇫🇷" data-name="France - Français"><span class="flag">🇫🇷</span> France - Français</div>
-          <div class="lang-option" data-lang="de" data-country="DE" data-currency="EUR" data-flag="🇩🇪" data-name="Deutschland - Deutsch"><span class="flag">🇩🇪</span> Deutschland - Deutsch</div>
-          <div class="lang-option" data-lang="ja" data-country="JP" data-currency="JPY" data-flag="🇯🇵" data-name="日本 - 日本語"><span class="flag">🇯🇵</span> 日本 - 日本語</div>
-          <div class="lang-option" data-lang="zh" data-country="CN" data-currency="CNY" data-flag="🇨🇳" data-name="中国 - 中文"><span class="flag">🇨🇳</span> 中国 - 中文</div>
-          <div class="lang-option" data-lang="es" data-country="ES" data-currency="EUR" data-flag="🇪🇸" data-name="España - Español"><span class="flag">🇪🇸</span> España - Español</div>
-          <div class="lang-option" data-lang="pt" data-country="PT" data-currency="EUR" data-flag="🇵🇹" data-name="Portugal - Português"><span class="flag">🇵🇹</span> Portugal - Português</div>
+  <div class="wrap nav">
+    <div class="logo">Mido <span>AI</span> Store</div>
+    <div class="nav-r">
+      <div class="lang-switcher">
+        <button type="button" class="lang-btn" id="langBtn"><span id="flag">🇺🇸</span> <span id="langName">English</span> ▼</button>
+        <div class="lang-dropdown" id="langMenu">
+          <div class="lang-option" data-l="ar" data-f="🇪🇬" data-n="مصر - عربي">🇪🇬 مصر - عربي</div>
+          <div class="lang-option" data-l="ar" data-f="🇸🇦" data-n="السعودية - عربي">🇸🇦 السعودية - عربي</div>
+          <div class="lang-option active" data-l="en" data-f="🇺🇸" data-n="USA - English">🇺🇸 USA - English</div>
+          <div class="lang-option" data-l="fr" data-f="🇫🇷" data-n="Français">🇫🇷 Français</div>
+          <div class="lang-option" data-l="de" data-f="🇩🇪" data-n="Deutsch">🇩🇪 Deutsch</div>
+          <div class="lang-option" data-l="ja" data-f="🇯🇵" data-n="日本語">🇯🇵 日本語</div>
+          <div class="lang-option" data-l="zh" data-f="🇨🇳" data-n="中文">🇨🇳 中文</div>
+          <div class="lang-option" data-l="es" data-f="🇪🇸" data-n="Español">🇪🇸 Español</div>
+          <div class="lang-option" data-l="pt" data-f="🇵🇹" data-n="Português">🇵🇹 Português</div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="wrap hwrap">
-    <div class="badge pill mono"><span class="dot dot6 pulse" style="background:#10b981"></span><span data-i18n="badge">V7.0 | VERIFIED RESEARCH ENGINE</span></div>
-    <h1><span class="sub1" data-i18n="hero_title">تقرير بحث منظم بالكامل في 35-40 ثانية</span></h1>
-    <p class="lead" data-i18n="hero_desc">مصادر موثقة • أسعار محلية وعالمية • توصية نهائية واضحة. جرّب بحثًا مجانيًا واحدًا، ثم احصل على الأداة بالكامل.</p>
-    <div class="ctas">
-      <a href="#live-demo" class="btn" data-i18n="cta_try">جرب البحث المجاني ←</a>
-      <a href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener noreferrer" class="btn btn-buy" data-i18n="cta_buy">احصل على الأداة - $6</a>
+      <span class="badge">V10 | Live</span>
+      <a class="btn btn-w" id="navBuy" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" data-i18n="nav_buy">Get Access — $6</a>
     </div>
   </div>
 </header>
 
-<!-- Case Study -->
-<section class="wrap sect">
-  <div class="center">
-    <div class="pill dbadge" data-i18n="case_badge">تقرير حقيقي تم إنشاؤه في 35 ثانية</div>
-    <h2 style="margin-top:16px;font-size:26px;font-weight:800" data-i18n="case_title">أفضل سماعات إلغاء الضوضاء تحت 150 دولارًا</h2>
+<section class="wrap"><div class="stats">
+  <div class="stat live"><div class="v" id="stVisitors">—</div><div class="l" data-i18n="st_visitors">Visitors</div></div>
+  <div class="stat live"><div class="v" id="stSearches">—</div><div class="l" data-i18n="st_searches">Searches today</div></div>
+  <div class="stat"><div class="v" id="stOk">—</div><div class="l" data-i18n="st_ok">Successful</div></div>
+  <div class="stat"><div class="v" id="stFail">—</div><div class="l" data-i18n="st_fail">Failed</div></div>
+  <div class="stat"><div class="v" id="stLeft">—</div><div class="l" data-i18n="st_left">Free left today</div></div>
+</div></section>
+
+<section class="hero wrap">
+  <div class="pill" data-i18n="pill">⚡ Verified research • 35–40s • Local + Global</div>
+  <h1 data-i18n-html="hero_title">Get a fully structured <span class="g">research report</span> — not just links</h1>
+  <p class="lead" data-i18n="hero_desc">A 5-stage verified pipeline with local and international sources, clear recommendation, and real pricing context — in about 35–40 seconds.</p>
+  <div class="cta-row">
+    <a href="#demo" class="btn btn-p" data-i18n="cta_try">Try Free Demo</a>
+    <a href="#report" class="btn btn-ghost" data-i18n="cta_report">See Full Report</a>
   </div>
-  <div class="case-study">
-    <h3 style="font-size:18px;font-weight:800;color:#6ee7b7" data-i18n="case_quick">الخلاصة السريعة</h3>
-    <ul style="margin-top:12px;padding-right:20px;font-size:14px;line-height:1.8;color:rgba(255,255,255,.8)">
-      <li>Sony WH-CH720N و JBL Tune 770NC يقدمان أفضل توازن بين إلغاء الضوضاء والراحة وعمر البطارية بأقل من 5,000 جنيه.</li>
-      <li>Clear Audio Enduro و Baseus Inspire XH1 يوفروا إحساسًا أكثر فخامة مقابل سعر أعلى قليلاً (~4,500 جنيه).</li>
-    </ul>
-
-    <h3 style="font-size:18px;font-weight:800;margin-top:24px" data-i18n="case_table">جدول المقارنة المختصر</h3>
-    <table>
-      <thead>
-        <tr>
-          <th data-i18n="th_model">السماعة</th>
-          <th data-i18n="th_price">السعر (USD)</th>
-          <th data-i18n="th_egp">السعر (EGP)</th>
-          <th data-i18n="th_anc">ANC /5</th>
-          <th data-i18n="th_battery">البطارية</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>JBL Tune 770NC</td><td>$79.99</td><td>2,400</td><td>4/5</td><td>30h</td></tr>
-        <tr><td>Sony WH-CH720N</td><td>$149.00</td><td>4,470</td><td>4.5/5</td><td>30h</td></tr>
-        <tr><td>Anker Space One</td><td>$79.99</td><td>2,400</td><td>4/5</td><td>30h</td></tr>
-        <tr><td>Clear Audio Enduro</td><td>$149.99</td><td>4,500</td><td>4.5/5</td><td>30h</td></tr>
-      </tbody>
-    </table>
-
-    <h3 style="font-size:18px;font-weight:800;margin-top:24px" data-i18n="case_rec">التوصية النهائية</h3>
-    <p style="margin-top:8px;font-size:14px;line-height:1.8;color:rgba(255,255,255,.8)" data-i18n="case_rec_desc">
-      <b>Sony WH-CH720N</b> هي الأفضل إجمالاً تحت 4,500 جنيه (أداء ANC ممتاز + راحة + اتصال متعدد).
-      <b>JBL Tune 770NC</b> هي الأفضل اقتصاديًا تحت 2,500 جنيه.
-    </p>
-
-    <div style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.4)">
-      <span data-i18n="case_sources">المصادر: SoundGuys (Score 0.75) • CNET (Score 0.76) • TechRadar (Score 0.76)</span>
-      <br><span data-i18n="case_note">* الأسعار تقريبية وتعتمد على سعر تحويل 1 USD = 30 EGP.</span>
-    </div>
+  <div class="trust">
+    <span data-i18n="t1">✓ 1 free trial / visitor</span>
+    <span data-i18n="t2">✓ 100 free searches / day</span>
+    <span data-i18n="t3">✓ API keys after purchase</span>
   </div>
 </section>
 
-<!-- Live Demo -->
-<section id="live-demo" class="wrap sect">
-  <div class="demo-in">
-    <div class="center">
-      <div class="pill dbadge" data-i18n="demo_badge">جرب بنفسك - 40 ثانية</div>
-      <h2 data-i18n="demo_title">اكتب سؤالك، واحصل على تقرير موثق</h2>
+<section class="sec wrap">
+  <h2 class="sec-t" data-i18n="skills_title">Research Skills</h2>
+  <p class="sec-s" data-i18n="skills_sub">Select a skill before searching. Save stores the last report on this device.</p>
+  <div class="skills" id="skills">
+    <button type="button" class="skill on" data-skill="deep_search" data-i18n="sk1">Deep Search</button>
+    <button type="button" class="skill" data-skill="summarize" data-i18n="sk2">Summarize</button>
+    <button type="button" class="skill" data-skill="compare" data-i18n="sk3">Compare</button>
+    <button type="button" class="skill" data-skill="recommend" data-i18n="sk4">Recommend</button>
+    <button type="button" class="skill" data-skill="price_check" data-i18n="sk5">Price Check</button>
+    <button type="button" class="skill" data-skill="save" data-i18n="sk6">Save Report</button>
+  </div>
+</section>
+
+<section class="sec wrap" id="demo">
+  <h2 class="sec-t" data-i18n="demo_title">Live Demo</h2>
+  <p class="sec-s" data-i18n="demo_sub">Real engine. Stages light up while the spider crawls sources.</p>
+  <div class="demo">
+    <div class="search-row">
+      <input id="q" type="text" data-i18n-placeholder="ph" placeholder="Best noise-cancelling headphones under $150" value="Best noise-cancelling headphones under $150"/>
+      <button type="button" class="btn btn-w" id="go" data-i18n="search_btn">Search 🔍</button>
     </div>
-    <div class="box"><div>
-      <div class="bar">
-        <div class="srow">
-          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" data-i18n-ph="search_placeholder" placeholder="اكتب سؤالك البحثي هنا..."></div>
-          <button id="go" disabled data-i18n="search_btn">بحث 🔍</button>
-        </div>
+    <div class="sugs" id="sugs"></div>
+    <div class="demo-meta">
+      <span data-i18n="meta1">Free: 1 / visitor</span>
+      <span data-i18n="meta2">Daily cap: 100</span>
+      <span style="color:#a5b4fc">Tavily → Analysis → Report</span>
+    </div>
+    <div class="stages" id="stages">
+      <div class="stage" data-i="0"><div class="num">1</div><h4 data-i18n="s1">Source Search</h4><p data-i18n="s1d">Tavily live sources</p></div>
+      <div class="stage" data-i="1"><div class="num">2</div><h4 data-i18n="s2">Thesis Build</h4><p data-i18n="s2d">Core argument</p></div>
+      <div class="stage" data-i="2"><div class="num">3</div><h4 data-i18n="s3">Reduce & Rank</h4><p data-i18n="s3d">Strongest signals</p></div>
+      <div class="stage" data-i="3"><div class="num">4</div><h4 data-i18n="s4">Risk Check</h4><p data-i18n="s4d">Local + global</p></div>
+      <div class="stage" data-i="4"><div class="num">5</div><h4 data-i18n="s5">Final Report</h4><p data-i18n="s5d">35–40 seconds</p></div>
+    </div>
+    <div id="res"></div>
+  </div>
+</section>
+
+<section class="sec wrap" id="laws">
+  <h2 class="sec-t" data-i18n="laws_title">Asimov Safety Laws</h2>
+  <p class="sec-s" data-i18n="laws_sub">These rules guide the engine so output stays useful, honest, and safe for real decisions.</p>
+  <div id="lawsList"></div>
+  <div class="trust-note" data-i18n="laws_trust">Why this matters: Mido is designed to reduce confident-but-wrong answers by forcing source checks, ranking, and a final recommendation you can verify.</div>
+</section>
+
+<section class="sec wrap" id="rings">
+  <h2 class="sec-t" data-i18n="rings_title">Five Protection Rings</h2>
+  <p class="sec-s" data-i18n="rings_sub">Tap any ring to read the full explanation. During search, rings light up as the spider moves.</p>
+  <div id="ringsList"></div>
+</section>
+
+<section class="sec wrap" id="report">
+  <h2 class="sec-t" data-i18n="case_title">Real Report Example</h2>
+  <p class="sec-s" data-i18n-html="case_sub">Generated in <strong>35 seconds</strong> for: “Best noise-cancelling headphones under $150”</p>
+  <div class="report">
+    <div class="report-h">
+      <h3 data-i18n="case_h">Best Noise-Canceling Headphones Under $150</h3>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag g">35s</span><span class="tag">~0.76</span><span class="tag">V10</span></div>
+    </div>
+    <div class="report-b">
+      <div class="qt">
+        <h4 data-i18n="case_quick">Quick Take</h4>
+        <ul>
+          <li data-i18n-html="cq1"><strong>Sony WH-CH720N</strong> — best overall under ~EGP 4,500.</li>
+          <li data-i18n-html="cq2"><strong>JBL Tune 770NC</strong> — best budget under ~EGP 2,500.</li>
+          <li data-i18n-html="cq3"><strong>OneOdio Focus A6</strong> — entry option near ~EGP 2,100.</li>
+        </ul>
       </div>
-      <div id="res"></div>
-      <div class="bfoot mono"><span>V7.0 | 40s | Verified</span><span><span data-i18n="foot_search">بحث اليوم</span>: <span id="cnt">0</span>/100</span></div>
-    </div></div>
-  </div>
-</section>
-
-<!-- Price -->
-<section class="wrap sect">
-  <div class="price-card">
-    <div class="price">$6</div>
-    <div class="price-sub" data-i18n="price_sub">أو ما يعادله بعملتك المحلية عبر Gumroad</div>
-    <div class="what-you-get">
-      <div>✅ <span data-i18n="get_tool">الوصول الكامل للأداة (Mido Deep Search)</span></div>
-      <div>✅ <span data-i18n="get_keys">مفاتيح Tavily و Grok و Nipus جاهزة للاستخدام</span></div>
-      <div>✅ <span data-i18n="get_setup">طريقة الإعداد خطوة بخطوة (Worker + Cloudflare)</span></div>
-      <div>✅ <span data-i18n="get_guide">دليل التشغيل والتوثيق</span></div>
-      <div>✅ <span data-i18n="get_limits">حدود الاستخدام الموضحة</span></div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th data-i18n="th1">Model</th><th>USD</th><th>EGP</th><th>ANC</th><th data-i18n="th2">Battery</th></tr></thead>
+          <tbody>
+            <tr><td>JBL Tune 770NC</td><td>$79.99</td><td>2,400</td><td>4/5</td><td>30h</td></tr>
+            <tr><td><strong>Sony WH-CH720N</strong></td><td>$149</td><td>4,470</td><td>4.5/5</td><td>30h</td></tr>
+            <tr><td>Anker Space One</td><td>$79.99</td><td>2,400</td><td>4/5</td><td>30h</td></tr>
+            <tr><td>OneOdio Focus A6</td><td>$69.99</td><td>2,100</td><td>3.5/5</td><td>30h</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="recs">
+        <div class="rec"><h5 data-i18n="r1">Best Overall</h5><p>Sony WH-CH720N</p><span class="pr">≈ 4,470 EGP</span></div>
+        <div class="rec"><h5 data-i18n="r2">Best Budget</h5><p>JBL Tune 770NC</p><span class="pr">≈ 2,400 EGP</span></div>
+        <div class="rec"><h5 data-i18n="r3">Entry Option</h5><p>OneOdio Focus A6</p><span class="pr">≈ 2,100 EGP</span></div>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted)" data-i18n="case_sources">Sources: SoundGuys, CNET, TechRadar + market listings. Prices approximate.</p>
+      <div style="margin-top:14px;text-align:center;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button type="button" class="btn btn-p" id="openReport" data-i18n="full_preview">Full Report Preview</button>
+        <button type="button" class="btn btn-ghost" id="saveExample" data-i18n="save_example">Save This Report</button>
+      </div>
     </div>
-    <a href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener noreferrer" class="btn btn-buy" data-i18n="buy_btn">احصل عليها الآن - $6 🔒</a>
-    <p class="trial-note" data-i18n="trial_note">تجربة مجانية واحدة لكل زائر. النظام يستقبل حتى 100 تجربة مجانية يوميًا.</p>
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="wrap sect">
-  <h2 class="center" style="font-size:24px;font-weight:800;margin-bottom:24px" data-i18n="faq_title">الأسئلة الشائعة</h2>
-  <div class="faq-item" onclick="this.classList.toggle('open')">
-    <h4><span data-i18n="faq1_q">كيف يعمل البحث؟</span> <span>▼</span></h4>
-    <p data-i18n="faq1_a">نظامنا يبحث في 10 مصادر محلية ودولية، ثم يقارن الأدلة ويختار أفضل 5، ويحولها لتقرير كامل.</p>
-  </div>
-  <div class="faq-item" onclick="this.classList.toggle('open')">
-    <h4><span data-i18n="faq2_q">هل التجربة المجانية محدودة؟</span> <span>▼</span></h4>
-    <p data-i18n="faq2_a">نعم، تجربة واحدة لكل زائر. الموقع ككل يستقبل حتى 100 تجربة مجانية يوميًا.</p>
-  </div>
-  <div class="faq-item" onclick="this.classList.toggle('open')">
-    <h4><span data-i18n="faq3_q">هل المفاتيح آمنة؟</span> <span>▼</span></h4>
-    <p data-i18n="faq3_a">نعم، المفاتيح لا تُكشف أبدًا في الواجهة. جميع الاتصالات تتم عبر Worker آمن (Server-Side).</p>
+<section class="sec wrap" id="pricing">
+  <h2 class="sec-t" data-i18n="price_title">Simple pricing</h2>
+  <p class="sec-s" data-i18n="price_sub">One-time payment. No subscription.</p>
+  <div class="price-box">
+    <div class="pr">$6 <small style="font-size:14px;color:var(--muted);font-weight:500" data-i18n="once">one-time</small></div>
+    <p style="font-size:12px;color:var(--muted);margin:4px 0 8px" data-i18n="price_local">or ~299 EGP via Gumroad (Egypt)</p>
+    <ul class="feats">
+      <li><span class="ck">✓</span> <span data-i18n="f1">Full Deep Search access</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f2">API keys: Tavily + Grok + Nebius</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f3">Verified local + global reports</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f4">Setup guide included</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f5">1 free trial before purchase</span></li>
+    </ul>
+    <a class="btn btn-w" style="width:100%" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" data-i18n="buy_btn">Get Full Access — $6</a>
   </div>
 </section>
 
-<footer><div class="wrap mono">
-  <span data-i18n="footer">© 2026 Mido AI Store | V7.0 | Privacy • Support</span>
-</div></footer>
+<section class="sec wrap" style="max-width:720px;margin-left:auto;margin-right:auto">
+  <h2 class="sec-t" data-i18n="faq_title">FAQ</h2>
+  <details open><summary data-i18n="fq1">How long does a real search take?</summary><p data-i18n="fa1">Typically 35–40 seconds to a verified report.</p></details>
+  <details><summary data-i18n="fq2">What do I get for $6?</summary><p data-i18n="fa2">Full access + Tavily, Grok, Nebius keys. One-time via Gumroad.</p></details>
+  <details><summary data-i18n="fq3">Free trial limits?</summary><p data-i18n="fa3">1 trial per visitor. Up to 100 free searches/day site-wide.</p></details>
+  <details><summary data-i18n="fq4">Are sources real?</summary><p data-i18n="fa4">Yes. The report appears after ranking documented sources.</p></details>
+</section>
+
+<footer class="wrap">
+  <p data-i18n="footer">© 2026 Mido AI Store • Deep Search Agent V10</p>
+  <p style="margin-top:4px;font-size:11px" data-i18n="footer2">Live sources. Always verify final local prices.</p>
+</footer>
+</div>
+
+<div class="modal" id="reportModal">
+  <div class="modal-bg" id="modalBg"></div>
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <div>
+        <h3 style="font-size:17px;font-weight:800" data-i18n="modal_title">Full Report — Headphones under $150</h3>
+        <p style="font-size:12px;color:var(--muted);margin-top:4px" data-i18n="modal_q">Query: Best noise-cancelling headphones under $150</p>
+      </div>
+      <button type="button" class="btn btn-ghost" id="closeModal" data-i18n="modal_close">Close</button>
+    </div>
+    <div class="qt" style="margin-top:14px">
+      <h4 data-i18n="modal_winner">Winner: Sony WH-CH720N</h4>
+      <p style="font-size:12.5px;color:var(--muted);margin-top:6px" data-i18n="modal_summary">Best overall ANC/comfort/battery under ~EGP 4,500. JBL Tune 770NC is best value under ~EGP 2,500. Ranked from SoundGuys, CNET, TechRadar and market listings.</p>
+    </div>
+    <div style="overflow-x:auto;margin-top:12px">
+      <table>
+        <thead><tr>
+          <th data-i18n="th1">Model</th><th data-i18n="th_price">Price</th><th>ANC</th><th data-i18n="th2">Battery</th><th data-i18n="th_comfort">Comfort</th><th data-i18n="th_verdict">Verdict</th>
+        </tr></thead>
+        <tbody>
+          <tr style="background:rgba(124,92,255,.08)"><td><strong>Sony WH-CH720N</strong></td><td>$149 / 4,470 EGP</td><td>4.5/5</td><td>30h</td><td>4.5/5</td><td data-i18n="v_best">Best overall</td></tr>
+          <tr><td>JBL Tune 770NC</td><td>$79.99 / 2,400 EGP</td><td>4/5</td><td>30h</td><td>4/5</td><td data-i18n="v_budget">Best budget</td></tr>
+          <tr><td>Anker Space One</td><td>$79.99 / 2,400 EGP</td><td>4/5</td><td>30h</td><td>4/5</td><td data-i18n="v_solid">Solid alt</td></tr>
+          <tr><td>OneOdio Focus A6</td><td>$69.99 / 2,100 EGP</td><td>3.5/5</td><td>30h</td><td>3.5/5</td><td data-i18n="v_entry">Entry pick</td></tr>
+          <tr><td>Soundcore Space Q45</td><td>$99.99 / 3,000 EGP</td><td>4.5/5</td><td>30h</td><td>4/5</td><td data-i18n="v_mid">Mid option</td></tr>
+          <tr><td>Baseus Inspire XH1</td><td>$149.99 / 4,500 EGP</td><td>4.5/5</td><td>30h</td><td>4/5</td><td data-i18n="v_prem">Premium feel</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px">
+      <div class="xcard" style="cursor:default">
+        <h3 data-i18n="modal_sources_title">Top Sources</h3>
+        <p style="margin-top:8px;font-size:12px;color:var(--muted)" data-i18n-html="modal_sources_list">1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Local market listings</p>
+      </div>
+      <div class="xcard" style="cursor:default">
+        <h3 data-i18n="modal_rec_title">Final Recommendation</h3>
+        <p style="margin-top:8px;font-size:12.5px;color:var(--muted)" data-i18n="modal_rec_text">Pick Sony WH-CH720N if budget allows. Pick JBL Tune 770NC for best value. Confirm live local prices before buying.</p>
+        <a href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" class="btn btn-w" style="margin-top:12px" data-i18n="buy_btn">Get Full Access — $6</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
 
 <script>
 (function(){
 'use strict';
+var WORKER_URL='https://mido-deepsearch.midoaistore.workers.dev';
+var WORKER_FALLBACK='https://mido-tavily-proxy.midoaistore.workers.dev';
+var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
+var skill='deep_search', currentLang='en', searching=false, lastReportText='';
 
-var WORKER_URL = 'https://mido-deepsearch.midoaistore.workers.dev';
-var CURRENT_LANG = localStorage.getItem('mido_lang') || 'ar';
+function glowPulse(el, ms){
+  if(!el) return;
+  el.classList.add('glow-on');
+  setTimeout(function(){ el.classList.remove('glow-on'); }, ms||900);
+}
+function toast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
 
-var T = {
-  ar: {
-    badge:"V7.0 | VERIFIED RESEARCH ENGINE",
-    hero_title:"تقرير بحث منظم بالكامل في 35-40 ثانية",
-    hero_desc:"مصادر موثقة • أسعار محلية وعالمية • توصية نهائية واضحة. جرّب بحثًا مجانيًا واحدًا، ثم احصل على الأداة بالكامل.",
-    cta_try:"جرب البحث المجاني ←", cta_buy:"احصل على الأداة - $6",
-    case_badge:"تقرير حقيقي تم إنشاؤه في 35 ثانية",
-    case_title:"أفضل سماعات إلغاء الضوضاء تحت 150 دولارًا",
-    case_quick:"الخلاصة السريعة", case_table:"جدول المقارنة المختصر", case_rec:"التوصية النهائية",
-    case_rec_desc:"Sony WH-CH720N هي الأفضل إجمالاً تحت 4,500 جنيه. JBL Tune 770NC هي الأفضل اقتصاديًا تحت 2,500 جنيه.",
-    case_sources:"المصادر: SoundGuys (Score 0.75) • CNET (Score 0.76) • TechRadar (Score 0.76)",
-    case_note:"* الأسعار تقريبية وتعتمد على سعر تحويل 1 USD = 30 EGP.",
-    th_model:"السماعة", th_price:"السعر (USD)", th_egp:"السعر (EGP)", th_anc:"ANC /5", th_battery:"البطارية",
-    demo_badge:"جرب بنفسك - 40 ثانية", demo_title:"اكتب سؤالك، واحصل على تقرير موثق",
-    search_placeholder:"اكتب سؤالك البحثي هنا...", search_btn:"بحث 🔍",
-    foot_search:"بحث اليوم", remaining_left:"متبقي",
-    price_sub:"أو ما يعادله بعملتك المحلية عبر Gumroad",
-    get_tool:"الوصول الكامل للأداة (Mido Deep Search)",
-    get_keys:"مفاتيح Tavily و Grok و Nipus جاهزة للاستخدام",
-    get_setup:"طريقة الإعداد خطوة بخطوة (Worker + Cloudflare)",
-    get_guide:"دليل التشغيل والتوثيق", get_limits:"حدود الاستخدام الموضحة",
-    buy_btn:"احصل عليها الآن - $6 🔒",
-    trial_note:"تجربة مجانية واحدة لكل زائر. النظام يستقبل حتى 100 تجربة مجانية يوميًا.",
-    faq_title:"الأسئلة الشائعة", faq1_q:"كيف يعمل البحث؟", faq1_a:"نظامنا يبحث في 10 مصادر محلية ودولية، ثم يقارن الأدلة ويختار أفضل 5.",
-    faq2_q:"هل التجربة المجانية محدودة؟", faq2_a:"نعم، تجربة واحدة لكل زائر. الموقع ككل يستقبل حتى 100 تجربة يوميًا.",
-    faq3_q:"هل المفاتيح آمنة؟", faq3_a:"نعم، المفاتيح لا تُكشف أبدًا في الواجهة. جميع الاتصالات عبر Worker آمن.",
-    footer:"© 2026 Mido AI Store | V7.0 | Privacy • Support",
-    searching_in:"جاري مراجعة المصادر المحلية والدولية...", sources_reviewed:"مصدرًا تمت مراجعته",
-    time_elapsed:"الوقت المنقضي", time_remaining:"المتبقي", search_complete:"اكتمل البحث",
-    sources_used:"10 مصادر تمت مراجعتها، 5 مصادر موثوقة للتقرير",
-    answer:"الإجابة", sources:"المصادر", error_prefix:"خطأ:",
-    empty_prompt:"اكتب سؤالك البحثي في الأعلى واحصل على تقرير في 40 ثانية",
-    timeout_error:"انتهت مدة الانتظار. جرب مرة أخرى.", retry_btn:"إعادة المحاولة"
-  },
-  en: {
-    badge:"V7.0 | VERIFIED RESEARCH ENGINE",
-    hero_title:"Get a fully structured research report in 35-40 seconds",
-    hero_desc:"Verified sources • Local + International pricing • Clear recommendation. Start with one free search.",
-    cta_try:"Try Free Search ←", cta_buy:"Get the Tool - $6",
-    case_badge:"Real Report Generated in 35 Seconds",
-    case_title:"Best Noise-Canceling Headphones Under $150",
-    case_quick:"Quick Take", case_table:"Comparison Table", case_rec:"Final Recommendation",
-    case_rec_desc:"Sony WH-CH720N is the best overall under $150. JBL Tune 770NC is the best budget option under $80.",
-    case_sources:"Sources: SoundGuys (Score 0.75) • CNET (Score 0.76) • TechRadar (Score 0.76)",
-    case_note:"* Prices are approximate (1 USD = 30 EGP).",
-    th_model:"Model", th_price:"Price (USD)", th_egp:"Price (EGP)", th_anc:"ANC /5", th_battery:"Battery",
-    demo_badge:"Try it - 40 seconds", demo_title:"Ask your question, get a verified report",
-    search_placeholder:"Type your research question here...", search_btn:"Search 🔍",
-    foot_search:"searches today", remaining_left:"left",
-    price_sub:"or local equivalent via Gumroad",
-    get_tool:"Full access to Mido Deep Search tool",
-    get_keys:"Ready-to-use Tavily, Grok, and Nipus keys",
-    get_setup:"Step-by-step setup (Worker + Cloudflare)",
-    get_guide:"User guide & documentation", get_limits:"Clear usage limits",
-    buy_btn:"Get it Now - $6 🔒",
-    trial_note:"One free trial per visitor. The platform supports up to 100 free trials per day.",
-    faq_title:"FAQ", faq1_q:"How does the research work?", faq1_a:"Our system scans 10 local and international sources, compares evidence, and selects the top 5.",
-    faq2_q:"Is the free trial limited?", faq2_a:"Yes, one trial per visitor. The platform supports up to 100 free trials per day.",
-    faq3_q:"Are the keys secure?", faq3_a:"Yes, keys are never exposed in the frontend. All communication is via a secure Worker.",
-    footer:"© 2026 Mido AI Store | V7.0 | Privacy • Support",
-    searching_in:"Searching local and international sources...", sources_reviewed:"sources reviewed",
-    time_elapsed:"Time elapsed", time_remaining:"Expected remaining", search_complete:"Research completed",
-    sources_used:"10 sources reviewed, 5 verified sources selected for the report",
-    answer:"Answer", sources:"Sources", error_prefix:"Error:",
-    empty_prompt:"Type your research question above and get a report in 40 seconds",
-    timeout_error:"Request timed out. Please try again.", retry_btn:"Retry"
-  },
-  fr: {badge:"V7.0 | MOTEUR DE RECHERCHE VÉRIFIÉ",hero_title:"Obtenez un rapport de recherche structuré en 35-40 secondes",hero_desc:"Sources vérifiées • Prix locaux + internationaux • Recommandation claire.",cta_try:"Essayer Gratuitement ←",cta_buy:"Acheter l'Outil - $6",case_badge:"Rapport Réel Généré en 35 Secondes",case_title:"Meilleurs Casques à Réduction de Bruit sous 150$",case_quick:"Résumé Rapide",case_table:"Tableau Comparatif",case_rec:"Recommandation Finale",case_rec_desc:"Sony WH-CH720N est le meilleur choix global. JBL Tune 770NC est le meilleur choix économique.",case_sources:"Sources: SoundGuys • CNET • TechRadar",case_note:"* Prix approximatifs.",th_model:"Modèle",th_price:"Prix (USD)",th_egp:"Prix (EGP)",th_anc:"ANC /5",th_battery:"Batterie",demo_badge:"Essayez - 40 secondes",demo_title:"Posez votre question, obtenez un rapport",search_placeholder:"Tapez votre question...",search_btn:"Rechercher 🔍",foot_search:"recherches aujourd'hui",remaining_left:"restant",price_sub:"ou équivalent local via Gumroad",get_tool:"Accès complet à l'outil",get_keys:"Clés Tavily, Grok et Nipus prêtes",get_setup:"Configuration étape par étape",get_guide:"Guide utilisateur",get_limits:"Limites d'utilisation",buy_btn:"Acheter - $6 🔒",trial_note:"Un essai gratuit par visiteur. Jusqu'à 100 essais par jour.",faq_title:"FAQ",faq1_q:"Comment ça marche?",faq1_a:"Le système analyse 10 sources et sélectionne les 5 meilleures.",faq2_q:"L'essai est limité?",faq2_a:"Oui, un essai par visiteur.",faq3_q:"Les clés sont sécurisées?",faq3_a:"Oui, jamais exposées côté client.",footer:"© 2026 Mido AI Store",searching_in:"Recherche...",sources_reviewed:"sources examinées",time_elapsed:"Temps écoulé",time_remaining:"Restant",search_complete:"Recherche terminée",sources_used:"10 sources, 5 sélectionnées",answer:"Réponse",sources:"Sources",error_prefix:"Erreur:",empty_prompt:"Tapez votre question...",timeout_error:"Délai dépassé.",retry_btn:"Réessayer"},
-  de: {badge:"V7.0 | VERIFIZIERTE RECHERCHE",hero_title:"Erhalten Sie einen strukturierten Bericht in 35-40 Sekunden",hero_desc:"Verifizierte Quellen • Lokale + Internationale Preise • Klare Empfehlung.",cta_try:"Kostenlos Testen ←",cta_buy:"Tool Kaufen - $6",case_badge:"Echter Bericht in 35 Sekunden",case_title:"Beste Noise-Cancelling-Kopfhörer unter $150",case_quick:"Kurzfassung",case_table:"Vergleichstabelle",case_rec:"Endgültige Empfehlung",case_rec_desc:"Sony WH-CH720N ist die beste Wahl. JBL Tune 770NC ist die günstigste Option.",case_sources:"Quellen: SoundGuys • CNET • TechRadar",case_note:"* Preise ungefähr.",th_model:"Modell",th_price:"Preis (USD)",th_egp:"Preis (EGP)",th_anc:"ANC /5",th_battery:"Akku",demo_badge:"Testen - 40 Sekunden",demo_title:"Frage eingeben, Bericht erhalten",search_placeholder:"Frage eingeben...",search_btn:"Suchen 🔍",foot_search:"Suchen heute",remaining_left:"übrig",price_sub:"oder lokales Äquivalent",get_tool:"Vollzugriff auf das Tool",get_keys:"Tavily, Grok und Nipus Schlüssel",get_setup:"Schritt-für-Schritt-Anleitung",get_guide:"Benutzerhandbuch",get_limits:"Nutzungslimits",buy_btn:"Jetzt Kaufen - $6 🔒",trial_note:"Eine kostenlose Testversion pro Besucher. Bis zu 100 pro Tag.",faq_title:"FAQ",faq1_q:"Wie funktioniert es?",faq1_a:"Das System prüft 10 Quellen und wählt die Top 5.",faq2_q:"Ist die Testversion begrenzt?",faq2_a:"Ja, eine pro Besucher.",faq3_q:"Sind die Schlüssel sicher?",faq3_a:"Ja, nie im Frontend sichtbar.",footer:"© 2026 Mido AI Store",searching_in:"Suche...",sources_reviewed:"Quellen geprüft",time_elapsed:"Verstrichene Zeit",time_remaining:"Verbleibend",search_complete:"Suche abgeschlossen",sources_used:"10 Quellen, 5 ausgewählt",answer:"Antwort",sources:"Quellen",error_prefix:"Fehler:",empty_prompt:"Geben Sie Ihre Frage ein...",timeout_error:"Zeitüberschreitung.",retry_btn:"Erneut versuchen"},
-  ja: {badge:"V7.0 | 検証済みリサーチエンジン",hero_title:"35〜40秒で完全に構造化されたレポートを取得",hero_desc:"検証済みソース • 国内外の価格 • 明確な推奨事項。",cta_try:"無料で試す ←",cta_buy:"ツールを購入 - $6",case_badge:"35秒で生成された実際のレポート",case_title:"150ドル以下の最高のノイズキャンセリングヘッドフォン",case_quick:"クイックテイク",case_table:"比較表",case_rec:"最終推奨",case_rec_desc:"Sony WH-CH720Nが総合的に最高です。JBL Tune 770NCが予算に最適です。",case_sources:"ソース: SoundGuys • CNET • TechRadar",case_note:"* 価格は概算です。",th_model:"モデル",th_price:"価格 (USD)",th_egp:"価格 (EGP)",th_anc:"ANC /5",th_battery:"バッテリー",demo_badge:"試してみる - 40秒",demo_title:"質問を入力してレポートを取得",search_placeholder:"質問を入力...",search_btn:"検索 🔍",foot_search:"本日の検索",remaining_left:"残り",price_sub:"または現地通貨換算",get_tool:"ツールへの完全アクセス",get_keys:"Tavily、Grok、Nipusキー",get_setup:"セットアップ手順",get_guide:"ユーザーガイド",get_limits:"使用制限",buy_btn:"今すぐ購入 - $6 🔒",trial_note:"訪問者ごとに1回の無料トライアル。1日最大100回。",faq_title:"FAQ",faq1_q:"仕組みは？",faq1_a:"10のソースを調査し、トップ5を選択します。",faq2_q:"トライアルは制限されていますか？",faq2_a:"はい、訪問者ごとに1回です。",faq3_q:"キーは安全ですか？",faq3_a:"はい、フロントエンドには表示されません。",footer:"© 2026 Mido AI Store",searching_in:"検索中...",sources_reviewed:"ソースを確認済み",time_elapsed:"経過時間",time_remaining:"残り時間",search_complete:"検索完了",sources_used:"10ソース、5つを選択",answer:"回答",sources:"ソース",error_prefix:"エラー:",empty_prompt:"質問を入力してください...",timeout_error:"タイムアウトしました。",retry_btn:"再試行"},
-  zh: {badge:"V7.0 | 验证研究引擎",hero_title:"在35-40秒内获得完全结构化的研究报告",hero_desc:"经过验证的来源 • 本地和国际价格 • 明确的建议。",cta_try:"免费试用 ←",cta_buy:"购买工具 - $6",case_badge:"35秒内生成的真实报告",case_title:"150美元以下最佳降噪耳机",case_quick:"快速摘要",case_table:"比较表",case_rec:"最终建议",case_rec_desc:"Sony WH-CH720N 是整体最佳选择。JBL Tune 770NC 是最佳预算选择。",case_sources:"来源: SoundGuys • CNET • TechRadar",case_note:"* 价格是近似值。",th_model:"型号",th_price:"价格 (USD)",th_egp:"价格 (EGP)",th_anc:"ANC /5",th_battery:"电池",demo_badge:"试一试 - 40秒",demo_title:"输入问题，获取报告",search_placeholder:"输入您的研究问题...",search_btn:"搜索 🔍",foot_search:"今日搜索",remaining_left:"剩余",price_sub:"或通过Gumroad的当地等价物",get_tool:"完全访问工具",get_keys:"Tavily、Grok和Nipus密钥",get_setup:"分步设置",get_guide:"用户指南",get_limits:"使用限制",buy_btn:"立即购买 - $6 🔒",trial_note:"每位访客一次免费试用。每天最多100次。",faq_title:"FAQ",faq1_q:"它是如何工作的？",faq1_a:"系统扫描10个来源并选择前5个。",faq2_q:"试用有限制吗？",faq2_a:"是的，每位访客一次。",faq3_q:"密钥安全吗？",faq3_a:"是的，永远不会在前端暴露。",footer:"© 2026 Mido AI Store",searching_in:"搜索中...",sources_reviewed:"已审查来源",time_elapsed:"已用时间",time_remaining:"预计剩余",search_complete:"搜索完成",sources_used:"已审查10个来源，选择了5个",answer:"回答",sources:"来源",error_prefix:"错误:",empty_prompt:"在上方输入您的研究问题...",timeout_error:"请求超时。",retry_btn:"重试"},
-  es: {badge:"V7.0 | MOTOR DE INVESTIGACIÓN VERIFICADO",hero_title:"Obtén un informe de investigación estructurado en 35-40 segundos",hero_desc:"Fuentes verificadas • Precios locales + internacionales • Recomendación clara.",cta_try:"Probar Gratis ←",cta_buy:"Comprar la Herramienta - $6",case_badge:"Informe Real Generado en 35 Segundos",case_title:"Mejores Auriculares con Cancelación de Ruido por Menos de $150",case_quick:"Resumen Rápido",case_table:"Tabla Comparativa",case_rec:"Recomendación Final",case_rec_desc:"Sony WH-CH720N es la mejor opción general. JBL Tune 770NC es la mejor opción económica.",case_sources:"Fuentes: SoundGuys • CNET • TechRadar",case_note:"* Precios aproximados.",th_model:"Modelo",th_price:"Precio (USD)",th_egp:"Precio (EGP)",th_anc:"ANC /5",th_battery:"Batería",demo_badge:"Pruébalo - 40 segundos",demo_title:"Escribe tu pregunta, obtén un informe",search_placeholder:"Escribe tu pregunta...",search_btn:"Buscar 🔍",foot_search:"búsquedas hoy",remaining_left:"restante",price_sub:"o equivalente local vía Gumroad",get_tool:"Acceso completo a la herramienta",get_keys:"Claves Tavily, Grok y Nipus listas",get_setup:"Configuración paso a paso",get_guide:"Guía de usuario",get_limits:"Límites de uso",buy_btn:"Comprar Ahora - $6 🔒",trial_note:"Una prueba gratuita por visitante. Hasta 100 por día.",faq_title:"FAQ",faq1_q:"¿Cómo funciona?",faq1_a:"El sistema escanea 10 fuentes y selecciona las 5 mejores.",faq2_q:"¿La prueba es limitada?",faq2_a:"Sí, una por visitante.",faq3_q:"¿Las claves son seguras?",faq3_a:"Sí, nunca se exponen en el frontend.",footer:"© 2026 Mido AI Store",searching_in:"Buscando...",sources_reviewed:"fuentes revisadas",time_elapsed:"Tiempo transcurrido",time_remaining:"Restante",search_complete:"Búsqueda completada",sources_used:"10 fuentes, 5 seleccionadas",answer:"Respuesta",sources:"Fuentes",error_prefix:"Error:",empty_prompt:"Escribe tu pregunta...",timeout_error:"Tiempo agotado.",retry_btn:"Reintentar"},
-  pt: {badge:"V7.0 | MOTOR DE PESQUISA VERIFICADO",hero_title:"Obtenha um relatório de pesquisa estruturado em 35-40 segundos",hero_desc:"Fontes verificadas • Preços locais + internacionais • Recomendação clara.",cta_try:"Experimentar Grátis ←",cta_buy:"Comprar a Ferramenta - $6",case_badge:"Relatório Real Gerado em 35 Segundos",case_title:"Melhores Fones com Cancelamento de Ruído por Menos de $150",case_quick:"Resumo Rápido",case_table:"Tabela Comparativa",case_rec:"Recomendação Final",case_rec_desc:"Sony WH-CH720N é a melhor opção geral. JBL Tune 770NC é a melhor opção econômica.",case_sources:"Fontes: SoundGuys • CNET • TechRadar",case_note:"* Preços aproximados.",th_model:"Modelo",th_price:"Preço (USD)",th_egp:"Preço (EGP)",th_anc:"ANC /5",th_battery:"Bateria",demo_badge:"Experimente - 40 segundos",demo_title:"Digite sua pergunta, obtenha um relatório",search_placeholder:"Digite sua pergunta...",search_btn:"Pesquisar 🔍",foot_search:"pesquisas hoje",remaining_left:"restante",price_sub:"ou equivalente local via Gumroad",get_tool:"Acesso completo à ferramenta",get_keys:"Chaves Tavily, Grok e Nipus prontas",get_setup:"Configuração passo a passo",get_guide:"Guia do usuário",get_limits:"Limites de uso",buy_btn:"Comprar Agora - $6 🔒",trial_note:"Um teste gratuito por visitante. Até 100 por dia.",faq_title:"FAQ",faq1_q:"Como funciona?",faq1_a:"O sistema escaneia 10 fontes e seleciona as 5 melhores.",faq2_q:"O teste é limitado?",faq2_a:"Sim, um por visitante.",faq3_q:"As chaves são seguras?",faq3_a:"Sim, nunca expostas no frontend.",footer:"© 2026 Mido AI Store",searching_in:"Pesquisando...",sources_reviewed:"fontes revisadas",time_elapsed:"Tempo decorrido",time_remaining:"Restante",search_complete:"Pesquisa concluída",sources_used:"10 fontes, 5 selecionadas",answer:"Resposta",sources:"Fontes",error_prefix:"Erro:",empty_prompt:"Digite sua pergunta...",timeout_error:"Tempo esgotado.",retry_btn:"Tentar novamente"}
+/* ===== FULL i18n ===== */
+var EN = {
+nav_buy:'Get Access — $6',pill:'⚡ Verified research • 35–40s • Local + Global',
+hero_title:'Get a fully structured <span class="g">research report</span> — not just links',
+hero_desc:'A 5-stage verified pipeline with local and international sources, clear recommendation, and real pricing context — in about 35–40 seconds.',
+cta_try:'Try Free Demo',cta_report:'See Full Report',t1:'✓ 1 free trial / visitor',t2:'✓ 100 free searches / day',t3:'✓ API keys after purchase',
+st_visitors:'Visitors',st_searches:'Searches today',st_ok:'Successful',st_fail:'Failed',st_left:'Free left today',
+skills_title:'Research Skills',skills_sub:'Select a skill before searching. Save stores the last report on this device.',
+sk1:'Deep Search',sk2:'Summarize',sk3:'Compare',sk4:'Recommend',sk5:'Price Check',sk6:'Save Report',
+demo_title:'Live Demo',demo_sub:'Real engine. Stages light up while the spider crawls sources.',
+ph:'Best noise-cancelling headphones under $150',search_btn:'Search 🔍',meta1:'Free: 1 / visitor',meta2:'Daily cap: 100',
+s1:'Source Search',s1d:'Tavily live sources',s2:'Thesis Build',s2d:'Core argument',s3:'Reduce & Rank',s3d:'Strongest signals',s4:'Risk Check',s4d:'Local + global',s5:'Final Report',s5d:'35–40 seconds',
+laws_title:'Asimov Safety Laws',laws_sub:'These rules guide the engine so output stays useful, honest, and safe for real decisions.',
+laws_trust:'Why this matters: Mido is designed to reduce confident-but-wrong answers by forcing source checks, ranking, and a final recommendation you can verify.',
+law1_t:'Do not harm with false confidence',law1_s:'Never present guesses as proven facts.',
+law1_d:'If evidence is weak, the report must say so. The engine prefers ranked sources and scored evidence instead of fluent but unsupported claims. This protects you from polished misinformation.',
+law2_t:'Serve the research goal first',law2_s:'Optimize for decisions, not chat.',
+law2_d:'The output is structured for action: summary, comparison, and recommendation. You should spend less time rewriting AI text and more time choosing.',
+law3_t:'Protect system and user limits',law3_s:'Fair use and server-side trial protection.',
+law3_d:'Free usage is limited per visitor and per day on the server, not only in the browser. This keeps the demo stable and prevents abuse while still letting new users test quality.',
+law4_t:'Respect local market reality',law4_s:'Include local pricing context when possible.',
+law4_d:'For questions like product buying in Egypt, the report aims to connect international reviews with local price ranges so the recommendation is practical, not theoretical.',
+rings_title:'Five Protection Rings',rings_sub:'Tap any ring to read the full explanation. During search, rings light up as the spider moves.',
+ring1_t:'Ring 1 — Source Verification',ring1_s:'Collect and score live sources (Tavily).',
+ring1_d:'The spider gathers multiple live sources and attaches relevance scores. Weak or duplicate pages are de-prioritized before deeper analysis starts.',
+ring2_t:'Ring 2 — Thesis Construction',ring2_s:'Build a logical core argument.',
+ring2_d:'Instead of dumping paragraphs, the system forms a clear thesis: what options exist, what criteria matter, and what decision the user is trying to make.',
+ring3_t:'Ring 3 — Reduce & Rank',ring3_s:'Keep only the strongest evidence.',
+ring3_d:'From a larger candidate set, the engine compresses down to the most useful sources so the final report stays readable and decision-focused.',
+ring4_t:'Ring 4 — Risk Check',ring4_s:'Validate market and context risks.',
+ring4_d:'Checks practical issues: price realism, local availability signals, and whether a recommendation may be too optimistic for the stated budget.',
+ring5_t:'Ring 5 — Confidence Calibration',ring5_s:'Generate the final verified report.',
+ring5_d:'Produces the structured output only after previous rings complete: quick take, comparison table, and a final recommendation with source trail.',
+case_title:'Real Report Example',case_sub:'Generated in <strong>35 seconds</strong> for: “Best noise-cancelling headphones under $150”',
+case_h:'Best Noise-Canceling Headphones Under $150',case_quick:'Quick Take',
+cq1:'<strong>Sony WH-CH720N</strong> — best overall under ~EGP 4,500.',
+cq2:'<strong>JBL Tune 770NC</strong> — best budget under ~EGP 2,500.',
+cq3:'<strong>OneOdio Focus A6</strong> — entry option near ~EGP 2,100.',
+th1:'Model',th2:'Battery',th_price:'Price',th_comfort:'Comfort',th_verdict:'Verdict',
+r1:'Best Overall',r2:'Best Budget',r3:'Entry Option',
+case_sources:'Sources: SoundGuys, CNET, TechRadar + market listings. Prices approximate.',
+full_preview:'Full Report Preview',save_example:'Save This Report',
+price_title:'Simple pricing',price_sub:'One-time payment. No subscription.',once:'one-time',
+price_local:'or ~299 EGP via Gumroad (Egypt)',
+f1:'Full Deep Search access',f2:'API keys: Tavily + Grok + Nebius',f3:'Verified local + global reports',f4:'Setup guide included',f5:'1 free trial before purchase',
+buy_btn:'Get Full Access — $6',
+faq_title:'FAQ',fq1:'How long does a real search take?',fa1:'Typically 35–40 seconds to a verified report.',
+fq2:'What do I get for $6?',fa2:'Full access + Tavily, Grok, Nebius keys. One-time via Gumroad.',
+fq3:'Free trial limits?',fa3:'1 trial per visitor. Up to 100 free searches/day site-wide.',
+fq4:'Are sources real?',fa4:'Yes. The report appears after ranking documented sources.',
+footer:'© 2026 Mido AI Store • Deep Search Agent V10',footer2:'Live sources. Always verify final local prices.',
+modal_title:'Full Report — Headphones under $150',modal_q:'Query: Best noise-cancelling headphones under $150',modal_close:'Close',
+modal_winner:'Winner: Sony WH-CH720N',
+modal_summary:'Best overall ANC/comfort/battery under ~EGP 4,500. JBL Tune 770NC is best value under ~EGP 2,500. Ranked from SoundGuys, CNET, TechRadar and market listings.',
+modal_sources_title:'Top Sources',modal_sources_list:'1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Local market listings',
+modal_rec_title:'Final Recommendation',modal_rec_text:'Pick Sony WH-CH720N if budget allows. Pick JBL Tune 770NC for best value. Confirm live local prices before buying.',
+v_best:'Best overall',v_budget:'Best budget',v_solid:'Solid alt',v_entry:'Entry pick',v_mid:'Mid option',v_prem:'Premium feel',
+searching:'Searching...',err_net:'Network issue. Try again.',err_trial:'Free trial already used.',err_daily:'Daily free limit reached.',
+sug1:'Best laptop for coding under 25000 EGP',sug2:'Best podcast mic under 3000 EGP',sug3:'Cheapest home internet in Egypt',
+saved_ok:'Report saved on this device',saved_empty:'No report to save yet — run a search first',skill_save_hint:'Save skill selected — will store the next/last report'
 };
 
-var CURRENCIES = {EG:'EGP',SA:'SAR',US:'USD',FR:'EUR',DE:'EUR',JP:'JPY',CN:'CNY',ES:'EUR',PT:'EUR'};
-var FLAGS = {EG:'🇪🇬',SA:'🇸🇦',US:'🇺🇸',FR:'🇫🇷',DE:'🇩🇪',JP:'🇯🇵',CN:'🇨🇳',ES:'🇪🇸',PT:'🇵🇹'};
+var AR = {
+nav_buy:'احصل على الأداة — $6',pill:'⚡ بحث موثق • 35–40 ثانية • مصادر محلية وعالمية',
+hero_title:'احصل على <span class="g">تقرير بحث منظم</span> — مش مجرد روابط',
+hero_desc:'خط أنابيب موثق من 5 مراحل مع مصادر محلية ودولية، وتوصية واضحة وسياق أسعار حقيقي خلال حوالي 35–40 ثانية.',
+cta_try:'جرب البحث المجاني',cta_report:'شاهد التقرير الكامل',t1:'✓ تجربة واحدة / زائر',t2:'✓ 100 بحث مجاني / يوم',t3:'✓ مفاتيح API بعد الشراء',
+st_visitors:'الزوار',st_searches:'بحث اليوم',st_ok:'ناجح',st_fail:'فاشل',st_left:'متبقي اليوم',
+skills_title:'مهارات البحث',skills_sub:'اختر المهارة قبل البحث. مهارة الحفظ تخزّن آخر تقرير على هذا الجهاز.',
+sk1:'بحث عميق',sk2:'تلخيص',sk3:'مقارنة',sk4:'توصية',sk5:'فحص السعر',sk6:'حفظ التقرير',
+demo_title:'تجربة حية',demo_sub:'محرك حقيقي. المراحل تضيء أثناء زحف العنكبوت على المصادر.',
+ph:'أفضل سماعات إلغاء ضوضاء تحت 150 دولار',search_btn:'بحث 🔍',meta1:'مجاني: 1 / زائر',meta2:'الحد اليومي: 100',
+s1:'بحث المصادر',s1d:'مصادر Tavily الحية',s2:'بناء الأطروحة',s2d:'الحجة الأساسية',s3:'تقليص وترتيب',s3d:'أقوى الإشارات',s4:'تقييم المخاطر',s4d:'محلي + عالمي',s5:'التقرير النهائي',s5d:'35–40 ثانية',
+laws_title:'قوانين أسيموف للسلامة',laws_sub:'قواعد توجّه المحرك ليبقى مفيدًا وصادقًا وآمنًا لقراراتك الحقيقية.',
+laws_trust:'لماذا هذا مهم؟ Mido مصمم لتقليل الإجابات الواثقة الخاطئة عبر إجبار التحقق من المصادر والترتيب ثم توصية نهائية يمكنك مراجعتها.',
+law1_t:'لا ضرر بالثقة الكاذبة',law1_s:'لا تُعرض التخمينات كحقائق مثبتة.',
+law1_d:'إذا كان الدليل ضعيفًا يجب أن يقول التقرير ذلك. المحرك يفضّل المصادر المرتبة والأدلة ذات الدرجة على الكلام السلس غير المدعوم. هذا يحميك من معلومات مضللة مصاغة بإتقان.',
+law2_t:'خدمة هدف البحث أولًا',law2_s:'تحسين القرار لا الدردشة.',
+law2_d:'المخرجات منظمة للتنفيذ: ملخص ومقارنة وتوصية. تقلل وقت إعادة صياغة نص الذكاء الاصطناعي وتزيد وقت الاختيار.',
+law3_t:'حماية النظام وحدود الاستخدام',law3_s:'استخدام عادل وحماية تجربة من الخادم.',
+law3_d:'التجربة المجانية محدودة لكل زائر ولكل يوم على الخادم وليس المتصفح فقط. هذا يحافظ على استقرار العرض ويمنع الإساءة مع إتاحة اختبار الجودة.',
+law4_t:'احترام واقع السوق المحلي',law4_s:'إدراج سياق الأسعار المحلية عند الإمكان.',
+law4_d:'لأسئلة الشراء في مصر يحاول التقرير ربط المراجعات الدولية بنطاقات الأسعار المحلية لتكون التوصية عملية لا نظرية.',
+rings_title:'حلقات الحماية الخمس',rings_sub:'اضغط أي حلقة لقراءة الشرح الكامل. أثناء البحث تضيء الحلقات مع حركة العنكبوت.',
+ring1_t:'الحلقة 1 — التحقق من المصدر',ring1_s:'جمع وتقييم مصادر حية (Tavily).',
+ring1_d:'يجمع العنكبوت مصادر حية متعددة ويربطها بدرجات صلة. الصفحات الضعيفة أو المكررة تُستبعد قبل التحليل الأعمق.',
+ring2_t:'الحلقة 2 — بناء الأطروحة',ring2_s:'بناء حجة منطقية أساسية.',
+ring2_d:'بدل رمي فقرات، يشكّل النظام أطروحة واضحة: ما الخيارات؟ ما المعايير؟ وما القرار المطلوب؟',
+ring3_t:'الحلقة 3 — التقليص والترتيب',ring3_s:'الإبقاء على أقوى الأدلة فقط.',
+ring3_d:'من مجموعة مرشحة أكبر يضغط المحرك إلى أهم المصادر ليبقى التقرير قابلًا للقراءة ومركزًا على القرار.',
+ring4_t:'الحلقة 4 — تقييم المخاطر',ring4_s:'التحقق من مخاطر السوق والسياق.',
+ring4_d:'يفحص واقعية السعر وإشارات التوفر المحلي وما إذا كانت التوصية متفائلة أكثر من اللازم للميزانية المذكورة.',
+ring5_t:'الحلقة 5 — معايرة الثقة',ring5_s:'توليد التقرير النهائي الموثق.',
+ring5_d:'يُنتج المخرج المنظم بعد اكتمال الحلقات السابقة: خلاصة سريعة وجدول مقارنة وتوصية نهائية مع أثر المصادر.',
+case_title:'مثال تقرير حقيقي',case_sub:'تم إنشاؤه خلال <strong>35 ثانية</strong> لسؤال: أفضل سماعات إلغاء ضوضاء تحت 150$',
+case_h:'أفضل سماعات إلغاء ضوضاء تحت 150$',case_quick:'الخلاصة السريعة',
+cq1:'<strong>Sony WH-CH720N</strong> — الأفضل إجمالًا تحت حوالي 4500ج.',
+cq2:'<strong>JBL Tune 770NC</strong> — الأفضل اقتصاديًا تحت حوالي 2500ج.',
+cq3:'<strong>OneOdio Focus A6</strong> — خيار دخول قرب 2100ج.',
+th1:'الموديل',th2:'البطارية',th_price:'السعر',th_comfort:'الراحة',th_verdict:'الحكم',
+r1:'الأفضل إجمالًا',r2:'الأفضل اقتصاديًا',r3:'خيار دخول',
+case_sources:'المصادر: SoundGuys وCNET وTechRadar + قوائم السوق. الأسعار تقريبية.',
+full_preview:'معاينة التقرير الكامل',save_example:'حفظ هذا التقرير',
+price_title:'تسعير بسيط',price_sub:'دفعة واحدة. بدون اشتراك.',once:'مرة واحدة',
+price_local:'أو حوالي 299ج عبر Gumroad (مصر)',
+f1:'وصول كامل للبحث العميق',f2:'مفاتيح API: Tavily + Grok + Nebius',f3:'تقارير موثقة محلية وعالمية',f4:'دليل الإعداد مشمول',f5:'تجربة مجانية واحدة قبل الشراء',
+buy_btn:'احصل على الوصول الكامل — $6',
+faq_title:'أسئلة شائعة',fq1:'كم يستغرق البحث الحقيقي؟',fa1:'عادة 35–40 ثانية حتى التقرير الموثق.',
+fq2:'ماذا أحصل مقابل 6$؟',fa2:'وصول كامل + مفاتيح Tavily وGrok وNebius. دفعة واحدة عبر Gumroad.',
+fq3:'حدود التجربة المجانية؟',fa3:'تجربة واحدة لكل زائر. حتى 100 بحث مجاني يوميًا للموقع.',
+fq4:'هل المصادر حقيقية؟',fa4:'نعم. يظهر التقرير بعد ترتيب مصادر موثقة.',
+footer:'© 2026 Mido AI Store • Deep Search Agent V10',footer2:'مصادر حية. تحقق دائمًا من الأسعار المحلية النهائية.',
+modal_title:'التقرير الكامل — سماعات تحت 150$',modal_q:'السؤال: أفضل سماعات إلغاء ضوضاء تحت 150$',modal_close:'إغلاق',
+modal_winner:'الفائز: Sony WH-CH720N',
+modal_summary:'أفضل توازن لإلغاء الضوضاء والراحة والبطارية تحت حوالي 4500ج. JBL Tune 770NC الأفضل قيمة تحت حوالي 2500ج. مرتّب من SoundGuys وCNET وTechRadar وقوائم السوق.',
+modal_sources_title:'أقوى المصادر',modal_sources_list:'1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. قوائم السوق المحلية',
+modal_rec_title:'التوصية النهائية',modal_rec_text:'اختر Sony WH-CH720N إن سمحت الميزانية. واختر JBL Tune 770NC لأفضل قيمة. أكد السعر المحلي قبل الشراء.',
+v_best:'الأفضل إجمالًا',v_budget:'الأفضل اقتصاديًا',v_solid:'بديل قوي',v_entry:'خيار دخول',v_mid:'خيار متوسط',v_prem:'إحساس فاخر',
+searching:'جاري البحث...',err_net:'مشكلة شبكة. حاول مجددًا.',err_trial:'التجربة المجانية مستخدمة.',err_daily:'تم استهلاك الحد اليومي.',
+sug1:'أفضل لابتوب برمجة تحت 25000ج',sug2:'أفضل مايك بودكاست تحت 3000ج',sug3:'أرخص إنترنت منزلي في مصر',
+saved_ok:'تم حفظ التقرير على هذا الجهاز',saved_empty:'لا يوجد تقرير للحفظ بعد — نفّذ بحثًا أولًا',skill_save_hint:'تم اختيار مهارة الحفظ — سيتم تخزين التقرير التالي/الأخير'
+};
 
-function applyLanguage(lang) {
-  var d = T[lang] || T.ar;
-  document.querySelectorAll('[data-i18n]').forEach(function(el) {
-    var k = el.getAttribute('data-i18n');
-    if (d[k]) el.textContent = d[k];
-  });
-  document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
-    var k = el.getAttribute('data-i18n-ph');
-    if (d[k]) el.placeholder = d[k];
-  });
-  document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-  document.documentElement.lang = lang;
-  var opt = document.querySelector('.lang-option[data-lang="' + lang + '"]');
-  if (opt) {
-    var c = opt.getAttribute('data-country');
-    document.getElementById('currentFlag').textContent = FLAGS[c];
-    document.getElementById('currentLang').textContent = opt.getAttribute('data-name');
-    document.getElementById('currencyFlag').textContent = FLAGS[c];
-    document.getElementById('currencyCode').textContent = CURRENCIES[c];
-  }
-  localStorage.setItem('mido_lang', lang);
+var T = {en:EN, ar:AR};
+T.fr = {"nav_buy": "Obtenir l'accès — $6", "pill": "⚡ Recherche vérifiée • 35–40s • Sources locales + mondiales", "hero_title": "Obtenez un <span class=\"g\">rapport structuré</span> — pas seulement des liens", "hero_desc": "Pipeline vérifié en 5 étapes avec sources locales et internationales, recommandation claire et contexte de prix réel — en environ 35–40 secondes.", "cta_try": "Essai gratuit", "cta_report": "Voir le rapport complet", "t1": "✓ 1 essai gratuit / visiteur", "t2": "✓ 100 recherches gratuites / jour", "t3": "✓ Clés API après achat", "st_visitors": "Visiteurs", "st_searches": "Recherches aujourd'hui", "st_ok": "Réussies", "st_fail": "Échouées", "st_left": "Restantes gratuites", "skills_title": "Compétences de recherche", "skills_sub": "Choisissez une compétence avant de chercher. Enregistrer stocke le dernier rapport sur cet appareil.", "sk1": "Recherche approfondie", "sk2": "Résumer", "sk3": "Comparer", "sk4": "Recommander", "sk5": "Vérifier le prix", "sk6": "Enregistrer le rapport", "demo_title": "Démo en direct", "demo_sub": "Moteur réel. Les étapes s'allument pendant que l'araignée explore les sources.", "ph": "Meilleurs casques ANC sous 150 $", "search_btn": "Rechercher 🔍", "meta1": "Gratuit : 1 / visiteur", "meta2": "Plafond journalier : 100", "s1": "Recherche de sources", "s1d": "Sources live Tavily", "s2": "Construction de thèse", "s2d": "Argument central", "s3": "Réduire et classer", "s3d": "Signaux les plus forts", "s4": "Contrôle des risques", "s4d": "Local + mondial", "s5": "Rapport final", "s5d": "35–40 secondes", "laws_title": "Lois de sécurité d'Asimov", "laws_sub": "Ces règles guident le moteur pour rester utile, honnête et sûr pour de vraies décisions.", "laws_trust": "Pourquoi c'est important : Mido réduit les réponses confiantess mais fausses en forçant la vérification des sources, le classement et une recommandation finale vérifiable.", "law1_t": "Ne pas nuire par fausse confiance", "law1_s": "Ne pas présenter des suppositions comme des faits prouvés.", "law1_d": "Si la preuve est faible, le rapport doit le dire. Le moteur privilégie des sources notées plutôt qu'un texte fluide non étayé. Cela vous protège de la désinformation soignée.", "law2_t": "Servir d'abord l'objectif de recherche", "law2_s": "Optimiser la décision, pas le chat.", "law2_d": "La sortie est structurée pour agir : résumé, comparaison et recommandation. Moins de réécriture, plus de choix.", "law3_t": "Protéger le système et les limites", "law3_s": "Usage équitable et protection d'essai côté serveur.", "law3_d": "Les limites gratuites s'appliquent côté serveur par visiteur et par jour, pas seulement dans le navigateur. Cela stabilise la démo et limite les abus.", "law4_t": "Respecter la réalité du marché local", "law4_s": "Inclure le contexte de prix local si possible.", "law4_d": "Pour les achats, le rapport relie avis internationaux et fourchettes de prix locales pour une recommandation pratique.", "rings_title": "Cinq anneaux de protection", "rings_sub": "Touchez un anneau pour lire l'explication complète. Pendant la recherche, les anneaux s'allument avec l'araignée.", "ring1_t": "Anneau 1 — Vérification des sources", "ring1_s": "Collecter et noter des sources live (Tavily).", "ring1_d": "Plusieurs sources live sont collectées avec des scores de pertinence. Les pages faibles ou en double sont dépriorisées avant l’analyse approfondie.", "ring2_t": "Anneau 2 — Construction de thèse", "ring2_s": "Construire un argument logique central.", "ring2_d": "Pas un tas de paragraphes : le système forme une thèse claire — options, critères et décision à prendre.", "ring3_t": "Anneau 3 — Réduire et classer", "ring3_s": "Garder seulement les preuves les plus fortes.", "ring3_d": "Compression vers les sources les plus utiles pour un rapport lisible et orienté décision.", "ring4_t": "Anneau 4 — Contrôle des risques", "ring4_s": "Valider risques de marché et de contexte.", "ring4_d": "Réalisme des prix, signaux de disponibilité locale, et risque de recommandation trop optimiste pour le budget.", "ring5_t": "Anneau 5 — Calibration de confiance", "ring5_s": "Générer le rapport final vérifié.", "ring5_d": "Produit le résumé rapide, le tableau comparatif et la recommandation finale avec piste de sources, après les anneaux précédents.", "case_title": "Exemple de rapport réel", "case_sub": "Généré en <strong>35 secondes</strong> pour : « Meilleurs casques ANC sous 150 $ »", "case_h": "Meilleurs casques à réduction de bruit sous 150 $", "case_quick": "Résumé rapide", "cq1": "<strong>Sony WH-CH720N</strong> — meilleur choix global sous ~EGP 4 500.", "cq2": "<strong>JBL Tune 770NC</strong> — meilleur budget sous ~EGP 2 500.", "cq3": "<strong>OneOdio Focus A6</strong> — option d’entrée vers ~EGP 2 100.", "th1": "Modèle", "th2": "Batterie", "th_price": "Prix", "th_comfort": "Confort", "th_verdict": "Verdict", "r1": "Meilleur global", "r2": "Meilleur budget", "r3": "Entrée de gamme", "case_sources": "Sources : SoundGuys, CNET, TechRadar + listes de marché. Prix approximatifs.", "full_preview": "Aperçu complet du rapport", "save_example": "Enregistrer ce rapport", "price_title": "Tarification simple", "price_sub": "Paiement unique. Pas d’abonnement.", "once": "unique", "price_local": "ou ~299 EGP via Gumroad (Égypte)", "f1": "Accès complet Deep Search", "f2": "Clés API : Tavily + Grok + Nebius", "f3": "Rapports locaux + internationaux vérifiés", "f4": "Guide d’installation inclus", "f5": "1 essai gratuit avant achat", "buy_btn": "Accès complet — $6", "faq_title": "FAQ", "fq1": "Combien de temps prend une vraie recherche ?", "fa1": "En général 35–40 secondes jusqu’au rapport vérifié.", "fq2": "Que comprend 6 $ ?", "fa2": "Accès complet + clés Tavily, Grok, Nebius. Paiement unique via Gumroad.", "fq3": "Limites de l’essai gratuit ?", "fa3": "1 essai par visiteur. Jusqu’à 100 recherches gratuites/jour sur le site.", "fq4": "Les sources sont-elles réelles ?", "fa4": "Oui. Le rapport apparaît après classement de sources documentées.", "footer": "© 2026 Mido AI Store • Deep Search Agent V10", "footer2": "Sources live. Vérifiez toujours les prix locaux finaux.", "modal_title": "Rapport complet — casques sous 150 $", "modal_q": "Question : meilleurs casques ANC sous 150 $", "modal_close": "Fermer", "modal_winner": "Gagnant : Sony WH-CH720N", "modal_summary": "Meilleur équilibre ANC/confort/batterie sous ~EGP 4 500. JBL Tune 770NC est le meilleur rapport qualité-prix sous ~EGP 2 500. Classé à partir de SoundGuys, CNET, TechRadar et listes de marché.", "modal_sources_title": "Principales sources", "modal_sources_list": "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Listes de marché locales", "modal_rec_title": "Recommandation finale", "modal_rec_text": "Choisissez Sony WH-CH720N si le budget le permet. Choisissez JBL Tune 770NC pour le meilleur prix. Confirmez les prix locaux avant d’acheter.", "v_best": "Meilleur global", "v_budget": "Meilleur budget", "v_solid": "Alternative solide", "v_entry": "Entrée", "v_mid": "Milieu de gamme", "v_prem": "Finition premium", "searching": "Recherche...", "err_net": "Problème réseau. Réessayez.", "err_trial": "Essai gratuit déjà utilisé.", "err_daily": "Limite gratuite journalière atteinte.", "sug1": "Meilleur laptop pour coder sous 25000 EGP", "sug2": "Meilleur micro podcast sous 3000 EGP", "sug3": "Internet domicile le moins cher en Égypte", "saved_ok": "Rapport enregistré sur cet appareil", "saved_empty": "Aucun rapport à enregistrer — lancez d’abord une recherche", "skill_save_hint": "Compétence Enregistrer sélectionnée — stockera le prochain/dernier rapport"};
+T.de = {"nav_buy": "Zugang holen — $6", "pill": "⚡ Verifizierte Recherche • 35–40s • Lokal + Global", "hero_title": "Erhalten Sie einen <span class=\"g\">strukturierten Bericht</span> — nicht nur Links", "hero_desc": "5-stufige verifizierte Pipeline mit lokalen und internationalen Quellen, klarer Empfehlung und realem Preiskontext — in etwa 35–40 Sekunden.", "cta_try": "Kostenlos testen", "cta_report": "Vollbericht ansehen", "t1": "✓ 1 Test / Besucher", "t2": "✓ 100 kostenlose Suchen / Tag", "t3": "✓ API-Keys nach Kauf", "st_visitors": "Besucher", "st_searches": "Suchen heute", "st_ok": "Erfolgreich", "st_fail": "Fehlgeschlagen", "st_left": "Frei übrig heute", "skills_title": "Recherche-Skills", "skills_sub": "Skill vor der Suche wählen. Speichern lagert den letzten Bericht auf diesem Gerät.", "sk1": "Deep Search", "sk2": "Zusammenfassen", "sk3": "Vergleichen", "sk4": "Empfehlen", "sk5": "Preis prüfen", "sk6": "Bericht speichern", "demo_title": "Live-Demo", "demo_sub": "Echte Engine. Stufen leuchten, während die Spinne Quellen abläuft.", "ph": "Beste ANC-Kopfhörer unter 150 $", "search_btn": "Suchen 🔍", "meta1": "Gratis: 1 / Besucher", "meta2": "Tageslimit: 100", "s1": "Quellensuche", "s1d": "Tavily Live-Quellen", "s2": "These aufbauen", "s2d": "Kernargument", "s3": "Reduzieren & ranken", "s3d": "Stärkste Signale", "s4": "Risikocheck", "s4d": "Lokal + global", "s5": "Endbericht", "s5d": "35–40 Sekunden", "laws_title": "Asimov-Sicherheitsgesetze", "laws_sub": "Regeln, damit die Ausgabe nützlich, ehrlich und entscheidungssicher bleibt.", "laws_trust": "Warum das zählt: Mido reduziert selbstbewusst falsche Antworten durch Quellenprüfung, Ranking und eine prüfbare Empfehlung.", "law1_t": "Kein Schaden durch falsche Sicherheit", "law1_s": "Vermutungen nicht als bewiesene Fakten darstellen.", "law1_d": "Bei schwacher Evidenz muss der Bericht das sagen. Bewertete Quellen haben Vorrang vor flüssigem, unbelegtem Text.", "law2_t": "Forschungsziel zuerst", "law2_s": "Für Entscheidungen optimieren, nicht für Chat.", "law2_d": "Strukturierte Ausgabe: Kurzfassung, Vergleich, Empfehlung. Weniger Umschreiben, mehr Entscheiden.", "law3_t": "System und Limits schützen", "law3_s": "Fair Use und serverseitiger Testschutz.", "law3_d": "Gratis-Limits gelten serverseitig pro Besucher und Tag, nicht nur im Browser.", "law4_t": "Lokale Marktrealität respektieren", "law4_s": "Lokalen Preiskontext einbeziehen, wenn möglich.", "law4_d": "Kauf-Fragen verbinden internationale Reviews mit lokalen Preisspannen für praxisnahe Empfehlungen.", "rings_title": "Fünf Schutzringe", "rings_sub": "Ring antippen für Details. Während der Suche leuchten Ringe mit der Spinne.", "ring1_t": "Ring 1 — Quellenprüfung", "ring1_s": "Live-Quellen sammeln und bewerten (Tavily).", "ring1_d": "Mehrere Live-Quellen mit Relevanz-Scores. Schwache oder doppelte Seiten werden vor der Tiefenanalyse abgewertet.", "ring2_t": "Ring 2 — These aufbauen", "ring2_s": "Logisches Kernargument bilden.", "ring2_d": "Keine Absatzflut: klare These zu Optionen, Kriterien und Entscheidung.", "ring3_t": "Ring 3 — Reduzieren & ranken", "ring3_s": "Nur stärkste Evidenz behalten.", "ring3_d": "Komprimierung auf die nützlichsten Quellen für einen lesbaren, entscheidungsorientierten Bericht.", "ring4_t": "Ring 4 — Risikocheck", "ring4_s": "Markt- und Kontext-Risiken prüfen.", "ring4_d": "Preisrealismus, Verfügbarkeitssignale und ob die Empfehlung zum Budget passt.", "ring5_t": "Ring 5 — Konfidenz-Kalibrierung", "ring5_s": "Finalen verifizierten Bericht erzeugen.", "ring5_d": "Kurzfassung, Vergleichstabelle und finale Empfehlung mit Quellenpfad nach Abschluss der vorherigen Ringe.", "case_title": "Echtes Berichtsbeispiel", "case_sub": "In <strong>35 Sekunden</strong> erzeugt für: „Beste ANC-Kopfhörer unter 150 $“", "case_h": "Beste Noise-Canceling-Kopfhörer unter 150 $", "case_quick": "Kurzfassung", "cq1": "<strong>Sony WH-CH720N</strong> — bestes Gesamtpaket unter ~EGP 4.500.", "cq2": "<strong>JBL Tune 770NC</strong> — bestes Budget unter ~EGP 2.500.", "cq3": "<strong>OneOdio Focus A6</strong> — Einstiegsoption bei ~EGP 2.100.", "th1": "Modell", "th2": "Akku", "th_price": "Preis", "th_comfort": "Komfort", "th_verdict": "Urteil", "r1": "Gesamtsieger", "r2": "Bestes Budget", "r3": "Einstieg", "case_sources": "Quellen: SoundGuys, CNET, TechRadar + Marktdaten. Preise approximativ.", "full_preview": "Vollbericht ansehen", "save_example": "Diesen Bericht speichern", "price_title": "Einfache Preise", "price_sub": "Einmalzahlung. Kein Abo.", "once": "einmalig", "price_local": "oder ~299 EGP via Gumroad (Ägypten)", "f1": "Voller Deep-Search-Zugang", "f2": "API-Keys: Tavily + Grok + Nebius", "f3": "Verifizierte lokale + globale Berichte", "f4": "Setup-Guide inklusive", "f5": "1 Gratis-Test vor dem Kauf", "buy_btn": "Voller Zugang — $6", "faq_title": "FAQ", "fq1": "Wie lange dauert eine echte Suche?", "fa1": "Typisch 35–40 Sekunden bis zum verifizierten Bericht.", "fq2": "Was enthält 6 $?", "fa2": "Voller Zugang + Tavily-, Grok-, Nebius-Keys. Einmalig über Gumroad.", "fq3": "Gratis-Limits?", "fa3": "1 Test pro Besucher. Bis 100 Gratis-Suchen/Tag site-weit.", "fq4": "Sind die Quellen echt?", "fa4": "Ja. Der Bericht erscheint nach Ranking dokumentierter Quellen.", "footer": "© 2026 Mido AI Store • Deep Search Agent V10", "footer2": "Live-Quellen. Endpreise lokal immer prüfen.", "modal_title": "Vollbericht — Kopfhörer unter 150 $", "modal_q": "Anfrage: Beste ANC-Kopfhörer unter 150 $", "modal_close": "Schließen", "modal_winner": "Sieger: Sony WH-CH720N", "modal_summary": "Bestes ANC/Komfort/Akku-Paket unter ~EGP 4.500. JBL Tune 770NC ist das beste Budget unter ~EGP 2.500. Gerankt aus SoundGuys, CNET, TechRadar und Marktdaten.", "modal_sources_title": "Top-Quellen", "modal_sources_list": "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Lokale Marktdaten", "modal_rec_title": "Finale Empfehlung", "modal_rec_text": "Sony WH-CH720N bei ausreichendem Budget. JBL Tune 770NC für besten Preis. Lokale Preise vor dem Kauf prüfen.", "v_best": "Gesamtsieger", "v_budget": "Bestes Budget", "v_solid": "Solide Alternative", "v_entry": "Einstieg", "v_mid": "Mittelklasse", "v_prem": "Premium-Gefühl", "searching": "Suche...", "err_net": "Netzwerkproblem. Bitte erneut versuchen.", "err_trial": "Gratis-Test bereits genutzt.", "err_daily": "Tageslimit erreicht.", "sug1": "Bestes Coding-Laptop unter 25000 EGP", "sug2": "Bestes Podcast-Mikro unter 3000 EGP", "sug3": "Günstigstes Heim-Internet in Ägypten", "saved_ok": "Bericht auf diesem Gerät gespeichert", "saved_empty": "Kein Bericht zum Speichern — zuerst suchen", "skill_save_hint": "Save-Skill aktiv — speichert nächsten/letzten Bericht"};
+T.es = {"nav_buy": "Obtener acceso — $6", "pill": "⚡ Investigación verificada • 35–40s • Fuentes locales + globales", "hero_title": "Obtén un <span class=\"g\">informe estructurado</span> — no solo enlaces", "hero_desc": "Pipeline verificado de 5 etapas con fuentes locales e internacionales, recomendación clara y contexto real de precios — en unos 35–40 segundos.", "cta_try": "Prueba gratis", "cta_report": "Ver informe completo", "t1": "✓ 1 prueba / visitante", "t2": "✓ 100 búsquedas gratis / día", "t3": "✓ Claves API tras la compra", "st_visitors": "Visitantes", "st_searches": "Búsquedas hoy", "st_ok": "Exitosas", "st_fail": "Fallidas", "st_left": "Gratis restantes", "skills_title": "Skills de investigación", "skills_sub": "Elige un skill antes de buscar. Guardar almacena el último informe en este dispositivo.", "sk1": "Búsqueda profunda", "sk2": "Resumir", "sk3": "Comparar", "sk4": "Recomendar", "sk5": "Revisar precio", "sk6": "Guardar informe", "demo_title": "Demo en vivo", "demo_sub": "Motor real. Las etapas se iluminan mientras la araña recorre fuentes.", "ph": "Mejores auriculares ANC por menos de $150", "search_btn": "Buscar 🔍", "meta1": "Gratis: 1 / visitante", "meta2": "Tope diario: 100", "s1": "Búsqueda de fuentes", "s1d": "Fuentes live Tavily", "s2": "Construcción de tesis", "s2d": "Argumento central", "s3": "Reducir y ordenar", "s3d": "Señales más fuertes", "s4": "Control de riesgos", "s4d": "Local + global", "s5": "Informe final", "s5d": "35–40 segundos", "laws_title": "Leyes de seguridad de Asimov", "laws_sub": "Reglas para que la salida sea útil, honesta y segura para decisiones reales.", "laws_trust": "Por qué importa: Mido reduce respuestas seguras pero erróneas al forzar verificación de fuentes, ranking y una recomendación final verificable.", "law1_t": "No dañar con falsa confianza", "law1_s": "No presentar conjeturas como hechos probados.", "law1_d": "Si la evidencia es débil, el informe debe decirlo. Prioriza fuentes puntuadas sobre texto fluido sin respaldo.", "law2_t": "Servir primero el objetivo de investigación", "law2_s": "Optimizar la decisión, no el chat.", "law2_d": "Salida estructurada: resumen, comparación y recomendación. Menos reescritura, más elección.", "law3_t": "Proteger el sistema y los límites", "law3_s": "Uso justo y protección de prueba en servidor.", "law3_d": "Los límites gratis se aplican en el servidor por visitante y por día, no solo en el navegador.", "law4_t": "Respetar la realidad del mercado local", "law4_s": "Incluir contexto de precios locales cuando sea posible.", "law4_d": "En compras, conecta reseñas internacionales con rangos de precios locales para una recomendación práctica.", "rings_title": "Cinco anillos de protección", "rings_sub": "Toca un anillo para leer el detalle completo. Durante la búsqueda se iluminan con la araña.", "ring1_t": "Anillo 1 — Verificación de fuentes", "ring1_s": "Recoger y puntuar fuentes live (Tavily).", "ring1_d": "Varias fuentes live con puntuación de relevancia. Páginas débiles o duplicadas bajan de prioridad antes del análisis profundo.", "ring2_t": "Anillo 2 — Construcción de tesis", "ring2_s": "Construir el argumento lógico central.", "ring2_d": "No un montón de párrafos: tesis clara sobre opciones, criterios y decisión.", "ring3_t": "Anillo 3 — Reducir y ordenar", "ring3_s": "Quedarse solo con la evidencia más fuerte.", "ring3_d": "Comprime hacia las fuentes más útiles para un informe legible y orientado a la decisión.", "ring4_t": "Anillo 4 — Control de riesgos", "ring4_s": "Validar riesgos de mercado y contexto.", "ring4_d": "Realismo de precios, señales de disponibilidad y si la recomendación es demasiado optimista para el presupuesto.", "ring5_t": "Anillo 5 — Calibración de confianza", "ring5_s": "Generar el informe final verificado.", "ring5_d": "Resumen, tabla comparativa y recomendación final con rastro de fuentes tras completar los anillos anteriores.", "case_title": "Ejemplo de informe real", "case_sub": "Generado en <strong>35 segundos</strong> para: “Mejores auriculares ANC bajo $150”", "case_h": "Mejores auriculares con cancelación de ruido bajo $150", "case_quick": "Resumen rápido", "cq1": "<strong>Sony WH-CH720N</strong> — mejor opción global bajo ~EGP 4,500.", "cq2": "<strong>JBL Tune 770NC</strong> — mejor presupuesto bajo ~EGP 2,500.", "cq3": "<strong>OneOdio Focus A6</strong> — opción de entrada cerca de ~EGP 2,100.", "th1": "Modelo", "th2": "Batería", "th_price": "Precio", "th_comfort": "Comodidad", "th_verdict": "Veredicto", "r1": "Mejor global", "r2": "Mejor presupuesto", "r3": "Entrada", "case_sources": "Fuentes: SoundGuys, CNET, TechRadar + listados de mercado. Precios aproximados.", "full_preview": "Vista completa del informe", "save_example": "Guardar este informe", "price_title": "Precio simple", "price_sub": "Pago único. Sin suscripción.", "once": "único", "price_local": "o ~299 EGP vía Gumroad (Egipto)", "f1": "Acceso completo Deep Search", "f2": "Claves API: Tavily + Grok + Nebius", "f3": "Informes locales + globales verificados", "f4": "Guía de configuración incluida", "f5": "1 prueba gratis antes de comprar", "buy_btn": "Acceso completo — $6", "faq_title": "FAQ", "fq1": "¿Cuánto tarda una búsqueda real?", "fa1": "Normalmente 35–40 segundos hasta el informe verificado.", "fq2": "¿Qué incluye $6?", "fa2": "Acceso completo + claves Tavily, Grok, Nebius. Pago único en Gumroad.", "fq3": "¿Límites de la prueba?", "fa3": "1 por visitante. Hasta 100 búsquedas gratis/día en el sitio.", "fq4": "¿Son reales las fuentes?", "fa4": "Sí. El informe aparece tras rankear fuentes documentadas.", "footer": "© 2026 Mido AI Store • Deep Search Agent V10", "footer2": "Fuentes en vivo. Verifica siempre el precio local final.", "modal_title": "Informe completo — auriculares bajo $150", "modal_q": "Consulta: mejores auriculares ANC bajo $150", "modal_close": "Cerrar", "modal_winner": "Ganador: Sony WH-CH720N", "modal_summary": "Mejor equilibrio ANC/comodidad/batería bajo ~EGP 4,500. JBL Tune 770NC es la mejor relación calidad-precio bajo ~EGP 2,500. Rankeado desde SoundGuys, CNET, TechRadar y listados de mercado.", "modal_sources_title": "Fuentes principales", "modal_sources_list": "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Listados de mercado locales", "modal_rec_title": "Recomendación final", "modal_rec_text": "Elige Sony WH-CH720N si el presupuesto lo permite. Elige JBL Tune 770NC por valor. Confirma precios locales antes de comprar.", "v_best": "Mejor global", "v_budget": "Mejor presupuesto", "v_solid": "Alternativa sólida", "v_entry": "Entrada", "v_mid": "Gama media", "v_prem": "Sensación premium", "searching": "Buscando...", "err_net": "Problema de red. Inténtalo de nuevo.", "err_trial": "Prueba gratis ya usada.", "err_daily": "Límite diario alcanzado.", "sug1": "Mejor portátil para programar bajo 25000 EGP", "sug2": "Mejor micrófono podcast bajo 3000 EGP", "sug3": "Internet hogar más barato en Egipto", "saved_ok": "Informe guardado en este dispositivo", "saved_empty": "No hay informe para guardar — busca primero", "skill_save_hint": "Skill Guardar seleccionado — guardará el próximo/último informe"};
+T.pt = {"nav_buy": "Obter acesso — $6", "pill": "⚡ Pesquisa verificada • 35–40s • Fontes locais + globais", "hero_title": "Obtenha um <span class=\"g\">relatório estruturado</span> — não apenas links", "hero_desc": "Pipeline verificado de 5 etapas com fontes locais e internacionais, recomendação clara e contexto real de preços — em cerca de 35–40 segundos.", "cta_try": "Teste grátis", "cta_report": "Ver relatório completo", "t1": "✓ 1 teste / visitante", "t2": "✓ 100 pesquisas grátis / dia", "t3": "✓ Chaves API após a compra", "st_visitors": "Visitantes", "st_searches": "Pesquisas hoje", "st_ok": "Sucesso", "st_fail": "Falhas", "st_left": "Grátis restantes", "skills_title": "Skills de pesquisa", "skills_sub": "Escolha um skill antes de pesquisar. Salvar guarda o último relatório neste dispositivo.", "sk1": "Busca profunda", "sk2": "Resumir", "sk3": "Comparar", "sk4": "Recomendar", "sk5": "Checar preço", "sk6": "Salvar relatório", "demo_title": "Demo ao vivo", "demo_sub": "Motor real. As etapas acendem enquanto a aranha percorre fontes.", "ph": "Melhores fones ANC por menos de $150", "search_btn": "Pesquisar 🔍", "meta1": "Grátis: 1 / visitante", "meta2": "Limite diário: 100", "s1": "Busca de fontes", "s1d": "Fontes live Tavily", "s2": "Construção da tese", "s2d": "Argumento central", "s3": "Reduzir e rankear", "s3d": "Sinais mais fortes", "s4": "Checagem de risco", "s4d": "Local + global", "s5": "Relatório final", "s5d": "35–40 segundos", "laws_title": "Leis de segurança de Asimov", "laws_sub": "Regras para a saída ser útil, honesta e segura para decisões reais.", "laws_trust": "Por que importa: o Mido reduz respostas confiantes mas erradas ao forçar verificação de fontes, ranking e recomendação final verificável.", "law1_t": "Não causar dano com falsa confiança", "law1_s": "Não apresentar palpites como fatos provados.", "law1_d": "Se a evidência for fraca, o relatório deve dizer isso. Fontes pontuadas têm prioridade sobre texto fluente sem base.", "law2_t": "Servir primeiro o objetivo da pesquisa", "law2_s": "Otimizar a decisão, não o chat.", "law2_d": "Saída estruturada: resumo, comparação e recomendação. Menos reescrita, mais escolha.", "law3_t": "Proteger o sistema e os limites", "law3_s": "Uso justo e proteção de teste no servidor.", "law3_d": "Limites grátis são aplicados no servidor por visitante e por dia, não só no navegador.", "law4_t": "Respeitar a realidade do mercado local", "law4_s": "Incluir contexto de preços locais quando possível.", "law4_d": "Em compras, conecta reviews internacionais a faixas de preço locais para uma recomendação prática.", "rings_title": "Cinco anéis de proteção", "rings_sub": "Toque um anel para ler o detalhe completo. Durante a pesquisa eles acendem com a aranha.", "ring1_t": "Anel 1 — Verificação de fontes", "ring1_s": "Coletar e pontuar fontes live (Tavily).", "ring1_d": "Várias fontes live com scores de relevância. Páginas fracas ou duplicadas perdem prioridade antes da análise profunda.", "ring2_t": "Anel 2 — Construção da tese", "ring2_s": "Montar o argumento lógico central.", "ring2_d": "Não um monte de parágrafos: tese clara sobre opções, critérios e decisão.", "ring3_t": "Anel 3 — Reduzir e rankear", "ring3_s": "Manter só a evidência mais forte.", "ring3_d": "Comprime para as fontes mais úteis e um relatório legível focado na decisão.", "ring4_t": "Anel 4 — Checagem de risco", "ring4_s": "Validar riscos de mercado e contexto.", "ring4_d": "Realismo de preço, sinais de disponibilidade e se a recomendação é otimista demais para o orçamento.", "ring5_t": "Anel 5 — Calibração de confiança", "ring5_s": "Gerar o relatório final verificado.", "ring5_d": "Resumo, tabela comparativa e recomendação final com trilha de fontes após os anéis anteriores.", "case_title": "Exemplo de relatório real", "case_sub": "Gerado em <strong>35 segundos</strong> para: “Melhores fones ANC abaixo de $150”", "case_h": "Melhores fones com cancelamento de ruído abaixo de $150", "case_quick": "Resumo rápido", "cq1": "<strong>Sony WH-CH720N</strong> — melhor escolha geral abaixo de ~EGP 4.500.", "cq2": "<strong>JBL Tune 770NC</strong> — melhor custo-benefício abaixo de ~EGP 2.500.", "cq3": "<strong>OneOdio Focus A6</strong> — opção de entrada perto de ~EGP 2.100.", "th1": "Modelo", "th2": "Bateria", "th_price": "Preço", "th_comfort": "Conforto", "th_verdict": "Veredito", "r1": "Melhor geral", "r2": "Melhor custo", "r3": "Entrada", "case_sources": "Fontes: SoundGuys, CNET, TechRadar + listagens de mercado. Preços aproximados.", "full_preview": "Prévia completa do relatório", "save_example": "Salvar este relatório", "price_title": "Preço simples", "price_sub": "Pagamento único. Sem assinatura.", "once": "único", "price_local": "ou ~299 EGP via Gumroad (Egito)", "f1": "Acesso completo Deep Search", "f2": "Chaves API: Tavily + Grok + Nebius", "f3": "Relatórios locais + globais verificados", "f4": "Guia de configuração incluído", "f5": "1 teste grátis antes da compra", "buy_btn": "Acesso completo — $6", "faq_title": "FAQ", "fq1": "Quanto tempo leva uma pesquisa real?", "fa1": "Normalmente 35–40 segundos até o relatório verificado.", "fq2": "O que inclui $6?", "fa2": "Acesso completo + chaves Tavily, Grok, Nebius. Pagamento único no Gumroad.", "fq3": "Limites do teste grátis?", "fa3": "1 por visitante. Até 100 pesquisas grátis/dia no site.", "fq4": "As fontes são reais?", "fa4": "Sim. O relatório aparece após rankear fontes documentadas.", "footer": "© 2026 Mido AI Store • Deep Search Agent V10", "footer2": "Fontes ao vivo. Sempre verifique o preço local final.", "modal_title": "Relatório completo — fones abaixo de $150", "modal_q": "Consulta: melhores fones ANC abaixo de $150", "modal_close": "Fechar", "modal_winner": "Vencedor: Sony WH-CH720N", "modal_summary": "Melhor equilíbrio ANC/conforto/bateria abaixo de ~EGP 4.500. JBL Tune 770NC é o melhor custo-benefício abaixo de ~EGP 2.500. Rankeado a partir de SoundGuys, CNET, TechRadar e listagens de mercado.", "modal_sources_title": "Principais fontes", "modal_sources_list": "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Listagens de mercado locais", "modal_rec_title": "Recomendação final", "modal_rec_text": "Escolha Sony WH-CH720N se o orçamento permitir. Escolha JBL Tune 770NC por valor. Confirme preços locais antes de comprar.", "v_best": "Melhor geral", "v_budget": "Melhor custo", "v_solid": "Alternativa sólida", "v_entry": "Entrada", "v_mid": "Intermediário", "v_prem": "Sensação premium", "searching": "Pesquisando...", "err_net": "Problema de rede. Tente de novo.", "err_trial": "Teste grátis já usado.", "err_daily": "Limite diário atingido.", "sug1": "Melhor notebook para programar sob 25000 EGP", "sug2": "Melhor microfone de podcast sob 3000 EGP", "sug3": "Internet residencial mais barata no Egito", "saved_ok": "Relatório salvo neste dispositivo", "saved_empty": "Nenhum relatório para salvar — pesquise primeiro", "skill_save_hint": "Skill Salvar selecionado — salvará o próximo/último relatório"};
+T.ja = {"nav_buy": "アクセスを取得 — $6", "pill": "⚡ 検証済み調査 • 35–40秒 • 現地＋国際ソース", "hero_title": "完全な<span class=\"g\">構造化調査レポート</span>を取得 — リンクだけではない", "hero_desc": "5段階の検証パイプライン。現地と国際ソース、明確な推奨、実価格の文脈を約35–40秒で提供します。", "cta_try": "無料で試す", "cta_report": "完全レポートを見る", "t1": "✓ 訪問者ごとに1回無料", "t2": "✓ 1日最大100回無料検索", "t3": "✓ 購入後にAPIキー", "st_visitors": "訪問者", "st_searches": "本日の検索", "st_ok": "成功", "st_fail": "失敗", "st_left": "本日の残り無料", "skills_title": "リサーチスキル", "skills_sub": "検索前にスキルを選択。保存は最新レポートをこの端末に保存します。", "sk1": "ディープサーチ", "sk2": "要約", "sk3": "比較", "sk4": "推奨", "sk5": "価格チェック", "sk6": "レポート保存", "demo_title": "ライブデモ", "demo_sub": "実エンジン。クモがソースを辿る間、ステージが点灯します。", "ph": "150ドル以下のベストANCヘッドホン", "search_btn": "検索 🔍", "meta1": "無料：訪問者1回", "meta2": "1日上限：100", "s1": "ソース検索", "s1d": "Tavilyライブ", "s2": "論旨構築", "s2d": "核心の議論", "s3": "削減と順位", "s3d": "最強シグナル", "s4": "リスク確認", "s4d": "現地＋国際", "s5": "最終レポート", "s5d": "35–40秒", "laws_title": "アシモフの安全法則", "laws_sub": "有用・誠実で、実際の意思決定に安全な出力のためのルールです。", "laws_trust": "重要な理由：Midoはソース確認・順位付け・検証可能な最終推奨を強制し、自信満々な誤回答を減らす設計です。", "law1_t": "偽の自信で害を与えない", "law1_s": "推測を確定事実として提示しない。", "law1_d": "証拠が弱い場合はレポートが明記します。流暢だが根拠の薄い文章より、スコア付きソースを優先します。", "law2_t": "調査目的を最優先", "law2_s": "雑談ではなく意思決定向けに最適化。", "law2_d": "要約・比較・推奨の構造で、書き直し時間を減らし選択時間を増やします。", "law3_t": "システムと利用制限を保護", "law3_s": "公平利用とサーバー側トライアル保護。", "law3_d": "無料枠はブラウザだけでなくサーバー側で訪問者/日ごとに制限されます。", "law4_t": "現地市場の現実を尊重", "law4_s": "可能な限り現地価格の文脈を含める。", "law4_d": "購入系の質問では国際レビューと現地価格帯を結び、実用的な推奨を目指します。", "rings_title": "5つの保護リング", "rings_sub": "リングをタップして詳細を表示。検索中はクモの移動に合わせて点灯します。", "ring1_t": "リング1 — ソース検証", "ring1_s": "ライブソースを収集・採点（Tavily）。", "ring1_d": "複数のライブソースを集め関連スコアを付与。弱い/重複ページは深掘り前に優先度を下げます。", "ring2_t": "リング2 — 論旨構築", "ring2_s": "論理的な核心を作る。", "ring2_d": "段落の羅列ではなく、選択肢・基準・意思決定を明確にする論旨を形成します。", "ring3_t": "リング3 — 削減と順位", "ring3_s": "最も強い証拠だけ残す。", "ring3_d": "候補を圧縮し、読みやすく意思決定に集中したレポートにします。", "ring4_t": "リング4 — リスク確認", "ring4_s": "市場と文脈のリスクを検証。", "ring4_d": "価格の現実性、入手性、予算に対して楽観的すぎないかを確認します。", "ring5_t": "リング5 — 信頼度校正", "ring5_s": "最終の検証レポートを生成。", "ring5_d": "前段完了後にクイックテイク、比較表、ソース付き最終推奨を出力します。", "case_title": "実レポート例", "case_sub": "<strong>35秒</strong>で生成： “150ドル以下のベストANCヘッドホン”", "case_h": "150ドル以下のベストANCヘッドホン", "case_quick": "クイックまとめ", "cq1": "<strong>Sony WH-CH720N</strong> — 約EGP 4,500以内で総合ベスト。", "cq2": "<strong>JBL Tune 770NC</strong> — 約EGP 2,500以内でコスパ最強。", "cq3": "<strong>OneOdio Focus A6</strong> — 約EGP 2,100の入門候補。", "th1": "モデル", "th2": "バッテリー", "th_price": "価格", "th_comfort": "快適性", "th_verdict": "判定", "r1": "総合ベスト", "r2": "コスパ", "r3": "入門", "case_sources": "ソース：SoundGuys、CNET、TechRadar、市場リスト。価格は概算。", "full_preview": "レポート全体を表示", "save_example": "このレポートを保存", "price_title": "シンプル価格", "price_sub": "一回払い。サブスクなし。", "once": "一回", "price_local": "またはGumroadで約299 EGP（エジプト）", "f1": "フルDeep Searchアクセス", "f2": "APIキー：Tavily + Grok + Nebius", "f3": "検証済み現地＋国際レポート", "f4": "セットアップガイド付き", "f5": "購入前に1回無料", "buy_btn": "フルアクセス — $6", "faq_title": "FAQ", "fq1": "実検索の所要時間は？", "fa1": "通常35–40秒で検証レポート。", "fq2": "$6に含まれるものは？", "fa2": "フルアクセス＋Tavily/Grok/Nebiusキー。Gumroad一回払い。", "fq3": "無料の制限は？", "fa3": "訪問者1回。サイト全体で1日最大100回。", "fq4": "ソースは本物？", "fa4": "はい。文書ソースの順位付け後にレポートを表示します。", "footer": "© 2026 Mido AI Store • Deep Search Agent V10", "footer2": "ライブソース。最終の現地価格は必ず確認してください。", "modal_title": "完全レポート — $150以下ヘッドホン", "modal_q": "質問：150ドル以下のベストANCヘッドホン", "modal_close": "閉じる", "modal_winner": "最優秀：Sony WH-CH720N", "modal_summary": "約EGP 4,500以内でANC/快適性/バッテリーの総合バランス最良。JBL Tune 770NCは約EGP 2,500以内でコスパ最良。SoundGuys、CNET、TechRadar、市場リストから順位付け。", "modal_sources_title": "主要ソース", "modal_sources_list": "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. 現地市場リスト", "modal_rec_title": "最終推奨", "modal_rec_text": "予算が許せばSony WH-CH720N。コスパならJBL Tune 770NC。購入前に現地価格を確認。", "v_best": "総合ベスト", "v_budget": "コスパ", "v_solid": "堅実な代替", "v_entry": "入門", "v_mid": "中間", "v_prem": "高級感", "searching": "検索中...", "err_net": "ネットワーク問題。再試行してください。", "err_trial": "無料は使用済みです。", "err_daily": "本日の無料上限に達しました。", "sug1": "EGP 25000以下のプログラミング用ノートPC", "sug2": "EGP 3000以下のポッドキャストマイク", "sug3": "エジプトで最安の家庭用ネット", "saved_ok": "レポートをこの端末に保存しました", "saved_empty": "保存するレポートがありません — 先に検索してください", "skill_save_hint": "保存スキル選択済み — 次/最新レポートを保存します"};
+T.zh = {"nav_buy": "获取访问 — $6", "pill": "⚡ 已验证研究 • 35–40秒 • 本地+国际来源", "hero_title": "获取完整的<span class=\"g\">结构化研究报告</span> — 不只是链接", "hero_desc": "五阶段验证流程，结合本地与国际来源，给出清晰推荐与真实价格背景，约35–40秒完成。", "cta_try": "免费试用", "cta_report": "查看完整报告", "t1": "✓ 每位访客1次免费", "t2": "✓ 每天最多100次免费搜索", "t3": "✓ 购买后提供API密钥", "st_visitors": "访客", "st_searches": "今日搜索", "st_ok": "成功", "st_fail": "失败", "st_left": "今日剩余免费", "skills_title": "研究技能", "skills_sub": "搜索前选择技能。保存会将最近报告存到本机。", "sk1": "深度搜索", "sk2": "摘要", "sk3": "对比", "sk4": "推荐", "sk5": "价格检查", "sk6": "保存报告", "demo_title": "在线演示", "demo_sub": "真实引擎。蜘蛛抓取来源时阶段会点亮。", "ph": "150美元以下最佳降噪耳机", "search_btn": "搜索 🔍", "meta1": "免费：每位访客1次", "meta2": "每日上限：100", "s1": "来源搜索", "s1d": "Tavily实时来源", "s2": "论点构建", "s2d": "核心论证", "s3": "筛选排序", "s3d": "最强信号", "s4": "风险检查", "s4d": "本地+国际", "s5": "最终报告", "s5d": "35–40秒", "laws_title": "阿西莫夫安全法则", "laws_sub": "这些规则引导引擎保持有用、诚实，并适合真实决策。", "laws_trust": "为什么重要：Mido通过强制查看来源、排序并给出可核实的最终推荐，减少“自信但错误”的回答。", "law1_t": "不以虚假信心造成伤害", "law1_s": "不要把猜测说成已证实事实。", "law1_d": "如果证据不足，报告必须说明。引擎优先采用有评分的来源与证据，而不是流畅却无依据的表述。", "law2_t": "优先服务研究目标", "law2_s": "为决策优化，而不是闲聊。", "law2_d": "输出结构化、可执行：摘要、对比、推荐。减少改写AI文本的时间，增加做选择的时间。", "law3_t": "保护系统与使用限制", "law3_s": "公平使用与服务端试用保护。", "law3_d": "免费额度按访客与按日在服务器侧限制，而不仅在浏览器。", "law4_t": "尊重本地市场现实", "law4_s": "尽可能纳入本地价格背景。", "law4_d": "对购买类问题，报告会尽量把国际评测与本地价格区间连接，使推荐更实用。", "rings_title": "五层保护环", "rings_sub": "点击任意环查看完整说明。搜索时环会随蜘蛛移动而点亮。", "ring1_t": "第1环 — 来源验证", "ring1_s": "收集并评分实时来源（Tavily）。", "ring1_d": "蜘蛛收集多个实时来源并附加相关度分数。弱页或重复页会在深入分析前被降权。", "ring2_t": "第2环 — 论点构建", "ring2_s": "构建逻辑核心论点。", "ring2_d": "不是堆砌段落，而是形成清晰论点：有哪些选项、关键标准是什么、用户要做的决策是什么。", "ring3_t": "第3环 — 筛选排序", "ring3_s": "只保留最强证据。", "ring3_d": "从较大候选集压缩到最有用来源，让最终报告可读并聚焦决策。", "ring4_t": "第4环 — 风险检查", "ring4_s": "验证市场与情境风险。", "ring4_d": "检查价格是否现实、本地可获得性信号，以及推荐是否相对预算过于乐观。", "ring5_t": "第5环 — 置信校准", "ring5_s": "生成最终验证报告。", "ring5_d": "仅在前序环完成后输出：快速总结、对比表、带来源轨迹的最终推荐。", "case_title": "真实报告示例", "case_sub": "在<strong>35秒</strong>内生成，问题：“150美元以下最佳降噪耳机”", "case_h": "150美元以下最佳降噪耳机", "case_quick": "快速总结", "cq1": "<strong>Sony WH-CH720N</strong> — 约4500埃镑预算内综合最佳。", "cq2": "<strong>JBL Tune 770NC</strong> — 约2500埃镑预算内性价比最佳。", "cq3": "<strong>OneOdio Focus A6</strong> — 约2100埃镑的入门选择。", "th1": "型号", "th2": "续航", "th_price": "价格", "th_comfort": "舒适度", "th_verdict": "结论", "r1": "综合最佳", "r2": "性价比最佳", "r3": "入门选择", "case_sources": "来源：SoundGuys、CNET、TechRadar及市场列表。价格为近似值。", "full_preview": "完整报告预览", "save_example": "保存此报告", "price_title": "简单定价", "price_sub": "一次性付款。无订阅。", "once": "一次性", "price_local": "或通过Gumroad约299埃镑（埃及）", "f1": "完整深度搜索访问", "f2": "API密钥：Tavily + Grok + Nebius", "f3": "已验证的本地+国际报告", "f4": "包含设置指南", "f5": "购买前1次免费试用", "buy_btn": "获取完整访问 — $6", "faq_title": "常见问题", "fq1": "真实搜索需要多久？", "fa1": "通常35–40秒得到验证报告。", "fq2": "6美元包含什么？", "fa2": "完整访问 + Tavily、Grok、Nebius密钥。通过Gumroad一次性付款。", "fq3": "免费试用限制？", "fa3": "每位访客1次。全站每天最多100次免费搜索。", "fq4": "来源是否真实？", "fa4": "是。报告在对文档来源排序后才会显示。", "footer": "© 2026 Mido AI Store • Deep Search Agent V10", "footer2": "实时来源。请始终核实最终本地价格。", "modal_title": "完整报告 — 150美元以下耳机", "modal_q": "问题：150美元以下最佳降噪耳机", "modal_close": "关闭", "modal_winner": "优胜：Sony WH-CH720N", "modal_summary": "约4500埃镑预算内降噪/舒适/续航综合最佳。JBL Tune 770NC在约2500埃镑内性价比最佳。来源排序自SoundGuys、CNET、TechRadar及市场列表。", "modal_sources_title": "主要来源", "modal_sources_list": "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. 本地市场列表", "modal_rec_title": "最终推荐", "modal_rec_text": "预算允许选Sony WH-CH720N；追求性价比选JBL Tune 770NC。购买前请确认实时本地价格。", "v_best": "综合最佳", "v_budget": "性价比最佳", "v_solid": "稳健备选", "v_entry": "入门选择", "v_mid": "中端选项", "v_prem": "更有质感", "searching": "搜索中...", "err_net": "网络问题，请重试。", "err_trial": "免费试用已使用。", "err_daily": "已达每日免费上限。", "sug1": "25000埃镑以下适合编程的笔记本", "sug2": "3000埃镑以下最佳播客麦克风", "sug3": "埃及最便宜的家庭宽带", "saved_ok": "报告已保存到本机", "saved_empty": "还没有可保存的报告 — 请先搜索", "skill_save_hint": "已选择保存技能 — 将存储下一个/最近报告"};
+
+function D(){return T[currentLang]||EN;}
+function applyLang(lang){
+  if(!T[lang]) lang='en';
+  currentLang=lang;
+  try{localStorage.setItem('mido_lang',lang);}catch(e){}
+  var rtl=lang==='ar';
+  document.documentElement.lang=lang;
+  document.documentElement.dir=rtl?'rtl':'ltr';
+  document.body.style.fontFamily=rtl?'Cairo,Inter,system-ui,sans-serif':'Inter,Cairo,system-ui,sans-serif';
+  var dict=D();
+  document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(dict[k]!=null)el.textContent=dict[k];});
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(dict[k]!=null)el.innerHTML=dict[k];});
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){var k=el.getAttribute('data-i18n-placeholder');if(dict[k]!=null)el.placeholder=dict[k];});
+  var go=document.getElementById('go');
+  if(go&&!go.classList.contains('loading')) go.textContent=dict.search_btn;
+  renderLaws();renderRings();renderSugs();
 }
 
-document.getElementById('langBtn').addEventListener('click', function(e) {
+function renderLaws(){
+  var d=D();
+  var items=[
+    ['01',d.law1_t,d.law1_s,d.law1_d],
+    ['02',d.law2_t,d.law2_s,d.law2_d],
+    ['03',d.law3_t,d.law3_s,d.law3_d],
+    ['04',d.law4_t,d.law4_s,d.law4_d]
+  ];
+  document.getElementById('lawsList').innerHTML=items.map(function(it,i){
+    return '<div class="xcard" data-xcard="law'+i+'"><div class="top"><span class="num">LAW '+it[0]+'</span><span class="chev">▼</span></div><h3>'+it[1]+'</h3><div class="short">'+it[2]+'</div><div class="detail">'+it[3]+'</div></div>';
+  }).join('');
+}
+function renderRings(){
+  var d=D();
+  var colors=['#ef4444','#7c5cff','#10b981','#f59e0b','#8b5cf6'];
+  var items=[
+    [d.ring1_t,d.ring1_s,d.ring1_d],
+    [d.ring2_t,d.ring2_s,d.ring2_d],
+    [d.ring3_t,d.ring3_s,d.ring3_d],
+    [d.ring4_t,d.ring4_s,d.ring4_d],
+    [d.ring5_t,d.ring5_s,d.ring5_d]
+  ];
+  document.getElementById('ringsList').innerHTML=items.map(function(it,i){
+    return '<div class="xcard ring-card" data-ring="'+i+'" data-xcard="ring'+i+'"><div class="top"><span class="num" style="color:'+colors[i]+'">RING 0'+(i+1)+'</span><span class="chev">▼</span></div><h3>'+it[0]+'</h3><div class="short">'+it[1]+'</div><div class="detail">'+it[2]+'</div></div>';
+  }).join('');
+}
+function renderSugs(){
+  var d=D();
+  document.getElementById('sugs').innerHTML=[d.sug1,d.sug2,d.sug3].map(function(s){return '<button type="button" class="sug">'+s+'</button>';}).join('');
+}
+
+/* expandable cards + glow on click */
+document.addEventListener('click',function(e){
+  var card=e.target.closest('.xcard[data-xcard]');
+  if(card){
+    var was=card.classList.contains('open');
+    // optional: close siblings in same section
+    card.parentElement.querySelectorAll('.xcard').forEach(function(c){c.classList.remove('open','glow-on');});
+    if(!was){card.classList.add('open');glowPulse(card,1200);}
+  }
+});
+
+/* lang */
+var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu');
+langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.toggle('open');glowPulse(langBtn,600);});
+document.addEventListener('click',function(e){if(!langMenu.contains(e.target)&&!langBtn.contains(e.target))langMenu.classList.remove('open');});
+langMenu.addEventListener('click',function(e){
   e.stopPropagation();
-  document.getElementById('langDropdown').classList.toggle('active');
+  var opt=e.target.closest('.lang-option');if(!opt)return;
+  document.getElementById('flag').textContent=opt.getAttribute('data-f');
+  document.getElementById('langName').textContent=opt.getAttribute('data-n');
+  langMenu.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');});
+  opt.classList.add('active');langMenu.classList.remove('open');
+  applyLang(opt.getAttribute('data-l'));
+  glowPulse(langBtn,800);
 });
-document.querySelectorAll('.lang-option').forEach(function(opt) {
-  opt.addEventListener('click', function() {
-    CURRENT_LANG = this.getAttribute('data-lang');
-    applyLanguage(CURRENT_LANG);
-    document.getElementById('langDropdown').classList.remove('active');
+try{var saved=localStorage.getItem('mido_lang')||'en';var m=document.querySelector('.lang-option[data-l="'+saved+'"]');if(m){document.getElementById('flag').textContent=m.getAttribute('data-f');document.getElementById('langName').textContent=m.getAttribute('data-n');document.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');});m.classList.add('active');}applyLang(saved);}catch(e){applyLang('en');}
+
+/* skills */
+document.getElementById('skills').addEventListener('click',function(e){
+  var b=e.target.closest('.skill');if(!b)return;
+  document.querySelectorAll('.skill').forEach(function(x){x.classList.remove('on','glow-on');});
+  b.classList.add('on');glowPulse(b,1000);
+  skill=b.getAttribute('data-skill')||'deep_search';
+  if(skill==='save'){
+    toast(D().skill_save_hint);
+    // if last report exists, save immediately
+    if(lastReportText){saveReport(lastReportText);}
+  }
+});
+document.getElementById('sugs').addEventListener('click',function(e){
+  var b=e.target.closest('.sug');if(!b)return;document.getElementById('q').value=b.textContent;glowPulse(b,700);
+});
+
+function saveReport(text){
+  if(!text){toast(D().saved_empty);return;}
+  try{
+    localStorage.setItem('mido_saved_report', text);
+    localStorage.setItem('mido_saved_at', new Date().toISOString());
+    toast(D().saved_ok);
+  }catch(e){toast(D().err_net);}
+}
+document.getElementById('saveExample').addEventListener('click',function(){
+  var d=D();
+  var txt=[d.case_h,d.case_quick,d.cq1.replace(/<[^>]+>/g,''),d.cq2.replace(/<[^>]+>/g,''),d.cq3.replace(/<[^>]+>/g,''),d.modal_rec_text].join('\n');
+  lastReportText=txt;saveReport(txt);glowPulse(this,900);
+});
+
+/* visitor + stats */
+function vid(){try{var id=localStorage.getItem('mido_vid');if(!id){id='v_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('mido_vid',id);}return id;}catch(e){return 'v_'+Date.now();}}
+var VISITOR_ID=vid();
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+async function fetchStats(){
+  var urls=[WORKER_URL+'/stats',WORKER_FALLBACK+'/stats'];
+  for(var i=0;i<urls.length;i++){
+    try{
+      var r=await fetch(urls[i],{cache:'no-store'});if(!r.ok)continue;
+      var d=await r.json();
+      var searches=d.searches_today||d.today||d.searches||'—';
+      document.getElementById('stVisitors').textContent=d.visitors||d.total_visitors||d.visits||'—';
+      document.getElementById('stSearches').textContent=searches;
+      document.getElementById('stOk').textContent=d.success||d.successful||d.ok||'—';
+      document.getElementById('stFail').textContent=d.failed||d.fail||'—';
+      document.getElementById('stLeft').textContent=d.remaining!=null?d.remaining:(typeof searches==='number'?Math.max(0,100-searches):'—');
+      return;
+    }catch(e){}
+  }
+}
+fetchStats();setInterval(fetchStats,30000);
+try{fetch(WORKER_URL+'/visit',{method:'POST',body:VISITOR_ID}).catch(function(){});}catch(e){}
+
+function setStages(n){
+  document.querySelectorAll('#stages .stage').forEach(function(el,i){
+    el.classList.toggle('on', i<=n);
+    if(i===n) glowPulse(el,800);
   });
-});
-document.addEventListener('click', function(e) {
-  if (!document.getElementById('langSwitcher').contains(e.target)) {
-    document.getElementById('langDropdown').classList.remove('active');
-  }
-});
-
-applyLanguage(CURRENT_LANG);
-
-function getVisitorId() {
-  var id = localStorage.getItem('mido_vid_v4');
-  if (!id) { id = 'v4_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36); localStorage.setItem('mido_vid_v4', id); }
-  return id;
+  document.querySelectorAll('.ring-card').forEach(function(el,i){
+    if(i<=n){el.classList.add('glow-on');} else el.classList.remove('glow-on');
+  });
 }
-var VISITOR_ID = getVisitorId();
+document.getElementById('stages').addEventListener('click',function(e){
+  var st=e.target.closest('.stage');if(!st)return;glowPulse(st,1000);
+});
 
-async function fetchStats() {
-  try {
-    var r = await fetch(WORKER_URL + '/stats');
-    if (r.ok) {
-      var d = await r.json();
-      document.getElementById('cnt').textContent = d.today_searches || 0;
-      document.getElementById('remainingLeft').textContent = Math.max(0, 100 - (d.today_searches || 0));
-    }
-  } catch (e) {}
+var go=document.getElementById('go'),q=document.getElementById('q'),res=document.getElementById('res');
+function stepsHTML(done){
+  var d=D();var labels=[d.s1,d.s2,d.s3,d.s4,d.s5];
+  return '<div class="log"><div class="steps">'+labels.map(function(s,i){
+    var cls=i<done?' done':(i===done?' active':'');
+    return '<div class="step'+cls+'"><div class="n">'+(i<done?'✓':(i+1))+'</div><span>'+s+(i===done?'...':'')+'</span></div>';
+  }).join('')+'</div>'+(done<5?'<div class="prog"><div></div></div>':'')+'</div>';
 }
-fetchStats();
-setInterval(fetchStats, 15000);
-try { fetch(WORKER_URL + '/visit', { method: 'POST', body: VISITOR_ID }); } catch(e) {}
-
-var q = document.getElementById('q'), go = document.getElementById('go'), res = document.getElementById('res');
-var loading = false;
-function refreshBtn() { go.disabled = loading || !q.value.trim(); }
-q.addEventListener('input', refreshBtn);
-q.addEventListener('keydown', function(e) { if (e.key === 'Enter') search(); });
-go.addEventListener('click', search);
-
-res.innerHTML = '<div class="empty"><div class="spd">🕷️</div><p>'+T[CURRENT_LANG].empty_prompt+'</p></div>';
-
-async function search() {
-  var text = q.value.trim();
-  if (!text || loading) return;
-  var tr = T[CURRENT_LANG];
-  loading = true; go.innerHTML = '<span class="spin"></span>'; refreshBtn();
-
-  var startTime = Date.now();
-  var totalSources = 10;
-  var reviewed = 0;
-
-  res.innerHTML = '<div class="progress-container"><div class="progress-label"><span>'+tr.searching_in+'</span><span id="pct">0%</span></div><div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar"></div></div><div class="progress-timer" id="timerInfo">'+tr.sources_reviewed+': 0 / '+totalSources+' | '+tr.time_elapsed+': 0s</div></div>';
-
-  var timerInterval = setInterval(function() {
-    var elapsed = Math.floor((Date.now() - startTime) / 1000);
-    reviewed = Math.min(totalSources, Math.floor(elapsed * 0.4));
-    var pct = Math.min(95, Math.floor((elapsed / 40) * 100));
-    var progBar = document.getElementById('progBar');
-    var pctEl = document.getElementById('pct');
-    var timerInfo = document.getElementById('timerInfo');
-    if (progBar) progBar.style.width = pct + '%';
-    if (pctEl) pctEl.textContent = pct + '%';
-    if (timerInfo) timerInfo.innerHTML = tr.sources_reviewed+': '+reviewed+' / '+totalSources+' | '+tr.time_elapsed+': '+elapsed+'s | '+tr.time_remaining+': ~'+Math.max(0, 40 - elapsed)+'s';
-  }, 500);
-
-  try {
-    var controller = new AbortController();
-    var timeout = setTimeout(function() { controller.abort(); }, 60000);
-    var r = await fetch(WORKER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Visitor-Id': VISITOR_ID },
-      body: JSON.stringify({ query: text, visitor_id: VISITOR_ID, skill: 'deep_search' }),
-      signal: controller.signal
-    });
-    clearTimeout(timeout);
-    clearInterval(timerInterval);
-    var data = await r.json();
-    var totalTime = Math.floor((Date.now() - startTime) / 1000);
-    if (!data.success) {
-      res.innerHTML = '<div class="err"><b>'+tr.error_prefix+'</b> ' + (data.reason || 'unknown') + '</div>';
-    } else {
-      var srcHtml = (data.top_sources || []).map(function(s) {
-        return '<a class="src" href="' + s.url + '" target="_blank"><div class="r"><h5>' + s.title + '</h5><span class="sc mono">' + (s.score || 0).toFixed(2) + '</span></div><p>' + (s.content || '').slice(0, 200) + '</p></a>';
-      }).join('');
-      res.innerHTML = '<div style="margin-bottom:16px;padding:12px;border-radius:12px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);text-align:center;font-size:13px;color:#6ee7b7">✅ '+tr.search_complete+' - '+totalTime+'s | '+tr.sources_used+'</div><div class="ans"><div class="m mono"><span>'+tr.answer+'</span></div><div class="txt">' + data.deep_answer + '</div></div>' + (srcHtml ? '<div class="srcs"><div class="hd"><h4 class="mono">'+tr.sources+'</h4></div>' + srcHtml + '</div>' : '');
+async function doSearch(){
+  var text=(q.value||'').trim();if(!text||searching)return;
+  if(skill==='save'){ /* save mode still allows search then auto-save */ }
+  searching=true;
+  go.classList.add('loading','glow');
+  go.innerHTML='<span class="spin"></span> '+D().searching;
+  res.innerHTML=stepsHTML(0);setStages(0);
+  var done=0;
+  var anim=(async function(){for(var i=0;i<5;i++){await new Promise(r=>setTimeout(r,650));done=i+1;setStages(i);if(searching)res.innerHTML=stepsHTML(done);}})();
+  var outcome;
+  try{
+    var ctrl=new AbortController();var to=setTimeout(function(){ctrl.abort();},55000);
+    var data=null,lastErr=null;
+    for(var u=0;u<[WORKER_URL,WORKER_FALLBACK].length;u++){
+      try{
+        var r=await fetch([WORKER_URL,WORKER_FALLBACK][u],{method:'POST',headers:{'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID},body:JSON.stringify({query:text,visitor_id:VISITOR_ID,skill:skill==='save'?'deep_search':skill}),signal:ctrl.signal});
+        if(r.status===429){var j={};try{j=await r.json();}catch(e){} throw new Error(j.reason==='daily_cap'?'daily_cap':'trial_used');}
+        if(!r.ok) throw new Error('http');
+        data=await r.json(); if(!data.success&&data.reason) throw new Error(data.reason); break;
+      }catch(err){lastErr=err;if(String(err.message).indexOf('trial')>-1||err.message==='daily_cap')throw err;}
     }
+    clearTimeout(to); if(!data) throw lastErr||new Error('network');
+    outcome={ok:true,answer:data.deep_answer||data.answer||'',sources:data.sources||data.results||data.top_sources||[]};
+  }catch(err){outcome={ok:false,msg:String(err&&err.message||err)};}
+  await anim;setStages(4);
+  if(outcome.ok){
+    lastReportText=outcome.answer;
+    var src='';
+    if(outcome.sources&&outcome.sources.length){
+      src='<div class="srcs">'+outcome.sources.slice(0,6).map(function(s){return '<a class="src" href="'+esc(s.url||'#')+'" target="_blank" rel="noopener"><h5>'+esc(s.title||'')+'</h5><p>'+esc((s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
+    }
+    res.innerHTML=stepsHTML(5)+'<div class="ans">'+esc(outcome.answer)+'</div>'+src;
+    if(skill==='save') saveReport(outcome.answer);
     fetchStats();
-  } catch (e) {
-    clearInterval(timerInterval);
-    if (e.name === 'AbortError') {
-      res.innerHTML = '<div class="err"><b>'+tr.error_prefix+'</b> '+tr.timeout_error+'<br><button onclick="location.reload()" style="margin-top:12px;background:#667eea;padding:8px 16px;border-radius:9999px;font-weight:700;color:#fff">'+tr.retry_btn+'</button></div>';
-    } else {
-      res.innerHTML = '<div class="err"><b>Network:</b> ' + String(e) + '</div>';
-    }
+  }else{
+    var em=D().err_net;
+    if(outcome.msg==='trial_used'||String(outcome.msg).indexOf('trial')>-1)em=D().err_trial;
+    if(outcome.msg==='daily_cap')em=D().err_daily;
+    res.innerHTML='<div class="err"><b>'+esc(em)+'</b><br><br><a class="btn btn-w" href="'+BUY_URL+'" target="_blank" rel="noopener">'+D().buy_btn+'</a></div>';
   }
-  loading = false; go.innerHTML = tr.search_btn; refreshBtn();
+  searching=false;go.classList.remove('loading','glow');go.textContent=D().search_btn;
 }
+go.addEventListener('click',function(){glowPulse(go,600);doSearch();});
+q.addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
 
-(function() {
-  var canvas = document.getElementById('spider'); if (!canvas) return;
-  var ctx = canvas.getContext('2d'); if (!ctx) return;
-  var W, H, dpr;
-  function resize() { W = innerWidth; H = innerHeight; dpr = devicePixelRatio || 1; canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.width = W + 'px'; canvas.style.height = H + 'px'; ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr, dpr); }
-  resize(); addEventListener('resize', resize);
-  function mkGrid() { var g = []; for (var r = 0; r < 4; r++) for (var c = 0; c < 6; c++) g.push({x: 90 + (c + .5) * ((W - 180) / 6), y: 120 + (r + .5) * ((H - 180) / 4)}); return g; }
-  var targets = mkGrid();
-  var sp = {x: W * .5, y: 90, tx: targets[0].x, ty: targets[0].y};
-  var legs = [-75,-38,38,75,105,142,-142,-105].map(function(d) { var a = d * Math.PI / 180; return {ang: a, fx: sp.x + Math.cos(a) * 30, fy: sp.y + Math.sin(a) * 30, tx: sp.x + Math.cos(a) * 30, ty: sp.y + Math.sin(a) * 30}; });
-  var moving = false, moveTimer = 0, last = performance.now();
-  var L1 = 34, L2 = 34, LIM = 46;
-  function draw(now) {
-    var dt = Math.min(50, now - last); last = now;
-    if (moving) { moveTimer -= dt / 1000; if (moveTimer <= 0) { moving = false; targets.shift(); if (!targets.length) targets = mkGrid(); sp.tx = targets[0].x; sp.ty = targets[0].y; } }
-    else { var dx = sp.tx - sp.x, dy = sp.ty - sp.y, dist = Math.hypot(dx, dy); if (dist < 6) { moving = true; moveTimer = 1; } else { var spd = Math.max(200, dist * 3.2 + 30) * dt / 1000; if (spd >= dist) { sp.x = sp.tx; sp.y = sp.ty; } else { sp.x += dx / dist * spd; sp.y += dy / dist * spd; } } }
-    ctx.clearRect(0, 0, W, H);
-    ctx.save(); ctx.strokeStyle = 'rgba(214,217,224,.12)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(sp.x, 0); ctx.lineTo(sp.x, sp.y - 12); ctx.stroke(); ctx.restore();
-    legs.forEach(function(l, i) {
-      var bx = sp.x + Math.cos(l.ang) * 12, by = sp.y + Math.sin(l.ang) * 10, dx = l.fx - bx, dy = l.fy - by;
-      var dist = Math.min(Math.hypot(dx, dy), L1 + L2 - .5); if (dist < .001) return;
-      var ca = (dist * dist - L1 * L1 - L2 * L2) / (2 * L1 * L2), an = Math.acos(Math.max(-1, Math.min(1, ca)));
-      var kd = L1 + L2 * Math.cos(an), kh = L2 * Math.sin(an), ba = Math.atan2(dy, dx) - Math.atan2(kh, kd);
-      var kx = bx + Math.cos(ba) * L1, ky = by + Math.sin(ba) * L1;
-      ctx.strokeStyle = '#2a2f3c'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(kx, ky); ctx.lineTo(l.fx, l.fy); ctx.stroke();
-      ctx.fillStyle = '#0d1018'; ctx.strokeStyle = '#232733'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(kx, ky, 2.8, 0, 6.2832); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = i % 2 === 0 ? '#8a90a0' : '#6b7280'; ctx.beginPath(); ctx.arc(l.fx, l.fy, 2.3, 0, 6.2832); ctx.fill();
+var modal=document.getElementById('reportModal');
+document.getElementById('openReport').addEventListener('click',function(){modal.classList.add('open');glowPulse(this,800);});
+document.getElementById('closeModal').addEventListener('click',function(){modal.classList.remove('open');});
+document.getElementById('modalBg').addEventListener('click',function(){modal.classList.remove('open');});
+document.getElementById('navBuy').addEventListener('click',function(){glowPulse(this,700);});
+
+/* Spider V4 + sound + glow coupling */
+(function(){
+  var canvas=document.getElementById('spider');if(!canvas)return;
+  var ctx=canvas.getContext('2d');if(!ctx)return;
+  var W,H,dpr,last=performance.now(),actx=null;
+  function resize(){W=innerWidth;H=innerHeight;dpr=devicePixelRatio||1;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}
+  resize();addEventListener('resize',resize);
+  function mkGrid(){var g=[];for(var r=0;r<4;r++)for(var c=0;c<6;c++)g.push({x:90+(c+.5)*((W-180)/6),y:120+(r+.5)*((H-180)/4)});return g;}
+  var targets=mkGrid();
+  var sp={x:W*.5,y:90,tx:targets[0].x,ty:targets[0].y};
+  var legs=[-75,-38,38,75,105,142,-142,-105].map(function(d){var a=d*Math.PI/180;return{ang:a,fx:sp.x+Math.cos(a)*30,fy:sp.y+Math.sin(a)*30,tx:sp.x+Math.cos(a)*30,ty:sp.y+Math.sin(a)*30};});
+  var moving=false,moveTimer=0,L1=34,L2=34,LIM=46,tick=0;
+  function snd(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume().catch(function(){});var n=actx.currentTime,o=actx.createOscillator(),g=actx.createGain(),f=actx.createBiquadFilter();f.type='bandpass';f.frequency.value=2400;f.Q.value=1.4;o.type='square';o.frequency.setValueAtTime(2400,n);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.06,n+.004);g.gain.exponentialRampToValueAtTime(.0001,n+.07);o.connect(f);f.connect(g);g.connect(actx.destination);o.start(n);o.stop(n+.07);}catch(e){}}
+  function draw(now){
+    var dt=Math.min(50,now-last);last=now;tick++;
+    if(moving){moveTimer-=dt/1000;if(moveTimer<=0){moving=false;targets.shift();if(!targets.length)targets=mkGrid();sp.tx=targets[0].x;sp.ty=targets[0].y;}}
+    else{var dx=sp.tx-sp.x,dy=sp.ty-sp.y,dist=Math.hypot(dx,dy);if(dist<6){moving=true;moveTimer=1;snd();if(searching){go.classList.add('glow');document.querySelectorAll('#stages .stage.on').forEach(function(el){el.classList.add('glow-on');});}}else{var spd=Math.max(180,dist*3+30)*dt/1000;if(spd>=dist){sp.x=sp.tx;sp.y=sp.ty;}else{sp.x+=dx/dist*spd;sp.y+=dy/dist*spd;}}}
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(214,217,224,.1)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(sp.x,0);ctx.lineTo(sp.x,sp.y-12);ctx.stroke();
+    legs.forEach(function(l,i){
+      var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10,dx=l.fx-bx,dy=l.fy-by;
+      var dist=Math.min(Math.hypot(dx,dy),L1+L2-.5);if(dist<.001)return;
+      var ca=(dist*dist-L1*L1-L2*L2)/(2*L1*L2),an=Math.acos(Math.max(-1,Math.min(1,ca)));
+      var kd=L1+L2*Math.cos(an),kh=L2*Math.sin(an),ba=Math.atan2(dy,dx)-Math.atan2(kh,kd);
+      var kx=bx+Math.cos(ba)*L1,ky=by+Math.sin(ba)*L1;
+      ctx.strokeStyle='#2a2f3c';ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(kx,ky);ctx.lineTo(l.fx,l.fy);ctx.stroke();
+      ctx.fillStyle='#0d1018';ctx.strokeStyle='#232733';ctx.beginPath();ctx.arc(kx,ky,2.8,0,6.28);ctx.fill();ctx.stroke();
+      ctx.fillStyle=i%2===0?'#8a90a0':'#6b7280';ctx.beginPath();ctx.arc(l.fx,l.fy,2.3,0,6.28);ctx.fill();
     });
-    ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath(); ctx.ellipse(sp.x, sp.y + 22, 18, 6, 0, 0, 6.2832); ctx.fill();
-    ctx.fillStyle = '#0d1018'; ctx.strokeStyle = '#2c313f'; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.ellipse(sp.x, sp.y + 12, 13, 17, 0, 0, 6.2832); ctx.fill(); ctx.stroke();
-    ctx.strokeStyle = 'rgba(255,184,77,.25)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(sp.x, sp.y + 2); ctx.lineTo(sp.x, sp.y + 20); ctx.stroke();
-    ctx.fillStyle = '#151821'; ctx.strokeStyle = '#2c313f'; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.ellipse(sp.x, sp.y - 5, 10.5, 10.5, 0, 0, 6.2832); ctx.fill(); ctx.stroke();
-    ctx.fillStyle = '#ff4d9a'; ctx.beginPath(); ctx.arc(sp.x - 3.2, sp.y - 8, 1.7, 0, 6.2832); ctx.fill();
-    ctx.fillStyle = '#4fe0ff'; ctx.beginPath(); ctx.arc(sp.x + 3.2, sp.y - 8, 1.7, 0, 6.2832); ctx.fill();
-    legs.forEach(function(l, i) {
-      var bx = sp.x + Math.cos(l.ang) * 12, by = sp.y + Math.sin(l.ang) * 10;
-      if (Math.hypot(l.fx - bx, l.fy - by) > LIM) { var td = 28 + (i % 3) * 6 + Math.random() * 6; l.tx = sp.x + Math.cos(l.ang) * td; l.ty = sp.y + Math.sin(l.ang) * td; }
-      var dx = l.tx - l.fx, dy = l.ty - l.fy, d = Math.hypot(dx, dy);
-      if (d > .5) { var mv = Math.min(d, 420 * dt / 1000); l.fx += dx / d * mv; l.fy += dy / d * mv; }
+    ctx.fillStyle='rgba(0,0,0,.35)';ctx.beginPath();ctx.ellipse(sp.x,sp.y+22,18,6,0,0,6.28);ctx.fill();
+    ctx.fillStyle='#0d1018';ctx.strokeStyle='#2c313f';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(sp.x,sp.y+12,13,17,0,0,6.28);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#151821';ctx.beginPath();ctx.ellipse(sp.x,sp.y-5,10.5,10.5,0,0,6.28);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#ff4d9a';ctx.beginPath();ctx.arc(sp.x-3.2,sp.y-8,1.7,0,6.28);ctx.fill();
+    ctx.fillStyle='#4fe0ff';ctx.beginPath();ctx.arc(sp.x+3.2,sp.y-8,1.7,0,6.28);ctx.fill();
+    if(moving){ctx.strokeStyle='rgba(255,77,154,.25)';ctx.beginPath();ctx.arc(sp.x,sp.y+3,10+(1-moveTimer)*18,0,6.28);ctx.stroke();}
+    legs.forEach(function(l,i){
+      var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10;
+      if(Math.hypot(l.fx-bx,l.fy-by)>LIM){var td=28+(i%3)*6+Math.random()*6;l.tx=sp.x+Math.cos(l.ang)*td;l.ty=sp.y+Math.sin(l.ang)*td;}
+      var dx=l.tx-l.fx,dy=l.ty-l.fy,d=Math.hypot(dx,dy);
+      if(d>.5){var mv=Math.min(d,420*dt/1000);l.fx+=dx/d*mv;l.fy+=dy/d*mv;if(d>3&&mv>=d-.1&&Math.random()<.85)snd();}
     });
     requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
 })();
-
 })();
 </script>
 </body>
-                                   </html>
+          </html>
