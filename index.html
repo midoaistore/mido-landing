@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mido AI Store | Deep Search Agent V6.2</title>
+<title>Mido AI Store | Deep Search Agent V6.3</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;border:0 solid #232733;margin:0;padding:0}
@@ -88,17 +88,6 @@ h1{font-size:28px;font-weight:800;line-height:1.1}
 .ring .act{display:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(35,39,51,.6);align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,.4)}
 .ring.open .act{display:flex}
 .ring .cir{display:none}
-.update-sec{background:linear-gradient(135deg,#0a0a0f 0%,#12121a 50%,#0f0f16 100%);border:1px solid #232733;position:relative;overflow:hidden}
-.ubadge{background:linear-gradient(to right,rgba(16,185,129,.2),rgba(52,211,153,.2));border:1px solid rgba(16,185,129,.4);color:#6ee7b7;padding:8px 20px;font-size:13px;font-weight:800}
-.update-grid{margin-top:40px;display:grid;gap:20px;max-width:900px;margin:auto}
-.engine{display:grid;grid-template-columns:1fr;gap:12px}
-.eng-card{border-radius:18px;border:1px solid #232733;background:#12121a;padding:20px}
-.eng-card.new{border-color:rgba(16,185,129,.4);background:linear-gradient(135deg,rgba(16,185,129,.1),#12121a)}
-.eng-card .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.eng-card .name{font-size:14px;font-weight:800}
-.eng-card .price{font-size:11px;padding:4px 8px;border-radius:9999px;background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
-.eng-card p{font-size:12px;line-height:1.6;color:rgba(255,255,255,.6)}
-.eng-card b{color:#fff}
 .demo-in{max-width:980px;margin:0 auto}
 .dbadge{padding:6px 16px;font-size:12px;font-weight:700;color:#a5b4fc;background:rgba(102,126,234,.15);border:1px solid rgba(102,126,234,.3)}
 .demo-in h2{margin-top:20px;font-size:28px;font-weight:800;line-height:1.15}
@@ -121,91 +110,10 @@ h1{font-size:28px;font-weight:800;line-height:1.1}
 .spd{margin:0 auto;width:64px;height:64px;border-radius:18px;background:#1a1a26;border:1px solid #232733;display:grid;place-items:center;font-size:28px;animation:float 3s ease-in-out infinite}
 .empty p{margin-top:16px;font-size:14px;font-weight:700;color:rgba(255,255,255,.7)}
 .empty small{display:block;margin-top:4px;font-size:12px;color:rgba(255,255,255,.4)}
-.log{border-radius:16px;border:1px solid #232733;background:#0a0a0f;padding:16px;margin-bottom:20px}
-.log .t{display:flex;align-items:center;justify-content:space-between;font-size:11px}
-.log .t .a{letter-spacing:.1em;color:rgba(255,255,255,.4)}
-.log .t .b{display:flex;align-items:center;gap:6px;color:#34d399}
-.steps{margin-top:12px;display:grid;gap:8px}
-.step{display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,.3)}
-.step.done{color:#fff;font-weight:600}
-.step .n{width:20px;height:20px;border-radius:9999px;display:grid;place-items:center;font-size:10px;border:1px solid #232733;background:#12121a;flex:none}
-.step.done .n{background:#667eea;border-color:#667eea;color:#fff}
-.prog{margin-top:16px;height:2px;width:100%;overflow:hidden;border-radius:9999px;background:#1a1a26}
-.prog div{height:100%;width:60%;background:linear-gradient(to right,#667eea,#764ba2);background-size:200% 100%;animation:shimmer 1.2s linear infinite}
-.err{border-radius:16px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.1);padding:16px;font-size:13px;color:#fecaca;line-height:1.7}
-.err a{display:inline-flex;margin-top:12px;height:40px;align-items:center;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);padding:0 20px;font-weight:700;color:#fff}
-.ans{border-radius:18px;border:1px solid rgba(102,126,234,.3);background:linear-gradient(to bottom right,rgba(102,126,234,.1),#12121a,#0a0a0f);padding:20px}
-.ans .m{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;color:#a5b4fc;margin-bottom:12px}
-.ans .m .x{padding:4px 8px;border-radius:9999px;background:rgba(102,126,234,.2);border:1px solid rgba(102,126,234,.3)}
-.ans .txt{font-size:14.5px;line-height:1.75rem;color:rgba(255,255,255,.85);white-space:pre-wrap;word-break:break-word}
-.tg{direction:ltr;justify-content:flex-end;margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
-.tg span{font-size:10px;padding:4px 10px;border-radius:9999px;background:#0a0a0f;border:1px solid #232733;color:rgba(255,255,255,.4)}
-.srcs{margin-top:20px;display:grid;gap:12px}
-.srcs .hd{display:flex;align-items:center;justify-content:space-between}
-.srcs .hd h4{font-size:13px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.5)}
-.src{display:block;border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px}
-.src:hover{border-color:rgba(102,126,234,.4);background:#151525}
-.src .r{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.src h5{font-size:13.5px;font-weight:700;line-height:1.5rem}
-.src p{margin-top:8px;font-size:12.5px;line-height:20px;color:rgba(255,255,255,.55)}
-.src .u{margin-top:10px;font-size:10px;color:rgba(255,255,255,.3);word-break:break-all}
 .bfoot{padding:12px 16px;border-top:1px solid #232733;background:#0a0a0f;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.3)}
-.after-buy{margin-top:20px;border-radius:18px;background:linear-gradient(to right,rgba(16,185,129,.15),rgba(102,126,234,.15));border:1px solid rgba(16,185,129,.3);padding:20px;text-align:center}
-.after-buy h4{font-size:16px;font-weight:800;color:#6ee7b7}
-.after-buy p{font-size:13px;color:rgba(255,255,255,.7);margin-top:8px;line-height:1.6}
-.after-buy a{margin-top:16px;display:inline-flex;height:44px;align-items:center;justify-content:center;border-radius:9999px;background:linear-gradient(to right,#10b981,#059669);padding:0 24px;font-weight:800;color:#fff;box-shadow:0 0 20px rgba(16,185,129,.3)}
-.pgrid{max-width:980px;margin:32px auto 0;display:grid;gap:24px;align-items:stretch}
-.pcard{border-radius:26px;border:1px solid rgba(102,126,234,.3);background:linear-gradient(to bottom right,rgba(102,126,234,.15),#12121a,#0a0a0f);padding:1px;box-shadow:0 20px 80px rgba(102,126,234,.15)}
-.pcard>div{border-radius:25px;background:#0e0e14;padding:28px;height:100%}
-.pcard .t{display:flex;align-items:center;gap:12px}
-.pcard .t .r{border-radius:9999px;background:#667eea;padding:4px 12px;font-size:11px;font-weight:700}
-.price{margin-top:24px;display:flex;align-items:flex-end;gap:16px}
-.price .big{font-size:44px;font-weight:800;line-height:1}.price .eq{font-size:20px;font-weight:700}
-.price .old{margin-top:4px;display:flex;align-items:center;gap:8px}
-.price .old s{font-size:13px;color:rgba(255,255,255,.3)}
-.price .old span{border-radius:9999px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);padding:2px 8px;font-size:11px;font-weight:700;color:#6ee7b7}
-.feat{margin-top:28px;display:grid;gap:12px}
-.feat div{display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,.75)}
-.feat i{font-style:normal;width:20px;height:20px;border-radius:9999px;background:rgba(102,126,234,.2);border:1px solid rgba(102,126,234,.3);display:grid;place-items:center;font-size:11px;color:#a5b4fc;flex:none}
-#buyBtn{margin-top:32px;display:flex;height:52px;width:100%;align-items:center;justify-content:center;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);font-size:15px;font-weight:800;box-shadow:0 0 35px rgba(102,126,234,.45)}
-.why{border-radius:24px;border:1px solid #232733;background:#12121a;padding:24px;display:flex;flex-direction:column}
-.why h4{font-size:15px;font-weight:700}
-.why p{margin-top:12px;font-size:13px;line-height:1.5rem;color:rgba(255,255,255,.6)}
-.mini{margin-top:auto;padding-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
-.mini div{border-radius:12px;background:#0a0a0f;border:1px solid #232733;padding:12px}
-.mini .a{font-size:16px;font-weight:800}.mini .b{font-size:10px;margin-top:4px;color:rgba(255,255,255,.4)}
-.deliver{border-radius:24px;border:1px solid #232733;background:#12121a;padding:28px;margin-top:32px}
-.deliver h3{font-size:20px;font-weight:800}
-.deliver-grid{display:grid;gap:16px;margin-top:20px}
-.deliver-item{display:flex;gap:12px}
-.deliver-item .ic{width:40px;height:40px;border-radius:12px;background:#0a0a0f;border:1px solid #232733;display:grid;place-items:center;font-size:18px;flex:none}
-.deliver-item h4{font-size:14px;font-weight:700}
-.deliver-item p{font-size:12px;color:rgba(255,255,255,.6);margin-top:4px;line-height:1.6}
-.faq{margin-top:32px}
-.faq h3{font-size:20px;font-weight:800;text-align:center}
-.faq-list{margin-top:20px;display:grid;gap:12px;max-width:800px;margin-left:auto;margin-right:auto}
-.faq-item{border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px;cursor:pointer}
-.faq-item h4{font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:space-between}
-.faq-item p{display:none;margin-top:12px;font-size:13px;color:rgba(255,255,255,.6);line-height:1.6}
-.faq-item.open p{display:block}
 footer{border-top:1px solid #232733;background:#08080c}
 footer .wrap{padding-top:32px;padding-bottom:32px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;font-size:12px;color:rgba(255,255,255,.3);text-align:center}
-footer .wrap span.f{display:flex;align-items:center;gap:8px}
 #spider{position:fixed;inset:0;pointer-events:none;z-index:20}
-.live-dot{width:8px;height:8px;background:#10b981;border-radius:9999px;display:inline-block;animation:pulse 1.5s infinite}
-.trust-sec{background:#0f0f16;border-top:1px solid #232733;border-bottom:1px solid #232733}
-.trust-grid{max-width:900px;margin:40px auto 0;display:grid;grid-template-columns:1fr;gap:16px}
-.trust-card{border-radius:20px;border:1px solid #232733;background:#12121a;padding:24px;text-align:center}
-.trust-card .ic{width:48px;height:48px;border-radius:12px;background:rgba(102,126,234,.15);border:1px solid rgba(102,126,234,.3);display:grid;place-items:center;font-size:24px;margin:0 auto 16px}
-.trust-card h4{font-size:16px;font-weight:800;color:#fff}
-.trust-card p{font-size:13px;color:rgba(255,255,255,.6);margin-top:8px;line-height:1.6}
-.skill-tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
-.skill-tab{padding:8px 16px;border-radius:9999px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #232733;background:#0a0a0f;color:rgba(255,255,255,.5);transition:all .2s;white-space:nowrap}
-.skill-tab.active{background:rgba(102,126,234,.2);border-color:#667eea;color:#a5b4fc}
-.skill-tab:hover:not(.active){background:#12121a;color:#fff}
-.save-skill-btn{padding:8px 16px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid rgba(16,185,129,.5);background:rgba(16,185,129,.1);color:#6ee7b7;transition:all .2s;margin-left:auto;white-space:nowrap}
-.save-skill-btn:hover{background:rgba(16,185,129,.2)}
-.save-skill-btn.saved{background:rgba(16,185,129,.3);border-color:#10b981;color:#fff}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;position:relative;z-index:30}
 .topbar-left{display:flex;align-items:center;gap:8px}
 .currency-badge{display:flex;align-items:center;gap:6px;background:rgba(18,18,26,.95);border:1px solid #232733;border-radius:9999px;padding:6px 14px;font-size:12px;font-weight:700;color:rgba(255,255,255,.85);}
@@ -220,41 +128,36 @@ footer .wrap span.f{display:flex;align-items:center;gap:8px}
 .lang-option{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;color:rgba(255,255,255,.8);font-size:12px;cursor:pointer;transition:all .15s;}
 .lang-option:hover{background:rgba(102,126,234,.15);color:#fff;}
 .lang-option .flag{font-size:16px;}
+.skill-tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+.skill-tab{padding:8px 16px;border-radius:9999px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #232733;background:#0a0a0f;color:rgba(255,255,255,.5);transition:all .2s;white-space:nowrap}
+.skill-tab.active{background:rgba(102,126,234,.2);border-color:#667eea;color:#a5b4fc}
+.save-skill-btn{padding:8px 16px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid rgba(16,185,129,.5);background:rgba(16,185,129,.1);color:#6ee7b7;transition:all .2s;margin-left:auto;white-space:nowrap}
+.save-skill-btn:hover{background:rgba(16,185,129,.2)}
+.save-skill-btn.saved{background:rgba(16,185,129,.3);border-color:#10b981;color:#fff}
 @media(min-width:768px){
 .wrap{padding:0 32px}
 h1{font-size:42px}
 .stats .wrap{grid-template-columns:repeat(4,1fr)}
 .sect{padding-top:80px;padding-bottom:80px}
-.lawhead h2{font-size:30px}
 .laws{grid-template-columns:repeat(2,1fr)}
 .rings-sec h2{font-size:36px}
-.rlist::before{content:"";position:absolute;right:30px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#667eea,#f59e0b,#8b5cf6);opacity:.2}
-.ring{padding-right:60px}
-.ring .cir{display:grid;position:absolute;right:18px;top:22px;width:26px;height:26px;border-radius:9999px;border:2px solid;place-items:center;font-size:12px;font-weight:700;z-index:10;background:#0a0a0f}
-.ring.open .cir{transform:scale(1.25)}
 .demo-in h2{font-size:36px}
 .bar,#res{padding:24px}
 .srow{flex-direction:row}
 #go{width:132px}
-.pgrid{grid-template-columns:1.15fr .85fr}
-.pcard>div{padding:32px}
-.why{padding:28px}
 footer .wrap{flex-direction:row}
-.engine{grid-template-columns:repeat(3,1fr)}
-.deliver-grid{grid-template-columns:repeat(2,1fr)}
-.trust-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(min-width:1024px){.laws{grid-template-columns:repeat(4,1fr)}}
 </style>
-  </head>
-  <body>
+</head>
+<body>
 <canvas id="spider"></canvas>
 
 <header>
   <div class="wrap">
     <div class="topbar">
       <div class="topbar-left">
-        <div class="currency-badge" id="currencyBadge"><span id="currencyFlag">🇪🇬</span> <span id="currencyCode">EGP</span></div>
+        <div class="currency-badge"><span id="currencyFlag">🇪🇬</span> <span id="currencyCode">EGP</span></div>
         <div class="remaining-badge"><span id="remainingLeft">100</span> <span data-i18n="remaining_left">متبقي</span></div>
       </div>
       <div class="lang-switcher" id="langSwitcher">
@@ -264,63 +167,46 @@ footer .wrap{flex-direction:row}
           <span class="arrow">▼</span>
         </button>
         <div class="lang-dropdown" id="langDropdown">
-          <div class="lang-option" data-lang="ar" data-country="EG" data-currency="EGP" data-flag="🇪🇬"><span class="flag">🇪🇬</span> مصر - عربي</div>
-          <div class="lang-option" data-lang="ar" data-country="SA" data-currency="SAR" data-flag="🇸🇦"><span class="flag">🇸🇦</span> السعودية - عربي</div>
-          <div class="lang-option" data-lang="en" data-country="US" data-currency="USD" data-flag="🇺🇸"><span class="flag">🇺🇸</span> USA - English</div>
-          <div class="lang-option" data-lang="fr" data-country="FR" data-currency="EUR" data-flag="🇫🇷"><span class="flag">🇫🇷</span> France - Français</div>
-          <div class="lang-option" data-lang="de" data-country="DE" data-currency="EUR" data-flag="🇩🇪"><span class="flag">🇩🇪</span> Deutschland - Deutsch</div>
-          <div class="lang-option" data-lang="ja" data-country="JP" data-currency="JPY" data-flag="🇯🇵"><span class="flag">🇯🇵</span> 日本 - 日本語</div>
-          <div class="lang-option" data-lang="zh" data-country="CN" data-currency="CNY" data-flag="🇨🇳"><span class="flag">🇨🇳</span> 中国 - 中文</div>
-          <div class="lang-option" data-lang="es" data-country="ES" data-currency="EUR" data-flag="🇪🇸"><span class="flag">🇪🇸</span> España - Español</div>
-          <div class="lang-option" data-lang="pt" data-country="PT" data-currency="EUR" data-flag="🇵🇹"><span class="flag">🇵🇹</span> Portugal - Português</div>
+          <div class="lang-option" data-lang="ar" data-country="EG" data-currency="EGP" data-flag="🇪🇬" data-name="مصر - عربي"><span class="flag">🇪🇬</span> مصر - عربي</div>
+          <div class="lang-option" data-lang="ar" data-country="SA" data-currency="SAR" data-flag="🇸🇦" data-name="السعودية - عربي"><span class="flag">🇸🇦</span> السعودية - عربي</div>
+          <div class="lang-option" data-lang="en" data-country="US" data-currency="USD" data-flag="🇺🇸" data-name="USA - English"><span class="flag">🇺🇸</span> USA - English</div>
+          <div class="lang-option" data-lang="fr" data-country="FR" data-currency="EUR" data-flag="🇫🇷" data-name="France - Français"><span class="flag">🇫🇷</span> France - Français</div>
+          <div class="lang-option" data-lang="de" data-country="DE" data-currency="EUR" data-flag="🇩🇪" data-name="Deutschland - Deutsch"><span class="flag">🇩🇪</span> Deutschland - Deutsch</div>
+          <div class="lang-option" data-lang="ja" data-country="JP" data-currency="JPY" data-flag="🇯🇵" data-name="日本 - 日本語"><span class="flag">🇯🇵</span> 日本 - 日本語</div>
+          <div class="lang-option" data-lang="zh" data-country="CN" data-currency="CNY" data-flag="🇨🇳" data-name="中国 - 中文"><span class="flag">🇨🇳</span> 中国 - 中文</div>
+          <div class="lang-option" data-lang="es" data-country="ES" data-currency="EUR" data-flag="🇪🇸" data-name="España - Español"><span class="flag">🇪🇸</span> España - Español</div>
+          <div class="lang-option" data-lang="pt" data-country="PT" data-currency="EUR" data-flag="🇵🇹" data-name="Portugal - Português"><span class="flag">🇵🇹</span> Portugal - Português</div>
         </div>
       </div>
     </div>
   </div>
   <div class="wrap hwrap">
-    <div class="badge pill mono" data-i18n="badge">V6.2 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE</div>
+    <div class="badge pill mono" data-i18n="badge">V6.3 GLOBAL SKILLS ENGINE</div>
     <h1>
       <span class="g1">Mido AI Store</span><span class="sep">|</span><span class="g2">Professional Tools</span>
-      <span class="sub1" data-i18n="sub1">وكيل البحث العميق - محرك المهارات العالمي</span>
+      <span class="sub1" data-i18n="sub1">وكيل البحث العميق</span>
     </h1>
     <div class="chips">
-      <span class="chip hl" data-i18n="chip1">محرك مهارات + عدادات حية + حماية خادم</span>
-      <span class="chip">Tavily 10 + Qwen3-235B</span>
-      <span class="chip mono" data-i18n="chip3">بحث عميق | تلخيص | مقارنة | تجربة مجانية</span>
+      <span class="chip hl" data-i18n="chip1">محرك مهارات + عدادات حية</span>
+      <span class="chip">Tavily 10 + Qwen3</span>
+      <span class="chip mono" data-i18n="chip3">بحث | تلخيص | مقارنة</span>
     </div>
-    <p class="lead" data-i18n="lead">نفس الـ API اللي بيستخدمه Perplexity Pro و ChatGPT Deep Research - بس بتوفر 96% من وقت البحث.</p>
+    <p class="lead" data-i18n="lead">وكيل بحث عميق بيوفر 96% من وقت البحث.</p>
     <div class="ctas">
-      <a href="#live-demo" class="btn" data-i18n="cta1">جرب البحث الحقيقي مجانا ←</a>
+      <a href="#live-demo" class="btn" data-i18n="cta1">جرب البحث مجانا</a>
     </div>
   </div>
-  <div class="blob" style="top:-96px;left:-96px;width:420px;height:420px;background:rgba(16,185,129,.15)"></div>
-  <div class="blob" style="top:-128px;right:-96px;width:380px;height:380px;background:rgba(102,126,234,.2)"></div>
 </header>
 
 <section class="stats"><div class="wrap" id="stats"></div></section>
 
-<section class="trust-sec sect">
-  <div class="wrap">
-    <div class="center">
-      <div class="pill rbadge" data-i18n="trust_badge">لماذا تثق في Mido AI؟</div>
-      <h2 style="font-size:28px;font-weight:800" data-i18n="trust_title">الثقة تُبنى من الشفافية</h2>
-      <p class="d" style="margin-top:12px;font-size:14px;color:rgba(255,255,255,.6);max-width:600px;margin-left:auto;margin-right:auto" data-i18n="trust_desc">لا نعرض تقييمات وهمية. نقدم أدوات حقيقية تعتمد على مصادر حية.</p>
-    </div>
-    <div class="trust-grid">
-      <div class="trust-card"><div class="ic">⚡</div><h4 data-i18n="trust1_title">سرعة المعالجة</h4><p data-i18n="trust1_desc">توفير 96% من وقت البحث. تقريرك في 60 ثانية.</p></div>
-      <div class="trust-card"><div class="ic">🛡️</div><h4 data-i18n="trust2_title">شفافية كاملة</h4><p data-i18n="trust2_desc">أعلى 5 مصادر مع درجة ثقة لكل مصدر.</p></div>
-      <div class="trust-card"><div class="ic">💎</div><h4 data-i18n="trust3_title">دفع آمن</h4><p data-i18n="trust3_desc">تنزيل فوري + ضمان 14 يوم.</p></div>
-    </div>
-  </div>
-</section>
-
 <section class="wrap sect">
   <div class="lawhead">
     <div>
-      <h2 data-i18n="laws_title">قوانين أسيموف للذكاء الاصطناعي</h2>
-      <p class="mono">ASIMOV LAWS | SAFETY PROTOCOL</p>
+      <h2 data-i18n="laws_title">قوانين أسيموف</h2>
+      <p class="mono">ASIMOV LAWS</p>
     </div>
-    <div class="tag mono">4 LAWS | AUDITED</div>
+    <div class="tag mono">4 LAWS</div>
   </div>
   <div class="laws" id="laws"></div>
 </section>
@@ -328,26 +214,25 @@ footer .wrap{flex-direction:row}
 <section id="live-demo" class="wrap sect">
   <div class="demo-in">
     <div class="center">
-      <div class="pill dbadge" data-i18n="demo_badge">جرب بنفسك - محرك مهارات</div>
-      <h2 data-i18n="demo_title">كل سؤال له تقرير حقيقي مختلف - 60 ثانية</h2>
-      <p class="s mono">Tavily 10 + Qwen3-235B | 5 مراحل | تجربة واحدة</p>
+      <div class="pill dbadge" data-i18n="demo_badge">جرب بنفسك</div>
+      <h2 data-i18n="demo_title">كل سؤال له تقرير مختلف</h2>
     </div>
     <div class="box"><div>
       <div class="bar">
         <div class="skill-tabs" id="skillTabs">
           <div class="skill-tab active" data-skill="deep_search" data-i18n="skill1">🔍 بحث عميق</div>
-          <div class="skill-tab" data-skill="summarize" data-i18n="skill2">⚡ تلخيص سريع</div>
-          <div class="skill-tab" data-skill="compare" data-i18n="skill3">⚖️ جدول مقارنة</div>
-          <button class="save-skill-btn" id="saveSkillBtn" data-i18n="save_skill">💾 حفظ المهارة</button>
+          <div class="skill-tab" data-skill="summarize" data-i18n="skill2">⚡ تلخيص</div>
+          <div class="skill-tab" data-skill="compare" data-i18n="skill3">⚖️ مقارنة</div>
+          <button class="save-skill-btn" id="saveSkillBtn" data-i18n="save_skill">💾 حفظ</button>
         </div>
         <div class="srow">
-          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" data-i18n-ph="search_placeholder" placeholder="مثلا: افضل لابتوب للبرمجة"></div>
+          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" data-i18n-ph="search_placeholder" placeholder="اكتب سؤالك"></div>
           <button id="go" disabled data-i18n="search_btn">بحث 🔍</button>
         </div>
         <div class="sugs" id="sugs"></div>
       </div>
       <div id="res"></div>
-      <div class="bfoot mono"><span>V6.2 | 5 RINGS | SERVER PROTECTION</span><span><span data-i18n="foot_search">بحث اليوم</span>: <span id="cnt">0</span>/100</span></div>
+      <div class="bfoot mono"><span>V6.3</span><span><span data-i18n="foot_search">بحث اليوم</span>: <span id="cnt">0</span>/100</span></div>
     </div></div>
   </div>
 </section>
@@ -355,50 +240,15 @@ footer .wrap{flex-direction:row}
 <section class="rings-sec sec-y">
   <div class="wrap sect">
     <div class="center">
-      <div class="pill rbadge" data-i18n="rings_badge">بروتوكول المعالجة - 5 مراحل</div>
+      <div class="pill rbadge" data-i18n="rings_badge">بروتوكول المعالجة</div>
       <h2 data-i18n="rings_title">مراحل المعالجة الخمس</h2>
-      <p class="d" data-i18n="rings_desc">كل سؤال يمر عبر 5 مراحل: بحث Tavily، ثم Qwen3-235B لبناء الأطروحة.</p>
     </div>
     <div class="rlist" id="rings"></div>
   </div>
 </section>
 
-<section class="rings-sec sec-y">
-  <div class="wrap sect">
-    <div class="center" style="margin-bottom:24px">
-      <span style="font-size:12px;font-weight:700;color:#fbbf24;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);padding:6px 16px;border-radius:9999px" data-i18n="example_badge">مثال حي - 60 ثانية</span>
-      <h2 style="margin-top:12px;font-size:26px;font-weight:800" data-i18n="example_title">تقرير البودكاست</h2>
-    </div>
-    <div style="max-width:900px;margin:0 auto 32px auto;border-radius:24px;overflow:hidden;border:1px solid #232733;box-shadow:0 20px 80px rgba(0,0,0,.5)">
-      <img src="https://raw.githubusercontent.com/midoaistore/mido-landing/a07f30c6fc547061f39661537246f4aa5e49962d/report-preview-en.png" alt="Report Preview" style="width:100%;height:auto;display:block;">
-    </div>
-  </div>
-</section>
-
-<section class="wrap sect">
-  <div class="center"><h2 style="font-size:26px;font-weight:800" data-i18n="pricing_title">سعر عالمي.. جودة عالية</h2></div>
-  <div class="pgrid">
-    <div class="pcard"><div>
-      <div class="t"><span class="r" data-i18n="pricing_badge">الاكثر طلبا</span><span class="e mono">Skills Engine</span></div>
-      <div class="price">
-        <div class="big">6$</div>
-        <div><div class="eq" data-i18n="pricing_eq">= 299 جنيه</div></div>
-      </div>
-      <div class="feat">
-        <div><i>✓</i><span data-i18n="feat1">تقارير غير محدودة</span></div>
-        <div><i>✓</i><span data-i18n="feat2">10 مصادر موثوقة</span></div>
-        <div><i>✓</i><span data-i18n="feat3">3 مهارات</span></div>
-        <div><i>✓</i><span data-i18n="feat4">جدول مقارنة + توصية</span></div>
-        <div><i>✓</i><span data-i18n="feat7">كود المصدر كامل</span></div>
-        <div><i>✓</i><span data-i18n="feat8">تحديثات مجانية</span></div>
-      </div>
-      <a id="buyBtn" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener noreferrer" data-i18n="buy_btn">اشتري الان - 299ج فقط 🔒</a>
-    </div></div>
-  </div>
-</section>
-
 <footer><div class="wrap mono">
-  <span data-i18n="footer">© 2026 Mido AI Store | V6.2 Skills Engine</span>
+  <span data-i18n="footer">© 2026 Mido AI Store</span>
 </div></footer>
 
 <script>
@@ -409,71 +259,270 @@ var WORKER_URL = 'https://mido-deepsearch.midoaistore.workers.dev';
 var CURRENT_SKILL = localStorage.getItem('mido_saved_skill') || 'deep_search';
 var CURRENT_LANG = localStorage.getItem('mido_lang') || 'ar';
 
+// ===== Translations =====
+var T = {
+  ar: {
+    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"وكيل البحث العميق", chip1:"محرك مهارات + عدادات حية", chip3:"بحث | تلخيص | مقارنة",
+    lead:"وكيل بحث عميق بيوفر 96% من وقت البحث.", cta1:"جرب البحث مجانا", remaining_left:"متبقي",
+    laws_title:"قوانين أسيموف", demo_badge:"جرب بنفسك", demo_title:"كل سؤال له تقرير مختلف",
+    skill1:"🔍 بحث عميق", skill2:"⚡ تلخيص", skill3:"⚖️ مقارنة", save_skill:"💾 حفظ",
+    search_placeholder:"اكتب سؤالك", search_btn:"بحث 🔍", rings_badge:"بروتوكول المعالجة", rings_title:"مراحل المعالجة الخمس",
+    foot_search:"بحث اليوم", footer:"© 2026 Mido AI Store",
+    law1_t:"القانون الأول: لا تؤذي", law1_s:"لا يجوز للروبوت إيذاء الإنسان", law1_d:"التقارير بتركز على الفائدة.",
+    law2_t:"القانون الثاني: الطاعة", law2_s:"طاعة أوامر الإنسان", law2_d:"أنت اللي بتحدد السؤال.",
+    law3_t:"القانون الثالث: حماية الوجود", law3_s:"حماية وجود الروبوت", law3_d:"يعتمد على مصادر حية.",
+    law4_t:"القانون الرابع: الإضافة المصرية", law4_s:"مفيد وعملي للمصريين", law4_d:"إجابات بأسعار مصرية.",
+    ring1_n:"البحث في المصادر", ring1_d:"10 مصادر حية",
+    ring2_n:"بناء الأطروحة", ring2_d:"تحليل",
+    ring3_n:"تقليص الحجم", ring3_d:"أعلى 5 مصادر",
+    ring4_n:"تقييم المخاطر", ring4_d:"مخاطر",
+    ring5_n:"التقرير النهائي", ring5_d:"تقرير من أعلى 5",
+    empty_p:"العنكبوت مستني سؤالك", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
+    sug1:"افضل لابتوب للبرمجة 25000 جنيه", sug2:"افضل مايك بودكاست 3000ج", sug3:"ارخص انترنت منزلي في مصر",
+    stats_visitors:"زوار", stats_searches:"بحث اليوم", stats_success:"ناجحة", stats_failed:"فاشلة",
+    search_loading:"يبحث...", search_error:"خطأ:", answer:"الإجابة"
+  },
+  en: {
+    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Deep Search Agent", chip1:"Skills Engine + Live Counters", chip3:"Search | Summary | Compare",
+    lead:"Deep search agent saves 96% of research time.", cta1:"Try Search Free", remaining_left:"left",
+    laws_title:"Asimov's Laws", demo_badge:"Try it", demo_title:"Every question gets a different report",
+    skill1:"🔍 Deep Search", skill2:"⚡ Summary", skill3:"⚖️ Compare", save_skill:"💾 Save",
+    search_placeholder:"Type your question", search_btn:"Search 🔍", rings_badge:"Processing Protocol", rings_title:"The Five Stages",
+    foot_search:"searches today", footer:"© 2026 Mido AI Store",
+    law1_t:"Law 1: Don't Harm", law1_s:"AI must not harm humans", law1_d:"Reports focus on benefit.",
+    law2_t:"Law 2: Obey", law2_s:"AI must obey humans", law2_d:"You decide the question.",
+    law3_t:"Law 3: Self-Preserve", law3_s:"AI must protect itself", law3_d:"Depends on live sources.",
+    law4_t:"Law 4: Egyptian Addition", law4_s:"Be useful to Egyptians", law4_d:"Answers with Egyptian prices.",
+    ring1_n:"Search Sources", ring1_d:"10 live sources",
+    ring2_n:"Build Thesis", ring2_d:"Analysis",
+    ring3_n:"Reduce", ring3_d:"Top 5 sources",
+    ring4_n:"Risk Assessment", ring4_d:"Risks",
+    ring5_n:"Final Report", ring5_d:"Report from top 5",
+    empty_p:"Spider waiting for your question", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
+    sug1:"Best laptop for programming", sug2:"Best podcast mic", sug3:"Cheapest home internet",
+    stats_visitors:"Visitors", stats_searches:"Searches today", stats_success:"Success", stats_failed:"Failed",
+    search_loading:"Searching...", search_error:"Error:", answer:"Answer"
+  },
+  fr: {
+    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Agent de Recherche Approfondie", chip1:"Moteur + Compteurs", chip3:"Recherche | Résumé | Comparaison",
+    lead:"Agent de recherche approfondie - économise 96% du temps.", cta1:"Essayer Gratuitement", remaining_left:"restant",
+    laws_title:"Lois d'Asimov", demo_badge:"Essayer", demo_title:"Chaque question a un rapport différent",
+    skill1:"🔍 Recherche", skill2:"⚡ Résumé", skill3:"⚖️ Comparaison", save_skill:"💾 Sauver",
+    search_placeholder:"Tapez votre question", search_btn:"Rechercher 🔍", rings_badge:"Protocole", rings_title:"Les Cinq Étapes",
+    foot_search:"recherches aujourd'hui", footer:"© 2026 Mido AI Store",
+    law1_t:"Loi 1: Ne pas nuire", law1_s:"L'IA ne doit pas nuire", law1_d:"Rapports axés sur le bénéfice.",
+    law2_t:"Loi 2: Obéir", law2_s:"L'IA doit obéir", law2_d:"Vous décidez.",
+    law3_t:"Loi 3: Auto-préservation", law3_s:"L'IA doit se protéger", law3_d:"Sources en direct.",
+    law4_t:"Loi 4: Addition Égyptienne", law4_s:"Utile aux Égyptiens", law4_d:"Prix égyptiens.",
+    ring1_n:"Recherche Sources", ring1_d:"10 sources",
+    ring2_n:"Thèse", ring2_d:"Analyse",
+    ring3_n:"Réduction", ring3_d:"Top 5",
+    ring4_n:"Risques", ring4_d:"Évaluation",
+    ring5_n:"Rapport Final", ring5_d:"Top 5",
+    empty_p:"Araignée attend", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
+    sug1:"Meilleur ordinateur portable", sug2:"Meilleur micro podcast", sug3:"Internet maison moins cher",
+    stats_visitors:"Visiteurs", stats_searches:"Recherches", stats_success:"Succès", stats_failed:"Échecs",
+    search_loading:"Recherche...", search_error:"Erreur:", answer:"Réponse"
+  },
+  de: {
+    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Deep Search Agent", chip1:"Skills Engine + Live-Zähler", chip3:"Suche | Zusammenfassung | Vergleich",
+    lead:"Deep-Search-Agent spart 96% der Recherchezeit.", cta1:"Kostenlos Testen", remaining_left:"übrig",
+    laws_title:"Asimovs Gesetze", demo_badge:"Testen", demo_title:"Jede Frage erhält einen anderen Bericht",
+    skill1:"🔍 Suche", skill2:"⚡ Zusammenfassung", skill3:"⚖️ Vergleich", save_skill:"💾 Speichern",
+    search_placeholder:"Frage eingeben", search_btn:"Suchen 🔍", rings_badge:"Protokoll", rings_title:"Die Fünf Stufen",
+    foot_search:"Suchen heute", footer:"© 2026 Mido AI Store",
+    law1_t:"Gesetz 1: Nicht schaden", law1_s:"KI darf nicht schaden", law1_d:"Fokus auf Nutzen.",
+    law2_t:"Gesetz 2: Gehorchen", law2_s:"KI muss gehorchen", law2_d:"Sie entscheiden.",
+    law3_t:"Gesetz 3: Selbstschutz", law3_s:"KI muss sich schützen", law3_d:"Live-Quellen.",
+    law4_t:"Gesetz 4: Ägyptische Ergänzung", law4_s:"Nützlich für Ägypter", law4_d:"Ägyptische Preise.",
+    ring1_n:"Quellen suchen", ring1_d:"10 Quellen",
+    ring2_n:"These", ring2_d:"Analyse",
+    ring3_n:"Reduktion", ring3_d:"Top 5",
+    ring4_n:"Risiken", ring4_d:"Bewertung",
+    ring5_n:"Bericht", ring5_d:"Top 5",
+    empty_p:"Spinne wartet", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
+    sug1:"Bester Laptop", sug2:"Bestes Podcast-Mikrofon", sug3:"Günstigstes Internet",
+    stats_visitors:"Besucher", stats_searches:"Suchen heute", stats_success:"Erfolg", stats_failed:"Fehler",
+    search_loading:"Suche...", search_error:"Fehler:", answer:"Antwort"
+  },
+  ja: {
+    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"ディープサーチエージェント", chip1:"スキルエンジン + カウンター", chip3:"検索 | 要約 | 比較",
+    lead:"ディープサーチエージェント - 調査時間を96%節約。", cta1:"無料で試す", remaining_left:"残り",
+    laws_title:"アシモフの法則", demo_badge:"試してみる", demo_title:"すべての質問に異なるレポート",
+    skill1:"🔍 検索", skill2:"⚡ 要約", skill3:"⚖️ 比較", save_skill:"💾 保存",
+    search_placeholder:"質問を入力", search_btn:"検索 🔍", rings_badge:"プロトコル", rings_title:"5つの段階",
+    foot_search:"本日の検索", footer:"© 2026 Mido AI Store",
+    law1_t:"第1法則: 害を与えない", law1_s:"AIは人間に害を与えてはならない", law1_d:"利益に焦点を当てる。",
+    law2_t:"第2法則: 従う", law2_s:"AIは人間に従わなければならない", law2_d:"あなたが決める。",
+    law3_t:"第3法則: 自己保存", law3_s:"AIは自己を保護しなければならない", law3_d:"ライブソース。",
+    law4_t:"第4法則: エジプトの追加", law4_s:"エジプト人に役立つ", law4_d:"エジプトの価格。",
+    ring1_n:"ソース検索", ring1_d:"10ソース",
+    ring2_n:"論文構築", ring2_d:"分析",
+    ring3_n:"削減", ring3_d:"トップ5",
+    ring4_n:"リスク", ring4_d:"評価",
+    ring5_n:"最終レポート", ring5_d:"トップ5",
+    empty_p:"スパイダーが待っています", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
+    sug1:"最高のノートパソコン", sug2:"最高のポッドキャストマイク", sug3:"最も安い家庭用インターネット",
+    stats_visitors:"訪問者", stats_searches:"本日の検索", stats_success:"成功", stats_failed:"失敗",
+    search_loading:"検索中...", search_error:"エラー:", answer:"回答"
+  },
+  zh: {
+    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"深度搜索代理", chip1:"技能引擎 + 实时计数器", chip3:"搜索 | 摘要 | 比较",
+    lead:"深度搜索代理 - 节省96%的研究时间。", cta1:"免费尝试", remaining_left:"剩余",
+    laws_title:"阿西莫夫法则", demo_badge:"试一试", demo_title:"每个问题都会得到不同的报告",
+    skill1:"🔍 搜索", skill2:"⚡ 摘要", skill3:"⚖️ 比较", save_skill:"💾 保存",
+    search_placeholder:"输入问题", search_btn:"搜索 🔍", rings_badge:"协议", rings_title:"五个阶段",
+    foot_search:"今日搜索", footer:"© 2026 Mido AI Store",
+    law1_t:"第一法则: 不伤害", law1_s:"AI不得伤害人类", law1_d:"关注利益。",
+    law2_t:"第二法则: 服从", law2_s:"AI必须服从人类", law2_d:"您来决定。",
+    law3_t:"第三法则: 自我保护", law3_s:"AI必须保护自己", law3_d:"实时来源。",
+    law4_t:"第四法则: 埃及补充", law4_s:"对埃及人有用", law4_d:"埃及价格。",
+    ring1_n:"搜索来源", ring1_d:"10个来源",
+    ring2_n:"构建论文", ring2_d:"分析",
+    ring3_n:"缩减", ring3_d:"前5",
+    ring4_n:"风险", ring4_d:"评估",
+    ring5_n:"最终报告", ring5_d:"前5",
+    empty_p:"蜘蛛等待中", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
+    sug1:"最佳笔记本电脑", sug2:"最佳播客麦克风", sug3:"最便宜的家庭互联网",
+    stats_visitors:"访客", stats_searches:"今日搜索", stats_success:"成功", stats_failed:"失败",
+    search_loading:"搜索中...", search_error:"错误:", answer:"答案"
+  },
+  es: {
+    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Agente de Búsqueda Profunda", chip1:"Motor + Contadores", chip3:"Búsqueda | Resumen | Comparación",
+    lead:"Agente de búsqueda profunda - ahorra 96% del tiempo.", cta1:"Probar Gratis", remaining_left:"restante",
+    laws_title:"Leyes de Asimov", demo_badge:"Probar", demo_title:"Cada pregunta obtiene un informe diferente",
+    skill1:"🔍 Búsqueda", skill2:"⚡ Resumen", skill3:"⚖️ Comparación", save_skill:"💾 Guardar",
+    search_placeholder:"Escribe tu pregunta", search_btn:"Buscar 🔍", rings_badge:"Protocolo", rings_title:"Las Cinco Etapas",
+    foot_search:"búsquedas hoy", footer:"© 2026 Mido AI Store",
+    law1_t:"Ley 1: No dañar", law1_s:"La IA no debe dañar", law1_d:"Enfoque en beneficio.",
+    law2_t:"Ley 2: Obedecer", law2_s:"La IA debe obedecer", law2_d:"Tú decides.",
+    law3_t:"Ley 3: Autopreservación", law3_s:"La IA debe protegerse", law3_d:"Fuentes en vivo.",
+    law4_t:"Ley 4: Adición Egipcia", law4_s:"Útil para egipcios", law4_d:"Precios egipcios.",
+    ring1_n:"Buscar Fuentes", ring1_d:"10 fuentes",
+    ring2_n:"Tesis", ring2_d:"Análisis",
+    ring3_n:"Reducción", ring3_d:"Top 5",
+    ring4_n:"Riesgos", ring4_d:"Evaluación",
+    ring5_n:"Informe Final", ring5_d:"Top 5",
+    empty_p:"Araña esperando", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
+    sug1:"Mejor portátil", sug2:"Mejor micrófono podcast", sug3:"Internet más barato",
+    stats_visitors:"Visitantes", stats_searches:"Búsquedas hoy", stats_success:"Éxito", stats_failed:"Fallos",
+    search_loading:"Buscando...", search_error:"Error:", answer:"Respuesta"
+  },
+  pt: {
+    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Agente de Pesquisa Profunda", chip1:"Motor + Contadores", chip3:"Pesquisa | Resumo | Comparação",
+    lead:"Agente de pesquisa profunda - economiza 96% do tempo.", cta1:"Experimentar Grátis", remaining_left:"restante",
+    laws_title:"Leis de Asimov", demo_badge:"Experimentar", demo_title:"Cada pergunta obtém um relatório diferente",
+    skill1:"🔍 Pesquisa", skill2:"⚡ Resumo", skill3:"⚖️ Comparação", save_skill:"💾 Salvar",
+    search_placeholder:"Digite sua pergunta", search_btn:"Pesquisar 🔍", rings_badge:"Protocolo", rings_title:"As Cinco Etapas",
+    foot_search:"pesquisas hoje", footer:"© 2026 Mido AI Store",
+    law1_t:"Lei 1: Não ferir", law1_s:"IA não deve ferir", law1_d:"Foco no benefício.",
+    law2_t:"Lei 2: Obedecer", law2_s:"IA deve obedecer", law2_d:"Você decide.",
+    law3_t:"Lei 3: Autopreservação", law3_s:"IA deve se proteger", law3_d:"Fontes ao vivo.",
+    law4_t:"Lei 4: Adição Egípcia", law4_s:"Útil para egípcios", law4_d:"Preços egípcios.",
+    ring1_n:"Buscar Fontes", ring1_d:"10 fontes",
+    ring2_n:"Tese", ring2_d:"Análise",
+    ring3_n:"Redução", ring3_d:"Top 5",
+    ring4_n:"Riscos", ring4_d:"Avaliação",
+    ring5_n:"Relatório Final", ring5_d:"Top 5",
+    empty_p:"Aranha esperando", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
+    sug1:"Melhor laptop", sug2:"Melhor microfone podcast", sug3:"Internet mais barato",
+    stats_visitors:"Visitantes", stats_searches:"Pesquisas hoje", stats_success:"Sucesso", stats_failed:"Falhas",
+    search_loading:"Pesquisando...", search_error:"Erro:", answer:"Resposta"
+  }
+};
+
+// ===== Currency & Flags =====
 var CURRENCIES = {EG:'EGP',SA:'SAR',US:'USD',FR:'EUR',DE:'EUR',JP:'JPY',CN:'CNY',ES:'EUR',PT:'EUR'};
 var FLAGS = {EG:'🇪🇬',SA:'🇸🇦',US:'🇺🇸',FR:'🇫🇷',DE:'🇩🇪',JP:'🇯🇵',CN:'🇨🇳',ES:'🇪🇸',PT:'🇵🇹'};
 
-var T = {
-  ar: {badge:"V6.2 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",sub1:"وكيل البحث العميق - محرك المهارات العالمي",chip1:"محرك مهارات + عدادات حية + حماية خادم",chip3:"بحث عميق | تلخيص | مقارنة | تجربة مجانية",lead:"نفس الـ API اللي بيستخدمه Perplexity Pro و ChatGPT Deep Research - بس بتوفر 96% من وقت البحث.",cta1:"جرب البحث الحقيقي مجانا ←",remaining_left:"متبقي",trust_badge:"لماذا تثق في Mido AI؟",trust_title:"الثقة تُبنى من الشفافية",trust_desc:"لا نعرض تقييمات وهمية. أدوات حقيقية تعتمد على مصادر حية.",trust1_title:"سرعة المعالجة",trust1_desc:"توفير 96% من الوقت. تقريرك في 60 ثانية.",trust2_title:"شفافية كاملة",trust2_desc:"أعلى 5 مصادر مع درجة ثقة.",trust3_title:"دفع آمن",trust3_desc:"تنزيل فوري + ضمان 14 يوم.",laws_title:"قوانين أسيموف للذكاء الاصطناعي",demo_badge:"جرب بنفسك - محرك مهارات",demo_title:"كل سؤال له تقرير مختلف - 60 ثانية",skill1:"🔍 بحث عميق",skill2:"⚡ تلخيص سريع",skill3:"⚖️ جدول مقارنة",save_skill:"💾 حفظ المهارة",search_placeholder:"مثلا: افضل لابتوب للبرمجة",search_btn:"بحث 🔍",rings_badge:"بروتوكول المعالجة - 5 مراحل",rings_title:"مراحل المعالجة الخمس",rings_desc:"كل سؤال يمر عبر 5 مراحل: بحث، تحليل، تقليص، مخاطر، تقرير.",foot_search:"بحث اليوم",example_badge:"مثال حي",example_title:"تقرير البودكاست",pricing_title:"سعر عالمي.. جودة عالية",pricing_badge:"الاكثر طلبا",pricing_eq:"= 299 جنيه",feat1:"تقارير غير محدودة",feat2:"10 مصادر موثوقة",feat3:"3 مهارات",feat4:"جدول مقارنة + توصية",feat7:"كود المصدر كامل",feat8:"تحديثات مجانية",buy_btn:"اشتري الان - 299ج فقط 🔒",footer:"© 2026 Mido AI Store | V6.2"},
-  en: {badge:"V6.2 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",sub1:"Deep Search Agent - Global Skills Engine",chip1:"Skills Engine + Live Counters + Server Protection",chip3:"Deep Search | Summarize | Compare | Free Trial",lead:"Same API used by Perplexity Pro and ChatGPT Deep Research - but saves 96% of research time.",cta1:"Try Real Search Free ←",remaining_left:"left",trust_badge:"Why Trust Mido AI?",trust_title:"Trust is built on transparency",trust_desc:"No fake reviews. Real tools powered by live sources.",trust1_title:"Processing Speed",trust1_desc:"Save 96% of time. Report in 60 seconds.",trust2_title:"Full Transparency",trust2_desc:"Top 5 sources with trust score.",trust3_title:"Secure Payment",trust3_desc:"Instant download + 14-day guarantee.",laws_title:"Asimov's Laws of AI",demo_badge:"Try it - Skills Engine",demo_title:"Every question gets a different report - 60 seconds",skill1:"🔍 Deep Search",skill2:"⚡ Quick Summary",skill3:"⚖️ Comparison Table",save_skill:"💾 Save Skill",search_placeholder:"e.g. Best laptop for programming",search_btn:"Search 🔍",rings_badge:"Processing Protocol - 5 Stages",rings_title:"The Five Stages",rings_desc:"Every question goes through 5 stages: search, analysis, reduction, risks, report.",foot_search:"searches today",example_badge:"Live Example",example_title:"Podcast Report",pricing_title:"Global Pricing.. High Quality",pricing_badge:"Most Popular",pricing_eq:"= $6 USD",feat1:"Unlimited reports",feat2:"10 trusted sources",feat3:"3 skills",feat4:"Comparison + recommendation",feat7:"Full source code",feat8:"Lifetime updates",buy_btn:"Buy Now - $6 Only 🔒",footer:"© 2026 Mido AI Store | V6.2"},
-  fr: {badge:"V6.2 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",sub1:"Agent de Recherche Approfondie - Moteur de Compétences Global",chip1:"Moteur de Compétences + Compteurs en Direct + Protection Serveur",chip3:"Recherche | Résumé | Comparaison | Essai Gratuit",lead:"Même API que Perplexity Pro - économise 96% du temps de recherche.",cta1:"Essayez la Recherche Réelle Gratuitement ←",remaining_left:"restant",trust_badge:"Pourquoi faire confiance à Mido AI?",trust_title:"La confiance se construit sur la transparence",trust_desc:"Pas d'avis faux. De vrais outils alimentés par des sources en direct.",trust1_title:"Vitesse de Traitement",trust1_desc:"Économisez 96% du temps. Rapport en 60 secondes.",trust2_title:"Transparence Totale",trust2_desc:"Top 5 sources avec score de confiance.",trust3_title:"Paiement Sécurisé",trust3_desc:"Téléchargement instantané + garantie 14 jours.",laws_title:"Les Lois d'Asimov sur l'IA",demo_badge:"Essayez - Moteur de Compétences",demo_title:"Chaque question obtient un rapport différent - 60 secondes",skill1:"🔍 Recherche Approfondie",skill2:"⚡ Résumé Rapide",skill3:"⚖️ Tableau Comparatif",save_skill:"💾 Sauvegarder",search_placeholder:"ex: Meilleur ordinateur portable",search_btn:"Rechercher 🔍",rings_badge:"Protocole - 5 Étapes",rings_title:"Les Cinq Étapes",rings_desc:"Chaque question passe par 5 étapes: recherche, analyse, réduction, risques, rapport.",foot_search:"recherches aujourd'hui",example_badge:"Exemple Réel",example_title:"Rapport Podcast",pricing_title:"Prix Global.. Haute Qualité",pricing_badge:"Le Plus Populaire",pricing_eq:"= 6€ EUR",feat1:"Rapports illimités",feat2:"10 sources fiables",feat3:"3 compétences",feat4:"Tableau + recommandation",feat7:"Code source complet",feat8:"Mises à jour à vie",buy_btn:"Acheter - 6€ 🔒",footer:"© 2026 Mido AI Store | V6.2"},
-  de: {badge:"V6.2 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",sub1:"Deep Search Agent - Globale Skills Engine",chip1:"Skills Engine + Live-Zähler + Server-Schutz",chip3:"Suche | Zusammenfassung | Vergleich | Kostenlos Testen",lead:"Gleiche API wie Perplexity Pro - spart 96% der Recherchezeit.",cta1:"Echte Suche Kostenlos Testen ←",remaining_left:"übrig",trust_badge:"Warum Mido AI vertrauen?",trust_title:"Vertrauen baut auf Transparenz",trust_desc:"Keine gefälschten Bewertungen. Echte Tools mit Live-Quellen.",trust1_title:"Verarbeitungsgeschwindigkeit",trust1_desc:"Sparen Sie 96% der Zeit. Bericht in 60 Sekunden.",trust2_title:"Volle Transparenz",trust2_desc:"Top 5 Quellen mit Vertrauensscore.",trust3_title:"Sichere Zahlung",trust3_desc:"Sofortiger Download + 14-Tage-Garantie.",laws_title:"Asimovs Gesetze der KI",demo_badge:"Testen - Skills Engine",demo_title:"Jede Frage erhält einen anderen Bericht - 60 Sekunden",skill1:"🔍 Tiefensuche",skill2:"⚡ Schnelle Zusammenfassung",skill3:"⚖️ Vergleichstabelle",save_skill:"💾 Skill Speichern",search_placeholder:"z.B. Bester Laptop",search_btn:"Suchen 🔍",rings_badge:"Protokoll - 5 Stufen",rings_title:"Die Fünf Stufen",rings_desc:"Jede Frage durchläuft 5 Stufen: Suche, Analyse, Reduktion, Risiken, Bericht.",foot_search:"Suchen heute",example_badge:"Live-Beispiel",example_title:"Podcast-Bericht",pricing_title:"Globaler Preis.. Hohe Qualität",pricing_badge:"Am Beliebtesten",pricing_eq:"= 6€ EUR",feat1:"Unbegrenzte Berichte",feat2:"10 vertrauenswürdige Quellen",feat3:"3 Skills",feat4:"Tabelle + Empfehlung",feat7:"Vollständiger Quellcode",feat8:"Lebenslange Updates",buy_btn:"Jetzt Kaufen - 6€ 🔒",footer:"© 2026 Mido AI Store | V6.2"},
-  ja: {badge:"V6.2 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",sub1:"ディープサーチエージェント - グローバルスキルエンジン",chip1:"スキルエンジン + ライブカウンター + サーバー保護",chip3:"ディープサーチ | 要約 | 比較 | 無料トライアル",lead:"Perplexity Proと同じAPI - 調査時間を96%節約。",cta1:"無料でリアル検索を試す ←",remaining_left:"残り",trust_badge:"なぜMido AIを信頼するのか？",trust_title:"信頼は透明性から生まれる",trust_desc:"偽のレビューはありません。ライブソースに基づく実際のツール。",trust1_title:"処理速度",trust1_desc:"時間を96%節約。60秒でレポート。",trust2_title:"完全な透明性",trust2_desc:"トップ5のソースと信頼スコア。",trust3_title:"安全な支払い",trust3_desc:"即時ダウンロード + 14日間保証。",laws_title:"アシモフのAIの法則",demo_badge:"試してみる - スキルエンジン",demo_title:"すべての質問に異なるレポート - 60秒",skill1:"🔍 ディープサーチ",skill2:"⚡ クイック要約",skill3:"⚖️ 比較表",save_skill:"💾 スキルを保存",search_placeholder:"例：最高のノートパソコン",search_btn:"検索 🔍",rings_badge:"処理プロトコル - 5段階",rings_title:"5つの処理段階",rings_desc:"すべての質問は5段階を経ます：検索、分析、削減、リスク、レポート。",foot_search:"本日の検索",example_badge:"ライブ例",example_title:"ポッドキャストレポート",pricing_title:"グローバル価格.. 高品質",pricing_badge:"最も人気",pricing_eq:"= $6 USD",feat1:"無制限のレポート",feat2:"10の信頼できるソース",feat3:"3つのスキル",feat4:"比較表 + 推奨事項",feat7:"完全なソースコード",feat8:"生涯無料アップデート",buy_btn:"今すぐ購入 - $6のみ 🔒",footer:"© 2026 Mido AI Store | V6.2"},
-  zh: {badge:"V6.2 全球技能引擎 | Qwen3-235B | 实时",sub1:"深度搜索代理 - 全球技能引擎",chip1:"技能引擎 + 实时计数器 + 服务器保护",chip3:"深度搜索 | 摘要 | 比较 | 免费试用",lead:"与Perplexity Pro相同的API - 节省96%的研究时间。",cta1:"免费尝试真实搜索 ←",remaining_left:"剩余",trust_badge:"为什么信任Mido AI？",trust_title:"信任建立在透明度上",trust_desc:"没有虚假评论。基于实时来源的真实工具。",trust1_title:"处理速度",trust1_desc:"节省96%的时间。60秒内获得报告。",trust2_title:"完全透明",trust2_desc:"前5个来源及信任评分。",trust3_title:"安全支付",trust3_desc:"即时下载 + 14天保修。",laws_title:"阿西莫夫的AI法则",demo_badge:"试一试 - 技能引擎",demo_title:"每个问题都会得到不同的报告 - 60秒",skill1:"🔍 深度搜索",skill2:"⚡ 快速摘要",skill3:"⚖️ 比较表",save_skill:"💾 保存技能",search_placeholder:"例如：最佳笔记本电脑",search_btn:"搜索 🔍",rings_badge:"处理协议 - 5个阶段",rings_title:"五个处理阶段",rings_desc:"每个问题经过5个阶段：搜索、分析、缩减、风险、报告。",foot_search:"今日搜索",example_badge:"实时示例",example_title:"播客报告",pricing_title:"全球定价.. 高品质",pricing_badge:"最受欢迎",pricing_eq:"= $6 USD",feat1:"无限报告",feat2:"10个可信来源",feat3:"3种技能",feat4:"比较表 + 推荐",feat7:"完整源代码",feat8:"终身免费更新",buy_btn:"立即购买 - 仅$6 🔒",footer:"© 2026 Mido AI Store | V6.2"},
-  es: {badge:"V6.2 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",sub1:"Agente de Búsqueda Profunda - Motor de Habilidades Global",chip1:"Motor de Habilidades + Contadores en Vivo + Protección del Servidor",chip3:"Búsqueda | Resumen | Comparación | Prueba Gratis",lead:"Misma API que Perplexity Pro - ahorra 96% del tiempo de investigación.",cta1:"Prueba la Búsqueda Real Gratis ←",remaining_left:"restante",trust_badge:"¿Por qué confiar en Mido AI?",trust_title:"La confianza se construye con transparencia",trust_desc:"Sin reseñas falsas. Herramientas reales con fuentes en vivo.",trust1_title:"Velocidad de Procesamiento",trust1_desc:"Ahorra 96% del tiempo. Informe en 60 segundos.",trust2_title:"Transparencia Total",trust2_desc:"Top 5 fuentes con puntuación de confianza.",trust3_title:"Pago Seguro",trust3_desc:"Descarga instantánea + garantía de 14 días.",laws_title:"Las Leyes de Asimov sobre IA",demo_badge:"Pruébalo - Motor de Habilidades",demo_title:"Cada pregunta obtiene un informe diferente - 60 segundos",skill1:"🔍 Búsqueda Profunda",skill2:"⚡ Resumen Rápido",skill3:"⚖️ Tabla Comparativa",save_skill:"💾 Guardar",search_placeholder:"ej: Mejor portátil",search_btn:"Buscar 🔍",rings_badge:"Protocolo - 5 Etapas",rings_title:"Las Cinco Etapas",rings_desc:"Cada pregunta pasa por 5 etapas: búsqueda, análisis, reducción, riesgos, informe.",foot_search:"búsquedas hoy",example_badge:"Ejemplo en Vivo",example_title:"Informe de Podcast",pricing_title:"Precio Global.. Alta Calidad",pricing_badge:"Más Popular",pricing_eq:"= 6€ EUR",feat1:"Informes ilimitados",feat2:"10 fuentes confiables",feat3:"3 habilidades",feat4:"Tabla + recomendación",feat7:"Código fuente completo",feat8:"Actualizaciones de por vida",buy_btn:"Comprar - Solo 6€ 🔒",footer:"© 2026 Mido AI Store | V6.2"},
-  pt: {badge:"V6.2 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",sub1:"Agente de Pesquisa Profunda - Motor de Habilidades Global",chip1:"Motor de Habilidades + Contadores ao Vivo + Proteção do Servidor",chip3:"Pesquisa | Resumo | Comparação | Teste Grátis",lead:"Mesma API que Perplexity Pro - economiza 96% do tempo de pesquisa.",cta1:"Experimente a Pesquisa Real Grátis ←",remaining_left:"restante",trust_badge:"Por que confiar na Mido AI?",trust_title:"A confiança é construída com transparência",trust_desc:"Sem avaliações falsas. Ferramentas reais com fontes ao vivo.",trust1_title:"Velocidade de Processamento",trust1_desc:"Economize 96% do tempo. Relatório em 60 segundos.",trust2_title:"Transparência Total",trust2_desc:"Top 5 fontes com pontuação de confiança.",trust3_title:"Pagamento Seguro",trust3_desc:"Download instantâneo + garantia de 14 dias.",laws_title:"As Leis de Asimov sobre IA",demo_badge:"Experimente - Motor de Habilidades",demo_title:"Cada pergunta obtém um relatório diferente - 60 segundos",skill1:"🔍 Pesquisa Profunda",skill2:"⚡ Resumo Rápido",skill3:"⚖️ Tabela Comparativa",save_skill:"💾 Salvar",search_placeholder:"ex: Melhor laptop",search_btn:"Pesquisar 🔍",rings_badge:"Protocolo - 5 Etapas",rings_title:"As Cinco Etapas",rings_desc:"Cada pergunta passa por 5 etapas: pesquisa, análise, redução, riscos, relatório.",foot_search:"pesquisas hoje",example_badge:"Exemplo ao Vivo",example_title:"Relatório de Podcast",pricing_title:"Preço Global.. Alta Qualidade",pricing_badge:"Mais Popular",pricing_eq:"= 6€ EUR",feat1:"Relatórios ilimitados",feat2:"10 fontes confiáveis",feat3:"3 habilidades",feat4:"Tabela + recomendação",feat7:"Código-fonte completo",feat8:"Atualizações para sempre",buy_btn:"Comprar - Apenas 6€ 🔒",footer:"© 2026 Mido AI Store | V6.2"}
-};
-
+// ===== Apply Language (Updates EVERYTHING) =====
 function applyLanguage(lang) {
-  var dict = T[lang] || T.ar;
+  var d = T[lang] || T.ar;
+  
+  // Update all data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
-    var key = el.getAttribute('data-i18n');
-    if (dict[key]) el.textContent = dict[key];
+    var k = el.getAttribute('data-i18n');
+    if (d[k]) el.textContent = d[k];
   });
   document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
-    var key = el.getAttribute('data-i18n-ph');
-    if (dict[key]) el.placeholder = dict[key];
+    var k = el.getAttribute('data-i18n-ph');
+    if (d[k]) el.placeholder = d[k];
   });
+  
+  // Update direction
   document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
   document.documentElement.lang = lang;
+  
+  // Update language button
   var opt = document.querySelector('.lang-option[data-lang="' + lang + '"]');
   if (opt) {
     var c = opt.getAttribute('data-country');
     document.getElementById('currentFlag').textContent = FLAGS[c];
-    document.getElementById('currentLang').textContent = opt.textContent.trim();
+    document.getElementById('currentLang').textContent = opt.getAttribute('data-name');
     document.getElementById('currencyFlag').textContent = FLAGS[c];
     document.getElementById('currencyCode').textContent = CURRENCIES[c];
   }
+  
+  // Re-render LAWS with translation
+  var laws = document.getElementById('laws');
+  if (laws) {
+    laws.innerHTML = [1,2,3,4].map(function(n) {
+      var c = ['#ef4444','#667eea','#10b981','#f59e0b'][n-1];
+      var eg = n===4 ? '<span class="eg">Egyptian</span>' : '';
+      return '<div class="law"><div class="in"><div class="row"><span class="num mono" style="color:'+c+'">0'+n+'</span><div>'+eg+'<span class="pm">+</span></div></div><h3>'+d['law'+n+'_t']+'</h3><p class="sd" style="color:'+c+'">'+d['law'+n+'_s']+'</p><p class="dt">'+d['law'+n+'_d']+'</p></div></div>';
+    }).join('');
+  }
+  
+  // Re-render RINGS with translation
+  var rings = document.getElementById('rings');
+  if (rings) {
+    var colors = ['#ef4444','#667eea','#10b981','#f59e0b','#8b5cf6'];
+    rings.innerHTML = [1,2,3,4,5].map(function(n) {
+      var c = colors[n-1];
+      return '<div class="ring" data-c="'+c+'"><div class="cir" style="border-color:'+c+';color:'+c+'">'+n+'</div><div class="c"><div class="h"><span class="code mono" style="border-color:'+c+'40;color:'+c+';background:'+c+'15">Stage '+n+'</span><h3>'+d['ring'+n+'_n']+'</h3></div><p>'+d['ring'+n+'_d']+'</p></div></div>';
+    }).join('');
+  }
+  
+  // Update suggestions
+  var sugs = document.getElementById('sugs');
+  if (sugs) {
+    sugs.innerHTML = [d.sug1, d.sug2, d.sug3].map(function(s) {
+      return '<button type="button" class="sug">'+s+'</button>';
+    }).join('');
+  }
+  
+  // Update empty state
+  var res = document.getElementById('res');
+  if (res) {
+    res.innerHTML = '<div class="empty"><div class="spd">🕷️</div><p>'+d.empty_p+'</p><small class="mono">'+d.empty_s+'</small></div>';
+  }
+  
   localStorage.setItem('mido_lang', lang);
 }
 
+// ===== Language Switcher =====
 document.getElementById('langBtn').addEventListener('click', function(e) {
   e.stopPropagation();
   document.getElementById('langDropdown').classList.toggle('active');
 });
-
 document.querySelectorAll('.lang-option').forEach(function(opt) {
   opt.addEventListener('click', function() {
-    var lang = this.getAttribute('data-lang');
-    CURRENT_LANG = lang;
-    applyLanguage(lang);
+    CURRENT_LANG = this.getAttribute('data-lang');
+    applyLanguage(CURRENT_LANG);
     document.getElementById('langDropdown').classList.remove('active');
   });
 });
-
 document.addEventListener('click', function(e) {
   if (!document.getElementById('langSwitcher').contains(e.target)) {
     document.getElementById('langDropdown').classList.remove('active');
   }
 });
 
-applyLanguage(CURRENT_LANG);
-
 // ===== Skill Tabs =====
 function setActiveSkill(skill) {
   CURRENT_SKILL = skill;
   document.querySelectorAll('.skill-tab').forEach(function(t) {
-    t.classList.remove('active');
-    if (t.getAttribute('data-skill') === skill) t.classList.add('active');
+    t.classList.toggle('active', t.getAttribute('data-skill') === skill);
   });
 }
 setActiveSkill(CURRENT_SKILL);
@@ -482,16 +531,16 @@ document.querySelectorAll('.skill-tab').forEach(function(t) {
 });
 
 // ===== Save Skill =====
-var saveBtn = document.getElementById('saveSkillBtn');
-saveBtn.addEventListener('click', function(e) {
+document.getElementById('saveSkillBtn').addEventListener('click', function(e) {
   e.preventDefault();
   localStorage.setItem('mido_saved_skill', CURRENT_SKILL);
-  saveBtn.textContent = '✅ ' + (CURRENT_LANG === 'ar' ? 'تم الحفظ!' : 'Saved!');
-  saveBtn.classList.add('saved');
+  this.textContent = '✅';
+  this.classList.add('saved');
+  var self = this;
   setTimeout(function() {
-    saveBtn.textContent = T[CURRENT_LANG].save_skill;
-    saveBtn.classList.remove('saved');
-  }, 2000);
+    self.textContent = T[CURRENT_LANG].save_skill;
+    self.classList.remove('saved');
+  }, 1500);
 });
 
 // ===== Visitor & Stats =====
@@ -507,17 +556,14 @@ async function fetchStats() {
     var r = await fetch(WORKER_URL + '/stats');
     if (r.ok) {
       var d = await r.json();
+      var tr = T[CURRENT_LANG];
       document.getElementById('cnt').textContent = d.today_searches || 0;
       document.getElementById('remainingLeft').textContent = Math.max(0, 100 - (d.today_searches || 0));
-      var statsWrap = document.getElementById('stats');
-      if (statsWrap) {
-        statsWrap.innerHTML = `
-          <div class="stat live-stat"><div class="i">👥</div><div class="v">${d.total_visitors}</div><div class="l mono">Visitors</div></div>
-          <div class="stat live-stat"><div class="i">🔍</div><div class="v">${d.today_searches}</div><div class="l mono">Searches Today</div></div>
-          <div class="stat"><div class="i">✅</div><div class="v">${d.successful_trials || 0}</div><div class="l mono">Success</div></div>
-          <div class="stat"><div class="i">❌</div><div class="v">${d.failed_trials || 0}</div><div class="l mono">Failed</div></div>
-        `;
-      }
+      document.getElementById('stats').innerHTML = 
+        '<div class="stat live-stat"><div class="i">👥</div><div class="v">'+(d.total_visitors||0)+'</div><div class="l mono">'+tr.stats_visitors+'</div></div>'+
+        '<div class="stat live-stat"><div class="i">🔍</div><div class="v">'+(d.today_searches||0)+'</div><div class="l mono">'+tr.stats_searches+'</div></div>'+
+        '<div class="stat"><div class="i">✅</div><div class="v">'+(d.successful_trials||0)+'</div><div class="l mono">'+tr.stats_success+'</div></div>'+
+        '<div class="stat"><div class="i">❌</div><div class="v">'+(d.failed_trials||0)+'</div><div class="l mono">'+tr.stats_failed+'</div></div>';
     }
   } catch (e) {}
 }
@@ -529,48 +575,6 @@ async function trackVisit() {
 trackVisit();
 setInterval(fetchStats, 15000);
 
-// ===== Laws =====
-var LAWS = [
-  {n:"01", t:"القانون الأول: لا تؤذي", s:"لا يجوز للروبوت إيذاء الإنسان", f:"لا يجوز للروبوت إيذاء الإنسان أو السماح بإيذائه بالتقاعس.", d:"التقارير بتركز على الفائدة والمصادر.", c:"#ef4444"},
-  {n:"02", t:"القانون الثاني: الطاعة", s:"يجب على الروبوت طاعة أوامر الإنسان", f:"يجب على الروبوت طاعة أوامر الإنسان إلا إذا تعارضت مع القانون الأول.", d:"أنت اللي بتحدد الميزانية والسؤال.", c:"#667eea"},
-  {n:"03", t:"القانون الثالث: حماية الوجود", s:"يجب على الروبوت حماية وجوده", f:"يجب على الروبوت حماية وجوده طالما لا يتعارض مع القانونين الأول والثاني.", d:"يعتمد على مصادر حية بـ Score.", c:"#10b981"},
-  {n:"04", t:"القانون الرابع: الإضافة المصرية", s:"يجب أن يكون مفيداً وعملياً للمصريين", f:"يجب على الروبوت أن يكون مفيداً وعملياً للمصريين - يقدم إجابات حقيقية بأسعار مصرية.", d:"يقدم إجابات حقيقية بأسعار مصرية.", c:"#f59e0b", eg:1}
-];
-document.getElementById('laws').innerHTML = LAWS.map(function(l, i) {
-  var bc = l.eg ? '#f59e0b33' : '#232733';
-  return '<div class="law" data-i="'+i+'" data-eg="'+(l.eg?1:0)+'" style="border-color:'+bc+'"><div class="in"><div class="row"><span class="num mono" style="color:'+l.c+'">'+l.n+'</span><div style="display:flex;align-items:center">'+(l.eg?'<span class="eg">مصري</span>':'')+'<span class="pm">+</span></div></div><h3>'+l.t+'</h3><p class="sd" style="color:'+l.c+'">'+l.s+'</p><p class="dt">'+l.d+'</p><div class="expand"><div><div class="full"><div class="lb mono">النص الكامل</div><p>'+l.f+'</p></div></div></div><div class="more">اضغط للتفاصيل ←</div></div></div>';
-}).join('');
-
-document.getElementById('laws').addEventListener('click', function(e) {
-  var c = e.target.closest('.law'); if (!c) return;
-  var was = c.classList.contains('open');
-  document.querySelectorAll('.law').forEach(function(x) { x.classList.remove('open'); x.querySelector('.pm').textContent='+'; x.style.borderColor=x.dataset.eg==='1'?'#f59e0b33':'#232733'; });
-  if (!was) { c.classList.add('open'); c.querySelector('.pm').textContent='-'; c.style.borderColor=c.dataset.eg==='1'?'#f59e0b66':'#667eea55'; }
-});
-
-// ===== Rings =====
-var RINGS = [
-  {id:1, n:"البحث في المصادر", code:"Tavily - 10 sources", d:"10 مصادر حية مع Score", c:"#ef4444"},
-  {id:2, n:"بناء الأطروحة", code:"Qwen3-235B - Thesis", d:"Qwen3-235B يبني اطروحة", c:"#667eea"},
-  {id:3, n:"تقليص الحجم", code:"Qwen3-235B - Top 5", d:"اختيار أعلى 5 مصادر", c:"#10b981"},
-  {id:4, n:"تقييم المخاطر", code:"Qwen3-235B - Risk", d:"تقييم مخاطر", c:"#f59e0b"},
-  {id:5, n:"كتابة التقرير النهائي", code:"Qwen3-235B - Final", d:"تقرير نهائي من أعلى 5", c:"#8b5cf6"}
-];
-document.getElementById('rings').innerHTML = RINGS.map(function(r) {
-  return '<div class="ring" data-c="'+r.c+'"><div class="cir" style="border-color:'+r.c+';color:'+r.c+'">'+r.id+'</div><div class="c"><div class="h"><span class="code mono" style="border-color:'+r.c+'40;color:'+r.c+';background:'+r.c+'15">'+r.code+'</span><h3>'+r.n+'</h3><span class="ar">▼</span></div><p>'+r.d+'</p><div class="act"><span class="dot dot6 pulse" style="background:'+r.c+'"></span>المرحلة نشطة</div></div></div>';
-}).join('');
-
-document.getElementById('rings').addEventListener('click', function(e) {
-  var c = e.target.closest('.ring'); if (!c) return;
-  var was = c.classList.contains('open');
-  document.querySelectorAll('.ring').forEach(function(x) { x.classList.remove('open'); var k=x.querySelector('.cir'); k.style.background='#0a0a0f'; k.style.color=x.dataset.c; });
-  if (!was) { c.classList.add('open'); var k=c.querySelector('.cir'); k.style.background=c.dataset.c; k.style.color='#fff'; }
-});
-
-// ===== Suggestions =====
-var SUGS = ["افضل لابتوب للبرمجة 25000 جنيه", "افضل مايك بودكاست 3000ج", "ارخص انترنت منزلي في مصر"];
-document.getElementById('sugs').innerHTML = SUGS.map(function(s) { return '<button type="button" class="sug">'+s+'</button>'; }).join('');
-
 // ===== Search =====
 var q = document.getElementById('q'), go = document.getElementById('go'), res = document.getElementById('res');
 var loading = false;
@@ -578,15 +582,16 @@ function refreshBtn() { go.disabled = loading || !q.value.trim(); }
 q.addEventListener('input', refreshBtn);
 q.addEventListener('keydown', function(e) { if (e.key === 'Enter') search(); });
 go.addEventListener('click', search);
-document.getElementById('sugs').addEventListener('click', function(e) { var b = e.target.closest('.sug'); if (b) { q.value = b.textContent; refreshBtn(); } });
-
-res.innerHTML = '<div class="empty"><div class="spd">🕷️</div><p>العنكبوت مستني سؤالك</p><small class="mono">Tavily 10 → Qwen3 → Report - 60s</small></div>';
+document.getElementById('sugs').addEventListener('click', function(e) {
+  var b = e.target.closest('.sug'); if (b) { q.value = b.textContent; refreshBtn(); }
+});
 
 async function search() {
   var text = q.value.trim();
   if (!text || loading) return;
+  var tr = T[CURRENT_LANG];
   loading = true; go.innerHTML = '<span class="spin"></span>'; refreshBtn();
-  res.innerHTML = '<div class="log"><div class="t"><span class="a mono">SPIDER LOG V6.2</span><span class="b"><span class="dot dot6 em pulse"></span>يزحف...</span></div></div>';
+  res.innerHTML = '<div class="log"><div class="t"><span class="a">'+tr.search_loading+'</span></div></div>';
   try {
     var r = await fetch(WORKER_URL, {
       method: 'POST',
@@ -595,12 +600,12 @@ async function search() {
     });
     var data = await r.json();
     if (!data.success) {
-      res.innerHTML = '<div class="err"><b>خطأ:</b> ' + (data.reason || 'unknown') + '</div>';
+      res.innerHTML = '<div class="err"><b>'+tr.search_error+'</b> ' + (data.reason || 'unknown') + '</div>';
     } else {
       var srcHtml = (data.top_sources || []).map(function(s) {
-        return '<a class="src" href="' + s.url + '" target="_blank"><div class="r"><h5>' + s.title + '</h5><span class="sc mono">Score ' + (s.score || 0).toFixed(2) + '</span></div><p>' + (s.content || '').slice(0, 200) + '</p></a>';
+        return '<a class="src" href="' + s.url + '" target="_blank"><div class="r"><h5>' + s.title + '</h5><span class="sc mono">' + (s.score || 0).toFixed(2) + '</span></div><p>' + (s.content || '').slice(0, 200) + '</p></a>';
       }).join('');
-      res.innerHTML = '<div class="ans"><div class="m mono"><span class="x">ANSWER</span></div><div class="txt">' + data.deep_answer + '</div></div>' + (srcHtml ? '<div class="srcs">' + srcHtml + '</div>' : '');
+      res.innerHTML = '<div class="ans"><div class="m mono"><span class="x">'+tr.answer+'</span></div><div class="txt">' + data.deep_answer + '</div></div>' + (srcHtml ? '<div class="srcs">' + srcHtml + '</div>' : '');
     }
     fetchStats();
   } catch (e) {
@@ -655,7 +660,10 @@ async function search() {
   requestAnimationFrame(draw);
 })();
 
+// ===== Init =====
+applyLanguage(CURRENT_LANG);
+
 })();
 </script>
 </body>
-</html>
+  </html>
