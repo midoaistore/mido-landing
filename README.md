@@ -5,6 +5,9 @@
 **🌐 Live:** https://midoaistore.github.io/mido-landing/  
 **💳 Buy:** https://midoaistore.gumroad.com/l/dtqpvka ($6 / 299 EGP)
 
+![Top Books Every Digital Product Leader Should Read](books-report-en.png)
+
+> **Example Live Report:** 8 books curated • Trust 4.5-4.9/5 • Verified in 35-40s • 10 Sources • Mido DeepSearch V4.4
 ## 🕷️ ايه هو Mido؟
 
 Mido مش محرك بحث عادي. هو pipeline من 5 مراحل:
