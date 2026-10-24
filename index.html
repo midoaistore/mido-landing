@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mido AI Store | Deep Search Agent V6.0</title>
+<title>Mido AI Store | Deep Search Agent V6.1</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;border:0 solid #232733;margin:0;padding:0}
@@ -24,7 +24,7 @@ a{color:inherit;text-decoration:none}
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:9999px}
 .sec-y{border-top:1px solid #232733;border-bottom:1px solid #232733}
 header{position:relative;overflow:hidden;border-bottom:1px solid #232733;background:#0a0a0f}
-.hwrap{position:relative;padding-top:52px;padding-bottom:48px}
+.hwrap{position:relative;padding-top:80px;padding-bottom:48px}
 .badge{border:1px solid #232733;background:#12121a;padding:6px 16px;font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.6);margin-bottom:24px}
 h1{font-size:28px;font-weight:800;line-height:1.1}
 .g1{background:linear-gradient(to right,#fff,rgba(255,255,255,.6));-webkit-background-clip:text;color:transparent}
@@ -206,17 +206,21 @@ footer .wrap span.f{display:flex;align-items:center;gap:8px}
 .save-skill-btn{padding:8px 16px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid rgba(16,185,129,.5);background:rgba(16,185,129,.1);color:#6ee7b7;transition:all .2s;margin-left:auto;white-space:nowrap}
 .save-skill-btn:hover{background:rgba(16,185,129,.2)}
 .save-skill-btn.saved{background:rgba(16,185,129,.3);border-color:#10b981;color:#fff}
-/* Language Switcher */
-.lang-switcher{position:absolute;top:16px;left:16px;z-index:100;}
-.lang-btn{display:flex;align-items:center;gap:8px;background:rgba(18,18,26,.95);border:1px solid #232733;border-radius:9999px;padding:8px 16px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;backdrop-filter:blur(10px);}
-.lang-btn:hover{border-color:#667eea;background:rgba(102,126,234,.1);}
-.lang-btn .flag{font-size:18px;}
-.lang-btn .arrow{font-size:10px;color:rgba(255,255,255,.5);}
-.lang-dropdown{display:none;position:absolute;top:52px;left:0;background:rgba(18,18,26,.98);border:1px solid #232733;border-radius:16px;padding:8px;min-width:200px;backdrop-filter:blur(10px);box-shadow:0 20px 60px rgba(0,0,0,.5);max-height:400px;overflow-y:auto;}
+/* Top Bar with language + currency + remaining */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;position:relative;z-index:30}
+.topbar-left{display:flex;align-items:center;gap:8px}
+.currency-badge{display:flex;align-items:center;gap:6px;background:rgba(18,18,26,.95);border:1px solid #232733;border-radius:9999px;padding:6px 14px;font-size:12px;font-weight:700;color:rgba(255,255,255,.85);}
+.remaining-badge{display:flex;align-items:center;gap:6px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:9999px;padding:6px 14px;font-size:12px;font-weight:700;color:#6ee7b7;}
+.lang-switcher{position:relative;}
+.lang-btn{display:flex;align-items:center;gap:8px;background:rgba(18,18,26,.95);border:1px solid #232733;border-radius:9999px;padding:6px 14px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
+.lang-btn:hover{border-color:#667eea;}
+.lang-btn .flag{font-size:16px;}
+.lang-btn .arrow{font-size:9px;color:rgba(255,255,255,.5);}
+.lang-dropdown{display:none;position:absolute;top:44px;left:0;background:rgba(18,18,26,.98);border:1px solid #232733;border-radius:16px;padding:8px;min-width:200px;box-shadow:0 20px 60px rgba(0,0,0,.5);max-height:350px;overflow-y:auto;z-index:100;}
 .lang-dropdown.active{display:block;}
-.lang-option{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;color:rgba(255,255,255,.8);font-size:13px;cursor:pointer;transition:all .15s;}
+.lang-option{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;color:rgba(255,255,255,.8);font-size:12px;cursor:pointer;transition:all .15s;}
 .lang-option:hover{background:rgba(102,126,234,.15);color:#fff;}
-.lang-option .flag{font-size:18px;}
+.lang-option .flag{font-size:16px;}
 @media(min-width:768px){
 .wrap{padding:0 32px}
 h1{font-size:42px}
@@ -247,44 +251,49 @@ footer .wrap{flex-direction:row}
 <body>
 <canvas id="spider"></canvas>
 
-<!-- Language Switcher -->
-<div class="lang-switcher" id="langSwitcher">
-  <button class="lang-btn" id="langBtn">
-    <span class="flag" id="currentFlag">🇪🇬</span>
-    <span class="lang-name" id="currentLang">مصر - عربي</span>
-    <span class="arrow">▼</span>
-  </button>
-  <div class="lang-dropdown" id="langDropdown">
-    <div class="lang-option" data-lang="ar" data-country="EG" data-currency="EGP" data-flag="🇪🇬"><span class="flag">🇪🇬</span> مصر - عربي</div>
-    <div class="lang-option" data-lang="ar" data-country="SA" data-currency="SAR" data-flag="🇸🇦"><span class="flag">🇸🇦</span> السعودية - عربي</div>
-    <div class="lang-option" data-lang="en" data-country="US" data-currency="USD" data-flag="🇺🇸"><span class="flag">🇺🇸</span> USA - English</div>
-    <div class="lang-option" data-lang="fr" data-country="FR" data-currency="EUR" data-flag="🇫🇷"><span class="flag">🇫🇷</span> France - Français</div>
-    <div class="lang-option" data-lang="de" data-country="DE" data-currency="EUR" data-flag="🇩🇪"><span class="flag">🇩🇪</span> Deutschland - Deutsch</div>
-    <div class="lang-option" data-lang="ja" data-country="JP" data-currency="JPY" data-flag="🇯🇵"><span class="flag">🇯🇵</span> 日本 - 日本語</div>
-    <div class="lang-option" data-lang="zh" data-country="CN" data-currency="CNY" data-flag="🇨🇳"><span class="flag">🇨🇳</span> 中国 - 中文</div>
-    <div class="lang-option" data-lang="es" data-country="ES" data-currency="EUR" data-flag="🇪🇸"><span class="flag">🇪🇸</span> España - Español</div>
-    <div class="lang-option" data-lang="pt" data-country="PT" data-currency="EUR" data-flag="🇵🇹"><span class="flag">🇵🇹</span> Portugal - Português</div>
-  </div>
-</div>
-
 <header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="currency-badge" id="currencyBadge"><span id="currencyFlag">🇪🇬</span> <span id="currencyCode">EGP</span></div>
+        <div class="remaining-badge"><span id="remainingLeft">100</span> <span data-i18n="remaining_left">left</span></div>
+      </div>
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn" id="langBtn">
+          <span class="flag" id="currentFlag">🇪🇬</span>
+          <span id="currentLang">مصر - عربي</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+          <div class="lang-option" data-lang="ar" data-country="EG" data-currency="EGP" data-flag="🇪🇬"><span class="flag">🇪🇬</span> مصر - عربي</div>
+          <div class="lang-option" data-lang="ar" data-country="SA" data-currency="SAR" data-flag="🇸🇦"><span class="flag">🇸🇦</span> السعودية - عربي</div>
+          <div class="lang-option" data-lang="en" data-country="US" data-currency="USD" data-flag="🇺🇸"><span class="flag">🇺🇸</span> USA - English</div>
+          <div class="lang-option" data-lang="fr" data-country="FR" data-currency="EUR" data-flag="🇫🇷"><span class="flag">🇫🇷</span> France - Français</div>
+          <div class="lang-option" data-lang="de" data-country="DE" data-currency="EUR" data-flag="🇩🇪"><span class="flag">🇩🇪</span> Deutschland - Deutsch</div>
+          <div class="lang-option" data-lang="ja" data-country="JP" data-currency="JPY" data-flag="🇯🇵"><span class="flag">🇯🇵</span> 日本 - 日本語</div>
+          <div class="lang-option" data-lang="zh" data-country="CN" data-currency="CNY" data-flag="🇨🇳"><span class="flag">🇨🇳</span> 中国 - 中文</div>
+          <div class="lang-option" data-lang="es" data-country="ES" data-currency="EUR" data-flag="🇪🇸"><span class="flag">🇪🇸</span> España - Español</div>
+          <div class="lang-option" data-lang="pt" data-country="PT" data-currency="EUR" data-flag="🇵🇹"><span class="flag">🇵🇹</span> Portugal - Português</div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="wrap hwrap">
-    <div class="badge pill mono" data-i18n="badge">V6.0 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE</div>
+    <div class="badge pill mono" data-i18n="badge">V6.1 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE</div>
     <h1>
       <span class="g1">Mido AI Store</span><span class="sep">|</span><span class="g2">Professional Tools</span>
       <span class="sub1" data-i18n="sub1">وكيل البحث العميق - محرك المهارات العالمي</span>
     </h1>
     <div class="chips">
-      <span class="chip hl" data-i18n="chip1">محرك مهارات (Skills) + عدادات حية + حماية خادم</span>
-      <span class="chip" data-i18n="chip2">Tavily 10 مصادر + Qwen3-235B</span>
+      <span class="chip hl" data-i18n="chip1">محرك مهارات + عدادات حية + حماية خادم</span>
+      <span class="chip">Tavily 10 + Qwen3-235B</span>
       <span class="chip mono" data-i18n="chip3">بحث عميق | تلخيص | مقارنة | تجربة مجانية</span>
     </div>
     <p class="lead" data-i18n="lead">
-      نفس الـ API اللي بيستخدمه Perplexity Pro و ChatGPT Deep Research - بس بتوفر 96% من وقت البحث حسب قياسنا.
+      نفس الـ API اللي بيستخدمه Perplexity Pro و ChatGPT Deep Research - بس بتوفر 96% من وقت البحث.
     </p>
     <div class="ctas">
       <a href="#live-demo" class="btn" data-i18n="cta1">جرب البحث الحقيقي مجانا ←</a>
-      <div class="pill live"><span class="live-dot"></span><span id="liveVisitors">--</span> <span data-i18n="visitors">زائر</span> | <span id="liveSearches">--</span> <span data-i18n="searches">بحث اليوم</span></div>
     </div>
   </div>
   <div class="blob" style="top:-96px;left:-96px;width:420px;height:420px;background:rgba(16,185,129,.15)"></div>
@@ -297,24 +306,24 @@ footer .wrap{flex-direction:row}
   <div class="wrap">
     <div class="center">
       <div class="pill rbadge" data-i18n="trust_badge">لماذا تثق في Mido AI؟</div>
-      <h2 style="font-size:28px;font-weight:800" data-i18n="trust_title">الثقة تُبنى من الشفافية، لا من الوعود</h2>
-      <p class="d" style="margin-top:12px;font-size:14px;color:rgba(255,255,255,.6);max-width:600px;margin-left:auto;margin-right:auto" data-i18n="trust_desc">لا نعرض تقييمات وهمية. نقدم لك أدوات عمل حقيقية تعتمد على مصادر حية وتقلل من الهلوسة بشكل ملموس.</p>
+      <h2 style="font-size:28px;font-weight:800" data-i18n="trust_title">الثقة تُبنى من الشفافية</h2>
+      <p class="d" style="margin-top:12px;font-size:14px;color:rgba(255,255,255,.6);max-width:600px;margin-left:auto;margin-right:auto" data-i18n="trust_desc">لا نعرض تقييمات وهمية. نقدم لك أدوات عمل حقيقية تعتمد على مصادر حية.</p>
     </div>
     <div class="trust-grid">
       <div class="trust-card">
         <div class="ic">⚡</div>
         <h4 data-i18n="trust1_title">سرعة المعالجة</h4>
-        <p data-i18n="trust1_desc">توفير 96% من وقت البحث بفضل المحرك الثلاثي. احصل على تقريرك في 60 ثانية.</p>
+        <p data-i18n="trust1_desc">توفير 96% من وقت البحث. احصل على تقريرك في 60 ثانية.</p>
       </div>
       <div class="trust-card">
         <div class="ic">🛡️</div>
         <h4 data-i18n="trust2_title">شفافية كاملة</h4>
-        <p data-i18n="trust2_desc">نعرض لك أعلى 5 مصادر مع درجة ثقة لكل مصدر. أنت من يقرر.</p>
+        <p data-i18n="trust2_desc">نعرض لك أعلى 5 مصادر مع درجة ثقة لكل مصدر.</p>
       </div>
       <div class="trust-card">
         <div class="ic">💎</div>
         <h4 data-i18n="trust3_title">دفع آمن وضمان</h4>
-        <p data-i18n="trust3_desc">تنزيل فوري عبر Gumroad مع ضمان استرداد لمدة 14 يوماً. تجربة شراء بدون مخاطرة.</p>
+        <p data-i18n="trust3_desc">تنزيل فوري عبر Gumroad مع ضمان استرداد 14 يوماً.</p>
       </div>
     </div>
   </div>
@@ -334,9 +343,9 @@ footer .wrap{flex-direction:row}
 <section id="live-demo" class="wrap sect">
   <div class="demo-in">
     <div class="center">
-      <div class="pill dbadge" data-i18n="demo_badge">جرب بنفسك - محرك مهارات - حماية خادم</div>
+      <div class="pill dbadge" data-i18n="demo_badge">جرب بنفسك - محرك مهارات</div>
       <h2 data-i18n="demo_title">كل سؤال له تقرير حقيقي مختلف - 60 ثانية</h2>
-      <p class="s mono" data-i18n="demo_sub">Tavily 10 مصادر + Qwen3-235B | مهارات متعددة | تجربة واحدة محمية</p>
+      <p class="s mono">Tavily 10 + Qwen3-235B | 5 مراحل | تجربة واحدة</p>
     </div>
     <div class="box"><div>
       <div class="bar">
@@ -347,13 +356,13 @@ footer .wrap{flex-direction:row}
           <button class="save-skill-btn" id="saveSkillBtn" data-i18n="save_skill">💾 حفظ المهارة</button>
         </div>
         <div class="srow">
-          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" data-i18n-ph="search_placeholder" placeholder="مثلا: افضل لابتوب للبرمجة بـ 25000ج"></div>
+          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" data-i18n-ph="search_placeholder" placeholder="مثلا: افضل لابتوب للبرمجة"></div>
           <button id="go" disabled data-i18n="search_btn">بحث 🔍</button>
         </div>
         <div class="sugs" id="sugs"></div>
       </div>
       <div id="res"></div>
-      <div class="bfoot mono"><span>WORKER: V6.0 Skills Engine</span><span>اليوم: <span id="cnt">0</span>/100 | زوار: <span id="cntVisitors">0</span></span></div>
+      <div class="bfoot mono"><span>V6.1 | 5 RINGS | SERVER PROTECTION</span><span><span data-i18n="foot_search">بحث اليوم</span>: <span id="cnt">0</span>/100</span></div>
     </div></div>
   </div>
 </section>
@@ -363,26 +372,9 @@ footer .wrap{flex-direction:row}
     <div class="center">
       <div class="pill rbadge" data-i18n="rings_badge">بروتوكول المعالجة - 5 مراحل</div>
       <h2 data-i18n="rings_title">مراحل المعالجة الخمس</h2>
-      <p class="d" data-i18n="rings_desc">كل سؤال يمر عبر 5 مراحل في الخادم: بحث Tavily في 10 مصادر، ثم Qwen3-235B لبناء الأطروحة وتقييم المخاطر.</p>
+      <p class="d" data-i18n="rings_desc">كل سؤال يمر عبر 5 مراحل: بحث Tavily، ثم Qwen3-235B لبناء الأطروحة.</p>
     </div>
     <div class="rlist" id="rings"></div>
-    <div class="rfoot"><span class="p">⚡ <b id="footSearches">--</b> <span data-i18n="foot_search">بحث اليوم</span> | <b id="footVisitors">--</b> <span data-i18n="foot_visitor">زائر</span></span></div>
-  </div>
-</section>
-
-<section class="update-sec sect">
-  <div class="wrap">
-    <div class="center">
-      <div class="pill ubadge" data-i18n="update_badge">V6.0 - محرك المهارات العالمي</div>
-      <h2 style="margin-top:20px;font-size:28px;font-weight:800" data-i18n="update_title">من بحث يدوي 25 دقيقة لـ 60 ثانية - توفير 96% من الوقت</h2>
-    </div>
-    <div class="update-grid">
-      <div class="engine">
-        <div class="eng-card new"><div class="top"><span class="name" data-i18n="engine1">المحرك 1: البحث</span><span class="price">Tavily Pro</span></div><p data-i18n="engine1_desc">Tavily Advanced Search - 10 مصادر موثوقة مع Score</p></div>
-        <div class="eng-card new"><div class="top"><span class="name" data-i18n="engine2">المحرك 2: التحليل</span><span class="price">Qwen3-235B</span></div><p data-i18n="engine2_desc">Qwen3-235B عبر API - يبني اطروحة ويقيم المخاطر</p></div>
-        <div class="eng-card new"><div class="top"><span class="name" data-i18n="engine3">المحرك 3: التقرير</span><span class="price">Qwen3-235B</span></div><p data-i18n="engine3_desc">تقرير: ملخص + 10 نقاط + جدول + توصية</p></div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -390,763 +382,78 @@ footer .wrap{flex-direction:row}
   <div class="wrap sect">
     <div class="center" style="margin-bottom:24px">
       <span style="font-size:12px;font-weight:700;color:#fbbf24;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);padding:6px 16px;border-radius:9999px" data-i18n="example_badge">مثال حي - 60 ثانية</span>
-      <h2 style="margin-top:12px;font-size:26px;font-weight:800" data-i18n="example_title">تقرير البودكاست في 60 ثانية</h2>
+      <h2 style="margin-top:12px;font-size:26px;font-weight:800" data-i18n="example_title">تقرير البودكاست</h2>
     </div>
-    <div style="max-width:900px;margin:0 auto;border-radius:24px;border:1px solid #232733;background:#12121a;padding:1px">
-      <div style="border-radius:23px;background:#0e0e14;padding:24px">
-        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px">
-          <div>
-            <div class="pill" style="padding:4px 12px;font-size:11px;background:#0a0a0f;border:1px solid #232733;color:rgba(255,255,255,.5)"><span class="dot dot8 em"></span><span data-i18n="example_complete">تقرير مكتمل | 60 ثانية | 5 مراحل موثقة</span></div>
-            <h3 style="margin-top:16px;font-size:20px;font-weight:700" data-i18n="example_q">افضل مايك للبودكاست - ميزانية 3000 جنيه</h3>
-          </div>
-          <div style="border-radius:14px;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.1);padding:12px 16px;text-align:center"><div style="font-size:11px;color:rgba(251,191,36,.7)" data-i18n="example_winner">الفائز</div><div style="margin-top:4px;font-size:15px;font-weight:800;color:#fbbf24">Rode PodMic</div><div style="font-size:13px;font-weight:700" data-i18n="example_price">2,800ج</div></div>
-        </div>
-        <div style="margin-top:24px;border-radius:16px;border:1px solid #232733;background:#0a0a0f;padding:16px">
-          <div style="font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:12px">SUMMARY | الخلاصة</div>
-          <p style="font-size:13.5px;line-height:1.75rem;color:rgba(255,255,255,.7)" data-i18n="example_summary">لو لسه بتبدأ بودكاست وميزانيتك 3000ج، الـ Rode PodMic هو الاختيار الصح. صوته دافي ومش بيلقط دوشة الشارع.</p>
-        </div>
-      </div>
+    <div style="max-width:900px;margin:0 auto 32px auto;border-radius:24px;overflow:hidden;border:1px solid #232733;box-shadow:0 20px 80px rgba(0,0,0,.5)">
+      <img src="https://raw.githubusercontent.com/midoaistore/mido-landing/a07f30c6fc547061f39661537246f4aa5e49962d/report-preview-en.png" alt="Report Preview" style="width:100%;height:auto;display:block;">
     </div>
-  </div>
-</section>
-
-<section class="wrap sect" style="padding-top:0;">
-  <div style="max-width:900px;margin:0 auto;border-radius:24px;overflow:hidden;border:1px solid #232733;box-shadow:0 20px 80px rgba(0,0,0,.5)">
-    <img src="https://raw.githubusercontent.com/midoaistore/mido-landing/a07f30c6fc547061f39661537246f4aa5e49962d/report-preview-en.png" alt="Mido Deep Search Report Preview" style="width:100%;height:auto;display:block;">
   </div>
 </section>
 
 <section class="wrap sect">
-  <div class="center">
-    <h2 style="font-size:26px;font-weight:800" data-i18n="pricing_title">سعر مصري.. جودة عالية</h2>
-  </div>
+  <div class="center"><h2 style="font-size:26px;font-weight:800" data-i18n="pricing_title">سعر عالمي.. جودة عالية</h2></div>
   <div class="pgrid">
     <div class="pcard"><div>
       <div class="t"><span class="r" data-i18n="pricing_badge">الاكثر طلبا</span><span class="e mono">Skills Engine</span></div>
       <div class="price">
         <div class="big">6$</div>
-        <div><div class="eq" data-i18n="pricing_eq">= 299 جنيه</div><div class="old"><s>999ج</s><span data-i18n="pricing_save">وفر 70%</span></div></div>
+        <div><div class="eq" data-i18n="pricing_eq">= 299 جنيه</div></div>
       </div>
       <div class="feat">
         <div><i>✓</i><span data-i18n="feat1">تقارير غير محدودة</span></div>
         <div><i>✓</i><span data-i18n="feat2">10 مصادر موثوقة</span></div>
-        <div><i>✓</i><span data-i18n="feat3">3 مهارات (بحث، تلخيص، مقارنة)</span></div>
-        <div><i>✓</i><span data-i18n="feat4">جدول مقارنة + توصية نهائية</span></div>
-        <div><i>✓</i><span data-i18n="feat5">يدعم العربي 100%</span></div>
-        <div><i>✓</i><span data-i18n="feat6">تجربة واحدة محمية من الخادم</span></div>
-        <div><i>✓</i><span data-i18n="feat7">كود المصدر كامل + Worker</span></div>
-        <div><i>✓</i><span data-i18n="feat8">تحديثات مجانية مدى الحياة</span></div>
+        <div><i>✓</i><span data-i18n="feat3">3 مهارات</span></div>
+        <div><i>✓</i><span data-i18n="feat4">جدول مقارنة + توصية</span></div>
+        <div><i>✓</i><span data-i18n="feat7">كود المصدر كامل</span></div>
+        <div><i>✓</i><span data-i18n="feat8">تحديثات مجانية</span></div>
       </div>
       <a id="buyBtn" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener noreferrer" data-i18n="buy_btn">اشتري الان - 299ج فقط 🔒</a>
-      <p style="margin-top:12px;text-align:center;font-size:11px;color:rgba(255,255,255,.35)" data-i18n="buy_note">دفع امن عبر Gumroad | استلام فوري | ضمان 14 يوم</p>
     </div></div>
-    <div class="why">
-      <h4 data-i18n="why_title">ليه 299ج؟</h4>
-      <p data-i18n="why_desc">عشان أدوات البحث العميق بـ 20-40$ في الشهر ومش بتدعم العربي كويس. توفير الوقت: البحث اليدوي بياخد 20-30 دقيقة - تقريرنا بيطلع في 60 ثانية.</p>
-      <div class="mini">
-        <div><div class="a" id="miniVisitors">--</div><div class="b mono" data-i18n="mini_visitors">زائر (حي)</div></div>
-        <div><div class="a" id="miniToday">--</div><div class="b mono" data-i18n="mini_today">بحث اليوم (حي)</div></div>
-        <div><div class="a">4.9/5</div><div class="b mono" data-i18n="mini_rating">تقييم العملاء</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="wrap sect">
-  <div class="faq">
-    <h3 data-i18n="faq_title">❓ أسئلة شائعة</h3>
-    <div class="faq-list">
-      <div class="faq-item" onclick="this.classList.toggle('open')">
-        <h4><span data-i18n="faq1_q">هل محرك المهارات حقيقي؟</span> <span>▼</span></h4>
-        <p data-i18n="faq1_a">حقيقي وموثق في كود الـ Worker: التطبيق بيبعت الـ Skill للخادم، والخادم بيوجه النموذج (Qwen3-235B) لتنفيذ المهارة دي.</p>
-      </div>
-      <div class="faq-item" onclick="this.classList.toggle('open')">
-        <h4><span data-i18n="faq2_q">إيه هي طبقات الحماية؟</span> <span>▼</span></h4>
-        <p data-i18n="faq2_a">4 طبقات: (1) حد 5 تجارب لكل IP، (2) Rate Limiting، (3) قفل in-flight، (4) تجربة واحدة لكل زائر محفوظة في KV.</p>
-      </div>
-      <div class="faq-item" onclick="this.classList.toggle('open')">
-        <h4><span data-i18n="faq3_q">هل بتقلل الهلوسة 100%؟</span> <span>▼</span></h4>
-        <p data-i18n="faq3_a">لا، مفيش نموذج بيمنع الهلوسة 100%. احنا بنقللها عبر 5 مراحل: البحث في 10 مصادر، بناء أطروحة، اختيار أعلى 5، تقييم مخاطر، وكتابة التقرير.</p>
-      </div>
-    </div>
   </div>
 </section>
 
 <footer><div class="wrap mono">
-  <span data-i18n="footer">© 2026 Mido AI Store | V6.0 Skills Engine</span>
+  <span data-i18n="footer">© 2026 Mido AI Store | V6.1 Skills Engine</span>
 </div></footer>
+
 <script>
 (function(){
 'use strict';
 
-// ===== 1. المتغيرات الأساسية =====
 var WORKER_URL = 'https://mido-deepsearch.midoaistore.workers.dev';
 var BUY_URL = 'https://midoaistore.gumroad.com/l/dtqpvka';
-var DAILY_MAX = 100;
 var CURRENT_SKILL = localStorage.getItem('mido_saved_skill') || 'deep_search';
 var CURRENT_LANG = localStorage.getItem('mido_lang') || 'ar';
-var CURRENT_CURRENCY = localStorage.getItem('mido_currency') || 'EGP';
 
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// ===== 2. قاموس الترجمات (Dictionary) =====
 var TRANSLATIONS = {
-  ar: {
-    badge: "V6.0 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",
-    sub1: "وكيل البحث العميق - محرك المهارات العالمي",
-    chip1: "محرك مهارات + عدادات حية + حماية خادم",
-    chip2: "Tavily 10 مصادر + Qwen3-235B",
-    chip3: "بحث عميق | تلخيص | مقارنة | تجربة مجانية",
-    lead: "نفس الـ API اللي بيستخدمه Perplexity Pro و ChatGPT Deep Research - بس بتوفر 96% من وقت البحث.",
-    cta1: "جرب البحث الحقيقي مجانا ←",
-    visitors: "زائر",
-    searches: "بحث اليوم",
-    trust_badge: "لماذا تثق في Mido AI؟",
-    trust_title: "الثقة تُبنى من الشفافية، لا من الوعود",
-    trust_desc: "لا نعرض تقييمات وهمية. نقدم لك أدوات عمل حقيقية تعتمد على مصادر حية وتقلل من الهلوسة.",
-    trust1_title: "سرعة المعالجة",
-    trust1_desc: "توفير 96% من وقت البحث بفضل المحرك الثلاثي. احصل على تقريرك في 60 ثانية.",
-    trust2_title: "شفافية كاملة",
-    trust2_desc: "نعرض لك أعلى 5 مصادر مع درجة ثقة لكل مصدر. أنت من يقرر.",
-    trust3_title: "دفع آمن وضمان",
-    trust3_desc: "تنزيل فوري عبر Gumroad مع ضمان استرداد لمدة 14 يوماً.",
-    laws_title: "قوانين أسيموف للذكاء الاصطناعي",
-    demo_badge: "جرب بنفسك - محرك مهارات - حماية خادم",
-    demo_title: "كل سؤال له تقرير حقيقي مختلف - 60 ثانية",
-    demo_sub: "Tavily 10 مصادر + Qwen3-235B | مهارات متعددة | تجربة واحدة محمية",
-    skill1: "🔍 بحث عميق",
-    skill2: "⚡ تلخيص سريع",
-    skill3: "⚖️ جدول مقارنة",
-    save_skill: "💾 حفظ المهارة",
-    search_placeholder: "مثلا: افضل لابتوب للبرمجة بـ 25000ج",
-    search_btn: "بحث 🔍",
-    rings_badge: "بروتوكول المعالجة - 5 مراحل",
-    rings_title: "مراحل المعالجة الخمس",
-    rings_desc: "كل سؤال يمر عبر 5 مراحل: بحث Tavily، ثم Qwen3-235B لبناء الأطروحة وتقييم المخاطر.",
-    foot_search: "بحث اليوم",
-    foot_visitor: "زائر",
-    update_badge: "V6.0 - محرك المهارات العالمي",
-    update_title: "من بحث يدوي 25 دقيقة لـ 60 ثانية - توفير 96% من الوقت",
-    engine1: "المحرك 1: البحث",
-    engine1_desc: "Tavily Advanced Search - 10 مصادر موثوقة مع Score",
-    engine2: "المحرك 2: التحليل",
-    engine2_desc: "Qwen3-235B عبر API - يبني اطروحة ويقيم المخاطر",
-    engine3: "المحرك 3: التقرير",
-    engine3_desc: "تقرير: ملخص + 10 نقاط + جدول + توصية",
-    example_badge: "مثال حي - 60 ثانية",
-    example_title: "تقرير البودكاست في 60 ثانية",
-    example_complete: "تقرير مكتمل | 60 ثانية | 5 مراحل",
-    example_q: "افضل مايك للبودكاست - ميزانية 3000 جنيه",
-    example_winner: "الفائز",
-    example_price: "2,800ج",
-    example_summary: "لو لسه بتبدأ بودكاست وميزانيتك 3000ج، الـ Rode PodMic هو الاختيار الصح.",
-    pricing_title: "سعر مصري.. جودة عالية",
-    pricing_badge: "الاكثر طلبا",
-    pricing_eq: "= 299 جنيه",
-    pricing_save: "وفر 70%",
-    feat1: "تقارير غير محدودة",
-    feat2: "10 مصادر موثوقة",
-    feat3: "3 مهارات (بحث، تلخيص، مقارنة)",
-    feat4: "جدول مقارنة + توصية نهائية",
-    feat5: "يدعم العربي 100%",
-    feat6: "تجربة واحدة محمية",
-    feat7: "كود المصدر كامل + Worker",
-    feat8: "تحديثات مجانية مدى الحياة",
-    buy_btn: "اشتري الان - 299ج فقط 🔒",
-    buy_note: "دفع امن عبر Gumroad | استلام فوري | ضمان 14 يوم",
-    why_title: "ليه 299ج؟",
-    why_desc: "عشان أدوات البحث العميق بـ 20-40$ في الشهر ومش بتدعم العربي كويس. توفير الوقت: البحث اليدوي 20-30 دقيقة - تقريرنا 60 ثانية.",
-    mini_visitors: "زائر (حي)",
-    mini_today: "بحث اليوم (حي)",
-    mini_rating: "تقييم العملاء",
-    faq_title: "❓ أسئلة شائعة",
-    faq1_q: "هل محرك المهارات حقيقي؟",
-    faq1_a: "حقيقي وموثق: التطبيق بيبعت الـ Skill للخادم، والخادم بيوجه النموذج لتنفيذها.",
-    faq2_q: "إيه هي طبقات الحماية؟",
-    faq2_a: "4 طبقات: حد 5 تجارب لكل IP، Rate Limiting، قفل in-flight، تجربة واحدة لكل زائر.",
-    faq3_q: "هل بتقلل الهلوسة 100%؟",
-    faq3_a: "لا، بنقللها عبر 5 مراحل: البحث في 10 مصادر، بناء أطروحة، اختيار أعلى 5، تقييم مخاطر، وكتابة التقرير.",
-    footer: "© 2026 Mido AI Store | V6.0 Skills Engine"
-  },
-  en: {
-    badge: "V6.0 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",
-    sub1: "Deep Search Agent - Global Skills Engine",
-    chip1: "Skills Engine + Live Counters + Server Protection",
-    chip2: "Tavily 10 Sources + Qwen3-235B",
-    chip3: "Deep Search | Summarize | Compare | Free Trial",
-    lead: "Same API used by Perplexity Pro and ChatGPT Deep Research - but saves 96% of research time.",
-    cta1: "Try Real Search Free ←",
-    visitors: "visitors",
-    searches: "searches today",
-    trust_badge: "Why Trust Mido AI?",
-    trust_title: "Trust is built on transparency, not promises",
-    trust_desc: "No fake reviews. Real tools powered by live sources that reduce hallucination.",
-    trust1_title: "Processing Speed",
-    trust1_desc: "Save 96% of research time with the triple engine. Get your report in 60 seconds.",
-    trust2_title: "Full Transparency",
-    trust2_desc: "We show you the top 5 sources with a trust score for each. You decide.",
-    trust3_title: "Secure Payment & Warranty",
-    trust3_desc: "Instant download via Gumroad with 14-day refund guarantee.",
-    laws_title: "Asimov's Laws of AI",
-    demo_badge: "Try it - Skills Engine - Server Protection",
-    demo_title: "Every question gets a different real report - 60 seconds",
-    demo_sub: "Tavily 10 sources + Qwen3-235B | Multiple skills | 1 protected trial",
-    skill1: "🔍 Deep Search",
-    skill2: "⚡ Quick Summary",
-    skill3: "⚖️ Comparison Table",
-    save_skill: "💾 Save Skill",
-    search_placeholder: "e.g. Best laptop for programming under $1000",
-    search_btn: "Search 🔍",
-    rings_badge: "Processing Protocol - 5 Stages",
-    rings_title: "The Five Processing Stages",
-    rings_desc: "Every question goes through 5 stages: Tavily search, then Qwen3-235B for thesis and risk assessment.",
-    foot_search: "searches today",
-    foot_visitor: "visitors",
-    update_badge: "V6.0 - Global Skills Engine",
-    update_title: "From 25 min manual research to 60 seconds - 96% time saved",
-    engine1: "Engine 1: Search",
-    engine1_desc: "Tavily Advanced Search - 10 trusted sources with score",
-    engine2: "Engine 2: Analysis",
-    engine2_desc: "Qwen3-235B API - builds thesis and assesses risks",
-    engine3: "Engine 3: Report",
-    engine3_desc: "Report: summary + 10 points + table + recommendation",
-    example_badge: "Live Example - 60 seconds",
-    example_title: "Podcast Report in 60 seconds",
-    example_complete: "Complete Report | 60s | 5 stages",
-    example_q: "Best podcast mic - budget $300",
-    example_winner: "Winner",
-    example_price: "$150",
-    example_summary: "If you're starting a podcast with a $300 budget, the Rode PodMic is the right choice.",
-    pricing_title: "Global Pricing.. High Quality",
-    pricing_badge: "Most Popular",
-    pricing_eq: "= $6 USD",
-    pricing_save: "Save 70%",
-    feat1: "Unlimited reports",
-    feat2: "10 trusted sources",
-    feat3: "3 skills (search, summary, compare)",
-    feat4: "Comparison table + final recommendation",
-    feat5: "100% Arabic support",
-    feat6: "1 protected trial",
-    feat7: "Full source code + Worker",
-    feat8: "Lifetime free updates",
-    buy_btn: "Buy Now - $6 Only 🔒",
-    buy_note: "Secure payment via Gumroad | Instant delivery | 14-day warranty",
-    why_title: "Why $6?",
-    why_desc: "Deep research tools cost $20-40/month and don't support Arabic well. Time saving: manual research 20-30 min - our report 60 seconds.",
-    mini_visitors: "visitors (live)",
-    mini_today: "searches today (live)",
-    mini_rating: "Customer rating",
-    faq_title: "❓ FAQ",
-    faq1_q: "Is the skills engine real?",
-    faq1_a: "Yes, documented: the app sends the Skill to the server, and the server directs the model to execute it.",
-    faq2_q: "What are the protection layers?",
-    faq2_a: "4 layers: 5 trials per IP, Rate Limiting, in-flight lock, 1 trial per visitor.",
-    faq3_q: "Does it reduce hallucination 100%?",
-    faq3_a: "No, we reduce it through 5 stages: search 10 sources, build thesis, select top 5, assess risks, write report.",
-    footer: "© 2026 Mido AI Store | V6.0 Skills Engine"
-  },
-  fr: {
-    badge: "V6.0 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",
-    sub1: "Agent de Recherche Approfondie - Moteur de Compétences Global",
-    chip1: "Moteur de Compétences + Compteurs en Direct + Protection Serveur",
-    chip2: "Tavily 10 Sources + Qwen3-235B",
-    chip3: "Recherche | Résumé | Comparaison | Essai Gratuit",
-    lead: "Même API que Perplexity Pro et ChatGPT Deep Research - mais économise 96% du temps de recherche.",
-    cta1: "Essayez la Recherche Réelle Gratuitement ←",
-    visitors: "visiteurs",
-    searches: "recherches aujourd'hui",
-    trust_badge: "Pourquoi faire confiance à Mido AI?",
-    trust_title: "La confiance se construit sur la transparence, pas sur les promesses",
-    trust_desc: "Pas d'avis faux. De vrais outils alimentés par des sources en direct qui réduisent l'hallucination.",
-    trust1_title: "Vitesse de Traitement",
-    trust1_desc: "Économisez 96% du temps de recherche. Obtenez votre rapport en 60 secondes.",
-    trust2_title: "Transparence Totale",
-    trust2_desc: "Nous vous montrons les 5 meilleures sources avec un score de confiance pour chacune.",
-    trust3_title: "Paiement Sécurisé & Garantie",
-    trust3_desc: "Téléchargement instantané via Gumroad avec garantie de remboursement de 14 jours.",
-    laws_title: "Les Lois d'Asimov sur l'IA",
-    demo_badge: "Essayez - Moteur de Compétences - Protection Serveur",
-    demo_title: "Chaque question obtient un rapport réel différent - 60 secondes",
-    demo_sub: "Tavily 10 sources + Qwen3-235B | Compétences multiples | 1 essai protégé",
-    skill1: "🔍 Recherche Approfondie",
-    skill2: "⚡ Résumé Rapide",
-    skill3: "⚖️ Tableau Comparatif",
-    save_skill: "💾 Sauvegarder",
-    search_placeholder: "ex: Meilleur ordinateur portable pour la programmation",
-    search_btn: "Rechercher 🔍",
-    rings_badge: "Protocole de Traitement - 5 Étapes",
-    rings_title: "Les Cinq Étapes de Traitement",
-    rings_desc: "Chaque question passe par 5 étapes: recherche Tavily, puis Qwen3-235B pour la thèse et l'évaluation des risques.",
-    foot_search: "recherches aujourd'hui",
-    foot_visitor: "visiteurs",
-    update_badge: "V6.0 - Moteur de Compétences Global",
-    update_title: "De 25 min de recherche manuelle à 60 secondes - 96% de temps économisé",
-    engine1: "Moteur 1: Recherche",
-    engine1_desc: "Tavily Advanced Search - 10 sources fiables avec score",
-    engine2: "Moteur 2: Analyse",
-    engine2_desc: "Qwen3-235B API - construit la thèse et évalue les risques",
-    engine3: "Moteur 3: Rapport",
-    engine3_desc: "Rapport: résumé + 10 points + tableau + recommandation",
-    example_badge: "Exemple Réel - 60 secondes",
-    example_title: "Rapport Podcast en 60 secondes",
-    example_complete: "Rapport Complet | 60s | 5 étapes",
-    example_q: "Meilleur micro podcast - budget 300€",
-    example_winner: "Gagnant",
-    example_price: "150€",
-    example_summary: "Si vous démarrez un podcast avec un budget de 300€, le Rode PodMic est le bon choix.",
-    pricing_title: "Prix Global.. Haute Qualité",
-    pricing_badge: "Le Plus Populaire",
-    pricing_eq: "= 6€ EUR",
-    pricing_save: "Économisez 70%",
-    feat1: "Rapports illimités",
-    feat2: "10 sources fiables",
-    feat3: "3 compétences (recherche, résumé, comparaison)",
-    feat4: "Tableau comparatif + recommandation finale",
-    feat5: "Support arabe 100%",
-    feat6: "1 essai protégé",
-    feat7: "Code source complet + Worker",
-    feat8: "Mises à jour gratuites à vie",
-    buy_btn: "Acheter - 6€ Seulement 🔒",
-    buy_note: "Paiement sécurisé via Gumroad | Livraison instantanée | Garantie 14 jours",
-    why_title: "Pourquoi 6€?",
-    why_desc: "Les outils de recherche approfondie coûtent 20-40$/mois. Économie de temps: recherche manuelle 20-30 min - notre rapport 60 secondes.",
-    mini_visitors: "visiteurs (live)",
-    mini_today: "recherches aujourd'hui (live)",
-    mini_rating: "Note clients",
-    faq_title: "❓ FAQ",
-    faq1_q: "Le moteur de compétences est-il réel?",
-    faq1_a: "Oui, documenté: l'application envoie la compétence au serveur, et le serveur dirige le modèle pour l'exécuter.",
-    faq2_q: "Quelles sont les couches de protection?",
-    faq2_a: "4 couches: 5 essais par IP, Rate Limiting, verrou in-flight, 1 essai par visiteur.",
-    faq3_q: "Réduit-il l'hallucination à 100%?",
-    faq3_a: "Non, nous le réduisons via 5 étapes: recherche 10 sources, construction de thèse, sélection top 5, évaluation des risques, rédaction du rapport.",
-    footer: "© 2026 Mido AI Store | V6.0 Skills Engine"
-  },
-  de: {
-    badge: "V6.0 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",
-    sub1: "Deep Search Agent - Globale Skills Engine",
-    chip1: "Skills Engine + Live-Zähler + Server-Schutz",
-    chip2: "Tavily 10 Quellen + Qwen3-235B",
-    chip3: "Suche | Zusammenfassung | Vergleich | Kostenlos Testen",
-    lead: "Gleiche API wie Perplexity Pro und ChatGPT Deep Research - spart aber 96% der Recherchezeit.",
-    cta1: "Echte Suche Kostenlos Testen ←",
-    visitors: "Besucher",
-    searches: "Suchen heute",
-    trust_badge: "Warum Mido AI vertrauen?",
-    trust_title: "Vertrauen baut auf Transparenz, nicht auf Versprechen",
-    trust_desc: "Keine gefälschten Bewertungen. Echte Tools mit Live-Quellen, die Halluzinationen reduzieren.",
-    trust1_title: "Verarbeitungsgeschwindigkeit",
-    trust1_desc: "Sparen Sie 96% der Recherchezeit. Erhalten Sie Ihren Bericht in 60 Sekunden.",
-    trust2_title: "Volle Transparenz",
-    trust2_desc: "Wir zeigen Ihnen die Top 5 Quellen mit einem Vertrauensscore für jede.",
-    trust3_title: "Sichere Zahlung & Garantie",
-    trust3_desc: "Sofortiger Download über Gumroad mit 14-Tage-Rückgabegarantie.",
-    laws_title: "Asimovs Gesetze der KI",
-    demo_badge: "Testen - Skills Engine - Server-Schutz",
-    demo_title: "Jede Frage erhält einen anderen echten Bericht - 60 Sekunden",
-    demo_sub: "Tavily 10 Quellen + Qwen3-235B | Mehrere Skills | 1 geschützte Testversion",
-    skill1: "🔍 Tiefensuche",
-    skill2: "⚡ Schnelle Zusammenfassung",
-    skill3: "⚖️ Vergleichstabelle",
-    save_skill: "💾 Skill Speichern",
-    search_placeholder: "z.B. Bester Laptop zum Programmieren unter 1000€",
-    search_btn: "Suchen 🔍",
-    rings_badge: "Verarbeitungsprotokoll - 5 Stufen",
-    rings_title: "Die Fünf Verarbeitungsstufen",
-    rings_desc: "Jede Frage durchläuft 5 Stufen: Tavily-Suche, dann Qwen3-235B für These und Risikobewertung.",
-    foot_search: "Suchen heute",
-    foot_visitor: "Besucher",
-    update_badge: "V6.0 - Globale Skills Engine",
-    update_title: "Von 25 Min manueller Recherche auf 60 Sekunden - 96% Zeit gespart",
-    engine1: "Engine 1: Suche",
-    engine1_desc: "Tavily Advanced Search - 10 vertrauenswürdige Quellen mit Score",
-    engine2: "Engine 2: Analyse",
-    engine2_desc: "Qwen3-235B API - erstellt These und bewertet Risiken",
-    engine3: "Engine 3: Bericht",
-    engine3_desc: "Bericht: Zusammenfassung + 10 Punkte + Tabelle + Empfehlung",
-    example_badge: "Live-Beispiel - 60 Sekunden",
-    example_title: "Podcast-Bericht in 60 Sekunden",
-    example_complete: "Vollständiger Bericht | 60s | 5 Stufen",
-    example_q: "Bestes Podcast-Mikrofon - Budget 300€",
-    example_winner: "Gewinner",
-    example_price: "150€",
-    example_summary: "Wenn Sie einen Podcast mit einem Budget von 300€ starten, ist das Rode PodMic die richtige Wahl.",
-    pricing_title: "Globaler Preis.. Hohe Qualität",
-    pricing_badge: "Am Beliebtesten",
-    pricing_eq: "= 6€ EUR",
-    pricing_save: "Sparen Sie 70%",
-    feat1: "Unbegrenzte Berichte",
-    feat2: "10 vertrauenswürdige Quellen",
-    feat3: "3 Skills (Suche, Zusammenfassung, Vergleich)",
-    feat4: "Vergleichstabelle + finale Empfehlung",
-    feat5: "100% Arabisch-Unterstützung",
-    feat6: "1 geschützte Testversion",
-    feat7: "Vollständiger Quellcode + Worker",
-    feat8: "Kostenlose Updates lebenslang",
-    buy_btn: "Jetzt Kaufen - Nur 6€ 🔒",
-    buy_note: "Sichere Zahlung über Gumroad | Sofortige Lieferung | 14-Tage-Garantie",
-    why_title: "Warum 6€?",
-    why_desc: "Deep-Research-Tools kosten 20-40$/Monat. Zeitersparnis: manuelle Recherche 20-30 Min - unser Bericht 60 Sekunden.",
-    mini_visitors: "Besucher (live)",
-    mini_today: "Suchen heute (live)",
-    mini_rating: "Kundenbewertung",
-    faq_title: "❓ FAQ",
-    faq1_q: "Ist die Skills Engine echt?",
-    faq1_a: "Ja, dokumentiert: Die App sendet den Skill an den Server, und der Server leitet das Modell zur Ausführung an.",
-    faq2_q: "Was sind die Schutzschichten?",
-    faq2_a: "4 Schichten: 5 Testversionen pro IP, Rate Limiting, In-Flight-Sperre, 1 Testversion pro Besucher.",
-    faq3_q: "Reduziert es Halluzinationen zu 100%?",
-    faq3_a: "Nein, wir reduzieren es durch 5 Stufen: Suche 10 Quellen, These erstellen, Top 5 auswählen, Risiken bewerten, Bericht schreiben.",
-    footer: "© 2026 Mido AI Store | V6.0 Skills Engine"
-  },
-  ja: {
-    badge: "V6.0 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",
-    sub1: "ディープサーチエージェント - グローバルスキルエンジン",
-    chip1: "スキルエンジン + ライブカウンター + サーバー保護",
-    chip2: "Tavily 10ソース + Qwen3-235B",
-    chip3: "ディープサーチ | 要約 | 比較 | 無料トライアル",
-    lead: "Perplexity ProやChatGPT Deep Researchと同じAPI - 調査時間を96%節約。",
-    cta1: "無料でリアル検索を試す ←",
-    visitors: "訪問者",
-    searches: "本日の検索",
-    trust_badge: "なぜMido AIを信頼するのか？",
-    trust_title: "信頼は透明性から生まれる",
-    trust_desc: "偽のレビューはありません。ライブソースに基づく実際のツール。",
-    trust1_title: "処理速度",
-    trust1_desc: "調査時間を96%節約。60秒でレポートを取得。",
-    trust2_title: "完全な透明性",
-    trust2_desc: "トップ5のソースと信頼スコアを表示します。",
-    trust3_title: "安全な支払いと保証",
-    trust3_desc: "Gumroad経由の即時ダウンロード、14日間返金保証付き。",
-    laws_title: "アシモフのAIの法則",
-    demo_badge: "試してみる - スキルエンジン - サーバー保護",
-    demo_title: "すべての質問に異なる実際のレポート - 60秒",
-    demo_sub: "Tavily 10ソース + Qwen3-235B | 複数スキル | 1つの保護されたトライアル",
-    skill1: "🔍 ディープサーチ",
-    skill2: "⚡ クイック要約",
-    skill3: "⚖️ 比較表",
-    save_skill: "💾 スキルを保存",
-    search_placeholder: "例：プログラミング用の最高のノートパソコン",
-    search_btn: "検索 🔍",
-    rings_badge: "処理プロトコル - 5段階",
-    rings_title: "5つの処理段階",
-    rings_desc: "すべての質問は5段階を経ます：Tavily検索、次にQwen3-235Bで論文とリスク評価。",
-    foot_search: "本日の検索",
-    foot_visitor: "訪問者",
-    update_badge: "V6.0 - グローバルスキルエンジン",
-    update_title: "25分の手動調査から60秒へ - 96%の時間節約",
-    engine1: "エンジン1：検索",
-    engine1_desc: "Tavily Advanced Search - 10の信頼できるソースとスコア",
-    engine2: "エンジン2：分析",
-    engine2_desc: "Qwen3-235B API - 論文を構築しリスクを評価",
-    engine3: "エンジン3：レポート",
-    engine3_desc: "レポート：要約 + 10ポイント + 表 + 推奨事項",
-    example_badge: "ライブ例 - 60秒",
-    example_title: "60秒でポッドキャストレポート",
-    example_complete: "完全なレポート | 60秒 | 5段階",
-    example_q: "最高のポッドキャストマイク - 予算300ドル",
-    example_winner: "勝者",
-    example_price: "$150",
-    example_summary: "予算300ドルでポッドキャストを始めるなら、Rode PodMicが正しい選択です。",
-    pricing_title: "グローバル価格.. 高品質",
-    pricing_badge: "最も人気",
-    pricing_eq: "= $6 USD",
-    pricing_save: "70%節約",
-    feat1: "無制限のレポート",
-    feat2: "10の信頼できるソース",
-    feat3: "3つのスキル（検索、要約、比較）",
-    feat4: "比較表 + 最終推奨",
-    feat5: "アラビア語100%サポート",
-    feat6: "1つの保護されたトライアル",
-    feat7: "完全なソースコード + Worker",
-    feat8: "生涯無料アップデート",
-    buy_btn: "今すぐ購入 - $6のみ 🔒",
-    buy_note: "Gumroad経由の安全な支払い | 即時配信 | 14日間保証",
-    why_title: "なぜ$6？",
-    why_desc: "ディープリサーチツールは月額20-40ドルかかります。時間節約：手動調査20-30分 - 私たちのレポート60秒。",
-    mini_visitors: "訪問者（ライブ）",
-    mini_today: "本日の検索（ライブ）",
-    mini_rating: "顧客評価",
-    faq_title: "❓ よくある質問",
-    faq1_q: "スキルエンジンは本物ですか？",
-    faq1_a: "はい、文書化されています：アプリはスキルをサーバーに送信し、サーバーはモデルを指示して実行します。",
-    faq2_q: "保護層は何ですか？",
-    faq2_a: "4つの層：IPごとに5回のトライアル、レート制限、インフライトロック、訪問者ごとに1回のトライアル。",
-    faq3_q: "幻覚を100%減らしますか？",
-    faq3_a: "いいえ、5段階で減らします：10ソースを検索、論文を構築、トップ5を選択、リスクを評価、レポートを書く。",
-    footer: "© 2026 Mido AI Store | V6.0 Skills Engine"
-  },
-  zh: {
-    badge: "V6.0 全球技能引擎 | Qwen3-235B | 实时",
-    sub1: "深度搜索代理 - 全球技能引擎",
-    chip1: "技能引擎 + 实时计数器 + 服务器保护",
-    chip2: "Tavily 10个来源 + Qwen3-235B",
-    chip3: "深度搜索 | 摘要 | 比较 | 免费试用",
-    lead: "与Perplexity Pro和ChatGPT Deep Research相同的API - 但节省96%的研究时间。",
-    cta1: "免费尝试真实搜索 ←",
-    visitors: "访客",
-    searches: "今日搜索",
-    trust_badge: "为什么信任Mido AI？",
-    trust_title: "信任建立在透明度上，而非承诺",
-    trust_desc: "没有虚假评论。基于实时来源的真实工具，减少幻觉。",
-    trust1_title: "处理速度",
-    trust1_desc: "节省96%的研究时间。60秒内获得报告。",
-    trust2_title: "完全透明",
-    trust2_desc: "我们向您展示前5个来源及每个来源的信任评分。",
-    trust3_title: "安全支付与保修",
-    trust3_desc: "通过Gumroad即时下载，14天退款保证。",
-    laws_title: "阿西莫夫的AI法则",
-    demo_badge: "试一试 - 技能引擎 - 服务器保护",
-    demo_title: "每个问题都会得到不同的真实报告 - 60秒",
-    demo_sub: "Tavily 10个来源 + Qwen3-235B | 多种技能 | 1个受保护的试用",
-    skill1: "🔍 深度搜索",
-    skill2: "⚡ 快速摘要",
-    skill3: "⚖️ 比较表",
-    save_skill: "💾 保存技能",
-    search_placeholder: "例如：最佳编程笔记本电脑",
-    search_btn: "搜索 🔍",
-    rings_badge: "处理协议 - 5个阶段",
-    rings_title: "五个处理阶段",
-    rings_desc: "每个问题经过5个阶段：Tavily搜索，然后Qwen3-235B构建论文和风险评估。",
-    foot_search: "今日搜索",
-    foot_visitor: "访客",
-    update_badge: "V6.0 - 全球技能引擎",
-    update_title: "从25分钟手动研究到60秒 - 节省96%时间",
-    engine1: "引擎1：搜索",
-    engine1_desc: "Tavily Advanced Search - 10个可信来源及评分",
-    engine2: "引擎2：分析",
-    engine2_desc: "Qwen3-235B API - 构建论文并评估风险",
-    engine3: "引擎3：报告",
-    engine3_desc: "报告：摘要 + 10点 + 表格 + 推荐",
-    example_badge: "实时示例 - 60秒",
-    example_title: "60秒播客报告",
-    example_complete: "完整报告 | 60秒 | 5个阶段",
-    example_q: "最佳播客麦克风 - 预算300美元",
-    example_winner: "获胜者",
-    example_price: "$150",
-    example_summary: "如果您以300美元的预算开始播客，Rode PodMic是正确选择。",
-    pricing_title: "全球定价.. 高品质",
-    pricing_badge: "最受欢迎",
-    pricing_eq: "= $6 USD",
-    pricing_save: "节省70%",
-    feat1: "无限报告",
-    feat2: "10个可信来源",
-    feat3: "3种技能（搜索、摘要、比较）",
-    feat4: "比较表 + 最终推荐",
-    feat5: "100%阿拉伯语支持",
-    feat6: "1个受保护的试用",
-    feat7: "完整源代码 + Worker",
-    feat8: "终身免费更新",
-    buy_btn: "立即购买 - 仅$6 🔒",
-    buy_note: "通过Gumroad安全支付 | 即时交付 | 14天保修",
-    why_title: "为什么$6？",
-    why_desc: "深度研究工具每月20-40美元。节省时间：手动研究20-30分钟 - 我们的报告60秒。",
-    mini_visitors: "访客（实时）",
-    mini_today: "今日搜索（实时）",
-    mini_rating: "客户评分",
-    faq_title: "❓ 常见问题",
-    faq1_q: "技能引擎是真的吗？",
-    faq1_a: "是的，有文档：应用将技能发送到服务器，服务器指示模型执行。",
-    faq2_q: "保护层是什么？",
-    faq2_a: "4层：每个IP 5次试用、速率限制、飞行中锁定、每个访客1次试用。",
-    faq3_q: "它能100%减少幻觉吗？",
-    faq3_a: "不，我们通过5个阶段减少：搜索10个来源、构建论文、选择前5、评估风险、撰写报告。",
-    footer: "© 2026 Mido AI Store | V6.0 Skills Engine"
-  },
-  es: {
-    badge: "V6.0 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",
-    sub1: "Agente de Búsqueda Profunda - Motor de Habilidades Global",
-    chip1: "Motor de Habilidades + Contadores en Vivo + Protección del Servidor",
-    chip2: "Tavily 10 Fuentes + Qwen3-235B",
-    chip3: "Búsqueda | Resumen | Comparación | Prueba Gratis",
-    lead: "Misma API que Perplexity Pro y ChatGPT Deep Research - pero ahorra 96% del tiempo de investigación.",
-    cta1: "Prueba la Búsqueda Real Gratis ←",
-    visitors: "visitantes",
-    searches: "búsquedas hoy",
-    trust_badge: "¿Por qué confiar en Mido AI?",
-    trust_title: "La confianza se construye con transparencia, no con promesas",
-    trust_desc: "Sin reseñas falsas. Herramientas reales impulsadas por fuentes en vivo que reducen la alucinación.",
-    trust1_title: "Velocidad de Procesamiento",
-    trust1_desc: "Ahorra 96% del tiempo de investigación. Obtén tu informe en 60 segundos.",
-    trust2_title: "Transparencia Total",
-    trust2_desc: "Te mostramos las 5 mejores fuentes con una puntuación de confianza para cada una.",
-    trust3_title: "Pago Seguro y Garantía",
-    trust3_desc: "Descarga instantánea vía Gumroad con garantía de reembolso de 14 días.",
-    laws_title: "Las Leyes de Asimov sobre IA",
-    demo_badge: "Pruébalo - Motor de Habilidades - Protección del Servidor",
-    demo_title: "Cada pregunta obtiene un informe real diferente - 60 segundos",
-    demo_sub: "Tavily 10 fuentes + Qwen3-235B | Múltiples habilidades | 1 prueba protegida",
-    skill1: "🔍 Búsqueda Profunda",
-    skill2: "⚡ Resumen Rápido",
-    skill3: "⚖️ Tabla Comparativa",
-    save_skill: "💾 Guardar Habilidad",
-    search_placeholder: "ej: Mejor portátil para programar por 1000€",
-    search_btn: "Buscar 🔍",
-    rings_badge: "Protocolo de Procesamiento - 5 Etapas",
-    rings_title: "Las Cinco Etapas de Procesamiento",
-    rings_desc: "Cada pregunta pasa por 5 etapas: búsqueda Tavily, luego Qwen3-235B para tesis y evaluación de riesgos.",
-    foot_search: "búsquedas hoy",
-    foot_visitor: "visitantes",
-    update_badge: "V6.0 - Motor de Habilidades Global",
-    update_title: "De 25 min de investigación manual a 60 segundos - 96% de tiempo ahorrado",
-    engine1: "Motor 1: Búsqueda",
-    engine1_desc: "Tavily Advanced Search - 10 fuentes confiables con puntuación",
-    engine2: "Motor 2: Análisis",
-    engine2_desc: "Qwen3-235B API - construye tesis y evalúa riesgos",
-    engine3: "Motor 3: Informe",
-    engine3_desc: "Informe: resumen + 10 puntos + tabla + recomendación",
-    example_badge: "Ejemplo en Vivo - 60 segundos",
-    example_title: "Informe de Podcast en 60 segundos",
-    example_complete: "Informe Completo | 60s | 5 etapas",
-    example_q: "Mejor micrófono de podcast - presupuesto 300€",
-    example_winner: "Ganador",
-    example_price: "150€",
-    example_summary: "Si estás comenzando un podcast con un presupuesto de 300€, el Rode PodMic es la elección correcta.",
-    pricing_title: "Precio Global.. Alta Calidad",
-    pricing_badge: "Más Popular",
-    pricing_eq: "= 6€ EUR",
-    pricing_save: "Ahorra 70%",
-    feat1: "Informes ilimitados",
-    feat2: "10 fuentes confiables",
-    feat3: "3 habilidades (búsqueda, resumen, comparación)",
-    feat4: "Tabla comparativa + recomendación final",
-    feat5: "Soporte 100% árabe",
-    feat6: "1 prueba protegida",
-    feat7: "Código fuente completo + Worker",
-    feat8: "Actualizaciones gratuitas de por vida",
-    buy_btn: "Comprar Ahora - Solo 6€ 🔒",
-    buy_note: "Pago seguro vía Gumroad | Entrega instantánea | Garantía 14 días",
-    why_title: "¿Por qué 6€?",
-    why_desc: "Las herramientas de investigación profunda cuestan 20-40$/mes. Ahorro de tiempo: investigación manual 20-30 min - nuestro informe 60 segundos.",
-    mini_visitors: "visitantes (vivo)",
-    mini_today: "búsquedas hoy (vivo)",
-    mini_rating: "Calificación de clientes",
-    faq_title: "❓ Preguntas Frecuentes",
-    faq1_q: "¿Es real el motor de habilidades?",
-    faq1_a: "Sí, documentado: la aplicación envía la habilidad al servidor, y el servidor dirige el modelo para ejecutarla.",
-    faq2_q: "¿Cuáles son las capas de protección?",
-    faq2_a: "4 capas: 5 pruebas por IP, Rate Limiting, bloqueo in-flight, 1 prueba por visitante.",
-    faq3_q: "¿Reduce la alucinación al 100%?",
-    faq3_a: "No, lo reducimos a través de 5 etapas: buscar 10 fuentes, construir tesis, seleccionar top 5, evaluar riesgos, escribir informe.",
-    footer: "© 2026 Mido AI Store | V6.0 Skills Engine"
-  },
-  pt: {
-    badge: "V6.0 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",
-    sub1: "Agente de Pesquisa Profunda - Motor de Habilidades Global",
-    chip1: "Motor de Habilidades + Contadores ao Vivo + Proteção do Servidor",
-    chip2: "Tavily 10 Fontes + Qwen3-235B",
-    chip3: "Pesquisa | Resumo | Comparação | Teste Grátis",
-    lead: "Mesma API que Perplexity Pro e ChatGPT Deep Research - mas economiza 96% do tempo de pesquisa.",
-    cta1: "Experimente a Pesquisa Real Grátis ←",
-    visitors: "visitantes",
-    searches: "pesquisas hoje",
-    trust_badge: "Por que confiar na Mido AI?",
-    trust_title: "A confiança é construída com transparência, não com promessas",
-    trust_desc: "Sem avaliações falsas. Ferramentas reais alimentadas por fontes ao vivo que reduzem a alucinação.",
-    trust1_title: "Velocidade de Processamento",
-    trust1_desc: "Economize 96% do tempo de pesquisa. Obtenha seu relatório em 60 segundos.",
-    trust2_title: "Transparência Total",
-    trust2_desc: "Mostramos as 5 melhores fontes com uma pontuação de confiança para cada uma.",
-    trust3_title: "Pagamento Seguro e Garantia",
-    trust3_desc: "Download instantâneo via Gumroad com garantia de reembolso de 14 dias.",
-    laws_title: "As Leis de Asimov sobre IA",
-    demo_badge: "Experimente - Motor de Habilidades - Proteção do Servidor",
-    demo_title: "Cada pergunta obtém um relatório real diferente - 60 segundos",
-    demo_sub: "Tavily 10 fontes + Qwen3-235B | Múltiplas habilidades | 1 teste protegido",
-    skill1: "🔍 Pesquisa Profunda",
-    skill2: "⚡ Resumo Rápido",
-    skill3: "⚖️ Tabela Comparativa",
-    save_skill: "💾 Salvar Habilidade",
-    search_placeholder: "ex: Melhor laptop para programação por 1000€",
-    search_btn: "Pesquisar 🔍",
-    rings_badge: "Protocolo de Processamento - 5 Etapas",
-    rings_title: "As Cinco Etapas de Processamento",
-    rings_desc: "Cada pergunta passa por 5 etapas: pesquisa Tavily, depois Qwen3-235B para tese e avaliação de riscos.",
-    foot_search: "pesquisas hoje",
-    foot_visitor: "visitantes",
-    update_badge: "V6.0 - Motor de Habilidades Global",
-    update_title: "De 25 min de pesquisa manual para 60 segundos - 96% de tempo economizado",
-    engine1: "Motor 1: Pesquisa",
-    engine1_desc: "Tavily Advanced Search - 10 fontes confiáveis com pontuação",
-    engine2: "Motor 2: Análise",
-    engine2_desc: "Qwen3-235B API - constrói tese e avalia riscos",
-    engine3: "Motor 3: Relatório",
-    engine3_desc: "Relatório: resumo + 10 pontos + tabela + recomendação",
-    example_badge: "Exemplo ao Vivo - 60 segundos",
-    example_title: "Relatório de Podcast em 60 segundos",
-    example_complete: "Relatório Completo | 60s | 5 etapas",
-    example_q: "Melhor microfone de podcast - orçamento 300€",
-    example_winner: "Vencedor",
-    example_price: "150€",
-    example_summary: "Se você está começando um podcast com um orçamento de 300€, o Rode PodMic é a escolha certa.",
-    pricing_title: "Preço Global.. Alta Qualidade",
-    pricing_badge: "Mais Popular",
-    pricing_eq: "= 6€ EUR",
-    pricing_save: "Economize 70%",
-    feat1: "Relatórios ilimitados",
-    feat2: "10 fontes confiáveis",
-    feat3: "3 habilidades (pesquisa, resumo, comparação)",
-    feat4: "Tabela comparativa + recomendação final",
-    feat5: "Suporte 100% árabe",
-    feat6: "1 teste protegido",
-    feat7: "Código-fonte completo + Worker",
-    feat8: "Atualizações gratuitas para sempre",
-    buy_btn: "Comprar Agora - Apenas 6€ 🔒",
-    buy_note: "Pagamento seguro via Gumroad | Entrega instantânea | Garantia de 14 dias",
-    why_title: "Por que 6€?",
-    why_desc: "Ferramentas de pesquisa profunda custam 20-40$/mês. Economia de tempo: pesquisa manual 20-30 min - nosso relatório 60 segundos.",
-    mini_visitors: "visitantes (ao vivo)",
-    mini_today: "pesquisas hoje (ao vivo)",
-    mini_rating: "Avaliação de clientes",
-    faq_title: "❓ Perguntas Frequentes",
-    faq1_q: "O motor de habilidades é real?",
-    faq1_a: "Sim, documentado: o aplicativo envia a habilidade para o servidor, e o servidor direciona o modelo para executá-la.",
-    faq2_q: "Quais são as camadas de proteção?",
-    faq2_a: "4 camadas: 5 testes por IP, Rate Limiting, bloqueio in-flight, 1 teste por visitante.",
-    faq3_q: "Reduz a alucinação em 100%?",
-    faq3_a: "Não, reduzimos através de 5 etapas: pesquisar 10 fontes, construir tese, selecionar top 5, avaliar riscos, escrever relatório.",
-    footer: "© 2026 Mido AI Store | V6.0 Skills Engine"
-  }
+  ar: {badge:"V6.1 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",sub1:"وكيل البحث العميق - محرك المهارات العالمي",chip1:"محرك مهارات + عدادات حية + حماية خادم",chip3:"بحث عميق | تلخيص | مقارنة | تجربة مجانية",lead:"نفس الـ API اللي بيستخدمه Perplexity Pro و ChatGPT Deep Research - بس بتوفر 96% من وقت البحث.",cta1:"جرب البحث الحقيقي مجانا ←",remaining_left:"متبقي",trust_badge:"لماذا تثق في Mido AI؟",trust_title:"الثقة تُبنى من الشفافية",trust_desc:"لا نعرض تقييمات وهمية. أدوات حقيقية تعتمد على مصادر حية.",trust1_title:"سرعة المعالجة",trust1_desc:"توفير 96% من وقت البحث. تقريرك في 60 ثانية.",trust2_title:"شفافية كاملة",trust2_desc:"أعلى 5 مصادر مع درجة ثقة لكل مصدر.",trust3_title:"دفع آمن",trust3_desc:"تنزيل فوري + ضمان 14 يوم.",laws_title:"قوانين أسيموف للذكاء الاصطناعي",demo_badge:"جرب بنفسك - محرك مهارات",demo_title:"كل سؤال له تقرير مختلف - 60 ثانية",skill1:"🔍 بحث عميق",skill2:"⚡ تلخيص سريع",skill3:"⚖️ جدول مقارنة",save_skill:"💾 حفظ المهارة",search_placeholder:"مثلا: افضل لابتوب للبرمجة",search_btn:"بحث 🔍",rings_badge:"بروتوكول المعالجة - 5 مراحل",rings_title:"مراحل المعالجة الخمس",rings_desc:"كل سؤال يمر عبر 5 مراحل: بحث، تحليل، تقليص، مخاطر، تقرير.",foot_search:"بحث اليوم",example_badge:"مثال حي",example_title:"تقرير البودكاست",pricing_title:"سعر عالمي.. جودة عالية",pricing_badge:"الاكثر طلبا",pricing_eq:"= 299 جنيه",feat1:"تقارير غير محدودة",feat2:"10 مصادر موثوقة",feat3:"3 مهارات",feat4:"جدول مقارنة + توصية",feat7:"كود المصدر كامل",feat8:"تحديثات مجانية",buy_btn:"اشتري الان - 299ج فقط 🔒",footer:"© 2026 Mido AI Store | V6.1"},
+  en: {badge:"V6.1 GLOBAL SKILLS ENGINE | Qwen3-235B | LIVE",sub1:"Deep Search Agent - Global Skills Engine",chip1:"Skills Engine + Live Counters + Server Protection",chip3:"Deep Search | Summarize | Compare | Free Trial",lead:"Same API used by Perplexity Pro and ChatGPT Deep Research - but saves 96% of research time.",cta1:"Try Real Search Free ←",remaining_left:"left",trust_badge:"Why Trust Mido AI?",trust_title:"Trust is built on transparency",trust_desc:"No fake reviews. Real tools powered by live sources.",trust1_title:"Processing Speed",trust1_desc:"Save 96% of research time. Report in 60 seconds.",trust2_title:"Full Transparency",trust2_desc:"Top 5 sources with trust score for each.",trust3_title:"Secure Payment",trust3_desc:"Instant download + 14-day guarantee.",laws_title:"Asimov's Laws of AI",demo_badge:"Try it - Skills Engine",demo_title:"Every question gets a different report - 60 seconds",skill1:"🔍 Deep Search",skill2:"⚡ Quick Summary",skill3:"⚖️ Comparison Table",save_skill:"💾 Save Skill",search_placeholder:"e.g. Best laptop for programming",search_btn:"Search 🔍",rings_badge:"Processing Protocol - 5 Stages",rings_title:"The Five Stages",rings_desc:"Every question goes through 5 stages: search, analysis, reduction, risks, report.",foot_search:"searches today",example_badge:"Live Example",example_title:"Podcast Report",pricing_title:"Global Pricing.. High Quality",pricing_badge:"Most Popular",pricing_eq:"= $6 USD",feat1:"Unlimited reports",feat2:"10 trusted sources",feat3:"3 skills",feat4:"Comparison table + recommendation",feat7:"Full source code",feat8:"Lifetime updates",buy_btn:"Buy Now - $6 Only 🔒",footer:"© 2026 Mido AI Store | V6.1"}
 };
+TRANSLATIONS.fr = TRANSLATIONS.en; TRANSLATIONS.de = TRANSLATIONS.en; TRANSLATIONS.ja = TRANSLATIONS.en;
+TRANSLATIONS.zh = TRANSLATIONS.en; TRANSLATIONS.es = TRANSLATIONS.en; TRANSLATIONS.pt = TRANSLATIONS.en;
 
-// ===== 3. تطبيق اللغة =====
 function applyLanguage(lang) {
   var dict = TRANSLATIONS[lang] || TRANSLATIONS.ar;
-  
-  // تحديث النصوص
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     var key = el.getAttribute('data-i18n');
     if (dict[key]) el.textContent = dict[key];
   });
-  
-  // تحديث الـ placeholders
   document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
     var key = el.getAttribute('data-i18n-ph');
     if (dict[key]) el.placeholder = dict[key];
   });
-  
-  // تحديث الاتجاه (RTL/LTR)
-  if (lang === 'ar') {
-    document.documentElement.dir = 'rtl';
-    document.documentElement.lang = 'ar';
-  } else {
-    document.documentElement.dir = 'ltr';
-    document.documentElement.lang = lang;
-  }
-  
-  // تحديث زرار اللغة
+  document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  document.documentElement.lang = lang;
   var activeOption = document.querySelector('.lang-option[data-lang="' + lang + '"]');
   if (activeOption) {
     document.getElementById('currentFlag').textContent = activeOption.getAttribute('data-flag');
     document.getElementById('currentLang').textContent = activeOption.textContent.trim();
-    CURRENT_CURRENCY = activeOption.getAttribute('data-currency');
-    localStorage.setItem('mido_currency', CURRENT_CURRENCY);
+    document.getElementById('currencyFlag').textContent = activeOption.getAttribute('data-flag');
+    document.getElementById('currencyCode').textContent = activeOption.getAttribute('data-currency');
   }
-  
   localStorage.setItem('mido_lang', lang);
 }
 
-// ===== 4. تشغيل زرار اللغة =====
 var langBtn = document.getElementById('langBtn');
 var langDropdown = document.getElementById('langDropdown');
 var langSwitcher = document.getElementById('langSwitcher');
@@ -1166,77 +473,44 @@ document.querySelectorAll('.lang-option').forEach(function(opt) {
 });
 
 document.addEventListener('click', function(e) {
-  if (!langSwitcher.contains(e.target)) {
-    langDropdown.classList.remove('active');
-  }
+  if (!langSwitcher.contains(e.target)) langDropdown.classList.remove('active');
 });
 
-// تطبيق اللغة المحفوظة عند التحميل
 applyLanguage(CURRENT_LANG);
 
-// ===== 5. تشغيل أزرار المهارات =====
+// ====== Skill Tabs ======
 function setActiveSkill(skill) {
   CURRENT_SKILL = skill;
-  var allTabs = document.querySelectorAll('.skill-tab');
-  for (var i = 0; i < allTabs.length; i++) {
-    allTabs[i].classList.remove('active');
-    if (allTabs[i].getAttribute('data-skill') === skill) {
-      allTabs[i].classList.add('active');
-    }
-  }
-}
-
-setActiveSkill(CURRENT_SKILL);
-
-document.addEventListener('click', function(e) {
-  var tab = e.target.closest('.skill-tab');
-  if (!tab) return;
-  var skill = tab.getAttribute('data-skill');
-  setActiveSkill(skill);
-});
-
-// ===== 6. زر حفظ المهارة =====
-var saveBtn = document.getElementById('saveSkillBtn');
-if (saveBtn) {
-  if (localStorage.getItem('mido_saved_skill')) {
-    saveBtn.textContent = '💾 ' + (TRANSLATIONS[CURRENT_LANG].save_skill || 'حفظ المهارة');
-  }
-  
-  saveBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    localStorage.setItem('mido_saved_skill', CURRENT_SKILL);
-    
-    saveBtn.textContent = '✅ ' + (CURRENT_LANG === 'ar' ? 'تم الحفظ!' : 'Saved!');
-    saveBtn.classList.add('saved');
-    saveBtn.style.background = 'rgba(16,185,129,.3)';
-    saveBtn.style.borderColor = '#10b981';
-    saveBtn.style.color = '#fff';
-    
-    var toast = document.createElement('div');
-    toast.textContent = CURRENT_LANG === 'ar' ? '✅ تم حفظ المهارة! هتفضل مختارة في المرة الجاية.' : '✅ Skill saved! It will stay selected next time.';
-    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#10b981;color:#fff;padding:12px 24px;border-radius:9999px;font-size:14px;font-weight:700;z-index:9999;box-shadow:0 10px 40px rgba(16,185,129,.5);transition:opacity .3s;';
-    document.body.appendChild(toast);
-    
-    setTimeout(function() {
-      toast.style.opacity = '0';
-      setTimeout(function() { toast.remove(); }, 300);
-    }, 2500);
-    
-    setTimeout(function() {
-      saveBtn.textContent = '💾 ' + (TRANSLATIONS[CURRENT_LANG].save_skill || 'حفظ المهارة');
-      saveBtn.classList.remove('saved');
-      saveBtn.style.background = 'rgba(16,185,129,.1)';
-      saveBtn.style.borderColor = 'rgba(16,185,129,.5)';
-      saveBtn.style.color = '#6ee7b7';
-    }, 2500);
+  document.querySelectorAll('.skill-tab').forEach(function(t) {
+    t.classList.remove('active');
+    if (t.getAttribute('data-skill') === skill) t.classList.add('active');
   });
 }
+setActiveSkill(CURRENT_SKILL);
+document.querySelectorAll('.skill-tab').forEach(function(t) {
+  t.addEventListener('click', function() {
+    setActiveSkill(this.getAttribute('data-skill'));
+  });
+});
 
-// ===== 7. إدارة الزائر والعدادات =====
+// ====== Save Skill ======
+var saveBtn = document.getElementById('saveSkillBtn');
+saveBtn.addEventListener('click', function(e) {
+  e.preventDefault();
+  localStorage.setItem('mido_saved_skill', CURRENT_SKILL);
+  saveBtn.textContent = '✅ ' + (CURRENT_LANG === 'ar' ? 'تم الحفظ!' : 'Saved!');
+  saveBtn.classList.add('saved');
+  setTimeout(function() {
+    saveBtn.textContent = TRANSLATIONS[CURRENT_LANG].save_skill;
+    saveBtn.classList.remove('saved');
+  }, 2000);
+});
+
+// ====== Visitor & Stats ======
 function getVisitorId() {
   var id = localStorage.getItem('mido_vid_v4');
   if (!id) {
-    id = 'v4_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36) + '_' + navigator.userAgent.slice(0, 20).replace(/\W/g, '');
+    id = 'v4_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
     localStorage.setItem('mido_vid_v4', id);
   }
   return id;
@@ -1249,23 +523,15 @@ async function fetchStats() {
     if (r.ok) {
       var d = await r.json();
       var set = function(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; };
-      set('liveVisitors', d.total_visitors);
-      set('liveSearches', d.today_searches);
       set('cnt', d.today_searches);
-      set('cntVisitors', d.total_visitors);
-      set('miniVisitors', d.total_visitors);
-      set('miniToday', d.today_searches);
-      set('footVisitors', d.total_visitors);
-      set('footSearches', d.today_searches);
-      
+      set('remainingLeft', d.remaining_today || Math.max(0, 100 - (d.today_searches || 0)));
       var statsWrap = document.getElementById('stats');
       if (statsWrap) {
-        var kvWarning = (d.kv === false) ? '<div style="grid-column:1/-1;border-radius:12px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);padding:12px;font-size:12px;color:#fbbf24;text-align:center">⚠️ KV غير مربوط</div>' : '';
-        statsWrap.innerHTML = kvWarning + `
-          <div class="stat live-stat"><div class="i">👥</div><div class="v">${d.total_visitors}</div><div class="l mono">إجمالي الزوار</div></div>
-          <div class="stat live-stat"><div class="i">🔍</div><div class="v">${d.today_searches}</div><div class="l mono">بحث اليوم</div></div>
-          <div class="stat"><div class="i">✅</div><div class="v">${d.successful_trials || 0}</div><div class="l mono">تجربة ناجحة</div></div>
-          <div class="stat"><div class="i">❌</div><div class="v">${d.failed_trials || 0}</div><div class="l mono">تجربة فاشلة</div></div>
+        statsWrap.innerHTML = `
+          <div class="stat live-stat"><div class="i">👥</div><div class="v">${d.total_visitors}</div><div class="l mono">Visitors</div></div>
+          <div class="stat live-stat"><div class="i">🔍</div><div class="v">${d.today_searches}</div><div class="l mono">Searches Today</div></div>
+          <div class="stat"><div class="i">✅</div><div class="v">${d.successful_trials || 0}</div><div class="l mono">Success</div></div>
+          <div class="stat"><div class="i">❌</div><div class="v">${d.failed_trials || 0}</div><div class="l mono">Failed</div></div>
         `;
       }
     }
@@ -1279,229 +545,92 @@ async function trackVisit() {
 trackVisit();
 setInterval(fetchStats, 15000);
 
-// ===== 8. دوال مساعدة =====
+// ====== Search ======
 function $(id) { return document.getElementById(id); }
 function esc(s) { var d = document.createElement('div'); d.textContent = String(s == null ? '' : s); return d.innerHTML; }
-function safeUrl(u) { try { var x = new URL(u); return (x.protocol === 'http:' || x.protocol === 'https:') ? x.href : '#'; } catch (e) { return '#'; } }
 
-var LAWS=[
-{n:"01",t:"القانون الاول: لا تؤذي",s:"لا يجوز للروبوت ايذاء الانسان",f:"لا يجوز للروبوت ايذاء الانسان او السماح بايذائه بالتقاعس.",d:"التقارير بتركز على الفائدة والمصادر.",c:"#ef4444"},
-{n:"02",t:"القانون الثاني: الطاعة",s:"يجب على الروبوت طاعة اوامر الانسان",f:"يجب على الروبوت طاعة اوامر الانسان الا اذا تعارضت مع القانون الاول.",d:"انت اللي بتحدد الميزانية والسؤال.",c:"#667eea"},
-{n:"03",t:"القانون الثالث: حماية الوجود",s:"يجب على الروبوت حماية وجوده",f:"يجب على الروبوت حماية وجوده طالما لا يتعارض مع القانونين الاول والثاني.",d:"يعتمد على مصادر حية بـ Score.",c:"#10b981"},
-{n:"04",t:"القانون الرابع: الاضافة المصرية",s:"يجب ان يكون مفيدا وعمليا للمصريين",f:"يجب على الروبوت ان يكون مفيدا وعمليا للمصريين - يقدم اجابات حقيقية باسعار مصرية.",d:"يقدم اجابات حقيقية باسعار مصرية.",c:"#f59e0b",eg:1}];
-var RINGS=[
-{id:1,n:"البحث في المصادر",code:"Tavily - 10 sources",d:"10 مصادر حية مع Score",c:"#ef4444"},
-{id:2,n:"بناء الاطروحة",code:"Qwen3-235B - Thesis",d:"Qwen3-235B يبني اطروحة",c:"#667eea"},
-{id:3,n:"تقليص الحجم",code:"Qwen3-235B - Top 5",d:"اختيار أعلى 5 مصادر",c:"#10b981"},
-{id:4,n:"تقييم المخاطر",code:"Qwen3-235B - Risk",d:"تقييم مخاطر",c:"#f59e0b"},
-{id:5,n:"كتابة التقرير النهائي",code:"Qwen3-235B - Final",d:"تقرير نهائي من أعلى 5",c:"#8b5cf6"}];
-var SUGS=["افضل لابتوب للبرمجة 25000 جنيه","افضل مايك بودكاست 3000ج","ارخص انترنت منزلي في مصر"];
+var q = $('q'), go = $('go'), res = $('res');
+var loading = false;
+function refreshBtn() { go.disabled = loading || !q.value.trim(); }
+q.addEventListener('input', refreshBtn);
+q.addEventListener('keydown', function(e) { if (e.key === 'Enter') search(); });
+go.addEventListener('click', search);
 
-$('laws').innerHTML=LAWS.map(function(l,i){
-  var bc=l.eg?'#f59e0b33':'#232733';
-  return '<div class="law" data-i="'+i+'" data-eg="'+(l.eg?1:0)+'" style="border-color:'+bc+'"><div class="in">'+
-  '<div class="row"><span class="num mono" style="color:'+l.c+'">'+l.n+'</span><div style="display:flex;align-items:center">'+(l.eg?'<span class="eg">مصري</span>':'')+'<span class="pm">+</span></div></div>'+
-  '<h3>'+l.t+'</h3><p class="sd" style="color:'+l.c+'">'+l.s+'</p><p class="dt">'+l.d+'</p>'+
-  '<div class="expand"><div><div class="full"><div class="lb mono">النص الكامل</div><p>'+l.f+'</p></div></div></div>'+
-  '<div class="more">اضغط للتفاصيل ←</div></div></div>';}).join('');
-$('rings').innerHTML=RINGS.map(function(r){
-  return '<div class="ring" data-c="'+r.c+'"><div class="cir" style="border-color:'+r.c+';color:'+r.c+'">'+r.id+'</div><div class="c"><div class="h"><span class="code mono" style="border-color:'+r.c+'40;color:'+r.c+';background:'+r.c+'15">'+r.code+'</span><h3>'+r.n+'</h3><span class="ar">▼</span></div><p>'+r.d+'</p><div class="act"><span class="dot dot6 pulse" style="background:'+r.c+'"></span>المرحلة نشطة</div></div></div>';}).join('');
-$('sugs').innerHTML=SUGS.map(function(s){return '<button type="button" class="sug">'+s+'</button>';}).join('');
+res.innerHTML = '<div class="empty"><div class="spd">🕷️</div><p>Spider ready</p><small class="mono">Tavily 10 → Qwen3 → Report - 60s</small></div>';
 
-$('laws').addEventListener('click',function(e){
-  var c=e.target.closest('.law'); if(!c) return;
-  var was=c.classList.contains('open');
-  document.querySelectorAll('.law').forEach(function(x){ x.classList.remove('open'); x.querySelector('.pm').textContent='+'; x.style.borderColor=x.dataset.eg==='1'?'#f59e0b33':'#232733'; });
-  if(!was){c.classList.add('open');c.querySelector('.pm').textContent='-';c.style.borderColor=c.dataset.eg==='1'?'#f59e0b66':'#667eea55';}
-});
-$('rings').addEventListener('click',function(e){
-  var c=e.target.closest('.ring'); if(!c) return;
-  var was=c.classList.contains('open');
-  document.querySelectorAll('.ring').forEach(function(x){ x.classList.remove('open'); var k=x.querySelector('.cir'); k.style.background='#0a0a0f'; k.style.color=x.dataset.c; });
-  if(!was){c.classList.add('open');var k=c.querySelector('.cir');k.style.background=c.dataset.c;k.style.color='#fff';}
-});
-
-// ===== 9. دالة البحث =====
-var q=$('q'), go=$('go'), res=$('res');
-var loading=false;
-function refreshBtn(){go.disabled=loading||!q.value.trim();}
-q.addEventListener('input',refreshBtn);
-q.addEventListener('keydown',function(e){if(e.key==='Enter')search();});
-go.addEventListener('click',search);
-$('sugs').addEventListener('click',function(e){var b=e.target.closest('.sug');if(b){q.value=b.textContent;refreshBtn();}});
-
-function emptyHTML(){return '<div class="empty"><div class="spd">🕷️</div><p>العنكبوت مستني سؤالك</p><small class="mono">Tavily 10 → Qwen3-235B → تقرير - 5 مراحل - 60 ثانية</small></div>';}
-res.innerHTML=emptyHTML();
-
-function stepsHTML(done,logs,isLoading){
-  let logsHtml = '';
-  if(logs && logs.length){
-    logsHtml = '<div style="margin-top:12px;display:grid;gap:6px">'+logs.map(l=>`<div class="step done"><div class="n" style="background:${l.status==='done'?'#10b981':'#ef4444'}">${l.status==='done'?'✓':'!'}</div><span><b>مرحلة ${l.ring}: ${esc(l.name)}</b> - ${esc(l.detail||l.status)}</span></div>`).join('')+'</div>';
-  }
-  const baseSteps = ["العنكبوت بيصحى ويبدأ يزحف على 10 مصادر...","المرحلة 1: البحث في المصادر...","المرحلة 2: معالجة المهارة...","المرحلة 3: تقليص الحجم...","المرحلة 4: تقييم المخاطر...","المرحلة 5: التقرير النهائي..."];
-  return '<div class="log"><div class="t"><span class="a mono">SPIDER LOG V6.0</span><span class="b"><span class="dot dot6 em pulse"></span>'+(isLoading?'يزحف...':'اكتمل')+'</span></div><div class="steps">'+
-  baseSteps.map(function(s,i){var d=i<done;return '<div class="step'+(d?' done':'')+'"><div class="n">'+(d?'✓':(i+1))+'</div><span>'+s+'</span></div>';}).join('')+
-  '</div>'+logsHtml+(isLoading?'<div class="prog"><div></div></div>':'')+'</div>';
-}
-
-function errHTML(msg,buy){
-  let finalMsg = msg;
-  let showBuy = buy;
-  if(msg.includes('daily_cap') || msg.includes('LIMIT:daily_cap')){
-    finalMsg = 'تم استهلاك الحد اليومي (100 بحث اليوم).';
-    showBuy = true;
-  } else if(msg.includes('trial_used') || msg.includes('LIMIT:trial_used')){
-    finalMsg = 'التجربة المجانية اتستخدمت قبل كده (مرة واحدة لكل زائر).';
-    showBuy = true;
-  } else if(msg.includes('ip_limit') || msg.includes('LIMIT:ip_limit')){
-    finalMsg = 'تم الوصول للحد الأقصى من نفس الشبكة (5 في اليوم).';
-    showBuy = true;
-  } else if(msg.includes('no_sources') || msg.includes('LIMIT:no_sources')){
-    finalMsg = 'مفيش مصادر كافية. جرب سؤال تاني.';
-    showBuy = false;
-  } else if(msg.includes('llm_failed') || msg.includes('LIMIT:llm_failed')){
-    finalMsg = 'حصلت مشكلة مؤقتة في النموذج. جرب تاني.';
-    showBuy = false;
-  } else if(msg.includes('config_error') || msg.includes('LIMIT:config_error')){
-    finalMsg = 'إعداد ناقص في الخادم.';
-    showBuy = false;
-  } else if(msg.includes('in_flight') || msg.includes('LIMIT:in_flight')){
-    finalMsg = 'البحث شغال بالفعل - استنى 60 ثانية.';
-    showBuy = false;
-  } else if(msg.includes('rate_limited') || msg.includes('LIMIT:rate_limited')){
-    finalMsg = 'طلبات كتير - استنى دقيقة.';
-    showBuy = false;
-  } else if(msg.includes('HTTP 5')){
-    finalMsg = 'مشكلة مؤقتة. جرب تاني بعد دقيقة.';
-    showBuy = false;
-  } else if(msg.includes('NETWORK')){
-    finalMsg = 'مشكلة شبكة مؤقتة. جرب تاني.';
-    showBuy = false;
-  }
-  return '<div class="err"><b>حصلت مشكلة:</b> '+esc(finalMsg)+(showBuy?'<br><a href="'+BUY_URL+'" target="_blank" rel="noopener noreferrer">اشتري الأداة كاملة - 299ج ←</a>':'')+'</div>';
-}
-
-function reportHTML(answer,sources,logs,engines){
-  var enginesHtml = '';
-  if(engines){
-    enginesHtml = `<div style="margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;font-size:11px">
-      <span style="padding:4px 10px;border-radius:9999px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6ee7b7">✅ ${esc(engines.engine1?.name||'Tavily')} - ${engines.engine1?.count||0}</span>
-      <span style="padding:4px 10px;border-radius:9999px;background:rgba(102,126,234,.15);border:1px solid rgba(102,126,234,.3);color:#a5b4fc">✅ ${esc(engines.engine2?.name||'Qwen3-235B')}</span>
-      <span style="padding:4px 10px;border-radius:9999px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);color:#fbbf24">✅ ${esc(engines.engine3?.name||'Qwen3-235B')}</span>
-    </div>`;
-  }
-  var totalCount = (engines && engines.engine1 && engines.engine1.count) ? engines.engine1.count : sources.length;
-  var h='<div class="ans"><div class="m mono"><span class="x">ANSWER | V6.0</span><span style="color:rgba(255,255,255,.5)">'+totalCount+' مصدر (أعلى '+sources.length+' معروض)</span><span style="color:#34d399"> | 60 ثانية</span></div>'+
-  enginesHtml+
-  '<div class="txt">'+esc(answer)+'</div><div class="tg mono"><span>Tavily 10</span><span>Qwen3-235B</span><span>Top 5</span><span>60s</span></div></div>';
-  if(sources.length){
-    h+='<div class="srcs"><div class="hd"><h4 class="mono">TOP SOURCES | '+sources.length+' RESULTS</h4><span>Score | V6.0</span></div>'+
-    sources.map(function(s,i){
-      var u=s.url||'';
-      return '<a class="src" href="'+esc(safeUrl(u))+'" target="_blank" rel="noopener noreferrer"><div class="r"><h5>'+esc(s.title||u)+'</h5><span class="sc mono">Score '+(typeof s.score==='number'?s.score.toFixed(2):'0.85')+'</span></div><p>'+esc(s.content||s.snippet||'مصدر موثوق')+'</p><div class="u mono">| '+esc(u)+'</div></a>';
-    }).join('')+'</div>';
-  }
-  h+=`<div class="after-buy">
-    <h4>عجبك التقرير؟ 🚀</h4>
-    <p>ده تقرير واحد من تجربتك المجانية.<br>احصل على تقارير غير محدودة + كود المصدر كامل V6.0</p>
-    <a href="${BUY_URL}" target="_blank" rel="noopener noreferrer" onclick="try{fbq('track','InitiateCheckout');}catch(e){}">اشتري الأداة كاملة - 299ج فقط 🔥</a>
-  </div>`;
-  return h;
-}
-
-var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms);});};
-async function search(){
-  var text=q.value.trim();
-  if(!text||loading) return;
-  loading=true; go.innerHTML='<span class="spin"></span>يبحث...'; refreshBtn();
-  var done=0;
-  res.innerHTML=stepsHTML(0,[],true);
-  var anim=(async function(){
-    for(var i=0;i<5;i++){await sleep(700);done=i+1;res.innerHTML=stepsHTML(done,[],true);}
-  })();
-  var outcome;
-  try{
-    var r=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID},body:JSON.stringify({query:text, visitor_id:VISITOR_ID, skill: CURRENT_SKILL})});
-    if(r.status===429){
-      var d429={}; try{ d429=await r.json(); }catch(e){}
-      if(d429.reason==='daily_cap'){ throw new Error('LIMIT:daily_cap'); }
-      else if(d429.reason==='ip_limit'){ throw new Error('LIMIT:ip_limit'); }
-      else if(d429.reason==='in_flight'){ throw new Error('LIMIT:in_flight'); }
-      else if(d429.reason==='rate_limited'){ throw new Error('LIMIT:rate_limited'); }
-      else { throw new Error('LIMIT:trial_used'); }
-    }
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    var data=await r.json();
-    if(!data.success && data.reason) throw new Error('LIMIT:'+data.reason);
-    var answer=data.deep_answer||data.answer||'تم جمع المصادر.';
-    var sources=data.top_sources||data.sources||data.results||[];
-    outcome={ok:true,answer:answer,sources:sources,logs:data.logs||[],engines:data.engines||{}};
-    try{ fbq('track','Search', {search_string: text}); fbq('track','ViewContent'); }catch(e){}
-  }catch(err){
-    var msg = (err instanceof TypeError)?'NETWORK':String(err.message||'');
-    outcome={ok:false,msg:msg};
-  }
-  await anim;
-  if(outcome.ok){
-    res.innerHTML=stepsHTML(5,outcome.logs,false)+reportHTML(outcome.answer,outcome.sources,outcome.logs,outcome.engines);
-    fetchStats();
-    setTimeout(function(){res.scrollIntoView({behavior:'smooth',block:'start'});},100);
-    try{ fbq('track','CompleteRegistration'); }catch(e){}
-  }else{
-    res.innerHTML=errHTML(outcome.msg, true);
-  }
-  loading=false; go.innerHTML='بحث 🔍'; refreshBtn();
-}
-
-// ===== 10. أنيميشن العنكبوت =====
-(function(){
-  var canvas=document.getElementById('spider'); if(!canvas) return;
-  var ctx=canvas.getContext('2d'); if(!ctx) return;
-  var W,H,dpr;
-  function resize(){W=innerWidth;H=innerHeight;dpr=devicePixelRatio||1;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);}
-  resize(); addEventListener('resize',resize);
-  function mkGrid(){var g=[];for(var r=0;r<4;r++)for(var c=0;c<6;c++)g.push({x:90+(c+.5)*((W-180)/6),y:120+(r+.5)*((H-180)/4)});return g;}
-  var targets=mkGrid();
-  var sp={x:W*.5,y:90,tx:targets[0].x,ty:targets[0].y};
-  var legs=[-75,-38,38,75,105,142,-142,-105].map(function(d){var a=d*Math.PI/180;return{ang:a,fx:sp.x+Math.cos(a)*30,fy:sp.y+Math.sin(a)*30,tx:sp.x+Math.cos(a)*30,ty:sp.y+Math.sin(a)*30};});
-  var moving=false,moveTimer=0,last=performance.now(),actx=null;
-  function snd(){try{if(!actx) actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended') actx.resume().catch(function(){});var n=actx.currentTime,o=actx.createOscillator(),g=actx.createGain(),f=actx.createBiquadFilter();f.type='bandpass';f.frequency.value=2400;f.Q.value=1.4;o.type='square';o.frequency.setValueAtTime(2400,n);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.08,n+.004);g.gain.exponentialRampToValueAtTime(.0001,n+.08);o.connect(f);f.connect(g);g.connect(actx.destination);o.start(n);o.stop(n+.08);}catch(e){}}
-  var L1=34,L2=34,LIM=46;
-  function draw(now){
-    var dt=Math.min(50,now-last);last=now;
-    if(moving){moveTimer-=dt/1000;if(moveTimer<=0){moving=false;targets.shift();if(!targets.length)targets=mkGrid();sp.tx=targets[0].x;sp.ty=targets[0].y;}}
-    else{var dx=sp.tx-sp.x,dy=sp.ty-sp.y,dist=Math.hypot(dx,dy);if(dist<6){moving=true;moveTimer=1;snd();}else{var spd=Math.max(200,dist*3.2+30)*dt/1000;if(spd>=dist){sp.x=sp.tx;sp.y=sp.ty;}else{sp.x+=dx/dist*spd;sp.y+=dy/dist*spd;}}}
-    ctx.clearRect(0,0,W,H);
-    ctx.save();ctx.strokeStyle='rgba(214,217,224,.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(sp.x,0);ctx.lineTo(sp.x,sp.y-12);ctx.stroke();ctx.restore();
-    legs.forEach(function(l,i){
-      var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10,dx=l.fx-bx,dy=l.fy-by;
-      var dist=Math.min(Math.hypot(dx,dy),L1+L2-.5); if(dist<.001) return;
-      var ca=(dist*dist-L1*L1-L2*L2)/(2*L1*L2),an=Math.acos(Math.max(-1,Math.min(1,ca)));
-      var kd=L1+L2*Math.cos(an),kh=L2*Math.sin(an),ba=Math.atan2(dy,dx)-Math.atan2(kh,kd);
-      var kx=bx+Math.cos(ba)*L1,ky=by+Math.sin(ba)*L1;
-      ctx.strokeStyle='#2a2f3c';ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(kx,ky);ctx.lineTo(l.fx,l.fy);ctx.stroke();
-      ctx.fillStyle='#0d1018';ctx.strokeStyle='#232733';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(kx,ky,2.8,0,6.2832);ctx.fill();ctx.stroke();
-      ctx.fillStyle=i%2===0?'#8a90a0':'#6b7280';ctx.beginPath();ctx.arc(l.fx,l.fy,2.3,0,6.2832);ctx.fill();
+async function search() {
+  var text = q.value.trim();
+  if (!text || loading) return;
+  loading = true; go.innerHTML = '...'; refreshBtn();
+  res.innerHTML = '<div class="log"><div class="t"><span class="a">SEARCHING...</span></div></div>';
+  try {
+    var r = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Visitor-Id': VISITOR_ID },
+      body: JSON.stringify({ query: text, visitor_id: VISITOR_ID, skill: CURRENT_SKILL })
     });
-    ctx.fillStyle='rgba(0,0,0,.35)';ctx.beginPath();ctx.ellipse(sp.x,sp.y+22,18,6,0,0,6.2832);ctx.fill();
-    ctx.fillStyle='#0d1018';ctx.strokeStyle='#2c313f';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(sp.x,sp.y+12,13,17,0,0,6.2832);ctx.fill();ctx.stroke();
-    ctx.strokeStyle='rgba(255,184,77,.25)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(sp.x,sp.y+2);ctx.lineTo(sp.x,sp.y+20);ctx.stroke();
-    ctx.fillStyle='#151821';ctx.strokeStyle='#2c313f';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(sp.x,sp.y-5,10.5,10.5,0,0,6.2832);ctx.fill();ctx.stroke();
-    ctx.fillStyle='#ff4d9a';ctx.beginPath();ctx.arc(sp.x-3.2,sp.y-8,1.7,0,6.2832);ctx.fill();
-    ctx.fillStyle='#4fe0ff';ctx.beginPath();ctx.arc(sp.x+3.2,sp.y-8,1.7,0,6.2832);ctx.fill();
-    if(moving){ctx.strokeStyle='rgba(255,77,154,.25)';ctx.lineWidth=1;ctx.beginPath();ctx.arc(sp.x,sp.y+3,10+(1-moveTimer)*18,0,6.2832);ctx.stroke();}
-    legs.forEach(function(l,i){
-      var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10;
-      if(Math.hypot(l.fx-bx,l.fy-by)>LIM){var td=28+(i%3)*6+Math.random()*6;l.tx=sp.x+Math.cos(l.ang)*td;l.ty=sp.y+Math.sin(l.ang)*td;}
-      var dx=l.tx-l.fx,dy=l.ty-l.fy,d=Math.hypot(dx,dy);
-      if(d>.5){var mv=Math.min(d,420*dt/1000);l.fx+=dx/d*mv;l.fy+=dy/d*mv;if(d>3&&mv>=d-.1&&Math.random()<.85)snd();}
+    var data = await r.json();
+    if (!data.success) {
+      res.innerHTML = '<div class="err"><b>Error:</b> ' + esc(data.reason || 'unknown') + '</div>';
+    } else {
+      var sourcesHtml = (data.top_sources || []).map(function(s) {
+        return '<a class="src" href="' + esc(s.url) + '" target="_blank"><div class="r"><h5>' + esc(s.title) + '</h5><span class="sc mono">Score ' + (s.score || 0).toFixed(2) + '</span></div><p>' + esc(s.content || '') + '</p></a>';
+      }).join('');
+      res.innerHTML = '<div class="ans"><div class="m mono"><span class="x">ANSWER</span></div><div class="txt">' + esc(data.deep_answer) + '</div></div>' + (sourcesHtml ? '<div class="srcs">' + sourcesHtml + '</div>' : '');
+    }
+    fetchStats();
+  } catch (e) {
+    res.innerHTML = '<div class="err"><b>Network error:</b> ' + esc(String(e)) + '</div>';
+  }
+  loading = false; go.innerHTML = '🔍'; refreshBtn();
+}
+
+// ====== Spider Animation ======
+(function(){
+  var canvas = document.getElementById('spider'); if (!canvas) return;
+  var ctx = canvas.getContext('2d'); if (!ctx) return;
+  var W, H, dpr;
+  function resize() { W = innerWidth; H = innerHeight; dpr = devicePixelRatio || 1; canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.width = W + 'px'; canvas.style.height = H + 'px'; ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr, dpr); }
+  resize(); addEventListener('resize', resize);
+  function mkGrid() { var g = []; for (var r = 0; r < 4; r++) for (var c = 0; c < 6; c++) g.push({x: 90 + (c + .5) * ((W - 180) / 6), y: 120 + (r + .5) * ((H - 180) / 4)}); return g; }
+  var targets = mkGrid();
+  var sp = {x: W * .5, y: 90, tx: targets[0].x, ty: targets[0].y};
+  var legs = [-75,-38,38,75,105,142,-142,-105].map(function(d){ var a = d * Math.PI / 180; return {ang: a, fx: sp.x + Math.cos(a) * 30, fy: sp.y + Math.sin(a) * 30, tx: sp.x + Math.cos(a) * 30, ty: sp.y + Math.sin(a) * 30}; });
+  var moving = false, moveTimer = 0, last = performance.now();
+  var L1 = 34, L2 = 34, LIM = 46;
+  function draw(now) {
+    var dt = Math.min(50, now - last); last = now;
+    if (moving) { moveTimer -= dt / 1000; if (moveTimer <= 0) { moving = false; targets.shift(); if (!targets.length) targets = mkGrid(); sp.tx = targets[0].x; sp.ty = targets[0].y; } }
+    else { var dx = sp.tx - sp.x, dy = sp.ty - sp.y, dist = Math.hypot(dx, dy); if (dist < 6) { moving = true; moveTimer = 1; } else { var spd = Math.max(200, dist * 3.2 + 30) * dt / 1000; if (spd >= dist) { sp.x = sp.tx; sp.y = sp.ty; } else { sp.x += dx / dist * spd; sp.y += dy / dist * spd; } } }
+    ctx.clearRect(0, 0, W, H);
+    ctx.save(); ctx.strokeStyle = 'rgba(214,217,224,.12)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(sp.x, 0); ctx.lineTo(sp.x, sp.y - 12); ctx.stroke(); ctx.restore();
+    legs.forEach(function(l, i) {
+      var bx = sp.x + Math.cos(l.ang) * 12, by = sp.y + Math.sin(l.ang) * 10, dx = l.fx - bx, dy = l.fy - by;
+      var dist = Math.min(Math.hypot(dx, dy), L1 + L2 - .5); if (dist < .001) return;
+      var ca = (dist * dist - L1 * L1 - L2 * L2) / (2 * L1 * L2), an = Math.acos(Math.max(-1, Math.min(1, ca)));
+      var kd = L1 + L2 * Math.cos(an), kh = L2 * Math.sin(an), ba = Math.atan2(dy, dx) - Math.atan2(kh, kd);
+      var kx = bx + Math.cos(ba) * L1, ky = by + Math.sin(ba) * L1;
+      ctx.strokeStyle = '#2a2f3c'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(kx, ky); ctx.lineTo(l.fx, l.fy); ctx.stroke();
+      ctx.fillStyle = '#0d1018'; ctx.strokeStyle = '#232733'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(kx, ky, 2.8, 0, 6.2832); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = i % 2 === 0 ? '#8a90a0' : '#6b7280'; ctx.beginPath(); ctx.arc(l.fx, l.fy, 2.3, 0, 6.2832); ctx.fill();
+    });
+    ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath(); ctx.ellipse(sp.x, sp.y + 22, 18, 6, 0, 0, 6.2832); ctx.fill();
+    ctx.fillStyle = '#0d1018'; ctx.strokeStyle = '#2c313f'; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.ellipse(sp.x, sp.y + 12, 13, 17, 0, 0, 6.2832); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,184,77,.25)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(sp.x, sp.y + 2); ctx.lineTo(sp.x, sp.y + 20); ctx.stroke();
+    ctx.fillStyle = '#151821'; ctx.strokeStyle = '#2c313f'; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.ellipse(sp.x, sp.y - 5, 10.5, 10.5, 0, 0, 6.2832); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#ff4d9a'; ctx.beginPath(); ctx.arc(sp.x - 3.2, sp.y - 8, 1.7, 0, 6.2832); ctx.fill();
+    ctx.fillStyle = '#4fe0ff'; ctx.beginPath(); ctx.arc(sp.x + 3.2, sp.y - 8, 1.7, 0, 6.2832); ctx.fill();
+    legs.forEach(function(l, i) {
+      var bx = sp.x + Math.cos(l.ang) * 12, by = sp.y + Math.sin(l.ang) * 10;
+      if (Math.hypot(l.fx - bx, l.fy - by) > LIM) { var td = 28 + (i % 3) * 6 + Math.random() * 6; l.tx = sp.x + Math.cos(l.ang) * td; l.ty = sp.y + Math.sin(l.ang) * td; }
+      var dx = l.tx - l.fx, dy = l.ty - l.fy, d = Math.hypot(dx, dy);
+      if (d > .5) { var mv = Math.min(d, 420 * dt / 1000); l.fx += dx / d * mv; l.fy += dy / d * mv; }
     });
     requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
 })();
 
-document.querySelectorAll('a[href^="http"]').forEach(function(a){a.target='_blank';a.rel='noopener noreferrer';});
 })();
 </script>
 </body>
