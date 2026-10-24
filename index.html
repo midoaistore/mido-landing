@@ -245,6 +245,47 @@ footer .wrap{flex-direction:row}
     </div>
     <div class="rlist" id="rings"></div>
   </div>
+  <!-- Live Example Section -->
+<section class="rings-sec sec-y">
+  <div class="wrap sect">
+    <div class="center" style="margin-bottom:24px">
+      <span style="font-size:12px;font-weight:700;color:#fbbf24;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);padding:6px 16px;border-radius:9999px" data-i18n="example_badge">مثال حي - 60 ثانية</span>
+      <h2 style="margin-top:12px;font-size:26px;font-weight:800" data-i18n="example_title">تقرير البودكاست في 60 ثانية</h2>
+    </div>
+
+    <!-- Podcast Report Card -->
+    <div style="max-width:900px;margin:0 auto 32px auto;border-radius:24px;border:1px solid #232733;background:#12121a;padding:1px">
+      <div style="border-radius:23px;background:#0e0e14;padding:24px">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px">
+          <div>
+            <div class="pill" style="padding:4px 12px;font-size:11px;background:#0a0a0f;border:1px solid #232733;color:rgba(255,255,255,.5)">
+              <span class="dot dot8 em"></span>
+              <span data-i18n="example_complete">تقرير مكتمل | 60 ثانية</span>
+            </div>
+            <h3 style="margin-top:16px;font-size:20px;font-weight:700" data-i18n="example_q">افضل مايك للبودكاست - ميزانية 3000 جنيه</h3>
+            <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;font-size:11px">
+              <span style="padding:4px 10px;border-radius:9999px;background:#1a1a26;border:1px solid #232733;color:rgba(255,255,255,.6)">9 Sources | Score 0.92</span>
+            </div>
+          </div>
+          <div style="border-radius:14px;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.1);padding:12px 16px;text-align:center">
+            <div style="font-size:11px;color:rgba(251,191,36,.7)" data-i18n="example_winner">الفائز</div>
+            <div style="margin-top:4px;font-size:15px;font-weight:800;color:#fbbf24">Rode PodMic</div>
+            <div style="font-size:13px;font-weight:700" data-i18n="example_price">2,800ج</div>
+          </div>
+        </div>
+        <div style="margin-top:24px;border-radius:16px;border:1px solid #232733;background:#0a0a0f;padding:16px">
+          <div style="font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:12px">SUMMARY</div>
+          <p style="font-size:13.5px;line-height:1.75rem;color:rgba(255,255,255,.7)" data-i18n="example_summary">لو لسه بتبدأ بودكاست وميزانيتك 3000ج، الـ Rode PodMic هو الاختيار الصح. صوته دافي ومش بيلقط دوشة الشارع.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image (Report Preview) -->
+    <div style="max-width:900px;margin:0 auto;border-radius:24px;overflow:hidden;border:1px solid #232733;box-shadow:0 20px 80px rgba(0,0,0,.5)">
+      <img src="https://raw.githubusercontent.com/midoaistore/mido-landing/a07f30c6fc547061f39661537246f4aa5e49962d/report-preview-en.png" alt="Report Preview" style="width:100%;height:auto;display:block;">
+    </div>
+  </div>
+</section>
 </section>
 
 <footer><div class="wrap mono">
@@ -261,7 +302,7 @@ var CURRENT_LANG = localStorage.getItem('mido_lang') || 'ar';
 
 // ===== Translations =====
 var T = {
-  ar: {
+  ar: {example_badge:"مثال حي - 60 ثانية", example_title:"تقرير البودكاست في 60 ثانية", example_complete:"تقرير مكتمل | 60 ثانية", example_q:"افضل مايك للبودكاست - ميزانية 3000 جنيه", example_winner:"الفائز", example_price:"2,800ج", example_summary:"لو لسه بتبدأ بودكاست وميزانيتك 3000ج، الـ Rode PodMic هو الاختيار الصح.",
     badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"وكيل البحث العميق", chip1:"محرك مهارات + عدادات حية", chip3:"بحث | تلخيص | مقارنة",
     lead:"وكيل بحث عميق بيوفر 96% من وقت البحث.", cta1:"جرب البحث مجانا", remaining_left:"متبقي",
     laws_title:"قوانين أسيموف", demo_badge:"جرب بنفسك", demo_title:"كل سؤال له تقرير مختلف",
@@ -282,7 +323,7 @@ var T = {
     stats_visitors:"زوار", stats_searches:"بحث اليوم", stats_success:"ناجحة", stats_failed:"فاشلة",
     search_loading:"يبحث...", search_error:"خطأ:", answer:"الإجابة"
   },
-  en: {
+  en: {example_badge:"Live Example - 60s", example_title:"Podcast Report in 60s", example_complete:"Complete Report | 60s", example_q:"Best podcast mic - budget $300", example_winner:"Winner", example_price:"$150", example_summary:"If you're starting a podcast with a $300 budget, the Rode PodMic is the right choice.",
     badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Deep Search Agent", chip1:"Skills Engine + Live Counters", chip3:"Search | Summary | Compare",
     lead:"Deep search agent saves 96% of research time.", cta1:"Try Search Free", remaining_left:"left",
     laws_title:"Asimov's Laws", demo_badge:"Try it", demo_title:"Every question gets a different report",
@@ -303,7 +344,7 @@ var T = {
     stats_visitors:"Visitors", stats_searches:"Searches today", stats_success:"Success", stats_failed:"Failed",
     search_loading:"Searching...", search_error:"Error:", answer:"Answer"
   },
-  fr: {
+  fr: {example_badge:"Exemple Réel - 60s", example_title:"Rapport Podcast en 60s", example_complete:"Rapport Complet | 60s", example_q:"Meilleur micro podcast - budget 300€", example_winner:"Gagnant", example_price:"150€", example_summary:"Si vous démarrez un podcast avec un budget de 300€, le Rode PodMic est le bon choix.",
     badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Agent de Recherche Approfondie", chip1:"Moteur + Compteurs", chip3:"Recherche | Résumé | Comparaison",
     lead:"Agent de recherche approfondie - économise 96% du temps.", cta1:"Essayer Gratuitement", remaining_left:"restant",
     laws_title:"Lois d'Asimov", demo_badge:"Essayer", demo_title:"Chaque question a un rapport différent",
@@ -324,7 +365,7 @@ var T = {
     stats_visitors:"Visiteurs", stats_searches:"Recherches", stats_success:"Succès", stats_failed:"Échecs",
     search_loading:"Recherche...", search_error:"Erreur:", answer:"Réponse"
   },
-  de: {
+  de: {example_badge:"Live-Beispiel - 60s", example_title:"Podcast-Bericht in 60s", example_complete:"Vollständiger Bericht | 60s", example_q:"Bestes Podcast-Mikrofon - Budget 300€", example_winner:"Gewinner", example_price:"150€", example_summary:"Wenn Sie einen Podcast mit einem Budget von 300€ starten, ist das Rode PodMic die richtige Wahl.",
     badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Deep Search Agent", chip1:"Skills Engine + Live-Zähler", chip3:"Suche | Zusammenfassung | Vergleich",
     lead:"Deep-Search-Agent spart 96% der Recherchezeit.", cta1:"Kostenlos Testen", remaining_left:"übrig",
     laws_title:"Asimovs Gesetze", demo_badge:"Testen", demo_title:"Jede Frage erhält einen anderen Bericht",
@@ -345,7 +386,7 @@ var T = {
     stats_visitors:"Besucher", stats_searches:"Suchen heute", stats_success:"Erfolg", stats_failed:"Fehler",
     search_loading:"Suche...", search_error:"Fehler:", answer:"Antwort"
   },
-  ja: {
+  ja: {example_badge:"ライブ例 - 60秒", example_title:"60秒でポッドキャストレポート", example_complete:"完全なレポート | 60秒", example_q:"最高のポッドキャストマイク - 予算300ドル", example_winner:"勝者", example_price:"$150", example_summary:"予算300ドルでポッドキャストを始めるなら、Rode PodMicが正しい選択です。",
     badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"ディープサーチエージェント", chip1:"スキルエンジン + カウンター", chip3:"検索 | 要約 | 比較",
     lead:"ディープサーチエージェント - 調査時間を96%節約。", cta1:"無料で試す", remaining_left:"残り",
     laws_title:"アシモフの法則", demo_badge:"試してみる", demo_title:"すべての質問に異なるレポート",
@@ -366,7 +407,7 @@ var T = {
     stats_visitors:"訪問者", stats_searches:"本日の検索", stats_success:"成功", stats_failed:"失敗",
     search_loading:"検索中...", search_error:"エラー:", answer:"回答"
   },
-  zh: {
+  zh: {example_badge:"实时示例 - 60秒", example_title:"60秒播客报告", example_complete:"完整报告 | 60秒", example_q:"最佳播客麦克风 - 预算300美元", example_winner:"获胜者", example_price:"$150", example_summary:"如果您以300美元的预算开始播客，Rode PodMic是正确选择。",
     badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"深度搜索代理", chip1:"技能引擎 + 实时计数器", chip3:"搜索 | 摘要 | 比较",
     lead:"深度搜索代理 - 节省96%的研究时间。", cta1:"免费尝试", remaining_left:"剩余",
     laws_title:"阿西莫夫法则", demo_badge:"试一试", demo_title:"每个问题都会得到不同的报告",
@@ -387,7 +428,7 @@ var T = {
     stats_visitors:"访客", stats_searches:"今日搜索", stats_success:"成功", stats_failed:"失败",
     search_loading:"搜索中...", search_error:"错误:", answer:"答案"
   },
-  es: {
+  es: {example_badge:"Ejemplo en Vivo - 60s", example_title:"Informe de Podcast en 60s", example_complete:"Informe Completo | 60s", example_q:"Mejor micrófono de podcast - presupuesto 300€", example_winner:"Ganador", example_price:"150€", example_summary:"Si estás comenzando un podcast con un presupuesto de 300€, el Rode PodMic es la elección correcta.",
     badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Agente de Búsqueda Profunda", chip1:"Motor + Contadores", chip3:"Búsqueda | Resumen | Comparación",
     lead:"Agente de búsqueda profunda - ahorra 96% del tiempo.", cta1:"Probar Gratis", remaining_left:"restante",
     laws_title:"Leyes de Asimov", demo_badge:"Probar", demo_title:"Cada pregunta obtiene un informe diferente",
@@ -408,7 +449,7 @@ var T = {
     stats_visitors:"Visitantes", stats_searches:"Búsquedas hoy", stats_success:"Éxito", stats_failed:"Fallos",
     search_loading:"Buscando...", search_error:"Error:", answer:"Respuesta"
   },
-  pt: {
+  pt: {example_badge:"Exemplo ao Vivo - 60s", example_title:"Relatório de Podcast em 60s", example_complete:"Relatório Completo | 60s", example_q:"Melhor microfone de podcast - orçamento 300€", example_winner:"Vencedor", example_price:"150€", example_summary:"Se você está começando um podcast com um orçamento de 300€, o Rode PodMic é a escolha certa.",
     badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Agente de Pesquisa Profunda", chip1:"Motor + Contadores", chip3:"Pesquisa | Resumo | Comparação",
     lead:"Agente de pesquisa profunda - economiza 96% do tempo.", cta1:"Experimentar Grátis", remaining_left:"restante",
     laws_title:"Leis de Asimov", demo_badge:"Experimentar", demo_title:"Cada pergunta obtém um relatório diferente",
