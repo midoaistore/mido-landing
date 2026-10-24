@@ -3,7 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mido AI Store | Deep Search Agent V6.3</title>
+<title>Mido Deep Search — Verified Research in 40 Seconds</title>
+<meta name="description" content="Mido Deep Search checks local and international sources and turns one question into a practical verified research report in 40 seconds.">
+<meta property="og:title" content="Mido Deep Search — Verified Research in 40 Seconds">
+<meta property="og:description" content="Research products, courses, markets and decisions using verified local and international sources.">
+<meta property="og:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
+<meta property="og:url" content="https://midoaistore.github.io/mido-landing/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mido Deep Search">
+<meta name="twitter:description" content="From one question to a verified research report in 40 seconds.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;border:0 solid #232733;margin:0;padding:0}
@@ -26,72 +36,18 @@ a{color:inherit;text-decoration:none}
 header{position:relative;overflow:hidden;border-bottom:1px solid #232733;background:#0a0a0f}
 .hwrap{position:relative;padding-top:80px;padding-bottom:48px}
 .badge{border:1px solid #232733;background:#12121a;padding:6px 16px;font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.6);margin-bottom:24px}
-h1{font-size:28px;font-weight:800;line-height:1.1}
-.g1{background:linear-gradient(to right,#fff,rgba(255,255,255,.6));-webkit-background-clip:text;color:transparent}
-.g2{background:linear-gradient(to right,#667eea,#764ba2);-webkit-background-clip:text;color:transparent}
-.sep{margin:0 12px;color:rgba(255,255,255,.2)}
-.sub1{display:block;margin-top:8px;font-size:22px;color:rgba(255,255,255,.9)}
-.chips{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
-.chip{border-radius:9999px;padding:6px 16px;font-size:13px;background:#12121a;border:1px solid #232733;color:rgba(255,255,255,.7)}
-.chip.hl{background:rgba(102,126,234,.15);border-color:rgba(102,126,234,.3);font-weight:700;color:#a5b4fc}
-.lead{margin-top:24px;max-width:760px;font-size:15px;line-height:1.75rem;color:rgba(255,255,255,.6)}
-.lead b{color:#fff}
+h1{font-size:28px;font-weight:800;line-height:1.2}
+.sub1{display:block;margin-top:8px;font-size:20px;color:rgba(255,255,255,.9);line-height:1.5}
+.lead{margin-top:24px;max-width:760px;font-size:15px;line-height:1.75rem;color:rgba(255,255,255,.7)}
 .ctas{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:44px;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);padding:0 28px;font-size:14px;font-weight:700;box-shadow:0 0 30px rgba(102,126,234,.35)}
-.live{height:44px;padding:0 20px;border:1px solid #232733;background:#12121a;font-size:13px;color:rgba(255,255,255,.6)}
+.btn-buy{background:linear-gradient(to right,#10b981,#059669);box-shadow:0 0 30px rgba(16,185,129,.4);}
 .blob{position:absolute;border-radius:9999px;filter:blur(90px);pointer-events:none}
-.stats{background:#0f0f16;border-bottom:1px solid #232733}
-.stats .wrap{padding-top:32px;padding-bottom:32px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.stat{border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px;text-align:center}
-.stat.live-stat{border-color:rgba(16,185,129,.3)}
-.stat .i{font-size:20px;margin-bottom:4px}.stat .v{font-size:22px;font-weight:800}.stat .l{font-size:10px;margin-top:4px;color:rgba(255,255,255,.4)}
 .sect{padding-top:56px;padding-bottom:56px}
-.lawhead{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.lawhead h2{font-size:22px;font-weight:800}
-.lawhead p{margin-top:8px;font-size:13px;letter-spacing:.1em;color:rgba(255,255,255,.4)}
-.tag{border:1px solid #232733;background:#12121a;padding:6px 16px;font-size:11px;color:rgba(255,255,255,.5);border-radius:9999px}
-.laws{margin-top:32px;display:grid;grid-template-columns:1fr;gap:16px}
-.law{position:relative;overflow:hidden;border-radius:20px;border:1px solid #232733;background:#12121a;padding:1px;cursor:pointer;user-select:none;transition:all .3s}
-.law.open{box-shadow:0 0 30px rgba(102,126,234,.15);transform:scale(1.02)}
-.law .in{border-radius:19px;background:#111119;padding:24px;height:100%;position:relative}
-.law .row{display:flex;align-items:center;justify-content:space-between}
-.num{font-size:11px;letter-spacing:.1em;padding:4px 8px;border-radius:9999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
-.eg{font-size:10px;font-weight:700;padding:4px 8px;border-radius:9999px;background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.3);margin-left:8px}
-.pm{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:9999px;border:1px solid #232733;background:#0a0a0f;font-size:12px;color:rgba(255,255,255,.4)}
-.law.open .pm{border-color:rgba(102,126,234,.4);background:rgba(102,126,234,.2);color:#a5b4fc}
-.law h3{margin-top:16px;font-size:16px;font-weight:700}
-.law .sd{margin-top:8px;font-size:14px;font-weight:600}
-.law .dt{margin-top:12px;font-size:13px;color:rgba(255,255,255,.55)}
-.expand{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s,opacity .3s;opacity:0}
-.law.open .expand{grid-template-rows:1fr;opacity:1}
-.expand>div{overflow:hidden}
-.full{margin-top:16px;padding-top:16px;border-top:1px solid rgba(35,39,51,.6)}
-.full .lb{font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:8px}
-.full p{font-size:12.5px;line-height:22px;color:rgba(255,255,255,.7);background:#0a0a0f;border:1px solid #232733;border-radius:12px;padding:12px}
-.more{margin-top:16px;font-size:11px;color:rgba(255,255,255,.25)}
-.law.open .more{display:none}
-.rings-sec{background:#0f0f16}
 .center{text-align:center}
-.rbadge{padding:6px 16px;font-size:12px;font-weight:700;color:#fbbf24;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);margin-bottom:16px}
-.rings-sec h2{font-size:26px;font-weight:800}
-.rings-sec .d{margin:12px auto 0;font-size:14px;color:rgba(255,255,255,.6);max-width:600px}
-.rlist{position:relative;max-width:800px;margin:48px auto 0;display:grid;gap:16px}
-.ring{position:relative;cursor:pointer}
-.ring .c{border-radius:18px;border:1px solid #232733;background:#12121a;padding:20px;transition:all .3s}
-.ring.open .c{border-color:rgba(102,126,234,.4);box-shadow:0 0 30px rgba(102,126,234,.15)}
-.ring .h{display:flex;align-items:center;gap:12px}
-.ring .code{font-size:10px;padding:2px 8px;border-radius:9999px;border:1px solid}
-.ring h3{font-size:16px;font-weight:700;flex:1}
-.ring .ar{font-size:12px;color:rgba(255,255,255,.3);transition:transform .3s}
-.ring.open .ar{transform:rotate(180deg);color:#a5b4fc}
-.ring p{margin-top:8px;font-size:13px;color:rgba(255,255,255,.6)}
-.ring .act{display:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(35,39,51,.6);align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,.4)}
-.ring.open .act{display:flex}
-.ring .cir{display:none}
 .demo-in{max-width:980px;margin:0 auto}
 .dbadge{padding:6px 16px;font-size:12px;font-weight:700;color:#a5b4fc;background:rgba(102,126,234,.15);border:1px solid rgba(102,126,234,.3)}
 .demo-in h2{margin-top:20px;font-size:28px;font-weight:800;line-height:1.15}
-.demo-in .s{margin-top:12px;font-size:14px;color:rgba(255,255,255,.6)}
 .box{margin-top:32px;border-radius:24px;border:1px solid #232733;background:#12121a;padding:1px;box-shadow:0 20px 80px rgba(0,0,0,.5)}
 .box>div{border-radius:23px;background:#0e0e14;overflow:hidden}
 .bar{padding:16px;border-bottom:1px solid #232733;background:rgba(18,18,26,.8)}
@@ -103,13 +59,25 @@ h1{font-size:28px;font-weight:800;line-height:1.1}
 #go{height:52px;border-radius:9999px;background:linear-gradient(to right,#667eea,#764ba2);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 24px}
 #go:disabled{opacity:.4;cursor:not-allowed}
 .spin{width:16px;height:16px;border-radius:9999px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;animation:spin 1s linear infinite}
-.sugs{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
-.sug{border-radius:9999px;border:1px solid #232733;background:#0a0a0f;padding:4px 12px;font-size:11px;color:rgba(255,255,255,.5)}
 #res{padding:16px;min-height:280px}
 .empty{padding:40px 0;text-align:center}
 .spd{margin:0 auto;width:64px;height:64px;border-radius:18px;background:#1a1a26;border:1px solid #232733;display:grid;place-items:center;font-size:28px;animation:float 3s ease-in-out infinite}
 .empty p{margin-top:16px;font-size:14px;font-weight:700;color:rgba(255,255,255,.7)}
 .empty small{display:block;margin-top:4px;font-size:12px;color:rgba(255,255,255,.4)}
+.progress-container{margin-top:16px;padding:16px;border-radius:16px;background:#0a0a0f;border:1px solid #232733;}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.6);margin-bottom:8px;}
+.progress-bar-outer{height:6px;width:100%;background:#1a1a26;border-radius:9999px;overflow:hidden;}
+.progress-bar-inner{height:100%;width:0%;background:linear-gradient(to right,#667eea,#764ba2);border-radius:9999px;transition:width 0.5s ease-out;}
+.progress-timer{margin-top:8px;font-size:11px;color:rgba(255,255,255,.4);text-align:center;}
+.err{border-radius:16px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.1);padding:16px;font-size:13px;color:#fecaca;line-height:1.7}
+.ans{border-radius:18px;border:1px solid rgba(102,126,234,.3);background:linear-gradient(to bottom right,rgba(102,126,234,.1),#12121a,#0a0a0f);padding:20px}
+.ans .m{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;color:#a5b4fc;margin-bottom:12px}
+.ans .txt{font-size:14.5px;line-height:1.75rem;color:rgba(255,255,255,.85);white-space:pre-wrap;word-break:break-word}
+.srcs{margin-top:20px;display:grid;gap:12px}
+.src{display:block;border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px}
+.src .r{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.src h5{font-size:13.5px;font-weight:700;line-height:1.5rem}
+.src p{margin-top:8px;font-size:12.5px;line-height:20px;color:rgba(255,255,255,.55)}
 .bfoot{padding:12px 16px;border-top:1px solid #232733;background:#0a0a0f;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.3)}
 footer{border-top:1px solid #232733;background:#08080c}
 footer .wrap{padding-top:32px;padding-bottom:32px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;font-size:12px;color:rgba(255,255,255,.3);text-align:center}
@@ -128,26 +96,25 @@ footer .wrap{padding-top:32px;padding-bottom:32px;display:flex;flex-direction:co
 .lang-option{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;color:rgba(255,255,255,.8);font-size:12px;cursor:pointer;transition:all .15s;}
 .lang-option:hover{background:rgba(102,126,234,.15);color:#fff;}
 .lang-option .flag{font-size:16px;}
-.skill-tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
-.skill-tab{padding:8px 16px;border-radius:9999px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #232733;background:#0a0a0f;color:rgba(255,255,255,.5);transition:all .2s;white-space:nowrap}
-.skill-tab.active{background:rgba(102,126,234,.2);border-color:#667eea;color:#a5b4fc}
-.save-skill-btn{padding:8px 16px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid rgba(16,185,129,.5);background:rgba(16,185,129,.1);color:#6ee7b7;transition:all .2s;margin-left:auto;white-space:nowrap}
-.save-skill-btn:hover{background:rgba(16,185,129,.2)}
-.save-skill-btn.saved{background:rgba(16,185,129,.3);border-color:#10b981;color:#fff}
-@media(min-width:768px){
-.wrap{padding:0 32px}
-h1{font-size:42px}
-.stats .wrap{grid-template-columns:repeat(4,1fr)}
-.sect{padding-top:80px;padding-bottom:80px}
-.laws{grid-template-columns:repeat(2,1fr)}
-.rings-sec h2{font-size:36px}
-.demo-in h2{font-size:36px}
-.bar,#res{padding:24px}
-.srow{flex-direction:row}
-#go{width:132px}
-footer .wrap{flex-direction:row}
-}
-@media(min-width:1024px){.laws{grid-template-columns:repeat(4,1fr)}}
+.price-card{max-width:600px;margin:40px auto 0;border-radius:24px;border:1px solid rgba(16,185,129,.4);background:linear-gradient(to bottom right,rgba(16,185,129,.1),#12121a);padding:32px;text-align:center;}
+.price-card .price{font-size:56px;font-weight:800;color:#fff;line-height:1;}
+.price-card .price-sub{font-size:14px;color:rgba(255,255,255,.6);margin-top:8px;}
+.price-card .what-you-get{text-align:right;margin-top:24px;display:grid;gap:8px;font-size:14px;color:rgba(255,255,255,.8);}
+.price-card .what-you-get div{display:flex;align-items:center;gap:8px;}
+.price-card .btn-buy{margin-top:24px;width:100%;height:56px;font-size:16px;}
+.trial-note{font-size:12px;color:rgba(255,255,255,.4);margin-top:12px;}
+.case-study{border-radius:24px;border:1px solid #232733;background:#12121a;padding:24px;margin-top:32px;}
+.case-study table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;}
+.case-study th{background:#1a1a26;padding:10px;text-align:right;border:1px solid #232733;}
+.case-study td{padding:10px;border:1px solid #232733;color:rgba(255,255,255,.8);}
+.case-study .tag{display:inline-block;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:700;margin-left:4px;}
+.tag-eg{background:rgba(16,185,129,.15);color:#6ee7b7;}
+.tag-int{background:rgba(102,126,234,.15);color:#a5b4fc;}
+.faq-item{border-radius:16px;border:1px solid #232733;background:#12121a;padding:16px;margin-bottom:8px;cursor:pointer;}
+.faq-item h4{font-size:14px;font-weight:700;display:flex;justify-content:space-between;}
+.faq-item p{display:none;margin-top:12px;font-size:13px;color:rgba(255,255,255,.6);}
+.faq-item.open p{display:block;}
+@media(min-width:768px){.wrap{padding:0 32px}h1{font-size:40px}}
 </style>
 </head>
 <body>
@@ -181,115 +148,117 @@ footer .wrap{flex-direction:row}
     </div>
   </div>
   <div class="wrap hwrap">
-    <div class="badge pill mono" data-i18n="badge">V6.3 GLOBAL SKILLS ENGINE</div>
-    <h1>
-      <span class="g1">Mido AI Store</span><span class="sep">|</span><span class="g2">Professional Tools</span>
-      <span class="sub1" data-i18n="sub1">وكيل البحث العميق</span>
-    </h1>
-    <div class="chips">
-      <span class="chip hl" data-i18n="chip1">محرك مهارات + عدادات حية</span>
-      <span class="chip">Tavily 10 + Qwen3</span>
-      <span class="chip mono" data-i18n="chip3">بحث | تلخيص | مقارنة</span>
-    </div>
-    <p class="lead" data-i18n="lead">وكيل بحث عميق بيوفر 96% من وقت البحث.</p>
+    <div class="badge pill mono"><span class="dot dot6 pulse" style="background:#10b981"></span><span data-i18n="badge">V7.0 | VERIFIED RESEARCH ENGINE</span></div>
+    <h1><span class="sub1" data-i18n="hero_title">تقرير بحث منظم بالكامل في 35-40 ثانية</span></h1>
+    <p class="lead" data-i18n="hero_desc">مصادر موثقة • أسعار محلية وعالمية • توصية نهائية واضحة. جرّب بحثًا مجانيًا واحدًا، ثم احصل على الأداة بالكامل.</p>
     <div class="ctas">
-      <a href="#live-demo" class="btn" data-i18n="cta1">جرب البحث مجانا</a>
+      <a href="#live-demo" class="btn" data-i18n="cta_try">جرب البحث المجاني ←</a>
+      <a href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener noreferrer" class="btn btn-buy" data-i18n="cta_buy">احصل على الأداة - $6</a>
     </div>
   </div>
 </header>
 
-<section class="stats"><div class="wrap" id="stats"></div></section>
-
+<!-- Case Study -->
 <section class="wrap sect">
-  <div class="lawhead">
-    <div>
-      <h2 data-i18n="laws_title">قوانين أسيموف</h2>
-      <p class="mono">ASIMOV LAWS</p>
-    </div>
-    <div class="tag mono">4 LAWS</div>
+  <div class="center">
+    <div class="pill dbadge" data-i18n="case_badge">تقرير حقيقي تم إنشاؤه في 35 ثانية</div>
+    <h2 style="margin-top:16px;font-size:26px;font-weight:800" data-i18n="case_title">أفضل سماعات إلغاء الضوضاء تحت 150 دولارًا</h2>
   </div>
-  <div class="laws" id="laws"></div>
+  <div class="case-study">
+    <h3 style="font-size:18px;font-weight:800;color:#6ee7b7" data-i18n="case_quick">الخلاصة السريعة</h3>
+    <ul style="margin-top:12px;padding-right:20px;font-size:14px;line-height:1.8;color:rgba(255,255,255,.8)">
+      <li>Sony WH-CH720N و JBL Tune 770NC يقدمان أفضل توازن بين إلغاء الضوضاء والراحة وعمر البطارية بأقل من 5,000 جنيه.</li>
+      <li>Clear Audio Enduro و Baseus Inspire XH1 يوفروا إحساسًا أكثر فخامة مقابل سعر أعلى قليلاً (~4,500 جنيه).</li>
+    </ul>
+
+    <h3 style="font-size:18px;font-weight:800;margin-top:24px" data-i18n="case_table">جدول المقارنة المختصر</h3>
+    <table>
+      <thead>
+        <tr>
+          <th data-i18n="th_model">السماعة</th>
+          <th data-i18n="th_price">السعر (USD)</th>
+          <th data-i18n="th_egp">السعر (EGP)</th>
+          <th data-i18n="th_anc">ANC /5</th>
+          <th data-i18n="th_battery">البطارية</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>JBL Tune 770NC</td><td>$79.99</td><td>2,400</td><td>4/5</td><td>30h</td></tr>
+        <tr><td>Sony WH-CH720N</td><td>$149.00</td><td>4,470</td><td>4.5/5</td><td>30h</td></tr>
+        <tr><td>Anker Space One</td><td>$79.99</td><td>2,400</td><td>4/5</td><td>30h</td></tr>
+        <tr><td>Clear Audio Enduro</td><td>$149.99</td><td>4,500</td><td>4.5/5</td><td>30h</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:18px;font-weight:800;margin-top:24px" data-i18n="case_rec">التوصية النهائية</h3>
+    <p style="margin-top:8px;font-size:14px;line-height:1.8;color:rgba(255,255,255,.8)" data-i18n="case_rec_desc">
+      <b>Sony WH-CH720N</b> هي الأفضل إجمالاً تحت 4,500 جنيه (أداء ANC ممتاز + راحة + اتصال متعدد).
+      <b>JBL Tune 770NC</b> هي الأفضل اقتصاديًا تحت 2,500 جنيه.
+    </p>
+
+    <div style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.4)">
+      <span data-i18n="case_sources">المصادر: SoundGuys (Score 0.75) • CNET (Score 0.76) • TechRadar (Score 0.76)</span>
+      <br><span data-i18n="case_note">* الأسعار تقريبية وتعتمد على سعر تحويل 1 USD = 30 EGP.</span>
+    </div>
+  </div>
 </section>
 
+<!-- Live Demo -->
 <section id="live-demo" class="wrap sect">
   <div class="demo-in">
     <div class="center">
-      <div class="pill dbadge" data-i18n="demo_badge">جرب بنفسك</div>
-      <h2 data-i18n="demo_title">كل سؤال له تقرير مختلف</h2>
+      <div class="pill dbadge" data-i18n="demo_badge">جرب بنفسك - 40 ثانية</div>
+      <h2 data-i18n="demo_title">اكتب سؤالك، واحصل على تقرير موثق</h2>
     </div>
     <div class="box"><div>
       <div class="bar">
-        <div class="skill-tabs" id="skillTabs">
-          <div class="skill-tab active" data-skill="deep_search" data-i18n="skill1">🔍 بحث عميق</div>
-          <div class="skill-tab" data-skill="summarize" data-i18n="skill2">⚡ تلخيص</div>
-          <div class="skill-tab" data-skill="compare" data-i18n="skill3">⚖️ مقارنة</div>
-          <button class="save-skill-btn" id="saveSkillBtn" data-i18n="save_skill">💾 حفظ</button>
-        </div>
         <div class="srow">
-          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" data-i18n-ph="search_placeholder" placeholder="اكتب سؤالك"></div>
+          <div class="inp"><span class="ic">🔍</span><input id="q" type="text" autocomplete="off" data-i18n-ph="search_placeholder" placeholder="اكتب سؤالك البحثي هنا..."></div>
           <button id="go" disabled data-i18n="search_btn">بحث 🔍</button>
         </div>
-        <div class="sugs" id="sugs"></div>
       </div>
       <div id="res"></div>
-      <div class="bfoot mono"><span>V6.3</span><span><span data-i18n="foot_search">بحث اليوم</span>: <span id="cnt">0</span>/100</span></div>
+      <div class="bfoot mono"><span>V7.0 | 40s | Verified</span><span><span data-i18n="foot_search">بحث اليوم</span>: <span id="cnt">0</span>/100</span></div>
     </div></div>
   </div>
 </section>
 
-<section class="rings-sec sec-y">
-  <div class="wrap sect">
-    <div class="center">
-      <div class="pill rbadge" data-i18n="rings_badge">بروتوكول المعالجة</div>
-      <h2 data-i18n="rings_title">مراحل المعالجة الخمس</h2>
+<!-- Price -->
+<section class="wrap sect">
+  <div class="price-card">
+    <div class="price">$6</div>
+    <div class="price-sub" data-i18n="price_sub">أو ما يعادله بعملتك المحلية عبر Gumroad</div>
+    <div class="what-you-get">
+      <div>✅ <span data-i18n="get_tool">الوصول الكامل للأداة (Mido Deep Search)</span></div>
+      <div>✅ <span data-i18n="get_keys">مفاتيح Tavily و Grok و Nipus جاهزة للاستخدام</span></div>
+      <div>✅ <span data-i18n="get_setup">طريقة الإعداد خطوة بخطوة (Worker + Cloudflare)</span></div>
+      <div>✅ <span data-i18n="get_guide">دليل التشغيل والتوثيق</span></div>
+      <div>✅ <span data-i18n="get_limits">حدود الاستخدام الموضحة</span></div>
     </div>
-    <div class="rlist" id="rings"></div>
-  </div>
-  <!-- Live Example Section -->
-<section class="rings-sec sec-y">
-  <div class="wrap sect">
-    <div class="center" style="margin-bottom:24px">
-      <span style="font-size:12px;font-weight:700;color:#fbbf24;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);padding:6px 16px;border-radius:9999px" data-i18n="example_badge">مثال حي - 60 ثانية</span>
-      <h2 style="margin-top:12px;font-size:26px;font-weight:800" data-i18n="example_title">تقرير البودكاست في 60 ثانية</h2>
-    </div>
-
-    <!-- Podcast Report Card -->
-    <div style="max-width:900px;margin:0 auto 32px auto;border-radius:24px;border:1px solid #232733;background:#12121a;padding:1px">
-      <div style="border-radius:23px;background:#0e0e14;padding:24px">
-        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px">
-          <div>
-            <div class="pill" style="padding:4px 12px;font-size:11px;background:#0a0a0f;border:1px solid #232733;color:rgba(255,255,255,.5)">
-              <span class="dot dot8 em"></span>
-              <span data-i18n="example_complete">تقرير مكتمل | 60 ثانية</span>
-            </div>
-            <h3 style="margin-top:16px;font-size:20px;font-weight:700" data-i18n="example_q">افضل مايك للبودكاست - ميزانية 3000 جنيه</h3>
-            <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;font-size:11px">
-              <span style="padding:4px 10px;border-radius:9999px;background:#1a1a26;border:1px solid #232733;color:rgba(255,255,255,.6)">9 Sources | Score 0.92</span>
-            </div>
-          </div>
-          <div style="border-radius:14px;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.1);padding:12px 16px;text-align:center">
-            <div style="font-size:11px;color:rgba(251,191,36,.7)" data-i18n="example_winner">الفائز</div>
-            <div style="margin-top:4px;font-size:15px;font-weight:800;color:#fbbf24">Rode PodMic</div>
-            <div style="font-size:13px;font-weight:700" data-i18n="example_price">2,800ج</div>
-          </div>
-        </div>
-        <div style="margin-top:24px;border-radius:16px;border:1px solid #232733;background:#0a0a0f;padding:16px">
-          <div style="font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:12px">SUMMARY</div>
-          <p style="font-size:13.5px;line-height:1.75rem;color:rgba(255,255,255,.7)" data-i18n="example_summary">لو لسه بتبدأ بودكاست وميزانيتك 3000ج، الـ Rode PodMic هو الاختيار الصح. صوته دافي ومش بيلقط دوشة الشارع.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Image (Report Preview) -->
-    <div style="max-width:900px;margin:0 auto;border-radius:24px;overflow:hidden;border:1px solid #232733;box-shadow:0 20px 80px rgba(0,0,0,.5)">
-      <img src="https://raw.githubusercontent.com/midoaistore/mido-landing/a07f30c6fc547061f39661537246f4aa5e49962d/report-preview-en.png" alt="Report Preview" style="width:100%;height:auto;display:block;">
-    </div>
+    <a href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener noreferrer" class="btn btn-buy" data-i18n="buy_btn">احصل عليها الآن - $6 🔒</a>
+    <p class="trial-note" data-i18n="trial_note">تجربة مجانية واحدة لكل زائر. النظام يستقبل حتى 100 تجربة مجانية يوميًا.</p>
   </div>
 </section>
+
+<!-- FAQ -->
+<section class="wrap sect">
+  <h2 class="center" style="font-size:24px;font-weight:800;margin-bottom:24px" data-i18n="faq_title">الأسئلة الشائعة</h2>
+  <div class="faq-item" onclick="this.classList.toggle('open')">
+    <h4><span data-i18n="faq1_q">كيف يعمل البحث؟</span> <span>▼</span></h4>
+    <p data-i18n="faq1_a">نظامنا يبحث في 10 مصادر محلية ودولية، ثم يقارن الأدلة ويختار أفضل 5، ويحولها لتقرير كامل.</p>
+  </div>
+  <div class="faq-item" onclick="this.classList.toggle('open')">
+    <h4><span data-i18n="faq2_q">هل التجربة المجانية محدودة؟</span> <span>▼</span></h4>
+    <p data-i18n="faq2_a">نعم، تجربة واحدة لكل زائر. الموقع ككل يستقبل حتى 100 تجربة مجانية يوميًا.</p>
+  </div>
+  <div class="faq-item" onclick="this.classList.toggle('open')">
+    <h4><span data-i18n="faq3_q">هل المفاتيح آمنة؟</span> <span>▼</span></h4>
+    <p data-i18n="faq3_a">نعم، المفاتيح لا تُكشف أبدًا في الواجهة. جميع الاتصالات تتم عبر Worker آمن (Server-Side).</p>
+  </div>
 </section>
 
 <footer><div class="wrap mono">
-  <span data-i18n="footer">© 2026 Mido AI Store</span>
+  <span data-i18n="footer">© 2026 Mido AI Store | V7.0 | Privacy • Support</span>
 </div></footer>
 
 <script>
@@ -297,190 +266,88 @@ footer .wrap{flex-direction:row}
 'use strict';
 
 var WORKER_URL = 'https://mido-deepsearch.midoaistore.workers.dev';
-var CURRENT_SKILL = localStorage.getItem('mido_saved_skill') || 'deep_search';
 var CURRENT_LANG = localStorage.getItem('mido_lang') || 'ar';
 
-// ===== Translations =====
 var T = {
-  ar: {example_badge:"مثال حي - 60 ثانية", example_title:"تقرير البودكاست في 60 ثانية", example_complete:"تقرير مكتمل | 60 ثانية", example_q:"افضل مايك للبودكاست - ميزانية 3000 جنيه", example_winner:"الفائز", example_price:"2,800ج", example_summary:"لو لسه بتبدأ بودكاست وميزانيتك 3000ج، الـ Rode PodMic هو الاختيار الصح.",
-    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"وكيل البحث العميق", chip1:"محرك مهارات + عدادات حية", chip3:"بحث | تلخيص | مقارنة",
-    lead:"وكيل بحث عميق بيوفر 96% من وقت البحث.", cta1:"جرب البحث مجانا", remaining_left:"متبقي",
-    laws_title:"قوانين أسيموف", demo_badge:"جرب بنفسك", demo_title:"كل سؤال له تقرير مختلف",
-    skill1:"🔍 بحث عميق", skill2:"⚡ تلخيص", skill3:"⚖️ مقارنة", save_skill:"💾 حفظ",
-    search_placeholder:"اكتب سؤالك", search_btn:"بحث 🔍", rings_badge:"بروتوكول المعالجة", rings_title:"مراحل المعالجة الخمس",
-    foot_search:"بحث اليوم", footer:"© 2026 Mido AI Store",
-    law1_t:"القانون الأول: لا تؤذي", law1_s:"لا يجوز للروبوت إيذاء الإنسان", law1_d:"التقارير بتركز على الفائدة.",
-    law2_t:"القانون الثاني: الطاعة", law2_s:"طاعة أوامر الإنسان", law2_d:"أنت اللي بتحدد السؤال.",
-    law3_t:"القانون الثالث: حماية الوجود", law3_s:"حماية وجود الروبوت", law3_d:"يعتمد على مصادر حية.",
-    law4_t:"القانون الرابع: الإضافة المصرية", law4_s:"مفيد وعملي للمصريين", law4_d:"إجابات بأسعار مصرية.",
-    ring1_n:"البحث في المصادر", ring1_d:"10 مصادر حية",
-    ring2_n:"بناء الأطروحة", ring2_d:"تحليل",
-    ring3_n:"تقليص الحجم", ring3_d:"أعلى 5 مصادر",
-    ring4_n:"تقييم المخاطر", ring4_d:"مخاطر",
-    ring5_n:"التقرير النهائي", ring5_d:"تقرير من أعلى 5",
-    empty_p:"العنكبوت مستني سؤالك", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
-    sug1:"افضل لابتوب للبرمجة 25000 جنيه", sug2:"افضل مايك بودكاست 3000ج", sug3:"ارخص انترنت منزلي في مصر",
-    stats_visitors:"زوار", stats_searches:"بحث اليوم", stats_success:"ناجحة", stats_failed:"فاشلة",
-    search_loading:"يبحث...", search_error:"خطأ:", answer:"الإجابة"
+  ar: {
+    badge:"V7.0 | VERIFIED RESEARCH ENGINE",
+    hero_title:"تقرير بحث منظم بالكامل في 35-40 ثانية",
+    hero_desc:"مصادر موثقة • أسعار محلية وعالمية • توصية نهائية واضحة. جرّب بحثًا مجانيًا واحدًا، ثم احصل على الأداة بالكامل.",
+    cta_try:"جرب البحث المجاني ←", cta_buy:"احصل على الأداة - $6",
+    case_badge:"تقرير حقيقي تم إنشاؤه في 35 ثانية",
+    case_title:"أفضل سماعات إلغاء الضوضاء تحت 150 دولارًا",
+    case_quick:"الخلاصة السريعة", case_table:"جدول المقارنة المختصر", case_rec:"التوصية النهائية",
+    case_rec_desc:"Sony WH-CH720N هي الأفضل إجمالاً تحت 4,500 جنيه. JBL Tune 770NC هي الأفضل اقتصاديًا تحت 2,500 جنيه.",
+    case_sources:"المصادر: SoundGuys (Score 0.75) • CNET (Score 0.76) • TechRadar (Score 0.76)",
+    case_note:"* الأسعار تقريبية وتعتمد على سعر تحويل 1 USD = 30 EGP.",
+    th_model:"السماعة", th_price:"السعر (USD)", th_egp:"السعر (EGP)", th_anc:"ANC /5", th_battery:"البطارية",
+    demo_badge:"جرب بنفسك - 40 ثانية", demo_title:"اكتب سؤالك، واحصل على تقرير موثق",
+    search_placeholder:"اكتب سؤالك البحثي هنا...", search_btn:"بحث 🔍",
+    foot_search:"بحث اليوم", remaining_left:"متبقي",
+    price_sub:"أو ما يعادله بعملتك المحلية عبر Gumroad",
+    get_tool:"الوصول الكامل للأداة (Mido Deep Search)",
+    get_keys:"مفاتيح Tavily و Grok و Nipus جاهزة للاستخدام",
+    get_setup:"طريقة الإعداد خطوة بخطوة (Worker + Cloudflare)",
+    get_guide:"دليل التشغيل والتوثيق", get_limits:"حدود الاستخدام الموضحة",
+    buy_btn:"احصل عليها الآن - $6 🔒",
+    trial_note:"تجربة مجانية واحدة لكل زائر. النظام يستقبل حتى 100 تجربة مجانية يوميًا.",
+    faq_title:"الأسئلة الشائعة", faq1_q:"كيف يعمل البحث؟", faq1_a:"نظامنا يبحث في 10 مصادر محلية ودولية، ثم يقارن الأدلة ويختار أفضل 5.",
+    faq2_q:"هل التجربة المجانية محدودة؟", faq2_a:"نعم، تجربة واحدة لكل زائر. الموقع ككل يستقبل حتى 100 تجربة يوميًا.",
+    faq3_q:"هل المفاتيح آمنة؟", faq3_a:"نعم، المفاتيح لا تُكشف أبدًا في الواجهة. جميع الاتصالات عبر Worker آمن.",
+    footer:"© 2026 Mido AI Store | V7.0 | Privacy • Support",
+    searching_in:"جاري مراجعة المصادر المحلية والدولية...", sources_reviewed:"مصدرًا تمت مراجعته",
+    time_elapsed:"الوقت المنقضي", time_remaining:"المتبقي", search_complete:"اكتمل البحث",
+    sources_used:"10 مصادر تمت مراجعتها، 5 مصادر موثوقة للتقرير",
+    answer:"الإجابة", sources:"المصادر", error_prefix:"خطأ:",
+    empty_prompt:"اكتب سؤالك البحثي في الأعلى واحصل على تقرير في 40 ثانية",
+    timeout_error:"انتهت مدة الانتظار. جرب مرة أخرى.", retry_btn:"إعادة المحاولة"
   },
-  en: {example_badge:"Live Example - 60s", example_title:"Podcast Report in 60s", example_complete:"Complete Report | 60s", example_q:"Best podcast mic - budget $300", example_winner:"Winner", example_price:"$150", example_summary:"If you're starting a podcast with a $300 budget, the Rode PodMic is the right choice.",
-    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Deep Search Agent", chip1:"Skills Engine + Live Counters", chip3:"Search | Summary | Compare",
-    lead:"Deep search agent saves 96% of research time.", cta1:"Try Search Free", remaining_left:"left",
-    laws_title:"Asimov's Laws", demo_badge:"Try it", demo_title:"Every question gets a different report",
-    skill1:"🔍 Deep Search", skill2:"⚡ Summary", skill3:"⚖️ Compare", save_skill:"💾 Save",
-    search_placeholder:"Type your question", search_btn:"Search 🔍", rings_badge:"Processing Protocol", rings_title:"The Five Stages",
-    foot_search:"searches today", footer:"© 2026 Mido AI Store",
-    law1_t:"Law 1: Don't Harm", law1_s:"AI must not harm humans", law1_d:"Reports focus on benefit.",
-    law2_t:"Law 2: Obey", law2_s:"AI must obey humans", law2_d:"You decide the question.",
-    law3_t:"Law 3: Self-Preserve", law3_s:"AI must protect itself", law3_d:"Depends on live sources.",
-    law4_t:"Law 4: Egyptian Addition", law4_s:"Be useful to Egyptians", law4_d:"Answers with Egyptian prices.",
-    ring1_n:"Search Sources", ring1_d:"10 live sources",
-    ring2_n:"Build Thesis", ring2_d:"Analysis",
-    ring3_n:"Reduce", ring3_d:"Top 5 sources",
-    ring4_n:"Risk Assessment", ring4_d:"Risks",
-    ring5_n:"Final Report", ring5_d:"Report from top 5",
-    empty_p:"Spider waiting for your question", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
-    sug1:"Best laptop for programming", sug2:"Best podcast mic", sug3:"Cheapest home internet",
-    stats_visitors:"Visitors", stats_searches:"Searches today", stats_success:"Success", stats_failed:"Failed",
-    search_loading:"Searching...", search_error:"Error:", answer:"Answer"
+  en: {
+    badge:"V7.0 | VERIFIED RESEARCH ENGINE",
+    hero_title:"Get a fully structured research report in 35-40 seconds",
+    hero_desc:"Verified sources • Local + International pricing • Clear recommendation. Start with one free search.",
+    cta_try:"Try Free Search ←", cta_buy:"Get the Tool - $6",
+    case_badge:"Real Report Generated in 35 Seconds",
+    case_title:"Best Noise-Canceling Headphones Under $150",
+    case_quick:"Quick Take", case_table:"Comparison Table", case_rec:"Final Recommendation",
+    case_rec_desc:"Sony WH-CH720N is the best overall under $150. JBL Tune 770NC is the best budget option under $80.",
+    case_sources:"Sources: SoundGuys (Score 0.75) • CNET (Score 0.76) • TechRadar (Score 0.76)",
+    case_note:"* Prices are approximate (1 USD = 30 EGP).",
+    th_model:"Model", th_price:"Price (USD)", th_egp:"Price (EGP)", th_anc:"ANC /5", th_battery:"Battery",
+    demo_badge:"Try it - 40 seconds", demo_title:"Ask your question, get a verified report",
+    search_placeholder:"Type your research question here...", search_btn:"Search 🔍",
+    foot_search:"searches today", remaining_left:"left",
+    price_sub:"or local equivalent via Gumroad",
+    get_tool:"Full access to Mido Deep Search tool",
+    get_keys:"Ready-to-use Tavily, Grok, and Nipus keys",
+    get_setup:"Step-by-step setup (Worker + Cloudflare)",
+    get_guide:"User guide & documentation", get_limits:"Clear usage limits",
+    buy_btn:"Get it Now - $6 🔒",
+    trial_note:"One free trial per visitor. The platform supports up to 100 free trials per day.",
+    faq_title:"FAQ", faq1_q:"How does the research work?", faq1_a:"Our system scans 10 local and international sources, compares evidence, and selects the top 5.",
+    faq2_q:"Is the free trial limited?", faq2_a:"Yes, one trial per visitor. The platform supports up to 100 free trials per day.",
+    faq3_q:"Are the keys secure?", faq3_a:"Yes, keys are never exposed in the frontend. All communication is via a secure Worker.",
+    footer:"© 2026 Mido AI Store | V7.0 | Privacy • Support",
+    searching_in:"Searching local and international sources...", sources_reviewed:"sources reviewed",
+    time_elapsed:"Time elapsed", time_remaining:"Expected remaining", search_complete:"Research completed",
+    sources_used:"10 sources reviewed, 5 verified sources selected for the report",
+    answer:"Answer", sources:"Sources", error_prefix:"Error:",
+    empty_prompt:"Type your research question above and get a report in 40 seconds",
+    timeout_error:"Request timed out. Please try again.", retry_btn:"Retry"
   },
-  fr: {example_badge:"Exemple Réel - 60s", example_title:"Rapport Podcast en 60s", example_complete:"Rapport Complet | 60s", example_q:"Meilleur micro podcast - budget 300€", example_winner:"Gagnant", example_price:"150€", example_summary:"Si vous démarrez un podcast avec un budget de 300€, le Rode PodMic est le bon choix.",
-    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Agent de Recherche Approfondie", chip1:"Moteur + Compteurs", chip3:"Recherche | Résumé | Comparaison",
-    lead:"Agent de recherche approfondie - économise 96% du temps.", cta1:"Essayer Gratuitement", remaining_left:"restant",
-    laws_title:"Lois d'Asimov", demo_badge:"Essayer", demo_title:"Chaque question a un rapport différent",
-    skill1:"🔍 Recherche", skill2:"⚡ Résumé", skill3:"⚖️ Comparaison", save_skill:"💾 Sauver",
-    search_placeholder:"Tapez votre question", search_btn:"Rechercher 🔍", rings_badge:"Protocole", rings_title:"Les Cinq Étapes",
-    foot_search:"recherches aujourd'hui", footer:"© 2026 Mido AI Store",
-    law1_t:"Loi 1: Ne pas nuire", law1_s:"L'IA ne doit pas nuire", law1_d:"Rapports axés sur le bénéfice.",
-    law2_t:"Loi 2: Obéir", law2_s:"L'IA doit obéir", law2_d:"Vous décidez.",
-    law3_t:"Loi 3: Auto-préservation", law3_s:"L'IA doit se protéger", law3_d:"Sources en direct.",
-    law4_t:"Loi 4: Addition Égyptienne", law4_s:"Utile aux Égyptiens", law4_d:"Prix égyptiens.",
-    ring1_n:"Recherche Sources", ring1_d:"10 sources",
-    ring2_n:"Thèse", ring2_d:"Analyse",
-    ring3_n:"Réduction", ring3_d:"Top 5",
-    ring4_n:"Risques", ring4_d:"Évaluation",
-    ring5_n:"Rapport Final", ring5_d:"Top 5",
-    empty_p:"Araignée attend", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
-    sug1:"Meilleur ordinateur portable", sug2:"Meilleur micro podcast", sug3:"Internet maison moins cher",
-    stats_visitors:"Visiteurs", stats_searches:"Recherches", stats_success:"Succès", stats_failed:"Échecs",
-    search_loading:"Recherche...", search_error:"Erreur:", answer:"Réponse"
-  },
-  de: {example_badge:"Live-Beispiel - 60s", example_title:"Podcast-Bericht in 60s", example_complete:"Vollständiger Bericht | 60s", example_q:"Bestes Podcast-Mikrofon - Budget 300€", example_winner:"Gewinner", example_price:"150€", example_summary:"Wenn Sie einen Podcast mit einem Budget von 300€ starten, ist das Rode PodMic die richtige Wahl.",
-    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Deep Search Agent", chip1:"Skills Engine + Live-Zähler", chip3:"Suche | Zusammenfassung | Vergleich",
-    lead:"Deep-Search-Agent spart 96% der Recherchezeit.", cta1:"Kostenlos Testen", remaining_left:"übrig",
-    laws_title:"Asimovs Gesetze", demo_badge:"Testen", demo_title:"Jede Frage erhält einen anderen Bericht",
-    skill1:"🔍 Suche", skill2:"⚡ Zusammenfassung", skill3:"⚖️ Vergleich", save_skill:"💾 Speichern",
-    search_placeholder:"Frage eingeben", search_btn:"Suchen 🔍", rings_badge:"Protokoll", rings_title:"Die Fünf Stufen",
-    foot_search:"Suchen heute", footer:"© 2026 Mido AI Store",
-    law1_t:"Gesetz 1: Nicht schaden", law1_s:"KI darf nicht schaden", law1_d:"Fokus auf Nutzen.",
-    law2_t:"Gesetz 2: Gehorchen", law2_s:"KI muss gehorchen", law2_d:"Sie entscheiden.",
-    law3_t:"Gesetz 3: Selbstschutz", law3_s:"KI muss sich schützen", law3_d:"Live-Quellen.",
-    law4_t:"Gesetz 4: Ägyptische Ergänzung", law4_s:"Nützlich für Ägypter", law4_d:"Ägyptische Preise.",
-    ring1_n:"Quellen suchen", ring1_d:"10 Quellen",
-    ring2_n:"These", ring2_d:"Analyse",
-    ring3_n:"Reduktion", ring3_d:"Top 5",
-    ring4_n:"Risiken", ring4_d:"Bewertung",
-    ring5_n:"Bericht", ring5_d:"Top 5",
-    empty_p:"Spinne wartet", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
-    sug1:"Bester Laptop", sug2:"Bestes Podcast-Mikrofon", sug3:"Günstigstes Internet",
-    stats_visitors:"Besucher", stats_searches:"Suchen heute", stats_success:"Erfolg", stats_failed:"Fehler",
-    search_loading:"Suche...", search_error:"Fehler:", answer:"Antwort"
-  },
-  ja: {example_badge:"ライブ例 - 60秒", example_title:"60秒でポッドキャストレポート", example_complete:"完全なレポート | 60秒", example_q:"最高のポッドキャストマイク - 予算300ドル", example_winner:"勝者", example_price:"$150", example_summary:"予算300ドルでポッドキャストを始めるなら、Rode PodMicが正しい選択です。",
-    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"ディープサーチエージェント", chip1:"スキルエンジン + カウンター", chip3:"検索 | 要約 | 比較",
-    lead:"ディープサーチエージェント - 調査時間を96%節約。", cta1:"無料で試す", remaining_left:"残り",
-    laws_title:"アシモフの法則", demo_badge:"試してみる", demo_title:"すべての質問に異なるレポート",
-    skill1:"🔍 検索", skill2:"⚡ 要約", skill3:"⚖️ 比較", save_skill:"💾 保存",
-    search_placeholder:"質問を入力", search_btn:"検索 🔍", rings_badge:"プロトコル", rings_title:"5つの段階",
-    foot_search:"本日の検索", footer:"© 2026 Mido AI Store",
-    law1_t:"第1法則: 害を与えない", law1_s:"AIは人間に害を与えてはならない", law1_d:"利益に焦点を当てる。",
-    law2_t:"第2法則: 従う", law2_s:"AIは人間に従わなければならない", law2_d:"あなたが決める。",
-    law3_t:"第3法則: 自己保存", law3_s:"AIは自己を保護しなければならない", law3_d:"ライブソース。",
-    law4_t:"第4法則: エジプトの追加", law4_s:"エジプト人に役立つ", law4_d:"エジプトの価格。",
-    ring1_n:"ソース検索", ring1_d:"10ソース",
-    ring2_n:"論文構築", ring2_d:"分析",
-    ring3_n:"削減", ring3_d:"トップ5",
-    ring4_n:"リスク", ring4_d:"評価",
-    ring5_n:"最終レポート", ring5_d:"トップ5",
-    empty_p:"スパイダーが待っています", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
-    sug1:"最高のノートパソコン", sug2:"最高のポッドキャストマイク", sug3:"最も安い家庭用インターネット",
-    stats_visitors:"訪問者", stats_searches:"本日の検索", stats_success:"成功", stats_failed:"失敗",
-    search_loading:"検索中...", search_error:"エラー:", answer:"回答"
-  },
-  zh: {example_badge:"实时示例 - 60秒", example_title:"60秒播客报告", example_complete:"完整报告 | 60秒", example_q:"最佳播客麦克风 - 预算300美元", example_winner:"获胜者", example_price:"$150", example_summary:"如果您以300美元的预算开始播客，Rode PodMic是正确选择。",
-    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"深度搜索代理", chip1:"技能引擎 + 实时计数器", chip3:"搜索 | 摘要 | 比较",
-    lead:"深度搜索代理 - 节省96%的研究时间。", cta1:"免费尝试", remaining_left:"剩余",
-    laws_title:"阿西莫夫法则", demo_badge:"试一试", demo_title:"每个问题都会得到不同的报告",
-    skill1:"🔍 搜索", skill2:"⚡ 摘要", skill3:"⚖️ 比较", save_skill:"💾 保存",
-    search_placeholder:"输入问题", search_btn:"搜索 🔍", rings_badge:"协议", rings_title:"五个阶段",
-    foot_search:"今日搜索", footer:"© 2026 Mido AI Store",
-    law1_t:"第一法则: 不伤害", law1_s:"AI不得伤害人类", law1_d:"关注利益。",
-    law2_t:"第二法则: 服从", law2_s:"AI必须服从人类", law2_d:"您来决定。",
-    law3_t:"第三法则: 自我保护", law3_s:"AI必须保护自己", law3_d:"实时来源。",
-    law4_t:"第四法则: 埃及补充", law4_s:"对埃及人有用", law4_d:"埃及价格。",
-    ring1_n:"搜索来源", ring1_d:"10个来源",
-    ring2_n:"构建论文", ring2_d:"分析",
-    ring3_n:"缩减", ring3_d:"前5",
-    ring4_n:"风险", ring4_d:"评估",
-    ring5_n:"最终报告", ring5_d:"前5",
-    empty_p:"蜘蛛等待中", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
-    sug1:"最佳笔记本电脑", sug2:"最佳播客麦克风", sug3:"最便宜的家庭互联网",
-    stats_visitors:"访客", stats_searches:"今日搜索", stats_success:"成功", stats_failed:"失败",
-    search_loading:"搜索中...", search_error:"错误:", answer:"答案"
-  },
-  es: {example_badge:"Ejemplo en Vivo - 60s", example_title:"Informe de Podcast en 60s", example_complete:"Informe Completo | 60s", example_q:"Mejor micrófono de podcast - presupuesto 300€", example_winner:"Ganador", example_price:"150€", example_summary:"Si estás comenzando un podcast con un presupuesto de 300€, el Rode PodMic es la elección correcta.",
-    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Agente de Búsqueda Profunda", chip1:"Motor + Contadores", chip3:"Búsqueda | Resumen | Comparación",
-    lead:"Agente de búsqueda profunda - ahorra 96% del tiempo.", cta1:"Probar Gratis", remaining_left:"restante",
-    laws_title:"Leyes de Asimov", demo_badge:"Probar", demo_title:"Cada pregunta obtiene un informe diferente",
-    skill1:"🔍 Búsqueda", skill2:"⚡ Resumen", skill3:"⚖️ Comparación", save_skill:"💾 Guardar",
-    search_placeholder:"Escribe tu pregunta", search_btn:"Buscar 🔍", rings_badge:"Protocolo", rings_title:"Las Cinco Etapas",
-    foot_search:"búsquedas hoy", footer:"© 2026 Mido AI Store",
-    law1_t:"Ley 1: No dañar", law1_s:"La IA no debe dañar", law1_d:"Enfoque en beneficio.",
-    law2_t:"Ley 2: Obedecer", law2_s:"La IA debe obedecer", law2_d:"Tú decides.",
-    law3_t:"Ley 3: Autopreservación", law3_s:"La IA debe protegerse", law3_d:"Fuentes en vivo.",
-    law4_t:"Ley 4: Adición Egipcia", law4_s:"Útil para egipcios", law4_d:"Precios egipcios.",
-    ring1_n:"Buscar Fuentes", ring1_d:"10 fuentes",
-    ring2_n:"Tesis", ring2_d:"Análisis",
-    ring3_n:"Reducción", ring3_d:"Top 5",
-    ring4_n:"Riesgos", ring4_d:"Evaluación",
-    ring5_n:"Informe Final", ring5_d:"Top 5",
-    empty_p:"Araña esperando", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
-    sug1:"Mejor portátil", sug2:"Mejor micrófono podcast", sug3:"Internet más barato",
-    stats_visitors:"Visitantes", stats_searches:"Búsquedas hoy", stats_success:"Éxito", stats_failed:"Fallos",
-    search_loading:"Buscando...", search_error:"Error:", answer:"Respuesta"
-  },
-  pt: {example_badge:"Exemplo ao Vivo - 60s", example_title:"Relatório de Podcast em 60s", example_complete:"Relatório Completo | 60s", example_q:"Melhor microfone de podcast - orçamento 300€", example_winner:"Vencedor", example_price:"150€", example_summary:"Se você está começando um podcast com um orçamento de 300€, o Rode PodMic é a escolha certa.",
-    badge:"V6.3 GLOBAL SKILLS ENGINE", sub1:"Agente de Pesquisa Profunda", chip1:"Motor + Contadores", chip3:"Pesquisa | Resumo | Comparação",
-    lead:"Agente de pesquisa profunda - economiza 96% do tempo.", cta1:"Experimentar Grátis", remaining_left:"restante",
-    laws_title:"Leis de Asimov", demo_badge:"Experimentar", demo_title:"Cada pergunta obtém um relatório diferente",
-    skill1:"🔍 Pesquisa", skill2:"⚡ Resumo", skill3:"⚖️ Comparação", save_skill:"💾 Salvar",
-    search_placeholder:"Digite sua pergunta", search_btn:"Pesquisar 🔍", rings_badge:"Protocolo", rings_title:"As Cinco Etapas",
-    foot_search:"pesquisas hoje", footer:"© 2026 Mido AI Store",
-    law1_t:"Lei 1: Não ferir", law1_s:"IA não deve ferir", law1_d:"Foco no benefício.",
-    law2_t:"Lei 2: Obedecer", law2_s:"IA deve obedecer", law2_d:"Você decide.",
-    law3_t:"Lei 3: Autopreservação", law3_s:"IA deve se proteger", law3_d:"Fontes ao vivo.",
-    law4_t:"Lei 4: Adição Egípcia", law4_s:"Útil para egípcios", law4_d:"Preços egípcios.",
-    ring1_n:"Buscar Fontes", ring1_d:"10 fontes",
-    ring2_n:"Tese", ring2_d:"Análise",
-    ring3_n:"Redução", ring3_d:"Top 5",
-    ring4_n:"Riscos", ring4_d:"Avaliação",
-    ring5_n:"Relatório Final", ring5_d:"Top 5",
-    empty_p:"Aranha esperando", empty_s:"Tavily 10 → Qwen3 → Report - 60s",
-    sug1:"Melhor laptop", sug2:"Melhor microfone podcast", sug3:"Internet mais barato",
-    stats_visitors:"Visitantes", stats_searches:"Pesquisas hoje", stats_success:"Sucesso", stats_failed:"Falhas",
-    search_loading:"Pesquisando...", search_error:"Erro:", answer:"Resposta"
-  }
+  fr: {badge:"V7.0 | MOTEUR DE RECHERCHE VÉRIFIÉ",hero_title:"Obtenez un rapport de recherche structuré en 35-40 secondes",hero_desc:"Sources vérifiées • Prix locaux + internationaux • Recommandation claire.",cta_try:"Essayer Gratuitement ←",cta_buy:"Acheter l'Outil - $6",case_badge:"Rapport Réel Généré en 35 Secondes",case_title:"Meilleurs Casques à Réduction de Bruit sous 150$",case_quick:"Résumé Rapide",case_table:"Tableau Comparatif",case_rec:"Recommandation Finale",case_rec_desc:"Sony WH-CH720N est le meilleur choix global. JBL Tune 770NC est le meilleur choix économique.",case_sources:"Sources: SoundGuys • CNET • TechRadar",case_note:"* Prix approximatifs.",th_model:"Modèle",th_price:"Prix (USD)",th_egp:"Prix (EGP)",th_anc:"ANC /5",th_battery:"Batterie",demo_badge:"Essayez - 40 secondes",demo_title:"Posez votre question, obtenez un rapport",search_placeholder:"Tapez votre question...",search_btn:"Rechercher 🔍",foot_search:"recherches aujourd'hui",remaining_left:"restant",price_sub:"ou équivalent local via Gumroad",get_tool:"Accès complet à l'outil",get_keys:"Clés Tavily, Grok et Nipus prêtes",get_setup:"Configuration étape par étape",get_guide:"Guide utilisateur",get_limits:"Limites d'utilisation",buy_btn:"Acheter - $6 🔒",trial_note:"Un essai gratuit par visiteur. Jusqu'à 100 essais par jour.",faq_title:"FAQ",faq1_q:"Comment ça marche?",faq1_a:"Le système analyse 10 sources et sélectionne les 5 meilleures.",faq2_q:"L'essai est limité?",faq2_a:"Oui, un essai par visiteur.",faq3_q:"Les clés sont sécurisées?",faq3_a:"Oui, jamais exposées côté client.",footer:"© 2026 Mido AI Store",searching_in:"Recherche...",sources_reviewed:"sources examinées",time_elapsed:"Temps écoulé",time_remaining:"Restant",search_complete:"Recherche terminée",sources_used:"10 sources, 5 sélectionnées",answer:"Réponse",sources:"Sources",error_prefix:"Erreur:",empty_prompt:"Tapez votre question...",timeout_error:"Délai dépassé.",retry_btn:"Réessayer"},
+  de: {badge:"V7.0 | VERIFIZIERTE RECHERCHE",hero_title:"Erhalten Sie einen strukturierten Bericht in 35-40 Sekunden",hero_desc:"Verifizierte Quellen • Lokale + Internationale Preise • Klare Empfehlung.",cta_try:"Kostenlos Testen ←",cta_buy:"Tool Kaufen - $6",case_badge:"Echter Bericht in 35 Sekunden",case_title:"Beste Noise-Cancelling-Kopfhörer unter $150",case_quick:"Kurzfassung",case_table:"Vergleichstabelle",case_rec:"Endgültige Empfehlung",case_rec_desc:"Sony WH-CH720N ist die beste Wahl. JBL Tune 770NC ist die günstigste Option.",case_sources:"Quellen: SoundGuys • CNET • TechRadar",case_note:"* Preise ungefähr.",th_model:"Modell",th_price:"Preis (USD)",th_egp:"Preis (EGP)",th_anc:"ANC /5",th_battery:"Akku",demo_badge:"Testen - 40 Sekunden",demo_title:"Frage eingeben, Bericht erhalten",search_placeholder:"Frage eingeben...",search_btn:"Suchen 🔍",foot_search:"Suchen heute",remaining_left:"übrig",price_sub:"oder lokales Äquivalent",get_tool:"Vollzugriff auf das Tool",get_keys:"Tavily, Grok und Nipus Schlüssel",get_setup:"Schritt-für-Schritt-Anleitung",get_guide:"Benutzerhandbuch",get_limits:"Nutzungslimits",buy_btn:"Jetzt Kaufen - $6 🔒",trial_note:"Eine kostenlose Testversion pro Besucher. Bis zu 100 pro Tag.",faq_title:"FAQ",faq1_q:"Wie funktioniert es?",faq1_a:"Das System prüft 10 Quellen und wählt die Top 5.",faq2_q:"Ist die Testversion begrenzt?",faq2_a:"Ja, eine pro Besucher.",faq3_q:"Sind die Schlüssel sicher?",faq3_a:"Ja, nie im Frontend sichtbar.",footer:"© 2026 Mido AI Store",searching_in:"Suche...",sources_reviewed:"Quellen geprüft",time_elapsed:"Verstrichene Zeit",time_remaining:"Verbleibend",search_complete:"Suche abgeschlossen",sources_used:"10 Quellen, 5 ausgewählt",answer:"Antwort",sources:"Quellen",error_prefix:"Fehler:",empty_prompt:"Geben Sie Ihre Frage ein...",timeout_error:"Zeitüberschreitung.",retry_btn:"Erneut versuchen"},
+  ja: {badge:"V7.0 | 検証済みリサーチエンジン",hero_title:"35〜40秒で完全に構造化されたレポートを取得",hero_desc:"検証済みソース • 国内外の価格 • 明確な推奨事項。",cta_try:"無料で試す ←",cta_buy:"ツールを購入 - $6",case_badge:"35秒で生成された実際のレポート",case_title:"150ドル以下の最高のノイズキャンセリングヘッドフォン",case_quick:"クイックテイク",case_table:"比較表",case_rec:"最終推奨",case_rec_desc:"Sony WH-CH720Nが総合的に最高です。JBL Tune 770NCが予算に最適です。",case_sources:"ソース: SoundGuys • CNET • TechRadar",case_note:"* 価格は概算です。",th_model:"モデル",th_price:"価格 (USD)",th_egp:"価格 (EGP)",th_anc:"ANC /5",th_battery:"バッテリー",demo_badge:"試してみる - 40秒",demo_title:"質問を入力してレポートを取得",search_placeholder:"質問を入力...",search_btn:"検索 🔍",foot_search:"本日の検索",remaining_left:"残り",price_sub:"または現地通貨換算",get_tool:"ツールへの完全アクセス",get_keys:"Tavily、Grok、Nipusキー",get_setup:"セットアップ手順",get_guide:"ユーザーガイド",get_limits:"使用制限",buy_btn:"今すぐ購入 - $6 🔒",trial_note:"訪問者ごとに1回の無料トライアル。1日最大100回。",faq_title:"FAQ",faq1_q:"仕組みは？",faq1_a:"10のソースを調査し、トップ5を選択します。",faq2_q:"トライアルは制限されていますか？",faq2_a:"はい、訪問者ごとに1回です。",faq3_q:"キーは安全ですか？",faq3_a:"はい、フロントエンドには表示されません。",footer:"© 2026 Mido AI Store",searching_in:"検索中...",sources_reviewed:"ソースを確認済み",time_elapsed:"経過時間",time_remaining:"残り時間",search_complete:"検索完了",sources_used:"10ソース、5つを選択",answer:"回答",sources:"ソース",error_prefix:"エラー:",empty_prompt:"質問を入力してください...",timeout_error:"タイムアウトしました。",retry_btn:"再試行"},
+  zh: {badge:"V7.0 | 验证研究引擎",hero_title:"在35-40秒内获得完全结构化的研究报告",hero_desc:"经过验证的来源 • 本地和国际价格 • 明确的建议。",cta_try:"免费试用 ←",cta_buy:"购买工具 - $6",case_badge:"35秒内生成的真实报告",case_title:"150美元以下最佳降噪耳机",case_quick:"快速摘要",case_table:"比较表",case_rec:"最终建议",case_rec_desc:"Sony WH-CH720N 是整体最佳选择。JBL Tune 770NC 是最佳预算选择。",case_sources:"来源: SoundGuys • CNET • TechRadar",case_note:"* 价格是近似值。",th_model:"型号",th_price:"价格 (USD)",th_egp:"价格 (EGP)",th_anc:"ANC /5",th_battery:"电池",demo_badge:"试一试 - 40秒",demo_title:"输入问题，获取报告",search_placeholder:"输入您的研究问题...",search_btn:"搜索 🔍",foot_search:"今日搜索",remaining_left:"剩余",price_sub:"或通过Gumroad的当地等价物",get_tool:"完全访问工具",get_keys:"Tavily、Grok和Nipus密钥",get_setup:"分步设置",get_guide:"用户指南",get_limits:"使用限制",buy_btn:"立即购买 - $6 🔒",trial_note:"每位访客一次免费试用。每天最多100次。",faq_title:"FAQ",faq1_q:"它是如何工作的？",faq1_a:"系统扫描10个来源并选择前5个。",faq2_q:"试用有限制吗？",faq2_a:"是的，每位访客一次。",faq3_q:"密钥安全吗？",faq3_a:"是的，永远不会在前端暴露。",footer:"© 2026 Mido AI Store",searching_in:"搜索中...",sources_reviewed:"已审查来源",time_elapsed:"已用时间",time_remaining:"预计剩余",search_complete:"搜索完成",sources_used:"已审查10个来源，选择了5个",answer:"回答",sources:"来源",error_prefix:"错误:",empty_prompt:"在上方输入您的研究问题...",timeout_error:"请求超时。",retry_btn:"重试"},
+  es: {badge:"V7.0 | MOTOR DE INVESTIGACIÓN VERIFICADO",hero_title:"Obtén un informe de investigación estructurado en 35-40 segundos",hero_desc:"Fuentes verificadas • Precios locales + internacionales • Recomendación clara.",cta_try:"Probar Gratis ←",cta_buy:"Comprar la Herramienta - $6",case_badge:"Informe Real Generado en 35 Segundos",case_title:"Mejores Auriculares con Cancelación de Ruido por Menos de $150",case_quick:"Resumen Rápido",case_table:"Tabla Comparativa",case_rec:"Recomendación Final",case_rec_desc:"Sony WH-CH720N es la mejor opción general. JBL Tune 770NC es la mejor opción económica.",case_sources:"Fuentes: SoundGuys • CNET • TechRadar",case_note:"* Precios aproximados.",th_model:"Modelo",th_price:"Precio (USD)",th_egp:"Precio (EGP)",th_anc:"ANC /5",th_battery:"Batería",demo_badge:"Pruébalo - 40 segundos",demo_title:"Escribe tu pregunta, obtén un informe",search_placeholder:"Escribe tu pregunta...",search_btn:"Buscar 🔍",foot_search:"búsquedas hoy",remaining_left:"restante",price_sub:"o equivalente local vía Gumroad",get_tool:"Acceso completo a la herramienta",get_keys:"Claves Tavily, Grok y Nipus listas",get_setup:"Configuración paso a paso",get_guide:"Guía de usuario",get_limits:"Límites de uso",buy_btn:"Comprar Ahora - $6 🔒",trial_note:"Una prueba gratuita por visitante. Hasta 100 por día.",faq_title:"FAQ",faq1_q:"¿Cómo funciona?",faq1_a:"El sistema escanea 10 fuentes y selecciona las 5 mejores.",faq2_q:"¿La prueba es limitada?",faq2_a:"Sí, una por visitante.",faq3_q:"¿Las claves son seguras?",faq3_a:"Sí, nunca se exponen en el frontend.",footer:"© 2026 Mido AI Store",searching_in:"Buscando...",sources_reviewed:"fuentes revisadas",time_elapsed:"Tiempo transcurrido",time_remaining:"Restante",search_complete:"Búsqueda completada",sources_used:"10 fuentes, 5 seleccionadas",answer:"Respuesta",sources:"Fuentes",error_prefix:"Error:",empty_prompt:"Escribe tu pregunta...",timeout_error:"Tiempo agotado.",retry_btn:"Reintentar"},
+  pt: {badge:"V7.0 | MOTOR DE PESQUISA VERIFICADO",hero_title:"Obtenha um relatório de pesquisa estruturado em 35-40 segundos",hero_desc:"Fontes verificadas • Preços locais + internacionais • Recomendação clara.",cta_try:"Experimentar Grátis ←",cta_buy:"Comprar a Ferramenta - $6",case_badge:"Relatório Real Gerado em 35 Segundos",case_title:"Melhores Fones com Cancelamento de Ruído por Menos de $150",case_quick:"Resumo Rápido",case_table:"Tabela Comparativa",case_rec:"Recomendação Final",case_rec_desc:"Sony WH-CH720N é a melhor opção geral. JBL Tune 770NC é a melhor opção econômica.",case_sources:"Fontes: SoundGuys • CNET • TechRadar",case_note:"* Preços aproximados.",th_model:"Modelo",th_price:"Preço (USD)",th_egp:"Preço (EGP)",th_anc:"ANC /5",th_battery:"Bateria",demo_badge:"Experimente - 40 segundos",demo_title:"Digite sua pergunta, obtenha um relatório",search_placeholder:"Digite sua pergunta...",search_btn:"Pesquisar 🔍",foot_search:"pesquisas hoje",remaining_left:"restante",price_sub:"ou equivalente local via Gumroad",get_tool:"Acesso completo à ferramenta",get_keys:"Chaves Tavily, Grok e Nipus prontas",get_setup:"Configuração passo a passo",get_guide:"Guia do usuário",get_limits:"Limites de uso",buy_btn:"Comprar Agora - $6 🔒",trial_note:"Um teste gratuito por visitante. Até 100 por dia.",faq_title:"FAQ",faq1_q:"Como funciona?",faq1_a:"O sistema escaneia 10 fontes e seleciona as 5 melhores.",faq2_q:"O teste é limitado?",faq2_a:"Sim, um por visitante.",faq3_q:"As chaves são seguras?",faq3_a:"Sim, nunca expostas no frontend.",footer:"© 2026 Mido AI Store",searching_in:"Pesquisando...",sources_reviewed:"fontes revisadas",time_elapsed:"Tempo decorrido",time_remaining:"Restante",search_complete:"Pesquisa concluída",sources_used:"10 fontes, 5 selecionadas",answer:"Resposta",sources:"Fontes",error_prefix:"Erro:",empty_prompt:"Digite sua pergunta...",timeout_error:"Tempo esgotado.",retry_btn:"Tentar novamente"}
 };
 
-// ===== Currency & Flags =====
 var CURRENCIES = {EG:'EGP',SA:'SAR',US:'USD',FR:'EUR',DE:'EUR',JP:'JPY',CN:'CNY',ES:'EUR',PT:'EUR'};
 var FLAGS = {EG:'🇪🇬',SA:'🇸🇦',US:'🇺🇸',FR:'🇫🇷',DE:'🇩🇪',JP:'🇯🇵',CN:'🇨🇳',ES:'🇪🇸',PT:'🇵🇹'};
 
-// ===== Apply Language (Updates EVERYTHING) =====
 function applyLanguage(lang) {
   var d = T[lang] || T.ar;
-  
-  // Update all data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     var k = el.getAttribute('data-i18n');
     if (d[k]) el.textContent = d[k];
@@ -489,12 +356,8 @@ function applyLanguage(lang) {
     var k = el.getAttribute('data-i18n-ph');
     if (d[k]) el.placeholder = d[k];
   });
-  
-  // Update direction
   document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
   document.documentElement.lang = lang;
-  
-  // Update language button
   var opt = document.querySelector('.lang-option[data-lang="' + lang + '"]');
   if (opt) {
     var c = opt.getAttribute('data-country');
@@ -503,45 +366,9 @@ function applyLanguage(lang) {
     document.getElementById('currencyFlag').textContent = FLAGS[c];
     document.getElementById('currencyCode').textContent = CURRENCIES[c];
   }
-  
-  // Re-render LAWS with translation
-  var laws = document.getElementById('laws');
-  if (laws) {
-    laws.innerHTML = [1,2,3,4].map(function(n) {
-      var c = ['#ef4444','#667eea','#10b981','#f59e0b'][n-1];
-      var eg = n===4 ? '<span class="eg">Egyptian</span>' : '';
-      return '<div class="law"><div class="in"><div class="row"><span class="num mono" style="color:'+c+'">0'+n+'</span><div>'+eg+'<span class="pm">+</span></div></div><h3>'+d['law'+n+'_t']+'</h3><p class="sd" style="color:'+c+'">'+d['law'+n+'_s']+'</p><p class="dt">'+d['law'+n+'_d']+'</p></div></div>';
-    }).join('');
-  }
-  
-  // Re-render RINGS with translation
-  var rings = document.getElementById('rings');
-  if (rings) {
-    var colors = ['#ef4444','#667eea','#10b981','#f59e0b','#8b5cf6'];
-    rings.innerHTML = [1,2,3,4,5].map(function(n) {
-      var c = colors[n-1];
-      return '<div class="ring" data-c="'+c+'"><div class="cir" style="border-color:'+c+';color:'+c+'">'+n+'</div><div class="c"><div class="h"><span class="code mono" style="border-color:'+c+'40;color:'+c+';background:'+c+'15">Stage '+n+'</span><h3>'+d['ring'+n+'_n']+'</h3></div><p>'+d['ring'+n+'_d']+'</p></div></div>';
-    }).join('');
-  }
-  
-  // Update suggestions
-  var sugs = document.getElementById('sugs');
-  if (sugs) {
-    sugs.innerHTML = [d.sug1, d.sug2, d.sug3].map(function(s) {
-      return '<button type="button" class="sug">'+s+'</button>';
-    }).join('');
-  }
-  
-  // Update empty state
-  var res = document.getElementById('res');
-  if (res) {
-    res.innerHTML = '<div class="empty"><div class="spd">🕷️</div><p>'+d.empty_p+'</p><small class="mono">'+d.empty_s+'</small></div>';
-  }
-  
   localStorage.setItem('mido_lang', lang);
 }
 
-// ===== Language Switcher =====
 document.getElementById('langBtn').addEventListener('click', function(e) {
   e.stopPropagation();
   document.getElementById('langDropdown').classList.toggle('active');
@@ -559,32 +386,8 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// ===== Skill Tabs =====
-function setActiveSkill(skill) {
-  CURRENT_SKILL = skill;
-  document.querySelectorAll('.skill-tab').forEach(function(t) {
-    t.classList.toggle('active', t.getAttribute('data-skill') === skill);
-  });
-}
-setActiveSkill(CURRENT_SKILL);
-document.querySelectorAll('.skill-tab').forEach(function(t) {
-  t.addEventListener('click', function() { setActiveSkill(this.getAttribute('data-skill')); });
-});
+applyLanguage(CURRENT_LANG);
 
-// ===== Save Skill =====
-document.getElementById('saveSkillBtn').addEventListener('click', function(e) {
-  e.preventDefault();
-  localStorage.setItem('mido_saved_skill', CURRENT_SKILL);
-  this.textContent = '✅';
-  this.classList.add('saved');
-  var self = this;
-  setTimeout(function() {
-    self.textContent = T[CURRENT_LANG].save_skill;
-    self.classList.remove('saved');
-  }, 1500);
-});
-
-// ===== Visitor & Stats =====
 function getVisitorId() {
   var id = localStorage.getItem('mido_vid_v4');
   if (!id) { id = 'v4_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36); localStorage.setItem('mido_vid_v4', id); }
@@ -597,65 +400,81 @@ async function fetchStats() {
     var r = await fetch(WORKER_URL + '/stats');
     if (r.ok) {
       var d = await r.json();
-      var tr = T[CURRENT_LANG];
       document.getElementById('cnt').textContent = d.today_searches || 0;
       document.getElementById('remainingLeft').textContent = Math.max(0, 100 - (d.today_searches || 0));
-      document.getElementById('stats').innerHTML = 
-        '<div class="stat live-stat"><div class="i">👥</div><div class="v">'+(d.total_visitors||0)+'</div><div class="l mono">'+tr.stats_visitors+'</div></div>'+
-        '<div class="stat live-stat"><div class="i">🔍</div><div class="v">'+(d.today_searches||0)+'</div><div class="l mono">'+tr.stats_searches+'</div></div>'+
-        '<div class="stat"><div class="i">✅</div><div class="v">'+(d.successful_trials||0)+'</div><div class="l mono">'+tr.stats_success+'</div></div>'+
-        '<div class="stat"><div class="i">❌</div><div class="v">'+(d.failed_trials||0)+'</div><div class="l mono">'+tr.stats_failed+'</div></div>';
     }
   } catch (e) {}
 }
-
-async function trackVisit() {
-  try { await fetch(WORKER_URL + '/visit', { method: 'POST', body: VISITOR_ID }); } catch (e) {}
-  fetchStats();
-}
-trackVisit();
+fetchStats();
 setInterval(fetchStats, 15000);
+try { fetch(WORKER_URL + '/visit', { method: 'POST', body: VISITOR_ID }); } catch(e) {}
 
-// ===== Search =====
 var q = document.getElementById('q'), go = document.getElementById('go'), res = document.getElementById('res');
 var loading = false;
 function refreshBtn() { go.disabled = loading || !q.value.trim(); }
 q.addEventListener('input', refreshBtn);
 q.addEventListener('keydown', function(e) { if (e.key === 'Enter') search(); });
 go.addEventListener('click', search);
-document.getElementById('sugs').addEventListener('click', function(e) {
-  var b = e.target.closest('.sug'); if (b) { q.value = b.textContent; refreshBtn(); }
-});
+
+res.innerHTML = '<div class="empty"><div class="spd">🕷️</div><p>'+T[CURRENT_LANG].empty_prompt+'</p></div>';
 
 async function search() {
   var text = q.value.trim();
   if (!text || loading) return;
   var tr = T[CURRENT_LANG];
   loading = true; go.innerHTML = '<span class="spin"></span>'; refreshBtn();
-  res.innerHTML = '<div class="log"><div class="t"><span class="a">'+tr.search_loading+'</span></div></div>';
+
+  var startTime = Date.now();
+  var totalSources = 10;
+  var reviewed = 0;
+
+  res.innerHTML = '<div class="progress-container"><div class="progress-label"><span>'+tr.searching_in+'</span><span id="pct">0%</span></div><div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar"></div></div><div class="progress-timer" id="timerInfo">'+tr.sources_reviewed+': 0 / '+totalSources+' | '+tr.time_elapsed+': 0s</div></div>';
+
+  var timerInterval = setInterval(function() {
+    var elapsed = Math.floor((Date.now() - startTime) / 1000);
+    reviewed = Math.min(totalSources, Math.floor(elapsed * 0.4));
+    var pct = Math.min(95, Math.floor((elapsed / 40) * 100));
+    var progBar = document.getElementById('progBar');
+    var pctEl = document.getElementById('pct');
+    var timerInfo = document.getElementById('timerInfo');
+    if (progBar) progBar.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '%';
+    if (timerInfo) timerInfo.innerHTML = tr.sources_reviewed+': '+reviewed+' / '+totalSources+' | '+tr.time_elapsed+': '+elapsed+'s | '+tr.time_remaining+': ~'+Math.max(0, 40 - elapsed)+'s';
+  }, 500);
+
   try {
+    var controller = new AbortController();
+    var timeout = setTimeout(function() { controller.abort(); }, 60000);
     var r = await fetch(WORKER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-Visitor-Id': VISITOR_ID },
-      body: JSON.stringify({ query: text, visitor_id: VISITOR_ID, skill: CURRENT_SKILL })
+      body: JSON.stringify({ query: text, visitor_id: VISITOR_ID, skill: 'deep_search' }),
+      signal: controller.signal
     });
+    clearTimeout(timeout);
+    clearInterval(timerInterval);
     var data = await r.json();
+    var totalTime = Math.floor((Date.now() - startTime) / 1000);
     if (!data.success) {
-      res.innerHTML = '<div class="err"><b>'+tr.search_error+'</b> ' + (data.reason || 'unknown') + '</div>';
+      res.innerHTML = '<div class="err"><b>'+tr.error_prefix+'</b> ' + (data.reason || 'unknown') + '</div>';
     } else {
       var srcHtml = (data.top_sources || []).map(function(s) {
         return '<a class="src" href="' + s.url + '" target="_blank"><div class="r"><h5>' + s.title + '</h5><span class="sc mono">' + (s.score || 0).toFixed(2) + '</span></div><p>' + (s.content || '').slice(0, 200) + '</p></a>';
       }).join('');
-      res.innerHTML = '<div class="ans"><div class="m mono"><span class="x">'+tr.answer+'</span></div><div class="txt">' + data.deep_answer + '</div></div>' + (srcHtml ? '<div class="srcs">' + srcHtml + '</div>' : '');
+      res.innerHTML = '<div style="margin-bottom:16px;padding:12px;border-radius:12px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);text-align:center;font-size:13px;color:#6ee7b7">✅ '+tr.search_complete+' - '+totalTime+'s | '+tr.sources_used+'</div><div class="ans"><div class="m mono"><span>'+tr.answer+'</span></div><div class="txt">' + data.deep_answer + '</div></div>' + (srcHtml ? '<div class="srcs"><div class="hd"><h4 class="mono">'+tr.sources+'</h4></div>' + srcHtml + '</div>' : '');
     }
     fetchStats();
   } catch (e) {
-    res.innerHTML = '<div class="err"><b>Network:</b> ' + String(e) + '</div>';
+    clearInterval(timerInterval);
+    if (e.name === 'AbortError') {
+      res.innerHTML = '<div class="err"><b>'+tr.error_prefix+'</b> '+tr.timeout_error+'<br><button onclick="location.reload()" style="margin-top:12px;background:#667eea;padding:8px 16px;border-radius:9999px;font-weight:700;color:#fff">'+tr.retry_btn+'</button></div>';
+    } else {
+      res.innerHTML = '<div class="err"><b>Network:</b> ' + String(e) + '</div>';
+    }
   }
-  loading = false; go.innerHTML = '🔍'; refreshBtn();
+  loading = false; go.innerHTML = tr.search_btn; refreshBtn();
 }
 
-// ===== Spider Animation =====
 (function() {
   var canvas = document.getElementById('spider'); if (!canvas) return;
   var ctx = canvas.getContext('2d'); if (!ctx) return;
@@ -701,10 +520,7 @@ async function search() {
   requestAnimationFrame(draw);
 })();
 
-// ===== Init =====
-applyLanguage(CURRENT_LANG);
-
 })();
 </script>
 </body>
-  </html>
+                                   </html>
