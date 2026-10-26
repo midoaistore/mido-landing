@@ -140,9 +140,11 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center;font-
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a24;border:1px solid rgba(0,255,163,.35);color:#fff;padding:10px 16px;border-radius:999px;font-size:12.5px;z-index:300;display:none;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 .toast.show{display:block}
 @media(max-width:640px){.search-row{flex-direction:column}.stats{grid-template-columns:repeat(2,1fr)}}
+.admin-trigger{opacity:0.15;cursor:pointer;font-size:14px;transition:0.3s;display:inline-block;margin-top:10px}
+.admin-trigger:hover{opacity:1;color:var(--green)}
 </style>
-  </head>
-  <body>
+</head>
+<body>
 <canvas id="spider"></canvas>
 <div class="main">
 <header>
@@ -313,6 +315,7 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center;font-
 <footer class="wrap">
   <p data-i18n="footer">© 2026 Mido AI Store • Deep Search Agent V10</p>
   <p style="margin-top:4px;font-size:11px" data-i18n="footer2">Live sources. Always verify final local prices.</p>
+  <span id="adminBtn" class="admin-trigger" title="Admin Login">🔑</span>
 </footer>
 </div>
 
@@ -622,6 +625,8 @@ function stepsHTML(done){
     return '<div class="step'+cls+'"><div class="n">'+(i<done?'✓':(i+1))+'</div><span>'+s+(i===done?'...':'')+'</span></div>';
   }).join('')+'</div>'+(done<5?'<div class="prog"><div></div></div>':'')+'</div>';
 }
+
+// --- التعديل الجديد: دالة البحث معدلة لترسل مفتاح الأدمن ---
 async function doSearch(){
   var text=(q.value||'').trim();if(!text||searching)return;
   searching=true;
@@ -644,10 +649,16 @@ async function doSearch(){
   var outcome;
   try{
     var ctrl=new AbortController();var to=setTimeout(function(){ctrl.abort();},55000);
-    var adminKey = new URLSearchParams(location.search).get('admin') || '';
-var headers = {'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID};
-if(adminKey) headers['X-Admin-Key'] = adminKey;
-var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify({query:text,visitor_id:VISITOR_ID,skill:skill==='save'?'deep_search':skill}),signal:ctrl.signal});
+    
+    // التعديل: قراءة المفتاح من المتصفح
+    var savedAdminKey = localStorage.getItem('mido_admin_key') || '';
+    var urlAdminKey = new URLSearchParams(location.search).get('admin') || '';
+    var finalAdminKey = savedAdminKey || urlAdminKey;
+    
+    var headers = {'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID};
+    if(finalAdminKey) headers['X-Admin-Key'] = finalAdminKey;
+    
+    var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify({query:text,visitor_id:VISITOR_ID,skill:skill==='save'?'deep_search':skill}),signal:ctrl.signal});
     clearTimeout(to);
     if(r.status===429){var j={};try{j=await r.json();}catch(e){} throw new Error(j.reason==='daily_cap'?'daily_cap':'trial_used');}
     if(!r.ok) throw new Error('http');
@@ -683,6 +694,21 @@ document.getElementById('openReport').addEventListener('click',function(){modal.
 document.getElementById('closeModal').addEventListener('click',function(){modal.classList.remove('open');});
 document.getElementById('modalBg').addEventListener('click',function(){modal.classList.remove('open');});
 document.getElementById('navBuy').addEventListener('click',function(){glowPulse(this,700);});
+
+// --- التعديل: كود إعداد مفتاح الأدمن المخفي ---
+document.getElementById('adminBtn').addEventListener('click', function() {
+    var currentKey = localStorage.getItem('mido_admin_key') || '';
+    var newKey = prompt("Enter Admin Key (Leave empty to remove):", currentKey);
+    if (newKey === null) return; // User cancelled
+    if (newKey.trim() === '') {
+        localStorage.removeItem('mido_admin_key');
+        toast("Admin Key removed. Free trial limits applied.");
+    } else {
+        localStorage.setItem('mido_admin_key', newKey.trim());
+        toast("Admin Key Saved! You now have unlimited searches.");
+    }
+});
+// --- نهاية التعديل ---
 
 (function(){
   var canvas=document.getElementById('spider');if(!canvas)return;
