@@ -52,10 +52,10 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 /* القائمة واللغة */
 .lang-switcher{position:relative}
 .lang-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);font-size:13px}
-.lang-dropdown{display:none;position:absolute;top:calc(100% + 6px);right:0;min-width:230px;background:#151b27;border:1px solid #2a3448;border-radius:14px;padding:6px;z-index:120;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.lang-dropdown{display:block;position:absolute;top:calc(100% + 6px);right:0;min-width:260px;background:#151b27;border:2px solid #53628a;border-radius:14px;padding:8px;z-index:120;opacity:1;box-shadow:0 16px 40px rgba(0,0,0,.7);box-shadow:0 16px 40px rgba(0,0,0,.5)}
 [dir=rtl] .lang-dropdown{right:auto;left:0}
 .lang-dropdown.open{display:block}
-.lang-option{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:10px;font-size:13px;color:var(--muted);cursor:pointer}
+.lang-option{display:flex;align-items:center;gap:8px;padding:11px 13px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer}
 .lang-option:hover,.lang-option.active{background:rgba(124,92,255,.15);color:#c4b5fd}
 
 /* الهيدر والأزرار */
@@ -94,7 +94,7 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rg
 .skill:hover,.skill.on{background:rgba(124,92,255,.15);border-color:rgba(124,92,255,.5);color:#c4b5fd}
 .demo{background:linear-gradient(180deg,#12121a,#0a0a0f);border:1px solid var(--border);border-radius:20px;padding:18px;max-width:860px;margin:0 auto}
 .search-row{display:flex;gap:8px;flex-wrap:wrap}
-.search-row input{flex:1;min-width:170px;height:46px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);padding:0 15px;color:#fff;font-size:14px;outline:none}
+.search-row input{flex:1;min-width:240px;height:60px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);padding:0 15px;color:#fff;font-size:14px;outline:none}
 .search-row input:focus{border-color:var(--accent)}
 .sugs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .sug{padding:5px 11px;border-radius:999px;border:1px solid var(--border);background:#0a0a0f;font-size:11px;color:var(--muted);cursor:pointer}
@@ -178,8 +178,8 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 .modal-box{position:relative;width:min(900px,100%);max-height:90vh;overflow:auto;background:#12121a;border:1px solid var(--border);border-radius:18px;padding:18px}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a24;border:1px solid rgba(0,255,163,.35);color:#fff;padding:10px 16px;border-radius:999px;font-size:12.5px;z-index:300;display:none;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 .toast.show{display:block}
-.currency-select{background:#0a0a0f;border:1px solid var(--border);color:#fff;padding:8px 12px;border-radius:999px;font-size:12px;outline:none;cursor:pointer}
-@media(max-width:640px){.search-row{flex-direction:column}.stats{grid-template-columns:repeat(2,1fr)}}
+.currency-select{height:60px;min-width:145px;background:#0a0a0f;border:1px solid var(--border);color:#fff;padding:8px 12px;border-radius:999px;font-size:12px;outline:none;cursor:pointer}
+@media(max-width:640px){.search-row{flex-direction:column}.search-row input,.currency-select,#go{width:100%;min-width:0}.stats{grid-template-columns:repeat(2,1fr)}}
 .admin-trigger{opacity:0.15;cursor:pointer;font-size:14px;transition:0.3s;display:inline-block;margin-top:10px}
 .admin-trigger:hover{opacity:1;color:var(--green)}
 </style>
@@ -461,50 +461,23 @@ function toast(msg){
   setTimeout(function(){ t.classList.remove('show'); }, 2200);
 }
 
-// إدارة صفحات السياسة
-window.openPolicy = function(e, type){
+// سياسات مترجمة ثابتة؛ المحتوى داخلي ولا يأتي من المستخدم أو الخادم.
+var POLICY_T = {
+  en:{privacy:{title:'Privacy Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>We collect only the data needed to operate Mido Deep Search.</p><h4>1. Data We Collect</h4><ul><li>Search queries are sent to Tavily and Groq to create the report.</li><li>A random Visitor ID is stored in your browser to enforce the free-trial limit.</li><li>The selected country is used to choose research context and currency preference.</li></ul><h4>2. Tracking</h4><p>Meta Pixel may measure page views and purchase-button interactions. You can disable tracking in your browser or Meta settings.</p><h4>3. Third Parties</h4><p>Payments are handled by Gumroad. We do not receive your payment details.</p><p>Contact: support@midoaistore.com</p>`},refund:{title:'Refund Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>This is a digital product with immediate access.</p><h4>1. Free Trial</h4><p>One free search is provided so you can test the service before purchase.</p><h4>2. Refunds</h4><p>A refund may be considered if the service or API keys do not work and the issue cannot be fixed within 48 hours, or if you were charged twice.</p><p>Contact us within 3 days with your Gumroad receipt.</p>`}},
+  ar:{privacy:{title:'سياسة الخصوصية',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>نجمع فقط البيانات اللازمة لتشغيل Mido Deep Search.</p><h4>1. البيانات التي نجمعها</h4><ul><li>تُرسل أسئلة البحث إلى Tavily وGroq لإنشاء التقرير.</li><li>يُحفظ معرّف زائر عشوائي في المتصفح لتطبيق حد التجربة المجانية.</li><li>تُستخدم الدولة المختارة لتحديد سياق البحث وتفضيل العملة.</li></ul><h4>2. التتبع</h4><p>قد يستخدم Meta Pixel قياس زيارات الصفحة والنقر على زر الشراء. يمكنك تعطيل التتبع من المتصفح أو إعدادات Meta.</p><h4>3. الخدمات الخارجية</h4><p>تُعالج المدفوعات عبر Gumroad ولا نصل إلى بيانات الدفع.</p><p>للتواصل: support@midoaistore.com</p>`},refund:{title:'سياسة الاسترداد',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>هذا منتج رقمي مع وصول فوري.</p><h4>1. التجربة المجانية</h4><p>نوفر بحثًا مجانيًا واحدًا لتجربة الخدمة قبل الشراء.</p><h4>2. الاسترداد</h4><p>يمكن النظر في طلب الاسترداد إذا لم تعمل الخدمة أو مفاتيح API وتعذر إصلاح المشكلة خلال 48 ساعة، أو تم الخصم مرتين.</p><p>تواصل معنا خلال 3 أيام مع إيصال Gumroad.</p>`}},
+  fr:{privacy:{title:'Politique de confidentialité',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Nous collectons uniquement les données nécessaires au fonctionnement du service.</p><h4>1. Données collectées</h4><ul><li>Les requêtes sont envoyées à Tavily et Groq pour créer le rapport.</li><li>Un identifiant de visiteur aléatoire est conservé pour appliquer la limite d’essai.</li><li>Le pays choisi sert au contexte et à la préférence monétaire.</li></ul><h4>2. Suivi</h4><p>Meta Pixel peut mesurer les visites et les clics d’achat. Vous pouvez le désactiver dans votre navigateur ou les réglages Meta.</p><h4>3. Tiers</h4><p>Les paiements sont traités par Gumroad.</p><p>Contact : support@midoaistore.com</p>`},refund:{title:'Politique de remboursement',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Il s’agit d’un produit numérique à accès immédiat.</p><p>Un remboursement peut être étudié si le service ne fonctionne pas et ne peut être réparé sous 48 heures, ou en cas de double débit. Contactez-nous sous 3 jours avec votre reçu Gumroad.</p>`}},
+  de:{privacy:{title:'Datenschutzrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Wir erheben nur Daten, die für den Betrieb des Dienstes erforderlich sind.</p><h4>Erhobene Daten</h4><p>Suchanfragen werden an Tavily und Groq gesendet. Eine zufällige Besucher-ID setzt das Testlimit durch. Das gewählte Land dient dem Suchkontext und der Währungspräferenz.</p><h4>Tracking und Drittanbieter</h4><p>Meta Pixel kann Besuche und Kaufklicks messen. Zahlungen werden von Gumroad verarbeitet.</p><p>Kontakt: support@midoaistore.com</p>`},refund:{title:'Rückerstattungsrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Bei diesem digitalen Produkt erfolgt der Zugriff sofort.</p><p>Eine Erstattung kann bei nicht reparierbarem Dienstfehler innerhalb von 48 Stunden oder bei doppelter Abbuchung geprüft werden. Kontakt innerhalb von 3 Tagen mit Gumroad-Beleg.</p>`}},
+  ja:{privacy:{title:'プライバシーポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>サービス運営に必要なデータのみを収集します。</p><p>検索内容はレポート作成のためTavilyとGroqへ送信されます。無料試用制限のため匿名の訪問者IDを保存します。選択した国は検索コンテキストと通貨設定に使用します。支払いはGumroadが処理します。</p><p>連絡先：support@midoaistore.com</p>`},refund:{title:'返金ポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>即時アクセスのデジタル商品です。</p><p>サービスまたはAPIキーが動作せず48時間以内に修正できない場合、または二重請求の場合は返金を検討します。Gumroadの領収書を添えて3日以内にご連絡ください。</p>`}},
+  zh:{privacy:{title:'隐私政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>我们只收集运行服务所需的数据。</p><p>搜索问题会发送给Tavily和Groq以生成报告。我们保存随机访客ID以执行免费试用限制。选择的国家用于研究上下文和货币偏好。付款由Gumroad处理。</p><p>联系：support@midoaistore.com</p>`},refund:{title:'退款政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>这是即时提供访问权限的数字产品。</p><p>如果服务或API密钥无法使用且48小时内无法修复，或发生重复扣款，可申请退款。请在3天内附Gumroad收据联系我们。</p>`}},
+  es:{privacy:{title:'Política de privacidad',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Solo recopilamos los datos necesarios para operar el servicio.</p><p>Las consultas se envían a Tavily y Groq para crear el informe. Guardamos un ID de visitante aleatorio para aplicar el límite de prueba. El país elegido define el contexto y la preferencia de moneda. Los pagos los procesa Gumroad.</p><p>Contacto: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Es un producto digital con acceso inmediato.</p><p>Puede considerarse un reembolso si el servicio no funciona y no se repara en 48 horas, o si se cobra dos veces. Contacte en 3 días con el recibo de Gumroad.</p>`}},
+  pt:{privacy:{title:'Política de privacidade',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Coletamos apenas os dados necessários para operar o serviço.</p><p>As consultas são enviadas à Tavily e à Groq para gerar o relatório. Guardamos um ID aleatório de visitante para aplicar o limite de teste. O país escolhido define o contexto e a preferência de moeda. Os pagamentos são processados pela Gumroad.</p><p>Contato: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Este é um produto digital com acesso imediato.</p><p>Um reembolso pode ser analisado se o serviço não funcionar e não puder ser corrigido em 48 horas, ou em caso de cobrança duplicada. Entre em contato em até 3 dias com o recibo Gumroad.</p>`}}
+};
+window.openPolicy = function(e,type){
   e.preventDefault();
-  var title = type === 'privacy' ? 'Privacy Policy' : 'Refund Policy';
-  var content = '';
-  
-  if(type === 'privacy') {
-    content = `
-      <p><strong>Last updated: October 2026</strong></p>
-      <p>At Mido AI Store, we take your privacy seriously. This policy explains what data we collect and how we use it.</p>
-      <h4 style="color:#fff; margin-top:10px; margin-bottom:5px;">1. Data We Collect</h4>
-      <p>When you use Mido Deep Search, we collect minimal data to ensure the service works correctly:</p>
-      <ul>
-        <li><strong>Search Queries:</strong> The questions you type are sent to our AI providers (Tavily, Groq) to generate the report. We do not store your search queries permanently on our servers.</li>
-        <li><strong>Visitor ID:</strong> We use a random, anonymous ID saved in your browser to enforce the "1 free trial per visitor" rule. This ID does not contain personal information.</li>
-        <li><strong>Country/Currency:</strong> We detect your country to provide localized prices. We do not store your IP address.</li>
-      </ul>
-      <h4 style="color:#fff; margin-top:10px; margin-bottom:5px;">2. Cookies & Tracking (Meta Pixel)</h4>
-      <p>We use Meta Pixel to understand how visitors interact with our site and to show relevant ads. The pixel may track your page views and actions (like clicking the buy button). You can opt-out of ad tracking through your browser settings or Facebook Ad Settings.</p>
-      <h4 style="color:#fff; margin-top:10px; margin-bottom:5px;">3. Third-Party Services</h4>
-      <p>We use Gumroad for payments. When you buy, your payment info is handled securely by Gumroad, not us.</p>
-      <p style="margin-top:15px">If you have questions, contact us at support@midoaistore.com.</p>
-    `;
-  } else {
-    content = `
-      <p><strong>Last updated: October 2026</strong></p>
-      <p>Thank you for purchasing Mido Deep Search. We want you to be completely satisfied with your purchase.</p>
-      <h4 style="color:#fff; margin-top:10px; margin-bottom:5px;">1. Free Trial First</h4>
-      <p>We offer a free trial (1 search per visitor) so you can test the engine before buying. Please use the demo to ensure the tool meets your needs.</p>
-      <h4 style="color:#fff; margin-top:10px; margin-bottom:5px;">2. Refund Policy</h4>
-      <p>Because this is a digital product (software/API keys) and you get instant access, <strong>all sales are generally final.</strong></p>
-      <p>However, we offer a refund if:</p>
-      <ul>
-        <li>The API keys or service do not work and we cannot fix the issue within 48 hours.</li>
-        <li>You were charged twice by mistake.</li>
-      </ul>
-      <p>To request a refund, contact us at support@midoaistore.com with your Gumroad receipt within 3 days of purchase.</p>
-      <h4 style="color:#fff; margin-top:10px; margin-bottom:5px;">3. Support</h4>
-      <p>If you have any issues setting up the tool, please contact us. We are happy to help you get it running.</p>
-    `;
-  }
-  
-  document.getElementById('policyTitle').textContent = title;
-  document.getElementById('policyContent').innerHTML = content;
+  var p=POLICY_T[currentLang]||POLICY_T.en;
+  var item=p[type]||POLICY_T.en[type];
+  document.getElementById('policyTitle').textContent=item.title;
+  document.getElementById('policyContent').innerHTML=item.html;
   document.getElementById('policyModal').classList.add('open');
 }
 
@@ -697,6 +670,7 @@ document.addEventListener('click',function(e){
     var was=card.classList.contains('open');
     card.parentElement.querySelectorAll('.xcard').forEach(function(c){c.classList.remove('open','glow-on');});
     if(!was){card.classList.add('open');glowPulse(card,1200);}
+    if(card.classList.contains('ring-card')) illuminateAllRings();
   }
 });
 var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu');
@@ -767,6 +741,9 @@ function setStages(n){
     if(i<=n){el.classList.add('glow-on');} else el.classList.remove('glow-on');
   });
 }
+function illuminateAllRings(){
+  document.querySelectorAll('.ring-card').forEach(function(card){card.classList.add('glow-on');});
+}
 function applyLogs(logs){
   var max=0;
   (Array.isArray(logs)?logs:[]).forEach(function(log){
@@ -824,6 +801,7 @@ async function doSearch(){
     clearInterval(timerInterval);
     var totalTime=Math.floor((Date.now()-startTime)/1000);
     if(outcome.logs.length){ applyLogs(outcome.logs); } else { setStages(4); }
+    illuminateAllRings();
     lastReportText=outcome.answer;
     var formattedAns = parseMarkdown(outcome.answer);
     var src='';
