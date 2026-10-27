@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; connect-src 'self' https://mido-deepsearch.midoaistore.workers.dev; img-src 'self' data: https://www.facebook.com https://raw.githubusercontent.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://midoaistore.gumroad.com">
 <title>Mido Deep Search — Verified Research in 5-40 Seconds</title>
 <meta name="description" content="Mido Deep Search checks local and international sources and turns one question into a practical verified research report in 5-40 seconds.">
 <meta property="og:title" content="Mido Deep Search — Verified Research in 5-40 Seconds">
@@ -304,7 +309,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
       <div class="qt">
         <h4 data-i18n="case_quick">Quick Take</h4>
         <ul>
-          <li data-i18n-html="cq1"><strong>Sony WH-CH720N</strong> — best overall (Price estimated).</li>
+          <li data-i18n-html="cq1"><strong>Sony WH-CH720N</strong> — best overall (source currency shown; verify current price).</li>
           <li data-i18n-html="cq2"><strong>JBL Tune 770NC</strong> — best budget under ~$100.</li>
           <li data-i18n-html="cq3"><strong>OneOdio Focus A6</strong> — entry option near ~$70.</li>
         </ul>
@@ -325,7 +330,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
         <div class="rec"><h5 data-i18n="r2">Best Budget</h5><p>JBL Tune 770NC</p><span class="pr">≈ $79.99</span></div>
         <div class="rec"><h5 data-i18n="r3">Entry Option</h5><p>OneOdio Focus A6</p><span class="pr">≈ $69.99</span></div>
       </div>
-      <p style="margin-top:12px;font-size:12px;color:var(--muted)" data-i18n="case_sources">Sources: SoundGuys, CNET, TechRadar + market listings. Prices approximate.</p>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted)" data-i18n="case_sources">Illustrative example only. Prices are shown in the cited source currency and may be outdated.</p>
       <div style="margin-top:14px;text-align:center;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
         <button type="button" class="btn btn-p" id="openReport" data-i18n="full_preview">Full Report Preview</button>
         <button type="button" class="btn btn-ghost" id="saveExample" data-i18n="save_example">Save This Report</button>
@@ -431,10 +436,10 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 'use strict';
 var WORKER_URL='https://mido-deepsearch.midoaistore.workers.dev';
 var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
-var skill='deep_search', currentLang='en', searching=false, lastReportText='';
+var skill='deep_search', currentLang='en', searching=false, lastReportText='', adminKey='';
 
 // إزالة سر الأدمن من الرابط (أمنياً)
-if(location.search.indexOf('admin=')>-1){history.replaceState(null,'',location.pathname);}
+if(/[?&]admin(?:=|&|$)/i.test(location.search)){history.replaceState(null,'',location.pathname+location.hash);}
 
 // تتبع البيكسل عند الضغط على زر الشراء
 document.querySelectorAll('.buy-btn-pixel, #navBuy').forEach(function(btn){
@@ -505,17 +510,31 @@ window.openPolicy = function(e, type){
 
 // تحويل المارك داون إلى HTML
 function parseMarkdown(md){
-  var html = md.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  html = html.replace(/```([\s\S]*?)```/g, '<pre style="background:#1a1a24;padding:10px;border-radius:8px;overflow-x:auto;font-size:11px">$1</pre>');
-  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-  html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
-  html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
-  html = html.replace(/^\s*\- (.*$)/gim, '<li>$1</li>');
-  html = html.replace(/(<li>.*<\/li>)/gim, '<ul>$1</ul>');
-  html = html.replace(/\n$/gim, '<br />');
-  return html;
+  md = typeof md === 'string' ? md : '';
+  var lines = md.replace(/\r\n?/g,'\n').split('\n');
+  var out=[], inList=false, inCode=false, code=[];
+  function closeList(){if(inList){out.push('</ul>');inList=false;}}
+  for(var i=0;i<lines.length;i++){
+    var raw=lines[i];
+    if(/^```/.test(raw.trim())){
+      if(inCode){out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');code=[];inCode=false;}
+      else {closeList();inCode=true;}
+      continue;
+    }
+    if(inCode){code.push(raw);continue;}
+    var line=esc(raw);
+    if(!line.trim()){closeList();continue;}
+    var m=line.match(/^###\s+(.*)$/); if(m){closeList();out.push('<h3>'+inlineMd(m[1])+'</h3>');continue;}
+    m=line.match(/^##\s+(.*)$/); if(m){closeList();out.push('<h2>'+inlineMd(m[1])+'</h2>');continue;}
+    m=line.match(/^#\s+(.*)$/); if(m){closeList();out.push('<h1>'+inlineMd(m[1])+'</h1>');continue;}
+    m=line.match(/^[-*]\s+(.*)$/); if(m){if(!inList){out.push('<ul>');inList=true;}out.push('<li>'+inlineMd(m[1])+'</li>');continue;}
+    closeList(); out.push('<p>'+inlineMd(line)+'</p>');
+  }
+  if(inCode) out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');
+  closeList(); return out.join('');
+}
+function inlineMd(s){
+  return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
 }
 
 // قاموس الترجمات الشامل
@@ -546,12 +565,12 @@ var T = {
     ring5_t:'Ring 5 — Confidence Calibration', ring5_s:'Generate the final verified report.', ring5_d:'Produces the structured output only after previous rings complete: quick take, comparison table, and a final recommendation.',
     case_title:'Real Report Example', case_sub:'Generated in <strong>35 seconds</strong> for: "Best noise-cancelling headphones under $150"',
     case_h:'Best Noise-Canceling Headphones Under $150', case_quick:'Quick Take',
-    cq1:'<strong>Sony WH-CH720N</strong> — best overall (Price estimated).',
+    cq1:'<strong>Sony WH-CH720N</strong> — best overall (source currency shown; verify current price).',
     cq2:'<strong>JBL Tune 770NC</strong> — best budget under ~$100.',
     cq3:'<strong>OneOdio Focus A6</strong> — entry option near ~$70.',
     th1:'Model', th2:'Battery', th_price:'Price', th_comfort:'Comfort', th_verdict:'Verdict',
     r1:'Best Overall', r2:'Best Budget', r3:'Entry Option',
-    case_sources:'Sources: SoundGuys, CNET, TechRadar + market listings. Prices approximate.',
+    case_sources:'Illustrative example only. Prices are shown in the cited source currency and may be outdated.',
     full_preview:'Full Report Preview', save_example:'Save This Report',
     price_title:'Simple pricing', price_sub:'One-time payment. No subscription.', once:'one-time',
     price_local:'or equivalent in your local currency at checkout via Gumroad.',
@@ -605,7 +624,7 @@ var T = {
     cq3:'<strong>OneOdio Focus A6</strong> — خيار دخول قرب 70$.',
     th1:'الموديل', th2:'البطارية', th_price:'السعر', th_comfort:'الراحة', th_verdict:'الحكم',
     r1:'الأفضل إجمالًا', r2:'الأفضل اقتصاديًا', r3:'خيار دخول',
-    case_sources:'المصادر: SoundGuys وCNET وTechRadar + قوائم السوق. الأسعار تقريبية.',
+    case_sources:'مثال توضيحي فقط. الأسعار معروضة بعملة المصدر وقد تكون غير محدثة.',
     full_preview:'معاينة التقرير الكامل', save_example:'حفظ هذا التقرير',
     price_title:'تسعير بسيط', price_sub:'دفعة واحدة. بدون اشتراك.', once:'مرة واحدة',
     price_local:'أو ما يعادلها بعملتك المحلية عند الدفع عبر Gumroad.',
@@ -724,6 +743,7 @@ document.getElementById('saveExample').addEventListener('click',function(){
 function vid(){try{var id=localStorage.getItem('mido_vid');if(!id){id='v_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('mido_vid',id);}return id;}catch(e){return 'v_'+Date.now();}}
 var VISITOR_ID=vid();
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function safeUrl(value){try{var u=new URL(String(value||''),location.origin);return (u.protocol==='http:'||u.protocol==='https:')?u.href:'#';}catch(e){return '#';}}
 async function fetchStats(){
   try{
     var r=await fetch(WORKER_URL+'/stats',{cache:'no-store'});if(!r.ok)return;
@@ -732,11 +752,11 @@ async function fetchStats(){
     document.getElementById('stSearches').textContent=d.today_searches||0;
     document.getElementById('stOk').textContent=d.successful_trials||0;
     document.getElementById('stFail').textContent=d.failed_trials||0;
-    document.getElementById('stLeft').textContent=d.remaining_today!=null?d.remaining_today:100;
+    document.getElementById('stLeft').textContent=d.remaining_today!=null?d.remaining_today:'—';
   }catch(e){}
 }
 fetchStats();setInterval(fetchStats,30000);
-try{fetch(WORKER_URL+'/visit',{method:'POST',body:VISITOR_ID}).catch(function(){});}catch(e){}
+try{fetch(WORKER_URL+'/visit',{method:'POST',headers:{'Content-Type':'text/plain'},body:VISITOR_ID,cache:'no-store'}).catch(function(){});}catch(e){}
 
 function setStages(n){
   document.querySelectorAll('#stages .stage').forEach(function(el,i){
@@ -746,6 +766,14 @@ function setStages(n){
   document.querySelectorAll('.ring-card').forEach(function(el,i){
     if(i<=n){el.classList.add('glow-on');} else el.classList.remove('glow-on');
   });
+}
+function applyLogs(logs){
+  var max=0;
+  (Array.isArray(logs)?logs:[]).forEach(function(log){
+    var n=Number(log.ring||log.stage||0);
+    if(n>max && (log.status==='done'||log.status==='complete'||log.completed===true)) max=n;
+  });
+  if(max>0) setStages(Math.min(4,max-1));
 }
 document.getElementById('stages').addEventListener('click',function(e){
   var st=e.target.closest('.stage');if(!st)return;glowPulse(st,1000);
@@ -767,7 +795,7 @@ async function doSearch(){
     var elapsed=Math.floor((Date.now()-startTime)/1000);
     var pb=document.getElementById('progBar');
     var pe=document.getElementById('pct');
-    if(pb && parseFloat(pb.style.width) < 90) pb.style.width = (parseFloat(pb.style.width) + 5) + '%';
+    if(pb && parseFloat(pb.style.width) < 85) pb.style.width = (parseFloat(pb.style.width) + 2) + '%';
     if(pe) pe.textContent = elapsed + 's';
     var ti=document.getElementById('timerInfo');
     if(ti) ti.innerHTML=D().prog_elapsed+': '+elapsed+'s...';
@@ -776,7 +804,7 @@ async function doSearch(){
   var outcome;
   try{
     var ctrl=new AbortController();var to=setTimeout(function(){ctrl.abort();},55000);
-    var savedAdminKey = localStorage.getItem('mido_admin_key') || '';
+    var savedAdminKey = adminKey;
     var headers = {'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID};
     if(savedAdminKey) headers['X-Admin-Key'] = savedAdminKey;
     
@@ -789,19 +817,18 @@ async function doSearch(){
     
     var data=await r.json();
     if(!data.success&&data.reason) throw new Error(data.reason);
-    outcome={ok:true,answer:data.deep_answer||data.answer||'',sources:data.sources||data.results||data.top_sources||[],logs:data.logs||[]};
+    outcome={ok:true,answer:String(data.deep_answer||data.answer||''),sources:Array.isArray(data.sources)?data.sources:(Array.isArray(data.top_sources)?data.top_sources:[]),logs:Array.isArray(data.logs)?data.logs:[]};
   }catch(err){clearInterval(timerInterval);outcome={ok:false,msg:String(err&&err.message||err)};}
-  
-  setStages(4);
   
   if(outcome.ok){
     clearInterval(timerInterval);
     var totalTime=Math.floor((Date.now()-startTime)/1000);
+    if(outcome.logs.length){ applyLogs(outcome.logs); } else { setStages(4); }
     lastReportText=outcome.answer;
     var formattedAns = parseMarkdown(outcome.answer);
     var src='';
     if(outcome.sources&&outcome.sources.length){
-      src='<div class="srcs">'+outcome.sources.slice(0,6).map(function(s){return '<a class="src" href="'+esc(s.url||'#')+'" target="_blank" rel="noopener"><h5>'+esc(s.title||'')+'</h5><p>'+esc((s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
+      src='<div class="srcs">'+outcome.sources.slice(0,6).map(function(s){var href=safeUrl(s.url); return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
     }
     res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="ans">'+formattedAns+'</div>'+src;
     
@@ -828,11 +855,11 @@ document.getElementById('modalBg').addEventListener('click',function(){modal.cla
 document.getElementById('navBuy').addEventListener('click',function(){glowPulse(this,700);});
 
 document.getElementById('adminBtn').addEventListener('click', function() {
-    var currentKey = localStorage.getItem('mido_admin_key') || '';
+    var currentKey = adminKey;
     var newKey = prompt("Enter Admin Key (Leave empty to remove):", currentKey);
     if (newKey === null) return; 
-    if (newKey.trim() === '') { localStorage.removeItem('mido_admin_key'); toast("Admin Key removed. Free trial limits applied."); } 
-    else { localStorage.setItem('mido_admin_key', newKey.trim()); toast("Admin Key Saved! You now have unlimited searches."); }
+    if (newKey.trim() === '') { adminKey=''; toast("Admin key removed."); }
+    else { adminKey=newKey.trim(); toast("Admin key active for this session."); }
 });
 
 (function(){
