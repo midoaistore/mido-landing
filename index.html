@@ -53,6 +53,8 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .lang-switcher{position:relative}
 .lang-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);font-size:13px}
 .lang-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;left:auto;width:260px;max-width:calc(100vw - 24px);max-height:min(70vh,420px);overflow-y:auto;background:#151b27;border:2px solid #53628a;border-radius:14px;padding:8px;z-index:120;opacity:1;box-shadow:0 16px 40px rgba(0,0,0,.7)}
+[dir="ltr"] .lang-dropdown{left:0;right:auto}
+[dir="rtl"] .lang-dropdown{right:0;left:auto}
 .lang-dropdown.open{display:block}
 .lang-option{display:flex;align-items:center;gap:8px;padding:11px 13px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer}
 .lang-option:hover,.lang-option.active{background:rgba(124,92,255,.15);color:#c4b5fd}
@@ -888,4 +890,4 @@ document.getElementById('adminBtn').addEventListener('click', function() {
 })();
 </script>
 </body>
-            </html>
+  </html>
