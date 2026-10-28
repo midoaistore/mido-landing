@@ -1418,94 +1418,130 @@
       statusEl.textContent = "";
       statusEl.className = "status";
     }
+// ============================================================
+// SEARCH
+// ============================================================
+async function performSearch() {
+  if (isSearching) return;
 
-    // ============================================================
-    // SEARCH
-    // ============================================================
-    async function performSearch() {
-      if (isSearching) return;
+  const query = searchInput.value.trim();
+  if (!query) {
+    setStatus(t("empty_query"), "error");
+    return;
+  }
 
-      const query = searchInput.value.trim();
-      if (!query) {
-        setStatus(t("empty_query"), "error");
-        return;
-      }
+  isSearching = true;
+  searchBtn.disabled = true;
+  lastQuery = query;
+  lastAnswerMarkdown = "";
+  resultsEl.innerHTML = "";
+  reportActionsEl.style.display = "none";
+  previewOpenBtn.classList.remove("visible");
+  setStatus(t("searching"), "loading");
+  showSkeleton();
 
-      isSearching = true;
-      searchBtn.disabled = true;
-      lastQuery = query;
-      lastAnswerMarkdown = "";
+  if (window.fbq) {
+    try { fbq("track", "InitiateCheckout"); } catch (e) {}
+  }
+
+  const adminKey = localStorage.getItem(STORAGE_KEY) || "";
+  const headers = { "Content-Type": "application/json" };
+  if (adminKey) headers["X-Admin-Key"] = adminKey;
+
+  const body = {
+    query: query,
+    country: currentCurrency,
+    lang: currentLang
+  };
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body)
+    });
+
+    const raw = await res.text();
+    let data = null;
+    try { data = JSON.parse(raw); } catch (e) { data = null; }
+
+    // 1. التحقق من خطأ الترخيص (Gumroad أو مفتاح خاطئ)
+    if (res.status === 401) {
       resultsEl.innerHTML = "";
-      reportActionsEl.style.display = "none";
-      previewOpenBtn.classList.remove("visible");
-      setStatus(t("searching"), "loading");
-      showSkeleton();
+      const msg = (data && data.message) || "Invalid or expired license key.";
+      setStatus(msg, "error");
+      localStorage.removeItem(STORAGE_KEY); // مسح المفتاح الخاطئ
+      updateAdminBtn();
+      return;
+    }
 
-      if (window.fbq) {
-        try { fbq("track", "InitiateCheckout"); } catch (e) {}
+    // 2. التحقق من تجاوز الحد (100 مجاني / 200 مدفوع)
+    if (res.status === 429) {
+      resultsEl.innerHTML = "";
+      const msg = (data && data.message) || t("rate_limit");
+      setStatus(msg, "error");
+      
+      // إظهار زر الترقية إذا كان المستخدم مجانياً
+      if (data && data.upgrade_url) {
+        const upgradeLink = document.createElement("a");
+        upgradeLink.href = data.upgrade_url;
+        upgradeLink.target = "_blank";
+        upgradeLink.textContent = " ⚡ Upgrade to Pro (200/day)";
+        upgradeLink.style.color = "var(--accent)";
+        upgradeLink.style.marginInlineStart = "8px";
+        upgradeLink.style.fontWeight = "bold";
+        statusEl.appendChild(upgradeLink);
       }
+      return;
+    }
 
-      const adminKey = localStorage.getItem(STORAGE_KEY) || "";
-      const headers = { "Content-Type": "application/json" };
-      if (adminKey) headers["X-Admin-Key"] = adminKey;
+    // 3. أخطاء أخرى
+    if (!res.ok) {
+      resultsEl.innerHTML = "";
+      const msg = (data && (data.error || data.message)) || t("error_generic");
+      setStatus(msg, "error");
+      return;
+    }
 
-      const body = {
-        query: query,
-        country: currentCurrency,
-        lang: currentLang
-      };
+    const answer = (data && (data.answer || data.result || data.content)) || "";
+    if (!answer) {
+      resultsEl.innerHTML = "";
+      setStatus(t("no_results"), "error");
+      return;
+    }
 
-      try {
-        const res = await fetch(WORKER_URL, {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify(body)
-        });
+    lastAnswerMarkdown = answer;
+    resultsEl.innerHTML = markdownToHtml(answer);
+    populateReportPreview(answer);
+    reportActionsEl.style.display = "flex";
+    previewOpenBtn.classList.add("visible");
+    clearStatus();
 
-        const raw = await res.text();
-        let data = null;
-        try { data = JSON.parse(raw); } catch (e) { data = null; }
-
-        if (res.status === 429) {
-          resultsEl.innerHTML = "";
-          setStatus(t("rate_limit"), "error");
-          return;
-        }
-
-        if (!res.ok) {
-          resultsEl.innerHTML = "";
-          const msg = (data && (data.error || data.message)) || t("error_generic");
-          setStatus(msg, "error");
-          return;
-        }
-
-        const answer = (data && (data.answer || data.result || data.content)) || "";
-        if (!answer) {
-          resultsEl.innerHTML = "";
-          setStatus(t("no_results"), "error");
-          return;
-        }
-
-        lastAnswerMarkdown = answer;
-        resultsEl.innerHTML = markdownToHtml(answer);
-        populateReportPreview(answer);
-        reportActionsEl.style.display = "flex";
-        previewOpenBtn.classList.add("visible");
-        clearStatus();
-
-        if (window.fbq) {
-          try { fbq("track", "Lead"); } catch (e) {}
-        }
-      } catch (err) {
-        console.error(err);
-        resultsEl.innerHTML = "";
-        setStatus(t("error_generic"), "error");
-      } finally {
-        isSearching = false;
-        searchBtn.disabled = false;
+    // 4. إشعار بالبحث المتبقي (للمستخدمين المدفوعين)
+    const meta = data?.meta || {};
+    if (meta.user_type === "paid" && meta.remaining_quota !== undefined) {
+      showToast(`💎 ${meta.remaining_quota} / ${meta.quota_limit} searches left`, "success");
+    } else if (meta.user_type === "free" && meta.remaining_quota !== undefined) {
+      if (meta.remaining_quota < 10) {
+        showToast(`⚠️ ${meta.remaining_quota} free searches left`, "error");
       }
     }
 
+    if (window.fbq) {
+      try { fbq("track", "Lead"); } catch (e) {}
+    }
+  } catch (err) {
+    console.error(err);
+    resultsEl.innerHTML = "";
+    setStatus(t("error_generic"), "error");
+  } finally {
+    isSearching = false;
+    searchBtn.disabled = false;
+  }
+}
+    
+
+        
     function clearAll() {
       searchInput.value = "";
       resultsEl.innerHTML = "";
