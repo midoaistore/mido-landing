@@ -7,10 +7,6 @@
   <meta name="description" content="Deep Search powered by Mido AI Store - Find products, prices, and suppliers across global markets." />
   <meta name="theme-color" content="#0b0f14" />
 
-  <!-- PWA Manifest (inline, لا يحتاج ملف خارجي) -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Mido Deep Search","short_name":"Mido","start_url":"./","display":"standalone","background_color":"%230b0f14","theme_color":"%230b0f14","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2322d3ee%22/%3E%3Ctext x=%2250%22 y=%2265%22 font-size=%2255%22 text-anchor=%22middle%22%3E%F0%9F%95%B7%EF%B8%8F%3C/text%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml"}]}' />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2322d3ee'/%3E%3Ctext x='50' y='65' font-size='55' text-anchor='middle'%3E%F0%9F%95%B7%EF%B8%8F%3C/text%3E%3C/svg%3E" />
-
   <!-- Meta Pixel -->
   <script>
     !function(f,b,e,v,n,t,s)
@@ -45,1901 +41,606 @@
       --bad: #ef4444;
       --radius: 14px;
       --shadow: 0 10px 30px rgba(0,0,0,0.45);
-      --focus: 0 0 0 3px rgba(34, 211, 238, 0.45);
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-
     body {
       font-family: "Segoe UI", Tahoma, system-ui, -apple-system, sans-serif;
       background: radial-gradient(1200px 600px at 50% -10%, #14202e 0%, var(--bg) 55%);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-      line-height: 1.6;
+      color: var(--text); min-height: 100vh; display: flex; flex-direction: column;
+      line-height: 1.6; overflow-x: hidden;
     }
-
-    /* A11Y: focus visible لكل العناصر التفاعلية */
-    a:focus-visible,
-    button:focus-visible,
-    input:focus-visible,
-    select:focus-visible {
-      outline: none;
-      box-shadow: var(--focus);
-      border-radius: 8px;
-    }
-
-    /* A11Y: skip link */
-    .skip-link {
-      position: absolute;
-      top: -100px;
-      inset-inline-start: 10px;
-      background: var(--accent);
-      color: #04121a;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-weight: 700;
-      z-index: 999;
-      transition: top 0.2s;
-    }
-    .skip-link:focus { top: 10px; }
-
-    /* A11Y: prefers-reduced-motion */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.001ms !important;
-      }
-    }
-
-    #spider-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.55;
-    }
-
-    header, main, footer { position: relative; z-index: 1; }
-
-    /* HEADER */
+    /* الهيدر والشعار */
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 16px 22px;
-      background: rgba(11, 15, 20, 0.75);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      flex-wrap: wrap;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 22px; background: rgba(11,15,20,0.85);
+      backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 10;
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: 0.4px;
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; }
+    .brand .logo { background: linear-gradient(135deg, var(--accent), var(--accent-2)); width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: #04121a; }
+    .controls { display: flex; gap: 10px; }
+    select { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; outline: none; }
+    
+    /* الهيكل الرئيسي */
+    main { flex: 1; max-width: 900px; margin: 0 auto; width: 100%; padding: 30px 20px; position: relative; z-index: 2; }
+    
+    /* لوحة العدادات */
+    .stats-board {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px;
     }
-
-    .brand .logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #04121a;
-      font-size: 1.2rem;
-      box-shadow: 0 6px 18px rgba(34, 211, 238, 0.35);
+    .stat-card {
+      background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 15px; text-align: center; box-shadow: var(--shadow);
     }
+    .stat-card .num { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+    .stat-card .lbl { font-size: 0.85rem; color: var(--muted); }
 
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    /* صندوق البحث */
+    .search-container { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); margin-bottom: 20px; }
+    .search-box { display: flex; gap: 10px; margin-bottom: 16px; }
+    .search-box input { flex: 1; background: var(--panel-2); border: 1px solid var(--border); padding: 14px; border-radius: 10px; color: #fff; outline: none; font-size: 1rem; }
+    .btn { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 700; transition: 0.2s; }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04121a; border: none; }
+    .btn:hover { filter: brightness(1.1); }
 
-    select, .btn {
-      background: var(--panel-2);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 9px 12px;
-      font-size: 0.92rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
-    }
+    /* المهارات (Skills) */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-pill { background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.3); color: var(--accent); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+    .skill-pill.active { background: var(--accent); color: #04121a; font-weight: bold; }
 
-    select:hover, .btn:hover { border-color: var(--accent); }
+    /* خطوات المراحل */
+    .pipeline { display: flex; justify-content: space-between; margin: 24px 0; opacity: 0.5; }
+    .step { text-align: center; font-size: 0.8rem; }
+    .step.active { opacity: 1; color: var(--accent); font-weight: bold; }
+    .step .circle { width: 30px; height: 30px; border-radius: 50%; background: var(--panel-2); border: 2px solid var(--border); display: grid; place-items: center; margin: 0 auto 6px; }
+    .step.active .circle { border-color: var(--accent); background: rgba(34,211,238,0.2); }
 
-    .btn.primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #04121a;
-      font-weight: 700;
-      border: none;
-    }
-
-    .btn.primary:hover { filter: brightness(1.08); }
-
-    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
-
-    .btn.small {
-      padding: 8px 12px;
-      font-size: 0.87rem;
-    }
-
-    /* MAIN */
-    main {
-      flex: 1;
-      width: 100%;
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 34px 20px 60px;
-    }
-
-    .hero { text-align: center; margin-bottom: 26px; }
-
-    .hero h1 {
-      font-size: clamp(1.55rem, 4vw, 2.3rem);
-      font-weight: 800;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, #fff, var(--accent));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p { color: var(--muted); font-size: 0.98rem; }
-
-    /* SEARCH BOX */
-    .search-box {
-      display: flex;
-      gap: 10px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 10px;
-      box-shadow: var(--shadow);
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
-
-    .search-box input {
-      flex: 1;
-      min-width: 200px;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--text);
-      font-size: 1rem;
-      padding: 10px 12px;
-      font-family: inherit;
-    }
-
-    .search-box input::placeholder { color: var(--muted); }
-
-    .actions-row {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-    }
-
-    /* STATUS */
-    .status {
-      margin: 18px 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-      min-height: 22px;
-    }
-
-    .status.error { color: var(--bad); }
-    .status.success { color: var(--good); }
-
-    .spinner {
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      border: 2px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      vertical-align: middle;
-      margin-inline-end: 8px;
-    }
-
+    /* النتائج */
+    .results { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); font-size: 0.97rem; line-height: 1.7; display: none; }
+    .results.visible { display: block; }
+    .results h1, .results h2, .results h3 { color: #fff; margin: 18px 0 10px; }
+    .results h2 { color: var(--accent); font-size: 1.2rem; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .results table { width: 100%; border-collapse: collapse; margin: 15px 0; display: block; overflow-x: auto; }
+    .results th, .results td { border: 1px solid var(--border); padding: 10px; text-align: start; }
+    .results th { background: var(--panel-2); color: var(--accent); }
+    .results ul, .results ol { padding-inline-start: 24px; margin: 10px 0; }
+    
+    /* أزرار التقرير */
+    .report-actions { display: flex; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    
+    /* التحميل */
+    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-inline-end: 8px; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* SKELETON LOADER */
-    .skeleton-report {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
+    /* الفوتر */
+    footer { border-top: 1px solid var(--border); padding: 20px; display: flex; justify-content: space-between; align-items: center; background: var(--bg); font-size: 0.9rem; color: var(--muted); position: relative; z-index: 2; }
+    footer a { color: var(--muted); text-decoration: none; margin-inline-start: 15px; cursor: pointer; }
+    .admin-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; opacity: 0.7; }
 
-    .skeleton-line {
-      height: 14px;
-      margin: 12px 0;
-      border-radius: 6px;
-      background: linear-gradient(90deg, var(--panel-2) 25%, var(--border) 50%, var(--panel-2) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-    }
-
-    .skeleton-line.w-40 { width: 40%; }
-    .skeleton-line.w-60 { width: 60%; }
-    .skeleton-line.w-80 { width: 80%; }
-    .skeleton-line.w-100 { width: 100%; }
-    .skeleton-line.title { height: 22px; margin-top: 0; }
-
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    /* RESULTS */
-    .results {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-      line-height: 1.75;
-      font-size: 0.97rem;
-      overflow-wrap: break-word;
-      word-break: break-word;
-    }
-
-    .results:empty { display: none; }
-
-    .results h1, .results h2, .results h3 {
-      margin: 18px 0 10px;
-      color: #fff;
-      line-height: 1.35;
-    }
-
-    .results h1 { font-size: 1.4rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
-    .results h2 { font-size: 1.2rem; color: var(--accent); }
-    .results h3 { font-size: 1.05rem; color: var(--accent-2); }
-
-    .results p { margin: 8px 0; }
-    .results ul, .results ol { margin: 8px 0; padding-inline-start: 24px; }
-    .results li { margin: 4px 0; }
-
-    .results a {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px dashed rgba(34, 211, 238, 0.4);
-    }
-    .results a:hover { color: #fff; border-bottom-color: var(--accent); }
-
-    .results strong { color: #fff; }
-    .results code {
-      background: var(--panel-2);
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-size: 0.9em;
-      color: var(--accent);
-    }
-
-    .results table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 12px 0;
-      font-size: 0.92rem;
-      display: block;
-      overflow-x: auto;
-    }
-
-    .results table thead, .results table tbody {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
-
-    .results th, .results td {
-      border: 1px solid var(--border);
-      padding: 8px 10px;
-      text-align: start;
-      vertical-align: top;
-    }
-
-    .results th { background: var(--panel-2); color: var(--accent); font-weight: 700; }
-
-    .results blockquote {
-      border-inline-start: 3px solid var(--accent);
-      padding-inline-start: 12px;
-      color: var(--muted);
-      margin: 10px 0;
-    }
-
-    .results hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 16px 0;
-    }
-
-    /* REPORT ACTION BAR */
-    .report-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-
-    .report-actions .btn {
-      flex: 1;
-      min-width: 120px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    /* PREVIEW BUTTON */
-    .preview-open-btn {
-      display: none;
-      margin-top: 14px;
-      width: 100%;
-      background: linear-gradient(135deg, var(--accent-2), var(--accent));
-      color: #04121a;
-      font-weight: 700;
-      border: none;
-      padding: 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.95rem;
-      transition: filter 0.2s;
-    }
-    .preview-open-btn.visible { display: block; }
-    .preview-open-btn:hover { filter: brightness(1.08); }
-
-    /* FOOTER */
-    footer {
-      padding: 18px 22px;
-      border-top: 1px solid var(--border);
-      background: rgba(11, 15, 20, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    footer .links { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-
-    footer .links a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      cursor: pointer;
-    }
-
-    footer .links a:hover { color: var(--accent); }
-
-    .admin-key-btn {
-      background: transparent;
-      border: none;
-      font-size: 1.1rem;
-      cursor: pointer;
-      padding: 4px 8px;
-      border-radius: 8px;
-      transition: background 0.2s;
-      opacity: 0.6;
-    }
-
-    .admin-key-btn:hover { opacity: 1; background: var(--panel-2); }
-    .admin-key-btn.active { opacity: 1; filter: drop-shadow(0 0 6px var(--accent)); }
-
-    /* MODAL */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 100;
-    }
-
+    /* النوافذ المنبثقة */
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px); }
     .modal-backdrop.open { display: flex; }
-
-    .modal {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      max-width: 620px;
-      width: 100%;
-      max-height: 85vh;
-      overflow-y: auto;
-      padding: 26px;
-      box-shadow: var(--shadow);
-    }
-
-    .modal.modal-wide { max-width: 920px; }
-
-    .modal h2 {
-      margin-bottom: 14px;
-      color: var(--accent);
-      font-size: 1.25rem;
-    }
-
-    .modal p, .modal li { margin: 8px 0; color: var(--text); font-size: 0.95rem; }
-    .modal ul { padding-inline-start: 22px; }
-
-    .modal .close-btn {
-      margin-top: 18px;
-      width: 100%;
-    }
-
-    .modal input[type="password"], .modal input[type="text"] {
-      width: 100%;
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 11px 13px;
-      color: var(--text);
-      font-size: 1rem;
-      margin-top: 10px;
-      font-family: inherit;
-    }
-
-    .modal input:focus { outline: none; border-color: var(--accent); }
-
-    .modal .hint { font-size: 0.83rem; color: var(--muted); margin-top: 8px; }
-
-    /* REPORT PREVIEW */
-    .report-preview {
-      max-height: 60vh;
-      overflow-y: auto;
-      padding: 8px 4px;
-      line-height: 1.7;
-    }
-
-    .report-preview .report-section { margin-bottom: 18px; }
-
-    .report-preview .report-section-title {
-      color: var(--accent);
-      font-size: 1.1rem;
-      margin: 12px 0 8px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .report-preview .report-empty {
-      color: var(--muted);
-      text-align: center;
-      padding: 20px;
-    }
-
-    .report-preview table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 10px 0;
-      font-size: 0.9rem;
-    }
-
-    .report-preview th, .report-preview td {
-      border: 1px solid var(--border);
-      padding: 8px 10px;
-      text-align: start;
-      vertical-align: top;
-    }
-
-    .report-preview th { background: var(--panel-2); color: var(--accent); }
-
-    .report-preview ul, .report-preview ol { padding-inline-start: 24px; margin: 8px 0; }
-    .report-preview li { margin: 4px 0; }
-    .report-preview p { margin: 8px 0; }
-
-    .report-preview h2, .report-preview h3 {
-      color: #fff;
-      margin: 14px 0 8px;
-    }
-
-    .report-preview a { color: var(--accent); text-decoration: none; }
-    .report-preview a:hover { color: #fff; }
-    .report-preview code {
-      background: var(--panel-2);
-      padding: 2px 6px;
-      border-radius: 6px;
-      color: var(--accent);
-    }
-
-    /* TOAST */
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      inset-inline-end: 24px;
-      background: var(--panel-2);
-      border: 1px solid var(--accent);
-      border-radius: 10px;
-      padding: 12px 18px;
-      color: var(--text);
-      font-size: 0.92rem;
-      box-shadow: var(--shadow);
-      z-index: 200;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.25s, transform 0.25s;
-      pointer-events: none;
-    }
-
-    .toast.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .toast.error { border-color: var(--bad); }
-    .toast.success { border-color: var(--good); }
-
-    /* RESPONSIVE */
-    @media (max-width: 620px) {
-      header { padding: 12px 14px; }
-      main { padding: 22px 14px 40px; }
-      .search-box { padding: 8px; }
-      .results { padding: 16px; font-size: 0.93rem; }
-      footer { justify-content: center; text-align: center; }
-      .toast { inset-inline-end: 12px; inset-inline-start: 12px; bottom: 16px; }
-      .report-actions .btn { flex: 1 1 45%; min-width: 0; font-size: 0.82rem; }
-    }
+    .modal { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); max-width: 600px; width: 100%; padding: 24px; box-shadow: var(--shadow); }
+    .modal h2 { margin-bottom: 16px; color: var(--accent); }
+    .modal input { width: 100%; background: var(--panel-2); border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: #fff; margin: 10px 0; }
+    .modal .hint { font-size: 0.8rem; color: var(--muted); margin-bottom: 16px; }
+    
+    #spider-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.4; }
+    .skeleton { background: var(--panel-2); border-radius: 6px; margin: 10px 0; animation: shimmer 1.5s infinite; }
+    @keyframes shimmer { 0% { opacity: 0.5; } 50% { opacity: 0.8; } 100% { opacity: 0.5; } }
   </style>
 </head>
-
 <body>
-  <a href="#search-input" class="skip-link" data-i18n="skip_to_search">Skip to search</a>
+  <canvas id="spider-canvas"></canvas>
 
-  <canvas id="spider-canvas" aria-hidden="true"></canvas>
-
-  <header role="banner">
-    <div class="brand">
-      <div class="logo" aria-hidden="true">🕷️</div>
-      <span>Mido AI Store</span>
-    </div>
+  <header>
+    <div class="brand"><div class="logo">🕷️</div> Mido AI Store</div>
     <div class="controls">
-      <select id="lang-select" aria-label="Language">
-        <option value="ar">العربية</option>
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-        <option value="de">Deutsch</option>
-        <option value="ja">日本語</option>
-        <option value="zh">简体中文</option>
-        <option value="es">Español</option>
-        <option value="pt">Português</option>
+      <select id="lang-select">
+        <option value="ar">العربية</option><option value="en">English</option><option value="zh">简体中文</option>
+        <option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option>
       </select>
-      <select id="currency-select" aria-label="Currency / Country">
-        <option value="US">USD ($) - United States</option>
-        <option value="EG">EGP (ج.م) - Egypt</option>
-        <option value="SA">SAR (ر.س) - Saudi Arabia</option>
-        <option value="AE">AED (د.إ) - UAE</option>
-        <option value="GB">GBP (£) - United Kingdom</option>
-        <option value="EU">EUR (€) - Eurozone</option>
-        <option value="CN">CNY (¥) - China</option>
-        <option value="JP">JPY (¥) - Japan</option>
-        <option value="BR">BRL (R$) - Brazil</option>
-        <option value="MX">MXN ($) - Mexico</option>
+      <select id="currency-select">
+        <option value="US">USD ($)</option><option value="CN">CNY (¥)</option><option value="EG">EGP (ج.م)</option><option value="EU">EUR (€)</option>
       </select>
     </div>
   </header>
 
-  <main role="main">
-    <section class="hero">
-      <h1 data-i18n="hero_title">Deep Search</h1>
-      <p data-i18n="hero_subtitle">Find products, prices, and suppliers across global markets.</p>
-    </section>
-
-    <div class="search-box">
-      <input
-        id="search-input"
-        type="text"
-        data-i18n-placeholder="search_placeholder"
-        placeholder="What are you looking for today?"
-        autocomplete="off"
-        aria-label="Search query"
-      />
-      <button id="search-btn" class="btn primary" data-i18n="search_btn" aria-label="Search">Search</button>
+  <main>
+    <!-- العدادات -->
+    <div class="stats-board">
+      <div class="stat-card"><div class="num" id="stat-visitors">86</div><div class="lbl" data-i18n="visitors">Visitors</div></div>
+      <div class="stat-card"><div class="num" id="stat-searches">0</div><div class="lbl" data-i18n="today_searches">Searches</div></div>
+      <div class="stat-card"><div class="num" id="stat-remaining">100</div><div class="lbl" data-i18n="remaining">Remaining</div></div>
     </div>
 
-    <div class="actions-row">
-      <button id="clear-btn" class="btn" data-i18n="clear_btn" aria-label="Clear">Clear</button>
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="What are you looking for today?" data-i18n-placeholder="search_placeholder" />
+        <button class="btn primary" id="search-btn" data-i18n="search_btn">Search 🔍</button>
+      </div>
+      
+      <!-- المهارات -->
+      <div class="skills-grid" id="skills-container">
+        <div class="skill-pill active" data-skill="deep">Deep Search</div>
+        <div class="skill-pill" data-skill="compare">Compare</div>
+        <div class="skill-pill" data-skill="price">Price Check</div>
+        <div class="skill-pill" data-skill="recommend">Recommend</div>
+        <div class="skill-pill" data-skill="fact">Fact Check</div>
+      </div>
     </div>
 
-    <div id="status" class="status" role="status" aria-live="polite"></div>
-    <div id="results" class="results" role="region" aria-live="polite"></div>
-
-    <div id="report-actions" class="report-actions" style="display:none">
-      <button id="copy-report-btn" class="btn" aria-label="Copy report">
-        <span aria-hidden="true">📋</span> <span data-i18n="copy_report">Copy</span>
-      </button>
-      <button id="share-report-btn" class="btn" aria-label="Share report">
-        <span aria-hidden="true">🔗</span> <span data-i18n="share_report">Share</span>
-      </button>
-      <button id="download-report-btn" class="btn" aria-label="Download report">
-        <span aria-hidden="true">⬇️</span> <span data-i18n="download_report">Download</span>
-      </button>
+    <!-- المراحل -->
+    <div class="pipeline" id="pipeline">
+      <div class="step" id="step-1"><div class="circle">1</div>Source</div>
+      <div class="step" id="step-2"><div class="circle">2</div>Analysis</div>
+      <div class="step" id="step-3"><div class="circle">3</div>Filter</div>
+      <div class="step" id="step-4"><div class="circle">4</div>Verify</div>
+      <div class="step" id="step-5"><div class="circle">5</div>Report</div>
     </div>
 
-    <button id="preview-open-btn" class="preview-open-btn" data-i18n="preview_open" aria-label="Open full report preview">
-      View Full Report Preview
-    </button>
+    <div id="status" style="text-align:center; margin-bottom:15px; color:var(--accent); font-weight:bold;"></div>
+    
+    <div id="results" class="results"></div>
+    
+    <div class="report-actions" id="report-actions" style="display:none">
+      <button class="btn" id="copy-btn" data-i18n="copy_btn">📋 Copy Report</button>
+      <button class="btn" id="download-btn" data-i18n="download_btn">⬇️ Download (.md)</button>
+    </div>
   </main>
 
-  <footer role="contentinfo">
-    <span>© <span id="year"></span> Mido AI Store</span>
-    <div class="links">
-      <a data-modal="privacy" data-i18n="privacy" role="button" tabindex="0">Privacy Policy</a>
-      <a data-modal="refund" data-i18n="refund" role="button" tabindex="0">Refund Policy</a>
-      <button id="admin-key-btn" class="admin-key-btn" title="Admin Key" aria-label="Admin key">🔑</button>
+  <footer>
+    <div>© <span id="year"></span> Mido AI Store</div>
+    <div>
+      <a data-modal="privacy" data-i18n="privacy">Privacy Policy</a>
+      <a data-modal="refund" data-i18n="refund">Refund Policy</a>
+      <button id="admin-key-btn" class="admin-btn" title="Admin/Pro Key">🔑</button>
     </div>
   </footer>
 
-  <!-- Privacy Modal -->
-  <div class="modal-backdrop" id="modal-privacy" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+  <!-- Modals -->
+  <div class="modal-backdrop" id="modal-admin">
     <div class="modal">
-      <h2 id="privacy-title" data-i18n="privacy_title">Privacy Policy</h2>
-      <p data-i18n="privacy_body">
-        We respect your privacy. We do not store your search queries on our servers.
-        We use Meta Pixel to measure campaign performance. No personal data is sold
-        to third parties. For questions, contact us via our official channels.
-      </p>
-      <button class="btn primary close-btn" data-close="privacy" data-i18n="close">Close</button>
+      <h2 data-i18n="admin_title">Unlock Pro Access</h2>
+      <p style="margin-bottom:10px; font-size:0.9rem;" data-i18n="admin_hint">Enter your Admin Key or Gumroad License Key.</p>
+      <input type="password" id="admin-key-input" placeholder="GUM-XXXX-XXXX" />
+      <p class="hint" data-i18n="admin_note">The key is saved locally in your browser.</p>
+      <button class="btn primary" id="admin-save-btn" style="width:100%; margin-bottom:10px;" data-i18n="save">Activate</button>
+      <button class="btn" onclick="document.getElementById('modal-admin').classList.remove('open')" style="width:100%;" data-i18n="cancel">Cancel</button>
     </div>
   </div>
 
-  <!-- Refund Modal -->
-  <div class="modal-backdrop" id="modal-refund" role="dialog" aria-modal="true" aria-labelledby="refund-title">
+  <div class="modal-backdrop" id="modal-privacy">
     <div class="modal">
-      <h2 id="refund-title" data-i18n="refund_title">Refund Policy</h2>
-      <p data-i18n="refund_body">
-        Digital products are non-refundable once delivered, unless there is a
-        technical failure on our side. Refund requests must be submitted within
-        7 days of purchase with proof of issue. Refunds are processed within
-        5-10 business days.
-      </p>
-      <button class="btn primary close-btn" data-close="refund" data-i18n="close">Close</button>
+      <h2 data-i18n="privacy">Privacy Policy</h2>
+      <p data-i18n="privacy_body">We respect your privacy. We do not store your search queries. We use Meta Pixel to measure performance.</p>
+      <button class="btn" onclick="document.getElementById('modal-privacy').classList.remove('open')" style="width:100%; margin-top:20px;" data-i18n="close">Close</button>
     </div>
   </div>
 
-  <!-- Admin Key Modal -->
-  <div class="modal-backdrop" id="modal-admin" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+  <div class="modal-backdrop" id="modal-refund">
     <div class="modal">
-      <h2 id="admin-title" data-i18n="admin_title">Admin Access</h2>
-      <p data-i18n="admin_hint">Enter your admin key to unlock unlimited searches.</p>
-      <input id="admin-key-input" type="password" placeholder="Admin Key" autocomplete="off" aria-label="Admin key input" />
-      <p class="hint" data-i18n="admin_note">
-        The key is stored locally in your browser only. It is never sent anywhere except to our API for verification.
-      </p>
-      <button id="admin-save-btn" class="btn primary close-btn" data-i18n="save">Save</button>
-      <button class="btn close-btn" data-close="admin" data-i18n="cancel">Cancel</button>
+      <h2 data-i18n="refund">Refund Policy</h2>
+      <p data-i18n="refund_body">Digital products are non-refundable once delivered, unless there is a technical failure on our side.</p>
+      <button class="btn" onclick="document.getElementById('modal-refund').classList.remove('open')" style="width:100%; margin-top:20px;" data-i18n="close">Close</button>
     </div>
   </div>
 
-  <!-- Full Report Preview Modal -->
-  <div class="modal-backdrop" id="modal-preview" role="dialog" aria-modal="true" aria-labelledby="preview-title">
-    <div class="modal modal-wide">
-      <h2 id="preview-title" data-i18n="preview_title">Full Report Preview</h2>
-      <div id="report-preview" class="report-preview"></div>
-      <button class="btn primary close-btn" data-close="preview" data-i18n="close">Close</button>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-  <script>
+  <div id="toast" style="position:fixed; bottom:20px; right:20px; background:var(--panel-2); border:1px solid var(--accent); padding:10px 20px; border-radius:8px; opacity:0; transition:0.3s; pointer-events:none; z-index:999;">Copied!</div>
+    <script>
     // ============================================================
     // CONFIG
     // ============================================================
     const WORKER_URL = "https://mido-deepsearch.midoaistore.workers.dev";
-    // ⚠️ Replace with your actual Cloudflare Worker URL.
-
     const STORAGE_KEY = "mido_admin_key";
     const LANG_KEY = "mido_lang";
     const CUR_KEY = "mido_currency";
+    let currentLang = localStorage.getItem(LANG_KEY) || "ar";
+    let currentCurrency = localStorage.getItem(CUR_KEY) || "US";
+    let isSearching = false;
+    let lastAnswerMarkdown = "";
+    let lastQuery = "";
+    let selectedSkill = "deep";
 
     // ============================================================
     // TRANSLATIONS
     // ============================================================
     const TRANSLATIONS = {
       ar: {
-        hero_title: "البحث العميق",
-        hero_subtitle: "اعثر على المنتجات والأسعار والموردين في الأسواق العالمية.",
-        search_placeholder: "ما الذي تبحث عنه اليوم؟",
-        search_btn: "بحث",
-        clear_btn: "مسح",
-        searching: "جاري البحث...",
-        empty_query: "الرجاء إدخال كلمة بحث.",
-        no_results: "لا توجد نتائج.",
-        error_generic: "حدث خطأ. حاول مرة أخرى.",
-        rate_limit: "تجاوزت الحد المسموح. أدخل مفتاح الأدمن أو حاول لاحقاً.",
-        privacy: "سياسة الخصوصية",
-        refund: "سياسة الاسترداد",
-        privacy_title: "سياسة الخصوصية",
-        privacy_body: "نحن نحترم خصوصيتك. لا نخزن استعلامات البحث على خوادمنا. نستخدم Meta Pixel لقياس أداء الحملات. لا يتم بيع أي بيانات شخصية لأطراف ثالثة. للاستفسارات، تواصل معنا عبر قنواتنا الرسمية.",
-        refund_title: "سياسة الاسترداد",
-        refund_body: "المنتجات الرقمية غير قابلة للاسترداد بعد التسليم، إلا في حالة وجود عطل تقني من جانبنا. يجب تقديم طلبات الاسترداد خلال 7 أيام من الشراء مع إثبات المشكلة. تتم معالجة المبالغ المستردة خلال 5-10 أيام عمل.",
-        close: "إغلاق",
-        admin_title: "وصول الأدمن",
-        admin_hint: "أدخل مفتاح الأدمن لفتح عمليات بحث غير محدودة.",
-        admin_note: "يُخزَّن المفتاح محلياً في متصفحك فقط. لا يُرسَل إلى أي مكان سوى واجهة الـ API للتحقق.",
-        save: "حفظ",
-        cancel: "إلغاء",
-        admin_saved: "تم حفظ مفتاح الأدمن.",
-        admin_removed: "تم إزالة مفتاح الأدمن.",
-        preview_open: "عرض معاينة التقرير الكامل",
-        preview_title: "معاينة التقرير الكامل",
-        preview_empty: "لا يوجد تقرير متاح بعد. قم بالبحث أولاً.",
-        copy_report: "نسخ",
-        share_report: "مشاركة",
-        download_report: "تحميل",
-        copied: "تم نسخ التقرير إلى الحافظة.",
-        copy_failed: "تعذر النسخ. حاول يدوياً.",
-        link_copied: "تم نسخ الرابط.",
-        shared: "تمت المشاركة.",
-        share_failed: "تعذرت المشاركة.",
-        downloaded: "تم تحميل التقرير.",
-        skip_to_search: "تخطَّ إلى البحث",
-        powered_by: "مدعوم بواسطة الذكاء الاصطناعي"
+        hero_title: "البحث العميق", hero_subtitle: "اعثر على المنتجات والأسعار والموردين.",
+        search_placeholder: "ما الذي تبحث عنه اليوم؟", search_btn: "بحث",
+        visitors: "زوار اليوم", today_searches: "عمليات بحث", remaining: "متبقي",
+        skills: "المهارات", steps: "المراحل",
+        privacy: "سياسة الخصوصية", refund: "سياسة الاسترداد",
+        privacy_body: "نحن نحترم خصوصيتك. لا نخزن استعلامات البحث على خوادمنا. نستخدم Meta Pixel لقياس أداء الحملات.",
+        refund_body: "المنتجات الرقمية غير قابلة للاسترداد بعد التسليم، إلا في حالة وجود عطل تقني من جانبنا.",
+        close: "إغلاق", save: "تفعيل", cancel: "إلغاء",
+        admin_title: "تفعيل الوصول الكامل", admin_hint: "أدخل مفتاح الأدمن أو ترخيص Gumroad.",
+        admin_note: "يُخزَّن المفتاح محلياً في متصفحك فقط.",
+        copy_btn: "نسخ التقرير", download_btn: "تحميل التقرير",
+        searching: "جاري البحث والتحليل...", empty_query: "أدخل كلمة بحث.", error_generic: "حدث خطأ.",
+        rate_limit: "تجاوزت الحد المسموح.", copied: "تم النسخ بنجاح!", downloaded: "تم التحميل!"
       },
       en: {
-        hero_title: "Deep Search",
-        hero_subtitle: "Find products, prices, and suppliers across global markets.",
-        search_placeholder: "What are you looking for today?",
-        search_btn: "Search",
-        clear_btn: "Clear",
-        searching: "Searching...",
-        empty_query: "Please enter a search query.",
-        no_results: "No results found.",
-        error_generic: "Something went wrong. Please try again.",
-        rate_limit: "Rate limit exceeded. Enter admin key or try later.",
-        privacy: "Privacy Policy",
-        refund: "Refund Policy",
-        privacy_title: "Privacy Policy",
-        privacy_body: "We respect your privacy. We do not store your search queries on our servers. We use Meta Pixel to measure campaign performance. No personal data is sold to third parties. For questions, contact us via our official channels.",
-        refund_title: "Refund Policy",
-        refund_body: "Digital products are non-refundable once delivered, unless there is a technical failure on our side. Refund requests must be submitted within 7 days of purchase with proof of issue. Refunds are processed within 5-10 business days.",
-        close: "Close",
-        admin_title: "Admin Access",
-        admin_hint: "Enter your admin key to unlock unlimited searches.",
-        admin_note: "The key is stored locally in your browser only. It is never sent anywhere except to our API for verification.",
-        save: "Save",
-        cancel: "Cancel",
-        admin_saved: "Admin key saved.",
-        admin_removed: "Admin key removed.",
-        preview_open: "View Full Report Preview",
-        preview_title: "Full Report Preview",
-        preview_empty: "No report available yet. Run a search first.",
-        copy_report: "Copy",
-        share_report: "Share",
-        download_report: "Download",
-        copied: "Report copied to clipboard.",
-        copy_failed: "Copy failed. Try manually.",
-        link_copied: "Link copied.",
-        shared: "Shared successfully.",
-        share_failed: "Sharing failed.",
-        downloaded: "Report downloaded.",
-        skip_to_search: "Skip to search",
-        powered_by: "Powered by AI"
-      },
-      fr: {
-        hero_title: "Recherche approfondie",
-        hero_subtitle: "Trouvez des produits, des prix et des fournisseurs sur les marchés mondiaux.",
-        search_placeholder: "Que recherchez-vous aujourd'hui ?",
-        search_btn: "Rechercher",
-        clear_btn: "Effacer",
-        searching: "Recherche en cours...",
-        empty_query: "Veuillez saisir une requête.",
-        no_results: "Aucun résultat trouvé.",
-        error_generic: "Une erreur s'est produite. Veuillez réessayer.",
-        rate_limit: "Limite atteinte. Entrez la clé admin ou réessayez plus tard.",
-        privacy: "Politique de confidentialité",
-        refund: "Politique de remboursement",
-        privacy_title: "Politique de confidentialité",
-        privacy_body: "Nous respectons votre vie privée. Nous ne stockons pas vos requêtes sur nos serveurs. Nous utilisons Meta Pixel pour mesurer les performances des campagnes. Aucune donnée personnelle n'est vendue à des tiers. Pour toute question, contactez-nous via nos canaux officiels.",
-        refund_title: "Politique de remboursement",
-        refund_body: "Les produits numériques ne sont pas remboursables une fois livrés, sauf en cas de défaillance technique de notre part. Les demandes de remboursement doivent être soumises dans les 7 jours suivant l'achat avec preuve du problème. Les remboursements sont traités sous 5 à 10 jours ouvrables.",
-        close: "Fermer",
-        admin_title: "Accès administrateur",
-        admin_hint: "Entrez votre clé admin pour débloquer des recherches illimitées.",
-        admin_note: "La clé est stockée localement dans votre navigateur uniquement. Elle n'est jamais envoyée ailleurs qu'à notre API pour vérification.",
-        save: "Enregistrer",
-        cancel: "Annuler",
-        admin_saved: "Clé admin enregistrée.",
-        admin_removed: "Clé admin supprimée.",
-        preview_open: "Afficher l'aperçu complet du rapport",
-        preview_title: "Aperçu complet du rapport",
-        preview_empty: "Aucun rapport disponible pour le moment. Lancez d'abord une recherche.",
-        copy_report: "Copier",
-        share_report: "Partager",
-        download_report: "Télécharger",
-        copied: "Rapport copié dans le presse-papiers.",
-        copy_failed: "Échec de la copie. Essayez manuellement.",
-        link_copied: "Lien copié.",
-        shared: "Partagé avec succès.",
-        share_failed: "Échec du partage.",
-        downloaded: "Rapport téléchargé.",
-        skip_to_search: "Aller à la recherche",
-        powered_by: "Propulsé par l'IA"
-      },
-      de: {
-        hero_title: "Tiefensuche",
-        hero_subtitle: "Finden Sie Produkte, Preise und Lieferanten auf globalen Märkten.",
-        search_placeholder: "Wonach suchen Sie heute?",
-        search_btn: "Suchen",
-        clear_btn: "Löschen",
-        searching: "Suche läuft...",
-        empty_query: "Bitte geben Sie eine Suchanfrage ein.",
-        no_results: "Keine Ergebnisse gefunden.",
-        error_generic: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
-        rate_limit: "Limit erreicht. Admin-Schlüssel eingeben oder später versuchen.",
-        privacy: "Datenschutzrichtlinie",
-        refund: "Rückerstattungsrichtlinie",
-        privacy_title: "Datenschutzrichtlinie",
-        privacy_body: "Wir respektieren Ihre Privatsphäre. Wir speichern Ihre Suchanfragen nicht auf unseren Servern. Wir verwenden Meta Pixel zur Messung der Kampagnenleistung. Es werden keine personenbezogenen Daten an Dritte verkauft. Bei Fragen kontaktieren Sie uns über unsere offiziellen Kanäle.",
-        refund_title: "Rückerstattungsrichtlinie",
-        refund_body: "Digitale Produkte sind nach der Lieferung nicht erstattungsfähig, es sei denn, es liegt ein technischer Fehler unsererseits vor. Rückerstattungsanträge müssen innerhalb von 7 Tagen nach dem Kauf mit Nachweis des Problems eingereicht werden. Rückerstattungen werden innerhalb von 5-10 Werktagen bearbeitet.",
-        close: "Schließen",
-        admin_title: "Admin-Zugang",
-        admin_hint: "Geben Sie Ihren Admin-Schlüssel ein, um unbegrenzte Suchen freizuschalten.",
-        admin_note: "Der Schlüssel wird nur lokal in Ihrem Browser gespeichert. Er wird nur zur Überprüfung an unsere API gesendet.",
-        save: "Speichern",
-        cancel: "Abbrechen",
-        admin_saved: "Admin-Schlüssel gespeichert.",
-        admin_removed: "Admin-Schlüssel entfernt.",
-        preview_open: "Vollständige Berichtsvorschau anzeigen",
-        preview_title: "Vollständige Berichtsvorschau",
-        preview_empty: "Noch kein Bericht verfügbar. Führen Sie zuerst eine Suche durch.",
-        copy_report: "Kopieren",
-        share_report: "Teilen",
-        download_report: "Herunterladen",
-        copied: "Bericht in die Zwischenablage kopiert.",
-        copy_failed: "Kopieren fehlgeschlagen. Manuell versuchen.",
-        link_copied: "Link kopiert.",
-        shared: "Erfolgreich geteilt.",
-        share_failed: "Teilen fehlgeschlagen.",
-        downloaded: "Bericht heruntergeladen.",
-        skip_to_search: "Zur Suche springen",
-        powered_by: "Unterstützt durch KI"
-      },
-      ja: {
-        hero_title: "ディープサーチ",
-        hero_subtitle: "世界市場の商品、価格、サプライヤーを検索します。",
-        search_placeholder: "今日は何をお探しですか？",
-        search_btn: "検索",
-        clear_btn: "クリア",
-        searching: "検索中...",
-        empty_query: "検索キーワードを入力してください。",
-        no_results: "結果が見つかりませんでした。",
-        error_generic: "エラーが発生しました。もう一度お試しください。",
-        rate_limit: "制限に達しました。管理者キーを入力するか、後でもう一度お試しください。",
-        privacy: "プライバシーポリシー",
-        refund: "返金ポリシー",
-        privacy_title: "プライバシーポリシー",
-        privacy_body: "私たちはあなたのプライバシーを尊重します。検索クエリをサーバーに保存しません。Meta Pixel を使用してキャンペーンのパフォーマンスを測定します。個人データが第三者に販売されることはありません。ご質問は公式チャネルからお問い合わせください。",
-        refund_title: "返金ポリシー",
-        refund_body: "デジタル製品は、当社側の技術的な障害がない限り、納品後の返金はできません。返金リクエストは購入から7日以内に問題の証明とともに提出する必要があります。返金は5〜10営業日以内に処理されます。",
-        close: "閉じる",
-        admin_title: "管理者アクセス",
-        admin_hint: "管理者キーを入力して無制限の検索をアンロックします。",
-        admin_note: "キーはブラウザにのみローカル保存されます。検証のためAPIにのみ送信されます。",
-        save: "保存",
-        cancel: "キャンセル",
-        admin_saved: "管理者キーを保存しました。",
-        admin_removed: "管理者キーを削除しました。",
-        preview_open: "レポート全体のプレビューを表示",
-        preview_title: "レポート全体のプレビュー",
-        preview_empty: "まだレポートがありません。先に検索を実行してください。",
-        copy_report: "コピー",
-        share_report: "共有",
-        download_report: "ダウンロード",
-        copied: "レポートをクリップボードにコピーしました。",
-        copy_failed: "コピーに失敗しました。手動でお試しください。",
-        link_copied: "リンクをコピーしました。",
-        shared: "共有しました。",
-        share_failed: "共有に失敗しました。",
-        downloaded: "レポートをダウンロードしました。",
-        skip_to_search: "検索へスキップ",
-        powered_by: "AIによる"
+        hero_title: "Deep Search", hero_subtitle: "Find products, prices, and suppliers.",
+        search_placeholder: "What are you looking for today?", search_btn: "Search",
+        visitors: "Today Visitors", today_searches: "Searches", remaining: "Remaining",
+        skills: "Skills", steps: "Stages",
+        privacy: "Privacy Policy", refund: "Refund Policy",
+        privacy_body: "We respect your privacy. We do not store your search queries. We use Meta Pixel to measure performance.",
+        refund_body: "Digital products are non-refundable once delivered, unless there is a technical failure on our side.",
+        close: "Close", save: "Activate", cancel: "Cancel",
+        admin_title: "Unlock Pro Access", admin_hint: "Enter Admin Key or Gumroad License.",
+        admin_note: "The key is saved locally in your browser.",
+        copy_btn: "Copy Report", download_btn: "Download Report",
+        searching: "Searching and analyzing...", empty_query: "Please enter a query.", error_generic: "An error occurred.",
+        rate_limit: "Rate limit exceeded.", copied: "Copied successfully!", downloaded: "Downloaded!"
       },
       zh: {
-        hero_title: "深度搜索",
-        hero_subtitle: "在全球市场中查找产品、价格和供应商。",
-        search_placeholder: "今天您想找什么？",
-        search_btn: "搜索",
-        clear_btn: "清除",
-        searching: "搜索中...",
-        empty_query: "请输入搜索关键词。",
-        no_results: "未找到结果。",
-        error_generic: "出现错误，请重试。",
-        rate_limit: "已达到限制。请输入管理员密钥或稍后再试。",
-        privacy: "隐私政策",
-        refund: "退款政策",
-        privacy_title: "隐私政策",
-        privacy_body: "我们尊重您的隐私。我们不会在服务器上存储您的搜索查询。我们使用 Meta Pixel 来衡量广告活动效果。不会向第三方出售任何个人数据。如有疑问，请通过我们的官方渠道联系我们。",
-        refund_title: "退款政策",
-        refund_body: "数字产品交付后不可退款，除非是我方技术故障。退款申请必须在购买后 7 天内提交并附上问题证明。退款将在 5-10 个工作日内处理。",
-        close: "关闭",
-        admin_title: "管理员访问",
-        admin_hint: "输入管理员密钥以解锁无限搜索。",
-        admin_note: "密钥仅存储在您的浏览器中。除用于验证的 API 外，绝不会发送到其他地方。",
-        save: "保存",
-        cancel: "取消",
-        admin_saved: "管理员密钥已保存。",
-        admin_removed: "管理员密钥已移除。",
-        preview_open: "查看完整报告预览",
-        preview_title: "完整报告预览",
-        preview_empty: "暂无报告。请先执行搜索。",
-        copy_report: "复制",
-        share_report: "分享",
-        download_report: "下载",
-        copied: "报告已复制到剪贴板。",
-        copy_failed: "复制失败，请手动复制。",
-        link_copied: "链接已复制。",
-        shared: "分享成功。",
-        share_failed: "分享失败。",
-        downloaded: "报告已下载。",
-        skip_to_search: "跳到搜索",
-        powered_by: "由 AI 提供支持"
+        hero_title: "深度搜索", hero_subtitle: "查找产品、价格和供应商。",
+        search_placeholder: "今天您想找什么？", search_btn: "搜索",
+        visitors: "今日访客", today_searches: "搜索次数", remaining: "剩余次数",
+        skills: "技能", steps: "阶段",
+        privacy: "隐私政策", refund: "退款政策",
+        privacy_body: "我们尊重您的隐私。我们不会在服务器上存储您的搜索查询。",
+        refund_body: "数字产品交付后不可退款，除非是我方技术故障。",
+        close: "关闭", save: "激活", cancel: "取消",
+        admin_title: "解锁专业版", admin_hint: "输入管理员密钥或 Gumroad 许可证。",
+        admin_note: "密钥仅存储在您的浏览器中。",
+        copy_btn: "复制报告", download_btn: "下载报告",
+        searching: "正在搜索和分析...", empty_query: "请输入关键词。", error_generic: "出现错误。",
+        rate_limit: "已达到限制。", copied: "复制成功！", downloaded: "下载成功！"
       },
-      es: {
-        hero_title: "Búsqueda Profunda",
-        hero_subtitle: "Encuentra productos, precios y proveedores en los mercados globales.",
-        search_placeholder: "¿Qué estás buscando hoy?",
-        search_btn: "Buscar",
-        clear_btn: "Limpiar",
-        searching: "Buscando...",
-        empty_query: "Por favor, introduce una consulta de búsqueda.",
-        no_results: "No se encontraron resultados.",
-        error_generic: "Algo salió mal. Por favor, inténtalo de nuevo.",
-        rate_limit: "Límite alcanzado. Introduce la clave de admin o inténtalo más tarde.",
-        privacy: "Política de privacidad",
-        refund: "Política de reembolso",
-        privacy_title: "Política de privacidad",
-        privacy_body: "Respetamos tu privacidad. No almacenamos tus consultas de búsqueda en nuestros servidores. Usamos Meta Pixel para medir el rendimiento de las campañas. No se venden datos personales a terceros. Para preguntas, contáctanos a través de nuestros canales oficiales.",
-        refund_title: "Política de reembolso",
-        refund_body: "Los productos digitales no son reembolsables una vez entregados, salvo en caso de fallo técnico por nuestra parte. Las solicitudes de reembolso deben enviarse dentro de los 7 días posteriores a la compra con prueba del problema. Los reembolsos se procesan en 5-10 días hábiles.",
-        close: "Cerrar",
-        admin_title: "Acceso de administrador",
-        admin_hint: "Introduce tu clave de admin para desbloquear búsquedas ilimitadas.",
-        admin_note: "La clave se almacena localmente en tu navegador. Nunca se envía a otro lugar que no sea nuestra API para verificación.",
-        save: "Guardar",
-        cancel: "Cancelar",
-        admin_saved: "Clave de admin guardada.",
-        admin_removed: "Clave de admin eliminada.",
-        preview_open: "Ver vista previa del informe completo",
-        preview_title: "Vista previa del informe completo",
-        preview_empty: "Aún no hay informe. Realiza una búsqueda primero.",
-        copy_report: "Copiar",
-        share_report: "Compartir",
-        download_report: "Descargar",
-        copied: "Informe copiado al portapapeles.",
-        copy_failed: "Error al copiar. Inténtalo manualmente.",
-        link_copied: "Enlace copiado.",
-        shared: "Compartido correctamente.",
-        share_failed: "Error al compartir.",
-        downloaded: "Informe descargado.",
-        skip_to_search: "Ir a la búsqueda",
-        powered_by: "Impulsado por IA"
-      },
-      pt: {
-        hero_title: "Pesquisa Profunda",
-        hero_subtitle: "Encontre produtos, preços e fornecedores nos mercados globais.",
-        search_placeholder: "O que você está procurando hoje?",
-        search_btn: "Pesquisar",
-        clear_btn: "Limpar",
-        searching: "Pesquisando...",
-        empty_query: "Por favor, insira uma consulta de pesquisa.",
-        no_results: "Nenhum resultado encontrado.",
-        error_generic: "Algo deu errado. Tente novamente.",
-        rate_limit: "Limite atingido. Insira a chave de admin ou tente mais tarde.",
-        privacy: "Política de Privacidade",
-        refund: "Política de Reembolso",
-        privacy_title: "Política de Privacidade",
-        privacy_body: "Respeitamos sua privacidade. Não armazenamos suas consultas de pesquisa em nossos servidores. Usamos o Meta Pixel para medir o desempenho das campanhas. Nenhum dado pessoal é vendido a terceiros. Para dúvidas, entre em contato através dos nossos canais oficiais.",
-        refund_title: "Política de Reembolso",
-        refund_body: "Produtos digitais não são reembolsáveis após a entrega, exceto em caso de falha técnica da nossa parte. As solicitações de reembolso devem ser enviadas dentro de 7 dias após a compra com prova do problema. Os reembolsos são processados em 5-10 dias úteis.",
-        close: "Fechar",
-        admin_title: "Acesso de Administrador",
-        admin_hint: "Insira sua chave de admin para desbloquear pesquisas ilimitadas.",
-        admin_note: "A chave é armazenada localmente no seu navegador. Ela nunca é enviada a nenhum lugar, exceto à nossa API para verificação.",
-        save: "Salvar",
-        cancel: "Cancelar",
-        admin_saved: "Chave de admin salva.",
-        admin_removed: "Chave de admin removida.",
-        preview_open: "Ver pré-visualização do relatório completo",
-        preview_title: "Pré-visualização do relatório completo",
-        preview_empty: "Nenhum relatório disponível ainda. Faça uma pesquisa primeiro.",
-        copy_report: "Copiar",
-        share_report: "Compartilhar",
-        download_report: "Baixar",
-        copied: "Relatório copiado para a área de transferência.",
-        copy_failed: "Falha ao copiar. Tente manualmente.",
-        link_copied: "Link copiado.",
-        shared: "Compartilhado com sucesso.",
-        share_failed: "Falha ao compartilhar.",
-        downloaded: "Relatório baixado.",
-        skip_to_search: "Ir para pesquisa",
-        powered_by: "Desenvolvido por IA"
-      }
+      fr: { hero_title: "Recherche", search_btn: "Chercher", visitors: "Visiteurs", today_searches: "Recherches", remaining: "Restant", privacy: "Confidentialité", refund: "Remboursement", close: "Fermer", save: "Activer", cancel: "Annuler", copy_btn: "Copier", download_btn: "Télécharger", searching: "Recherche...", empty_query: "Entrez une requête.", error_generic: "Erreur.", rate_limit: "Limite atteinte.", copied: "Copié!", downloaded: "Téléchargé!", admin_title: "Accès Pro", admin_hint: "Clé Admin ou Licence." },
+      de: { hero_title: "Suche", search_btn: "Suchen", visitors: "Besucher", today_searches: "Suchanfragen", remaining: "Verbleibend", privacy: "Datenschutz", refund: "Rückerstattung", close: "Schließen", save: "Aktivieren", cancel: "Abbrechen", copy_btn: "Kopieren", download_btn: "Herunterladen", searching: "Suche...", empty_query: "Anfrage eingeben.", error_generic: "Fehler.", rate_limit: "Limit erreicht.", copied: "Kopiert!", downloaded: "Heruntergeladen!", admin_title: "Pro-Zugang", admin_hint: "Admin-Schlüssel oder Lizenz." },
+      es: { hero_title: "Búsqueda", search_btn: "Buscar", visitors: "Visitantes", today_searches: "Búsquedas", remaining: "Restante", privacy: "Privacidad", refund: "Reembolso", close: "Cerrar", save: "Activar", cancel: "Cancelar", copy_btn: "Copiar", download_btn: "Descargar", searching: "Buscando...", empty_query: "Ingrese consulta.", error_generic: "Error.", rate_limit: "Límite alcanzado.", copied: "¡Copiado!", downloaded: "¡Descargado!", admin_title: "Acceso Pro", admin_hint: "Clave Admin o Licencia." }
     };
-
-    // ============================================================
-    // STATE
-    // ============================================================
-    let currentLang = localStorage.getItem(LANG_KEY) || "ar";
-    let currentCurrency = localStorage.getItem(CUR_KEY) || "US";
-    let isSearching = false;
-    let lastAnswerMarkdown = "";
-    let lastQuery = "";
-    let toastTimer = null;
 
     // ============================================================
     // DOM REFS
     // ============================================================
-    const langSelect = document.getElementById("lang-select");
-    const currencySelect = document.getElementById("currency-select");
     const searchInput = document.getElementById("search-input");
     const searchBtn = document.getElementById("search-btn");
-    const clearBtn = document.getElementById("clear-btn");
-    const statusEl = document.getElementById("status");
     const resultsEl = document.getElementById("results");
+    const statusEl = document.getElementById("status");
+    const statsVisitors = document.getElementById("stat-visitors");
+    const statsSearches = document.getElementById("stat-searches");
+    const statsRemaining = document.getElementById("stat-remaining");
     const reportActionsEl = document.getElementById("report-actions");
-    const copyReportBtn = document.getElementById("copy-report-btn");
-    const shareReportBtn = document.getElementById("share-report-btn");
-    const downloadReportBtn = document.getElementById("download-report-btn");
-    const previewOpenBtn = document.getElementById("preview-open-btn");
-    const previewBody = document.getElementById("report-preview");
-    const adminKeyBtn = document.getElementById("admin-key-btn");
     const adminKeyInput = document.getElementById("admin-key-input");
-    const adminSaveBtn = document.getElementById("admin-save-btn");
-    const yearEl = document.getElementById("year");
-    const toastEl = document.getElementById("toast");
 
     // ============================================================
-    // I18N
+    // HELPERS
     // ============================================================
-    function t(key) {
-      return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) ||
-             TRANSLATIONS.en[key] || key;
+    function t(key) { return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) || TRANSLATIONS.en[key] || key; }
+    
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.style.opacity = "1";
+      setTimeout(() => { toast.style.opacity = "0"; }, 2500);
     }
 
-    function applyTranslations() {
-      document.documentElement.lang = currentLang;
-      document.documentElement.dir = (currentLang === "ar") ? "rtl" : "ltr";
-
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        el.textContent = t(key);
-      });
-
-      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-        const key = el.getAttribute("data-i18n-placeholder");
-        el.setAttribute("placeholder", t(key));
-      });
-    }
-
-    function setLang(lang) {
-      if (!TRANSLATIONS[lang]) lang = "en";
-      currentLang = lang;
-      localStorage.setItem(LANG_KEY, lang);
-      langSelect.value = lang;
-      applyTranslations();
-    }
-
-    // ============================================================
-    // TOAST
-    // ============================================================
-    function showToast(msg, type = "") {
-      toastEl.textContent = msg;
-      toastEl.className = "toast visible" + (type ? " " + type : "");
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toastEl.classList.remove("visible");
-      }, 2200);
-    }
-
-    // ============================================================
-    // MARKDOWN RENDERER
-    // ============================================================
     function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
+      return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
     }
 
+    // عارض Markdown المحدث
     function inlineFormat(text) {
       let s = escapeHtml(text);
       s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
       s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-      s = s.replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>");
-      s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
-        '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-      s = s.replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,
-        '$1<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>');
+      s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">$1</a>');
       return s;
     }
-
-    function isTableRow(line) {
-      const t = line.trim();
-      return t.startsWith("|") && t.endsWith("|") && (t.match(/\|/g) || []).length >= 2;
-    }
-
-    function isSeparatorRow(line) {
-      const t = line.trim();
-      if (!isTableRow(t)) return false;
-      const cells = t.slice(1, -1).split("|").map(c => c.trim());
-      if (cells.length === 0) return false;
-      return cells.every(c => /^:?-{1,}:?$/.test(c));
-    }
-
-    function parseTableCells(line) {
-      const t = line.trim();
-      const inner = t.slice(1, -1);
-      return inner.split("|").map(c => c.trim());
-    }
-
-    function parseAlign(cell) {
-      const t = cell.trim();
-      const left = t.startsWith(":");
-      const right = t.endsWith(":");
-      if (left && right) return "center";
-      if (right) return "right";
-      if (left) return "left";
-      return "left";
-    }
-
-    function renderTable(headerCells, aligns, bodyRows) {
+    function isTableRow(line) { const t = line.trim(); return t.startsWith("|") && t.endsWith("|") && (t.match(/\|/g) || []).length >= 2; }
+    function isSeparatorRow(line) { const t = line.trim(); if (!isTableRow(t)) return false; const cells = t.slice(1, -1).split("|").map(c => c.trim()); return cells.every(c => /^:?-{1,}:?$/.test(c)); }
+    function parseTableCells(line) { return line.trim().slice(1, -1).split("|").map(c => c.trim()); }
+    function renderTable(headerCells, bodyRows) {
       let html = "<table><thead><tr>";
-      for (let i = 0; i < headerCells.length; i++) {
-        const align = aligns[i] || "left";
-        html += `<th style="text-align:${align}">${inlineFormat(headerCells[i])}</th>`;
-      }
+      headerCells.forEach(c => { html += `<th>${inlineFormat(c)}</th>`; });
       html += "</tr></thead><tbody>";
-      for (const row of bodyRows) {
+      bodyRows.forEach(row => {
         html += "<tr>";
-        for (let i = 0; i < headerCells.length; i++) {
-          const cell = row[i] !== undefined ? row[i] : "";
-          const align = aligns[i] || "left";
-          html += `<td style="text-align:${align}">${inlineFormat(cell)}</td>`;
-        }
+        headerCells.forEach((_, i) => { html += `<td>${inlineFormat(row[i] || "")}</td>`; });
         html += "</tr>";
-      }
-      html += "</tbody></table>";
-      return html;
+      });
+      return html + "</tbody></table>";
     }
-
     function markdownToHtml(md) {
       if (!md) return "";
       const lines = String(md).replace(/\r\n/g, "\n").split("\n");
-      const out = [];
-      let i = 0;
-      let inUl = false;
-      let inOl = false;
-      let inCode = false;
-      let codeBuf = [];
-
-      function closeLists() {
-        if (inUl) { out.push("</ul>"); inUl = false; }
-        if (inOl) { out.push("</ol>"); inOl = false; }
-      }
-
+      const out = []; let i = 0, inUl = false, inOl = false, inCode = false, codeBuf = [];
+      function closeLists() { if (inUl) { out.push("</ul>"); inUl = false; } if (inOl) { out.push("</ol>"); inOl = false; } }
       while (i < lines.length) {
-        const line = lines[i];
-        const trimmed = line.trim();
-
+        const line = lines[i], trimmed = line.trim();
         if (trimmed.startsWith("```")) {
-          if (!inCode) {
-            closeLists();
-            inCode = true;
-            codeBuf = [];
-          } else {
-            out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
-            inCode = false;
-            codeBuf = [];
-          }
-          i++;
-          continue;
+          if (!inCode) { closeLists(); inCode = true; codeBuf = []; } 
+          else { out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>"); inCode = false; }
+          i++; continue;
         }
         if (inCode) { codeBuf.push(line); i++; continue; }
-
         if (trimmed === "") { closeLists(); i++; continue; }
-
         if (isTableRow(line) && i + 1 < lines.length && isSeparatorRow(lines[i + 1])) {
-          closeLists();
-          const headerCells = parseTableCells(line);
-          const sepCells = parseTableCells(lines[i + 1]);
-          const aligns = sepCells.map(parseAlign);
-          const bodyRows = [];
-          i += 2;
-          while (i < lines.length && isTableRow(lines[i])) {
-            bodyRows.push(parseTableCells(lines[i]));
-            i++;
-          }
-          out.push(renderTable(headerCells, aligns, bodyRows));
-          continue;
+          closeLists(); const header = parseTableCells(line); const bodyRows = []; i += 2;
+          while (i < lines.length && isTableRow(lines[i])) { bodyRows.push(parseTableCells(lines[i])); i++; }
+          out.push(renderTable(header, bodyRows)); continue;
         }
-
         const h = trimmed.match(/^(#{1,6})\s+(.*)$/);
-        if (h) {
-          closeLists();
-          const level = h[1].length;
-          out.push(`<h${level}>${inlineFormat(h[2])}</h${level}>`);
-          i++;
-          continue;
-        }
-
-        if (/^(\-{3,}|\*{3,}|_{3,})$/.test(trimmed)) {
-          closeLists();
-          out.push("<hr>");
-          i++;
-          continue;
-        }
-
-        if (/^>\s?/.test(trimmed)) {
-          closeLists();
-          out.push("<blockquote>" + inlineFormat(trimmed.replace(/^>\s?/, "")) + "</blockquote>");
-          i++;
-          continue;
-        }
-
+        if (h) { closeLists(); out.push(`<h${h[1].length}>${inlineFormat(h[2])}</h${h[1].length}>`); i++; continue; }
+        if (/^(\-{3,}|\*{3,}|_{3,})$/.test(trimmed)) { closeLists(); out.push("<hr>"); i++; continue; }
+        if (/^>\s?/.test(trimmed)) { closeLists(); out.push("<blockquote style='border-left:3px solid var(--accent);padding-left:10px;'>" + inlineFormat(trimmed.replace(/^>\s?/, "")) + "</blockquote>"); i++; continue; }
         const ulMatch = trimmed.match(/^[-*+]\s+(.*)$/);
-        if (ulMatch) {
-          if (inOl) { out.push("</ol>"); inOl = false; }
-          if (!inUl) { out.push("<ul>"); inUl = true; }
-          out.push("<li>" + inlineFormat(ulMatch[1]) + "</li>");
-          i++;
-          continue;
-        }
-
+        if (ulMatch) { if (inOl) { out.push("</ol>"); inOl = false; } if (!inUl) { out.push("<ul>"); inUl = true; } out.push("<li>" + inlineFormat(ulMatch[1]) + "</li>"); i++; continue; }
         const olMatch = trimmed.match(/^\d+\.\s+(.*)$/);
-        if (olMatch) {
-          if (inUl) { out.push("</ul>"); inUl = false; }
-          if (!inOl) { out.push("<ol>"); inOl = true; }
-          out.push("<li>" + inlineFormat(olMatch[1]) + "</li>");
-          i++;
-          continue;
-        }
-
-        closeLists();
-        out.push("<p>" + inlineFormat(trimmed) + "</p>");
-        i++;
+        if (olMatch) { if (inUl) { out.push("</ul>"); inUl = false; } if (!inOl) { out.push("<ol>"); inOl = true; } out.push("<li>" + inlineFormat(olMatch[1]) + "</li>"); i++; continue; }
+        closeLists(); out.push("<p>" + inlineFormat(trimmed) + "</p>"); i++;
       }
-
       if (inCode) out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
-      closeLists();
-      return out.join("\n");
+      closeLists(); return out.join("\n");
     }
 
     // ============================================================
-    // REPORT PREVIEW POPULATOR
+    // APPLY TRANSLATIONS
     // ============================================================
-    function populateReportPreview(answerMarkdown) {
-      if (!previewBody) return;
+    function applyTranslations() {
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = (currentLang === "ar") ? "rtl" : "ltr";
+      document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.getAttribute("data-i18n")); });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => { el.setAttribute("placeholder", t(el.getAttribute("data-i18n-placeholder"))); });
+    }
 
-      if (!answerMarkdown || !answerMarkdown.trim()) {
-        previewBody.innerHTML = `<p class="report-empty">${escapeHtml(t("preview_empty"))}</p>`;
-        return;
-      }
-
-      const sections = [];
-      let current = { title: "__intro__", body: [] };
-      const lines = answerMarkdown.split("\n");
-      for (const line of lines) {
-        const m = line.match(/^##\s+(.*)$/);
-        if (m) {
-          if (current.body.length > 0 || current.title !== "__intro__") {
-            sections.push(current);
-          }
-          current = { title: m[1].trim(), body: [] };
-        } else {
-          current.body.push(line);
+    // ============================================================
+    // STATS FETCHING
+    // ============================================================
+    async function fetchStats() {
+      try {
+        const res = await fetch(WORKER_URL + "/stats");
+        if (res.ok) {
+          const data = await res.json();
+          statsVisitors.textContent = data.visitors || "0";
+          statsSearches.textContent = data.searches || "0";
+          // افتراضياً 100 متبقي إذا لم يبحث بعد
+          statsRemaining.textContent = "100"; 
         }
-      }
-      if (current.body.length > 0 || current.title !== "__intro__") {
-        sections.push(current);
-      }
+      } catch (e) { console.warn("Stats unavailable"); }
+    }
 
-      const rendered = sections.map(sec => {
-        const bodyMd = sec.body.join("\n").trim();
-        if (!bodyMd) return "";
-        const titleHtml = sec.title === "__intro__"
-          ? ""
-          : `<h2 class="report-section-title">${inlineFormat(sec.title)}</h2>`;
-        return `<section class="report-section">${titleHtml}${markdownToHtml(bodyMd)}</section>`;
-      }).filter(Boolean);
+    // ============================================================
+    // SEARCH LOGIC
+    // ============================================================
+    async function performSearch() {
+      if (isSearching) return;
+      const query = searchInput.value.trim();
+      if (!query) { statusEl.textContent = t("empty_query"); statusEl.style.color = "var(--bad)"; return; }
 
-      if (rendered.length === 0) {
-        previewBody.innerHTML = `<section class="report-section">${markdownToHtml(answerMarkdown)}</section>`;
-      } else {
-        previewBody.innerHTML = rendered.join("\n");
+      isSearching = true;
+      searchBtn.disabled = true;
+      lastQuery = query;
+      resultsEl.innerHTML = "";
+      resultsEl.classList.remove("visible");
+      reportActionsEl.style.display = "none";
+      statusEl.textContent = t("searching");
+      statusEl.style.color = "var(--accent)";
+      
+      // أنيميشن المراحل
+      let step = 1;
+      document.querySelectorAll(".step").forEach(el => el.classList.remove("active"));
+      const stepInterval = setInterval(() => {
+        document.getElementById("step-" + step)?.classList.add("active");
+        step = step < 5 ? step + 1 : 1;
+      }, 1500);
+
+      // Meta Pixel
+      if (window.fbq) try { fbq("track", "InitiateCheckout"); } catch (e) {}
+
+      const adminKey = localStorage.getItem(STORAGE_KEY) || "";
+      const headers = { "Content-Type": "application/json" };
+      if (adminKey) headers["X-Admin-Key"] = adminKey;
+
+      // إرسال المهارة المحددة كجزء من الاستعلام (لزيادة دقة الـ Worker)
+      const finalQuery = selectedSkill !== "deep" ? `[Skill: ${selectedSkill}] ${query}` : query;
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify({ query: finalQuery, country: currentCurrency, lang: currentLang })
+        });
+
+        clearInterval(stepInterval);
+        document.querySelectorAll(".step").forEach(el => el.classList.remove("active"));
+        document.getElementById("step-5").classList.add("active");
+
+        const data = await res.json().catch(() => null);
+
+        if (res.status === 401) {
+          statusEl.textContent = data?.message || "Invalid License Key.";
+          statusEl.style.color = "var(--bad)";
+          localStorage.removeItem(STORAGE_KEY);
+          updateAdminBtn();
+          return;
+        }
+
+        if (res.status === 429) {
+          statusEl.textContent = data?.message || t("rate_limit");
+          statusEl.style.color = "var(--bad)";
+          if (data?.upgrade_url) {
+            const a = document.createElement("a"); a.href = data.upgrade_url; a.target = "_blank";
+            a.textContent = " Upgrade Now"; a.style.color = "var(--accent)"; a.style.fontWeight = "bold";
+            statusEl.appendChild(a);
+          }
+          return;
+        }
+
+        if (!res.ok || !data?.answer) {
+          statusEl.textContent = data?.error || t("error_generic");
+          statusEl.style.color = "var(--bad)";
+          return;
+        }
+
+        // النجاح
+        statusEl.textContent = "";
+        lastAnswerMarkdown = data.answer;
+        resultsEl.innerHTML = markdownToHtml(data.answer);
+        resultsEl.classList.add("visible");
+        reportActionsEl.style.display = "flex";
+        
+        // تحديث العداد المتبقي من الـ Meta
+        if (data.meta && data.meta.remaining_quota !== undefined && data.meta.remaining_quota !== null) {
+          statsRemaining.textContent = data.meta.remaining_quota;
+        }
+        
+        fetchStats(); // تحديث العدادات من السيرفر
+        if (window.fbq) try { fbq("track", "Lead"); } catch (e) {}
+
+      } catch (err) {
+        clearInterval(stepInterval);
+        console.error(err);
+        statusEl.textContent = t("error_generic");
+        statusEl.style.color = "var(--bad)";
+      } finally {
+        isSearching = false;
+        searchBtn.disabled = false;
       }
     }
 
     // ============================================================
-    // SKELETON LOADER
+    // ACTIONS (Copy / Download / Admin)
     // ============================================================
-    function showSkeleton() {
-      resultsEl.innerHTML = `
-        <div class="skeleton-report" aria-hidden="true">
-          <div class="skeleton-line title w-60"></div>
-          <div class="skeleton-line w-100"></div>
-          <div class="skeleton-line w-80"></div>
-          <div class="skeleton-line w-100"></div>
-          <div class="skeleton-line w-40"></div>
-          <div style="height:14px"></div>
-          <div class="skeleton-line w-100"></div>
-          <div class="skeleton-line w-80"></div>
-          <div class="skeleton-line w-100"></div>
-          <div class="skeleton-line w-60"></div>
-        </div>
-      `;
-    }
-
-    // ============================================================
-    // STATUS
-    // ============================================================
-    function setStatus(msg, type = "") {
-      statusEl.className = "status" + (type ? " " + type : "");
-      if (type === "loading") {
-        statusEl.innerHTML = '<span class="spinner"></span>' + escapeHtml(msg);
-      } else {
-        statusEl.textContent = msg;
-      }
-    }
-
-    function clearStatus() {
-      statusEl.textContent = "";
-      statusEl.className = "status";
-    }
-// ============================================================
-// SEARCH
-// ============================================================
-async function performSearch() {
-  if (isSearching) return;
-
-  const query = searchInput.value.trim();
-  if (!query) {
-    setStatus(t("empty_query"), "error");
-    return;
-  }
-
-  isSearching = true;
-  searchBtn.disabled = true;
-  lastQuery = query;
-  lastAnswerMarkdown = "";
-  resultsEl.innerHTML = "";
-  reportActionsEl.style.display = "none";
-  previewOpenBtn.classList.remove("visible");
-  setStatus(t("searching"), "loading");
-  showSkeleton();
-
-  if (window.fbq) {
-    try { fbq("track", "InitiateCheckout"); } catch (e) {}
-  }
-
-  const adminKey = localStorage.getItem(STORAGE_KEY) || "";
-  const headers = { "Content-Type": "application/json" };
-  if (adminKey) headers["X-Admin-Key"] = adminKey;
-
-  const body = {
-    query: query,
-    country: currentCurrency,
-    lang: currentLang
-  };
-
-  try {
-    const res = await fetch(WORKER_URL, {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(body)
+    document.getElementById("copy-btn").addEventListener("click", async () => {
+      if (!lastAnswerMarkdown) return;
+      try {
+        await navigator.clipboard.writeText(lastAnswerMarkdown);
+        showToast(t("copied"));
+      } catch (e) { alert("Copy failed"); }
     });
 
-    const raw = await res.text();
-    let data = null;
-    try { data = JSON.parse(raw); } catch (e) { data = null; }
-
-    // 1. التحقق من خطأ الترخيص (Gumroad أو مفتاح خاطئ)
-    if (res.status === 401) {
-      resultsEl.innerHTML = "";
-      const msg = (data && data.message) || "Invalid or expired license key.";
-      setStatus(msg, "error");
-      localStorage.removeItem(STORAGE_KEY); // مسح المفتاح الخاطئ
-      updateAdminBtn();
-      return;
-    }
-
-    // 2. التحقق من تجاوز الحد (100 مجاني / 200 مدفوع)
-    if (res.status === 429) {
-      resultsEl.innerHTML = "";
-      const msg = (data && data.message) || t("rate_limit");
-      setStatus(msg, "error");
-      
-      // إظهار زر الترقية إذا كان المستخدم مجانياً
-      if (data && data.upgrade_url) {
-        const upgradeLink = document.createElement("a");
-        upgradeLink.href = data.upgrade_url;
-        upgradeLink.target = "_blank";
-        upgradeLink.textContent = " ⚡ Upgrade to Pro (200/day)";
-        upgradeLink.style.color = "var(--accent)";
-        upgradeLink.style.marginInlineStart = "8px";
-        upgradeLink.style.fontWeight = "bold";
-        statusEl.appendChild(upgradeLink);
-      }
-      return;
-    }
-
-    // 3. أخطاء أخرى
-    if (!res.ok) {
-      resultsEl.innerHTML = "";
-      const msg = (data && (data.error || data.message)) || t("error_generic");
-      setStatus(msg, "error");
-      return;
-    }
-
-    const answer = (data && (data.answer || data.result || data.content)) || "";
-    if (!answer) {
-      resultsEl.innerHTML = "";
-      setStatus(t("no_results"), "error");
-      return;
-    }
-
-    lastAnswerMarkdown = answer;
-    resultsEl.innerHTML = markdownToHtml(answer);
-    populateReportPreview(answer);
-    reportActionsEl.style.display = "flex";
-    previewOpenBtn.classList.add("visible");
-    clearStatus();
-
-    // 4. إشعار بالبحث المتبقي (للمستخدمين المدفوعين)
-    const meta = data?.meta || {};
-    if (meta.user_type === "paid" && meta.remaining_quota !== undefined) {
-      showToast(`💎 ${meta.remaining_quota} / ${meta.quota_limit} searches left`, "success");
-    } else if (meta.user_type === "free" && meta.remaining_quota !== undefined) {
-      if (meta.remaining_quota < 10) {
-        showToast(`⚠️ ${meta.remaining_quota} free searches left`, "error");
-      }
-    }
-
-    if (window.fbq) {
-      try { fbq("track", "Lead"); } catch (e) {}
-    }
-  } catch (err) {
-    console.error(err);
-    resultsEl.innerHTML = "";
-    setStatus(t("error_generic"), "error");
-  } finally {
-    isSearching = false;
-    searchBtn.disabled = false;
-  }
-}
-    
-
-        
-    function clearAll() {
-      searchInput.value = "";
-      resultsEl.innerHTML = "";
-      previewBody.innerHTML = "";
-      reportActionsEl.style.display = "none";
-      previewOpenBtn.classList.remove("visible");
-      lastAnswerMarkdown = "";
-      lastQuery = "";
-      clearStatus();
-      searchInput.focus();
-    }
-
-    // ============================================================
-    // REPORT ACTIONS: COPY / SHARE / DOWNLOAD
-    // ============================================================
-    async function copyReport() {
+    document.getElementById("download-btn").addEventListener("click", () => {
       if (!lastAnswerMarkdown) return;
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(lastAnswerMarkdown);
-        } else {
-          // Fallback for old browsers
-          const ta = document.createElement("textarea");
-          ta.value = lastAnswerMarkdown;
-          ta.style.position = "fixed";
-          ta.style.opacity = "0";
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand("copy");
-          document.body.removeChild(ta);
-        }
-        showToast(t("copied"), "success");
-      } catch (e) {
-        console.warn("Copy failed:", e);
-        showToast(t("copy_failed"), "error");
-      }
-    }
+      const content = `# Mido Deep Search\nQuery: ${lastQuery}\n\n---\n\n${lastAnswerMarkdown}`;
+      const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
+      const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `report-${Date.now()}.md`;
+      a.click(); URL.revokeObjectURL(a.href);
+      showToast(t("downloaded"));
+    });
 
-    async function shareReport() {
-      if (!lastAnswerMarkdown) return;
-      const shareData = {
-        title: "Mido Deep Search",
-        text: lastQuery || "Check out this report from Mido AI Store",
-        url: window.location.href
-      };
-
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-          showToast(t("shared"), "success");
-        } catch (e) {
-          // User cancelled or share failed silently — no toast
-          if (e && e.name !== "AbortError") {
-            console.warn("Share failed:", e);
-            showToast(t("share_failed"), "error");
-          }
-        }
-      } else {
-        // Fallback: copy URL
-        try {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(shareData.url);
-          } else {
-            const ta = document.createElement("textarea");
-            ta.value = shareData.url;
-            ta.style.position = "fixed";
-            ta.style.opacity = "0";
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand("copy");
-            document.body.removeChild(ta);
-          }
-          showToast(t("link_copied"), "success");
-        } catch (e) {
-          showToast(t("share_failed"), "error");
-        }
-      }
-    }
-
-    function downloadReport() {
-      if (!lastAnswerMarkdown) return;
-      try {
-        const header = `# Mido Deep Search Report\n\nQuery: ${lastQuery || ""}\nDate: ${new Date().toISOString()}\n\n---\n\n`;
-        const content = header + lastAnswerMarkdown;
-        const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `mido-report-${Date.now()}.md`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-        showToast(t("downloaded"), "success");
-      } catch (e) {
-        console.warn("Download failed:", e);
-        showToast(t("error_generic"), "error");
-      }
-    }
-
-    // ============================================================
-    // MODALS
-    // ============================================================
-    function openModal(name) {
-      const el = document.getElementById("modal-" + name);
-      if (el) {
-        el.classList.add("open");
-        const focusable = el.querySelector("input, button, [tabindex]");
-        if (focusable) setTimeout(() => focusable.focus(), 80);
-      }
-    }
-
-    function closeModal(name) {
-      const el = document.getElementById("modal-" + name);
-      if (el) el.classList.remove("open");
-    }
-
-    // ============================================================
-    // ADMIN KEY
-    // ============================================================
     function updateAdminBtn() {
       const key = localStorage.getItem(STORAGE_KEY);
-      if (key) {
-        adminKeyBtn.classList.add("active");
-        adminKeyBtn.title = "Admin Key Active (click to remove)";
-      } else {
-        adminKeyBtn.classList.remove("active");
-        adminKeyBtn.title = "Admin Key";
-      }
+      const btn = document.getElementById("admin-key-btn");
+      btn.style.filter = key ? "drop-shadow(0 0 6px var(--accent))" : "none";
+      btn.style.opacity = key ? "1" : "0.7";
     }
 
-    function openAdminModal() {
-      const existing = localStorage.getItem(STORAGE_KEY);
-      adminKeyInput.value = existing || "";
-      openModal("admin");
-    }
+    document.getElementById("admin-key-btn").addEventListener("click", () => {
+      adminKeyInput.value = localStorage.getItem(STORAGE_KEY) || "";
+      document.getElementById("modal-admin").classList.add("open");
+    });
 
-    function saveAdminKey() {
+    document.getElementById("admin-save-btn").addEventListener("click", () => {
       const val = adminKeyInput.value.trim();
-      if (val) {
-        localStorage.setItem(STORAGE_KEY, val);
-        showToast(t("admin_saved"), "success");
-      } else {
-        localStorage.removeItem(STORAGE_KEY);
-        showToast(t("admin_removed"), "success");
-      }
+      if (val) localStorage.setItem(STORAGE_KEY, val);
+      else localStorage.removeItem(STORAGE_KEY);
       updateAdminBtn();
-      closeModal("admin");
-    }
+      document.getElementById("modal-admin").classList.remove("open");
+      showToast("Key Saved!");
+    });
 
     // ============================================================
-    // SPIDER CANVAS (with performance guard)
+    // EVENTS WIRING
     // ============================================================
-    function initSpiderCanvas() {
+    document.getElementById("lang-select").addEventListener("change", e => {
+      currentLang = e.target.value; localStorage.setItem(LANG_KEY, currentLang); applyTranslations();
+    });
+    document.getElementById("currency-select").addEventListener("change", e => {
+      currentCurrency = e.target.value; localStorage.setItem(CUR_KEY, currentCurrency);
+    });
+    document.getElementById("search-btn").addEventListener("click", performSearch);
+    searchInput.addEventListener("keydown", e => { if (e.key === "Enter") performSearch(); });
+
+    document.querySelectorAll(".skill-pill").forEach(pill => {
+      pill.addEventListener("click", () => {
+        document.querySelectorAll(".skill-pill").forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        selectedSkill = pill.getAttribute("data-skill");
+      });
+    });
+
+    document.querySelectorAll("[data-modal]").forEach(el => {
+      el.addEventListener("click", () => document.getElementById("modal-" + el.getAttribute("data-modal")).classList.add("open"));
+    });
+
+    // ============================================================
+    // INITIALIZATION & CANVAS
+    // ============================================================
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      
+      document.getElementById("lang-select").value = currentLang;
+      document.getElementById("currency-select").value = currentCurrency;
+      applyTranslations();
+      updateAdminBtn();
+      fetchStats();
+
+      // Canvas Spider Effect (نسخة خفيفة لا تستهلك البطارية)
       const canvas = document.getElementById("spider-canvas");
-      if (!canvas) return;
-
-      // A11Y + performance guard: disable on low-end devices and reduced motion
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const isLowEndDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
-      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-
-      if (prefersReducedMotion || (isMobile && isLowEndDevice)) {
-        canvas.style.display = "none";
-        return;
-      }
-
       const ctx = canvas.getContext("2d");
       let w, h, particles = [];
-      let rafId = null;
-      const spider = { x: 0, y: 0, angle: 0, targetX: 0, targetY: 0, legsPhase: 0 };
-
+      let spider = { x: 0, y: 0, targetX: 0, targetY: 0, angle: 0, phase: 0 };
+      
       function resize() {
-        w = canvas.width = window.innerWidth * window.devicePixelRatio;
-        h = canvas.height = window.innerHeight * window.devicePixelRatio;
-        canvas.style.width = window.innerWidth + "px";
-        canvas.style.height = window.innerHeight + "px";
-        if (spider.x === 0 && spider.y === 0) {
-          spider.x = w / 2; spider.y = h / 2;
-          spider.targetX = w / 2; spider.targetY = h / 2;
-        }
-        initParticles();
+        w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight;
+        if (!spider.x) { spider.x = w/2; spider.y = h/2; spider.targetX = w/2; spider.targetY = h/2; }
       }
+      window.addEventListener("resize", resize); resize();
 
-      function initParticles() {
-        particles = [];
-        const count = Math.min(50, Math.floor((w * h) / (110000 * window.devicePixelRatio)));
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4,
-            r: (Math.random() * 1.6 + 0.6) * window.devicePixelRatio
-          });
-        }
-      }
+      for(let i=0; i<30; i++) particles.push({ x: Math.random()*w, y: Math.random()*h, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5 });
 
-      function drawWeb() {
-        ctx.strokeStyle = "rgba(34, 211, 238, 0.09)";
-        ctx.lineWidth = 1;
-        const cx = spider.x, cy = spider.y;
-        const radius = 220 * window.devicePixelRatio;
-        const rings = 5, spokes = 12;
-        for (let s = 0; s < spokes; s++) {
-          const a = (Math.PI * 2 * s) / spokes + spider.legsPhase * 0.05;
-          ctx.beginPath();
-          ctx.moveTo(cx, cy);
-          ctx.lineTo(cx + Math.cos(a) * radius, cy + Math.sin(a) * radius);
-          ctx.stroke();
-        }
-        for (let r = 1; r <= rings; r++) {
-          const rr = (radius / rings) * r;
-          ctx.beginPath();
-          for (let s = 0; s <= spokes; s++) {
-            const a = (Math.PI * 2 * s) / spokes + spider.legsPhase * 0.05;
-            const x = cx + Math.cos(a) * rr;
-            const y = cy + Math.sin(a) * rr;
-            if (s === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
+      function draw() {
+        if (document.hidden) { requestAnimationFrame(draw); return; }
+        ctx.clearRect(0,0,w,h);
+        
+        // رسم الشبكة
+        ctx.strokeStyle = "rgba(34, 211, 238, 0.05)"; ctx.beginPath();
+        for(let i=0; i<particles.length; i++) {
+          for(let j=i+1; j<particles.length; j++) {
+            const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+            if (dx*dx + dy*dy < 15000) { ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); }
           }
-          ctx.stroke();
         }
-      }
+        ctx.stroke();
 
-      function drawSpider() {
-        const scale = window.devicePixelRatio;
-        const bodyR = 9 * scale;
-        ctx.save();
-        ctx.translate(spider.x, spider.y);
-        ctx.rotate(spider.angle);
-        ctx.fillStyle = "rgba(34, 211, 238, 0.85)";
-        ctx.shadowColor = "rgba(34, 211, 238, 0.9)";
-        ctx.shadowBlur = 18 * scale;
-        ctx.beginPath();
-        ctx.ellipse(0, 0, bodyR * 1.3, bodyR, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(bodyR * 1.15, 0, bodyR * 0.55, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(99, 102, 241, 0.95)";
-        ctx.fill();
-        ctx.shadowBlur = 0;
-        ctx.strokeStyle = "rgba(34, 211, 238, 0.75)";
-        ctx.lineWidth = 1.6 * scale;
-        ctx.lineCap = "round";
-        const legCount = 4;
-        for (let i = 0; i < legCount; i++) {
-          const baseA = (i - (legCount - 1) / 2) * 0.42;
-          const swing = Math.sin(spider.legsPhase + i) * 0.22;
-          for (const side of [-1, 1]) {
-            const a = baseA + swing * side;
-            const len = bodyR * 2.6;
-            const midX = Math.cos(a) * len * 0.55;
-            const midY = Math.sin(a) * len * 0.55 * side;
-            const endX = Math.cos(a) * len + Math.cos(a + 0.6 * side) * len * 0.35;
-            const endY = Math.sin(a) * len * side + Math.sin(a + 0.6 * side) * len * 0.35;
-            ctx.beginPath();
-            ctx.moveTo(bodyR * 0.4, side * bodyR * 0.2);
-            ctx.quadraticCurveTo(midX, midY, endX, endY);
-            ctx.stroke();
+        // تحديث الجزيئات
+        ctx.fillStyle = "rgba(147, 161, 181, 0.3)";
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if(p.x<0 || p.x>w) p.vx*=-1; if(p.y<0 || p.y>h) p.vy*=-1;
+          ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI*2); ctx.fill();
+        });
+
+        // رسم العنكبوت
+        spider.phase += 0.05;
+        const dx = spider.targetX - spider.x, dy = spider.targetY - spider.y;
+        spider.x += dx * 0.02; spider.y += dy * 0.02;
+        if(Math.abs(dx)+Math.abs(dy) > 10) spider.angle = Math.atan2(dy, dx);
+        if(Math.random() < 0.01) { spider.targetX = w*0.2 + Math.random()*w*0.6; spider.targetY = h*0.2 + Math.random()*h*0.6; }
+
+        ctx.save(); ctx.translate(spider.x, spider.y); ctx.rotate(spider.angle);
+        ctx.fillStyle = "rgba(34, 211, 238, 0.8)"; ctx.shadowBlur = 15; ctx.shadowColor = "var(--accent)";
+        ctx.beginPath(); ctx.ellipse(0, 0, 12, 8, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(10, 0, 5, 0, Math.PI*2); ctx.fillStyle = "rgba(99, 102, 241, 0.9)"; ctx.fill();
+        ctx.shadowBlur = 0; ctx.strokeStyle = "rgba(34, 211, 238, 0.6)"; ctx.lineWidth = 1.5;
+        for(let i=0; i<4; i++) {
+          const a = (i-1.5)*0.4 + Math.sin(spider.phase + i)*0.2;
+          for(let s of [-1, 1]) {
+            ctx.beginPath(); ctx.moveTo(0,0); ctx.quadraticCurveTo(Math.cos(a)*20, Math.sin(a)*20*s, Math.cos(a)*35, Math.sin(a)*35*s); ctx.stroke();
           }
         }
         ctx.restore();
+        requestAnimationFrame(draw);
       }
-
-      function drawParticles() {
-        for (const p of particles) {
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0 || p.x > w) p.vx *= -1;
-          if (p.y < 0 || p.y > h) p.vy *= -1;
-          ctx.beginPath();
-          ctx.fillStyle = "rgba(147, 161, 181, 0.35)";
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-
-      function animate() {
-        spider.legsPhase += 0.06;
-        const dx = spider.targetX - spider.x;
-        const dy = spider.targetY - spider.y;
-        spider.x += dx * 0.012;
-        spider.y += dy * 0.012;
-        if (Math.abs(dx) + Math.abs(dy) > 1) {
-          spider.angle = Math.atan2(dy, dx);
-        }
-        if (Math.random() < 0.006) {
-          spider.targetX = w * (0.15 + Math.random() * 0.7);
-          spider.targetY = h * (0.15 + Math.random() * 0.7);
-        }
-        ctx.clearRect(0, 0, w, h);
-        drawParticles();
-        drawWeb();
-        drawSpider();
-        rafId = requestAnimationFrame(animate);
-      }
-
-      window.addEventListener("resize", resize);
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-          if (rafId) cancelAnimationFrame(rafId);
-          rafId = null;
-        } else if (!rafId) {
-          rafId = requestAnimationFrame(animate);
-        }
-      });
-
-      resize();
-      rafId = requestAnimationFrame(animate);
-    }
-
-    // ============================================================
-    // EVENT WIRING
-    // ============================================================
-    function wireEvents() {
-      langSelect.addEventListener("change", e => setLang(e.target.value));
-
-      currencySelect.addEventListener("change", e => {
-        currentCurrency = e.target.value;
-        localStorage.setItem(CUR_KEY, currentCurrency);
-      });
-
-      searchBtn.addEventListener("click", performSearch);
-      clearBtn.addEventListener("click", clearAll);
-
-      searchInput.addEventListener("keydown", e => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          performSearch();
-        }
-      });
-
-      copyReportBtn.addEventListener("click", copyReport);
-      shareReportBtn.addEventListener("click", shareReport);
-      downloadReportBtn.addEventListener("click", downloadReport);
-
-      previewOpenBtn.addEventListener("click", () => {
-        populateReportPreview(lastAnswerMarkdown || "");
-        openModal("preview");
-      });
-
-      adminKeyBtn.addEventListener("click", openAdminModal);
-      adminSaveBtn.addEventListener("click", saveAdminKey);
-      adminKeyInput.addEventListener("keydown", e => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          saveAdminKey();
-        }
-      });
-
-      document.querySelectorAll("[data-modal]").forEach(el => {
-        const handler = () => openModal(el.getAttribute("data-modal"));
-        el.addEventListener("click", handler);
-        el.addEventListener("keydown", e => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            handler();
-          }
-        });
-      });
-
-      document.querySelectorAll("[data-close]").forEach(el => {
-        el.addEventListener("click", () => closeModal(el.getAttribute("data-close")));
-      });
-
-      document.querySelectorAll(".modal-backdrop").forEach(bd => {
-        bd.addEventListener("click", e => {
-          if (e.target === bd) bd.classList.remove("open");
-        });
-      });
-
-      document.addEventListener("keydown", e => {
-        if (e.key === "Escape") {
-          document.querySelectorAll(".modal-backdrop.open").forEach(m => m.classList.remove("open"));
-        }
-      });
-    }
-
-    // ============================================================
-    // INIT
-    // ============================================================
-    function init() {
-      yearEl.textContent = new Date().getFullYear();
-
-      if (!TRANSLATIONS[currentLang]) currentLang = "ar";
-      langSelect.value = currentLang;
-      currencySelect.value = currentCurrency;
-
-      applyTranslations();
-      updateAdminBtn();
-      wireEvents();
-      initSpiderCanvas();
-      populateReportPreview("");
-
-      setTimeout(() => searchInput.focus(), 250);
-    }
-
-    document.addEventListener("DOMContentLoaded", init);
+      draw();
+    });
   </script>
 </body>
-  </html>
+</html>
