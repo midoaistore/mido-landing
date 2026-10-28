@@ -8,16 +8,16 @@
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; connect-src 'self' https://mido-deepsearch.midoaistore.workers.dev; img-src 'self' data: https://www.facebook.com https://raw.githubusercontent.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://midoaistore.gumroad.com">
-<title>Mido Deep Search — Verified Research in 5-40 Seconds</title>
-<meta name="description" content="Mido Deep Search checks local and international sources and turns one question into a practical verified research report in 5-40 seconds.">
-<meta property="og:title" content="Mido Deep Search — Verified Research in 5-40 Seconds">
-<meta property="og:description" content="Research products, courses, markets and decisions using verified local and international sources.">
+<title>Mido DeepSearch — Evidence-Based Research Reports</title>
+<meta name="description" content="Mido Deep Search searches live web sources and turns one question into a structured research report with source links and explicit evidence limitations.">
+<meta property="og:title" content="Mido DeepSearch — Evidence-Based Research Reports">
+<meta property="og:description" content="Research products, courses, markets and decisions using live sources, comparisons, and evidence-aware reports.">
 <meta property="og:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
 <meta property="og:url" content="https://midoaistore.github.io/mido-landing/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mido Deep Search">
-<meta name="twitter:description" content="From one question to a verified research report in 5-40 seconds.">
+<meta name="twitter:description" content="From one question to a structured research report with live source links.">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -90,7 +90,7 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rg
 .sec-s{text-align:center;color:var(--muted);font-size:13px;max-width:620px;margin:0 auto 18px}
 .skills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:980px;margin:0 auto}
 .skill{padding:8px 14px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);font-size:12px;color:var(--muted);cursor:pointer;transition:.2s}
-.skill:hover,.skill.on{background:rgba(124,92,255,.15);border-color:rgba(124,92,255,.5);color:#c4b5fd}
+.skill:hover,.skill.on{background:rgba(124,92,255,.18);border-color:rgba(124,92,255,.7);color:#ddd6fe}.skill.on{box-shadow:0 0 0 2px rgba(124,92,255,.28),0 0 18px rgba(124,92,255,.25)}.license-row input:focus{outline:2px solid rgba(124,92,255,.7);box-shadow:0 0 18px rgba(124,92,255,.22)}
 .demo{background:linear-gradient(180deg,#12121a,#0a0a0f);border:1px solid var(--border);border-radius:20px;padding:18px;max-width:860px;margin:0 auto}
 .search-row{display:flex;gap:8px;flex-wrap:wrap}
 .search-row input{flex:1;min-width:240px;height:60px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);padding:0 15px;color:#fff;font-size:14px;outline:none}
@@ -111,6 +111,9 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rg
 .step .n{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;border:1px solid var(--border);background:#12121a}
 .step.done .n{background:var(--accent);border-color:var(--accent)}
 .step.active .n{border-color:var(--green);box-shadow:0 0 12px rgba(0,255,163,.5)}
+.report-actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 16px;justify-content:center;padding:12px;border-radius:14px;background:rgba(18,18,26,.9);border:1px solid rgba(124,92,255,.4);box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.report-actions .btn{font-size:13px;padding:10px 16px;font-weight:600;min-width:140px;justify-content:center}
+.report-actions .btn-p{box-shadow:0 0 18px rgba(124,92,255,.4)}
 .ans{margin-top:10px;border-radius:14px;border:1px solid rgba(124,92,255,.3);background:rgba(124,92,255,.08);padding:14px;font-size:13px;white-space:pre-wrap;word-break:break-word}
 .ans h1,.ans h2,.ans h3{margin-top:12px;margin-bottom:6px;color:var(--cyan)}
 .ans p{margin-bottom:8px}
@@ -204,7 +207,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
           <div class="lang-option" data-l="pt" data-f="🇵🇹" data-n="Português">🇵🇹 Português</div>
         </div>
       </div>
-      <span class="badge">V10.3 | Live</span>
+      <span class="badge">V5.0 | Live</span>
       <a class="btn btn-w" id="navBuy" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" data-i18n="nav_buy">Get Access — $6</a>
     </div>
   </div>
@@ -219,9 +222,9 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 </div></section>
 
 <section class="hero wrap">
-  <div class="pill" data-i18n="pill">⚡ Verified research • 5-40s • Local + Global</div>
-  <h1 data-i18n-html="hero_title">Get a fully structured <span class="g">research report</span> — not just links</h1>
-  <p class="lead" data-i18n="hero_desc">A 5-stage verified pipeline with local and international sources, clear recommendation, and real pricing context — in about 5-40 seconds.</p>
+  <div class="pill" data-i18n="pill">⚡ Live sources • Evidence-aware reports • 5-40s</div>
+  <h1 data-i18n-html="hero_title">Stop Guessing. Research with Evidence Before You Decide.</h1>
+  <p class="lead" data-i18n="hero_desc">Turn one question into a structured research report with live source links, clear comparisons, and evidence-aware recommendations.</p>
   <div class="cta-row">
     <a href="#demo" class="btn btn-p" data-i18n="cta_try">Try Free Demo</a>
     <a href="#report" class="btn btn-ghost" data-i18n="cta_report">See Full Report</a>
@@ -229,7 +232,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
   <div class="trust">
     <span data-i18n="t1">✓ 1 free trial / visitor</span>
     <span data-i18n="t2">✓ 100 free searches / day</span>
-    <span data-i18n="t3">✓ API keys after purchase</span>
+    <span data-i18n="t3">✓ Licensed access after purchase</span>
   </div>
 </section>
 
@@ -241,7 +244,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 
 <section class="sec wrap" id="demo">
   <h2 class="sec-t" data-i18n="demo_title">Live Demo</h2>
-  <p class="sec-s" data-i18n="demo_sub">Real engine. Stages light up while the spider crawls sources.</p>
+  <p class="sec-s" data-i18n="demo_sub">Live search engine. Progress indicators reflect completed stages.</p>
   <div class="demo">
     <div class="search-row">
       <input id="q" type="text" data-i18n-placeholder="ph" placeholder="Best noise-cancelling headphones under $150" value="Best noise-cancelling headphones under $150"/>
@@ -253,11 +256,17 @@ footer a:hover{color:var(--accent);text-decoration:underline}
         <option value="GB">🇬🇧 GBP (£)</option>
         <option value="FR">🇫🇷 EUR (€)</option>
         <option value="DE">🇩🇪 EUR (€)</option>
+        <option value="ES">🇪🇸 EUR (€)</option>
+        <option value="PT">🇵🇹 EUR (€)</option>
         <option value="JP">🇯🇵 JPY (¥)</option>
         <option value="CN">🇨🇳 CNY (¥)</option>
         <option value="IN">🇮🇳 INR (₹)</option>
       </select>
       <button type="button" class="btn btn-w" id="go" data-i18n="search_btn">Search 🔍</button>
+    </div>
+    <div class="license-row" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center">
+      <input id="licenseKey" type="password" autocomplete="off" spellcheck="false" aria-label="Gumroad license key" data-i18n-placeholder="license_ph" placeholder="Optional Gumroad license key" style="flex:1;min-width:220px;background:#0a0a0f;border:1px solid var(--border);border-radius:12px;padding:12px;color:#fff" />
+      <span data-i18n="license_hint" style="font-size:11px;color:var(--muted)">Optional: enter the license key from your Gumroad receipt.</span>
     </div>
     <div class="sugs" id="sugs"></div>
     <div class="demo-meta">
@@ -269,7 +278,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
       <div class="stage" data-i="0"><div class="num">1</div><h4 data-i18n="s1">Source Search</h4><p data-i18n="s1d">Tavily live sources</p></div>
       <div class="stage" data-i="1"><div class="num">2</div><h4 data-i18n="s2">Thesis Build</h4><p data-i18n="s2d">Core argument</p></div>
       <div class="stage" data-i="2"><div class="num">3</div><h4 data-i18n="s3">Reduce & Rank</h4><p data-i18n="s3d">Strongest signals</p></div>
-      <div class="stage" data-i="3"><div class="num">4</div><h4 data-i18n="s4">Risk Check</h4><p data-i18n="s4d">Local + global</p></div>
+      <div class="stage" data-i="3"><div class="num">4</div><h4 data-i18n="s4">Risk Check</h4><p data-i18n="s4d">Evidence limits</p></div>
       <div class="stage" data-i="4"><div class="num">5</div><h4 data-i18n="s5">Final Report</h4><p data-i18n="s5d">5-40 seconds</p></div>
     </div>
     <div id="res"></div>
@@ -290,39 +299,39 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 </section>
 
 <section class="sec wrap" id="report">
-  <h2 class="sec-t" data-i18n="case_title">Real Report Example</h2>
+  <h2 class="sec-t" data-i18n="case_title">Illustrative Report Example</h2>
   <p class="sec-s" data-i18n-html="case_sub">Generated in <strong>35 seconds</strong> for: "Best noise-cancelling headphones under $150"</p>
   <div class="report">
     <div class="report-h">
       <h3 data-i18n="case_h">Best Noise-Canceling Headphones Under $150</h3>
-      <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag g">35s</span><span class="tag">~0.76</span><span class="tag">V10.3</span></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag g">35s</span><span class="tag">~0.76</span><span class="tag">V5.0</span></div>
     </div>
     <div class="report-b">
       <div class="qt">
         <h4 data-i18n="case_quick">Quick Take</h4>
         <ul>
-          <li data-i18n-html="cq1"><strong>Sony WH-CH720N</strong> — best overall (source currency shown; verify current price).</li>
-          <li data-i18n-html="cq2"><strong>JBL Tune 770NC</strong> — best budget under ~$100.</li>
-          <li data-i18n-html="cq3"><strong>OneOdio Focus A6</strong> — entry option near ~$70.</li>
+          <li data-i18n-html="cq1"><strong>Sony WH-CH720N</strong> — best overall (≈ $109 in Oct 2026; verify current price).</li>
+          <li data-i18n-html="cq2"><strong>JBL Tune 770NC</strong> — best budget under ~$100 (≈ $89).</li>
+          <li data-i18n-html="cq3"><strong>Anker Soundcore Space One</strong> — strong entry option near ~$79.</li>
         </ul>
       </div>
       <div style="overflow-x:auto">
         <table>
-          <thead><tr><th data-i18n="th1">Model</th><th>USD</th><th>ANC</th><th data-i18n="th2">Battery</th></tr></thead>
+          <thead><tr><th data-i18n="th1">Model</th><th>USD (Oct 2026)</th><th>ANC</th><th data-i18n="th2">Battery</th></tr></thead>
           <tbody>
-            <tr><td>JBL Tune 770NC</td><td>$79.99</td><td>4/5</td><td>30h</td></tr>
-            <tr><td><strong>Sony WH-CH720N</strong></td><td>$149</td><td>4.5/5</td><td>30h</td></tr>
-            <tr><td>Anker Space One</td><td>$79.99</td><td>4/5</td><td>30h</td></tr>
-            <tr><td>OneOdio Focus A6</td><td>$69.99</td><td>3.5/5</td><td>30h</td></tr>
+            <tr><td>JBL Tune 770NC</td><td>$89</td><td>4/5</td><td>70h</td></tr>
+            <tr><td><strong>Sony WH-CH720N</strong></td><td>$109</td><td>4.5/5</td><td>35h</td></tr>
+            <tr><td>Anker Soundcore Space One</td><td>$79</td><td>4/5</td><td>40h</td></tr>
+            <tr><td>OneOdio Focus A6</td><td>$69</td><td>3.5/5</td><td>50h</td></tr>
           </tbody>
         </table>
       </div>
       <div class="recs">
-        <div class="rec"><h5 data-i18n="r1">Best Overall</h5><p>Sony WH-CH720N</p><span class="pr">≈ $149</span></div>
-        <div class="rec"><h5 data-i18n="r2">Best Budget</h5><p>JBL Tune 770NC</p><span class="pr">≈ $79.99</span></div>
-        <div class="rec"><h5 data-i18n="r3">Entry Option</h5><p>OneOdio Focus A6</p><span class="pr">≈ $69.99</span></div>
+        <div class="rec"><h5 data-i18n="r1">Best Overall</h5><p>Sony WH-CH720N</p><span class="pr">≈ $109</span></div>
+        <div class="rec"><h5 data-i18n="r2">Best Budget</h5><p>JBL Tune 770NC</p><span class="pr">≈ $89</span></div>
+        <div class="rec"><h5 data-i18n="r3">Entry Option</h5><p>Anker Space One</p><span class="pr">≈ $79</span></div>
       </div>
-      <p style="margin-top:12px;font-size:12px;color:var(--muted)" data-i18n="case_sources">Illustrative example only. Prices are shown in the cited source currency and may be outdated.</p>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted)" data-i18n="case_sources">Illustrative example only (October 2026) — not a live search result. Always verify current prices and availability.</p>
       <div style="margin-top:14px;text-align:center;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
         <button type="button" class="btn btn-p" id="openReport" data-i18n="full_preview">Full Report Preview</button>
         <button type="button" class="btn btn-ghost" id="saveExample" data-i18n="save_example">Save This Report</button>
@@ -339,9 +348,9 @@ footer a:hover{color:var(--accent);text-decoration:underline}
     <p style="font-size:12px;color:var(--muted);margin:4px 0 8px" data-i18n="price_local">or equivalent in your local currency at checkout via Gumroad.</p>
     <ul class="feats">
       <li><span class="ck">✓</span> <span data-i18n="f1">Full Deep Search access</span></li>
-      <li><span class="ck">✓</span> <span data-i18n="f2">API keys: Tavily + Groq + Nebius</span></li>
-      <li><span class="ck">✓</span> <span data-i18n="f3">Verified local + global reports</span></li>
-      <li><span class="ck">✓</span> <span data-i18n="f4">Setup guide included</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f2">Server-side Tavily + Groq integrations</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f3">Structured reports with live source links</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f4">Higher daily limits with license key</span></li>
       <li><span class="ck">✓</span> <span data-i18n="f5">1 free trial before purchase</span></li>
     </ul>
     <a class="btn btn-w buy-btn-pixel" style="width:100%" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" data-i18n="buy_btn">Get Full Access — $6</a>
@@ -351,17 +360,19 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 <section class="sec wrap" style="max-width:720px;margin-left:auto;margin-right:auto">
   <h2 class="sec-t" data-i18n="faq_title">FAQ</h2>
   <details open><summary data-i18n="fq1">How long does a real search take?</summary><p data-i18n="fa1">Typically 5-40 seconds to a verified report.</p></details>
-  <details><summary data-i18n="fq2">What do I get for $6?</summary><p data-i18n="fa2">Full access + Tavily, Groq, Nebius keys. One-time via Gumroad.</p></details>
+  <details><summary data-i18n="fq2">What do I get for $6?</summary><p data-i18n="fa2">Full licensed access to the hosted service (higher daily limits). One-time payment via Gumroad. The Worker uses server-configured Tavily and Groq credentials.</p></details>
   <details><summary data-i18n="fq3">Free trial limits?</summary><p data-i18n="fa3">1 trial per visitor. Up to 100 free searches/day site-wide.</p></details>
   <details><summary data-i18n="fq4">Are sources real?</summary><p data-i18n="fa4">Yes. The report appears after ranking documented sources.</p></details>
 </section>
 
 <footer class="wrap">
-  <p data-i18n="footer">© 2026 Mido AI Store • Deep Search Agent V10.3</p>
+  <p data-i18n="footer">© 2026 Mido AI Store • Mido DeepSearch V5.0</p>
   <p style="margin-top:4px;font-size:11px" data-i18n="footer2">Live sources. Always verify final local prices.</p>
   <div style="margin-top:10px;font-size:11px;opacity:.8">
-    <a href="#" onclick="openPolicy(event, 'privacy')">Privacy Policy</a> | 
-    <a href="#" onclick="openPolicy(event, 'refund')">Refund Policy</a>
+    <a href="#" onclick="openPolicy(event, 'privacy')" data-i18n="policy_privacy_link">Privacy Policy</a> |
+    <a href="#" onclick="openPolicy(event, 'refund')" data-i18n="policy_refund_link">Refund Policy</a> |
+    <a href="#" onclick="openPolicy(event, 'terms')" data-i18n="policy_terms_link">Terms of Use</a> |
+    <a href="#" onclick="openPolicy(event, 'license')" data-i18n="policy_license_link">Usage Rights</a>
   </div>
   <span id="adminBtn" class="admin-trigger" title="Admin Login">🔑</span>
 </footer>
@@ -415,7 +426,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
   <div class="modal-box">
     <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:15px">
       <h3 style="font-size:18px;font-weight:800" id="policyTitle">Policy</h3>
-      <button type="button" class="btn btn-ghost" onclick="document.getElementById('policyModal').classList.remove('open')">Close</button>
+      <button type="button" class="btn btn-ghost" id="policyClose" onclick="document.getElementById('policyModal').classList.remove('open')">Close</button>
     </div>
     <div id="policyContent" style="font-size:13px;color:var(--muted);line-height:1.8"></div>
   </div>
@@ -455,19 +466,44 @@ function toast(msg){
 
 // سياسات مترجمة ثابتة؛ المحتوى داخلي ولا يأتي من المستخدم أو الخادم.
 var POLICY_T = {
-  en:{privacy:{title:'Privacy Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>We collect only the data needed to operate Mido Deep Search.</p><h4>1. Data We Collect</h4><ul><li>Search queries are sent to Tavily and Groq to create the report.</li><li>A random Visitor ID is stored in your browser to enforce the free-trial limit.</li><li>The selected country is used to choose research context and currency preference.</li></ul><h4>2. Tracking</h4><p>Meta Pixel may measure page views and purchase-button interactions. You can disable tracking in your browser or Meta settings.</p><h4>3. Third Parties</h4><p>Payments are handled by Gumroad. We do not receive your payment details.</p><p>Contact: support@midoaistore.com</p>`},refund:{title:'Refund Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>This is a digital product with immediate access.</p><h4>1. Free Trial</h4><p>One free search is provided so you can test the service before purchase.</p><h4>2. Creating Your API Keys</h4><p>After purchase, we do not send ready-made API keys. You create your own keys from your accounts: create a Tavily key at <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a>, and a Groq key at <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. The setup guide explains where to add them to the Worker.</p><h4>3. Refunds through Gumroad</h4><p>Refund requests can be submitted within one week (7 days) of purchase and are handled according to Gumroad's refund policy. If you were charged twice, include your Gumroad receipt when contacting support.</p><p>Contact: support@midoaistore.com</p>`}},
-  ar:{privacy:{title:'سياسة الخصوصية',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>نجمع فقط البيانات اللازمة لتشغيل Mido Deep Search.</p><h4>1. البيانات التي نجمعها</h4><ul><li>تُرسل أسئلة البحث إلى Tavily وGroq لإنشاء التقرير.</li><li>يُحفظ معرّف زائر عشوائي في المتصفح لتطبيق حد التجربة المجانية.</li><li>تُستخدم الدولة المختارة لتحديد سياق البحث وتفضيل العملة.</li></ul><h4>2. التتبع</h4><p>قد يستخدم Meta Pixel قياس زيارات الصفحة والنقر على زر الشراء. يمكنك تعطيل التتبع من المتصفح أو إعدادات Meta.</p><h4>3. الخدمات الخارجية</h4><p>تُعالج المدفوعات عبر Gumroad ولا نصل إلى بيانات الدفع.</p><p>للتواصل: support@midoaistore.com</p>`},refund:{title:'سياسة الاسترداد',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>هذا منتج رقمي مع وصول فوري.</p><h4>1. التجربة المجانية</h4><p>نوفر بحثًا مجانيًا واحدًا لتجربة الخدمة قبل الشراء.</p><h4>2. إنشاء مفاتيح API</h4><p>بعد الشراء لا نرسل مفاتيح API جاهزة. ينشئ المستخدم مفاتيحه بنفسه من حساباته: مفتاح Tavily من <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a>، ومفتاح Groq من <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. يوضح دليل الإعداد مكان إضافة المفاتيح داخل الـWorker.</p><h4>3. الاسترداد عبر Gumroad</h4><p>يمكن تقديم طلب الاسترداد خلال أسبوع واحد (7 أيام) من تاريخ الشراء، وتتم معالجة الطلب وفق سياسة الاسترداد الخاصة بمنصة Gumroad. وفي حالة الخصم المكرر، أرفق إيصال Gumroad عند التواصل مع الدعم.</p><p>للتواصل: support@midoaistore.com</p>`}},
-  fr:{privacy:{title:'Politique de confidentialité',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Nous collectons uniquement les données nécessaires au fonctionnement du service.</p><h4>1. Données collectées</h4><ul><li>Les requêtes sont envoyées à Tavily et Groq pour créer le rapport.</li><li>Un identifiant de visiteur aléatoire est conservé pour appliquer la limite d’essai.</li><li>Le pays choisi sert au contexte et à la préférence monétaire.</li></ul><h4>2. Suivi</h4><p>Meta Pixel peut mesurer les visites et les clics d’achat. Vous pouvez le désactiver dans votre navigateur ou les réglages Meta.</p><h4>3. Tiers</h4><p>Les paiements sont traités par Gumroad.</p><p>Contact : support@midoaistore.com</p>`},refund:{title:'Politique de remboursement',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Il s’agit d’un produit numérique à accès immédiat.</p><p>Après l’achat, les clés API ne sont pas fournies prêtes à l’emploi : l’utilisateur crée sa clé Tavily sur <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> et sa clé Groq sur <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. Le guide explique leur ajout au Worker.</p><p>Une demande de remboursement peut être envoyée dans la semaine (7 jours) suivant l’achat, conformément à la politique de Gumroad. Contactez-nous avec votre reçu Gumroad.</p>`}},
+  en:{privacy:{title:'Privacy Policy',html:`<p><strong>Last updated: 28 October 2026</strong></p><p>Mido DeepSearch processes data needed to run searches, enforce usage limits, prevent abuse, and display results.</p><h4>Data and processing</h4><ul><li>Your query, selected skill, language and country are sent to the Worker. Search queries and source excerpts are sent to Tavily and Groq to generate the report.</li><li>The service processes your IP address for abuse prevention and daily limits. A random visitor identifier is hashed server-side; a trial-use marker is retained to enforce the one-trial policy.</li><li>Meta Pixel may process page-view and checkout-interaction data where enabled.</li></ul><h4>Third parties</h4><p>Cloudflare hosts the Worker; Tavily provides search; Groq generates reports; Gumroad processes payments and may verify licenses. Their own terms apply.</p><h4>Contact</h4><p>Do not submit passwords or confidential data in a search. Contact: support@midoaistore.com.</p>`},refund:{title:'Refund Policy',html:`<p><strong>Last updated: 28 October 2026</strong></p><p>This is a digital product with access delivered electronically. You may request a refund from the seller within 7 days of purchase by replying to your Gumroad receipt or contacting support@midoaistore.com. Include your receipt and a brief description of the issue.</p><p>Requests are reviewed individually and processed through Gumroad, subject to its rules and mandatory consumer rights.</p><p>The current Worker uses server-configured Tavily and Groq credentials. This page does not promise delivery of personal API keys. Third-party accounts, fees and limits may be separate.</p>`}},
+  ar:{privacy:{title:'سياسة الخصوصية',html:`<p><strong>آخر تحديث: 28 أكتوبر 2026</strong></p><p>تعالج Mido DeepSearch البيانات اللازمة لتشغيل البحث وفرض الحدود ومنع الإساءة وعرض النتائج.</p><h4>البيانات والمعالجة</h4><ul><li>يُرسل الاستعلام والمهارة واللغة والدولة إلى الـ Worker. تُرسل الاستعلامات ومقتطفات المصادر إلى Tavily وGroq لإنشاء التقرير.</li><li>تُعالج عنوان IP لمنع الإساءة والحدود اليومية. يُخزَّن معرّف زائر عشوائي بعد التجزئة على الخادم لتطبيق حد التجربة الواحدة.</li><li>قد يعالج Meta Pixel بيانات زيارات الصفحة والتفاعل مع الشراء عند تفعيله.</li></ul><h4>الأطراف الثالثة</h4><p>Cloudflare تستضيف الـ Worker، وTavily للبحث، وGroq لإنشاء التقارير، وGumroad للمدفوعات والتحقق من التراخيص. تنطبق شروط كل طرف.</p><h4>التواصل</h4><p>لا تُرسل كلمات مرور أو بيانات سرية في البحث. للتواصل: support@midoaistore.com.</p>`},refund:{title:'سياسة الاسترداد',html:`<p><strong>آخر تحديث: 28 أكتوبر 2026</strong></p><p>هذا منتج رقمي يُسلَّم إلكترونياً. يمكنك طلب استرداد من البائع خلال 7 أيام من الشراء بالرد على إيصال Gumroad أو مراسلة support@midoaistore.com مع الإيصال ووصف مختصر للمشكلة.</p><p>تُراجع الطلبات فردياً وتُعالج عبر Gumroad وفق قواعدها والحقوق الإلزامية للمستهلك.</p><p>يستخدم الـ Worker الحالي بيانات اعتماد Tavily وGroq المضبوطة على الخادم. لا تعد هذه الصفحة بتسليم مفاتيح API شخصية. قد تكون حسابات وحدود ورسوم الخدمات الخارجية منفصلة.</p>`}},
+  fr:{privacy:{title:'Politique de confidentialité',html:`<p><strong>Dernière mise à jour : 28 octobre 2026</strong></p><p>Mido DeepSearch traite les données nécessaires aux recherches, aux limites d’usage, à la prévention des abus et à l’affichage des résultats.</p><h4>Données et traitement</h4><ul><li>La requête, le skill, la langue et le pays sont envoyés au Worker. Les requêtes et extraits de sources sont transmis à Tavily et Groq.</li><li>L’adresse IP est utilisée pour les limites et la prévention des abus. Un identifiant visiteur aléatoire est haché côté serveur.</li><li>Meta Pixel peut traiter des données d’interaction lorsque activé.</li></ul><h4>Tiers</h4><p>Cloudflare héberge le Worker ; Tavily et Groq fournissent la recherche et la génération ; Gumroad traite les paiements et peut vérifier les licences.</p><h4>Contact</h4><p>N’envoyez pas de mots de passe ou données confidentielles. Contact : support@midoaistore.com.</p>`},refund:{title:'Politique de remboursement',html:`<p><strong>Dernière mise à jour : 28 octobre 2026</strong></p><p>Vous pouvez demander un remboursement au vendeur dans les 7 jours suivant l’achat en répondant au reçu Gumroad ou à support@midoaistore.com, avec le reçu et une description du problème.</p><p>Les demandes sont examinées individuellement et traitées via Gumroad, sous réserve de ses règles et des droits impératifs des consommateurs.</p><p>Le Worker actuel utilise les identifiants Tavily et Groq configurés côté serveur. Cette page ne promet pas la livraison de clés API personnelles. Les comptes, frais et limites des services tiers peuvent être distincts.</p>`}},
   de:{privacy:{title:'Datenschutzrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Wir erheben nur Daten, die für den Betrieb des Dienstes erforderlich sind.</p><h4>Erhobene Daten</h4><p>Suchanfragen werden an Tavily und Groq gesendet. Eine zufällige Besucher-ID setzt das Testlimit durch. Das gewählte Land dient dem Suchkontext und der Währungspräferenz.</p><h4>Tracking und Drittanbieter</h4><p>Meta Pixel kann Besuche und Kaufklicks messen. Zahlungen werden von Gumroad verarbeitet.</p><p>Kontakt: support@midoaistore.com</p>`},refund:{title:'Rückerstattungsrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Bei diesem digitalen Produkt erfolgt der Zugriff sofort.</p><p>Nach dem Kauf werden keine fertigen API-Schlüssel gesendet. Der Nutzer erstellt seinen Tavily-Schlüssel unter <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> und seinen Groq-Schlüssel unter <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. Die Anleitung erklärt die Einrichtung im Worker.</p><p>Eine Rückerstattung kann innerhalb einer Woche (7 Tage) nach dem Kauf gemäß der Gumroad-Richtlinie beantragt werden. Bitte den Gumroad-Beleg beifügen.</p>`}},
   ja:{privacy:{title:'プライバシーポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>サービス運営に必要なデータのみを収集します。</p><p>検索内容はレポート作成のためTavilyとGroqへ送信されます。無料試用制限のため匿名の訪問者IDを保存します。選択した国は検索コンテキストと通貨設定に使用します。支払いはGumroadが処理します。</p><p>連絡先：support@midoaistore.com</p>`},refund:{title:'返金ポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>即時アクセスのデジタル商品です。</p><p>購入後、完成済みのAPIキーは送付されません。ユーザーが <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> でTavilyキーを、<a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> でGroqキーを作成します。設定方法はガイドで説明します。</p><p>返金は購入から1週間（7日）以内に、Gumroadのポリシーに従って申請できます。領収書を添えてご連絡ください。</p>`}},
   zh:{privacy:{title:'隐私政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>我们只收集运行服务所需的数据。</p><p>搜索问题会发送给Tavily和Groq以生成报告。我们保存随机访客ID以执行免费试用限制。选择的国家用于研究上下文和货币偏好。付款由Gumroad处理。</p><p>联系：support@midoaistore.com</p>`},refund:{title:'退款政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>这是即时提供访问权限的数字产品。</p><p>购买后不会提供现成的API密钥。用户需要在 <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> 创建Tavily密钥，并在 <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> 创建Groq密钥。设置指南会说明如何将密钥添加到Worker。</p><p>可在购买后一个星期（7天）内按照Gumroad退款政策提交退款申请，请附上Gumroad收据。</p>`}},
   es:{privacy:{title:'Política de privacidad',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Solo recopilamos los datos necesarios para operar el servicio.</p><p>Las consultas se envían a Tavily y Groq para crear el informe. Guardamos un ID de visitante aleatorio para aplicar el límite de prueba. El país elegido define el contexto y la preferencia de moneda. Los pagos los procesa Gumroad.</p><p>Contacto: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Es un producto digital con acceso inmediato.</p><p>Después de la compra no se entregan claves API listas. El usuario crea su clave de Tavily en <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> y su clave de Groq en <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. La guía explica cómo añadirlas al Worker.</p><p>La solicitud de reembolso puede presentarse dentro de una semana (7 días) según la política de Gumroad. Incluya el recibo de Gumroad.</p>`}},
   pt:{privacy:{title:'Política de privacidade',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Coletamos apenas os dados necessários para operar o serviço.</p><p>As consultas são enviadas à Tavily e à Groq para gerar o relatório. Guardamos um ID aleatório de visitante para aplicar o limite de teste. O país escolhido define o contexto e a preferência de moeda. Os pagamentos são processados pela Gumroad.</p><p>Contato: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Este é um produto digital com acesso imediato.</p><p>Após a compra, não são fornecidas chaves API prontas. O usuário cria a chave Tavily em <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> e a chave Groq em <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. O guia explica como adicioná-las ao Worker.</p><p>O pedido de reembolso pode ser enviado em até uma semana (7 dias), conforme a política da Gumroad. Inclua o recibo da Gumroad.</p>`}}
 };
+
+// Consolidated legal copy: concise, localized, and aligned with the current Worker implementation.
+// Review this copy for the seller's jurisdiction before publication; it is not legal advice.
+
+var LEGAL_T = {
+ en:{
+  privacy:{title:'Privacy Policy',html:`<p><strong>Last updated: 28 October 2026</strong></p><p>Mido DeepSearch processes data needed to run searches, enforce usage limits, prevent abuse, and display results.</p><h4>Data and processing</h4><ul><li>Your query, selected skill, language and country are sent to the Worker. Search queries and source excerpts are sent to Tavily and Groq to generate the report.</li><li>The service processes your IP address for abuse prevention and daily limits. A random visitor identifier is hashed server-side; a trial-use marker is retained to enforce the one-trial policy. Daily usage statistics are retained for a limited period.</li><li>Meta Pixel may process page-view and checkout-interaction data where enabled by the page.</li></ul><h4>Third parties</h4><p>Cloudflare hosts the Worker and usage state; Tavily provides search; Groq generates reports; Gumroad processes payments and may provide license verification. Their own terms and privacy policies apply.</p><h4>Your choices and contact</h4><p>Do not submit passwords, confidential personal data, or sensitive information in a search. For privacy questions or a data request, contact support@midoaistore.com. Some abuse-prevention records may be retained as needed to enforce service limits or meet legal obligations.</p>`},
+  refund:{title:'Refund Policy',html:`<p><strong>Last updated: 28 October 2026</strong></p><p>This is a digital product with access delivered electronically. You may request a refund from the seller within 7 days of purchase by replying to your Gumroad receipt or contacting support@midoaistore.com. Include your receipt and a brief description of the issue.</p><p>Requests are reviewed individually. Refund processing is handled through Gumroad and remains subject to Gumroad's applicable rules and mandatory consumer rights. Gumroad may also issue refunds under its own policy. This page does not remove rights that cannot legally be waived.</p><p>The current Worker uses server-configured Tavily and Groq credentials. This page does not promise delivery of personal API keys from those providers. Third-party accounts, provider limits, and charges may be separate unless the specific product listing expressly says otherwise.</p>`},
+  terms:{title:'Terms of Use',html:`<p><strong>Last updated: 28 October 2026</strong></p><p>Use the service lawfully and do not attempt to bypass limits, overload the service, extract credentials, interfere with security, or use the service to violate another party's rights.</p><p>Reports are generated from search results and AI synthesis. Sources can be incomplete, stale, inaccurate, or contradictory. Scores help rank relevance and do not prove truth. You must review linked sources before relying on important claims. No report is a guarantee or a substitute for professional advice.</p><p>Access, price, features and usage limits are described in the current product listing. Third-party services are governed by their own terms. We may update or suspend the service for security, maintenance, legal compliance, or abuse prevention. Nothing here limits mandatory rights under applicable law.</p><p>Contact: support@midoaistore.com</p>`},
+  license:{title:'Usage Rights & Intellectual Property',html:`<p><strong>Last updated: 28 October 2026</strong></p><p>After a valid purchase, you receive a personal, non-exclusive, non-transferable right to access and use the product for lawful personal or business research, subject to the purchase listing.</p><p>Unless the seller gives written permission, you may not resell, redistribute, sublicense, publish, or share the product files or access credentials as a standalone product, nor claim ownership of Mido AI Store branding, source code, or documentation.</p><p>You may use report outputs in your own work, subject to source copyrights, third-party terms, and applicable law. Third-party trademarks and source content remain the property of their respective owners. Do not share API secrets or license keys publicly.</p><p>For licensing questions: support@midoaistore.com</p>`}
+ },
+ ar:{
+  privacy:{title:'سياسة الخصوصية',html:`<p><strong>آخر تحديث: 28 أكتوبر 2026</strong></p><p>تعالج Mido DeepSearch البيانات اللازمة لتشغيل البحث وتطبيق حدود الاستخدام ومنع إساءة الاستخدام وعرض النتائج.</p><h4>البيانات والمعالجة</h4><ul><li>يُرسل السؤال والمهارة واللغة والدولة المختارة إلى الـ Worker، وتُرسل أسئلة البحث ومقتطفات المصادر إلى Tavily وGroq لإنشاء التقرير.</li><li>يعالج النظام عنوان IP لمنع الإساءة وتطبيق الحدود اليومية. يُحوّل معرّف الزائر العشوائي إلى بصمة مشفّرة على الخادم، ويُحتفظ بعلامة استخدام التجربة لتطبيق سياسة التجربة الواحدة. تُحتفظ بإحصاءات الاستخدام اليومية مدة محدودة.</li><li>قد يعالج Meta Pixel بيانات زيارة الصفحة والتفاعل مع الشراء عند تفعيله.</li></ul><h4>الخدمات الخارجية</h4><p>تستضيف Cloudflare الـ Worker وبيانات الاستخدام؛ وتوفر Tavily البحث، وGroq إنشاء التقارير، وتعالج Gumroad الدفع وقد تتحقق من الترخيص. تنطبق سياسات هذه الجهات وشروطها الخاصة.</p><h4>اختياراتك والتواصل</h4><p>لا تُدخل كلمات مرور أو بيانات شخصية سرية أو معلومات حساسة في البحث. لأسئلة الخصوصية أو طلبات البيانات: support@midoaistore.com. قد نحتفظ ببعض سجلات منع الإساءة بالقدر اللازم لتطبيق الحدود أو الامتثال القانوني.</p>`},
+  refund:{title:'سياسة الاسترداد',html:`<p><strong>آخر تحديث: 28 أكتوبر 2026</strong></p><p>هذا منتج رقمي يُسلّم الوصول إليه إلكترونيًا. يمكنك طلب الاسترداد من البائع خلال 7 أيام من الشراء بالرد على إيصال Gumroad أو مراسلة support@midoaistore.com، مع إرفاق الإيصال وشرح مختصر للمشكلة.</p><p>تُراجع الطلبات كلٌّ على حدة، وتتم معالجة الاسترداد عبر Gumroad وفق القواعد المعمول بها وحقوق المستهلك الإلزامية. وقد تصدر Gumroad استردادًا وفق سياستها الخاصة. لا تلغي هذه السياسة أي حق لا يسمح القانون بالتنازل عنه.</p><p>يستخدم الـ Worker الحالي بيانات اعتماد Tavily وGroq المضبوطة على الخادم. لا تعد هذه الصفحة بتسليم مفاتيح API شخصية من مزودي الخدمة. وقد تتطلب خدمات الطرف الثالث حسابات أو رسومًا أو حدود استخدام منفصلة، ما لم يذكر عرض المنتج خلاف ذلك صراحةً.</p>`},
+  terms:{title:'شروط الاستخدام',html:`<p><strong>آخر تحديث: 28 أكتوبر 2026</strong></p><p>استخدم الخدمة بصورة قانونية. يُمنع التحايل على الحدود أو إغراق الخدمة بالطلبات أو استخراج بيانات الاعتماد أو تعطيل الحماية أو انتهاك حقوق الآخرين.</p><p>تُنشأ التقارير من نتائج البحث وصياغة الذكاء الاصطناعي. قد تكون المصادر ناقصة أو قديمة أو غير دقيقة أو متعارضة. تساعد الدرجات على ترتيب الملاءمة ولا تثبت صحة المعلومات. راجع الروابط قبل الاعتماد على الادعاءات المهمة. لا يُعد التقرير ضمانًا للصحة أو بديلًا عن المشورة المتخصصة.</p><p>تُحدد إمكانية الوصول والسعر والميزات والحدود في عرض المنتج الحالي. وتخضع الخدمات الخارجية لشروطها الخاصة. قد نحدّث الخدمة أو نوقفها للصيانة أو الأمان أو الامتثال أو منع الإساءة، مع عدم الانتقاص من الحقوق الإلزامية التي يقررها القانون.</p><p>للتواصل: support@midoaistore.com</p>`},
+  license:{title:'حقوق الاستخدام والملكية الفكرية',html:`<p><strong>آخر تحديث: 28 أكتوبر 2026</strong></p><p>بعد شراء صحيح، يحصل المشتري على حق شخصي وغير حصري وغير قابل للتحويل لاستخدام المنتج في البحث الشخصي أو التجاري المشروع، وفق ما يرد في عرض الشراء.</p><p>ما لم يمنح البائع إذنًا كتابيًا، لا يجوز إعادة بيع ملفات المنتج أو توزيعها أو ترخيصها من الباطن أو مشاركة بيانات الدخول باعتبارها منتجًا مستقلًا، كما لا يجوز ادعاء ملكية العلامة التجارية أو الكود المصدري أو الوثائق.</p><p>يجوز استخدام مخرجات التقارير في أعمالك مع مراعاة حقوق مصادر المحتوى وشروط الأطراف الثالثة والقانون. تبقى العلامات التجارية ومحتويات المصادر ملكًا لأصحابها. لا تشارك مفاتيح API أو الترخيص علنًا.</p><p>للاستفسار: support@midoaistore.com</p>`}
+ },
+ fr:{privacy:{title:'Politique de confidentialité',html:`<p><strong>Dernière mise à jour : 28 octobre 2026</strong></p><p>Le service traite les données nécessaires à la recherche, aux limites d’usage, à la prévention des abus et à l’affichage des résultats. Les requêtes, la compétence, la langue et le pays sont transmis au Worker; les requêtes et extraits sont envoyés à Tavily et Groq.</p><p>L’adresse IP est traitée pour limiter les abus. L’identifiant aléatoire du visiteur est haché côté serveur et un marqueur d’essai est conservé. Cloudflare héberge le Worker; Gumroad traite les paiements et peut vérifier les licences. Meta Pixel peut traiter des données d’interaction lorsqu’il est activé.</p><p>N’envoyez pas de mots de passe ni de données confidentielles. Contact : support@midoaistore.com. Certains journaux peuvent être conservés pour appliquer les limites ou respecter la loi.</p>`},refund:{title:'Politique de remboursement',html:`<p><strong>Dernière mise à jour : 28 octobre 2026</strong></p><p>Vous pouvez demander un remboursement au vendeur dans les 7 jours suivant l’achat en répondant au reçu Gumroad ou à support@midoaistore.com, avec le reçu et une description du problème.</p><p>Les demandes sont examinées individuellement et traitées via Gumroad, sous réserve de ses règles et des droits impératifs des consommateurs. Cette politique ne supprime aucun droit légal non renonçable.</p><p>Le Worker actuel utilise les identifiants Tavily et Groq configurés côté serveur. Cette page ne promet pas la livraison de clés API personnelles. Les comptes, frais et limites des services tiers peuvent être distincts.</p>`},terms:{title:'Conditions d’utilisation',html:`<p>Utilisez le service légalement. Il est interdit de contourner les limites, de surcharger le service, d’extraire des identifiants ou de compromettre la sécurité.</p><p>Les rapports combinent des résultats de recherche et une synthèse IA. Les sources peuvent être incomplètes, anciennes, inexactes ou contradictoires. Les scores aident au classement mais ne prouvent pas la véracité. Vérifiez les liens avant toute décision importante; le rapport ne remplace pas un conseil professionnel.</p><p>Le prix, l’accès et les limites sont ceux indiqués dans l’offre actuelle. Les services tiers ont leurs propres conditions. Contact : support@midoaistore.com.</p>`},license:{title:'Droits d’utilisation et propriété intellectuelle',html:`<p>Après achat valide, vous disposez d’un droit personnel, non exclusif et non transférable d’utiliser le produit pour vos recherches licites, selon l’offre d’achat.</p><p>Sans autorisation écrite, vous ne pouvez pas revendre ou redistribuer les fichiers, partager les accès comme produit autonome, ni revendiquer la propriété de la marque, du code ou de la documentation.</p><p>Les résultats peuvent être utilisés dans vos travaux sous réserve des droits des sources, des conditions tierces et de la loi. Ne publiez pas les clés API ou licences. Contact : support@midoaistore.com.</p>`}},
+ de:{privacy:{title:'Datenschutzerklärung',html:`<p><strong>Stand: 28. Oktober 2026</strong></p><p>Wir verarbeiten Daten für Suche, Nutzungsgrenzen, Missbrauchsschutz und Ergebnisse. Anfrage, Skill, Sprache und Land gehen an den Worker; Anfrage und Quellenauszüge werden zur Berichtserstellung an Tavily und Groq gesendet.</p><p>Die IP-Adresse wird zum Missbrauchsschutz verarbeitet. Die zufällige Besucher-ID wird serverseitig gehasht; ein Testmarker wird zur Durchsetzung der Testgrenze gespeichert. Cloudflare hostet den Worker, Gumroad verarbeitet Zahlungen und kann Lizenzen prüfen. Meta Pixel kann bei Aktivierung Interaktionsdaten verarbeiten.</p><p>Bitte keine Passwörter oder vertraulichen Daten eingeben. Kontakt: support@midoaistore.com. Einige Missbrauchsschutzdaten können für Limits oder gesetzliche Pflichten aufbewahrt werden.</p>`},refund:{title:'Rückerstattungsrichtlinie',html:`<p>Sie können innerhalb von 7 Tagen nach dem Kauf beim Verkäufer eine Rückerstattung beantragen, indem Sie auf den Gumroad-Beleg antworten oder support@midoaistore.com kontaktieren. Fügen Sie den Beleg und eine kurze Problembeschreibung bei.</p><p>Anträge werden einzeln geprüft und über Gumroad gemäß den geltenden Regeln und zwingenden Verbraucherrechten bearbeitet. Nicht abdingbare gesetzliche Rechte bleiben unberührt.</p><p>Der aktuelle Worker verwendet serverseitig konfigurierte Tavily- und Groq-Zugangsdaten. Persönliche API-Schlüssel werden hier nicht zugesagt. Drittanbieter können eigene Konten, Gebühren und Limits verlangen.</p>`},terms:{title:'Nutzungsbedingungen',html:`<p>Nutzen Sie den Dienst rechtmäßig. Umgehung von Limits, Überlastung, Auslesen von Zugangsdaten und Sicherheitsangriffe sind untersagt.</p><p>Berichte kombinieren Suchergebnisse mit KI-Synthese. Quellen können unvollständig, veraltet, ungenau oder widersprüchlich sein. Scores ordnen Relevanz und beweisen keine Wahrheit. Prüfen Sie Quellenlinks vor wichtigen Entscheidungen; Berichte ersetzen keine professionelle Beratung.</p><p>Preis, Zugriff und Limits ergeben sich aus dem aktuellen Angebot. Drittanbieter haben eigene Bedingungen. Kontakt: support@midoaistore.com.</p>`},license:{title:'Nutzungsrechte und geistiges Eigentum',html:`<p>Nach gültigem Kauf erhalten Sie ein persönliches, nicht exklusives und nicht übertragbares Recht zur rechtmäßigen privaten oder geschäftlichen Recherche gemäß dem Angebot.</p><p>Ohne schriftliche Erlaubnis dürfen Sie Produktdateien nicht weiterverkaufen oder verbreiten, Zugänge nicht als eigenständiges Produkt teilen und keine Rechte an Marke, Quellcode oder Dokumentation beanspruchen.</p><p>Berichtsausgaben dürfen vorbehaltlich Quellenrechten, Drittanbieterbedingungen und geltendem Recht genutzt werden. Veröffentlichen Sie keine API- oder Lizenzschlüssel. Kontakt: support@midoaistore.com.</p>`}},
+ ja:{privacy:{title:'プライバシーポリシー',html:`<p><strong>最終更新：2026年10月28日</strong></p><p>検索、利用制限、不正利用防止、結果表示に必要なデータを処理します。質問・スキル・言語・国はWorkerへ送信され、質問と検索結果の抜粋はレポート生成のためTavilyとGroqへ送信されます。</p><p>不正利用防止のためIPアドレスを処理し、訪問者IDはサーバー側でハッシュ化します。試用済みの記録を制限適用のため保存します。CloudflareがWorkerをホストし、Gumroadが決済とライセンス確認を扱う場合があります。お問い合わせ：support@midoaistore.com。</p>`},refund:{title:'返金ポリシー',html:`<p>購入後7日以内に、Gumroadの領収書への返信またはsupport@midoaistore.comへの連絡で返金を申請できます。領収書と問題の説明を添えてください。</p><p>申請は個別に確認され、Gumroadの規則と適用される消費者の権利に従って処理されます。法律上放棄できない権利には影響しません。</p><p>現在のWorkerはサーバー設定済みのTavily/Groq認証情報を使います。個人用APIキーの提供を約束するものではありません。第三者サービスには別の料金や制限がある場合があります。</p>`},terms:{title:'利用規約',html:`<p>合法的に利用してください。制限の回避、過剰なリクエスト、認証情報の取得、セキュリティ妨害は禁止です。</p><p>レポートは検索結果とAIによる要約から作られます。情報源は不完全、古い、不正確、または矛盾している可能性があります。スコアは関連性の順位付けであり、真実の証明ではありません。重要な判断の前にリンクを確認してください。</p><p>価格・機能・利用制限は現在の商品説明に従います。第三者サービスには独自の規約があります。連絡先：support@midoaistore.com。</p>`},license:{title:'利用権と知的財産',html:`<p>有効な購入後、商品説明に従い、合法的な調査目的で利用する個人的・非独占的・譲渡不可の権利が付与されます。</p><p>書面による許可なく、ファイルの再販売・再配布、アクセス情報の独立商品としての共有、ブランド・ソースコード・文書の所有権主張は禁止です。</p><p>レポート出力は情報源の権利、第三者規約、適用法に従って利用できます。APIキーやライセンスキーを公開しないでください。連絡先：support@midoaistore.com。</p>`}},
+ zh:{privacy:{title:'隐私政策',html:`<p><strong>更新日期：2026年10月28日</strong></p><p>我们处理运行搜索、执行使用限制、防止滥用和展示结果所需的数据。问题、技能、语言和国家会发送到Worker；问题和来源摘录会发送给Tavily与Groq以生成报告。</p><p>系统会处理IP地址以防止滥用，并在服务器端对随机访客ID进行哈希处理；试用标记会被保留以执行试用限制。Cloudflare托管Worker，Gumroad处理付款并可能验证许可。联系：support@midoaistore.com。</p>`},refund:{title:'退款政策',html:`<p>购买后7天内，可回复Gumroad收据或联系support@midoaistore.com向卖家申请退款，请附收据和问题说明。</p><p>申请将逐项审核，并通过Gumroad按照其适用规则和强制性消费者权利处理。本政策不限制法律规定不可放弃的权利。</p><p>当前Worker使用服务器配置的Tavily和Groq凭据。本页面不承诺提供个人API密钥。第三方服务可能有单独的账户、费用和使用限制。</p>`},terms:{title:'使用条款',html:`<p>请合法使用本服务。禁止绕过限制、过度请求、提取凭据或破坏安全措施。</p><p>报告由搜索结果和AI综合生成。来源可能不完整、过时、不准确或互相矛盾。评分用于排序相关性，并不证明事实正确。重要决策前请查看来源链接；报告不替代专业建议。</p><p>价格、功能和使用限制以当前商品说明为准。第三方服务适用其自身条款。联系：support@midoaistore.com。</p>`},license:{title:'使用权与知识产权',html:`<p>有效购买后，您获得个人、非独占、不可转让的许可，可依商品说明将产品用于合法的个人或商业研究。</p><p>未经书面许可，不得转售或分发产品文件、将访问凭据作为独立产品分享，也不得声称拥有品牌、源代码或文档的所有权。</p><p>报告输出的使用须遵守来源版权、第三方条款及适用法律。请勿公开API密钥或许可密钥。联系：support@midoaistore.com。</p>`}},
+ es:{privacy:{title:'Política de privacidad',html:`<p><strong>Última actualización: 28 de octubre de 2026</strong></p><p>Procesamos datos necesarios para buscar, aplicar límites, prevenir abusos y mostrar resultados. La consulta, la habilidad, el idioma y el país se envían al Worker; las consultas y extractos se envían a Tavily y Groq para generar informes.</p><p>La IP se procesa para prevenir abusos y el identificador aleatorio se convierte en hash en el servidor. Se conserva una marca de prueba usada para aplicar el límite. Cloudflare aloja el Worker y Gumroad procesa pagos y puede verificar licencias. Contacto: support@midoaistore.com.</p>`},refund:{title:'Política de reembolso',html:`<p>Puede solicitar un reembolso al vendedor dentro de los 7 días posteriores a la compra respondiendo al recibo de Gumroad o escribiendo a support@midoaistore.com. Incluya el recibo y una breve descripción del problema.</p><p>Las solicitudes se revisan individualmente y se tramitan mediante Gumroad conforme a sus reglas y a los derechos obligatorios del consumidor. No se limitan los derechos legales irrenunciables.</p><p>El Worker actual usa credenciales de Tavily y Groq configuradas en el servidor. Esta página no promete claves API personales. Los servicios externos pueden tener cuentas, tarifas y límites separados.</p>`},terms:{title:'Condiciones de uso',html:`<p>Use el servicio legalmente. Se prohíbe eludir límites, sobrecargar el servicio, extraer credenciales o interferir con la seguridad.</p><p>Los informes combinan resultados de búsqueda y síntesis de IA. Las fuentes pueden ser incompletas, antiguas, inexactas o contradictorias. Las puntuaciones ordenan relevancia, pero no demuestran la verdad. Revise los enlaces antes de decisiones importantes; el informe no sustituye el asesoramiento profesional.</p><p>El precio, el acceso y los límites son los indicados en la oferta actual. Los servicios externos tienen sus propias condiciones. Contacto: support@midoaistore.com.</p>`},license:{title:'Derechos de uso y propiedad intelectual',html:`<p>Tras una compra válida, obtiene un derecho personal, no exclusivo e intransferible para usar el producto en investigaciones lícitas según la oferta.</p><p>Sin permiso escrito, no puede revender ni redistribuir archivos, compartir accesos como producto independiente ni reclamar la propiedad de la marca, el código o la documentación.</p><p>Puede usar los resultados respetando los derechos de las fuentes, las condiciones de terceros y la ley. No publique claves API ni licencias. Contacto: support@midoaistore.com.</p>`}},
+ pt:{privacy:{title:'Política de privacidade',html:`<p><strong>Última atualização: 28 de outubro de 2026</strong></p><p>Processamos os dados necessários para pesquisar, aplicar limites, prevenir abusos e exibir resultados. A consulta, habilidade, idioma e país são enviados ao Worker; consultas e trechos de fontes são enviados à Tavily e à Groq para gerar relatórios.</p><p>O IP é processado para prevenção de abusos e o identificador aleatório é transformado em hash no servidor. Um marcador de teste é mantido para aplicar o limite. A Cloudflare hospeda o Worker; a Gumroad processa pagamentos e pode verificar licenças. Contato: support@midoaistore.com.</p>`},refund:{title:'Política de reembolso',html:`<p>Você pode solicitar reembolso ao vendedor em até 7 dias após a compra, respondendo ao recibo da Gumroad ou escrevendo para support@midoaistore.com. Inclua o recibo e uma breve descrição do problema.</p><p>Os pedidos são analisados individualmente e processados pela Gumroad conforme suas regras e os direitos obrigatórios do consumidor. Direitos legais irrenunciáveis permanecem válidos.</p><p>O Worker atual usa credenciais Tavily e Groq configuradas no servidor. Esta página não promete fornecer chaves API pessoais. Serviços de terceiros podem ter contas, taxas e limites separados.</p>`},terms:{title:'Termos de uso',html:`<p>Use o serviço legalmente. É proibido contornar limites, sobrecarregar o serviço, extrair credenciais ou interferir na segurança.</p><p>Os relatórios combinam resultados de busca e síntese de IA. As fontes podem ser incompletas, antigas, imprecisas ou contraditórias. As pontuações ajudam a ordenar relevância, mas não provam a verdade. Verifique os links antes de decisões importantes; o relatório não substitui aconselhamento profissional.</p><p>Preço, acesso e limites seguem a oferta atual. Serviços de terceiros têm termos próprios. Contato: support@midoaistore.com.</p>`},license:{title:'Direitos de uso e propriedade intelectual',html:`<p>Após uma compra válida, você recebe um direito pessoal, não exclusivo e intransferível para usar o produto em pesquisas legais conforme a oferta.</p><p>Sem autorização por escrito, não pode revender ou redistribuir arquivos, compartilhar acessos como produto independente nem reivindicar propriedade da marca, código ou documentação.</p><p>Os resultados podem ser usados respeitando direitos das fontes, termos de terceiros e a lei. Não publique chaves API ou licenças. Contato: support@midoaistore.com.</p>`}}
+};
+
 window.openPolicy = function(e,type){
   e.preventDefault();
   var p=POLICY_T[currentLang]||POLICY_T.en;
-  var item=p[type]||POLICY_T.en[type];
+  var item=(LEGAL_T[currentLang]&&LEGAL_T[currentLang][type])||(LEGAL_T.en&&LEGAL_T.en[type])||p[type]||POLICY_T.en[type];
   document.getElementById('policyTitle').textContent=item.title;
   document.getElementById('policyContent').innerHTML=item.html;
   document.getElementById('policyModal').classList.add('open');
@@ -505,15 +541,15 @@ function inlineMd(s){
 // قاموس الترجمات الشامل
 var T = {
   en: {
-    nav_buy:'Get Access — $6', pill:'⚡ Verified research • 5-40s • Local + Global',
-    hero_title:'Turn one question into a <span class="g">verified decision</span> — before you spend',
-    hero_desc:'Ask once. Get live sources, a clear comparison, and an evidence-based recommendation in about 5-40 seconds.',
+    nav_buy:'Get Access — $6', pill:'⚡ Live sources • Evidence-aware reports • 5-40s',
+    hero_title:'Turn one question into a <span class="g">structured research report</span> — before you decide',
+    hero_desc:'Ask once. Get live sources, a clear comparison, and an evidence-aware recommendation in about 5-40 seconds.',
     cta_try:'Try Free Demo', cta_report:'See Full Report',
-    t1:'✓ 1 free trial / visitor', t2:'✓ 100 free searches / day', t3:'✓ API keys after purchase',
+    t1:'✓ 1 free trial / visitor', t2:'✓ 100 free searches / day', t3:'✓ Licensed access after purchase',
     st_visitors:'Visitors', st_searches:'Searches today', st_ok:'Successful', st_fail:'Failed', st_left:'Free left today',
     skills_title:'Research Skills', skills_sub:'Select a skill before searching. Save stores the last report on this device.',
     sk1:'Deep Search', sk2:'Summarize', sk3:'Compare', sk4:'Recommend', sk5:'Price Check', sk6:'Save Report',
-    demo_title:'Live Demo', demo_sub:'Real engine. Stages light up while the spider crawls sources.',
+    demo_title:'Live Demo', demo_sub:'Live search engine. Progress indicators reflect completed stages.',
     ph:'Best noise-cancelling headphones under $150', search_btn:'Search 🔍', meta1:'Free: 1 / visitor', meta2:'Daily cap: 100',
     s1:'Source Search', s1d:'Tavily live sources', s2:'Thesis Build', s2d:'Core argument', s3:'Reduce & Rank', s3d:'Strongest signals', s4:'Risk Check', s4d:'Local + global', s5:'Final Report', s5d:'5-40 seconds',
     laws_title:'Asimov Safety Laws', laws_sub:'These rules guide the engine so output stays useful, honest, and safe for real decisions.',
@@ -530,22 +566,22 @@ var T = {
     ring5_t:'Ring 5 — Confidence Calibration', ring5_s:'Generate the final verified report.', ring5_d:'Produces the structured output only after previous rings complete: quick take, comparison table, and a final recommendation.',
     case_title:'Real Report Example', case_sub:'Generated in <strong>35 seconds</strong> for: "Best noise-cancelling headphones under $150"',
     case_h:'Best Noise-Canceling Headphones Under $150', case_quick:'Quick Take',
-    cq1:'<strong>Sony WH-CH720N</strong> — best overall (source currency shown; verify current price).',
-    cq2:'<strong>JBL Tune 770NC</strong> — best budget under ~$100.',
-    cq3:'<strong>OneOdio Focus A6</strong> — entry option near ~$70.',
+    cq1:'<strong>Sony WH-CH720N</strong> — best overall (≈ $109 in Oct 2026; verify current price).',
+    cq2:'<strong>JBL Tune 770NC</strong> — best budget under ~$100 (≈ $89).',
+    cq3:'<strong>Anker Soundcore Space One</strong> — strong entry option near ~$79.',
     th1:'Model', th2:'Battery', th_price:'Price', th_comfort:'Comfort', th_verdict:'Verdict',
     r1:'Best Overall', r2:'Best Budget', r3:'Entry Option',
-    case_sources:'Illustrative example only. Prices are shown in the cited source currency and may be outdated.',
+    case_sources:'Illustrative example only (October 2026). Always verify current prices and availability.',
     full_preview:'Full Report Preview', save_example:'Save This Report',
     price_title:'Simple pricing', price_sub:'One-time payment. No subscription.', once:'one-time',
     price_local:'or equivalent in your local currency at checkout via Gumroad.',
-    f1:'Full Deep Search access', f2:'API keys: Tavily + Groq + Nebius', f3:'Verified local + global reports', f4:'Setup guide included', f5:'1 free trial before purchase',
+    f1:'Full Deep Search access', f2:'Server-side Tavily + Groq integrations', f3:'Structured reports with live source links', f4:'Higher daily limits with license key', f5:'1 free trial before purchase',
     buy_btn:'Get Full Access — $6',
-    faq_title:'FAQ', fq1:'How long does a real search take?', fa1:'Typically 5-40 seconds to a verified report.',
-    fq2:'What do I get for $6?', fa2:'Full access + Tavily, Groq, Nebius keys. One-time via Gumroad.',
+    faq_title:'FAQ', fq1:'How long does a real search take?', fa1:'Typically 5-40 seconds. Always review the linked sources.',
+    fq2:'What do I get for $6?', fa2:'Full licensed access to the hosted service with higher daily limits. One-time payment via Gumroad. The Worker uses server-configured Tavily and Groq credentials.',
     fq3:'Free trial limits?', fa3:'1 trial per visitor. Up to 100 free searches/day site-wide.',
-    fq4:'Are sources real?', fa4:'Yes. The report appears after ranking documented sources.',
-    footer:'© 2026 Mido AI Store • Deep Search Agent V10.3', footer2:'Live sources. Always verify final local prices.',
+    fq4:'Are sources real?', fa4:'Yes. The tool searches live sources and includes their links. Ranking is not independent fact-checking — always verify.',
+    footer:'© 2026 Mido AI Store • Mido DeepSearch V5.0', footer2:'Live sources. Always verify final local prices.',
     modal_title:'Full Report — Headphones under $150', modal_q:'Query: Best noise-cancelling headphones under $150', modal_close:'Close',
     modal_winner:'Winner: Sony WH-CH720N',
     modal_summary:'Best overall ANC/comfort/battery. JBL Tune 770NC is best value.',
@@ -563,7 +599,7 @@ var T = {
     hero_title:'حوّل سؤالك إلى <span class="g">قرار موثّق</span> — قبل أن تدفع',
     hero_desc:'اسأل مرة واحدة لتحصل على مصادر حية، ومقارنة واضحة، وتوصية مبنية على الأدلة خلال حوالي 5-40 ثانية.',
     cta_try:'جرب البحث المجاني', cta_report:'شاهد التقرير الكامل',
-    t1:'✓ تجربة واحدة / زائر', t2:'✓ 100 بحث مجاني / يوم', t3:'✓ مفاتيح API بعد الشراء',
+    t1:'✓ تجربة واحدة / زائر', t2:'✓ 100 بحث مجاني / يوم', t3:'✓ وصول مرخّص بعد الشراء',
     st_visitors:'الزوار', st_searches:'بحث اليوم', st_ok:'ناجح', st_fail:'فاشل', st_left:'متبقي اليوم',
     skills_title:'مهارات البحث', skills_sub:'اختر المهارة قبل البحث. مهارة الحفظ تخزّن آخر تقرير على هذا الجهاز.',
     sk1:'بحث عميق', sk2:'تلخيص', sk3:'مقارنة', sk4:'توصية', sk5:'فحص السعر', sk6:'حفظ التقرير',
@@ -584,22 +620,22 @@ var T = {
     ring5_t:'الحلقة 5 — معايرة الثقة', ring5_s:'توليد التقرير النهائي الموثق.', ring5_d:'يُنتج المخرج المنظم بعد اكتمال الحلقات السابقة.',
     case_title:'مثال تقرير حقيقي', case_sub:'تم إنشاؤه خلال <strong>35 ثانية</strong> لسؤال: أفضل سماعات إلغاء ضوضاء تحت 150$',
     case_h:'أفضل سماعات إلغاء ضوضاء تحت 150$', case_quick:'الخلاصة السريعة',
-    cq1:'<strong>Sony WH-CH720N</strong> — الأفضل إجمالًا (سعر تقديري).',
-    cq2:'<strong>JBL Tune 770NC</strong> — الأفضل اقتصاديًا تحت 100$.',
-    cq3:'<strong>OneOdio Focus A6</strong> — خيار دخول قرب 70$.',
+    cq1:'<strong>Sony WH-CH720N</strong> — الأفضل إجمالًا (≈ 109$ في أكتوبر 2026؛ تحقق من السعر الحالي).',
+    cq2:'<strong>JBL Tune 770NC</strong> — الأفضل اقتصاديًا تحت 100$ (≈ 89$).',
+    cq3:'<strong>Anker Soundcore Space One</strong> — خيار دخول قوي قرب 79$.',
     th1:'الموديل', th2:'البطارية', th_price:'السعر', th_comfort:'الراحة', th_verdict:'الحكم',
     r1:'الأفضل إجمالًا', r2:'الأفضل اقتصاديًا', r3:'خيار دخول',
-    case_sources:'مثال توضيحي فقط. الأسعار معروضة بعملة المصدر وقد تكون غير محدثة.',
+    case_sources:'مثال توضيحي فقط (أكتوبر 2026). تحقق دائماً من الأسعار والتوافر الحاليين.',
     full_preview:'معاينة التقرير الكامل', save_example:'حفظ هذا التقرير',
     price_title:'تسعير بسيط', price_sub:'دفعة واحدة. بدون اشتراك.', once:'مرة واحدة',
     price_local:'أو ما يعادلها بعملتك المحلية عند الدفع عبر Gumroad.',
-    f1:'وصول كامل للبحث العميق', f2:'مفاتيح API: Tavily + Groq + Nebius', f3:'تقارير موثقة محلية وعالمية', f4:'دليل الإعداد مشمول', f5:'تجربة مجانية واحدة قبل الشراء',
+    f1:'وصول كامل للبحث العميق', f2:'تكاملات Tavily وGroq مضبوطة على الخادم', f3:'تقارير منظمة مع روابط المصادر', f4:'حدود يومية أعلى بمفتاح الترخيص', f5:'تجربة مجانية واحدة قبل الشراء',
     buy_btn:'احصل على الوصول الكامل — $6',
-    faq_title:'أسئلة شائعة', fq1:'كم يستغرق البحث الحقيقي؟', fa1:'عادة 5-40 ثانية حتى التقرير الموثق.',
-    fq2:'ماذا أحصل مقابل 6$؟', fa2:'وصول كامل + مفاتيح Tavily وGroq وNebius. دفعة واحدة عبر Gumroad.',
+    faq_title:'أسئلة شائعة', fq1:'كم يستغرق البحث الحقيقي؟', fa1:'عادة 5-40 ثانية. راجع دائماً روابط المصادر.',
+    fq2:'ماذا أحصل مقابل 6$؟', fa2:'وصول مرخّص كامل للخدمة المستضافة مع حدود يومية أعلى. دفعة واحدة عبر Gumroad. يستخدم الـ Worker بيانات اعتماد Tavily وGroq المضبوطة على الخادم.',
     fq3:'حدود التجربة المجانية؟', fa3:'تجربة واحدة لكل زائر. حتى 100 بحث مجاني يوميًا للموقع.',
-    fq4:'هل المصادر حقيقية؟', fa4:'نعم. يظهر التقرير بعد ترتيب مصادر موثقة.',
-    footer:'© 2026 Mido AI Store • Deep Search Agent V10.3', footer2:'مصادر حية. تحقق دائمًا من الأسعار المحلية النهائية.',
+    fq4:'هل المصادر حقيقية؟', fa4:'نعم. تبحث الأداة في مصادر حية وتضع روابطها. الترتيب ليس تحققاً مستقلاً من الحقائق — راجع دائماً.',
+    footer:'© 2026 Mido AI Store • Mido DeepSearch V5.0', footer2:'مصادر حية. تحقق دائمًا من الأسعار المحلية النهائية.',
     modal_title:'التقرير الكامل — سماعات تحت 150$', modal_q:'السؤال: أفضل سماعات إلغاء ضوضاء تحت 150$', modal_close:'إغلاق',
     modal_winner:'الفائز: Sony WH-CH720N',
     modal_summary:'أفضل توازن لإلغاء الضوضاء والراحة والبطارية. JBL Tune 770NC الأفضل قيمة.',
@@ -643,30 +679,71 @@ function applyLang(lang){
   currentLang=lang;
   try{localStorage.setItem('mido_lang',lang);}catch(e){}
   var rtl=lang==='ar';
-  document.documentElement.lang=lang;
-  document.documentElement.dir=rtl?'rtl':'ltr';
+  document.documentElement.lang=lang; document.documentElement.dir=rtl?'rtl':'ltr';
   document.body.style.fontFamily=rtl?"'Cairo','Inter',system-ui,sans-serif":"'Inter','Cairo',system-ui,sans-serif";
   var dict=D();
+  var hooks={
+   en:['Stop Guessing. Research with Evidence Before You Decide.','Turn one question into a structured research report with live source links, clear comparisons, and evidence-aware recommendations.'],
+   ar:['بلاش تخمين… خُد قرارك على أساس الأدلة.','حوّل سؤالك إلى تقرير بحث منظم بمصادر وروابط واضحة ومقارنات عملية وتوصيات توضّح حدود الأدلة.'],
+   fr:['Ne devinez plus. Décidez grâce aux preuves.','Transformez une question en rapport structuré avec des sources en direct, des comparaisons claires et des recommandations fondées sur les éléments disponibles.'],
+   de:['Nicht raten. Entscheiden Sie auf Grundlage von Belegen.','Verwandeln Sie eine Frage in einen strukturierten Recherchebericht mit Live-Quellen, klaren Vergleichen und evidenzbewussten Empfehlungen.'],
+   ja:['推測に頼らず、根拠に基づいて判断する。','ひとつの質問から、情報源・明確な比較・根拠の限界を示す提案をまとめた調査レポートを作成します。'],
+   zh:['别再猜测，用证据做出决定。','将一个问题转化为结构化研究报告，包含实时来源、清晰比较和明确说明证据局限的建议。'],
+   es:['Deja de adivinar. Decide con evidencia.','Convierte una pregunta en un informe estructurado con fuentes en vivo, comparaciones claras y recomendaciones que explican los límites de la evidencia.'],
+   pt:['Pare de adivinhar. Decida com base em evidências.','Transforme uma pergunta em um relatório estruturado com fontes ao vivo, comparações claras e recomendações que explicam os limites das evidências.']
+  };
+  var hook=hooks[lang]||hooks.en; dict.hero_title=hook[0];dict.hero_desc=hook[1];
+  var legalLinks={en:['Privacy Policy','Refund Policy','Terms of Use','Usage Rights'],ar:['سياسة الخصوصية','سياسة الاسترداد','شروط الاستخدام','حقوق الاستخدام'],fr:['Confidentialité','Remboursement','Conditions d’utilisation','Droits d’utilisation'],de:['Datenschutz','Rückerstattung','Nutzungsbedingungen','Nutzungsrechte'],ja:['プライバシー','返金ポリシー','利用規約','利用権'],zh:['隐私政策','退款政策','使用条款','使用权'],es:['Privacidad','Reembolsos','Condiciones de uso','Derechos de uso'],pt:['Privacidade','Reembolso','Termos de uso','Direitos de uso']};
+  var ll=legalLinks[lang]||legalLinks.en;['policy_privacy_link','policy_refund_link','policy_terms_link','policy_license_link'].forEach(function(k,i){var el=document.querySelector('[data-i18n="'+k+'"]');if(el)el.textContent=ll[i];});
+  var licenseText={en:['Optional Gumroad license key','If enabled for this product, enter the license key from your Gumroad receipt.'],ar:['مفتاح ترخيص Gumroad (اختياري)','إذا كان الترخيص مفعّلًا لهذا المنتج، أدخل المفتاح الموجود في إيصال Gumroad.'],fr:['Clé de licence Gumroad (facultatif)','Si les licences sont activées pour ce produit, saisissez la clé du reçu Gumroad.'],de:['Gumroad-Lizenzschlüssel (optional)','Falls für dieses Produkt aktiviert, geben Sie den Schlüssel aus Ihrem Gumroad-Beleg ein.'],ja:['Gumroadライセンスキー（任意）','この商品でライセンスが有効な場合、領収書のキーを入力してください。'],zh:['Gumroad许可证密钥（可选）','如果此商品启用了许可证，请输入Gumroad收据中的密钥。'],es:['Clave de licencia Gumroad (opcional)','Si está habilitada para este producto, introduce la clave del recibo de Gumroad.'],pt:['Chave de licença Gumroad (opcional)','Se estiver ativada para este produto, informe a chave do recibo Gumroad.']};
+  var lt=licenseText[lang]||licenseText.en;var li=document.getElementById('licenseKey');if(li){li.placeholder=lt[0];li.setAttribute('aria-label',lt[0]);}var lh=document.querySelector('[data-i18n="license_hint"]');if(lh)lh.textContent=lt[1];
   document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(dict[k]!=null)el.textContent=dict[k];});
   document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(dict[k]!=null)el.innerHTML=dict[k];});
   document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){var k=el.getAttribute('data-i18n-placeholder');if(dict[k]!=null)el.placeholder=dict[k];});
-  var go=document.getElementById('go');
-  if(go&&!go.classList.contains('loading')) go.textContent=dict.search_btn;
+  var claims={
+   en:{t3:'✓ Licensed access after purchase',f2:'Server-side Tavily + Groq integrations',fa2:'Full licensed access to the hosted service with higher daily limits. One-time payment via Gumroad. The Worker uses server-configured Tavily and Groq credentials; third-party services may have separate terms or limits.',pill:'⚡ Live sources • Evidence-aware reports • 5-40s',f3:'Structured reports with live source links',fa4:'The tool searches live sources and links them in the report. Review sources and evidence; search ranking is not independent fact verification.',case_sub:'Illustrative sample — not a live search result',case_sources:'Illustrative example only. Product details and prices may be outdated.',rings_sub:'Tap any ring to read its explanation. Stage indicators reflect completed server steps.'},
+   ar:{t3:'✓ الوصول بعد الشراء',f2:'تكاملات Tavily وGroq مضبوطة على الخادم',fa2:'دفع لمرة واحدة عبر Gumroad. يستخدم الـ Worker بيانات اعتماد مضبوطة على الخادم، وقد تنطبق شروط وحدود منفصلة للخدمات الخارجية.',pill:'⚡ بحث مباشر في المصادر • تقارير توضّح حدود الأدلة',f3:'تقارير منظمة مع روابط المصادر',fa4:'تبحث الأداة في مصادر مباشرة وتضع روابطها في التقرير. راجع الأدلة؛ ترتيب نتائج البحث ليس تحققًا مستقلًا من الحقائق.',case_sub:'مثال توضيحي — ليس نتيجة بحث مباشر',case_sources:'مثال توضيحي فقط؛ قد تكون تفاصيل المنتجات والأسعار قديمة.',rings_sub:'اضغط على أي حلقة لقراءة شرحها. تعكس مؤشرات المراحل الخطوات التي اكتمل تنفيذها على الخادم.'},
+   fr:{t3:'✓ Accès après achat',f2:'Intégrations Tavily + Groq configurées côté serveur',fa2:'Paiement unique via Gumroad. Le Worker utilise des identifiants configurés côté serveur; des conditions ou limites tierces peuvent s’appliquer.',pill:'⚡ Recherche en direct • Rapports transparents sur les preuves',f3:'Rapports structurés avec liens sources',fa4:'L’outil recherche des sources en direct et ajoute leurs liens. Vérifiez les éléments cités : le classement ne constitue pas une vérification indépendante des faits.',case_sub:'Exemple illustratif — pas un résultat de recherche en direct',case_sources:'Exemple illustratif uniquement ; les prix et caractéristiques peuvent être obsolètes.',rings_sub:'Touchez un anneau pour lire son explication. Les étapes reflètent les opérations terminées côté serveur.'},
+   de:{t3:'✓ Zugriff nach dem Kauf',f2:'Tavily- und Groq-Integrationen (serverseitig)',fa2:'Einmalzahlung über Gumroad. Der Worker verwendet serverseitig konfigurierte Zugangsdaten; für Drittanbieter können eigene Bedingungen und Limits gelten.',pill:'⚡ Live-Quellensuche • Evidenzbewusste Berichte',f3:'Strukturierte Berichte mit Quellenlinks',fa4:'Das Tool sucht aktuelle Quellen und verlinkt sie im Bericht. Prüfen Sie die Belege; die Suchrangfolge ist keine unabhängige Faktenprüfung.',case_sub:'Illustratives Beispiel — kein Live-Suchergebnis',case_sources:'Nur ein Beispiel; Produktdetails und Preise können veraltet sein.',rings_sub:'Wählen Sie einen Ring für die Erklärung. Die Statusanzeigen spiegeln abgeschlossene Server-Schritte wider.'},
+   ja:{t3:'✓ 購入後にアクセス',f2:'Tavily・Groq連携（サーバー設定）',fa2:'Gumroadでの一回払いです。Workerはサーバー設定済みの認証情報を使用します。第三者サービスには別の条件や制限が適用される場合があります。',pill:'⚡ ライブ検索 • 根拠の限界を明示するレポート',f3:'情報源リンク付きの構造化レポート',fa4:'情報源を検索し、レポートにリンクを掲載します。検索順位は独立した事実確認を意味しません。根拠を確認してください。',case_sub:'説明用サンプル — ライブ検索結果ではありません',case_sources:'説明用の例です。製品情報や価格は古い可能性があります。',rings_sub:'リングを選ぶと説明を表示します。進捗表示はサーバーで完了した処理を示します。'},
+   zh:{t3:'✓ 购买后可访问',f2:'Tavily + Groq集成（服务器配置）',fa2:'通过Gumroad一次性付款。Worker使用服务器配置的服务凭据；第三方服务可能有单独的条款和限制。',pill:'⚡ 实时搜索来源 • 明确说明证据局限的报告',f3:'附来源链接的结构化报告',fa4:'工具会搜索实时来源并在报告中提供链接。请检查证据；搜索排序并不等于独立事实核验。',case_sub:'示例内容 — 并非实时搜索结果',case_sources:'仅供说明的示例；产品信息和价格可能已过时。',rings_sub:'点击环节查看说明。进度指示反映服务器已完成的步骤。'},
+   es:{t3:'✓ Acceso tras la compra',f2:'Integraciones Tavily + Groq configuradas en servidor',fa2:'Pago único mediante Gumroad. El Worker usa credenciales configuradas en servidor; los servicios externos pueden tener condiciones y límites propios.',pill:'⚡ Búsqueda en vivo • Informes conscientes de la evidencia',f3:'Informes estructurados con enlaces a fuentes',fa4:'La herramienta busca fuentes en vivo y enlaza sus páginas. Revise la evidencia: la clasificación no es una verificación independiente de los hechos.',case_sub:'Ejemplo ilustrativo — no es un resultado en vivo',case_sources:'Ejemplo ilustrativo; los precios y detalles pueden estar desactualizados.',rings_sub:'Pulsa un anillo para ver su explicación. Las etapas reflejan pasos completados en el servidor.'},
+   pt:{t3:'✓ Acesso após a compra',f2:'Integrações Tavily + Groq configuradas no servidor',fa2:'Pagamento único pela Gumroad. O Worker usa credenciais configuradas no servidor; serviços externos podem ter termos e limites próprios.',pill:'⚡ Pesquisa ao vivo • Relatórios transparentes sobre evidências',f3:'Relatórios estruturados com links das fontes',fa4:'A ferramenta pesquisa fontes ao vivo e inclui os links. Verifique as evidências; a classificação não é uma verificação independente dos fatos.',case_sub:'Exemplo ilustrativo — não é um resultado ao vivo',case_sources:'Exemplo ilustrativo; preços e detalhes podem estar desatualizados.',rings_sub:'Toque em um anel para ver a explicação. As etapas refletem operações concluídas no servidor.'}
+  };
+  var c=claims[lang]||claims.en;
+  var qualityCopy={
+   en:{case_title:'Illustrative Report Example',fa1:'Searches often take around 5–40 seconds; reports are generated from available sources and should be reviewed.',ring5_s:'Generate the final evidence-aware report.',ring5_d:'Produces a structured report and source links after the search steps finish.',law:'LAW',ring:'RING',currency:'Currency',admin:'Admin diagnostics key',close:'Close'},
+   ar:{case_title:'مثال توضيحي للتقرير',fa1:'قد يستغرق البحث عادةً نحو 5–40 ثانية؛ ويُنشأ التقرير من المصادر المتاحة ويجب مراجعة روابطه.',ring5_s:'إنشاء التقرير النهائي مع توضيح حدود الأدلة.',ring5_d:'يعرض تقريرًا منظمًا وروابط المصادر بعد اكتمال خطوات البحث.',law:'قاعدة',ring:'حلقة',currency:'العملة',admin:'مفتاح تشخيص الأدمن',close:'إغلاق'},
+   fr:{case_title:'Exemple de rapport illustratif',fa1:'Une recherche prend souvent environ 5 à 40 secondes ; vérifiez les sources du rapport.',ring5_s:'Générer le rapport final en tenant compte des preuves.',ring5_d:'Produit un rapport structuré et des liens sources une fois les étapes terminées.',law:'RÈGLE',ring:'ANNEAU',currency:'Devise',admin:'Clé de diagnostic admin',close:'Fermer'},
+   de:{case_title:'Illustratives Berichtsbeispiel',fa1:'Eine Suche dauert oft etwa 5–40 Sekunden; prüfen Sie die Quellen im Bericht.',ring5_s:'Den abschließenden evidenzbewussten Bericht erstellen.',ring5_d:'Erstellt nach Abschluss der Suchschritte einen strukturierten Bericht mit Quellenlinks.',law:'REGEL',ring:'RING',currency:'Währung',admin:'Admin-Diagnoseschlüssel',close:'Schließen'},
+   ja:{case_title:'レポートの説明用サンプル',fa1:'検索には通常約5～40秒かかります。レポートの情報源を確認してください。',ring5_s:'根拠の限界を示す最終レポートを生成する。',ring5_d:'検索手順の完了後、構造化レポートと情報源リンクを表示します。',law:'法則',ring:'リング',currency:'通貨',admin:'管理診断キー',close:'閉じる'},
+   zh:{case_title:'报告示例（仅供说明）',fa1:'搜索通常约需5–40秒；报告根据可用来源生成，请检查来源链接。',ring5_s:'生成说明证据局限的最终报告。',ring5_d:'搜索步骤完成后，生成结构化报告和来源链接。',law:'规则',ring:'环',currency:'货币',admin:'管理员诊断密钥',close:'关闭'},
+   es:{case_title:'Ejemplo ilustrativo de informe',fa1:'Las búsquedas suelen tardar unos 5–40 segundos; revisa las fuentes del informe.',ring5_s:'Generar el informe final consciente de la evidencia.',ring5_d:'Genera un informe estructurado y enlaces a fuentes cuando terminan los pasos de búsqueda.',law:'LEY',ring:'ANILLO',currency:'Moneda',admin:'Clave de diagnóstico de administrador',close:'Cerrar'},
+   pt:{case_title:'Exemplo ilustrativo de relatório',fa1:'As pesquisas geralmente levam cerca de 5–40 segundos; confira as fontes do relatório.',ring5_s:'Gerar o relatório final considerando os limites das evidências.',ring5_d:'Produz um relatório estruturado e links das fontes após concluir as etapas de pesquisa.',law:'LEI',ring:'ANEL',currency:'Moeda',admin:'Chave de diagnóstico do administrador',close:'Fechar'}
+  };
+  var qc=qualityCopy[lang]||qualityCopy.en;dict.ring5_s=qc.ring5_s;dict.ring5_d=qc.ring5_d;
+  ['case_title','fa1'].forEach(function(k){var el=document.querySelector('[data-i18n="'+k+'"]');if(el)el.textContent=qc[k];});
+  var pc=document.getElementById('policyClose');if(pc)pc.textContent=qc.close;var cs=document.getElementById('countrySel');if(cs)cs.title=qc.currency;var ab=document.getElementById('adminBtn');if(ab)ab.title=qc.admin;
+  var statsLabel={en:'All successful searches today',ar:'إجمالي عمليات البحث الناجحة اليوم',fr:'Recherches réussies aujourd’hui',de:'Erfolgreiche Suchen heute',ja:'本日の成功した検索',zh:'今日成功搜索数',es:'Búsquedas exitosas hoy',pt:'Pesquisas bem-sucedidas hoje'};
+  var stLabel=document.querySelector('[data-i18n="st_searches"]');if(stLabel)stLabel.textContent=statsLabel[lang]||statsLabel.en;
+  ['t3','f2','fa2','pill','f3','fa4','case_sub','case_sources','rings_sub'].forEach(function(k){var el=document.querySelector('[data-i18n="'+k+'"]')||document.querySelector('[data-i18n-html="'+k+'"]');if(el&&c[k]!=null)el.textContent=c[k];});
+  var go=document.getElementById('go');if(go&&!go.classList.contains('loading'))go.textContent=dict.search_btn;
   renderLaws();renderRings();renderSugs();renderSkills();
 }
+
 function renderLaws(){
-  var d=D();
+  var d=D();var labels=({en:{law:'LAW'},ar:{law:'قاعدة'},fr:{law:'RÈGLE'},de:{law:'REGEL'},ja:{law:'法則'},zh:{law:'规则'},es:{law:'LEY'},pt:{law:'LEI'}}[currentLang]||{law:'LAW'});
   var items=[['01',d.law1_t,d.law1_s,d.law1_d],['02',d.law2_t,d.law2_s,d.law2_d],['03',d.law3_t,d.law3_s,d.law3_d],['04',d.law4_t,d.law4_s,d.law4_d]];
   document.getElementById('lawsList').innerHTML=items.map(function(it,i){
-    return '<div class="xcard" data-xcard="law'+i+'"><div class="top"><span class="num">LAW '+it[0]+'</span><span class="chev">▼</span></div><h3>'+it[1]+'</h3><div class="short">'+it[2]+'</div><div class="detail">'+it[3]+'</div></div>';
+    return '<div class="xcard" data-xcard="law'+i+'"><div class="top"><span class="num">'+labels.law+' '+it[0]+'</span><span class="chev">▼</span></div><h3>'+it[1]+'</h3><div class="short">'+it[2]+'</div><div class="detail">'+it[3]+'</div></div>';
   }).join('');
 }
 function renderRings(){
-  var d=D();
+  var d=D();var labels=({en:{ring:'RING'},ar:{ring:'حلقة'},fr:{ring:'ANNEAU'},de:{ring:'RING'},ja:{ring:'リング'},zh:{ring:'环'},es:{ring:'ANILLO'},pt:{ring:'ANEL'}}[currentLang]||{ring:'RING'});
   var colors=['#ef4444','#7c5cff','#10b981','#f59e0b','#8b5cf6'];
   var items=[[d.ring1_t,d.ring1_s,d.ring1_d],[d.ring2_t,d.ring2_s,d.ring2_d],[d.ring3_t,d.ring3_s,d.ring3_d],[d.ring4_t,d.ring4_s,d.ring4_d],[d.ring5_t,d.ring5_s,d.ring5_d]];
   document.getElementById('ringsList').innerHTML=items.map(function(it,i){
-    return '<div class="xcard ring-card" data-ring="'+i+'" data-xcard="ring'+i+'"><div class="top"><span class="num" style="color:'+colors[i]+'">RING 0'+(i+1)+'</span><span class="chev">▼</span></div><h3>'+it[0]+'</h3><div class="short">'+it[1]+'</div><div class="detail">'+it[2]+'</div></div>';
+    return '<div class="xcard ring-card" data-ring="'+i+'" data-xcard="ring'+i+'"><div class="top"><span class="num" style="color:'+colors[i]+'">'+labels.ring+' 0'+(i+1)+'</span><span class="chev">▼</span></div><h3>'+it[0]+'</h3><div class="short">'+it[1]+'</div><div class="detail">'+it[2]+'</div></div>';
   }).join('');
 }
 function renderSugs(){
@@ -729,7 +806,7 @@ function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').
 function safeUrl(value){try{var u=new URL(String(value||''),location.origin);return (u.protocol==='http:'||u.protocol==='https:')?u.href:'#';}catch(e){return '#';}}
 async function fetchStats(){
   try{
-    var r=await fetch(WORKER_URL+'/stats',{cache:'no-store'});if(!r.ok)return;
+    var sh={cache:'no-store'};if(adminKey)sh.headers={'X-Admin-Key':adminKey};var r=await fetch(WORKER_URL+'/stats',sh);if(!r.ok)return;
     var d=await r.json();
     document.getElementById('stVisitors').textContent=d.total_visitors||0;
     document.getElementById('stSearches').textContent=d.today_searches||0;
@@ -794,14 +871,14 @@ async function doSearch(){
     var headers = {'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID};
     if(savedAdminKey) headers['X-Admin-Key'] = savedAdminKey;
     
-    var reqBody = {query:text, visitor_id:VISITOR_ID, skill:skill, country:document.getElementById('countrySel').value, lang:currentLang};
+    var reqBody = {query:text, visitor_id:VISITOR_ID, skill:skill, country:document.getElementById('countrySel').value, lang:currentLang, license_key:(document.getElementById('licenseKey').value||'').trim()};
     var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify(reqBody),signal:ctrl.signal});
     
     clearTimeout(to);
     var data={};try{data=await r.json();}catch(e){}
     if(!r.ok){
       var apiError=String(data.error||data.reason||'http');
-      if(r.status===429 || apiError==='rate_limit_exceeded') throw new Error('rate_limit_exceeded');
+      if(apiError==='rate_limit_exceeded') throw new Error('rate_limit_exceeded');
       if(r.status===401 || apiError==='invalid_license') throw new Error('invalid_license');
       throw new Error(apiError);
     }
@@ -820,7 +897,9 @@ async function doSearch(){
     if(outcome.sources&&outcome.sources.length){
       src='<div class="srcs">'+outcome.sources.slice(0,6).map(function(s){var href=safeUrl(s.url); return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
     }
-    res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="ans">'+formattedAns+'</div>'+src;
+    var actionLabels={en:['📋 Copy report','📥 Paste into search','⬇ Download .txt'],ar:['📋 نسخ التقرير','📥 لصق في البحث','⬇ تنزيل TXT'],fr:['📋 Copier le rapport','📥 Coller dans la recherche','⬇ Télécharger TXT'],de:['📋 Bericht kopieren','📥 In Suche einfügen','⬇ TXT herunterladen'],ja:['📋 レポートをコピー','📥 検索欄に貼り付け','⬇ TXTをダウンロード'],zh:['📋 复制报告','📥 粘贴到搜索框','⬇ 下载 TXT'],es:['📋 Copiar informe','📥 Pegar en búsqueda','⬇ Descargar TXT'],pt:['📋 Copiar relatório','📥 Colar na pesquisa','⬇ Baixar TXT']};
+    var al=actionLabels[currentLang]||actionLabels.en;
+    res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="report-actions"><button type="button" class="btn btn-p" data-report-action="copy">'+al[0]+'</button><button type="button" class="btn btn-ghost" data-report-action="paste">'+al[1]+'</button><button type="button" class="btn btn-ghost" data-report-action="download">'+al[2]+'</button></div><div class="ans">'+formattedAns+'</div>'+src;
     
     if(typeof fbq === 'function') fbq('track', 'Lead');
 
@@ -829,13 +908,48 @@ async function doSearch(){
   }else{
     var em=D().err_net;
     if(outcome.msg==='trial_used'||String(outcome.msg).indexOf('trial')>-1)em=D().err_trial;
-    if(outcome.msg==='rate_limit_exceeded'||outcome.msg==='daily_cap')em=D().err_daily;
-    if(outcome.msg==='invalid_license')em=D().err_license||'Invalid license key.';
-    if(outcome.msg==='origin_not_allowed')em="Origin not allowed. Please check your settings.";
+    var errorMessages={
+      en:{trial_used:'Your free trial has already been used.',daily_cap:'The daily free-search limit has been reached.',ip_limit:'This network has reached its daily limit. Try later.',in_flight:'A search is already running for this visitor.',invalid_license:'The Gumroad license key could not be verified.',license_daily_cap:'This license has reached its daily search limit.',license_unavailable:'Paid-license verification is not configured on the server.',usage_store_unavailable:'Usage protection is temporarily unavailable. Please try again later.',no_sources:'No usable sources were returned. Try a more specific question.',llm_failed:'The report could not be generated. Please try again.',service_unavailable:'The search service is temporarily unavailable.',origin_not_allowed:'This page origin is not allowed to use the service.',query_too_long:'Please shorten your question to 500 characters or fewer.'},
+      ar:{trial_used:'لقد استخدمت التجربة المجانية بالفعل.',daily_cap:'تم بلوغ الحد اليومي للبحث المجاني.',ip_limit:'وصلت هذه الشبكة إلى حدها اليومي. حاول لاحقًا.',in_flight:'يوجد بحث آخر قيد التنفيذ لهذا الزائر.',invalid_license:'تعذر التحقق من مفتاح ترخيص Gumroad.',license_daily_cap:'وصل هذا الترخيص إلى الحد اليومي للبحث.',license_unavailable:'لم يتم إعداد التحقق من الترخيص المدفوع على الخادم.',usage_store_unavailable:'حماية الاستخدام غير متاحة مؤقتًا. حاول لاحقًا.',no_sources:'لم يتم العثور على مصادر مناسبة. جرّب سؤالًا أكثر تحديدًا.',llm_failed:'تعذر إنشاء التقرير. حاول مرة أخرى.',service_unavailable:'خدمة البحث غير متاحة مؤقتًا.',origin_not_allowed:'مصدر الصفحة غير مسموح له باستخدام الخدمة.',query_too_long:'اختصر السؤال إلى 500 حرف أو أقل.'},
+      fr:{trial_used:'Votre essai gratuit a déjà été utilisé.',daily_cap:'La limite quotidienne de recherches gratuites est atteinte.',ip_limit:'Ce réseau a atteint sa limite quotidienne. Réessayez plus tard.',in_flight:'Une recherche est déjà en cours pour ce visiteur.',invalid_license:'La clé de licence Gumroad n’a pas pu être vérifiée.',license_daily_cap:'Cette licence a atteint sa limite quotidienne.',license_unavailable:'La vérification des licences payantes n’est pas configurée.',usage_store_unavailable:'La protection d’utilisation est temporairement indisponible.',no_sources:'Aucune source exploitable trouvée. Précisez la question.',llm_failed:'Le rapport n’a pas pu être généré.',service_unavailable:'Le service de recherche est temporairement indisponible.',origin_not_allowed:'Cette origine n’est pas autorisée.',query_too_long:'Réduisez la question à 500 caractères maximum.'},
+      de:{trial_used:'Der kostenlose Test wurde bereits genutzt.',daily_cap:'Das tägliche Limit für kostenlose Suchen ist erreicht.',ip_limit:'Dieses Netzwerk hat sein Tageslimit erreicht. Bitte später erneut versuchen.',in_flight:'Für diesen Besucher läuft bereits eine Suche.',invalid_license:'Der Gumroad-Lizenzschlüssel konnte nicht bestätigt werden.',license_daily_cap:'Diese Lizenz hat ihr Tageslimit erreicht.',license_unavailable:'Die Prüfung kostenpflichtiger Lizenzen ist nicht eingerichtet.',usage_store_unavailable:'Der Nutzungsschutz ist vorübergehend nicht verfügbar.',no_sources:'Keine brauchbaren Quellen gefunden. Bitte präzisieren Sie die Frage.',llm_failed:'Der Bericht konnte nicht erstellt werden.',service_unavailable:'Der Suchdienst ist vorübergehend nicht verfügbar.',origin_not_allowed:'Diese Seitenherkunft ist nicht zugelassen.',query_too_long:'Bitte kürzen Sie die Frage auf höchstens 500 Zeichen.'},
+      ja:{trial_used:'無料トライアルはすでに使用されています。',daily_cap:'無料検索の1日上限に達しました。',ip_limit:'このネットワークは1日の上限に達しました。後でもう一度お試しください。',in_flight:'この訪問者の検索はすでに実行中です。',invalid_license:'Gumroadライセンスキーを確認できませんでした。',license_daily_cap:'このライセンスは1日の上限に達しました。',license_unavailable:'有料ライセンスの確認が設定されていません。',usage_store_unavailable:'利用保護機能は一時的に利用できません。',no_sources:'利用可能な情報源が見つかりません。質問を具体化してください。',llm_failed:'レポートを作成できませんでした。',service_unavailable:'検索サービスは一時的に利用できません。',origin_not_allowed:'このページのオリジンは許可されていません。',query_too_long:'質問を500文字以内に短くしてください。'},
+      zh:{trial_used:'免费试用已使用。',daily_cap:'已达到每日免费搜索上限。',ip_limit:'此网络已达到每日上限，请稍后重试。',in_flight:'此访客已有搜索正在运行。',invalid_license:'无法验证Gumroad许可证密钥。',license_daily_cap:'此许可证已达到每日搜索上限。',license_unavailable:'服务器尚未配置付费许可证验证。',usage_store_unavailable:'使用保护暂时不可用，请稍后重试。',no_sources:'未找到可用来源，请尝试更具体的问题。',llm_failed:'无法生成报告，请重试。',service_unavailable:'搜索服务暂时不可用。',origin_not_allowed:'此页面来源未获授权。',query_too_long:'请将问题缩短至500个字符以内。'},
+      es:{trial_used:'Ya has utilizado la prueba gratuita.',daily_cap:'Se alcanzó el límite diario de búsquedas gratuitas.',ip_limit:'Esta red alcanzó su límite diario. Inténtalo más tarde.',in_flight:'Ya hay una búsqueda en curso para este visitante.',invalid_license:'No se pudo verificar la licencia de Gumroad.',license_daily_cap:'Esta licencia alcanzó su límite diario.',license_unavailable:'La verificación de licencias de pago no está configurada.',usage_store_unavailable:'La protección de uso no está disponible temporalmente.',no_sources:'No se encontraron fuentes útiles. Prueba una pregunta más específica.',llm_failed:'No se pudo generar el informe.',service_unavailable:'El servicio de búsqueda no está disponible temporalmente.',origin_not_allowed:'Este origen no está autorizado.',query_too_long:'Reduce la consulta a 500 caracteres o menos.'},
+      pt:{trial_used:'Você já usou o teste gratuito.',daily_cap:'O limite diário de pesquisas gratuitas foi atingido.',ip_limit:'Esta rede atingiu o limite diário. Tente novamente mais tarde.',in_flight:'Já existe uma pesquisa em andamento para este visitante.',invalid_license:'Não foi possível verificar a licença da Gumroad.',license_daily_cap:'Esta licença atingiu o limite diário.',license_unavailable:'A verificação de licenças pagas não está configurada.',usage_store_unavailable:'A proteção de uso está temporariamente indisponível.',no_sources:'Nenhuma fonte útil encontrada. Tente uma pergunta mais específica.',llm_failed:'Não foi possível gerar o relatório.',service_unavailable:'O serviço de pesquisa está temporariamente indisponível.',origin_not_allowed:'Esta origem não está autorizada.',query_too_long:'Reduza a pergunta para até 500 caracteres.'}
+    };
+    var localized=errorMessages[currentLang]||errorMessages.en;
+    if(localized[outcome.msg])em=localized[outcome.msg];
+    else if(outcome.msg==='rate_limit_exceeded')em=D().err_daily;
     res.innerHTML='<div class="err"><b>'+esc(em)+'</b><br><br><a class="btn btn-w" href="'+BUY_URL+'" target="_blank" rel="noopener">'+D().buy_btn+'</a></div>';
   }
   searching=false;go.classList.remove('loading','glow');go.textContent=D().search_btn;
 }
+document.getElementById('res').addEventListener('click',async function(e){
+  var btn=e.target.closest('[data-report-action]');if(!btn)return;
+  var action=btn.getAttribute('data-report-action');
+  var labels={
+    en:{copied:'Report copied to clipboard.',paste:'Clipboard text pasted into the search box.',pasteFail:'Clipboard access was blocked by your browser.',empty:'Run a search first.',downloaded:'Report downloaded as TXT.'},
+    ar:{copied:'تم نسخ التقرير إلى الحافظة.',paste:'تم لصق نص الحافظة في مربع البحث.',pasteFail:'المتصفح منع الوصول إلى الحافظة.',empty:'أجرِ بحثًا أولًا.',downloaded:'تم تنزيل التقرير كملف TXT.'},
+    fr:{copied:'Rapport copié dans le presse-papiers.',paste:'Texte du presse-papiers collé dans la recherche.',pasteFail:'Accès au presse-papiers bloqué par le navigateur.',empty:'Lancez d’abord une recherche.',downloaded:'Rapport téléchargé en TXT.'},
+    de:{copied:'Bericht in die Zwischenablage kopiert.',paste:'Zwischenablage in das Suchfeld eingefügt.',pasteFail:'Zwischenablage-Zugriff vom Browser blockiert.',empty:'Zuerst eine Suche ausführen.',downloaded:'Bericht als TXT heruntergeladen.'},
+    ja:{copied:'レポートをクリップボードにコピーしました。',paste:'クリップボードの内容を検索欄に貼り付けました。',pasteFail:'ブラウザがクリップボードへのアクセスをブロックしました。',empty:'先に検索を実行してください。',downloaded:'レポートをTXTでダウンロードしました。'},
+    zh:{copied:'报告已复制到剪贴板。',paste:'已将剪贴板内容粘贴到搜索框。',pasteFail:'浏览器阻止了剪贴板访问。',empty:'请先运行一次搜索。',downloaded:'报告已下载为 TXT。'},
+    es:{copied:'Informe copiado al portapapeles.',paste:'Texto del portapapeles pegado en la búsqueda.',pasteFail:'El navegador bloqueó el acceso al portapapeles.',empty:'Ejecuta primero una búsqueda.',downloaded:'Informe descargado como TXT.'},
+    pt:{copied:'Relatório copiado para a área de transferência.',paste:'Texto da área de transferência colado na pesquisa.',pasteFail:'O navegador bloqueou o acesso à área de transferência.',empty:'Execute uma pesquisa primeiro.',downloaded:'Relatório baixado como TXT.'}
+  };
+  var msg=labels[currentLang]||labels.en;
+  if(!lastReportText){toast(msg.empty);return;}
+  if(action==='copy'){
+    try{await navigator.clipboard.writeText(lastReportText);toast(msg.copied);}
+    catch(err){var ta=document.createElement('textarea');ta.value=lastReportText;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){}ta.remove();toast(ok?msg.copied:msg.pasteFail);}
+  }else if(action==='paste'){
+    try{var clip=await navigator.clipboard.readText();if(clip){document.getElementById('q').value=clip;document.getElementById('q').focus();toast(msg.paste);}else toast(msg.pasteFail);}
+    catch(err){toast(msg.pasteFail);}
+  }else if(action==='download'){
+    var blob=new Blob([lastReportText],{type:'text/plain;charset=utf-8'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='mido-deepsearch-report-'+new Date().toISOString().slice(0,10)+'.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);toast(msg.downloaded);
+  }
+});
 go.addEventListener('click',function(){glowPulse(go,600);doSearch();});
 q.addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
 
@@ -847,10 +961,11 @@ document.getElementById('navBuy').addEventListener('click',function(){glowPulse(
 
 document.getElementById('adminBtn').addEventListener('click', function() {
     var currentKey = adminKey;
-    var newKey = prompt("Enter Admin Key (Leave empty to remove):", currentKey);
-    if (newKey === null) return; 
-    if (newKey.trim() === '') { adminKey=''; toast("Admin key removed."); }
-    else { adminKey=newKey.trim(); toast("Admin key active for this session."); }
+    var adminText={en:['Enter Admin Diagnostics Key (leave empty to remove):','Admin diagnostics key removed.','Admin diagnostics key active for this session; it does not bypass search limits.'],ar:['أدخل مفتاح تشخيص الأدمن (اتركه فارغًا للإزالة):','تمت إزالة مفتاح تشخيص الأدمن.','تم تفعيل مفتاح التشخيص لهذه الجلسة؛ ولا يتجاوز حدود البحث.'],fr:['Saisissez la clé de diagnostic admin (vide pour supprimer) :','Clé admin supprimée.','Clé de diagnostic active pour cette session ; elle ne contourne pas les limites.'],de:['Admin-Diagnoseschlüssel eingeben (leer zum Entfernen):','Admin-Diagnoseschlüssel entfernt.','Diagnoseschlüssel für diese Sitzung aktiv; Limits werden nicht umgangen.'],ja:['管理診断キーを入力（空欄で削除）：','管理診断キーを削除しました。','診断キーはこのセッションで有効です。検索制限は回避できません。'],zh:['输入管理员诊断密钥（留空则移除）：','已移除管理员诊断密钥。','诊断密钥仅在本次会话有效，不会绕过搜索限制。'],es:['Introduce la clave de diagnóstico (vacío para quitarla):','Clave de diagnóstico eliminada.','Clave activa en esta sesión; no omite los límites de búsqueda.'],pt:['Digite a chave de diagnóstico (vazio para remover):','Chave de diagnóstico removida.','Chave ativa nesta sessão; não ignora os limites de pesquisa.']};
+    var at=adminText[currentLang]||adminText.en;var newKey = prompt(at[0], currentKey);
+    if (newKey === null) return;
+    if (newKey.trim() === '') { adminKey=''; toast(at[1]); }
+    else { adminKey=newKey.trim(); toast(at[2]); }
 });
 
 (function(){
