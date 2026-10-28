@@ -4,8 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; connect-src 'self' https://mido-deepsearch.midoaistore.workers.dev; img-src 'self' data: https://www.facebook.com https://raw.githubusercontent.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://midoaistore.gumroad.com">
 <title>Mido Deep Search — Verified Research in 5-40 Seconds</title>
+<meta name="description" content="Mido Deep Search checks local and international sources and turns one question into a practical verified research report in 5-40 seconds.">
+<meta property="og:title" content="Mido Deep Search — Verified Research in 5-40 Seconds">
+<meta property="og:description" content="Research products, courses, markets and decisions using verified local and international sources.">
+<meta property="og:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
+<meta property="og:url" content="https://midoaistore.github.io/mido-landing/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mido Deep Search">
+<meta name="twitter:description" content="From one question to a verified research report in 5-40 seconds.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <!-- Meta Pixel Code -->
@@ -26,6 +39,7 @@ src="https://www.facebook.com/tr?id=1805920357103132&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 
 <style>
+/* التنسيقات العامة */
 :root{--bg:#0a0a0f;--card:#12121a;--border:#232733;--text:#fff;--muted:rgba(255,255,255,.55);--accent:#7c5cff;--green:#00ffa3;--cyan:#00d4ff}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter','Cairo',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;min-height:100vh}
@@ -35,14 +49,15 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 #spider{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5}
 .main{position:relative;z-index:2}
 
+/* القائمة واللغة */
 .lang-switcher{position:relative}
 .lang-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);font-size:13px}
-.lang-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:260px;max-width:calc(100vw - 24px);max-height:min(70vh,420px);overflow-y:auto;background:#151b27;border:2px solid #53628a;border-radius:14px;padding:8px;z-index:120;box-shadow:0 16px 40px rgba(0,0,0,.7)}
+.lang-dropdown{display:none;position:fixed;top:76px;left:50%;right:auto;transform:translateX(-50%);width:min(320px,calc(100vw - 24px));max-height:min(70vh,460px);overflow-y:auto;background:#151b27;border:2px solid #53628a;border-radius:14px;padding:8px;z-index:120;opacity:1;box-shadow:0 16px 40px rgba(0,0,0,.7)}
 .lang-dropdown.open{display:block}
 .lang-option{display:flex;align-items:center;gap:8px;padding:11px 13px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer}
 .lang-option:hover,.lang-option.active{background:rgba(124,92,255,.15);color:#c4b5fd}
-.flag-icon{font-size:1.2rem}
 
+/* الهيدر والأزرار */
 header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(10,10,15,.92);border-bottom:1px solid var(--border)}
 .nav{display:flex;align-items:center;justify-content:space-between;padding:11px 0;gap:10px;flex-wrap:wrap}
 .logo{font-weight:800;font-size:1.1rem}.logo span{color:var(--accent)}
@@ -58,6 +73,7 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rg
 .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(1turn)}}
 
+/* الأقسام */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;padding:16px 0}
 .stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:11px;text-align:center}
 .stat .v{font-size:19px;font-weight:800}.stat .l{font-size:10px;color:var(--muted);margin-top:2px}
@@ -88,14 +104,21 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rg
 .progress-bar-outer{height:6px;width:100%;background:#1a1a24;border-radius:99px;overflow:hidden}
 .progress-bar-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:99px;transition:width .5s ease-out}
 .progress-timer{margin-top:8px;font-size:11px;color:var(--muted);text-align:center}
-.ans{margin-top:10px;border-radius:14px;border:1px solid rgba(124,92,255,.3);background:rgba(124,92,255,.08);padding:14px;font-size:13px;word-break:break-word}
+.log{border-radius:12px;border:1px solid var(--border);background:#0a0a0f;padding:12px}
+.steps{display:grid;gap:6px}
+.step{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.step.done,.step.active{color:#fff}
+.step .n{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;border:1px solid var(--border);background:#12121a}
+.step.done .n{background:var(--accent);border-color:var(--accent)}
+.step.active .n{border-color:var(--green);box-shadow:0 0 12px rgba(0,255,163,.5)}
+.ans{margin-top:10px;border-radius:14px;border:1px solid rgba(124,92,255,.3);background:rgba(124,92,255,.08);padding:14px;font-size:13px;white-space:pre-wrap;word-break:break-word}
 .ans h1,.ans h2,.ans h3{margin-top:12px;margin-bottom:6px;color:var(--cyan)}
 .ans p{margin-bottom:8px}
 .ans ul,.ans ol{padding-inline-start:20px;margin-bottom:8px}
 .ans li{margin-bottom:4px}
 .ans strong{color:var(--green)}
-.ans table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px;display:block;overflow-x:auto}
-.ans th,.ans td{border:1px solid var(--border);padding:6px;text-align:start}
+.ans table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px}
+.ans th,.ans td{border:1px solid var(--border);padding:6px}
 .ans th{background:#1a1a24}
 .err{margin-top:10px;border-radius:12px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.1);padding:12px;font-size:13px;color:#fecaca}
 .srcs{margin-top:10px;display:grid;gap:8px}
@@ -120,6 +143,32 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rg
 .xcard .chev{font-size:12px;color:var(--muted);transition:.2s}
 .xcard.open .chev{transform:rotate(180deg);color:#c4b5fd}
 .trust-note{margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(0,255,163,.06);border:1px solid rgba(0,255,163,.2);font-size:12.5px;color:rgba(255,255,255,.75);text-align:center}
+.report{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.report-h{padding:13px 15px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;background:linear-gradient(90deg,rgba(124,92,255,.12),rgba(0,212,255,.05))}
+.report-h h3{font-size:14.5px}
+.tag{font-size:10px;padding:3px 9px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);color:var(--muted)}
+.tag.g{color:var(--green);border-color:rgba(0,255,163,.3);background:rgba(0,255,163,.1)}
+.report-b{padding:15px}
+.qt{background:#0a0a0f;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px}
+.qt h4{font-size:12px;color:var(--green);margin-bottom:6px}
+.qt ul{padding-inline-start:18px;font-size:12.5px;color:var(--muted)}
+.qt li{margin-bottom:5px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+th,td{padding:8px;border-bottom:1px solid #1a1a24;text-align:start}
+th{font-size:10px;color:var(--muted);background:#0a0a0f}
+.recs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:10px}
+.rec{background:#0a0a0f;border:1px solid var(--border);border-radius:12px;padding:10px}
+.rec h5{font-size:12px}.rec p{font-size:11px;color:var(--muted);margin-top:3px}
+.rec .pr{color:var(--green);font-weight:700;font-size:12px;margin-top:4px;display:block}
+.price-box{max-width:480px;margin:0 auto;text-align:center;padding:22px;border-radius:18px;border:1px solid var(--border);background:linear-gradient(180deg,#12121a,#0a0a0f)}
+.price-box .pr{font-size:2.5rem;font-weight:800}
+.feats{text-align:start;margin:12px 0;list-style:none}
+.feats li{padding:7px 0;border-bottom:1px solid #1a1a24;font-size:13px;display:flex;gap:8px}
+.feats li:last-child{border-bottom:none}
+.ck{color:var(--green);font-weight:700}
+details{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 14px;margin-bottom:7px}
+summary{cursor:pointer;font-weight:600;font-size:13px;list-style:none}
+details p{margin-top:7px;font-size:12.5px;color:var(--muted)}
 footer{border-top:1px solid var(--border);padding:20px 0;text-align:center;font-size:12px;color:var(--muted)}
 footer a:hover{color:var(--accent);text-decoration:underline}
 .modal{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;padding:14px}
@@ -129,16 +178,9 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a24;border:1px solid rgba(0,255,163,.35);color:#fff;padding:10px 16px;border-radius:999px;font-size:12.5px;z-index:300;display:none;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 .toast.show{display:block}
 .currency-select{height:60px;min-width:145px;background:#0a0a0f;border:1px solid var(--border);color:#fff;padding:8px 12px;border-radius:999px;font-size:12px;outline:none;cursor:pointer}
-.action-btns{display:flex;gap:8px;margin-top:12px;justify-content:flex-end;flex-wrap:wrap}
-.action-btn{background:#1a1a24;color:var(--text);border:1px solid var(--border);padding:8px 12px;border-radius:8px;font-size:12px;display:inline-flex;align-items:center;gap:6px;transition:.2s}
-.action-btn:hover{border-color:var(--accent);background:rgba(124,92,255,.15)}
-@media(max-width:640px){.search-row{flex-direction:column}.search-row input,.currency-select,#go,#pasteBtn{width:100%;min-width:0}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.search-row{flex-direction:column}.search-row input,.currency-select,#go{width:100%;min-width:0}.stats{grid-template-columns:repeat(2,1fr)}}
 .admin-trigger{opacity:0.15;cursor:pointer;font-size:14px;transition:0.3s;display:inline-block;margin-top:10px}
-.admin-trigger:hover,.admin-trigger.active{opacity:1;color:var(--green);filter:drop-shadow(0 0 6px var(--green))}
-.cookie-banner{position:fixed;bottom:20px;left:20px;right:20px;max-width:400px;background:#151b27;border:1px solid var(--border);padding:16px;border-radius:14px;z-index:999;box-shadow:0 10px 30px rgba(0,0,0,.5);display:none;font-size:13px}
-.cookie-banner.show{display:block}
-.cookie-banner p{margin-bottom:12px;color:var(--muted);line-height:1.5}
-.cookie-btns{display:flex;gap:8px}
+.admin-trigger:hover{opacity:1;color:var(--green)}
 </style>
 </head>
 <body>
@@ -151,17 +193,18 @@ footer a:hover{color:var(--accent);text-decoration:underline}
       <div class="lang-switcher">
         <button type="button" class="lang-btn" id="langBtn"><span id="flag">🇺🇸</span> <span id="langName">English</span> ▼</button>
         <div class="lang-dropdown" id="langMenu">
-          <div class="lang-option" data-l="ar" data-f="🇪🇬" data-n="مصر - عربي"><span class="flag-icon">🇪🇬</span> مصر - عربي</div>
-          <div class="lang-option active" data-l="en" data-f="🇺🇸" data-n="USA - English"><span class="flag-icon">🇺🇸</span> USA - English</div>
-          <div class="lang-option" data-l="fr" data-f="🇫🇷" data-n="Français"><span class="flag-icon">🇫🇷</span> Français</div>
-          <div class="lang-option" data-l="de" data-f="🇩🇪" data-n="Deutsch"><span class="flag-icon">🇩🇪</span> Deutsch</div>
-          <div class="lang-option" data-l="ja" data-f="🇯🇵" data-n="日本語"><span class="flag-icon">🇯🇵</span> 日本語</div>
-          <div class="lang-option" data-l="zh" data-f="🇨🇳" data-n="中文"><span class="flag-icon">🇨🇳</span> 中文</div>
-          <div class="lang-option" data-l="es" data-f="🇪🇸" data-n="Español"><span class="flag-icon">🇪🇸</span> Español</div>
-          <div class="lang-option" data-l="pt" data-f="🇵🇹" data-n="Português"><span class="flag-icon">🇵🇹</span> Português</div>
+          <div class="lang-option" data-l="ar" data-f="🇪🇬" data-n="مصر - عربي">🇪🇬 مصر - عربي</div>
+          <div class="lang-option" data-l="ar" data-f="🇸🇦" data-n="السعودية - عربي">🇸🇦 السعودية - عربي</div>
+          <div class="lang-option active" data-l="en" data-f="🇺🇸" data-n="USA - English">🇺🇸 USA - English</div>
+          <div class="lang-option" data-l="fr" data-f="🇫🇷" data-n="Français">🇫🇷 Français</div>
+          <div class="lang-option" data-l="de" data-f="🇩🇪" data-n="Deutsch">🇩🇪 Deutsch</div>
+          <div class="lang-option" data-l="ja" data-f="🇯🇵" data-n="日本語">🇯🇵 日本語</div>
+          <div class="lang-option" data-l="zh" data-f="🇨🇳" data-n="中文">🇨🇳 中文</div>
+          <div class="lang-option" data-l="es" data-f="🇪🇸" data-n="Español">🇪🇸 Español</div>
+          <div class="lang-option" data-l="pt" data-f="🇵🇹" data-n="Português">🇵🇹 Português</div>
         </div>
       </div>
-      <span class="badge">V10.5 | Live</span>
+      <span class="badge">V10.3 | Live</span>
       <a class="btn btn-w" id="navBuy" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" data-i18n="nav_buy">Get Access — $6</a>
     </div>
   </div>
@@ -177,10 +220,11 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 
 <section class="hero wrap">
   <div class="pill" data-i18n="pill">⚡ Verified research • 5-40s • Local + Global</div>
-  <h1 data-i18n-html="hero_title">Get a fully structured <span class="g">research report</span></h1>
-  <p class="lead" data-i18n="hero_desc">A 5-stage verified pipeline with local and international sources, clear recommendation, and real pricing context.</p>
+  <h1 data-i18n-html="hero_title">Get a fully structured <span class="g">research report</span> — not just links</h1>
+  <p class="lead" data-i18n="hero_desc">A 5-stage verified pipeline with local and international sources, clear recommendation, and real pricing context — in about 5-40 seconds.</p>
   <div class="cta-row">
     <a href="#demo" class="btn btn-p" data-i18n="cta_try">Try Free Demo</a>
+    <a href="#report" class="btn btn-ghost" data-i18n="cta_report">See Full Report</a>
   </div>
   <div class="trust">
     <span data-i18n="t1">✓ 1 free trial / visitor</span>
@@ -191,7 +235,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 
 <section class="sec wrap">
   <h2 class="sec-t" data-i18n="skills_title">Research Skills</h2>
-  <p class="sec-s" data-i18n="skills_sub">Select a skill before searching.</p>
+  <p class="sec-s" data-i18n="skills_sub">Select a skill before searching. Save stores the last report on this device.</p>
   <div class="skills" id="skills"></div>
 </section>
 
@@ -213,7 +257,6 @@ footer a:hover{color:var(--accent);text-decoration:underline}
         <option value="CN">🇨🇳 CNY (¥)</option>
         <option value="IN">🇮🇳 INR (₹)</option>
       </select>
-      <button type="button" class="btn btn-ghost" id="pasteBtn" title="Paste">📋 Paste</button>
       <button type="button" class="btn btn-w" id="go" data-i18n="search_btn">Search 🔍</button>
     </div>
     <div class="sugs" id="sugs"></div>
@@ -242,30 +285,131 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 
 <section class="sec wrap" id="rings">
   <h2 class="sec-t" data-i18n="rings_title">Five Protection Rings</h2>
-  <p class="sec-s" data-i18n="rings_sub">Tap any ring to read the full explanation.</p>
+  <p class="sec-s" data-i18n="rings_sub">Tap any ring to read the full explanation. During search, rings light up as the spider moves.</p>
   <div id="ringsList"></div>
 </section>
 
+<section class="sec wrap" id="report">
+  <h2 class="sec-t" data-i18n="case_title">Real Report Example</h2>
+  <p class="sec-s" data-i18n-html="case_sub">Generated in <strong>35 seconds</strong> for: "Best noise-cancelling headphones under $150"</p>
+  <div class="report">
+    <div class="report-h">
+      <h3 data-i18n="case_h">Best Noise-Canceling Headphones Under $150</h3>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag g">35s</span><span class="tag">~0.76</span><span class="tag">V10.3</span></div>
+    </div>
+    <div class="report-b">
+      <div class="qt">
+        <h4 data-i18n="case_quick">Quick Take</h4>
+        <ul>
+          <li data-i18n-html="cq1"><strong>Sony WH-CH720N</strong> — best overall (source currency shown; verify current price).</li>
+          <li data-i18n-html="cq2"><strong>JBL Tune 770NC</strong> — best budget under ~$100.</li>
+          <li data-i18n-html="cq3"><strong>OneOdio Focus A6</strong> — entry option near ~$70.</li>
+        </ul>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th data-i18n="th1">Model</th><th>USD</th><th>ANC</th><th data-i18n="th2">Battery</th></tr></thead>
+          <tbody>
+            <tr><td>JBL Tune 770NC</td><td>$79.99</td><td>4/5</td><td>30h</td></tr>
+            <tr><td><strong>Sony WH-CH720N</strong></td><td>$149</td><td>4.5/5</td><td>30h</td></tr>
+            <tr><td>Anker Space One</td><td>$79.99</td><td>4/5</td><td>30h</td></tr>
+            <tr><td>OneOdio Focus A6</td><td>$69.99</td><td>3.5/5</td><td>30h</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="recs">
+        <div class="rec"><h5 data-i18n="r1">Best Overall</h5><p>Sony WH-CH720N</p><span class="pr">≈ $149</span></div>
+        <div class="rec"><h5 data-i18n="r2">Best Budget</h5><p>JBL Tune 770NC</p><span class="pr">≈ $79.99</span></div>
+        <div class="rec"><h5 data-i18n="r3">Entry Option</h5><p>OneOdio Focus A6</p><span class="pr">≈ $69.99</span></div>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted)" data-i18n="case_sources">Illustrative example only. Prices are shown in the cited source currency and may be outdated.</p>
+      <div style="margin-top:14px;text-align:center;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button type="button" class="btn btn-p" id="openReport" data-i18n="full_preview">Full Report Preview</button>
+        <button type="button" class="btn btn-ghost" id="saveExample" data-i18n="save_example">Save This Report</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="pricing">
+  <h2 class="sec-t" data-i18n="price_title">Simple pricing</h2>
+  <p class="sec-s" data-i18n="price_sub">One-time payment. No subscription.</p>
+  <div class="price-box">
+    <div class="pr">$6 <small style="font-size:14px;color:var(--muted);font-weight:500" data-i18n="once">one-time</small></div>
+    <p style="font-size:12px;color:var(--muted);margin:4px 0 8px" data-i18n="price_local">or equivalent in your local currency at checkout via Gumroad.</p>
+    <ul class="feats">
+      <li><span class="ck">✓</span> <span data-i18n="f1">Full Deep Search access</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f2">API keys: Tavily + Groq + Nebius</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f3">Verified local + global reports</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f4">Setup guide included</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f5">1 free trial before purchase</span></li>
+    </ul>
+    <a class="btn btn-w buy-btn-pixel" style="width:100%" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" data-i18n="buy_btn">Get Full Access — $6</a>
+  </div>
+</section>
+
+<section class="sec wrap" style="max-width:720px;margin-left:auto;margin-right:auto">
+  <h2 class="sec-t" data-i18n="faq_title">FAQ</h2>
+  <details open><summary data-i18n="fq1">How long does a real search take?</summary><p data-i18n="fa1">Typically 5-40 seconds to a verified report.</p></details>
+  <details><summary data-i18n="fq2">What do I get for $6?</summary><p data-i18n="fa2">Full access + Tavily, Groq, Nebius keys. One-time via Gumroad.</p></details>
+  <details><summary data-i18n="fq3">Free trial limits?</summary><p data-i18n="fa3">1 trial per visitor. Up to 100 free searches/day site-wide.</p></details>
+  <details><summary data-i18n="fq4">Are sources real?</summary><p data-i18n="fa4">Yes. The report appears after ranking documented sources.</p></details>
+</section>
+
 <footer class="wrap">
-  <p data-i18n="footer">© 2026 Mido AI Store • V10.5</p>
+  <p data-i18n="footer">© 2026 Mido AI Store • Deep Search Agent V10.3</p>
   <p style="margin-top:4px;font-size:11px" data-i18n="footer2">Live sources. Always verify final local prices.</p>
-  <div style="margin-top:10px;font-size:11px;opacity:.8;display:flex;gap:10px;justify-content:center">
-    <a href="#" class="policy-link" data-policy="privacy">Privacy Policy</a> | 
-    <a href="#" class="policy-link" data-policy="terms">Terms of Use</a> | 
-    <a href="#" class="policy-link" data-policy="refund">Refund Policy (7 Days)</a>
+  <div style="margin-top:10px;font-size:11px;opacity:.8">
+    <a href="#" onclick="openPolicy(event, 'privacy')">Privacy Policy</a> | 
+    <a href="#" onclick="openPolicy(event, 'refund')">Refund Policy</a>
   </div>
   <span id="adminBtn" class="admin-trigger" title="Admin Login">🔑</span>
 </footer>
 </div>
 
-<div class="cookie-banner" id="cookieBanner">
-  <p>We use cookies to analyze traffic and improve your experience. By clicking "Accept", you consent to our use of cookies.</p>
-  <div class="cookie-btns">
-    <button class="btn btn-p" onclick="acceptCookies()">Accept</button>
-    <button class="btn btn-ghost" onclick="document.getElementById('cookieBanner').classList.remove('show')">Decline</button>
+<!-- Modal: Full Report -->
+<div class="modal" id="reportModal">
+  <div class="modal-bg" id="modalBg"></div>
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <div>
+        <h3 style="font-size:17px;font-weight:800" data-i18n="modal_title">Full Report — Headphones under $150</h3>
+        <p style="font-size:12px;color:var(--muted);margin-top:4px" data-i18n="modal_q">Query: Best noise-cancelling headphones under $150</p>
+      </div>
+      <button type="button" class="btn btn-ghost" id="closeModal" data-i18n="modal_close">Close</button>
+    </div>
+    <div class="qt" style="margin-top:14px">
+      <h4 data-i18n="modal_winner">Winner: Sony WH-CH720N</h4>
+      <p style="font-size:12.5px;color:var(--muted);margin-top:6px" data-i18n="modal_summary">Best overall ANC/comfort/battery. JBL Tune 770NC is best value. Ranked from SoundGuys, CNET, TechRadar and market listings.</p>
+    </div>
+    <div style="overflow-x:auto;margin-top:12px">
+      <table>
+        <thead><tr>
+          <th data-i18n="th1">Model</th><th data-i18n="th_price">Price</th><th>ANC</th><th data-i18n="th2">Battery</th><th data-i18n="th_comfort">Comfort</th><th data-i18n="th_verdict">Verdict</th>
+        </tr></thead>
+        <tbody>
+          <tr style="background:rgba(124,92,255,.08)"><td><strong>Sony WH-CH720N</strong></td><td>$149</td><td>4.5/5</td><td>30h</td><td>4.5/5</td><td data-i18n="v_best">Best overall</td></tr>
+          <tr><td>JBL Tune 770NC</td><td>$79.99</td><td>4/5</td><td>30h</td><td>4/5</td><td data-i18n="v_budget">Best budget</td></tr>
+          <tr><td>Anker Space One</td><td>$79.99</td><td>4/5</td><td>30h</td><td>4/5</td><td data-i18n="v_solid">Solid alt</td></tr>
+          <tr><td>OneOdio Focus A6</td><td>$69.99</td><td>3.5/5</td><td>30h</td><td>3.5/5</td><td data-i18n="v_entry">Entry pick</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px">
+      <div class="xcard" style="cursor:default">
+        <h3 data-i18n="modal_sources_title">Top Sources</h3>
+        <p style="margin-top:8px;font-size:12px;color:var(--muted)" data-i18n-html="modal_sources_list">1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Local market listings</p>
+      </div>
+      <div class="xcard" style="cursor:default">
+        <h3 data-i18n="modal_rec_title">Final Recommendation</h3>
+        <p style="margin-top:8px;font-size:12.5px;color:var(--muted)" data-i18n="modal_rec_text">Pick Sony WH-CH720N if budget allows. Pick JBL Tune 770NC for best value. Confirm live local prices before buying.</p>
+        <a href="https://midoaistore.gumroad.com/l/dtqpvka" class="btn btn-w buy-btn-pixel" target="_blank" rel="noopener" style="margin-top:12px" data-i18n="buy_btn">Get Full Access — $6</a>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- Modal: Policies -->
 <div class="modal" id="policyModal">
   <div class="modal-bg" onclick="document.getElementById('policyModal').classList.remove('open')"></div>
   <div class="modal-box">
@@ -286,208 +430,440 @@ var WORKER_URL='https://mido-deepsearch.midoaistore.workers.dev';
 var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
 var skill='deep_search', currentLang='en', searching=false, lastReportText='', adminKey='';
 
-try {
-  var urlParams = new URLSearchParams(location.search);
-  if (urlParams.has('admin')) {
-    adminKey = urlParams.get('admin');
-    localStorage.setItem('mido_admin_key', adminKey);
-    window.history.replaceState(null, '', location.pathname + location.hash);
-  } else {
-    adminKey = localStorage.getItem('mido_admin_key') || '';
-  }
-} catch(e) { adminKey = ''; }
+// إزالة سر الأدمن من الرابط (أمنياً)
+if(/[?&]admin(?:=|&|$)/i.test(location.search)){history.replaceState(null,'',location.pathname+location.hash);}
 
-var POLICY_T = {
-  en:{ privacy:{title:'Privacy Policy',html:`<p>We collect only the data needed to operate Mido Deep Search. Queries are sent to Tavily and Groq. We use Meta Pixel to measure campaign performance. No personal data is sold.</p><p>Contact: support@midoaistore.com</p>`}, terms:{title:'Terms of Use',html:`<p>By using Mido Deep Search, you agree to use the service for lawful purposes only. You may not abuse the API or use the service to generate harmful content.</p><p>Contact: support@midoaistore.com</p>`}, refund:{title:'Refund Policy',html:`<p>This is a digital product with immediate access.</p><h4>7-Day Refund Guarantee</h4><p>Refund requests must be submitted within <strong>7 days</strong> of purchase with proof of issue.</p><p>Contact: support@midoaistore.com</p>`} },
-  ar:{ privacy:{title:'سياسة الخصوصية',html:`<p>نجمع فقط البيانات اللازمة لتشغيل Mido Deep Search. تُرسل الاستعلامات إلى Tavily وGroq. نستخدم Meta Pixel لقياس أداء الحملات. لا يتم بيع أي بيانات شخصية.</p><p>للتواصل: support@midoaistore.com</p>`}, terms:{title:'حقوق الاستخدام',html:`<p>باستخدامك للخدمة، توافق على استخدامها للأغراض المشروعة فقط. يُمنع إساءة استخدام الـ API أو توليد محتوى ضار.</p><p>للتواصل: support@midoaistore.com</p>`}, refund:{title:'سياسة الاسترداد',html:`<p>هذا منتج رقمي مع وصول فوري.</p><h4>ضمان استرداد خلال 7 أيام</h4><p>يجب تقديم طلبات الاسترداد خلال <strong>7 أيام</strong> من تاريخ الشراء مع إثبات المشكلة.</p><p>للتواصل: support@midoaistore.com</p>`} }
-};
-['fr','de','ja','zh','es','pt'].forEach(function(l){ POLICY_T[l] = POLICY_T.en; });
-
-window.acceptCookies = function() { localStorage.setItem('mido_cookie_consent', 'true'); document.getElementById('cookieBanner').classList.remove('show'); };
-if (!localStorage.getItem('mido_cookie_consent')) { setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 2000); }
-
-document.querySelectorAll('.policy-link').forEach(function(link) {
-  link.addEventListener('click', function(e) {
-    e.preventDefault(); var type = this.getAttribute('data-policy'); var p = POLICY_T[currentLang] || POLICY_T.en; var item = p[type] || POLICY_T.en[type];
-    document.getElementById('policyTitle').textContent = item.title; document.getElementById('policyContent').innerHTML = item.html; document.getElementById('policyModal').classList.add('open');
+// تتبع البيكسل عند الضغط على زر الشراء
+document.querySelectorAll('.buy-btn-pixel, #navBuy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    if(typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout');
+    }
   });
 });
 
-var T = {
-  en: { nav_buy:'Get Access — $6', pill:'⚡ Verified research • 5-40s', hero_title:'Get a fully structured <span class="g">research report</span>', hero_desc:'A 5-stage verified pipeline in 5-40s.', cta_try:'Try Free Demo', t1:'✓ 1 free trial', t2:'✓ 100 free/day', t3:'✓ API keys after purchase', st_visitors:'Visitors', st_searches:'Searches today', st_ok:'Successful', st_fail:'Failed', st_left:'Free left today', skills_title:'Research Skills', skills_sub:'Select a skill before searching.', demo_title:'Live Demo', demo_sub:'Real engine. Stages light up.', ph:'Best noise-cancelling headphones under $150', search_btn:'Search 🔍', meta1:'Free: 1 / visitor', meta2:'Daily cap: 100', s1:'Source Search', s1d:'Tavily live sources', s2:'Thesis Build', s2d:'Core argument', s3:'Reduce & Rank', s3d:'Strongest signals', s4:'Risk Check', s4d:'Local + global', s5:'Final Report', s5d:'5-40 seconds', laws_title:'Asimov Safety Laws', laws_sub:'These rules guide the engine.', laws_trust:'Mido reduces confident-but-wrong answers.', law1_t:'Do not harm with false confidence', law1_s:'Never present guesses as facts.', law1_d:'If evidence is weak, the report must say so.', law2_t:'Serve the research goal first', law2_s:'Optimize for decisions.', law2_d:'Output is structured for action.', law3_t:'Protect system limits', law3_s:'Fair use and server-side protection.', law3_d:'Free usage is limited per visitor.', law4_t:'Respect local market', law4_s:'Include local pricing.', law4_d:'Connects reviews with local prices.', rings_title:'Five Protection Rings', rings_sub:'Tap any ring to read.', ring1_t:'Ring 1 — Source Verification', ring1_s:'Collect live sources.', ring1_d:'Gathers multiple sources.', ring2_t:'Ring 2 — Thesis Construction', ring2_s:'Build core argument.', ring2_d:'Forms a clear thesis.', ring3_t:'Ring 3 — Reduce & Rank', ring3_s:'Keep strongest evidence.', ring3_d:'Compresses to best sources.', ring4_t:'Ring 4 — Risk Check', ring4_s:'Validate risks.', ring4_d:'Checks practical issues.', ring5_t:'Ring 5 — Calibration', ring5_s:'Generate final report.', ring5_d:'Produces structured output.', footer:'© 2026 Mido AI Store • V10.5', footer2:'Live sources. Verify prices.', searching:'Searching...', prog_complete:'Completed', actual_time:'Time', prog_used:'sources', err_net:'Network issue.', err_trial:'Free trial used.', err_daily:'Daily limit reached.', copy_btn:'Copy', share_btn:'Share', download_btn:'Download', copied:'Copied!', download_ok:'Downloaded', share_ok:'Shared' },
-  ar: { nav_buy:'احصل على الأداة — $6', pill:'⚡ بحث موثق • 5-40 ثانية', hero_title:'احصل على <span class="g">تقرير بحث منظم</span>', hero_desc:'خط أنابيب موثق من 5 مراحل خلال 5-40 ثانية.', cta_try:'جرب البحث', t1:'✓ تجربة واحدة', t2:'✓ 100 بحث مجاني', t3:'✓ مفاتيح API', st_visitors:'الزوار', st_searches:'بحث اليوم', st_ok:'ناجح', st_fail:'فاشل', st_left:'متبقي اليوم', skills_title:'مهارات البحث', skills_sub:'اختر المهارة قبل البحث.', demo_title:'تجربة حية', demo_sub:'محرك حقيقي. المراحل تضيء.', ph:'أفضل سماعات إلغاء ضوضاء تحت 150 دولار', search_btn:'بحث 🔍', meta1:'مجاني: 1 / زائر', meta2:'الحد اليومي: 100', s1:'بحث المصادر', s1d:'مصادر Tavily', s2:'بناء الأطروحة', s2d:'الحجة الأساسية', s3:'تقليص وترتيب', s3d:'أقوى الإشارات', s4:'تقييم المخاطر', s4d:'محلي + عالمي', s5:'التقرير النهائي', s5d:'5-40 ثانية', laws_title:'قوانين أسيموف للسلامة', laws_sub:'قواعد توجّه المحرك ليبقى مفيدًا.', laws_trust:'Mido مصمم لتقليل الإجابات الخاطئة.', law1_t:'لا ضرر بالثقة الكاذبة', law1_s:'لا تُعرض التخمينات كحقائق.', law1_d:'إذا كان الدليل ضعيفًا يجب أن يقول التقرير ذلك.', law2_t:'خدمة هدف البحث أولًا', law2_s:'تحسين القرار لا الدردشة.', law2_d:'المخرجات منظمة للتنفيذ.', law3_t:'حماية النظام', law3_s:'استخدام عادل وحماية من الخادم.', law3_d:'التجربة محدودة لكل زائر على الخادم.', law4_t:'احترام السوق المحلي', law4_s:'إدراج سياق الأسعار المحلية.', law4_d:'ربط المراجعات الدولية بأسعار محلية.', rings_title:'حلقات الحماية الخمس', rings_sub:'اضغط أي حلقة لقراءة الشرح.', ring1_t:'الحلقة 1 — التحقق', ring1_s:'جمع وتقييم مصادر.', ring1_d:'يجمع العنكبوت مصادر متعددة.', ring2_t:'الحلقة 2 — الأطروحة', ring2_s:'بناء حجة منطقية.', ring2_d:'يشكّل أطروحة واضحة.', ring3_t:'الحلقة 3 — التقليص', ring3_s:'الإبقاء على أقوى الأدلة.', ring3_d:'يضغط المحرك لأهم المصادر.', ring4_t:'الحلقة 4 — المخاطر', ring4_s:'التحقق من مخاطر السوق.', ring4_d:'يفحص واقعية السعر.', ring5_t:'الحلقة 5 — الثقة', ring5_s:'توليد التقرير النهائي.', ring5_d:'يُنتج المخرج المنظم.', footer:'© 2026 Mido AI Store • V10.5', footer2:'مصادر حية. تحقق من الأسعار.', searching:'جاري البحث...', prog_complete:'اكتمل البحث', actual_time:'الوقت', prog_used:'مصادر', err_net:'مشكلة شبكة.', err_trial:'التجربة مستخدمة.', err_daily:'تم استهلاك الحد.', copy_btn:'نسخ', share_btn:'مشاركة', download_btn:'تنزيل', copied:'تم النسخ!', download_ok:'تم التنزيل', share_ok:'تمت المشاركة' },
-  fr: { nav_buy:'Accès — $6', pill:'⚡ Recherche vérifiée • 5-40s', hero_title:'Obtenez un <span class="g">rapport structuré</span>', hero_desc:'Un pipeline vérifié en 5 étapes en 5-40s.', cta_try:'Essai gratuit', t1:'✓ 1 essai gratuit', t2:'✓ 100 gratuits/jour', t3:'✓ Clés API après achat', st_visitors:'Visiteurs', st_searches:'Recherches', st_ok:'Réussies', st_fail:'Échouées', st_left:'Restantes', skills_title:'Compétences', skills_sub:'Choisissez un skill.', demo_title:'Démo en direct', demo_sub:'Moteur réel. Les étapes s\'allument.', ph:'Meilleurs casques ANC sous 150 $', search_btn:'Rechercher 🔍', meta1:'Gratuit: 1', meta2:'Plafond: 100', s1:'Recherche de sources', s1d:'Sources en direct', s2:'Construction de thèse', s2d:'Argument central', s3:'Réduire et classer', s3d:'Signaux forts', s4:'Contrôle des risques', s4d:'Local + global', s5:'Rapport final', s5d:'5-40 secondes', laws_title:'Lois de sécurité d\'Asimov', laws_sub:'Ces règles guident le moteur.', laws_trust:'Mido réduit les fausses réponses.', law1_t:'Ne pas nuire par fausse confiance', law1_s:'Ne pas présenter des suppositions comme des faits.', law1_d:'Si la preuve est faible, le rapport doit le dire.', law2_t:'Servir l\'objectif', law2_s:'Optimiser la décision.', law2_d:'Sortie structurée : résumé, comparaison et recommandation.', law3_t:'Protéger le système', law3_s:'Usage équitable et protection serveur.', law3_d:'Les limites s\'appliquent côté serveur.', law4_t:'Respecter le marché local', law4_s:'Inclure le contexte de prix local.', law4_d:'Le rapport relie avis internationaux et prix locaux.', rings_title:'Cinq anneaux de protection', rings_sub:'Touchez un anneau.', ring1_t:'Anneau 1 — Vérification', ring1_s:'Collecter des sources.', ring1_d:'Plusieurs sources avec scores.', ring2_t:'Anneau 2 — Thèse', ring2_s:'Construire l\'argument.', ring2_d:'Le système forme une thèse.', ring3_t:'Anneau 3 — Réduire', ring3_s:'Garder les meilleures preuves.', ring3_d:'Compression vers les sources utiles.', ring4_t:'Anneau 4 — Risques', ring4_s:'Valider les risques.', ring4_d:'Réalisme des prix et disponibilité.', ring5_t:'Anneau 5 — Confiance', ring5_s:'Générer le rapport final.', ring5_d:'Produit la recommandation finale.', footer:'© 2026 Mido AI Store • V10.5', footer2:'Sources en direct. Vérifiez les prix.', searching:'Recherche...', prog_complete:'Terminé', actual_time:'Temps', prog_used:'sources', err_net:'Erreur réseau.', err_trial:'Essai utilisé.', err_daily:'Limite atteinte.', copy_btn:'Copier', share_btn:'Partager', download_btn:'Télécharger', copied:'Copié!', download_ok:'Téléchargé', share_ok:'Partagé' },
-  de: { nav_buy:'Zugang — $6', pill:'⚡ Verifizierte Recherche • 5-40s', hero_title:'Erhalten Sie einen <span class="g">strukturierten Bericht</span>', hero_desc:'5-stufige verifizierte Pipeline in 5-40s.', cta_try:'Kostenlos testen', t1:'✓ 1 Test / Besucher', t2:'✓ 100 / Tag', t3:'✓ API-Keys nach Kauf', st_visitors:'Besucher', st_searches:'Suchen heute', st_ok:'Erfolgreich', st_fail:'Fehlgeschlagen', st_left:'Frei übrig', skills_title:'Recherche-Skills', skills_sub:'Skill vor der Suche wählen.', demo_title:'Live-Demo', demo_sub:'Echte Engine. Stufen leuchten auf.', ph:'Beste ANC-Kopfhörer unter 150 $', search_btn:'Suchen 🔍', meta1:'Gratis: 1', meta2:'Limit: 100', s1:'Quellensuche', s1d:'Live-Quellen', s2:'These', s2d:'Kernargument', s3:'Reduzieren', s3d:'Stärkste Signale', s4:'Risikocheck', s4d:'Lokal + global', s5:'Endbericht', s5d:'5-40 Sekunden', laws_title:'Asimov-Sicherheitsgesetze', laws_sub:'Regeln für nützliche Ausgabe.', laws_trust:'Mido reduziert falsche Antworten.', law1_t:'Kein Schaden', law1_s:'Vermutungen nicht als Fakten.', law1_d:'Bei schwacher Evidenz muss der Bericht das sagen.', law2_t:'Forschungsziel', law2_s:'Für Entscheidungen optimieren.', law2_d:'Strukturierte Ausgabe.', law3_t:'System schützen', law3_s:'Fair Use und serverseitiger Schutz.', law3_d:'Gratis-Limits gelten serverseitig.', law4_t:'Lokale Marktrealität', law4_s:'Lokalen Preiskontext einbeziehen.', law4_d:'Kauf-Fragen verbinden Reviews mit Preisen.', rings_title:'Fünf Schutzringe', rings_sub:'Ring antippen für Details.', ring1_t:'Ring 1 — Quellenprüfung', ring1_s:'Live-Quellen sammeln.', ring1_d:'Mehrere Live-Quellen mit Scores.', ring2_t:'Ring 2 — These', ring2_s:'Logisches Kernargument.', ring2_d:'Klare These zu Optionen.', ring3_t:'Ring 3 — Reduzieren', ring3_s:'Nur stärkste Evidenz behalten.', ring3_d:'Komprimierung auf nützlichste Quellen.', ring4_t:'Ring 4 — Risikocheck', ring4_s:'Markt-Risiken prüfen.', ring4_d:'Preisrealismus und Verfügbarkeit.', ring5_t:'Ring 5 — Konfidenz', ring5_s:'Finalen Bericht erzeugen.', ring5_d:'Kurzfassung und Empfehlung.', footer:'© 2026 Mido AI Store • V10.5', footer2:'Live-Quellen. Preise prüfen.', searching:'Suche...', prog_complete:'Abgeschlossen', actual_time:'Zeit', prog_used:'Quellen', err_net:'Netzwerkproblem.', err_trial:'Test genutzt.', err_daily:'Tageslimit erreicht.', copy_btn:'Kopieren', share_btn:'Teilen', download_btn:'Herunterladen', copied:'Kopiert!', download_ok:'Heruntergeladen', share_ok:'Geteilt' },
-  ja: { nav_buy:'アクセス — $6', pill:'⚡ 検証済み調査 • 5-40秒', hero_title:'完全な<span class="g">構造化レポート</span>を取得', hero_desc:'5段階の検証パイプラインを5-40秒で提供。', cta_try:'無料で試す', t1:'✓ 訪問者1回無料', t2:'✓ 1日100回無料', t3:'✓ 購入後APIキー', st_visitors:'訪問者', st_searches:'本日の検索', st_ok:'成功', st_fail:'失敗', st_left:'残り無料', skills_title:'リサーチスキル', skills_sub:'検索前にスキルを選択。', demo_title:'ライブデモ', demo_sub:'実エンジン。ステージが点灯。', ph:'150ドル以下のベストANC', search_btn:'検索 🔍', meta1:'無料：訪問者1回', meta2:'1日上限：100', s1:'ソース検索', s1d:'Tavilyライブ', s2:'論旨構築', s2d:'核心', s3:'削減', s3d:'最強シグナル', s4:'リスク', s4d:'現地＋国際', s5:'最終レポート', s5d:'5-40秒', laws_title:'アシモフの安全法則', laws_sub:'有用・誠実な出力のためのルール。', laws_trust:'Midoは誤回答を減らす設計。', law1_t:'偽の自信で害を与えない', law1_s:'推測を事実としない。', law1_d:'証拠が弱い場合は明記。', law2_t:'調査目的優先', law2_s:'意思決定向けに最適化。', law2_d:'要約・比較・推奨の構造。', law3_t:'システム保護', law3_s:'公平利用とサーバー保護。', law3_d:'サーバー側で制限。', law4_t:'現地市場尊重', law4_s:'現地価格を含める。', law4_d:'国際レビューと現地価格を結ぶ。', rings_title:'5つの保護リング', rings_sub:'リングをタップして詳細。', ring1_t:'リング1 — ソース検証', ring1_s:'ライブソース収集。', ring1_d:'複数ソースにスコア付与。', ring2_t:'リング2 — 論旨', ring2_s:'論理的な核心。', ring2_d:'明確な論旨を形成。', ring3_t:'リング3 — 削減', ring3_s:'最強の証拠のみ。', ring3_d:'有用ソースに圧縮。', ring4_t:'リング4 — リスク', ring4_s:'市場リスク検証。', ring4_d:'価格の現実性確認。', ring5_t:'リング5 — 信頼度', ring5_s:'最終レポート生成。', ring5_d:'完了後に構造化出力。', footer:'© 2026 Mido AI Store • V10.5', footer2:'ライブソース。価格確認。', searching:'検索中...', prog_complete:'完了', actual_time:'時間', prog_used:'ソース', err_net:'ネットワーク問題。', err_trial:'無料使用済み。', err_daily:'上限到達。', copy_btn:'コピー', share_btn:'共有', download_btn:'ダウンロード', copied:'コピーしました!', download_ok:'ダウンロード完了', share_ok:'共有しました' },
-  zh: { nav_buy:'获取访问 — $6', pill:'⚡ 已验证研究 • 5-40秒', hero_title:'获取完整的<span class="g">结构化报告</span>', hero_desc:'五阶段验证流程，约5-40秒完成。', cta_try:'免费试用', t1:'✓ 每位访客1次免费', t2:'✓ 每天100次免费', t3:'✓ 购买后提供API密钥', st_visitors:'访客', st_searches:'今日搜索', st_ok:'成功', st_fail:'失败', st_left:'今日剩余', skills_title:'研究技能', skills_sub:'搜索前选择技能。', demo_title:'在线演示', demo_sub:'真实引擎。阶段会点亮。', ph:'150美元以下最佳降噪耳机', search_btn:'搜索 🔍', meta1:'免费：每位访客1次', meta2:'每日上限：100', s1:'来源搜索', s1d:'Tavily实时来源', s2:'论点构建', s2d:'核心论证', s3:'筛选排序', s3d:'最强信号', s4:'风险检查', s4d:'本地+国际', s5:'最终报告', s5d:'5-40秒', laws_title:'阿西莫夫安全法则', laws_sub:'这些规则引导引擎。', laws_trust:'Mido减少错误回答。', law1_t:'不以虚假信心造成伤害', law1_s:'不要把猜测说成事实。', law1_d:'如果证据不足，报告必须说明。', law2_t:'优先服务研究目标', law2_s:'为决策优化。', law2_d:'输出结构化：摘要、对比、推荐。', law3_t:'保护系统', law3_s:'公平使用与服务端保护。', law3_d:'免费额度在服务器侧限制。', law4_t:'尊重本地市场', law4_s:'尽可能纳入本地价格。', law4_d:'连接国际评测与本地价格。', rings_title:'五层保护环', rings_sub:'点击任意环查看说明。', ring1_t:'第1环 — 来源验证', ring1_s:'收集并评分来源。', ring1_d:'多个来源附加相关度分数。', ring2_t:'第2环 — 论点构建', ring2_s:'构建核心论点。', ring2_d:'形成清晰论点。', ring3_t:'第3环 — 筛选排序', ring3_s:'只保留最强证据。', ring3_d:'压缩到最有用来源。', ring4_t:'第4环 — 风险检查', ring4_s:'验证风险。', ring4_d:'检查价格与可获得性。', ring5_t:'第5环 — 置信校准', ring5_s:'生成最终报告。', ring5_d:'输出结构化结果。', footer:'© 2026 Mido AI Store • V10.5', footer2:'实时来源。请核实价格。', searching:'搜索中...', prog_complete:'完成', actual_time:'时间', prog_used:'来源', err_net:'网络问题。', err_trial:'试用已使用。', err_daily:'已达每日上限。', copy_btn:'复制', share_btn:'分享', download_btn:'下载', copied:'已复制!', download_ok:'已下载', share_ok:'已分享' },
-  es: { nav_buy:'Acceso — $6', pill:'⚡ Investigación verificada • 5-40s', hero_title:'Obtén un <span class="g">informe estructurado</span>', hero_desc:'Pipeline verificado de 5 etapas en 5-40s.', cta_try:'Prueba gratis', t1:'✓ 1 prueba / visitante', t2:'✓ 100 gratis / día', t3:'✓ Claves API tras la compra', st_visitors:'Visitantes', st_searches:'Búsquedas hoy', st_ok:'Exitosas', st_fail:'Fallidas', st_left:'Gratis restantes', skills_title:'Skills', skills_sub:'Elige un skill antes de buscar.', demo_title:'Demo en vivo', demo_sub:'Motor real. Etapas iluminadas.', ph:'Mejores auriculares ANC por menos de $150', search_btn:'Buscar 🔍', meta1:'Gratis: 1 / visitante', meta2:'Tope diario: 100', s1:'Búsqueda de fuentes', s1d:'Fuentes live', s2:'Construcción de tesis', s2d:'Argumento central', s3:'Reducir y ordenar', s3d:'Señales fuertes', s4:'Control de riesgos', s4d:'Local + global', s5:'Informe final', s5d:'5-40 segundos', laws_title:'Leyes de seguridad de Asimov', laws_sub:'Reglas para una salida útil y honesta.', laws_trust:'Mido reduce respuestas erróneas.', law1_t:'No dañar con falsa confianza', law1_s:'No presentar conjeturas como hechos.', law1_d:'Si la evidencia es débil, el informe debe decirlo.', law2_t:'Servir el objetivo', law2_s:'Optimizar la decisión.', law2_d:'Salida estructurada: resumen, comparación, recomendación.', law3_t:'Proteger el sistema', law3_s:'Uso justo y protección en servidor.', law3_d:'Los límites se aplican en el servidor.', law4_t:'Respetar el mercado local', law4_s:'Incluir contexto de precios locales.', law4_d:'Conecta reseñas con precios locales.', rings_title:'Cinco anillos de protección', rings_sub:'Toca un anillo para leer el detalle.', ring1_t:'Anillo 1 — Verificación', ring1_s:'Recoger fuentes live.', ring1_d:'Varias fuentes con puntuación.', ring2_t:'Anillo 2 — Tesis', ring2_s:'Construir el argumento.', ring2_d:'Tesis clara sobre opciones.', ring3_t:'Anillo 3 — Reducir', ring3_s:'Solo la evidencia más fuerte.', ring3_d:'Compresión a fuentes útiles.', ring4_t:'Anillo 4 — Riesgos', ring4_s:'Validar riesgos de mercado.', ring4_d:'Realismo de precios y disponibilidad.', ring5_t:'Anillo 5 — Confianza', ring5_s:'Generar el informe final.', ring5_d:'Resumen y recomendación final.', footer:'© 2026 Mido AI Store • V10.5', footer2:'Fuentes en vivo. Verifica precios.', searching:'Buscando...', prog_complete:'Completado', actual_time:'Tiempo', prog_used:'fuentes', err_net:'Problema de red.', err_trial:'Prueba usada.', err_daily:'Límite alcanzado.', copy_btn:'Copiar', share_btn:'Compartir', download_btn:'Descargar', copied:'¡Copiado!', download_ok:'Descargado', share_ok:'Compartido' },
-  pt: { nav_buy:'Acesso — $6', pill:'⚡ Pesquisa verificada • 5-40s', hero_title:'Obtenha um <span class="g">relatório estruturado</span>', hero_desc:'Pipeline verificado de 5 etapas em 5-40s.', cta_try:'Teste grátis', t1:'✓ 1 teste / visitante', t2:'✓ 100 grátis / dia', t3:'✓ Chaves API após compra', st_visitors:'Visitantes', st_searches:'Pesquisas hoje', st_ok:'Sucesso', st_fail:'Falhas', st_left:'Grátis restantes', skills_title:'Skills', skills_sub:'Escolha um skill antes de pesquisar.', demo_title:'Demo ao vivo', demo_sub:'Motor real. Etapas acesas.', ph:'Melhores fones ANC por menos de $150', search_btn:'Pesquisar 🔍', meta1:'Grátis: 1 / visitante', meta2:'Limite diário: 100', s1:'Busca de fontes', s1d:'Fontes live', s2:'Construção da tese', s2d:'Argumento central', s3:'Reduzir e rankear', s3d:'Sinais fortes', s4:'Checagem de risco', s4d:'Local + global', s5:'Relatório final', s5d:'5-40 segundos', laws_title:'Leis de segurança de Asimov', laws_sub:'Regras para saída útil e honesta.', laws_trust:'Mido reduz respostas erradas.', law1_t:'Não causar dano', law1_s:'Não apresentar palpites como fatos.', law1_d:'Se a evidência for fraca, o relatório deve dizer.', law2_t:'Servir o objetivo', law2_s:'Otimizar a decisão.', law2_d:'Saída estruturada: resumo, comparação, recomendação.', law3_t:'Proteger o sistema', law3_s:'Uso justo e proteção no servidor.', law3_d:'Limites aplicados no servidor.', law4_t:'Respeitar o mercado local', law4_s:'Incluir contexto de preços locais.', law4_d:'Conecta reviews com preços locais.', rings_title:'Cinco anéis de proteção', rings_sub:'Toque em um anel para ler o detalhe.', ring1_t:'Anel 1 — Verificação', ring1_s:'Coletar fontes live.', ring1_d:'Várias fontes com scores.', ring2_t:'Anel 2 — Tese', ring2_s:'Montar o argumento.', ring2_d:'Tese clara sobre opções.', ring3_t:'Anel 3 — Reduzir', ring3_s:'Só a evidência mais forte.', ring3_d:'Compressão para fontes úteis.', ring4_t:'Anel 4 — Riscos', ring4_s:'Validar riscos de mercado.', ring4_d:'Realismo de preço e disponibilidade.', ring5_t:'Anel 5 — Confiança', ring5_s:'Gerar o relatório final.', ring5_d:'Resumo e recomendação final.', footer:'© 2026 Mido AI Store • V10.5', footer2:'Fontes ao vivo. Verifique preços.', searching:'Pesquisando...', prog_complete:'Concluído', actual_time:'Tempo', prog_used:'fontes', err_net:'Erro de rede.', err_trial:'Teste usado.', err_daily:'Limite atingido.', copy_btn:'Copiar', share_btn:'Compartilhar', download_btn:'Baixar', copied:'Copiado!', download_ok:'Baixado', share_ok:'Compartilhado' }
-};
+function glowPulse(el, ms){
+  if(!el) return;
+  el.classList.add('glow-on');
+  setTimeout(function(){ el.classList.remove('glow-on'); }, ms||900);
+}
+function toast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
 
-var SKILL_NAMES={ 
-  en:['Deep Search','Summarize','Compare','Recommend','Price Check','Save Report','Fact Check','Pros & Cons','Buying Guide','Local Price Check','Source Audit','Risk Check','Extract Facts','Outline','Decision Matrix'], 
-  ar:['بحث عميق','تلخيص','مقارنة','توصية','فحص السعر','حفظ التقرير','تدقيق الحقائق','الإيجابيات والسلبيات','دليل الشراء','فحص السعر المحلي','تدقيق المصادر','فحص المخاطر','استخراج الحقائق','إنشاء مخطط','مصفوفة القرار'],
-  fr:['Recherche','Résumé','Comparer','Recommander','Prix','Enregistrer','Faits','Pour/Contre','Guide','Prix Local','Audit','Risques','Extraire','Plan','Matrice'],
-  de:['Tiefensuche','Zusammenfassen','Vergleichen','Empfehlen','Preis','Speichern','Fakten','Vor/Nachteile','Kaufratgeber','Lokaler Preis','Audit','Risiken','Extrahieren','Gliederung','Matrix'],
-  ja:['サーチ','要約','比較','推奨','価格','保存','事実','長所短所','ガイド','現地価格','監査','リスク','抽出','概要','マトリクス'],
-  zh:['深度搜索','摘要','对比','推荐','价格','保存','事实','优缺点','指南','本地价格','审计','风险','提取','大纲','矩阵'],
-  es:['Búsqueda','Resumir','Comparar','Recomendar','Precio','Guardar','Hechos','Pros/Contras','Guía','Precio Local','Auditar','Riesgos','Extraer','Esquema','Matriz'],
-  pt:['Busca','Resumir','Comparar','Recomendar','Preço','Salvar','Fatos','Prós/Contras','Guia','Preço Local','Auditar','Riscos','Extrair','Esquema','Matriz'] 
+// سياسات مترجمة ثابتة؛ المحتوى داخلي ولا يأتي من المستخدم أو الخادم.
+var POLICY_T = {
+  en:{privacy:{title:'Privacy Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>We collect only the data needed to operate Mido Deep Search.</p><h4>1. Data We Collect</h4><ul><li>Search queries are sent to Tavily and Groq to create the report.</li><li>A random Visitor ID is stored in your browser to enforce the free-trial limit.</li><li>The selected country is used to choose research context and currency preference.</li></ul><h4>2. Tracking</h4><p>Meta Pixel may measure page views and purchase-button interactions. You can disable tracking in your browser or Meta settings.</p><h4>3. Third Parties</h4><p>Payments are handled by Gumroad. We do not receive your payment details.</p><p>Contact: support@midoaistore.com</p>`},refund:{title:'Refund Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>This is a digital product with immediate access.</p><h4>1. Free Trial</h4><p>One free search is provided so you can test the service before purchase.</p><h4>2. Creating Your API Keys</h4><p>After purchase, we do not send ready-made API keys. You create your own keys from your accounts: create a Tavily key at <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a>, and a Groq key at <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. The setup guide explains where to add them to the Worker.</p><h4>3. Refunds through Gumroad</h4><p>Refund requests can be submitted within one week (7 days) of purchase and are handled according to Gumroad's refund policy. If you were charged twice, include your Gumroad receipt when contacting support.</p><p>Contact: support@midoaistore.com</p>`}},
+  ar:{privacy:{title:'سياسة الخصوصية',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>نجمع فقط البيانات اللازمة لتشغيل Mido Deep Search.</p><h4>1. البيانات التي نجمعها</h4><ul><li>تُرسل أسئلة البحث إلى Tavily وGroq لإنشاء التقرير.</li><li>يُحفظ معرّف زائر عشوائي في المتصفح لتطبيق حد التجربة المجانية.</li><li>تُستخدم الدولة المختارة لتحديد سياق البحث وتفضيل العملة.</li></ul><h4>2. التتبع</h4><p>قد يستخدم Meta Pixel قياس زيارات الصفحة والنقر على زر الشراء. يمكنك تعطيل التتبع من المتصفح أو إعدادات Meta.</p><h4>3. الخدمات الخارجية</h4><p>تُعالج المدفوعات عبر Gumroad ولا نصل إلى بيانات الدفع.</p><p>للتواصل: support@midoaistore.com</p>`},refund:{title:'سياسة الاسترداد',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>هذا منتج رقمي مع وصول فوري.</p><h4>1. التجربة المجانية</h4><p>نوفر بحثًا مجانيًا واحدًا لتجربة الخدمة قبل الشراء.</p><h4>2. إنشاء مفاتيح API</h4><p>بعد الشراء لا نرسل مفاتيح API جاهزة. ينشئ المستخدم مفاتيحه بنفسه من حساباته: مفتاح Tavily من <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a>، ومفتاح Groq من <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. يوضح دليل الإعداد مكان إضافة المفاتيح داخل الـWorker.</p><h4>3. الاسترداد عبر Gumroad</h4><p>يمكن تقديم طلب الاسترداد خلال أسبوع واحد (7 أيام) من تاريخ الشراء، وتتم معالجة الطلب وفق سياسة الاسترداد الخاصة بمنصة Gumroad. وفي حالة الخصم المكرر، أرفق إيصال Gumroad عند التواصل مع الدعم.</p><p>للتواصل: support@midoaistore.com</p>`}},
+  fr:{privacy:{title:'Politique de confidentialité',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Nous collectons uniquement les données nécessaires au fonctionnement du service.</p><h4>1. Données collectées</h4><ul><li>Les requêtes sont envoyées à Tavily et Groq pour créer le rapport.</li><li>Un identifiant de visiteur aléatoire est conservé pour appliquer la limite d’essai.</li><li>Le pays choisi sert au contexte et à la préférence monétaire.</li></ul><h4>2. Suivi</h4><p>Meta Pixel peut mesurer les visites et les clics d’achat. Vous pouvez le désactiver dans votre navigateur ou les réglages Meta.</p><h4>3. Tiers</h4><p>Les paiements sont traités par Gumroad.</p><p>Contact : support@midoaistore.com</p>`},refund:{title:'Politique de remboursement',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Il s’agit d’un produit numérique à accès immédiat.</p><p>Après l’achat, les clés API ne sont pas fournies prêtes à l’emploi : l’utilisateur crée sa clé Tavily sur <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> et sa clé Groq sur <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. Le guide explique leur ajout au Worker.</p><p>Une demande de remboursement peut être envoyée dans la semaine (7 jours) suivant l’achat, conformément à la politique de Gumroad. Contactez-nous avec votre reçu Gumroad.</p>`}},
+  de:{privacy:{title:'Datenschutzrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Wir erheben nur Daten, die für den Betrieb des Dienstes erforderlich sind.</p><h4>Erhobene Daten</h4><p>Suchanfragen werden an Tavily und Groq gesendet. Eine zufällige Besucher-ID setzt das Testlimit durch. Das gewählte Land dient dem Suchkontext und der Währungspräferenz.</p><h4>Tracking und Drittanbieter</h4><p>Meta Pixel kann Besuche und Kaufklicks messen. Zahlungen werden von Gumroad verarbeitet.</p><p>Kontakt: support@midoaistore.com</p>`},refund:{title:'Rückerstattungsrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Bei diesem digitalen Produkt erfolgt der Zugriff sofort.</p><p>Nach dem Kauf werden keine fertigen API-Schlüssel gesendet. Der Nutzer erstellt seinen Tavily-Schlüssel unter <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> und seinen Groq-Schlüssel unter <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. Die Anleitung erklärt die Einrichtung im Worker.</p><p>Eine Rückerstattung kann innerhalb einer Woche (7 Tage) nach dem Kauf gemäß der Gumroad-Richtlinie beantragt werden. Bitte den Gumroad-Beleg beifügen.</p>`}},
+  ja:{privacy:{title:'プライバシーポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>サービス運営に必要なデータのみを収集します。</p><p>検索内容はレポート作成のためTavilyとGroqへ送信されます。無料試用制限のため匿名の訪問者IDを保存します。選択した国は検索コンテキストと通貨設定に使用します。支払いはGumroadが処理します。</p><p>連絡先：support@midoaistore.com</p>`},refund:{title:'返金ポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>即時アクセスのデジタル商品です。</p><p>購入後、完成済みのAPIキーは送付されません。ユーザーが <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> でTavilyキーを、<a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> でGroqキーを作成します。設定方法はガイドで説明します。</p><p>返金は購入から1週間（7日）以内に、Gumroadのポリシーに従って申請できます。領収書を添えてご連絡ください。</p>`}},
+  zh:{privacy:{title:'隐私政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>我们只收集运行服务所需的数据。</p><p>搜索问题会发送给Tavily和Groq以生成报告。我们保存随机访客ID以执行免费试用限制。选择的国家用于研究上下文和货币偏好。付款由Gumroad处理。</p><p>联系：support@midoaistore.com</p>`},refund:{title:'退款政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>这是即时提供访问权限的数字产品。</p><p>购买后不会提供现成的API密钥。用户需要在 <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> 创建Tavily密钥，并在 <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> 创建Groq密钥。设置指南会说明如何将密钥添加到Worker。</p><p>可在购买后一个星期（7天）内按照Gumroad退款政策提交退款申请，请附上Gumroad收据。</p>`}},
+  es:{privacy:{title:'Política de privacidad',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Solo recopilamos los datos necesarios para operar el servicio.</p><p>Las consultas se envían a Tavily y Groq para crear el informe. Guardamos un ID de visitante aleatorio para aplicar el límite de prueba. El país elegido define el contexto y la preferencia de moneda. Los pagos los procesa Gumroad.</p><p>Contacto: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Es un producto digital con acceso inmediato.</p><p>Después de la compra no se entregan claves API listas. El usuario crea su clave de Tavily en <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> y su clave de Groq en <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. La guía explica cómo añadirlas al Worker.</p><p>La solicitud de reembolso puede presentarse dentro de una semana (7 días) según la política de Gumroad. Incluya el recibo de Gumroad.</p>`}},
+  pt:{privacy:{title:'Política de privacidade',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Coletamos apenas os dados necessários para operar o serviço.</p><p>As consultas são enviadas à Tavily e à Groq para gerar o relatório. Guardamos um ID aleatório de visitante para aplicar o limite de teste. O país escolhido define o contexto e a preferência de moeda. Os pagamentos são processados pela Gumroad.</p><p>Contato: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Este é um produto digital com acesso imediato.</p><p>Após a compra, não são fornecidas chaves API prontas. O usuário cria a chave Tavily em <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> e a chave Groq em <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. O guia explica como adicioná-las ao Worker.</p><p>O pedido de reembolso pode ser enviado em até uma semana (7 dias), conforme a política da Gumroad. Inclua o recibo da Gumroad.</p>`}}
 };
-var SKILL_IDS=['deep_search','summarize','compare','recommend','price_check','save','fact_check','pros_cons','buying_guide','local_price_check','source_audit','risk_check','extract_facts','outline','decision_matrix'];
+window.openPolicy = function(e,type){
+  e.preventDefault();
+  var p=POLICY_T[currentLang]||POLICY_T.en;
+  var item=p[type]||POLICY_T.en[type];
+  document.getElementById('policyTitle').textContent=item.title;
+  document.getElementById('policyContent').innerHTML=item.html;
+  document.getElementById('policyModal').classList.add('open');
+}
+
+// تحويل المارك داون إلى HTML
+function parseMarkdown(md){
+  md = typeof md === 'string' ? md : '';
+  var lines = md.replace(/\r\n?/g,'\n').split('\n');
+  var out=[], inList=false, inCode=false, code=[];
+  function closeList(){if(inList){out.push('</ul>');inList=false;}}
+  for(var i=0;i<lines.length;i++){
+    var raw=lines[i];
+    if(/^```/.test(raw.trim())){
+      if(inCode){out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');code=[];inCode=false;}
+      else {closeList();inCode=true;}
+      continue;
+    }
+    if(inCode){code.push(raw);continue;}
+    var line=esc(raw);
+    if(!line.trim()){closeList();continue;}
+    var m=line.match(/^###\s+(.*)$/); if(m){closeList();out.push('<h3>'+inlineMd(m[1])+'</h3>');continue;}
+    m=line.match(/^##\s+(.*)$/); if(m){closeList();out.push('<h2>'+inlineMd(m[1])+'</h2>');continue;}
+    m=line.match(/^#\s+(.*)$/); if(m){closeList();out.push('<h1>'+inlineMd(m[1])+'</h1>');continue;}
+    m=line.match(/^[-*]\s+(.*)$/); if(m){if(!inList){out.push('<ul>');inList=true;}out.push('<li>'+inlineMd(m[1])+'</li>');continue;}
+    closeList(); out.push('<p>'+inlineMd(line)+'</p>');
+  }
+  if(inCode) out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');
+  closeList(); return out.join('');
+}
+function inlineMd(s){
+  return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
+}
+
+// قاموس الترجمات الشامل
+var T = {
+  en: {
+    nav_buy:'Get Access — $6', pill:'⚡ Verified research • 5-40s • Local + Global',
+    hero_title:'Turn one question into a <span class="g">verified decision</span> — before you spend',
+    hero_desc:'Ask once. Get live sources, a clear comparison, and an evidence-based recommendation in about 5-40 seconds.',
+    cta_try:'Try Free Demo', cta_report:'See Full Report',
+    t1:'✓ 1 free trial / visitor', t2:'✓ 100 free searches / day', t3:'✓ API keys after purchase',
+    st_visitors:'Visitors', st_searches:'Searches today', st_ok:'Successful', st_fail:'Failed', st_left:'Free left today',
+    skills_title:'Research Skills', skills_sub:'Select a skill before searching. Save stores the last report on this device.',
+    sk1:'Deep Search', sk2:'Summarize', sk3:'Compare', sk4:'Recommend', sk5:'Price Check', sk6:'Save Report',
+    demo_title:'Live Demo', demo_sub:'Real engine. Stages light up while the spider crawls sources.',
+    ph:'Best noise-cancelling headphones under $150', search_btn:'Search 🔍', meta1:'Free: 1 / visitor', meta2:'Daily cap: 100',
+    s1:'Source Search', s1d:'Tavily live sources', s2:'Thesis Build', s2d:'Core argument', s3:'Reduce & Rank', s3d:'Strongest signals', s4:'Risk Check', s4d:'Local + global', s5:'Final Report', s5d:'5-40 seconds',
+    laws_title:'Asimov Safety Laws', laws_sub:'These rules guide the engine so output stays useful, honest, and safe for real decisions.',
+    laws_trust:'Why this matters: Mido is designed to reduce confident-but-wrong answers by forcing source checks, ranking, and a final recommendation you can verify.',
+    law1_t:'Do not harm with false confidence', law1_s:'Never present guesses as proven facts.', law1_d:'If evidence is weak, the report must say so. The engine prefers ranked sources and scored evidence instead of fluent but unsupported claims.',
+    law2_t:'Serve the research goal first', law2_s:'Optimize for decisions, not chat.', law2_d:'The output is structured for action: summary, comparison, and recommendation.',
+    law3_t:'Protect system and user limits', law3_s:'Fair use and server-side trial protection.', law3_d:'Free usage is limited per visitor and per day on the server, not only in the browser.',
+    law4_t:'Respect local market reality', law4_s:'Include local pricing context when possible.', law4_d:'For questions like product buying, the report connects international reviews with local price ranges.',
+    rings_title:'Five Protection Rings', rings_sub:'Tap any ring to read the full explanation. During search, rings light up as the spider moves.',
+    ring1_t:'Ring 1 — Source Verification', ring1_s:'Collect and score live sources (Tavily).', ring1_d:'The spider gathers multiple live sources and attaches relevance scores.',
+    ring2_t:'Ring 2 — Thesis Construction', ring2_s:'Build a logical core argument.', ring2_d:'The system forms a clear thesis: what options exist, what criteria matter, and what decision the user is trying to make.',
+    ring3_t:'Ring 3 — Reduce & Rank', ring3_s:'Keep only the strongest evidence.', ring3_d:'From a larger candidate set, the engine compresses down to the most useful sources.',
+    ring4_t:'Ring 4 — Risk Check', ring4_s:'Validate market and context risks.', ring4_d:'Checks practical issues: price realism, local availability signals, and whether a recommendation may be too optimistic.',
+    ring5_t:'Ring 5 — Confidence Calibration', ring5_s:'Generate the final verified report.', ring5_d:'Produces the structured output only after previous rings complete: quick take, comparison table, and a final recommendation.',
+    case_title:'Real Report Example', case_sub:'Generated in <strong>35 seconds</strong> for: "Best noise-cancelling headphones under $150"',
+    case_h:'Best Noise-Canceling Headphones Under $150', case_quick:'Quick Take',
+    cq1:'<strong>Sony WH-CH720N</strong> — best overall (source currency shown; verify current price).',
+    cq2:'<strong>JBL Tune 770NC</strong> — best budget under ~$100.',
+    cq3:'<strong>OneOdio Focus A6</strong> — entry option near ~$70.',
+    th1:'Model', th2:'Battery', th_price:'Price', th_comfort:'Comfort', th_verdict:'Verdict',
+    r1:'Best Overall', r2:'Best Budget', r3:'Entry Option',
+    case_sources:'Illustrative example only. Prices are shown in the cited source currency and may be outdated.',
+    full_preview:'Full Report Preview', save_example:'Save This Report',
+    price_title:'Simple pricing', price_sub:'One-time payment. No subscription.', once:'one-time',
+    price_local:'or equivalent in your local currency at checkout via Gumroad.',
+    f1:'Full Deep Search access', f2:'API keys: Tavily + Groq + Nebius', f3:'Verified local + global reports', f4:'Setup guide included', f5:'1 free trial before purchase',
+    buy_btn:'Get Full Access — $6',
+    faq_title:'FAQ', fq1:'How long does a real search take?', fa1:'Typically 5-40 seconds to a verified report.',
+    fq2:'What do I get for $6?', fa2:'Full access + Tavily, Groq, Nebius keys. One-time via Gumroad.',
+    fq3:'Free trial limits?', fa3:'1 trial per visitor. Up to 100 free searches/day site-wide.',
+    fq4:'Are sources real?', fa4:'Yes. The report appears after ranking documented sources.',
+    footer:'© 2026 Mido AI Store • Deep Search Agent V10.3', footer2:'Live sources. Always verify final local prices.',
+    modal_title:'Full Report — Headphones under $150', modal_q:'Query: Best noise-cancelling headphones under $150', modal_close:'Close',
+    modal_winner:'Winner: Sony WH-CH720N',
+    modal_summary:'Best overall ANC/comfort/battery. JBL Tune 770NC is best value.',
+    modal_sources_title:'Top Sources', modal_sources_list:'1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Local market listings',
+    modal_rec_title:'Final Recommendation', modal_rec_text:'Pick Sony WH-CH720N if budget allows. Pick JBL Tune 770NC for best value.',
+    v_best:'Best overall', v_budget:'Best budget', v_solid:'Solid alt', v_entry:'Entry pick',
+    searching:'Searching...', err_net:'Network issue. Try again.', err_trial:'Free trial already used.', err_daily:'Daily free limit reached.', err_license:'Invalid license key.' ,
+    sug1:'Best laptop for coding under 25000 EGP', sug2:'Best podcast mic under 3000 EGP', sug3:'Cheapest home internet in Egypt',
+    saved_ok:'Report saved on this device', saved_empty:'No report to save yet', skill_save_hint:'Save skill selected',
+    prog_sources:'Sources reviewed', prog_elapsed:'Elapsed', prog_remaining:'Remaining', prog_complete:'Research completed',
+    prog_used:'sources reviewed', answer:'Answer', sources:'Sources', actual_time:'Actual time'
+  },
+  ar: {
+    nav_buy:'احصل على الأداة — $6', pill:'⚡ بحث موثق • 5-40 ثانية • مصادر محلية وعالمية',
+    hero_title:'حوّل سؤالك إلى <span class="g">قرار موثّق</span> — قبل أن تدفع',
+    hero_desc:'اسأل مرة واحدة لتحصل على مصادر حية، ومقارنة واضحة، وتوصية مبنية على الأدلة خلال حوالي 5-40 ثانية.',
+    cta_try:'جرب البحث المجاني', cta_report:'شاهد التقرير الكامل',
+    t1:'✓ تجربة واحدة / زائر', t2:'✓ 100 بحث مجاني / يوم', t3:'✓ مفاتيح API بعد الشراء',
+    st_visitors:'الزوار', st_searches:'بحث اليوم', st_ok:'ناجح', st_fail:'فاشل', st_left:'متبقي اليوم',
+    skills_title:'مهارات البحث', skills_sub:'اختر المهارة قبل البحث. مهارة الحفظ تخزّن آخر تقرير على هذا الجهاز.',
+    sk1:'بحث عميق', sk2:'تلخيص', sk3:'مقارنة', sk4:'توصية', sk5:'فحص السعر', sk6:'حفظ التقرير',
+    demo_title:'تجربة حية', demo_sub:'محرك حقيقي. المراحل تضيء أثناء زحف العنكبوت على المصادر.',
+    ph:'أفضل سماعات إلغاء ضوضاء تحت 150 دولار', search_btn:'بحث 🔍', meta1:'مجاني: 1 / زائر', meta2:'الحد اليومي: 100',
+    s1:'بحث المصادر', s1d:'مصادر Tavily الحية', s2:'بناء الأطروحة', s2d:'الحجة الأساسية', s3:'تقليص وترتيب', s3d:'أقوى الإشارات', s4:'تقييم المخاطر', s4d:'محلي + عالمي', s5:'التقرير النهائي', s5d:'5-40 ثانية',
+    laws_title:'قوانين أسيموف للسلامة', laws_sub:'قواعد توجّه المحرك ليبقى مفيدًا وصادقًا وآمنًا لقراراتك الحقيقية.',
+    laws_trust:'لماذا هذا مهم؟ Mido مصمم لتقليل الإجابات الواثقة الخاطئة عبر إجبار التحقق من المصادر والترتيب ثم توصية نهائية يمكنك مراجعتها.',
+    law1_t:'لا ضرر بالثقة الكاذبة', law1_s:'لا تُعرض التخمينات كحقائق مثبتة.', law1_d:'إذا كان الدليل ضعيفًا يجب أن يقول التقرير ذلك. المحرك يفضّل المصادر المرتبة والأدلة ذات الدرجة.',
+    law2_t:'خدمة هدف البحث أولًا', law2_s:'تحسين القرار لا الدردشة.', law2_d:'المخرجات منظمة للتنفيذ: ملخص ومقارنة وتوصية.',
+    law3_t:'حماية النظام وحدود الاستخدام', law3_s:'استخدام عادل وحماية تجربة من الخادم.', law3_d:'التجربة المجانية محدودة لكل زائر ولكل يوم على الخادم وليس المتصفح فقط.',
+    law4_t:'احترام واقع السوق المحلي', law4_s:'إدراج سياق الأسعار المحلية عند الإمكان.', law4_d:'لأسئلة الشراء يحاول التقرير ربط المراجعات الدولية بنطاقات الأسعار المحلية.',
+    rings_title:'حلقات الحماية الخمس', rings_sub:'اضغط أي حلقة لقراءة الشرح الكامل. أثناء البحث تضيء الحلقات مع حركة العنكبوت.',
+    ring1_t:'الحلقة 1 — التحقق من المصدر', ring1_s:'جمع وتقييم مصادر حية (Tavily).', ring1_d:'يجمع العنكبوت مصادر حية متعددة ويربطها بدرجات صلة.',
+    ring2_t:'الحلقة 2 — بناء الأطروحة', ring2_s:'بناء حجة منطقية أساسية.', ring2_d:'يشكّل النظام أطروحة واضحة: ما الخيارات؟ ما المعايير؟ وما القرار المطلوب؟',
+    ring3_t:'الحلقة 3 — التقليص والترتيب', ring3_s:'الإبقاء على أقوى الأدلة فقط.', ring3_d:'من مجموعة مرشحة أكبر يضغط المحرك إلى أهم المصادر.',
+    ring4_t:'الحلقة 4 — تقييم المخاطر', ring4_s:'التحقق من مخاطر السوق والسياق.', ring4_d:'يفحص واقعية السعر وإشارات التوفر المحلي.',
+    ring5_t:'الحلقة 5 — معايرة الثقة', ring5_s:'توليد التقرير النهائي الموثق.', ring5_d:'يُنتج المخرج المنظم بعد اكتمال الحلقات السابقة.',
+    case_title:'مثال تقرير حقيقي', case_sub:'تم إنشاؤه خلال <strong>35 ثانية</strong> لسؤال: أفضل سماعات إلغاء ضوضاء تحت 150$',
+    case_h:'أفضل سماعات إلغاء ضوضاء تحت 150$', case_quick:'الخلاصة السريعة',
+    cq1:'<strong>Sony WH-CH720N</strong> — الأفضل إجمالًا (سعر تقديري).',
+    cq2:'<strong>JBL Tune 770NC</strong> — الأفضل اقتصاديًا تحت 100$.',
+    cq3:'<strong>OneOdio Focus A6</strong> — خيار دخول قرب 70$.',
+    th1:'الموديل', th2:'البطارية', th_price:'السعر', th_comfort:'الراحة', th_verdict:'الحكم',
+    r1:'الأفضل إجمالًا', r2:'الأفضل اقتصاديًا', r3:'خيار دخول',
+    case_sources:'مثال توضيحي فقط. الأسعار معروضة بعملة المصدر وقد تكون غير محدثة.',
+    full_preview:'معاينة التقرير الكامل', save_example:'حفظ هذا التقرير',
+    price_title:'تسعير بسيط', price_sub:'دفعة واحدة. بدون اشتراك.', once:'مرة واحدة',
+    price_local:'أو ما يعادلها بعملتك المحلية عند الدفع عبر Gumroad.',
+    f1:'وصول كامل للبحث العميق', f2:'مفاتيح API: Tavily + Groq + Nebius', f3:'تقارير موثقة محلية وعالمية', f4:'دليل الإعداد مشمول', f5:'تجربة مجانية واحدة قبل الشراء',
+    buy_btn:'احصل على الوصول الكامل — $6',
+    faq_title:'أسئلة شائعة', fq1:'كم يستغرق البحث الحقيقي؟', fa1:'عادة 5-40 ثانية حتى التقرير الموثق.',
+    fq2:'ماذا أحصل مقابل 6$؟', fa2:'وصول كامل + مفاتيح Tavily وGroq وNebius. دفعة واحدة عبر Gumroad.',
+    fq3:'حدود التجربة المجانية؟', fa3:'تجربة واحدة لكل زائر. حتى 100 بحث مجاني يوميًا للموقع.',
+    fq4:'هل المصادر حقيقية؟', fa4:'نعم. يظهر التقرير بعد ترتيب مصادر موثقة.',
+    footer:'© 2026 Mido AI Store • Deep Search Agent V10.3', footer2:'مصادر حية. تحقق دائمًا من الأسعار المحلية النهائية.',
+    modal_title:'التقرير الكامل — سماعات تحت 150$', modal_q:'السؤال: أفضل سماعات إلغاء ضوضاء تحت 150$', modal_close:'إغلاق',
+    modal_winner:'الفائز: Sony WH-CH720N',
+    modal_summary:'أفضل توازن لإلغاء الضوضاء والراحة والبطارية. JBL Tune 770NC الأفضل قيمة.',
+    modal_sources_title:'أقوى المصادر', modal_sources_list:'1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. قوائم السوق المحلية',
+    modal_rec_title:'التوصية النهائية', modal_rec_text:'اختر Sony WH-CH720N إن سمحت الميزانية. واختر JBL Tune 770NC لأفضل قيمة.',
+    v_best:'الأفضل إجمالًا', v_budget:'الأفضل اقتصاديًا', v_solid:'بديل قوي', v_entry:'خيار دخول',
+    searching:'جاري البحث...', err_net:'مشكلة شبكة. حاول مجددًا.', err_trial:'التجربة المجانية مستخدمة.', err_daily:'تم استهلاك الحد اليومي.',
+    sug1:'أفضل لابتوب برمجة تحت 25000ج', sug2:'أفضل مايك بودكاست تحت 3000ج', sug3:'أرخص إنترنت منزلي في مصر',
+    saved_ok:'تم حفظ التقرير على هذا الجهاز', saved_empty:'لا يوجد تقرير للحفظ بعد', skill_save_hint:'تم اختيار مهارة الحفظ',
+    prog_sources:'مصدرًا تمت مراجعته', prog_elapsed:'الوقت المنقضي', prog_remaining:'المتبقي', prog_complete:'اكتمل البحث',
+    prog_used:'مصادر تمت مراجعتها', answer:'الإجابة', sources:'المصادر', actual_time:'الوقت الفعلي'
+  },
+  fr: { nav_buy:"Obtenir l'accès — $6",pill:"⚡ Recherche vérifiée • 5-40s • Sources locales + mondiales",hero_title:"Obtenez un <span class=\"g\">rapport structuré</span> — pas seulement des liens",hero_desc:"Pipeline vérifié en 5 étapes avec sources locales et internationales — en environ 5-40 secondes.",cta_try:"Essai gratuit",cta_report:"Voir le rapport complet",t1:"✓ 1 essai gratuit / visiteur",t2:"✓ 100 recherches gratuites / jour",t3:"✓ Clés API après achat",st_visitors:"Visiteurs",st_searches:"Recherches aujourd'hui",st_ok:"Réussies",st_fail:"Échouées",st_left:"Restantes gratuites",skills_title:"Compétences de recherche",skills_sub:"Choisissez une compétence avant de chercher.",sk1:"Recherche approfondie",sk2:"Résumer",sk3:"Comparer",sk4:"Recommander",sk5:"Vérifier le prix",sk6:"Enregistrer",demo_title:"Démo en direct",demo_sub:"Moteur réel. Les étapes s'allument pendant la recherche.",ph:"Meilleurs casques ANC sous 150 $",search_btn:"Rechercher 🔍",meta1:"Gratuit : 1 / visiteur",meta2:"Plafond : 100",s1:"Recherche de sources",s1d:"Sources live",s2:"Construction de thèse",s2d:"Argument central",s3:"Réduire et classer",s3d:"Signaux forts",s4:"Contrôle des risques",s4d:"Local + mondial",s5:"Rapport final",s5d:"5-40 secondes",laws_title:"Lois de sécurité d'Asimov",laws_sub:"Ces règles guident le moteur.",laws_trust:"Pourquoi c'est important : Mido réduit les réponses fausses.",law1_t:"Ne pas nuire par fausse confiance",law1_s:"Ne pas présenter des suppositions comme des faits.",law1_d:"Si la preuve est faible, le rapport doit le dire.",law2_t:"Servir d'abord l'objectif",law2_s:"Optimiser la décision.",law2_d:"Sortie structurée : résumé, comparaison et recommandation.",law3_t:"Protéger le système",law3_s:"Usage équitable et protection côté serveur.",law3_d:"Les limites s'appliquent côté serveur par visiteur et par jour.",law4_t:"Respecter le marché local",law4_s:"Inclure le contexte de prix local.",law4_d:"Le rapport relie avis internationaux et prix locaux.",rings_title:"Cinq anneaux de protection",rings_sub:"Touchez un anneau pour lire l'explication complète.",ring1_t:"Anneau 1 — Vérification",ring1_s:"Collecter et noter des sources (Tavily).",ring1_d:"Plusieurs sources live avec scores de pertinence.",ring2_t:"Anneau 2 — Thèse",ring2_s:"Construire un argument logique.",ring2_d:"Le système forme une thèse claire.",ring3_t:"Anneau 3 — Réduire",ring3_s:"Garder seulement les preuves les plus fortes.",ring3_d:"Compression vers les sources les plus utiles.",ring4_t:"Anneau 4 — Risques",ring4_s:"Valider risques de marché.",ring4_d:"Réalisme des prix et disponibilité locale.",ring5_t:"Anneau 5 — Confiance",ring5_s:"Générer le rapport final vérifié.",ring5_d:"Produit le résumé et la recommandation finale.",case_title:"Exemple de rapport réel",case_sub:"Généré en <strong>35 secondes</strong>",case_h:"Meilleurs casques ANC sous 150 $",case_quick:"Résumé rapide",cq1:"<strong>Sony WH-CH720N</strong> — meilleur choix global.",cq2:"<strong>JBL Tune 770NC</strong> — meilleur budget.",cq3:"<strong>OneOdio Focus A6</strong> — option d'entrée.",th1:"Modèle",th2:"Batterie",th_price:"Prix",th_comfort:"Confort",th_verdict:"Verdict",r1:"Meilleur global",r2:"Meilleur budget",r3:"Entrée de gamme",case_sources:"Sources : SoundGuys, CNET, TechRadar.",full_preview:"Aperçu complet",save_example:"Enregistrer ce rapport",price_title:"Tarification simple",price_sub:"Paiement unique.",once:"unique",price_local:"ou équivalent en devise locale via Gumroad.",f1:"Accès complet Deep Search",f2:"Clés API : Tavily + Groq + Nebius",f3:"Rapports vérifiés locaux + internationaux",f4:"Guide d'installation inclus",f5:"1 essai gratuit avant achat",buy_btn:"Accès complet — $6",faq_title:"FAQ",fq1:"Combien de temps ?",fa1:"En général 5-40 secondes.",fq2:"Que comprend 6 $ ?",fa2:"Accès complet + clés Tavily, Groq, Nebius.",fq3:"Limites ?",fa3:"1 essai par visiteur. Jusqu'à 100/jour.",fq4:"Sources réelles ?",fa4:"Oui, après classement de sources documentées.",footer:"© 2026 Mido AI Store",footer2:"Sources live. Vérifiez les prix locaux.",modal_title:"Rapport complet",modal_q:"Question",modal_close:"Fermer",modal_winner:"Gagnant",modal_summary:"Résumé",modal_sources_title:"Principales sources",modal_sources_list:"Sources",modal_rec_title:"Recommandation finale",modal_rec_text:"Texte",v_best:"Meilleur global",v_budget:"Meilleur budget",v_solid:"Alternative solide",v_entry:"Entrée",searching:"Recherche...",err_net:"Problème réseau.",err_trial:"Essai déjà utilisé.",err_daily:"Limite atteinte.",sug1:"Meilleur laptop",sug2:"Meilleur micro",sug3:"Internet le moins cher",saved_ok:"Rapport enregistré",saved_empty:"Aucun rapport",skill_save_hint:"Compétence Enregistrer",prog_sources:"sources",prog_elapsed:"Écoulé",prog_remaining:"Restant",prog_complete:"Terminé",prog_used:"sources",answer:"Réponse",sources:"Sources",actual_time:"Temps réel"},
+  de: { nav_buy:"Zugang — $6",pill:"⚡ Verifizierte Recherche • 5-40s • Lokal + Global",hero_title:"Erhalten Sie einen <span class=\"g\">strukturierten Bericht</span>",hero_desc:"5-stufige verifizierte Pipeline in etwa 5-40 Sekunden.",cta_try:"Kostenlos testen",cta_report:"Vollbericht",t1:"✓ 1 Test / Besucher",t2:"✓ 100 Suchen / Tag",t3:"✓ API-Keys nach Kauf",st_visitors:"Besucher",st_searches:"Suchen heute",st_ok:"Erfolgreich",st_fail:"Fehlgeschlagen",st_left:"Frei übrig",skills_title:"Recherche-Skills",skills_sub:"Skill vor der Suche wählen.",sk1:"Deep Search",sk2:"Zusammenfassen",sk3:"Vergleichen",sk4:"Empfehlen",sk5:"Preis prüfen",sk6:"Bericht speichern",demo_title:"Live-Demo",demo_sub:"Echte Engine. Stufen leuchten während der Suche.",ph:"Beste ANC-Kopfhörer unter 150 $",search_btn:"Suchen 🔍",meta1:"Gratis: 1 / Besucher",meta2:"Tageslimit: 100",s1:"Quellensuche",s1d:"Tavily Live-Quellen",s2:"These",s2d:"Kernargument",s3:"Reduzieren",s3d:"Stärkste Signale",s4:"Risikocheck",s4d:"Lokal + global",s5:"Endbericht",s5d:"5-40 Sekunden",laws_title:"Asimov-Sicherheitsgesetze",laws_sub:"Regeln für nützliche und ehrliche Ausgabe.",laws_trust:"Warum das zählt: Mido reduziert falsche Antworten.",law1_t:"Kein Schaden",law1_s:"Vermutungen nicht als Fakten.",law1_d:"Bei schwacher Evidenz muss der Bericht das sagen.",law2_t:"Forschungsziel",law2_s:"Für Entscheidungen optimieren.",law2_d:"Strukturierte Ausgabe: Kurzfassung, Vergleich, Empfehlung.",law3_t:"System schützen",law3_s:"Fair Use und serverseitiger Schutz.",law3_d:"Gratis-Limits gelten serverseitig pro Besucher und Tag.",law4_t:"Lokale Marktrealität",law4_s:"Lokalen Preiskontext einbeziehen.",law4_d:"Kauf-Fragen verbinden internationale Reviews mit lokalen Preisen.",rings_title:"Fünf Schutzringe",rings_sub:"Ring antippen für Details.",ring1_t:"Ring 1 — Quellenprüfung",ring1_s:"Live-Quellen sammeln (Tavily).",ring1_d:"Mehrere Live-Quellen mit Relevanz-Scores.",ring2_t:"Ring 2 — These",ring2_s:"Logisches Kernargument.",ring2_d:"Klare These zu Optionen und Kriterien.",ring3_t:"Ring 3 — Reduzieren",ring3_s:"Nur stärkste Evidenz behalten.",ring3_d:"Komprimierung auf nützlichste Quellen.",ring4_t:"Ring 4 — Risikocheck",ring4_s:"Markt-Risiken prüfen.",ring4_d:"Preisrealismus und Verfügbarkeit.",ring5_t:"Ring 5 — Konfidenz",ring5_s:"Finalen Bericht erzeugen.",ring5_d:"Kurzfassung und Empfehlung nach Abschluss.",case_title:"Echtes Berichtsbeispiel",case_sub:"In <strong>35 Sekunden</strong> erzeugt",case_h:"Beste ANC-Kopfhörer unter 150 $",case_quick:"Kurzfassung",cq1:"<strong>Sony WH-CH720N</strong> — bestes Gesamtpaket.",cq2:"<strong>JBL Tune 770NC</strong> — bestes Budget.",cq3:"<strong>OneOdio Focus A6</strong> — Einstieg.",th1:"Modell",th2:"Akku",th_price:"Preis",th_comfort:"Komfort",th_verdict:"Urteil",r1:"Gesamtsieger",r2:"Bestes Budget",r3:"Einstieg",case_sources:"Quellen: SoundGuys, CNET, TechRadar.",full_preview:"Vollbericht",save_example:"Bericht speichern",price_title:"Einfache Preise",price_sub:"Einmalzahlung.",once:"einmalig",price_local:"oder Gegenwert in Ihrer Währung via Gumroad.",f1:"Voller Deep-Search-Zugang",f2:"API-Keys: Tavily + Groq + Nebius",f3:"Verifizierte Berichte",f4:"Setup-Guide",f5:"1 Gratis-Test",buy_btn:"Voller Zugang — $6",faq_title:"FAQ",fq1:"Wie lange dauert eine Suche?",fa1:"Typisch 5-40 Sekunden.",fq2:"Was enthält 6 $?",fa2:"Voller Zugang + Keys.",fq3:"Gratis-Limits?",fa3:"1 Test pro Besucher. Bis 100/Tag.",fq4:"Echte Quellen?",fa4:"Ja, nach Ranking dokumentierter Quellen.",footer:"© 2026 Mido AI Store",footer2:"Live-Quellen. Preise prüfen.",modal_title:"Vollbericht",modal_q:"Anfrage",modal_close:"Schließen",modal_winner:"Sieger",modal_summary:"Zusammenfassung",modal_sources_title:"Top-Quellen",modal_sources_list:"Quellen",modal_rec_title:"Finale Empfehlung",modal_rec_text:"Text",v_best:"Gesamtsieger",v_budget:"Bestes Budget",v_solid:"Solide Alternative",v_entry:"Einstieg",searching:"Suche...",err_net:"Netzwerkproblem.",err_trial:"Test genutzt.",err_daily:"Tageslimit erreicht.",sug1:"Bestes Laptop",sug2:"Bestes Mikro",sug3:"Günstigstes Internet",saved_ok:"Bericht gespeichert",saved_empty:"Kein Bericht",skill_save_hint:"Save-Skill aktiv",prog_sources:"Quellen geprüft",prog_elapsed:"Verstrichen",prog_remaining:"Verbleibend",prog_complete:"Abgeschlossen",prog_used:"Quellen",answer:"Antwort",sources:"Quellen",actual_time:"Echte Zeit"},
+  ja: { nav_buy:"アクセス — $6",pill:"⚡ 検証済み調査 • 5-40秒",hero_title:"完全な<span class=\"g\">構造化レポート</span>を取得",hero_desc:"5段階の検証パイプラインを約5-40秒で提供。",cta_try:"無料で試す",cta_report:"完全レポート",t1:"✓ 訪問者1回無料",t2:"✓ 1日100回無料",t3:"✓ 購入後APIキー",st_visitors:"訪問者",st_searches:"本日の検索",st_ok:"成功",st_fail:"失敗",st_left:"残り無料",skills_title:"リサーチスキル",skills_sub:"検索前にスキルを選択。",sk1:"ディープサーチ",sk2:"要約",sk3:"比較",sk4:"推奨",sk5:"価格チェック",sk6:"レポート保存",demo_title:"ライブデモ",demo_sub:"実エンジン。検索中にステージが点灯。",ph:"150ドル以下のベストANCヘッドホン",search_btn:"検索 🔍",meta1:"無料：訪問者1回",meta2:"1日上限：100",s1:"ソース検索",s1d:"Tavilyライブ",s2:"論旨構築",s2d:"核心",s3:"削減",s3d:"最強シグナル",s4:"リスク",s4d:"現地＋国際",s5:"最終レポート",s5d:"5-40秒",laws_title:"アシモフの安全法則",laws_sub:"有用・誠実な出力のためのルール。",laws_trust:"重要な理由：Midoは誤回答を減らす設計。",law1_t:"偽の自信で害を与えない",law1_s:"推測を事実としない。",law1_d:"証拠が弱い場合は明記。",law2_t:"調査目的優先",law2_s:"意思決定向けに最適化。",law2_d:"要約・比較・推奨の構造。",law3_t:"システム保護",law3_s:"公平利用とサーバー保護。",law3_d:"サーバー側で制限。",law4_t:"現地市場尊重",law4_s:"現地価格を含める。",law4_d:"国際レビューと現地価格を結ぶ。",rings_title:"5つの保護リング",rings_sub:"リングをタップして詳細。",ring1_t:"リング1 — ソース検証",ring1_s:"ライブソース収集。",ring1_d:"複数ソースにスコア付与。",ring2_t:"リング2 — 論旨",ring2_s:"論理的な核心。",ring2_d:"明確な論旨を形成。",ring3_t:"リング3 — 削減",ring3_s:"最強の証拠のみ。",ring3_d:"有用ソースに圧縮。",ring4_t:"リング4 — リスク",ring4_s:"市場リスク検証。",ring4_d:"価格の現実性確認。",ring5_t:"リング5 — 信頼度",ring5_s:"最終レポート生成。",ring5_d:"完了後に構造化出力。",case_title:"実レポート例",case_sub:"<strong>35秒</strong>で生成",case_h:"150ドル以下のベストANC",case_quick:"クイックまとめ",cq1:"<strong>Sony WH-CH720N</strong> — 総合ベスト。",cq2:"<strong>JBL Tune 770NC</strong> — コスパ最強。",cq3:"<strong>OneOdio Focus A6</strong> — 入門。",th1:"モデル",th2:"バッテリー",th_price:"価格",th_comfort:"快適性",th_verdict:"判定",r1:"総合ベスト",r2:"コスパ",r3:"入門",case_sources:"ソース：SoundGuys、CNET、TechRadar。",full_preview:"レポート全体",save_example:"保存",price_title:"シンプル価格",price_sub:"一回払い。",once:"一回",price_local:"またはGumroadで現地通貨の同等額。",f1:"フルDeep Search",f2:"APIキー：Tavily + Groq + Nebius",f3:"検証済みレポート",f4:"セットアップガイド",f5:"購入前に1回無料",buy_btn:"フルアクセス — $6",faq_title:"FAQ",fq1:"所要時間は？",fa1:"通常5-40秒。",fq2:"$6に含まれる？",fa2:"フルアクセス＋キー。",fq3:"無料制限？",fa3:"訪問者1回。1日100回。",fq4:"ソースは本物？",fa4:"はい、文書ソース順位付け後。",footer:"© 2026 Mido AI Store",footer2:"ライブソース。価格確認。",modal_title:"完全レポート",modal_q:"質問",modal_close:"閉じる",modal_winner:"最優秀",modal_summary:"まとめ",modal_sources_title:"主要ソース",modal_sources_list:"ソース",modal_rec_title:"最終推奨",modal_rec_text:"テキスト",v_best:"総合ベスト",v_budget:"コスパ",v_solid:"堅実",v_entry:"入門",searching:"検索中...",err_net:"ネットワーク問題。",err_trial:"無料使用済み。",err_daily:"上限到達。",sug1:"プログラミング用ノートPC",sug2:"ポッドキャストマイク",sug3:"最安インターネット",saved_ok:"レポート保存済み",saved_empty:"保存するレポートなし",skill_save_hint:"保存スキル選択済み",prog_sources:"ソース確認",prog_elapsed:"経過",prog_remaining:"残り",prog_complete:"完了",prog_used:"ソース",answer:"回答",sources:"ソース",actual_time:"実時間"},
+  zh: { nav_buy:"获取访问 — $6",pill:"⚡ 已验证研究 • 5-40秒",hero_title:"获取完整的<span class=\"g\">结构化报告</span>",hero_desc:"五阶段验证流程，约5-40秒完成。",cta_try:"免费试用",cta_report:"查看完整报告",t1:"✓ 每位访客1次免费",t2:"✓ 每天100次免费搜索",t3:"✓ 购买后提供API密钥",st_visitors:"访客",st_searches:"今日搜索",st_ok:"成功",st_fail:"失败",st_left:"今日剩余",skills_title:"研究技能",skills_sub:"搜索前选择技能。",sk1:"深度搜索",sk2:"摘要",sk3:"对比",sk4:"推荐",sk5:"价格检查",sk6:"保存报告",demo_title:"在线演示",demo_sub:"真实引擎。搜索时阶段会点亮。",ph:"150美元以下最佳降噪耳机",search_btn:"搜索 🔍",meta1:"免费：每位访客1次",meta2:"每日上限：100",s1:"来源搜索",s1d:"Tavily实时来源",s2:"论点构建",s2d:"核心论证",s3:"筛选排序",s3d:"最强信号",s4:"风险检查",s4d:"本地+国际",s5:"最终报告",s5d:"5-40秒",laws_title:"阿西莫夫安全法则",laws_sub:"这些规则引导引擎。",laws_trust:"为什么重要：Mido减少错误回答。",law1_t:"不以虚假信心造成伤害",law1_s:"不要把猜测说成事实。",law1_d:"如果证据不足，报告必须说明。",law2_t:"优先服务研究目标",law2_s:"为决策优化。",law2_d:"输出结构化：摘要、对比、推荐。",law3_t:"保护系统",law3_s:"公平使用与服务端保护。",law3_d:"免费额度在服务器侧限制。",law4_t:"尊重本地市场",law4_s:"尽可能纳入本地价格。",law4_d:"连接国际评测与本地价格。",rings_title:"五层保护环",rings_sub:"点击任意环查看说明。",ring1_t:"第1环 — 来源验证",ring1_s:"收集并评分来源。",ring1_d:"多个来源附加相关度分数。",ring2_t:"第2环 — 论点构建",ring2_s:"构建核心论点。",ring2_d:"形成清晰论点。",ring3_t:"第3环 — 筛选排序",ring3_s:"只保留最强证据。",ring3_d:"压缩到最有用来源。",ring4_t:"第4环 — 风险检查",ring4_s:"验证风险。",ring4_d:"检查价格与可获得性。",ring5_t:"第5环 — 置信校准",ring5_s:"生成最终报告。",ring5_d:"输出结构化结果。",case_title:"真实报告示例",case_sub:"在<strong>35秒</strong>内生成",case_h:"150美元以下最佳降噪耳机",case_quick:"快速总结",cq1:"<strong>Sony WH-CH720N</strong> — 综合最佳。",cq2:"<strong>JBL Tune 770NC</strong> — 性价比最佳。",cq3:"<strong>OneOdio Focus A6</strong> — 入门选择。",th1:"型号",th2:"电池",th_price:"价格",th_comfort:"舒适度",th_verdict:"结论",r1:"综合最佳",r2:"性价比最佳",r3:"入门选择",case_sources:"来源：SoundGuys、CNET、TechRadar。",full_preview:"完整报告预览",save_example:"保存此报告",price_title:"简单定价",price_sub:"一次性付款。",once:"一次性",price_local:"或通过Gumroad以当地货币等值支付。",f1:"完整深度搜索访问",f2:"API密钥：Tavily + Groq + Nebius",f3:"已验证报告",f4:"包含设置指南",f5:"购买前1次免费试用",buy_btn:"获取完整访问 — $6",faq_title:"常见问题",fq1:"真实搜索需要多久？",fa1:"通常5-40秒。",fq2:"6美元包含什么？",fa2:"完整访问 + 密钥。",fq3:"免费试用限制？",fa3:"每位访客1次。每天最多100次。",fq4:"来源是否真实？",fa4:"是，排序文档来源后显示。",footer:"© 2026 Mido AI Store",footer2:"实时来源。请核实最终价格。",modal_title:"完整报告",modal_q:"问题",modal_close:"关闭",modal_winner:"优胜",modal_summary:"总结",modal_sources_title:"主要来源",modal_sources_list:"来源",modal_rec_title:"最终推荐",modal_rec_text:"文本",v_best:"综合最佳",v_budget:"性价比最佳",v_solid:"稳健备选",v_entry:"入门",searching:"搜索中...",err_net:"网络问题。",err_trial:"试用已使用。",err_daily:"已达每日上限。",sug1:"适合编程的笔记本",sug2:"最佳播客麦克风",sug3:"最便宜的家庭宽带",saved_ok:"报告已保存",saved_empty:"没有可保存的报告",skill_save_hint:"已选择保存技能",prog_sources:"已审查来源",prog_elapsed:"已用时间",prog_remaining:"剩余",prog_complete:"完成",prog_used:"来源",answer:"回答",sources:"来源",actual_time:"实际时间"},
+  es: { nav_buy:"Obtener acceso — $6",pill:"⚡ Investigación verificada • 5-40s",hero_title:"Obtén un <span class=\"g\">informe estructurado</span>",hero_desc:"Pipeline verificado de 5 etapas en unos 5-40 segundos.",cta_try:"Prueba gratis",cta_report:"Ver informe completo",t1:"✓ 1 prueba / visitante",t2:"✓ 100 búsquedas gratis / día",t3:"✓ Claves API tras la compra",st_visitors:"Visitantes",st_searches:"Búsquedas hoy",st_ok:"Exitosas",st_fail:"Fallidas",st_left:"Gratis restantes",skills_title:"Skills de investigación",skills_sub:"Elige un skill antes de buscar.",sk1:"Búsqueda profunda",sk2:"Resumir",sk3:"Comparar",sk4:"Recomendar",sk5:"Revisar precio",sk6:"Guardar informe",demo_title:"Demo en vivo",demo_sub:"Motor real. Las etapas se iluminan durante la búsqueda.",ph:"Mejores auriculares ANC por menos de $150",search_btn:"Buscar 🔍",meta1:"Gratis: 1 / visitante",meta2:"Tope diario: 100",s1:"Búsqueda de fuentes",s1d:"Fuentes live",s2:"Construcción de tesis",s2d:"Argumento central",s3:"Reducir y ordenar",s3d:"Señales fuertes",s4:"Control de riesgos",s4d:"Local + global",s5:"Informe final",s5d:"5-40 segundos",laws_title:"Leyes de seguridad de Asimov",laws_sub:"Reglas para una salida útil y honesta.",laws_trust:"Por qué importa: Mido reduce respuestas erróneas.",law1_t:"No dañar con falsa confianza",law1_s:"No presentar conjeturas como hechos.",law1_d:"Si la evidencia es débil, el informe debe decirlo.",law2_t:"Servir el objetivo de investigación",law2_s:"Optimizar la decisión.",law2_d:"Salida estructurada: resumen, comparación, recomendación.",law3_t:"Proteger el sistema",law3_s:"Uso justo y protección en servidor.",law3_d:"Los límites se aplican en el servidor.",law4_t:"Respetar el mercado local",law4_s:"Incluir contexto de precios locales.",law4_d:"Conecta reseñas internacionales con precios locales.",rings_title:"Cinco anillos de protección",rings_sub:"Toca un anillo para leer el detalle.",ring1_t:"Anillo 1 — Verificación",ring1_s:"Recoger fuentes live.",ring1_d:"Varias fuentes con puntuación.",ring2_t:"Anillo 2 — Tesis",ring2_s:"Construir el argumento.",ring2_d:"Tesis clara sobre opciones.",ring3_t:"Anillo 3 — Reducir",ring3_s:"Solo la evidencia más fuerte.",ring3_d:"Compresión a fuentes útiles.",ring4_t:"Anillo 4 — Riesgos",ring4_s:"Validar riesgos de mercado.",ring4_d:"Realismo de precios y disponibilidad.",ring5_t:"Anillo 5 — Confianza",ring5_s:"Generar el informe final.",ring5_d:"Resumen y recomendación final.",case_title:"Ejemplo de informe real",case_sub:"Generado en <strong>35 segundos</strong>",case_h:"Mejores auriculares ANC bajo $150",case_quick:"Resumen rápido",cq1:"<strong>Sony WH-CH720N</strong> — mejor global.",cq2:"<strong>JBL Tune 770NC</strong> — mejor presupuesto.",cq3:"<strong>OneOdio Focus A6</strong> — entrada.",th1:"Modelo",th2:"Batería",th_price:"Precio",th_comfort:"Comodidad",th_verdict:"Veredicto",r1:"Mejor global",r2:"Mejor presupuesto",r3:"Entrada",case_sources:"Fuentes: SoundGuys, CNET, TechRadar.",full_preview:"Vista completa",save_example:"Guardar este informe",price_title:"Precio simple",price_sub:"Pago único.",once:"único",price_local:"o equivalente en moneda local vía Gumroad.",f1:"Acceso completo",f2:"Claves API: Tavily + Groq + Nebius",f3:"Informes verificados",f4:"Guía de configuración",f5:"1 prueba gratis",buy_btn:"Acceso completo — $6",faq_title:"FAQ",fq1:"¿Cuánto tarda?",fa1:"Normalmente 5-40 segundos.",fq2:"¿Qué incluye $6?",fa2:"Acceso completo + claves.",fq3:"¿Límites?",fa3:"1 por visitante. Hasta 100/día.",fq4:"¿Fuentes reales?",fa4:"Sí, tras rankear fuentes documentadas.",footer:"© 2026 Mido AI Store",footer2:"Fuentes en vivo. Verifica precios.",modal_title:"Informe completo",modal_q:"Consulta",modal_close:"Cerrar",modal_winner:"Ganador",modal_summary:"Resumen",modal_sources_title:"Fuentes",modal_sources_list:"Fuentes",modal_rec_title:"Recomendación",modal_rec_text:"Texto",v_best:"Mejor global",v_budget:"Mejor presupuesto",v_solid:"Alternativa",v_entry:"Entrada",searching:"Buscando...",err_net:"Problema de red.",err_trial:"Prueba usada.",err_daily:"Límite alcanzado.",sug1:"Mejor portátil",sug2:"Mejor micrófono",sug3:"Internet más barato",saved_ok:"Informe guardado",saved_empty:"No hay informe",skill_save_hint:"Skill Guardar",prog_sources:"fuentes",prog_elapsed:"Transcurrido",prog_remaining:"Restante",prog_complete:"Completado",prog_used:"fuentes",answer:"Respuesta",sources:"Fuentes",actual_time:"Tiempo real"},
+  pt: { nav_buy:"Obter acesso — $6",pill:"⚡ Pesquisa verificada • 5-40s",hero_title:"Obtenha um <span class=\"g\">relatório estruturado</span>",hero_desc:"Pipeline verificado de 5 etapas em cerca de 5-40 segundos.",cta_try:"Teste grátis",cta_report:"Ver relatório completo",t1:"✓ 1 teste / visitante",t2:"✓ 100 pesquisas grátis / dia",t3:"✓ Chaves API após compra",st_visitors:"Visitantes",st_searches:"Pesquisas hoje",st_ok:"Sucesso",st_fail:"Falhas",st_left:"Grátis restantes",skills_title:"Skills de pesquisa",skills_sub:"Escolha um skill antes de pesquisar.",sk1:"Busca profunda",sk2:"Resumir",sk3:"Comparar",sk4:"Recomendar",sk5:"Checar preço",sk6:"Salvar relatório",demo_title:"Demo ao vivo",demo_sub:"Motor real. As etapas acendem durante a pesquisa.",ph:"Melhores fones ANC por menos de $150",search_btn:"Pesquisar 🔍",meta1:"Grátis: 1 / visitante",meta2:"Limite diário: 100",s1:"Busca de fontes",s1d:"Fontes live",s2:"Construção da tese",s2d:"Argumento central",s3:"Reduzir e rankear",s3d:"Sinais fortes",s4:"Checagem de risco",s4d:"Local + global",s5:"Relatório final",s5d:"5-40 segundos",laws_title:"Leis de segurança de Asimov",laws_sub:"Regras para saída útil e honesta.",laws_trust:"Por que importa: Mido reduz respostas erradas.",law1_t:"Não causar dano",law1_s:"Não apresentar palpites como fatos.",law1_d:"Se a evidência for fraca, o relatório deve dizer.",law2_t:"Servir o objetivo",law2_s:"Otimizar a decisão.",law2_d:"Saída estruturada: resumo, comparação, recomendação.",law3_t:"Proteger o sistema",law3_s:"Uso justo e proteção no servidor.",law3_d:"Limites aplicados no servidor.",law4_t:"Respeitar o mercado local",law4_s:"Incluir contexto de preços locais.",law4_d:"Conecta reviews internacionais com preços locais.",rings_title:"Cinco anéis de proteção",rings_sub:"Toque um anel para ler o detalhe.",ring1_t:"Anel 1 — Verificação",ring1_s:"Coletar fontes live.",ring1_d:"Várias fontes com scores.",ring2_t:"Anel 2 — Tese",ring2_s:"Montar o argumento.",ring2_d:"Tese clara sobre opções.",ring3_t:"Anel 3 — Reduzir",ring3_s:"Só a evidência mais forte.",ring3_d:"Compressão para fontes úteis.",ring4_t:"Anel 4 — Riscos",ring4_s:"Validar riscos de mercado.",ring4_d:"Realismo de preço e disponibilidade.",ring5_t:"Anel 5 — Confiança",ring5_s:"Gerar o relatório final.",ring5_d:"Resumo e recomendação final.",case_title:"Exemplo de relatório real",case_sub:"Gerado em <strong>35 segundos</strong>",case_h:"Melhores fones ANC abaixo de $150",case_quick:"Resumo rápido",cq1:"<strong>Sony WH-CH720N</strong> — melhor geral.",cq2:"<strong>JBL Tune 770NC</strong> — melhor custo.",cq3:"<strong>OneOdio Focus A6</strong> — entrada.",th1:"Modelo",th2:"Bateria",th_price:"Preço",th_comfort:"Conforto",th_verdict:"Veredito",r1:"Melhor geral",r2:"Melhor custo",r3:"Entrada",case_sources:"Fontes: SoundGuys, CNET, TechRadar.",full_preview:"Prévia completa",save_example:"Salvar este relatório",price_title:"Preço simples",price_sub:"Pagamento único.",once:"único",price_local:"ou equivalente em moeda local via Gumroad.",f1:"Acesso completo",f2:"Chaves API: Tavily + Groq + Nebius",f3:"Relatórios verificados",f4:"Guia de configuração",f5:"1 teste grátis",buy_btn:"Acesso completo — $6",faq_title:"FAQ",fq1:"Quanto tempo?",fa1:"Normalmente 5-40 segundos.",fq2:"O que inclui $6?",fa2:"Acesso completo + chaves.",fq3:"Limites?",fa3:"1 por visitante. Até 100/dia.",fq4:"Fontes reais?",fa4:"Sim, após rankear fontes documentadas.",footer:"© 2026 Mido AI Store",footer2:"Fontes ao vivo. Verifique preços.",modal_title:"Relatório completo",modal_q:"Consulta",modal_close:"Fechar",modal_winner:"Vencedor",modal_summary:"Resumo",modal_sources_title:"Fontes",modal_sources_list:"Fontes",modal_rec_title:"Recomendação",modal_rec_text:"Texto",v_best:"Melhor geral",v_budget:"Melhor custo",v_solid:"Alternativa sólida",v_entry:"Entrada",searching:"Pesquisando...",err_net:"Problema de rede.",err_trial:"Teste usado.",err_daily:"Limite atingido.",sug1:"Melhor notebook",sug2:"Melhor microfone",sug3:"Internet mais barata",saved_ok:"Relatório salvo",saved_empty:"Nenhum relatório",skill_save_hint:"Skill Salvar",prog_sources:"fontes",prog_elapsed:"Decorrido",prog_remaining:"Restante",prog_complete:"Concluído",prog_used:"fontes",answer:"Resposta",sources:"Fontes",actual_time:"Tempo real"}
+};
 
 function D(){return T[currentLang]||T.en;}
-function escapeHtml(str) { return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
-function inlineMd(text) { let s = escapeHtml(text); s = s.replace(/`([^`]+)`/g, "<code>$1</code>"); s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>"); s = s.replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>"); return s; }
-function isTableRow(line) { const t = line.trim(); return t.startsWith("|") && t.endsWith("|") && (t.match(/\|/g) || []).length >= 2; }
-function isSeparatorRow(line) { const t = line.trim(); if (!isTableRow(t)) return false; const cells = t.slice(1, -1).split("|").map(c => c.trim()); return cells.every(c => /^:?-{1,}:?$/.test(c)); }
-function parseTableCells(line) { return line.trim().slice(1, -1).split("|").map(c => c.trim()); }
-function renderTable(headers, aligns, rows) {
-  let html = "<table><thead><tr>";
-  for (let i = 0; i < headers.length; i++) html += `<th style="text-align:${aligns[i]||'left'}">${inlineMd(headers[i])}</th>`;
-  html += "</tr></thead><tbody>";
-  for (const row of rows) { html += "<tr>"; for (let i = 0; i < headers.length; i++) html += `<td style="text-align:${aligns[i]||'left'}">${inlineMd(row[i] || "")}</td>`; html += "</tr>"; }
-  return html + "</tbody></table>";
-}
-function parseMarkdown(md) {
-  if (!md) return "";
-  const lines = String(md).replace(/\r\n/g, "\n").split("\n");
-  const out = []; let i = 0, inUl = false, inOl = false, inCode = false, codeBuf = [];
-  function closeLists() { if (inUl) { out.push("</ul>"); inUl = false; } if (inOl) { out.push("</ol>"); inOl = false; } }
-  while (i < lines.length) {
-    const line = lines[i], trimmed = line.trim();
-    if (trimmed.startsWith("```")) {
-      if (!inCode) { closeLists(); inCode = true; codeBuf = []; } 
-      else { out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>"); inCode = false; codeBuf = []; }
-      i++; continue;
-    }
-    if (inCode) { codeBuf.push(line); i++; continue; }
-    if (trimmed === "") { closeLists(); i++; continue; }
-    if (isTableRow(line) && i + 1 < lines.length && isSeparatorRow(lines[i + 1])) {
-      closeLists(); const headers = parseTableCells(line); const aligns = parseTableCells(lines[i + 1]).map(c => c.startsWith(':') && c.endsWith(':') ? 'center' : c.endsWith(':') ? 'right' : 'left');
-      const rows = []; i += 2;
-      while (i < lines.length && isTableRow(lines[i])) { rows.push(parseTableCells(lines[i])); i++; }
-      out.push(renderTable(headers, aligns, rows)); continue;
-    }
-    const h = trimmed.match(/^(#{1,6})\s+(.*)$/);
-    if (h) { closeLists(); out.push(`<h${h[1].length}>${inlineMd(h[2])}</h${h[1].length}>`); i++; continue; }
-    if (/^(\-{3,}|\*{3,}|_{3,})$/.test(trimmed)) { closeLists(); out.push("<hr>"); i++; continue; }
-    const ulMatch = trimmed.match(/^[-*+]\s+(.*)$/);
-    if (ulMatch) { if (inOl) { out.push("</ol>"); inOl = false; } if (!inUl) { out.push("<ul>"); inUl = true; } out.push("<li>" + inlineMd(ulMatch[1]) + "</li>"); i++; continue; }
-    const olMatch = trimmed.match(/^\d+\.\s+(.*)$/);
-    if (olMatch) { if (inUl) { out.push("</ul>"); inUl = false; } if (!inOl) { out.push("<ol>"); inOl = true; } out.push("<li>" + inlineMd(olMatch[1]) + "</li>"); i++; continue; }
-    closeLists(); out.push("<p>" + inlineMd(trimmed) + "</p>"); i++;
-  }
-  if (inCode) out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
-  closeLists(); return out.join("\n");
-}
-
-function renderLaws(){
-  var d=D(); var items=[['01',d.law1_t,d.law1_s,d.law1_d],['02',d.law2_t,d.law2_s,d.law2_d],['03',d.law3_t,d.law3_s,d.law3_d],['04',d.law4_t,d.law4_s,d.law4_d]];
-  document.getElementById('lawsList').innerHTML=items.map(function(it,i){ return '<div class="xcard" data-xcard="law'+i+'"><div class="top"><span class="num">LAW '+it[0]+'</span><span class="chev">▼</span></div><h3>'+it[1]+'</h3><div class="short">'+it[2]+'</div><div class="detail">'+it[3]+'</div></div>'; }).join('');
-}
-function renderRings(){
-  var d=D(); var colors=['#ef4444','#7c5cff','#10b981','#f59e0b','#8b5cf6'];
-  var items=[[d.ring1_t,d.ring1_s,d.ring1_d],[d.ring2_t,d.ring2_s,d.ring2_d],[d.ring3_t,d.ring3_s,d.ring3_d],[d.ring4_t,d.ring4_s,d.ring4_d],[d.ring5_t,d.ring5_s,d.ring5_d]];
-  document.getElementById('ringsList').innerHTML=items.map(function(it,i){ return '<div class="xcard ring-card" data-ring="'+i+'" data-xcard="ring'+i+'"><div class="top"><span class="num" style="color:'+colors[i]+'">RING 0'+(i+1)+'</span><span class="chev">▼</span></div><h3>'+it[0]+'</h3><div class="short">'+it[1]+'</div><div class="detail">'+it[2]+'</div></div>'; }).join('');
-}
+var SKILL_NAMES={
+  en:['Deep Search','Summarize','Compare','Recommend','Price Check','Save Report','Fact Check','Pros & Cons','Buying Guide','Local Price Check','Source Audit','Risk Check','Extract Facts','Outline','Decision Matrix'],
+  ar:['بحث عميق','تلخيص','مقارنة','توصية','فحص السعر','حفظ التقرير','تدقيق الحقائق','الإيجابيات والسلبيات','دليل الشراء','فحص السعر المحلي','تدقيق المصادر','فحص المخاطر','استخراج الحقائق','إنشاء مخطط','مصفوفة القرار'],
+  fr:['Recherche approfondie','Résumé','Comparer','Recommander','Vérifier le prix','Enregistrer','Vérifier les faits','Pour et contre','Guide d’achat','Prix local','Audit des sources','Risques','Extraire les faits','Plan détaillé','Matrice de décision'],
+  de:['Tiefensuche','Zusammenfassen','Vergleichen','Empfehlen','Preisprüfung','Bericht speichern','Fakten prüfen','Vor- und Nachteile','Kaufratgeber','Lokaler Preis','Quellenprüfung','Risiken prüfen','Fakten extrahieren','Gliederung','Entscheidungsmatrix'],
+  es:['Búsqueda profunda','Resumir','Comparar','Recomendar','Revisar precio','Guardar informe','Verificar hechos','Pros y contras','Guía de compra','Precio local','Auditar fuentes','Revisar riesgos','Extraer hechos','Esquema','Matriz de decisión'],
+  pt:['Busca profunda','Resumir','Comparar','Recomendar','Verificar preço','Salvar relatório','Verificar fatos','Prós e contras','Guia de compra','Preço local','Auditar fontes','Verificar riscos','Extrair fatos','Esquema','Matriz de decisão'],
+  ja:['ディープサーチ','要約','比較','推奨','価格確認','レポート保存','事実確認','長所と短所','購入ガイド','現地価格','ソース監査','リスク確認','事実抽出','アウトライン','意思決定マトリクス'],
+  zh:['深度搜索','摘要','对比','推荐','价格检查','保存报告','事实核查','优缺点','购买指南','本地价格检查','来源审计','风险检查','提取事实','内容大纲','决策矩阵']
+};
+var SKILL_IDS=['deep_search','summarize','compare','recommend','price_check','save','fact_check','pros_cons','buying_guide','local_price_check','source_audit','risk_check','extract_facts','outline','decision_matrix'];
 function renderSkills(){
   var names=SKILL_NAMES[currentLang]||SKILL_NAMES.en;
-  document.getElementById('skills').innerHTML=SKILL_IDS.map(function(id,i){ return '<button type="button" class="skill'+(id===skill?' on':'')+'" data-skill="'+id+'">'+esc(names[i]||SKILL_NAMES.en[i])+'</button>'; }).join('');
+  document.getElementById('skills').innerHTML=SKILL_IDS.map(function(id,i){
+    return '<button type="button" class="skill'+(i===0?' on':'')+'" data-skill="'+id+'">'+esc(names[i]||SKILL_NAMES.en[i])+'</button>';
+  }).join('');
 }
 function applyLang(lang){
-  if(!T[lang]) lang='en'; currentLang=lang; try{localStorage.setItem('mido_lang',lang);}catch(e){}
-  var rtl=lang==='ar'; document.documentElement.lang=lang; document.documentElement.dir=rtl?'rtl':'ltr';
+  if(!T[lang]) lang='en';
+  currentLang=lang;
+  try{localStorage.setItem('mido_lang',lang);}catch(e){}
+  var rtl=lang==='ar';
+  document.documentElement.lang=lang;
+  document.documentElement.dir=rtl?'rtl':'ltr';
   document.body.style.fontFamily=rtl?"'Cairo','Inter',system-ui,sans-serif":"'Inter','Cairo',system-ui,sans-serif";
   var dict=D();
   document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(dict[k]!=null)el.textContent=dict[k];});
   document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(dict[k]!=null)el.innerHTML=dict[k];});
   document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){var k=el.getAttribute('data-i18n-placeholder');if(dict[k]!=null)el.placeholder=dict[k];});
-  var go=document.getElementById('go'); if(go&&!go.classList.contains('loading')) go.textContent=dict.search_btn;
-  renderLaws(); renderRings(); renderSkills();
+  var go=document.getElementById('go');
+  if(go&&!go.classList.contains('loading')) go.textContent=dict.search_btn;
+  renderLaws();renderRings();renderSugs();renderSkills();
 }
-
-var langBtn=document.getElementById('langBtn'), langMenu=document.getElementById('langMenu');
-langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.toggle('open');});
+function renderLaws(){
+  var d=D();
+  var items=[['01',d.law1_t,d.law1_s,d.law1_d],['02',d.law2_t,d.law2_s,d.law2_d],['03',d.law3_t,d.law3_s,d.law3_d],['04',d.law4_t,d.law4_s,d.law4_d]];
+  document.getElementById('lawsList').innerHTML=items.map(function(it,i){
+    return '<div class="xcard" data-xcard="law'+i+'"><div class="top"><span class="num">LAW '+it[0]+'</span><span class="chev">▼</span></div><h3>'+it[1]+'</h3><div class="short">'+it[2]+'</div><div class="detail">'+it[3]+'</div></div>';
+  }).join('');
+}
+function renderRings(){
+  var d=D();
+  var colors=['#ef4444','#7c5cff','#10b981','#f59e0b','#8b5cf6'];
+  var items=[[d.ring1_t,d.ring1_s,d.ring1_d],[d.ring2_t,d.ring2_s,d.ring2_d],[d.ring3_t,d.ring3_s,d.ring3_d],[d.ring4_t,d.ring4_s,d.ring4_d],[d.ring5_t,d.ring5_s,d.ring5_d]];
+  document.getElementById('ringsList').innerHTML=items.map(function(it,i){
+    return '<div class="xcard ring-card" data-ring="'+i+'" data-xcard="ring'+i+'"><div class="top"><span class="num" style="color:'+colors[i]+'">RING 0'+(i+1)+'</span><span class="chev">▼</span></div><h3>'+it[0]+'</h3><div class="short">'+it[1]+'</div><div class="detail">'+it[2]+'</div></div>';
+  }).join('');
+}
+function renderSugs(){
+  var d=D();
+  document.getElementById('sugs').innerHTML=[d.sug1,d.sug2,d.sug3].map(function(s){return '<button type="button" class="sug">'+s+'</button>';}).join('');
+}
+document.addEventListener('click',function(e){
+  var card=e.target.closest('.xcard[data-xcard]');
+  if(card){
+    var was=card.classList.contains('open');
+    card.parentElement.querySelectorAll('.xcard').forEach(function(c){c.classList.remove('open','glow-on');});
+    if(!was){card.classList.add('open');glowPulse(card,1200);}
+    if(card.classList.contains('ring-card')) illuminateAllRings();
+  }
+});
+var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu');
+langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.toggle('open');glowPulse(langBtn,600);});
 document.addEventListener('click',function(e){if(!langMenu.contains(e.target)&&!langBtn.contains(e.target))langMenu.classList.remove('open');});
 langMenu.addEventListener('click',function(e){
-  e.stopPropagation(); var opt=e.target.closest('.lang-option'); if(!opt)return;
-  document.getElementById('flag').textContent=opt.getAttribute('data-f'); document.getElementById('langName').textContent=opt.getAttribute('data-n');
-  langMenu.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');}); opt.classList.add('active'); langMenu.classList.remove('open'); applyLang(opt.getAttribute('data-l')); 
+  e.stopPropagation();
+  var opt=e.target.closest('.lang-option');if(!opt)return;
+  document.getElementById('flag').textContent=opt.getAttribute('data-f');
+  document.getElementById('langName').textContent=opt.getAttribute('data-n');
+  langMenu.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');});
+  opt.classList.add('active');langMenu.classList.remove('open');
+  applyLang(opt.getAttribute('data-l'));
+  glowPulse(langBtn,800);
 });
 try{var saved=localStorage.getItem('mido_lang')||'en';var m=document.querySelector('.lang-option[data-l="'+saved+'"]');if(m){document.getElementById('flag').textContent=m.getAttribute('data-f');document.getElementById('langName').textContent=m.getAttribute('data-n');document.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');});m.classList.add('active');}applyLang(saved);}catch(e){applyLang('en');}
 
-document.addEventListener('click',function(e){ var card=e.target.closest('.xcard[data-xcard]'); if(card){ var was=card.classList.contains('open'); card.parentElement.querySelectorAll('.xcard').forEach(function(c){c.classList.remove('open','glow-on');}); if(!was){card.classList.add('open');} } });
-document.getElementById('skills').addEventListener('click',function(e){ var b=e.target.closest('.skill'); if(!b)return; document.querySelectorAll('.skill').forEach(function(x){x.classList.remove('on','glow-on');}); b.classList.add('on'); skill=b.getAttribute('data-skill')||'deep_search'; });
-
-document.getElementById('pasteBtn').addEventListener('click', async function() { try { var text = await navigator.clipboard.readText(); document.getElementById('q').value = text; } catch (err) {} });
-
+document.getElementById('skills').addEventListener('click',function(e){
+  var b=e.target.closest('.skill');if(!b)return;
+  document.querySelectorAll('.skill').forEach(function(x){x.classList.remove('on','glow-on');});
+  b.classList.add('on');glowPulse(b,1000);
+  skill=b.getAttribute('data-skill')||'deep_search';
+  if(skill==='save'){
+    toast(D().skill_save_hint);
+    if(lastReportText){saveReport(lastReportText);}
+  }
+});
+document.getElementById('sugs').addEventListener('click',function(e){
+  var b=e.target.closest('.sug');if(!b)return;document.getElementById('q').value=b.textContent;glowPulse(b,700);
+});
+function saveReport(text){
+  if(!text){toast(D().saved_empty);return;}
+  try{
+    localStorage.setItem('mido_saved_report', text);
+    localStorage.setItem('mido_saved_at', new Date().toISOString());
+    toast(D().saved_ok);
+  }catch(e){toast(D().err_net);}
+}
+document.getElementById('saveExample').addEventListener('click',function(){
+  var d=D();
+  var txt=[d.case_h,d.case_quick,d.cq1.replace(/<[^>]+>/g,''),d.cq2.replace(/<[^>]+>/g,''),d.cq3.replace(/<[^>]+>/g,''),d.modal_rec_text].join('\n');
+  lastReportText=txt;saveReport(txt);glowPulse(this,900);
+});
 function vid(){try{var id=localStorage.getItem('mido_vid');if(!id){id='v_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('mido_vid',id);}return id;}catch(e){return 'v_'+Date.now();}}
 var VISITOR_ID=vid();
-
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function safeUrl(value){try{var u=new URL(String(value||''),location.origin);return (u.protocol==='http:'||u.protocol==='https:')?u.href:'#';}catch(e){return '#';}}
 async function fetchStats(){
   try{
-    var r=await fetch(WORKER_URL+'/stats',{cache:'no-store'}); if(!r.ok)return;
+    var r=await fetch(WORKER_URL+'/stats',{cache:'no-store'});if(!r.ok)return;
     var d=await r.json();
-    document.getElementById('stVisitors').textContent=d.total_visitors||0; document.getElementById('stSearches').textContent=d.today_searches||0; document.getElementById('stOk').textContent=d.successful_trials||0; document.getElementById('stFail').textContent=d.failed_trials||0; document.getElementById('stLeft').textContent=d.remaining_today!=null?d.remaining_today:'—';
+    document.getElementById('stVisitors').textContent=d.total_visitors||0;
+    document.getElementById('stSearches').textContent=d.today_searches||0;
+    document.getElementById('stOk').textContent=d.successful_trials||0;
+    document.getElementById('stFail').textContent=d.failed_trials||0;
+    document.getElementById('stLeft').textContent=d.remaining_today!=null?d.remaining_today:'—';
   }catch(e){}
 }
-fetchStats(); setInterval(fetchStats,30000);
+fetchStats();setInterval(fetchStats,30000);
 try{fetch(WORKER_URL+'/visit',{method:'POST',headers:{'Content-Type':'text/plain'},body:VISITOR_ID,cache:'no-store'}).catch(function(){});}catch(e){}
 
-function setStagesFromLogs(logs){
-  var maxStage = 0; (logs||[]).forEach(function(l){ if(l.status==='done' || l.status==='complete') maxStage = Math.max(maxStage, l.stage||0); });
-  document.querySelectorAll('#stages .stage').forEach(function(el,i){ el.classList.toggle('on', i < maxStage || maxStage === 5); });
+function setStages(n){
+  document.querySelectorAll('#stages .stage').forEach(function(el,i){
+    el.classList.toggle('on', i<=n);
+    if(i===n) glowPulse(el,800);
+  });
+  document.querySelectorAll('.ring-card').forEach(function(el,i){
+    if(i<=n){el.classList.add('glow-on');} else el.classList.remove('glow-on');
+  });
 }
+function illuminateAllRings(){
+  document.querySelectorAll('.ring-card').forEach(function(card){card.classList.add('glow-on');});
+}
+function applyLogs(logs){
+  var max=0;
+  (Array.isArray(logs)?logs:[]).forEach(function(log){
+    var n=Number(log.ring||log.stage||0);
+    if(n>max && (log.status==='done'||log.status==='complete'||log.completed===true)) max=n;
+  });
+  if(max>0) setStages(Math.min(4,max-1));
+}
+document.getElementById('stages').addEventListener('click',function(e){
+  var st=e.target.closest('.stage');if(!st)return;glowPulse(st,1000);
+});
 
-var go=document.getElementById('go'), q=document.getElementById('q'), res=document.getElementById('res');
+var go=document.getElementById('go'),q=document.getElementById('q'),res=document.getElementById('res');
+
 async function doSearch(){
-  var text=(q.value||'').trim(); if(!text||searching)return;
-  searching=true; go.classList.add('loading','glow'); go.innerHTML='<span class="spin"></span> '+D().searching;
+  var text=(q.value||'').trim();if(!text||searching)return;
+  searching=true;
+  go.classList.add('loading','glow');
+  go.innerHTML='<span class="spin"></span> '+D().searching;
   var startTime=Date.now();
+  
   res.innerHTML='<div class="progress-container"><div class="progress-label"><span>'+D().searching+'</span><span id="pct">0s</span></div><div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar" style="width:10%"></div></div><div class="progress-timer" id="timerInfo">...</div></div>';
-  var timerInterval=setInterval(function(){ var elapsed=Math.floor((Date.now()-startTime)/1000); var pb=document.getElementById('progBar'), pe=document.getElementById('pct'); if(pb && parseFloat(pb.style.width) < 85) pb.style.width = (parseFloat(pb.style.width) + 2) + '%'; if(pe) pe.textContent = elapsed + 's'; var ti=document.getElementById('timerInfo'); if(ti) ti.innerHTML='Elapsed: '+elapsed+'s...'; },500);
+  
+  setStages(0);
+  var timerInterval=setInterval(function(){
+    var elapsed=Math.floor((Date.now()-startTime)/1000);
+    var pb=document.getElementById('progBar');
+    var pe=document.getElementById('pct');
+    if(pb && parseFloat(pb.style.width) < 85) pb.style.width = (parseFloat(pb.style.width) + 2) + '%';
+    if(pe) pe.textContent = elapsed + 's';
+    var ti=document.getElementById('timerInfo');
+    if(ti) ti.innerHTML=D().prog_elapsed+': '+elapsed+'s...';
+  },500);
+
   var outcome;
   try{
-    var ctrl=new AbortController(); var to=setTimeout(function(){ctrl.abort();},60000);
-    var headers={'Content-Type':'application/json'}; if(adminKey) headers['X-Admin-Key']=adminKey;
-    var reqBody={query:text, visitor_id:VISITOR_ID, skill:skill==='save'?'deep_search':skill, country:document.getElementById('countrySel').value, lang:currentLang};
-    var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify(reqBody),signal:ctrl.signal}); clearTimeout(to);
-    if(r.status===429){var j={};try{j=await r.json();}catch(e){} throw new Error('trial_used');}
-    if(!r.ok) throw new Error('http');
-    var data=await r.json(); if(!data.ok && !data.success && data.reason) throw new Error(data.reason);
-    outcome={ok:true, answer:String(data.answer||data.deep_answer||''), sources:Array.isArray(data.sources)?data.sources:[], logs:Array.isArray(data.logs)?data.logs:[]};
+    var ctrl=new AbortController();var to=setTimeout(function(){ctrl.abort();},55000);
+    var savedAdminKey = adminKey;
+    var headers = {'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID};
+    if(savedAdminKey) headers['X-Admin-Key'] = savedAdminKey;
+    
+    var reqBody = {query:text, visitor_id:VISITOR_ID, skill:skill, country:document.getElementById('countrySel').value, lang:currentLang};
+    var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify(reqBody),signal:ctrl.signal});
+    
+    clearTimeout(to);
+    var data={};try{data=await r.json();}catch(e){}
+    if(!r.ok){
+      var apiError=String(data.error||data.reason||'http');
+      if(r.status===429 || apiError==='rate_limit_exceeded') throw new Error('rate_limit_exceeded');
+      if(r.status===401 || apiError==='invalid_license') throw new Error('invalid_license');
+      throw new Error(apiError);
+    }
+    if(data.ok===false || (data.success===false && (data.error||data.reason))) throw new Error(String(data.error||data.reason||'http'));
+    outcome={ok:true,answer:String(data.answer||data.deep_answer||''),sources:Array.isArray(data.sources)?data.sources:(Array.isArray(data.top_sources)?data.top_sources:[]),logs:Array.isArray(data.logs)?data.logs:[],meta:data.meta||{}};
   }catch(err){clearInterval(timerInterval);outcome={ok:false,msg:String(err&&err.message||err)};}
+  
   if(outcome.ok){
-    clearInterval(timerInterval); var totalTime=Math.floor((Date.now()-startTime)/1000); setStagesFromLogs(outcome.logs); 
-    document.querySelectorAll('.ring-card').forEach(function(c){c.classList.add('glow-on');}); lastReportText=outcome.answer; var formattedAns = parseMarkdown(outcome.answer);
-    var src=''; if(outcome.sources&&outcome.sources.length){ src='<div class="srcs"><h4 style="font-size:14px;margin-bottom:8px;color:var(--muted)">'+outcome.sources.length+' Sources Verified</h4>'+outcome.sources.slice(0,10).map(function(s){return '<a class="src" href="'+s.url+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'Source')+'</h5><p>'+esc(String(s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>'; }
-    var actions = '<div class="action-btns"><button class="action-btn" id="btnCopy">📋 '+D().copy_btn+'</button><button class="action-btn" id="btnShare">🔗 '+D().share_btn+'</button><button class="action-btn" id="btnDownload">💾 '+D().download_btn+'</button></div>';
-    res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="ans">'+formattedAns+'</div>'+actions+src;
-    document.getElementById('btnCopy').onclick = function() { navigator.clipboard.writeText(outcome.answer).then(function(){ toast(D().copied); }); };
-    document.getElementById('btnDownload').onclick = function() { var blob = new Blob([outcome.answer], {type: 'text/markdown'}); var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Mido_Report.md'; a.click(); toast(D().download_ok); };
-    document.getElementById('btnShare').onclick = function() { if (navigator.share) { navigator.share({ title: 'Mido Deep Search', text: outcome.answer }).then(function(){ toast(D().share_ok); }); } else { navigator.clipboard.writeText(outcome.answer); toast(D().copied); } };
-    if(typeof fbq === 'function') fbq('track', 'Lead'); fetchStats();
-  }else{
-    var em=D().err_net; if(outcome.msg==='trial_used'||String(outcome.msg).indexOf('trial')>-1)em=D().err_trial; if(outcome.msg==='daily_cap')em=D().err_daily;
-    res.innerHTML='<div class="err"><b>'+esc(em)+'</b><br><br><a class="btn btn-w" href="'+BUY_URL+'" target="_blank" rel="noopener">'+D().nav_buy+'</a></div>';
-  }
-  searching=false; go.classList.remove('loading','glow'); go.textContent=D().search_btn;
-}
-go.addEventListener('click',function(){doSearch();}); q.addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+    clearInterval(timerInterval);
+    var totalTime=Math.floor((Date.now()-startTime)/1000);
+    if(outcome.logs.length){ applyLogs(outcome.logs); } else { setStages(4); }
+    illuminateAllRings();
+    lastReportText=outcome.answer;
+    var formattedAns = parseMarkdown(outcome.answer);
+    var src='';
+    if(outcome.sources&&outcome.sources.length){
+      src='<div class="srcs">'+outcome.sources.slice(0,6).map(function(s){var href=safeUrl(s.url); return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
+    }
+    res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="ans">'+formattedAns+'</div>'+src;
+    
+    if(typeof fbq === 'function') fbq('track', 'Lead');
 
-var adminBtnEl = document.getElementById('adminBtn'); if(adminKey) adminBtnEl.classList.add('active');
-adminBtnEl.addEventListener('click', function() { var newKey = prompt("Admin Key (Leave empty to remove):", adminKey); if (newKey === null) return; if (newKey.trim() === '') { adminKey=''; localStorage.removeItem('mido_admin_key'); adminBtnEl.classList.remove('active'); toast("Admin key removed."); } else { adminKey=newKey.trim(); localStorage.setItem('mido_admin_key', adminKey); adminBtnEl.classList.add('active'); toast("Admin key active."); } });
+    if(skill==='save') saveReport(outcome.answer);
+    fetchStats();
+  }else{
+    var em=D().err_net;
+    if(outcome.msg==='trial_used'||String(outcome.msg).indexOf('trial')>-1)em=D().err_trial;
+    if(outcome.msg==='rate_limit_exceeded'||outcome.msg==='daily_cap')em=D().err_daily;
+    if(outcome.msg==='invalid_license')em=D().err_license||'Invalid license key.';
+    if(outcome.msg==='origin_not_allowed')em="Origin not allowed. Please check your settings.";
+    res.innerHTML='<div class="err"><b>'+esc(em)+'</b><br><br><a class="btn btn-w" href="'+BUY_URL+'" target="_blank" rel="noopener">'+D().buy_btn+'</a></div>';
+  }
+  searching=false;go.classList.remove('loading','glow');go.textContent=D().search_btn;
+}
+go.addEventListener('click',function(){glowPulse(go,600);doSearch();});
+q.addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+
+var modal=document.getElementById('reportModal');
+document.getElementById('openReport').addEventListener('click',function(){modal.classList.add('open');glowPulse(this,800);});
+document.getElementById('closeModal').addEventListener('click',function(){modal.classList.remove('open');});
+document.getElementById('modalBg').addEventListener('click',function(){modal.classList.remove('open');});
+document.getElementById('navBuy').addEventListener('click',function(){glowPulse(this,700);});
+
+document.getElementById('adminBtn').addEventListener('click', function() {
+    var currentKey = adminKey;
+    var newKey = prompt("Enter Admin Key (Leave empty to remove):", currentKey);
+    if (newKey === null) return; 
+    if (newKey.trim() === '') { adminKey=''; toast("Admin key removed."); }
+    else { adminKey=newKey.trim(); toast("Admin key active for this session."); }
+});
 
 (function(){
   var canvas=document.getElementById('spider');if(!canvas)return;
   var ctx=canvas.getContext('2d');if(!ctx)return;
-  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; if(prefersReduced){ canvas.style.display = 'none'; return; }
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(prefersReduced){ canvas.style.display = 'none'; return; }
   var W,H,dpr,last=performance.now(),actx=null;
   function resize(){W=innerWidth;H=innerHeight;dpr=devicePixelRatio||1;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}
   resize();addEventListener('resize',resize);
   function mkGrid(){var g=[];for(var r=0;r<4;r++)for(var c=0;c<6;c++)g.push({x:90+(c+.5)*((W-180)/6),y:120+(r+.5)*((H-180)/4)});return g;}
-  var targets=mkGrid(); var sp={x:W*.5,y:90,tx:targets[0].x,ty:targets[0].y};
+  var targets=mkGrid();
+  var sp={x:W*.5,y:90,tx:targets[0].x,ty:targets[0].y};
   var legs=[-75,-38,38,75,105,142,-142,-105].map(function(d){var a=d*Math.PI/180;return{ang:a,fx:sp.x+Math.cos(a)*30,fy:sp.y+Math.sin(a)*30,tx:sp.x+Math.cos(a)*30,ty:sp.y+Math.sin(a)*30};});
   var moving=false,moveTimer=0,L1=34,L2=34,LIM=46;
   function snd(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume().catch(function(){});var n=actx.currentTime,o=actx.createOscillator(),g=actx.createGain(),f=actx.createBiquadFilter();f.type='bandpass';f.frequency.value=2400;f.Q.value=1.4;o.type='square';o.frequency.setValueAtTime(2400,n);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.06,n+.004);g.gain.exponentialRampToValueAtTime(.0001,n+.07);o.connect(f);f.connect(g);g.connect(actx.destination);o.start(n);o.stop(n+.07);}catch(e){}}
@@ -495,11 +871,30 @@ adminBtnEl.addEventListener('click', function() { var newKey = prompt("Admin Key
     var dt=Math.min(50,now-last);last=now;
     if(moving){moveTimer-=dt/1000;if(moveTimer<=0){moving=false;targets.shift();if(!targets.length)targets=mkGrid();sp.tx=targets[0].x;sp.ty=targets[0].y;}}
     else{var dx=sp.tx-sp.x,dy=sp.ty-sp.y,dist=Math.hypot(dx,dy);if(dist<6){moving=true;moveTimer=1;snd();}else{var spd=Math.max(180,dist*3+30)*dt/1000;if(spd>=dist){sp.x=sp.tx;sp.y=sp.ty;}else{sp.x+=dx/dist*spd;sp.y+=dy/dist*spd;}}}
-    ctx.clearRect(0,0,W,H); ctx.strokeStyle='rgba(214,217,224,.1)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(sp.x,0);ctx.lineTo(sp.x,sp.y-12);ctx.stroke();
-    legs.forEach(function(l,i){ var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10,dx=l.fx-bx,dy=l.fy-by; var dist=Math.min(Math.hypot(dx,dy),L1+L2-.5);if(dist<.001)return; var ca=(dist*dist-L1*L1-L2*L2)/(2*L1*L2),an=Math.acos(Math.max(-1,Math.min(1,ca))); var kd=L1+L2*Math.cos(an),kh=L2*Math.sin(an),ba=Math.atan2(dy,dx)-Math.atan2(kh,kd); var kx=bx+Math.cos(ba)*L1,ky=by+Math.sin(ba)*L1; ctx.strokeStyle='#2a2f3c';ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(kx,ky);ctx.lineTo(l.fx,l.fy);ctx.stroke(); ctx.fillStyle='#0d1018';ctx.strokeStyle='#232733';ctx.beginPath();ctx.arc(kx,ky,2.8,0,6.28);ctx.fill();ctx.stroke(); ctx.fillStyle=i%2===0?'#8a90a0':'#6b7280';ctx.beginPath();ctx.arc(l.fx,l.fy,2.3,0,6.28);ctx.fill(); });
-    ctx.fillStyle='rgba(0,0,0,.35)';ctx.beginPath();ctx.ellipse(sp.x,sp.y+22,18,6,0,0,6.28);ctx.fill(); ctx.fillStyle='#0d1018';ctx.strokeStyle='#2c313f';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(sp.x,sp.y+12,13,17,0,0,6.28);ctx.fill();ctx.stroke(); ctx.fillStyle='#151821';ctx.beginPath();ctx.ellipse(sp.x,sp.y-5,10.5,10.5,0,0,6.28);ctx.fill();ctx.stroke(); ctx.fillStyle='#ff4d9a';ctx.beginPath();ctx.arc(sp.x-3.2,sp.y-8,1.7,0,6.28);ctx.fill(); ctx.fillStyle='#4fe0ff';ctx.beginPath();ctx.arc(sp.x+3.2,sp.y-8,1.7,0,6.28);ctx.fill();
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(214,217,224,.1)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(sp.x,0);ctx.lineTo(sp.x,sp.y-12);ctx.stroke();
+    legs.forEach(function(l,i){
+      var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10,dx=l.fx-bx,dy=l.fy-by;
+      var dist=Math.min(Math.hypot(dx,dy),L1+L2-.5);if(dist<.001)return;
+      var ca=(dist*dist-L1*L1-L2*L2)/(2*L1*L2),an=Math.acos(Math.max(-1,Math.min(1,ca)));
+      var kd=L1+L2*Math.cos(an),kh=L2*Math.sin(an),ba=Math.atan2(dy,dx)-Math.atan2(kh,kd);
+      var kx=bx+Math.cos(ba)*L1,ky=by+Math.sin(ba)*L1;
+      ctx.strokeStyle='#2a2f3c';ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(kx,ky);ctx.lineTo(l.fx,l.fy);ctx.stroke();
+      ctx.fillStyle='#0d1018';ctx.strokeStyle='#232733';ctx.beginPath();ctx.arc(kx,ky,2.8,0,6.28);ctx.fill();ctx.stroke();
+      ctx.fillStyle=i%2===0?'#8a90a0':'#6b7280';ctx.beginPath();ctx.arc(l.fx,l.fy,2.3,0,6.28);ctx.fill();
+    });
+    ctx.fillStyle='rgba(0,0,0,.35)';ctx.beginPath();ctx.ellipse(sp.x,sp.y+22,18,6,0,0,6.28);ctx.fill();
+    ctx.fillStyle='#0d1018';ctx.strokeStyle='#2c313f';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(sp.x,sp.y+12,13,17,0,0,6.28);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#151821';ctx.beginPath();ctx.ellipse(sp.x,sp.y-5,10.5,10.5,0,0,6.28);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#ff4d9a';ctx.beginPath();ctx.arc(sp.x-3.2,sp.y-8,1.7,0,6.28);ctx.fill();
+    ctx.fillStyle='#4fe0ff';ctx.beginPath();ctx.arc(sp.x+3.2,sp.y-8,1.7,0,6.28);ctx.fill();
     if(moving){ctx.strokeStyle='rgba(255,77,154,.25)';ctx.beginPath();ctx.arc(sp.x,sp.y+3,10+(1-moveTimer)*18,0,6.28);ctx.stroke();}
-    legs.forEach(function(l,i){ var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10; if(Math.hypot(l.fx-bx,l.fy-by)>LIM){var td=28+(i%3)*6+Math.random()*6;l.tx=sp.x+Math.cos(l.ang)*td;l.ty=sp.y+Math.sin(l.ang)*td;} var dx=l.tx-l.fx,dy=l.ty-l.fy,d=Math.hypot(dx,dy); if(d>.5){var mv=Math.min(d,420*dt/1000);l.fx+=dx/d*mv;l.fy+=dy/d*mv;if(d>3&&mv>=d-.1&&Math.random()<.85)snd();} });
+    legs.forEach(function(l,i){
+      var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10;
+      if(Math.hypot(l.fx-bx,l.fy-by)>LIM){var td=28+(i%3)*6+Math.random()*6;l.tx=sp.x+Math.cos(l.ang)*td;l.ty=sp.y+Math.sin(l.ang)*td;}
+      var dx=l.tx-l.fx,dy=l.ty-l.fy,d=Math.hypot(dx,dy);
+      if(d>.5){var mv=Math.min(d,420*dt/1000);l.fx+=dx/d*mv;l.fy+=dy/d*mv;if(d>3&&mv>=d-.1&&Math.random()<.85)snd();}
+    });
     requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
@@ -507,4 +902,4 @@ adminBtnEl.addEventListener('click', function() { var newKey = prompt("Admin Key
 })();
 </script>
 </body>
-            </html>
+  </html>
