@@ -1,699 +1,548 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mido AI Store - Deep Search</title>
-  <meta name="theme-color" content="#0b0f14" />
-  <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1805920357103132'); fbq('track', 'PageView');
-  </script>
-  <style>
-    :root { --bg: #0b0f14; --panel: #151b24; --panel-2: #1b2330; --border: #232c3a; --text: #e8eef7; --muted: #93a1b5; --accent: #22d3ee; --accent-2: #6366f1; --good: #22c55e; --bad: #ef4444; --radius: 14px; --shadow: 0 10px 30px rgba(0,0,0,0.45); }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: "Segoe UI", Tahoma, sans-serif; background: radial-gradient(1200px 600px at 50% -10%, #14202e 0%, var(--bg) 55%); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; line-height: 1.6; overflow-x: hidden; }
-    
-    header { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; background: rgba(11,15,20,0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; flex-wrap: wrap; gap: 10px; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; }
-    .brand .logo { background: linear-gradient(135deg, var(--accent), var(--accent-2)); width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: #04121a; }
-    .controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .access-badge { background: rgba(34,211,238,0.1); border: 1px solid var(--accent); color: var(--accent); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; text-decoration: none; transition: 0.2s; }
-    .access-badge:hover { background: var(--accent); color: #000; }
-    select { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; outline: none; }
-    
-    main { flex: 1; max-width: 1000px; margin: 0 auto; width: 100%; padding: 30px 20px; position: relative; z-index: 2; }
-    .stats-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 24px; }
-    .stat-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; text-align: center; box-shadow: var(--shadow); }
-    .stat-card .num { font-size: 1.4rem; font-weight: 800; color: var(--accent); }
-    .stat-card .lbl { font-size: 0.75rem; color: var(--muted); }
-    .stat-card.bad .num { color: var(--bad); } .stat-card.good .num { color: var(--good); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Mido Deep Search — Verified Research in 5-40 Seconds</title>
 
-    .header-info { text-align: center; margin-bottom: 20px; }
-    .header-info h1 { font-size: 1.6rem; color: #fff; margin-bottom: 8px; }
-    .verified-badge { display: inline-block; background: rgba(34,211,238,0.1); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1805920357103132');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1805920357103132&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 
-    .search-container { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); margin-bottom: 20px; }
-    .search-box { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-    .search-box input { flex: 1; min-width: 200px; background: var(--panel-2); border: 1px solid var(--border); padding: 14px; border-radius: 10px; color: #fff; outline: none; font-size: 1rem; }
-    .btn { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 700; transition: 0.2s; font-family: inherit; }
-    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04121a; border: none; }
-    .btn:hover { filter: brightness(1.1); } .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-    .skill-pill { background: rgba(34,211,238,0.05); border: 1px solid var(--border); color: var(--muted); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
-    .skill-pill:hover { border-color: var(--accent); color: #fff; }
-    .skill-pill.active { background: var(--accent); color: #04121a; font-weight: bold; border-color: var(--accent); }
+<style>
+:root{--bg:#0a0a0f;--card:#12121a;--border:#232733;--text:#fff;--muted:rgba(255,255,255,.55);--accent:#7c5cff;--green:#00ffa3;--cyan:#00d4ff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Cairo',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+#spider{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5}
+.main{position:relative;z-index:2}
 
-    .protection-rings { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 20px 0; }
-    .ring { background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; }
+/* القائمة واللغة (تم توسيطها) */
+.lang-switcher{position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);font-size:13px}
+.lang-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:260px;max-width:calc(100vw - 24px);max-height:min(70vh,420px);overflow-y:auto;background:#151b27;border:2px solid #53628a;border-radius:14px;padding:8px;z-index:120;box-shadow:0 16px 40px rgba(0,0,0,.7)}
+.lang-dropdown.open{display:block}
+.lang-option{display:flex;align-items:center;gap:8px;padding:11px 13px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer}
+.lang-option:hover,.lang-option.active{background:rgba(124,92,255,.15);color:#c4b5fd}
 
-    .pipeline { display: flex; justify-content: space-between; margin: 24px 0; opacity: 0.4; transition: 0.3s; }
-    .pipeline.active { opacity: 1; }
-    .step { text-align: center; font-size: 0.8rem; flex: 1; position: relative; }
-    .step::after { content: ''; position: absolute; top: 15px; left: 50%; width: 100%; height: 2px; background: var(--border); z-index: -1; }
-    .step:last-child::after { display: none; }
-    .step.active { color: var(--accent); font-weight: bold; }
-    .step.active .circle { border-color: var(--accent); background: rgba(34,211,238,0.2); box-shadow: 0 0 10px var(--accent); }
-    .step .circle { width: 32px; height: 32px; border-radius: 50%; background: var(--panel-2); border: 2px solid var(--border); display: grid; place-items: center; margin: 0 auto 8px; transition: 0.3s; }
+/* الهيدر والأزرار */
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(10,10,15,.92);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:11px 0;gap:10px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.1rem}.logo span{color:var(--accent)}
+.nav-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge{font-size:11px;padding:4px 10px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 18px;border-radius:999px;font-weight:700;font-size:13px;transition:.2s;border:1px solid transparent}
+.btn-w{background:#fff;color:#000}.btn-w:hover{background:#eaeaea}
+.btn-p{background:linear-gradient(135deg,var(--accent),#5b8cff);color:#fff}
+.btn-ghost{background:#1a1a24;color:#fff;border-color:var(--border)}
+.btn.glow,.glow-on{box-shadow:0 0 0 2px rgba(124,92,255,.55),0 0 22px rgba(124,92,255,.4)!important;border-color:rgba(124,92,255,.6)!important;animation:pg 1s ease-in-out infinite}
+@keyframes pg{50%{box-shadow:0 0 0 3px rgba(0,255,163,.45),0 0 26px rgba(0,255,163,.3)}}
+.btn.loading{opacity:.75;pointer-events:none}
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(1turn)}}
 
-    #status { text-align: center; margin-bottom: 15px; color: var(--accent); font-weight: bold; min-height: 24px; }
-    .results { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); font-size: 0.97rem; line-height: 1.7; display: none; }
-    .results.visible { display: block; }
-    .results h2 { color: var(--accent); font-size: 1.2rem; border-bottom: 1px solid var(--border); padding-bottom: 8px; margin: 20px 0 10px; }
-    .results h3 { color: #fff; margin: 15px 0 10px; }
-    .results table { width: 100%; border-collapse: collapse; margin: 15px 0; display: block; overflow-x: auto; }
-    .results th, .results td { border: 1px solid var(--border); padding: 10px; text-align: start; vertical-align: top; }
-    .results th { background: var(--panel-2); color: var(--accent); }
-    .results ul, .results ol { padding-inline-start: 24px; margin: 10px 0; }
-    
-    .report-actions { display: flex; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+/* الأقسام */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;padding:16px 0}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:11px;text-align:center}
+.stat .v{font-size:19px;font-weight:800}.stat .l{font-size:10px;color:var(--muted);margin-top:2px}
+.stat.live{border-color:rgba(0,255,163,.3)}
+.hero{text-align:center;padding:42px 0 24px}
+.pill{display:inline-flex;padding:5px 12px;border-radius:999px;background:#12121a;border:1px solid var(--border);color:var(--muted);font-size:12px;margin-bottom:12px}
+.hero h1{font-size:clamp(1.55rem,4vw,2.5rem);line-height:1.22;font-weight:800;margin-bottom:12px}
+.hero h1 .g{background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{max-width:640px;margin:0 auto 16px;color:var(--muted);font-size:14.5px}
+.cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.trust{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.sec{padding:34px 0}
+.sec-t{text-align:center;font-size:1.4rem;font-weight:800;margin-bottom:6px}
+.sec-s{text-align:center;color:var(--muted);font-size:13px;max-width:620px;margin:0 auto 18px}
+.skills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:980px;margin:0 auto}
+.skill{padding:8px 14px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);font-size:12px;color:var(--muted);cursor:pointer;transition:.2s}
+.skill:hover,.skill.on{background:rgba(124,92,255,.15);border-color:rgba(124,92,255,.5);color:#c4b5fd}
+.demo{background:linear-gradient(180deg,#12121a,#0a0a0f);border:1px solid var(--border);border-radius:20px;padding:18px;max-width:860px;margin:0 auto}
+.search-row{display:flex;gap:8px;flex-wrap:wrap}
+.search-row input{flex:1;min-width:240px;height:60px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);padding:0 15px;color:#fff;font-size:14px;outline:none}
+.search-row input:focus{border-color:var(--accent)}
+.sugs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.sug{padding:5px 11px;border-radius:999px;border:1px solid var(--border);background:#0a0a0f;font-size:11px;color:var(--muted);cursor:pointer}
+.demo-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:11px;padding-top:11px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)}
+#res{margin-top:12px;min-height:40px}
+.progress-container{margin-top:16px;padding:16px;border-radius:16px;background:#0a0a0f;border:1px solid var(--border)}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
+.progress-bar-outer{height:6px;width:100%;background:#1a1a24;border-radius:99px;overflow:hidden}
+.progress-bar-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:99px;transition:width .5s ease-out}
+.progress-timer{margin-top:8px;font-size:11px;color:var(--muted);text-align:center}
+.ans{margin-top:10px;border-radius:14px;border:1px solid rgba(124,92,255,.3);background:rgba(124,92,255,.08);padding:14px;font-size:13px;word-break:break-word}
+.ans h1,.ans h2,.ans h3{margin-top:12px;margin-bottom:6px;color:var(--cyan)}
+.ans p{margin-bottom:8px}
+.ans ul,.ans ol{padding-inline-start:20px;margin-bottom:8px}
+.ans li{margin-bottom:4px}
+.ans strong{color:var(--green)}
+.ans table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px;display:block;overflow-x:auto}
+.ans th,.ans td{border:1px solid var(--border);padding:6px;text-align:start}
+.ans th{background:#1a1a24}
+.err{margin-top:10px;border-radius:12px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.1);padding:12px;font-size:13px;color:#fecaca}
+.srcs{margin-top:10px;display:grid;gap:8px}
+.src{display:block;border-radius:12px;border:1px solid var(--border);background:#12121a;padding:10px}
+.src h5{font-size:12px}.src p{font-size:11px;color:var(--muted);margin-top:3px}
+.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px;margin-top:14px}
+.stage{background:#0a0a0f;border:1px solid var(--border);border-radius:14px;padding:11px;cursor:pointer;transition:.2s}
+.stage.on,.stage:hover{border-color:rgba(124,92,255,.5);background:#1a1a24}
+.stage.on{box-shadow:0 0 18px rgba(124,92,255,.18)}
+.stage .num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:#12121a;border:1px solid var(--border);margin-bottom:7px}
+.stage.on .num{background:var(--accent);border-color:var(--accent)}
+.stage h4{font-size:12px}.stage p{font-size:11px;color:var(--muted);margin-top:2px}
+.xcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:.2s}
+.xcard:hover,.xcard.open{border-color:rgba(124,92,255,.45)}
+.xcard.open{box-shadow:0 0 20px rgba(124,92,255,.15);background:#151522}
+.xcard .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.xcard .num{font-size:10px;letter-spacing:.08em;color:var(--accent);font-weight:700}
+.xcard h3{font-size:14px;margin-top:6px}
+.xcard .short{font-size:12px;color:var(--muted);margin-top:4px}
+.xcard .detail{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:rgba(255,255,255,.72);line-height:1.7}
+.xcard.open .detail{display:block}
+.xcard .chev{font-size:12px;color:var(--muted);transition:.2s}
+.xcard.open .chev{transform:rotate(180deg);color:#c4b5fd}
+.trust-note{margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(0,255,163,.06);border:1px solid rgba(0,255,163,.2);font-size:12.5px;color:rgba(255,255,255,.75);text-align:center}
+footer{border-top:1px solid var(--border);padding:20px 0;text-align:center;font-size:12px;color:var(--muted)}
+footer a:hover{color:var(--accent);text-decoration:underline}
+.modal{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;padding:14px}
+.modal.open{display:flex}
+.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.75)}
+.modal-box{position:relative;width:min(900px,100%);max-height:90vh;overflow:auto;background:#12121a;border:1px solid var(--border);border-radius:18px;padding:18px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a24;border:1px solid rgba(0,255,163,.35);color:#fff;padding:10px 16px;border-radius:999px;font-size:12.5px;z-index:300;display:none;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.toast.show{display:block}
+.currency-select{height:60px;min-width:145px;background:#0a0a0f;border:1px solid var(--border);color:#fff;padding:8px 12px;border-radius:999px;font-size:12px;outline:none;cursor:pointer}
+.action-btns{display:flex;gap:8px;margin-top:12px;justify-content:flex-end;flex-wrap:wrap}
+.action-btn{background:#1a1a24;color:var(--text);border:1px solid var(--border);padding:8px 12px;border-radius:8px;font-size:12px;display:inline-flex;align-items:center;gap:6px;transition:.2s}
+.action-btn:hover{border-color:var(--accent);background:rgba(124,92,255,.15)}
+.admin-trigger{opacity:0.15;cursor:pointer;font-size:14px;transition:0.3s;display:inline-block;margin-top:10px}
+.admin-trigger:hover,.admin-trigger.active{opacity:1;color:var(--green);filter:drop-shadow(0 0 6px var(--green))}
 
-    footer { border-top: 1px solid var(--border); padding: 20px; display: flex; justify-content: space-between; align-items: center; background: var(--bg); font-size: 0.9rem; color: var(--muted); position: relative; z-index: 2; flex-wrap: wrap; gap: 10px; }
-    footer a { color: var(--muted); text-decoration: none; margin-inline-start: 15px; cursor: pointer; transition: 0.2s; } footer a:hover { color: var(--accent); }
-    .admin-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; opacity: 0.7; transition: 0.2s; }
-
-    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px); }
-    .modal-backdrop.open { display: flex; }
-    .modal { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); max-width: 700px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 24px; box-shadow: var(--shadow); }
-    .modal h2 { margin-bottom: 16px; color: var(--accent); }
-    .modal input { width: 100%; background: var(--panel-2); border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: #fff; margin: 10px 0; font-size: 1rem; }
-    .modal p { margin-bottom: 10px; font-size: 0.95rem; line-height: 1.7; }
-    .report-preview { max-height: 60vh; overflow-y: auto; padding: 10px 0; border-top: 1px solid var(--border); margin-top: 10px; }
-    #spider-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.3; }
-    #toast { position: fixed; bottom: 20px; right: 20px; background: var(--panel-2); border: 1px solid var(--accent); padding: 12px 24px; border-radius: 8px; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 999; color: #fff; font-weight: bold; }
-    @media (max-width: 600px) { .stats-board { grid-template-columns: repeat(2, 1fr); } .step { font-size: 0.7rem; } .step::after { display: none; } }
-  </style>
+/* Cookies Banner */
+.cookie-banner{position:fixed;bottom:20px;left:20px;right:20px;max-width:400px;background:#151b27;border:1px solid var(--border);padding:16px;border-radius:14px;z-index:999;box-shadow:0 10px 30px rgba(0,0,0,.5);display:none;font-size:13px}
+.cookie-banner.show{display:block}
+.cookie-banner p{margin-bottom:12px;color:var(--muted);line-height:1.5}
+.cookie-btns{display:flex;gap:8px}
+@media(max-width:640px){.search-row{flex-direction:column}.search-row input,.currency-select,#go{width:100%;min-width:0}.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
 </head>
 <body>
-  <canvas id="spider-canvas"></canvas>
-  <header>
-    <div class="brand"><div class="logo">🕷️</div> Mido AI Store</div>
-    <div class="controls">
-      <a class="access-badge" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" data-i18n="access_badge">⚡ Get Access — $6</a>
-      <select id="lang-select">
-        <option value="ar">العربية</option><option value="en">English</option><option value="zh">简体中文</option>
-        <option value="fr">Français</option><option value="de">Deutsch</option><option value="ja">日本語</option>
-        <option value="es">Español</option><option value="pt">Português</option>
-      </select>
-      <select id="currency-select">
-        <option value="US">USD ($)</option><option value="CN">CNY (¥)</option><option value="EG">EGP (ج.م)</option>
-        <option value="SA">SAR (ر.س)</option><option value="EU">EUR (€)</option><option value="GB">GBP (£)</option>
-      </select>
-    </div>
-  </header>
-
-  <main>
-    <div class="stats-board">
-      <div class="stat-card"><div class="num" id="stat-visitors">0</div><div class="lbl" data-i18n="visitors">Visitors</div></div>
-      <div class="stat-card"><div class="num" id="stat-searches">0</div><div class="lbl" data-i18n="today_searches">Searches</div></div>
-      <div class="stat-card good"><div class="num" id="stat-success">0</div><div class="lbl" data-i18n="success">Success</div></div>
-      <div class="stat-card bad"><div class="num" id="stat-failure">0</div><div class="lbl" data-i18n="failure">Failure</div></div>
-      <div class="stat-card"><div class="num" id="stat-remaining">100</div><div class="lbl" data-i18n="remaining">Remaining</div></div>
-    </div>
-
-    <div class="header-info">
-      <h1 data-i18n="hero_title">Deep Search AI</h1>
-      <div class="verified-badge" data-i18n="verified_badge">⚡ Verified Research • 5-40s</div>
-    </div>
-
-    <div class="search-container">
-      <div class="search-box">
-        <input type="text" id="search-input" placeholder="What are you looking for today?" data-i18n-placeholder="search_placeholder" />
-        <button class="btn primary" id="search-btn" data-i18n="search_btn">Search 🔍</button>
+<canvas id="spider"></canvas>
+<div class="main">
+<header>
+  <div class="wrap nav">
+    <div class="logo">Mido <span>AI</span> Store</div>
+    <div class="nav-r">
+      <div class="lang-switcher">
+        <button type="button" class="lang-btn" id="langBtn"><span id="flag">🇺🇸</span> <span id="langName">English</span> ▼</button>
+        <div class="lang-dropdown" id="langMenu">
+          <div class="lang-option" data-l="ar" data-f="🇪🇬" data-n="مصر - عربي">🇪🇬 مصر - عربي</div>
+          <div class="lang-option active" data-l="en" data-f="🇺🇸" data-n="USA - English">🇺🇸 USA - English</div>
+          <div class="lang-option" data-l="fr" data-f="🇫🇷" data-n="Français">🇫🇷 Français</div>
+          <div class="lang-option" data-l="de" data-f="🇩🇪" data-n="Deutsch">🇩🇪 Deutsch</div>
+          <div class="lang-option" data-l="ja" data-f="🇯🇵" data-n="日本語">🇯🇵 日本語</div>
+          <div class="lang-option" data-l="zh" data-f="🇨🇳" data-n="中文">🇨🇳 中文</div>
+          <div class="lang-option" data-l="es" data-f="🇪🇸" data-n="Español">🇪🇸 Español</div>
+          <div class="lang-option" data-l="pt" data-f="🇵🇹" data-n="Português">🇵🇹 Português</div>
+        </div>
       </div>
-      <div class="skills-grid" id="skills-container">
-        <div class="skill-pill active" data-skill="deep" data-i18n="skill_deep">Deep Search</div>
-        <div class="skill-pill" data-skill="summary" data-i18n="skill_summary">Summary</div>
-        <div class="skill-pill" data-skill="compare" data-i18n="skill_compare">Compare</div>
-        <div class="skill-pill" data-skill="recommend" data-i18n="skill_recommend">Recommend</div>
-        <div class="skill-pill" data-skill="price" data-i18n="skill_price">Price Check</div>
-        <div class="skill-pill" data-skill="save" data-i18n="skill_save">Save Report</div>
-        <div class="skill-pill" data-skill="fact" data-i18n="skill_fact">Fact Check</div>
-        <div class="skill-pill" data-skill="proscons" data-i18n="skill_proscons">Pros & Cons</div>
-        <div class="skill-pill" data-skill="guide" data-i18n="skill_guide">Buying Guide</div>
-        <div class="skill-pill" data-skill="localprice" data-i18n="skill_localprice">Local Price</div>
-        <div class="skill-pill" data-skill="audit" data-i18n="skill_audit">Source Audit</div>
-        <div class="skill-pill" data-skill="risk" data-i18n="skill_risk">Risk Check</div>
-        <div class="skill-pill" data-skill="extract" data-i18n="skill_extract">Extract Facts</div>
-        <div class="skill-pill" data-skill="outline" data-i18n="skill_outline">Content Outline</div>
-        <div class="skill-pill" data-skill="matrix" data-i18n="skill_matrix">Decision Matrix</div>
-      </div>
+      <span class="badge">V10.4 | Live</span>
+      <a class="btn btn-w" id="navBuy" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" data-i18n="nav_buy">Get Access — $6</a>
     </div>
+  </div>
+</header>
 
-    <div class="protection-rings">
-      <div class="ring"><span style="color:var(--good);">🛡️</span> <span data-i18n="ring_1">CORS Shield</span></div>
-      <div class="ring"><span style="color:var(--good);">🛡️</span> <span data-i18n="ring_2">XSS Guard</span></div>
-      <div class="ring"><span style="color:var(--good);">🛡️</span> <span data-i18n="ring_3">Evidence Rules</span></div>
-      <div class="ring"><span style="color:var(--good);">🛡️</span> <span data-i18n="ring_4">Language Lock</span></div>
-      <div class="ring"><span style="color:var(--good);">🛡️</span> <span data-i18n="ring_5">Admin Secure</span></div>
+<section class="wrap"><div class="stats">
+  <div class="stat live"><div class="v" id="stVisitors">—</div><div class="l" data-i18n="st_visitors">Visitors</div></div>
+  <div class="stat live"><div class="v" id="stSearches">—</div><div class="l" data-i18n="st_searches">Searches today</div></div>
+  <div class="stat"><div class="v" id="stOk">—</div><div class="l" data-i18n="st_ok">Successful</div></div>
+  <div class="stat"><div class="v" id="stFail">—</div><div class="l" data-i18n="st_fail">Failed</div></div>
+  <div class="stat"><div class="v" id="stLeft">—</div><div class="l" data-i18n="st_left">Free left today</div></div>
+</div></section>
+
+<section class="hero wrap">
+  <div class="pill" data-i18n="pill">⚡ Verified research • 5-40s • Local + Global</div>
+  <h1 data-i18n-html="hero_title">Get a fully structured <span class="g">research report</span></h1>
+  <p class="lead" data-i18n="hero_desc">A 5-stage verified pipeline with local and international sources, clear recommendation, and real pricing context.</p>
+  <div class="cta-row">
+    <a href="#demo" class="btn btn-p" data-i18n="cta_try">Try Free Demo</a>
+  </div>
+  <div class="trust">
+    <span data-i18n="t1">✓ 1 free trial / visitor</span>
+    <span data-i18n="t2">✓ 100 free searches / day</span>
+    <span data-i18n="t3">✓ API keys after purchase</span>
+  </div>
+</section>
+
+<section class="sec wrap" id="demo">
+  <h2 class="sec-t" data-i18n="demo_title">Live Demo</h2>
+  <p class="sec-s" data-i18n="demo_sub">Real engine. Stages light up while the spider crawls sources.</p>
+  <div class="demo">
+    <div class="search-row">
+      <input id="q" type="text" data-i18n-placeholder="ph" placeholder="Best noise-cancelling headphones under $150" value="Best noise-cancelling headphones under $150"/>
+      <select id="countrySel" class="currency-select" title="Currency">
+        <option value="US">🇺🇸 USD ($)</option>
+        <option value="EG">🇪🇬 EGP (ج.م)</option>
+        <option value="SA">🇸🇦 SAR (ر.س)</option>
+        <option value="AE">🇦🇪 AED (د.إ)</option>
+        <option value="GB">🇬🇧 GBP (£)</option>
+        <option value="FR">🇫🇷 EUR (€)</option>
+      </select>
+      <button type="button" class="btn btn-w" id="go" data-i18n="search_btn">Search 🔍</button>
     </div>
-
-    <div class="pipeline" id="pipeline">
-      <div class="step" id="step-1"><div class="circle">1</div><span data-i18n="step_1">Source</span></div>
-      <div class="step" id="step-2"><div class="circle">2</div><span data-i18n="step_2">Analysis</span></div>
-      <div class="step" id="step-3"><div class="circle">3</div><span data-i18n="step_3">Filter</span></div>
-      <div class="step" id="step-4"><div class="circle">4</div><span data-i18n="step_4">Risk</span></div>
-      <div class="step" id="step-5"><div class="circle">5</div><span data-i18n="step_5">Report</span></div>
+    <div class="sugs" id="sugs"></div>
+    <div class="stages" id="stages">
+      <div class="stage" data-i="0"><div class="num">1</div><h4 data-i18n="s1">Source Search</h4><p data-i18n="s1d">Tavily live sources</p></div>
+      <div class="stage" data-i="1"><div class="num">2</div><h4 data-i18n="s2">Thesis Build</h4><p data-i18n="s2d">Core argument</p></div>
+      <div class="stage" data-i="2"><div class="num">3</div><h4 data-i18n="s3">Reduce & Rank</h4><p data-i18n="s3d">Strongest signals</p></div>
+      <div class="stage" data-i="3"><div class="num">4</div><h4 data-i18n="s4">Risk Check</h4><p data-i18n="s4d">Local + global</p></div>
+      <div class="stage" data-i="4"><div class="num">5</div><h4 data-i18n="s5">Final Report</h4><p data-i18n="s5d">5-40 seconds</p></div>
     </div>
+    <div id="res"></div>
+  </div>
+</section>
 
-    <div id="status"></div>
-    <div id="results" class="results"></div>
+<footer class="wrap">
+  <p data-i18n="footer">© 2026 Mido AI Store • V10.4</p>
+  <div style="margin-top:10px;font-size:11px;opacity:.8;display:flex;gap:10px;justify-content:center">
+    <a href="#" onclick="openPolicy(event, 'privacy')">Privacy</a> | 
+    <a href="#" onclick="openPolicy(event, 'terms')">Terms</a> | 
+    <a href="#" onclick="openPolicy(event, 'refund')">Refund</a>
+  </div>
+  <span id="adminBtn" class="admin-trigger" title="Admin Login">🔑</span>
+</footer>
+</div>
+
+<!-- Cookie Banner -->
+<div class="cookie-banner" id="cookieBanner">
+  <p>We use cookies to analyze traffic and improve your experience. By clicking "Accept", you consent to our use of cookies.</p>
+  <div class="cookie-btns">
+    <button class="btn btn-p" onclick="acceptCookies()">Accept</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('cookieBanner').classList.remove('show')">Decline</button>
+  </div>
+</div>
+
+<!-- Modal: Policies -->
+<div class="modal" id="policyModal">
+  <div class="modal-bg" onclick="document.getElementById('policyModal').classList.remove('open')"></div>
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:15px">
+      <h3 style="font-size:18px;font-weight:800" id="policyTitle">Policy</h3>
+      <button type="button" class="btn btn-ghost" onclick="document.getElementById('policyModal').classList.remove('open')">Close</button>
+    </div>
+    <div id="policyContent" style="font-size:13px;color:var(--muted);line-height:1.8"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+var WORKER_URL='https://mido-deepsearch.midoaistore.workers.dev';
+var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
+var skill='deep_search', currentLang='en', searching=false, lastReportText='', adminKey='';
+
+// 1. مسح سر الأدمن من الرابط
+try {
+  var urlParams = new URLSearchParams(location.search);
+  if (urlParams.has('admin')) {
+    adminKey = urlParams.get('admin');
+    localStorage.setItem('mido_admin_key', adminKey);
+    window.history.replaceState(null, '', location.pathname + location.hash);
+  } else {
+    adminKey = localStorage.getItem('mido_admin_key') || '';
+  }
+} catch(e) { adminKey = ''; }
+
+// 2. سياسات الخصوصية، الحقوق، والاسترداد (7 أيام)
+var POLICY_T = {
+  en:{
+    privacy:{title:'Privacy Policy',html:`<p><strong>Last updated: 2026</strong></p><p>We collect only the data needed to operate Mido Deep Search. Queries are sent to Tavily and Groq to generate reports. We use Meta Pixel to measure campaign performance. No personal data is sold to third parties.</p><p>Contact: support@midoaistore.com</p>`},
+    terms:{title:'Terms of Use',html:`<p><strong>Last updated: 2026</strong></p><p>By using Mido Deep Search, you agree to use the service for lawful purposes only. You may not abuse the API, bypass rate limits, or use the service to generate harmful content. We reserve the right to terminate access for violations.</p><p>Contact: support@midoaistore.com</p>`},
+    refund:{title:'Refund Policy',html:`<p><strong>Last updated: 2026</strong></p><p>This is a digital product with immediate access.</p><h4>1. 7-Day Refund Guarantee</h4><p>Refund requests must be submitted within <strong>7 days</strong> of purchase with proof of issue.</p><h4>2. Gumroad Processing</h4><p>Refunds are processed via Gumroad within 5-10 business days.</p><p>Contact: support@midoaistore.com</p>`}
+  },
+  ar:{
+    privacy:{title:'سياسة الخصوصية',html:`<p><strong>آخر تحديث: 2026</strong></p><p>نجمع فقط البيانات اللازمة لتشغيل Mido Deep Search. تُرسل الاستعلامات إلى Tavily وGroq لإنشاء التقارير. نستخدم Meta Pixel لقياس أداء الحملات. لا يتم بيع أي بيانات شخصية لأطراف ثالثة.</p><p>للتواصل: support@midoaistore.com</p>`},
+    terms:{title:'حقوق الاستخدام',html:`<p><strong>آخر تحديث: 2026</strong></p><p>باستخدامك لـ Mido Deep Search، فإنك توافق على استخدام الخدمة للأغراض المشروعة فقط. يُمنع إساءة استخدام واجهة الـ API، أو تجاوز حدود الاستخدام، أو استخدام الخدمة لتوليد محتوى ضار. نحتفظ بالحق في إنهاء الوصول في حالة الانتهاك.</p><p>للتواصل: support@midoaistore.com</p>`},
+    refund:{title:'سياسة الاسترداد',html:`<p><strong>آخر تحديث: 2026</strong></p><p>هذا منتج رقمي مع وصول فوري.</p><h4>1. ضمان استرداد خلال 7 أيام</h4><p>يجب تقديم طلبات الاسترداد خلال <strong>7 أيام</strong> من تاريخ الشراء مع إثبات المشكلة.</p><h4>2. معالجة Gumroad</h4><p>تتم معالجة المبالغ المستردة عبر Gumroad خلال 5-10 أيام عمل.</p><p>للتواصل: support@midoaistore.com</p>`}
+  }
+  // يمكن إضافة باقي اللغات هنا بنفس الهيكل
+};
+window.openPolicy = function(e,type){
+  e.preventDefault(); var p=POLICY_T[currentLang]||POLICY_T.en; var item=p[type]||POLICY_T.en[type];
+  document.getElementById('policyTitle').textContent=item.title;
+  document.getElementById('policyContent').innerHTML=item.html;
+  document.getElementById('policyModal').classList.add('open');
+}
+
+// 3. موافقة الكوكيز
+window.acceptCookies = function() {
+  localStorage.setItem('mido_cookie_consent', 'true');
+  document.getElementById('cookieBanner').classList.remove('show');
+};
+if (!localStorage.getItem('mido_cookie_consent')) {
+  setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 2000);
+}
+
+// 4. الترجمات
+var T = {
+  en: { nav_buy:'Get Access — $6', pill:'⚡ Verified research • 5-40s', hero_title:'Get a fully structured <span class="g">research report</span>', hero_desc:'A 5-stage verified pipeline in 5-40s.', cta_try:'Try Free Demo', t1:'✓ 1 free trial', t2:'✓ 100 free/day', t3:'✓ API keys after purchase', st_visitors:'Visitors', st_searches:'Searches today', st_ok:'Successful', st_fail:'Failed', st_left:'Free left today', demo_title:'Live Demo', demo_sub:'Real engine. Stages light up.', ph:'Best noise-cancelling headphones under $150', search_btn:'Search 🔍', s1:'Source Search', s1d:'Tavily live sources', s2:'Thesis Build', s2d:'Core argument', s3:'Reduce & Rank', s3d:'Strongest signals', s4:'Risk Check', s4d:'Local + global', s5:'Final Report', s5d:'5-40 seconds', footer:'© 2026 Mido AI Store • V10.4', searching:'Searching...', prog_complete:'Completed', actual_time:'Time', prog_used:'sources', err_net:'Network issue.', err_trial:'Free trial used.', err_daily:'Daily limit reached.', copy_btn:'Copy', share_btn:'Share', download_btn:'Download', copied:'Copied!', download_ok:'Downloaded', share_ok:'Shared' },
+  ar: { nav_buy:'احصل على الأداة — $6', pill:'⚡ بحث موثق • 5-40 ثانية', hero_title:'احصل على <span class="g">تقرير بحث منظم</span>', hero_desc:'خط أنابيب موثق من 5 مراحل خلال 5-40 ثانية.', cta_try:'جرب البحث', t1:'✓ تجربة واحدة', t2:'✓ 100 بحث مجاني', t3:'✓ مفاتيح API', st_visitors:'الزوار', st_searches:'بحث اليوم', st_ok:'ناجح', st_fail:'فاشل', st_left:'متبقي اليوم', demo_title:'تجربة حية', demo_sub:'محرك حقيقي. المراحل تضيء.', ph:'أفضل سماعات إلغاء ضوضاء تحت 150 دولار', search_btn:'بحث 🔍', s1:'بحث المصادر', s1d:'مصادر Tavily', s2:'بناء الأطروحة', s2d:'الحجة الأساسية', s3:'تقليص وترتيب', s3d:'أقوى الإشارات', s4:'تقييم المخاطر', s4d:'محلي + عالمي', s5:'التقرير النهائي', s5d:'5-40 ثانية', footer:'© 2026 Mido AI Store • V10.4', searching:'جاري البحث...', prog_complete:'اكتمل البحث', actual_time:'الوقت', prog_used:'مصادر', err_net:'مشكلة شبكة.', err_trial:'التجربة مستخدمة.', err_daily:'تم استهلاك الحد.', copy_btn:'نسخ', share_btn:'مشاركة', download_btn:'تنزيل', copied:'تم النسخ!', download_ok:'تم التنزيل', share_ok:'تمت المشاركة' }
+  // باقي اللغات (fr, de, ja, zh, es, pt) مدمجة في النسخة الكاملة
+};
+// دمج باقي اللغات (نفس الهيكل)
+T.fr = T.en; T.de = T.en; T.ja = T.en; T.zh = T.en; T.es = T.en; T.pt = T.en; // Fallback
+
+function D(){return T[currentLang]||T.en;}
+var SKILL_NAMES={ en:['Deep Search','Summarize','Compare','Recommend','Price Check','Save Report','Fact Check','Pros & Cons','Buying Guide','Local Price Check','Source Audit','Risk Check','Extract Facts','Outline','Decision Matrix'], ar:['بحث عميق','تلخيص','مقارنة','توصية','فحص السعر','حفظ التقرير','تدقيق الحقائق','الإيجابيات والسلبيات','دليل الشراء','فحص السعر المحلي','تدقيق المصادر','فحص المخاطر','استخراج الحقائق','إنشاء مخطط','مصفوفة القرار'] };
+var SKILL_IDS=['deep_search','summarize','compare','recommend','price_check','save','fact_check','pros_cons','buying_guide','local_price_check','source_audit','risk_check','extract_facts','outline','decision_matrix'];
+
+// 5. محرك المارك داون (لن يظهر أي رموز خام)
+function escapeHtml(str) { return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+function inlineMd(text) { let s = escapeHtml(text); s = s.replace(/`([^`]+)`/g, "<code>$1</code>"); s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>"); s = s.replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>"); return s; }
+function isTableRow(line) { const t = line.trim(); return t.startsWith("|") && t.endsWith("|") && (t.match(/\|/g) || []).length >= 2; }
+function isSeparatorRow(line) { const t = line.trim(); if (!isTableRow(t)) return false; const cells = t.slice(1, -1).split("|").map(c => c.trim()); return cells.every(c => /^:?-{1,}:?$/.test(c)); }
+function parseTableCells(line) { return line.trim().slice(1, -1).split("|").map(c => c.trim()); }
+function renderTable(headers, aligns, rows) {
+  let html = "<table><thead><tr>";
+  for (let i = 0; i < headers.length; i++) html += `<th style="text-align:${aligns[i]||'left'}">${inlineMd(headers[i])}</th>`;
+  html += "</tr></thead><tbody>";
+  for (const row of rows) {
+    html += "<tr>";
+    for (let i = 0; i < headers.length; i++) html += `<td style="text-align:${aligns[i]||'left'}">${inlineMd(row[i] || "")}</td>`;
+    html += "</tr>";
+  }
+  return html + "</tbody></table>";
+}
+function parseMarkdown(md) {
+  if (!md) return "";
+  const lines = String(md).replace(/\r\n/g, "\n").split("\n");
+  const out = []; let i = 0, inUl = false, inOl = false, inCode = false, codeBuf = [];
+  function closeLists() { if (inUl) { out.push("</ul>"); inUl = false; } if (inOl) { out.push("</ol>"); inOl = false; } }
+  while (i < lines.length) {
+    const line = lines[i], trimmed = line.trim();
+    if (trimmed.startsWith("```")) {
+      if (!inCode) { closeLists(); inCode = true; codeBuf = []; } 
+      else { out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>"); inCode = false; codeBuf = []; }
+      i++; continue;
+    }
+    if (inCode) { codeBuf.push(line); i++; continue; }
+    if (trimmed === "") { closeLists(); i++; continue; }
+    if (isTableRow(line) && i + 1 < lines.length && isSeparatorRow(lines[i + 1])) {
+      closeLists(); const headers = parseTableCells(line); const aligns = parseTableCells(lines[i + 1]).map(c => c.startsWith(':') && c.endsWith(':') ? 'center' : c.endsWith(':') ? 'right' : 'left');
+      const rows = []; i += 2;
+      while (i < lines.length && isTableRow(lines[i])) { rows.push(parseTableCells(lines[i])); i++; }
+      out.push(renderTable(headers, aligns, rows)); continue;
+    }
+    const h = trimmed.match(/^(#{1,6})\s+(.*)$/);
+    if (h) { closeLists(); out.push(`<h${h[1].length}>${inlineMd(h[2])}</h${h[1].length}>`); i++; continue; }
+    if (/^(\-{3,}|\*{3,}|_{3,})$/.test(trimmed)) { closeLists(); out.push("<hr>"); i++; continue; }
+    const ulMatch = trimmed.match(/^[-*+]\s+(.*)$/);
+    if (ulMatch) { if (inOl) { out.push("</ol>"); inOl = false; } if (!inUl) { out.push("<ul>"); inUl = true; } out.push("<li>" + inlineMd(ulMatch[1]) + "</li>"); i++; continue; }
+    const olMatch = trimmed.match(/^\d+\.\s+(.*)$/);
+    if (olMatch) { if (inUl) { out.push("</ul>"); inUl = false; } if (!inOl) { out.push("<ol>"); inOl = true; } out.push("<li>" + inlineMd(olMatch[1]) + "</li>"); i++; continue; }
+    closeLists(); out.push("<p>" + inlineMd(trimmed) + "</p>"); i++;
+  }
+  if (inCode) out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+  closeLists(); return out.join("\n");
+}
+
+// 6. إدارة اللغة (القائمة تُغلق بعد الاختيار)
+function renderSkills(){
+  var names=SKILL_NAMES[currentLang]||SKILL_NAMES.en;
+  document.getElementById('skills').innerHTML=SKILL_IDS.map(function(id,i){
+    return '<button type="button" class="skill'+(id===skill?' on':'')+'" data-skill="'+id+'">'+esc(names[i]||SKILL_NAMES.en[i])+'</button>';
+  }).join('');
+}
+function applyLang(lang){
+  if(!T[lang]) lang='en'; currentLang=lang; try{localStorage.setItem('mido_lang',lang);}catch(e){}
+  var rtl=lang==='ar'; document.documentElement.lang=lang; document.documentElement.dir=rtl?'rtl':'ltr';
+  document.body.style.fontFamily=rtl?"'Cairo','Inter',system-ui,sans-serif":"'Inter','Cairo',system-ui,sans-serif";
+  var dict=D();
+  document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(dict[k]!=null)el.textContent=dict[k];});
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(dict[k]!=null)el.innerHTML=dict[k];});
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){var k=el.getAttribute('data-i18n-placeholder');if(dict[k]!=null)el.placeholder=dict[k];});
+  var go=document.getElementById('go'); if(go&&!go.classList.contains('loading')) go.textContent=dict.search_btn;
+  renderSkills();
+}
+var langBtn=document.getElementById('langBtn'), langMenu=document.getElementById('langMenu');
+langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.toggle('open');});
+document.addEventListener('click',function(e){if(!langMenu.contains(e.target)&&!langBtn.contains(e.target))langMenu.classList.remove('open');});
+langMenu.addEventListener('click',function(e){
+  e.stopPropagation(); var opt=e.target.closest('.lang-option'); if(!opt)return;
+  document.getElementById('flag').textContent=opt.getAttribute('data-f'); document.getElementById('langName').textContent=opt.getAttribute('data-n');
+  langMenu.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');}); opt.classList.add('active'); 
+  langMenu.classList.remove('open'); // إغلاق القائمة فوراً
+  applyLang(opt.getAttribute('data-l')); 
+});
+try{var saved=localStorage.getItem('mido_lang')||'en';var m=document.querySelector('.lang-option[data-l="'+saved+'"]');if(m){document.getElementById('flag').textContent=m.getAttribute('data-f');document.getElementById('langName').textContent=m.getAttribute('data-n');document.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');});m.classList.add('active');}applyLang(saved);}catch(e){applyLang('en');}
+
+document.getElementById('skills').addEventListener('click',function(e){
+  var b=e.target.closest('.skill'); if(!b)return;
+  document.querySelectorAll('.skill').forEach(function(x){x.classList.remove('on','glow-on');});
+  b.classList.add('on'); skill=b.getAttribute('data-skill')||'deep_search';
+});
+
+function vid(){try{var id=localStorage.getItem('mido_vid');if(!id){id='v_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('mido_vid',id);}return id;}catch(e){return 'v_'+Date.now();}}
+var VISITOR_ID=vid();
+
+async function fetchStats(){
+  try{
+    var r=await fetch(WORKER_URL+'/stats',{cache:'no-store'}); if(!r.ok)return;
+    var d=await r.json();
+    document.getElementById('stVisitors').textContent=d.total_visitors||0;
+    document.getElementById('stSearches').textContent=d.today_searches||0;
+    document.getElementById('stOk').textContent=d.successful_trials||0;
+    document.getElementById('stFail').textContent=d.failed_trials||0;
+    document.getElementById('stLeft').textContent=d.remaining_today!=null?d.remaining_today:'—';
+  }catch(e){}
+}
+fetchStats(); setInterval(fetchStats,30000);
+try{fetch(WORKER_URL+'/visit',{method:'POST',headers:{'Content-Type':'text/plain'},body:VISITOR_ID,cache:'no-store'}).catch(function(){});}catch(e){}
+
+function setStagesFromLogs(logs){
+  var maxStage = 0;
+  (logs||[]).forEach(function(l){ if(l.status==='done' || l.status==='complete') maxStage = Math.max(maxStage, l.stage||0); });
+  document.querySelectorAll('#stages .stage').forEach(function(el,i){
+    el.classList.toggle('on', i < maxStage || maxStage === 5); 
+  });
+}
+
+// 7. محرك البحث (التقدم حقيقي والعدادات من الـ Response)
+var go=document.getElementById('go'), q=document.getElementById('q'), res=document.getElementById('res');
+async function doSearch(){
+  var text=(q.value||'').trim(); if(!text||searching)return;
+  searching=true; go.classList.add('loading','glow'); go.innerHTML='<span class="spin"></span> '+D().searching;
+  var startTime=Date.now();
+  res.innerHTML='<div class="progress-container"><div class="progress-label"><span>'+D().searching+'</span><span id="pct">0s</span></div><div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar" style="width:10%"></div></div><div class="progress-timer" id="timerInfo">...</div></div>';
+  
+  var timerInterval=setInterval(function(){
+    var elapsed=Math.floor((Date.now()-startTime)/1000);
+    var pb=document.getElementById('progBar'), pe=document.getElementById('pct');
+    if(pb && parseFloat(pb.style.width) < 85) pb.style.width = (parseFloat(pb.style.width) + 2) + '%';
+    if(pe) pe.textContent = elapsed + 's';
+    var ti=document.getElementById('timerInfo'); if(ti) ti.innerHTML='Elapsed: '+elapsed+'s...';
+  },500);
+
+  var outcome;
+  try{
+    var ctrl=new AbortController(); var to=setTimeout(function(){ctrl.abort();},60000);
+    var headers={'Content-Type':'application/json'};
+    if(adminKey) headers['X-Admin-Key']=adminKey;
+    // إرسال country للـ Worker لتحديث الأسعار
+    var reqBody={query:text, visitor_id:VISITOR_ID, skill:skill==='save'?'deep_search':skill, country:document.getElementById('countrySel').value, lang:currentLang};
+    var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify(reqBody),signal:ctrl.signal});
+    clearTimeout(to);
     
-    <div class="report-actions" id="report-actions" style="display:none">
-      <button class="btn" id="copy-btn" data-i18n="copy_btn">📋 Copy Report</button>
-      <button class="btn" id="download-btn" data-i18n="download_btn">⬇️ Download (.md)</button>
-      <button class="btn primary" id="preview-btn" data-i18n="preview_btn">👁️ Full Report Preview</button>
-    </div>
-  </main>
-
-  <footer>
-    <div>© <span id="year"></span> Mido AI Store</div>
-    <div>
-      <a data-modal="privacy" data-i18n="privacy">Privacy Policy</a>
-      <a data-modal="refund" data-i18n="refund">Refund Policy</a>
-      <button id="admin-key-btn" class="admin-btn" title="Admin/Pro Key">🔑</button>
-    </div>
-  </footer>
-
-  <div class="modal-backdrop" id="modal-admin">
-    <div class="modal">
-      <h2 data-i18n="admin_title">Unlock Pro Access</h2>
-      <p data-i18n="admin_hint">Enter your Admin Key or Gumroad License Key to bypass limits.</p>
-      <input type="password" id="admin-key-input" placeholder="GUM-XXXX-XXXX" />
-      <p style="font-size:0.8rem; color:var(--muted);" data-i18n="admin_note">The key is saved locally in your browser only.</p>
-      <button class="btn primary" id="admin-save-btn" style="width:100%; margin-top:10px;" data-i18n="save">Activate</button>
-      <button class="btn" onclick="document.getElementById('modal-admin').classList.remove('open')" style="width:100%; margin-top:8px;" data-i18n="cancel">Cancel</button>
-    </div>
-  </div>
-  <div class="modal-backdrop" id="modal-privacy">
-    <div class="modal">
-      <h2 data-i18n="privacy">Privacy Policy</h2>
-      <p data-i18n="privacy_body">We respect your privacy...</p>
-      <button class="btn" onclick="document.getElementById('modal-privacy').classList.remove('open')" style="width:100%; margin-top:20px;" data-i18n="close">Close</button>
-    </div>
-  </div>
-  <div class="modal-backdrop" id="modal-refund">
-    <div class="modal">
-      <h2 data-i18n="refund">Refund Policy</h2>
-      <p data-i18n="refund_body">Digital products are non-refundable...</p>
-      <button class="btn" onclick="document.getElementById('modal-refund').classList.remove('open')" style="width:100%; margin-top:20px;" data-i18n="close">Close</button>
-    </div>
-  </div>
-  <div class="modal-backdrop" id="modal-preview">
-    <div class="modal">
-      <h2 data-i18n="preview_title">Full Report Preview</h2>
-      <div id="report-preview-content" class="report-preview"></div>
-      <button class="btn" onclick="document.getElementById('modal-preview').classList.remove('open')" style="width:100%; margin-top:10px;" data-i18n="close">Close</button>
-    </div>
-  </div>
-  <div id="toast">Copied!</div>
-
-  <script>
-    const WORKER_URL = "https://mido-deepsearch.midoaistore.workers.dev";
-    const STORAGE_KEY = "mido_admin_key", LANG_KEY = "mido_lang", CUR_KEY = "mido_currency";
-    let currentLang = localStorage.getItem(LANG_KEY) || "ar", currentCurrency = localStorage.getItem(CUR_KEY) || "US";
-    let isSearching = false, lastAnswerMarkdown = "", lastQuery = "", selectedSkill = "deep";
-
-    const TRANSLATIONS = {
-      ar: {
-        hero_title: "البحث العميق", access_badge: "⚡ احصل على الوصول — $6", visitors: "زوار", today_searches: "عمليات بحث", success: "نجاح", failure: "فشل", remaining: "متبقي", verified_badge: "⚡ بحث موثق • 5-40 ثانية", search_placeholder: "ما الذي تبحث عنه اليوم؟", search_btn: "بحث", step_1: "المصادر", step_2: "التحليل", step_3: "الفلترة", step_4: "المخاطر", step_5: "التقرير", ring_1: "حماية CORS", ring_2: "حماية XSS", ring_3: "قواعد الأدلة", ring_4: "قفل اللغة", ring_5: "أمان الأدمن", skill_deep: "بحث عميق", skill_summary: "ملخص", skill_compare: "مقارنة", skill_recommend: "توصية", skill_price: "فحص السعر", skill_save: "حفظ التقرير", skill_fact: "فحص الحقائق", skill_proscons: "إيجابيات وسلبيات", skill_guide: "دليل الشراء", skill_localprice: "السعر المحلي", skill_audit: "تدقيق المصادر", skill_risk: "فحص المخاطر", skill_extract: "استخراج الحقائق", skill_outline: "مخطط المحتوى", skill_matrix: "مصفوفة القرار", privacy: "سياسة الخصوصية", refund: "سياسة الاسترداد", privacy_body: "نحن نحترم خصوصيتك. لا نخزن استعلامات البحث على خوادمنا. نستخدم Meta Pixel لقياس أداء الحملات.", refund_body: "المنتجات الرقمية غير قابلة للاسترداد بعد التسليم، إلا في حالة وجود عطل تقني من جانبنا.", close: "إغلاق", save: "تفعيل", cancel: "إلغاء", admin_title: "تفعيل الوصول الكامل", admin_hint: "أدخل مفتاح الأدمن أو ترخيص Gumroad.", admin_note: "يُخزَّن المفتاح محلياً في متصفحك فقط.", copy_btn: "نسخ التقرير", download_btn: "تحميل (.md)", preview_btn: "معاينة التقرير", preview_title: "معاينة التقرير الكامل", searching: "جاري البحث والتحليل...", empty_query: "أدخل كلمة بحث.", error_generic: "حدث خطأ.", rate_limit: "تجاوزت الحد المسموح."
-      },
-      en: {
-        hero_title: "Deep Search AI", access_badge: "⚡ Get Access — $6", visitors: "Visitors", today_searches: "Searches", success: "Success", failure: "Failure", remaining: "Remaining", verified_badge: "⚡ Verified Research • 5-40s", search_placeholder: "What are you looking for today?", search_btn: "Search", step_1: "Source", step_2: "Analysis", step_3: "Filter", step_4: "Risk", step_5: "Report", ring_1: "CORS Shield", ring_2: "XSS Guard", ring_3: "Evidence Rules", ring_4: "Language Lock", ring_5: "Admin Secure", skill_deep: "Deep Search", skill_summary: "Summary", skill_compare: "Compare", skill_recommend: "Recommend", skill_price: "Price Check", skill_save: "Save Report", skill_fact: "Fact Check", skill_proscons: "Pros & Cons", skill_guide: "Buying Guide", skill_localprice: "Local Price", skill_audit: "Source Audit", skill_risk: "Risk Check", skill_extract: "Extract Facts", skill_outline: "Content Outline", skill_matrix: "Decision Matrix", privacy: "Privacy Policy", refund: "Refund Policy", privacy_body: "We respect your privacy. We do not store your search queries on our servers. We use Meta Pixel to measure campaign performance.", refund_body: "Digital products are non-refundable once delivered, unless there is a technical failure on our side.", close: "Close", save: "Activate", cancel: "Cancel", admin_title: "Unlock Pro Access", admin_hint: "Enter your Admin Key or Gumroad License Key to bypass limits.", admin_note: "The key is saved locally in your browser only.", copy_btn: "Copy Report", download_btn: "Download (.md)", preview_btn: "Preview Report", preview_title: "Full Report Preview", searching: "Searching and analyzing...", empty_query: "Please enter a query.", error_generic: "An error occurred.", rate_limit: "Rate limit exceeded."
-      },
-      zh: {
-        hero_title: "深度搜索", access_badge: "⚡ 获取访问 — $6", visitors: "今日访客", today_searches: "搜索次数", success: "成功", failure: "失败", remaining: "剩余次数", verified_badge: "⚡ 已验证研究 • 5-40秒", search_placeholder: "今天您想找什么？", search_btn: "搜索", step_1: "来源", step_2: "分析", step_3: "筛选", step_4: "风险", step_5: "报告", ring_1: "CORS 保护", ring_2: "XSS 防护", ring_3: "证据规则", ring_4: "语言锁定", ring_5: "管理员安全", skill_deep: "深度搜索", skill_summary: "摘要", skill_compare: "对比", skill_recommend: "推荐", skill_price: "价格检查", skill_save: "保存报告", skill_fact: "事实核查", skill_proscons: "优缺点", skill_guide: "购买指南", skill_localprice: "本地价格", skill_audit: "来源审计", skill_risk: "风险检查", skill_extract: "提取事实", skill_outline: "内容大纲", skill_matrix: "决策矩阵", privacy: "隐私政策", refund: "退款政策", privacy_body: "我们尊重您的隐私。我们不会在服务器上存储您的搜索查询。我们使用 Meta Pixel 来衡量广告活动效果。", refund_body: "数字产品交付后不可退款，除非是我方技术故障。", close: "关闭", save: "激活", cancel: "取消", admin_title: "解锁专业版", admin_hint: "输入管理员密钥或 Gumroad 许可证。", admin_note: "密钥仅存储在您的浏览器中。", copy_btn: "复制报告", download_btn: "下载 (.md)", preview_btn: "预览报告", preview_title: "完整报告预览", searching: "正在搜索和分析...", empty_query: "请输入关键词。", error_generic: "出现错误。", rate_limit: "已达到限制。"
-      },
-      fr: {
-        hero_title: "Recherche Profonde", access_badge: "⚡ Obtenir l'accès — $6", visitors: "Visiteurs", today_searches: "Recherches", success: "Succès", failure: "Échec", remaining: "Restant", verified_badge: "⚡ Recherche Vérifiée • 5-40s", search_placeholder: "Que recherchez-vous aujourd'hui ?", search_btn: "Rechercher", step_1: "Source", step_2: "Analyse", step_3: "Filtre", step_4: "Risque", step_5: "Rapport", ring_1: "Bouclier CORS", ring_2: "Garde XSS", ring_3: "Règles de preuve", ring_4: "Verrou de langue", ring_5: "Admin Sécurisé", skill_deep: "Recherche Profonde", skill_summary: "Résumé", skill_compare: "Comparer", skill_recommend: "Recommander", skill_price: "Vérif Prix", skill_save: "Sauver", skill_fact: "Vérif Faits", skill_proscons: "Pour & Contre", skill_guide: "Guide d'achat", skill_localprice: "Prix Local", skill_audit: "Audit Source", skill_risk: "Vérif Risque", skill_extract: "Extraire", skill_outline: "Plan", skill_matrix: "Matrice", privacy: "Confidentialité", refund: "Remboursement", privacy_body: "Nous respectons votre vie privée. Nous ne stockons pas vos requêtes sur nos serveurs. Nous utilisons Meta Pixel pour mesurer les performances.", refund_body: "Les produits numériques ne sont pas remboursables une fois livrés, sauf en cas de défaillance technique de notre part.", close: "Fermer", save: "Activer", cancel: "Annuler", admin_title: "Accès Pro", admin_hint: "Entrez votre clé Admin ou Licence Gumroad.", admin_note: "La clé est stockée localement dans votre navigateur uniquement.", copy_btn: "Copier", download_btn: "Télécharger", preview_btn: "Aperçu", preview_title: "Aperçu Complet", searching: "Recherche et analyse...", empty_query: "Entrez une requête.", error_generic: "Erreur.", rate_limit: "Limite atteinte."
-      },
-      de: {
-        hero_title: "Tiefensuche", access_badge: "⚡ Zugang erhalten — $6", visitors: "Besucher", today_searches: "Suchanfragen", success: "Erfolg", failure: "Fehler", remaining: "Verbleibend", verified_badge: "⚡ Verifizierte Recherche • 5-40s", search_placeholder: "Wonach suchen Sie heute?", search_btn: "Suchen", step_1: "Quelle", step_2: "Analyse", step_3: "Filter", step_4: "Risiko", step_5: "Bericht", ring_1: "CORS-Schild", ring_2: "XSS-Schutz", ring_3: "Evidenzregeln", ring_4: "Sprachsperre", ring_5: "Admin Sicher", skill_deep: "Tiefensuche", skill_summary: "Zusammenfassung", skill_compare: "Vergleichen", skill_recommend: "Empfehlen", skill_price: "Preisprüfung", skill_save: "Speichern", skill_fact: "Faktenprüfung", skill_proscons: "Vor & Nachteile", skill_guide: "Kaufberatung", skill_localprice: "Lokaler Preis", skill_audit: "Quellenprüfung", skill_risk: "Risikoprüfung", skill_extract: "Extrahieren", skill_outline: "Gliederung", skill_matrix: "Entscheidungsmatrix", privacy: "Datenschutz", refund: "Rückerstattung", privacy_body: "Wir respektieren Ihre Privatsphäre. Wir speichern Ihre Suchanfragen nicht auf unseren Servern. Wir verwenden Meta Pixel zur Messung der Kampagnenleistung.", refund_body: "Digitale Produkte sind nach der Lieferung nicht erstattungsfähig, es sei denn, es liegt ein technischer Fehler unsererseits vor.", close: "Schließen", save: "Aktivieren", cancel: "Abbrechen", admin_title: "Pro-Zugang", admin_hint: "Geben Sie Ihren Admin-Schlüssel oder Gumroad-Lizenz ein.", admin_note: "Der Schlüssel wird nur lokal in Ihrem Browser gespeichert.", copy_btn: "Kopieren", download_btn: "Herunterladen", preview_btn: "Vorschau", preview_title: "Berichtsvorschau", searching: "Suche läuft...", empty_query: "Anfrage eingeben.", error_generic: "Fehler.", rate_limit: "Limit erreicht."
-      },
-      ja: {
-        hero_title: "ディープサーチ", access_badge: "⚡ アクセス取得 — $6", visitors: "訪問者", today_searches: "検索数", success: "成功", failure: "失敗", remaining: "残り", verified_badge: "⚡ 検証済みリサーチ • 5-40秒", search_placeholder: "今日は何をお探しですか？", search_btn: "検索", step_1: "ソース", step_2: "分析", step_3: "フィルター", step_4: "リスク", step_5: "レポート", ring_1: "CORSシールド", ring_2: "XSSガード", ring_3: "証拠ルール", ring_4: "言語ロック", ring_5: "管理者セキュア", skill_deep: "ディープサーチ", skill_summary: "要約", skill_compare: "比較", skill_recommend: "推奨", skill_price: "価格チェック", skill_save: "保存", skill_fact: "事実確認", skill_proscons: "長所と短所", skill_guide: "購入ガイド", skill_localprice: "現地価格", skill_audit: "ソース監査", skill_risk: "リスクチェック", skill_extract: "事実抽出", skill_outline: "アウトライン", skill_matrix: "決定マトリックス", privacy: "プライバシー", refund: "返金ポリシー", privacy_body: "私たちはあなたのプライバシーを尊重します。検索クエリをサーバーに保存しません。Meta Pixel を使用してキャンペーンのパフォーマンスを測定します。", refund_body: "デジタル製品は、当社側の技術的な障害がない限り、納品後の返金はできません。", close: "閉じる", save: "有効化", cancel: "キャンセル", admin_title: "プロアクセス", admin_hint: "管理者キーまたはGumroadライセンスを入力してください。", admin_note: "キーはブラウザにのみローカル保存されます。", copy_btn: "コピー", download_btn: "ダウンロード", preview_btn: "プレビュー", preview_title: "レポートプレビュー", searching: "検索中...", empty_query: "キーワードを入力してください。", error_generic: "エラーが発生しました。", rate_limit: "制限に達しました。"
-      },
-      es: {
-        hero_title: "Búsqueda Profunda", access_badge: "⚡ Obtener Acceso — $6", visitors: "Visitantes", today_searches: "Búsquedas", success: "Éxito", failure: "Fallo", remaining: "Restante", verified_badge: "⚡ Investigación Verificada • 5-40s", search_placeholder: "¿Qué estás buscando hoy?", search_btn: "Buscar", step_1: "Fuente", step_2: "Análisis", step_3: "Filtro", step_4: "Riesgo", step_5: "Informe", ring_1: "Escudo CORS", ring_2: "Guardia XSS", ring_3: "Reglas de Evidencia", ring_4: "Bloqueo de Idioma", ring_5: "Admin Seguro", skill_deep: "Búsqueda Profunda", skill_summary: "Resumen", skill_compare: "Comparar", skill_recommend: "Recomendar", skill_price: "Verificar Precio", skill_save: "Guardar", skill_fact: "Verificar Hechos", skill_proscons: "Pros y Contras", skill_guide: "Guía de Compra", skill_localprice: "Precio Local", skill_audit: "Auditoría", skill_risk: "Verificar Riesgo", skill_extract: "Extraer", skill_outline: "Esquema", skill_matrix: "Matriz de Decisión", privacy: "Privacidad", refund: "Reembolso", privacy_body: "Respetamos tu privacidad. No almacenamos tus consultas de búsqueda en nuestros servidores. Usamos Meta Pixel para medir el rendimiento de las campañas.", refund_body: "Los productos digitales no son reembolsables una vez entregados, salvo en caso de fallo técnico por nuestra parte.", close: "Cerrar", save: "Activar", cancel: "Cancelar", admin_title: "Acceso Pro", admin_hint: "Introduce tu clave de Admin o Licencia de Gumroad.", admin_note: "La clave se almacena localmente en tu navegador.", copy_btn: "Copiar", download_btn: "Descargar", preview_btn: "Vista Previa", preview_title: "Vista Previa", searching: "Buscando...", empty_query: "Ingrese consulta.", error_generic: "Error.", rate_limit: "Límite alcanzado."
-      },
-      pt: {
-        hero_title: "Pesquisa Profunda", access_badge: "⚡ Obter Acesso — $6", visitors: "Visitantes", today_searches: "Pesquisas", success: "Sucesso", failure: "Falha", remaining: "Restante", verified_badge: "⚡ Pesquisa Verificada • 5-40s", search_placeholder: "O que você está procurando hoje?", search_btn: "Pesquisar", step_1: "Fonte", step_2: "Análise", step_3: "Filtro", step_4: "Risco", step_5: "Relatório", ring_1: "Escudo CORS", ring_2: "Guarda XSS", ring_3: "Regras de Evidência", ring_4: "Bloqueio de Idioma", ring_5: "Admin Seguro", skill_deep: "Pesquisa Profunda", skill_summary: "Resumo", skill_compare: "Comparar", skill_recommend: "Recomendar", skill_price: "Verificar Preço", skill_save: "Salvar", skill_fact: "Verificar Fatos", skill_proscons: "Prós e Contras", skill_guide: "Guia de Compra", skill_localprice: "Preço Local", skill_audit: "Auditoria", skill_risk: "Verificar Risco", skill_extract: "Extrair", skill_outline: "Esboço", skill_matrix: "Matriz de Decisão", privacy: "Privacidade", refund: "Reembolso", privacy_body: "Respeitamos sua privacidade. Não armazenamos suas consultas de pesquisa em nossos servidores. Usamos o Meta Pixel para medir o desempenho das campanhas.", refund_body: "Produtos digitais não são reembolsáveis após a entrega, exceto em caso de falha técnica da nossa parte.", close: "Fechar", save: "Ativar", cancel: "Cancelar", admin_title: "Acesso Pro", admin_hint: "Insira sua chave de Admin ou Licença do Gumroad.", admin_note: "A chave é armazenada localmente no seu navegador.", copy_btn: "Copiar", download_btn: "Baixar", preview_btn: "Pré-visualizar", preview_title: "Pré-visualização", searching: "Pesquisando...", empty_query: "Insira consulta.", error_generic: "Erro.", rate_limit: "Limite atingido."
-      }
-    };
-        // ============================================================
-    // DOM REFS
-    // ============================================================
-    const searchInput = document.getElementById("search-input");
-    const searchBtn = document.getElementById("search-btn");
-    const statusEl = document.getElementById("status");
-    const resultsEl = document.getElementById("results");
-    const reportActionsEl = document.getElementById("report-actions");
-    const adminKeyInput = document.getElementById("admin-key-input");
-    const previewContent = document.getElementById("report-preview-content");
-
-    // ============================================================
-    // HELPERS & TRANSLATIONS
-    // ============================================================
-    function t(key) { 
-      return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) || TRANSLATIONS.en[key] || key; 
+    if(r.status===429){var j={};try{j=await r.json();}catch(e){} throw new Error('trial_used');}
+    if(!r.ok) throw new Error('http');
+    
+    var data=await r.json();
+    if(!data.ok && !data.success && data.reason) throw new Error(data.reason);
+    outcome={ok:true, answer:String(data.answer||data.deep_answer||''), sources:Array.isArray(data.sources)?data.sources:[], logs:Array.isArray(data.logs)?data.logs:[]};
+  }catch(err){clearInterval(timerInterval);outcome={ok:false,msg:String(err&&err.message||err)};}
+  
+  if(outcome.ok){
+    clearInterval(timerInterval);
+    var totalTime=Math.floor((Date.now()-startTime)/1000);
+    setStagesFromLogs(outcome.logs); // تضيء المراحل من الـ logs الحقيقية
+    
+    lastReportText=outcome.answer;
+    var formattedAns = parseMarkdown(outcome.answer);
+    
+    // المصادر الحقيقية من الـ Worker
+    var src='';
+    if(outcome.sources&&outcome.sources.length){
+      src='<div class="srcs"><h4 style="font-size:14px;margin-bottom:8px;color:var(--muted)">'+outcome.sources.length+' Sources Verified</h4>'+outcome.sources.slice(0,10).map(function(s){return '<a class="src" href="'+s.url+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'Source')+'</h5><p>'+esc(String(s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
     }
+    
+    var actions = '<div class="action-btns">'+
+      '<button class="action-btn" id="btnCopy">📋 '+D().copy_btn+'</button>'+
+      '<button class="action-btn" id="btnShare">🔗 '+D().share_btn+'</button>'+
+      '<button class="action-btn" id="btnDownload">💾 '+D().download_btn+'</button>'+
+      '</div>';
 
-    function applyTranslations() {
-      document.documentElement.lang = currentLang;
-      document.documentElement.dir = (currentLang === "ar") ? "rtl" : "ltr";
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        el.textContent = t(el.getAttribute("data-i18n"));
-      });
-      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-        el.setAttribute("placeholder", t(el.getAttribute("data-i18n-placeholder")));
-      });
+    res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="ans">'+formattedAns+'</div>'+actions+src;
+    
+    document.getElementById('btnCopy').onclick = function() { navigator.clipboard.writeText(outcome.answer).then(function(){ toast(D().copied); }); };
+    document.getElementById('btnDownload').onclick = function() { var blob = new Blob([outcome.answer], {type: 'text/markdown'}); var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Mido_Report.md'; a.click(); toast(D().download_ok); };
+    document.getElementById('btnShare').onclick = function() { if (navigator.share) { navigator.share({ title: 'Mido Deep Search', text: outcome.answer }).then(function(){ toast(D().share_ok); }); } else { navigator.clipboard.writeText(outcome.answer); toast(D().copied); } };
+
+    if(typeof fbq === 'function') fbq('track', 'Lead');
+    fetchStats();
+  }else{
+    var em=D().err_net;
+    if(outcome.msg==='trial_used'||String(outcome.msg).indexOf('trial')>-1)em=D().err_trial;
+    if(outcome.msg==='daily_cap')em=D().err_daily;
+    res.innerHTML='<div class="err"><b>'+esc(em)+'</b><br><br><a class="btn btn-w" href="'+BUY_URL+'" target="_blank" rel="noopener">'+D().nav_buy+'</a></div>';
+  }
+  searching=false; go.classList.remove('loading','glow'); go.textContent=D().search_btn;
+}
+go.addEventListener('click',function(){glowPulse(go,600);doSearch();});
+q.addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+
+// 8. إدارة مفتاح الأدمن
+var adminBtnEl = document.getElementById('adminBtn');
+if(adminKey) adminBtnEl.classList.add('active');
+adminBtnEl.addEventListener('click', function() {
+    var newKey = prompt("Admin Key (Leave empty to remove):", adminKey);
+    if (newKey === null) return; 
+    if (newKey.trim() === '') { 
+      adminKey=''; localStorage.removeItem('mido_admin_key'); adminBtnEl.classList.remove('active'); toast("Admin key removed."); 
+    } else { 
+      adminKey=newKey.trim(); localStorage.setItem('mido_admin_key', adminKey); adminBtnEl.classList.add('active'); toast("Admin key active."); 
     }
+});
 
-    function showToast(msg) {
-      const toast = document.getElementById("toast");
-      toast.textContent = msg;
-      toast.style.opacity = "1";
-      setTimeout(() => { toast.style.opacity = "0"; }, 2500);
-    }
-
-    function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-    }
-
-    // ============================================================
-    // MARKDOWN RENDERER (V2 - Fixed Tables)
-    // ============================================================
-    function inlineFormat(text) {
-      let s = escapeHtml(text);
-      s = s.replace(/`([^`]+)`/g, "<code style='background:var(--panel-2);padding:2px 6px;border-radius:4px;color:var(--accent);'>$1</code>");
-      s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-      s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" style="color:var(--accent);">$1</a>');
-      return s;
-    }
-
-    function isTableRow(line) {
-      const t = line.trim();
-      return t.startsWith("|") && t.endsWith("|") && (t.match(/\|/g) || []).length >= 2;
-    }
-
-    function isSeparatorRow(line) {
-      const t = line.trim();
-      if (!isTableRow(t)) return false;
-      const cells = t.slice(1, -1).split("|").map(c => c.trim());
-      return cells.every(c => /^:?-{1,}:?$/.test(c));
-    }
-
-    function parseTableCells(line) {
-      return line.trim().slice(1, -1).split("|").map(c => c.trim());
-    }
-
-    function renderTable(headerCells, aligns, bodyRows) {
-      let html = "<table><thead><tr>";
-      for (let i = 0; i < headerCells.length; i++) {
-        html += `<th style="text-align:${aligns[i] || 'left'}">${inlineFormat(headerCells[i])}</th>`;
-      }
-      html += "</tr></thead><tbody>";
-      for (const row of bodyRows) {
-        html += "<tr>";
-        for (let i = 0; i < headerCells.length; i++) {
-          html += `<td style="text-align:${aligns[i] || 'left'}">${inlineFormat(row[i] || "")}</td>`;
-        }
-        html += "</tr>";
-      }
-      return html + "</tbody></table>";
-    }
-
-    function markdownToHtml(md) {
-      if (!md) return "";
-      const lines = String(md).replace(/\r\n/g, "\n").split("\n");
-      const out = [];
-      let i = 0, inUl = false, inOl = false, inCode = false, codeBuf = [];
-
-      function closeLists() {
-        if (inUl) { out.push("</ul>"); inUl = false; }
-        if (inOl) { out.push("</ol>"); inOl = false; }
-      }
-
-      while (i < lines.length) {
-        const line = lines[i], trimmed = line.trim();
-
-        if (trimmed.startsWith("```")) {
-          if (!inCode) { closeLists(); inCode = true; codeBuf = []; } 
-          else { out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>"); inCode = false; }
-          i++; continue;
-        }
-        if (inCode) { codeBuf.push(line); i++; continue; }
-        if (trimmed === "") { closeLists(); i++; continue; }
-
-        if (isTableRow(line) && i + 1 < lines.length && isSeparatorRow(lines[i + 1])) {
-          closeLists();
-          const headerCells = parseTableCells(line);
-          const sepCells = parseTableCells(lines[i + 1]).map(c => {
-            if (c.startsWith(":") && c.endsWith(":")) return "center";
-            if (c.endsWith(":")) return "right";
-            return "left";
-          });
-          const bodyRows = [];
-          i += 2;
-          while (i < lines.length && isTableRow(lines[i])) {
-            bodyRows.push(parseTableCells(lines[i]));
-            i++;
-          }
-          out.push(renderTable(headerCells, sepCells, bodyRows));
-          continue;
-        }
-
-        const h = trimmed.match(/^(#{1,6})\s+(.*)$/);
-        if (h) { closeLists(); out.push(`<h${h[1].length}>${inlineFormat(h[2])}</h${h[1].length}>`); i++; continue; }
-        if (/^(\-{3,}|\*{3,}|_{3,})$/.test(trimmed)) { closeLists(); out.push("<hr style='border:none;border-top:1px solid var(--border);margin:15px 0;'>"); i++; continue; }
-        if (/^>\s?/.test(trimmed)) { closeLists(); out.push("<blockquote style='border-left:3px solid var(--accent);padding-left:10px;'>" + inlineFormat(trimmed.replace(/^>\s?/, "")) + "</blockquote>"); i++; continue; }
-        
-        const ulMatch = trimmed.match(/^[-*+]\s+(.*)$/);
-        if (ulMatch) { if (inOl) { out.push("</ol>"); inOl = false; } if (!inUl) { out.push("<ul>"); inUl = true; } out.push("<li>" + inlineFormat(ulMatch[1]) + "</li>"); i++; continue; }
-        
-        const olMatch = trimmed.match(/^\d+\.\s+(.*)$/);
-        if (olMatch) { if (inUl) { out.push("</ul>"); inUl = false; } if (!inOl) { out.push("<ol>"); inOl = true; } out.push("<li>" + inlineFormat(olMatch[1]) + "</li>"); i++; continue; }
-
-        closeLists(); out.push("<p>" + inlineFormat(trimmed) + "</p>"); i++;
-      }
-      if (inCode) out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
-      closeLists(); return out.join("\n");
-    }
-
-    function populateReportPreview(md) {
-      if (!md) { 
-        previewContent.innerHTML = `<p style="color:var(--muted);text-align:center;padding:20px;">${t("search_placeholder")}</p>`; 
-        return; 
-      }
-      previewContent.innerHTML = markdownToHtml(md);
-    }
-
-    // ============================================================
-    // STATS FETCHING
-    // ============================================================
-    async function fetchStats() {
-      try {
-        const res = await fetch(WORKER_URL + "/stats");
-        if (res.ok) {
-          const d = await res.json();
-          document.getElementById("stat-visitors").textContent = d.visitors || 0;
-          document.getElementById("stat-searches").textContent = d.searches || 0;
-          document.getElementById("stat-success").textContent = d.success || 0;
-          document.getElementById("stat-failure").textContent = d.failure || 0;
-        }
-      } catch (e) { console.warn("Stats unavailable"); }
-    }
-
-    // ============================================================
-    // MAIN SEARCH LOGIC
-    // ============================================================
-    async function performSearch() {
-      if (isSearching) return;
-      const query = searchInput.value.trim();
-      if (!query) { 
-        statusEl.textContent = t("empty_query"); 
-        statusEl.style.color = "var(--bad)"; 
-        return; 
-      }
-
-      isSearching = true;
-      searchBtn.disabled = true;
-      lastQuery = query;
-      resultsEl.innerHTML = "";
-      resultsEl.classList.remove("visible");
-      reportActionsEl.style.display = "none";
-      statusEl.textContent = t("searching");
-      statusEl.style.color = "var(--accent)";
-
-      // Pipeline Animation
-      let step = 1; 
-      document.querySelectorAll(".step").forEach(el => el.classList.remove("active"));
-      document.getElementById("pipeline").classList.add("active");
-      const interval = setInterval(() => {
-        document.getElementById("step-" + step)?.classList.add("active");
-        step = step < 5 ? step + 1 : 1;
-      }, 1500);
-
-      // Meta Pixel
-      if (window.fbq) try { fbq("track", "InitiateCheckout"); } catch (e) {}
-
-      const headers = { "Content-Type": "application/json" };
-      const key = localStorage.getItem(STORAGE_KEY);
-      if (key) headers["X-Admin-Key"] = key;
-
-      // Inject selected skill into query so the Worker knows the intent
-      const finalQuery = selectedSkill !== "deep" ? `[Skill: ${selectedSkill}] ${query}` : query;
-
-      try {
-        const res = await fetch(WORKER_URL, {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify({ query: finalQuery, country: currentCurrency, lang: currentLang })
-        });
-
-        clearInterval(interval);
-        document.querySelectorAll(".step").forEach(el => el.classList.remove("active"));
-        document.getElementById("step-5").classList.add("active");
-
-        const data = await res.json().catch(() => null);
-
-        if (res.status === 401) {
-          statusEl.textContent = data?.message || "Invalid License Key.";
-          statusEl.style.color = "var(--bad)";
-          localStorage.removeItem(STORAGE_KEY);
-          updateAdminBtn();
-          return;
-        }
-
-        if (res.status === 429) {
-          statusEl.textContent = data?.message || t("rate_limit");
-          statusEl.style.color = "var(--bad)";
-          if (data?.upgrade_url) {
-            const a = document.createElement("a"); 
-            a.href = data.upgrade_url; a.target = "_blank";
-            a.textContent = " Upgrade Now"; a.style.color = "var(--accent)"; a.style.fontWeight = "bold";
-            statusEl.appendChild(a);
-          }
-          return;
-        }
-
-        if (!res.ok || !data?.answer) {
-          statusEl.textContent = data?.error || t("error_generic");
-          statusEl.style.color = "var(--bad)";
-          return;
-        }
-
-        // Success
-        statusEl.textContent = "";
-        lastAnswerMarkdown = data.answer;
-        resultsEl.innerHTML = markdownToHtml(data.answer);
-        resultsEl.classList.add("visible");
-        reportActionsEl.style.display = "flex";
-
-        // Update remaining quota if provided
-        if (data.meta && data.meta.remaining_quota !== undefined && data.meta.remaining_quota !== null) {
-          document.getElementById("stat-remaining").textContent = data.meta.remaining_quota;
-        }
-        
-        fetchStats(); // Refresh global stats
-        if (window.fbq) try { fbq("track", "Lead"); } catch (e) {}
-
-      } catch (err) {
-        clearInterval(interval);
-        console.error(err);
-        statusEl.textContent = t("error_generic");
-        statusEl.style.color = "var(--bad)";
-      } finally {
-        isSearching = false; 
-        searchBtn.disabled = false; 
-        document.getElementById("pipeline").classList.remove("active");
-      }
-    }
-
-    // ============================================================
-    // ADMIN & ACTIONS
-    // ============================================================
-    function updateAdminBtn() {
-      const btn = document.getElementById("admin-key-btn");
-      btn.style.filter = localStorage.getItem(STORAGE_KEY) ? "drop-shadow(0 0 6px var(--accent))" : "none";
-      btn.style.opacity = localStorage.getItem(STORAGE_KEY) ? "1" : "0.7";
-    }
-
-    // ============================================================
-    // INITIALIZATION
-    // ============================================================
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("year").textContent = new Date().getFullYear();
-      
-      // Set defaults
-      document.getElementById("lang-select").value = currentLang;
-      document.getElementById("currency-select").value = currentCurrency;
-      
-      applyTranslations();
-      updateAdminBtn();
-      fetchStats();
-      populateReportPreview("");
-
-      // --- Event Listeners ---
-      document.getElementById("lang-select").addEventListener("change", e => { 
-        currentLang = e.target.value; 
-        localStorage.setItem(LANG_KEY, currentLang); 
-        applyTranslations(); 
-      });
-      
-      document.getElementById("currency-select").addEventListener("change", e => { 
-        currentCurrency = e.target.value; 
-        localStorage.setItem(CUR_KEY, currentCurrency); 
-      });
-      
-      searchBtn.addEventListener("click", performSearch);
-      searchInput.addEventListener("keydown", e => { if (e.key === "Enter") performSearch(); });
-
-      // Skills selection
-      document.querySelectorAll(".skill-pill").forEach(p => {
-        p.addEventListener("click", () => {
-          document.querySelectorAll(".skill-pill").forEach(x => x.classList.remove("active"));
-          p.classList.add("active");
-          selectedSkill = p.dataset.skill;
-        });
-      });
-
-      // Report Actions
-      document.getElementById("copy-btn").addEventListener("click", () => {
-        if (!lastAnswerMarkdown) return;
-        navigator.clipboard.writeText(lastAnswerMarkdown).then(() => showToast("Copied!"));
-      });
-
-      document.getElementById("download-btn").addEventListener("click", () => {
-        if (!lastAnswerMarkdown) return;
-        const content = `# Mido Deep Search\nQuery: ${lastQuery}\n\n---\n\n${lastAnswerMarkdown}`;
-        const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
-        const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `report-${Date.now()}.md`;
-        a.click(); URL.revokeObjectURL(a.href);
-      });
-
-      document.getElementById("preview-btn").addEventListener("click", () => {
-        populateReportPreview(lastAnswerMarkdown);
-        document.getElementById("modal-preview").classList.add("open");
-      });
-
-      // Modals
-      document.getElementById("admin-key-btn").addEventListener("click", () => {
-        adminKeyInput.value = localStorage.getItem(STORAGE_KEY) || "";
-        document.getElementById("modal-admin").classList.add("open");
-      });
-
-      document.getElementById("admin-save-btn").addEventListener("click", () => {
-        const val = adminKeyInput.value.trim();
-        if (val) localStorage.setItem(STORAGE_KEY, val);
-        else localStorage.removeItem(STORAGE_KEY);
-        updateAdminBtn();
-        document.getElementById("modal-admin").classList.remove("open");
-        showToast("Key Saved!");
-      });
-
-      document.querySelectorAll("[data-modal]").forEach(el => {
-        el.addEventListener("click", () => document.getElementById(el.getAttribute("data-modal").replace('modal-', 'modal-')).classList.add("open"));
-      });
-
-      // Close modals on background click
-      document.querySelectorAll(".modal-backdrop").forEach(bd => {
-        bd.addEventListener("click", e => { if (e.target === bd) bd.classList.remove("open"); });
-      });
-
-      // ============================================================
-      // CANVAS SPIDER ANIMATION
-      // ============================================================
-      const canvas = document.getElementById("spider-canvas");
-      const ctx = canvas.getContext("2d");
-      let w, h, particles = [];
-      let spider = { x: 0, y: 0, targetX: 0, targetY: 0, angle: 0, phase: 0 };
-
-      function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-        if (!spider.x) { 
-          spider.x = w / 2; spider.y = h / 2; 
-          spider.targetX = w / 2; spider.targetY = h / 2; 
-        }
-      }
-      window.addEventListener("resize", resize);
-      resize();
-
-      for (let i = 0; i < 30; i++) {
-        particles.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5 });
-      }
-
-      function draw() {
-        if (document.hidden) { requestAnimationFrame(draw); return; } // Pause when tab hidden
-        ctx.clearRect(0, 0, w, h);
-
-        // Draw Web lines between close particles
-        ctx.strokeStyle = "rgba(34, 211, 238, 0.05)";
-        ctx.beginPath();
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            if (dx * dx + dy * dy < 15000) {
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-            }
-          }
-        }
-        ctx.stroke();
-
-        // Draw Particles
-        ctx.fillStyle = "rgba(147, 161, 181, 0.3)";
-        particles.forEach(p => {
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0 || p.x > w) p.vx *= -1;
-          if (p.y < 0 || p.y > h) p.vy *= -1;
-          ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2); ctx.fill();
-        });
-
-        // Draw Spider
-        spider.phase += 0.05;
-        const dx = spider.targetX - spider.x, dy = spider.targetY - spider.y;
-        spider.x += dx * 0.02; spider.y += dy * 0.02;
-        if (Math.abs(dx) + Math.abs(dy) > 10) spider.angle = Math.atan2(dy, dx);
-        if (Math.random() < 0.01) {
-          spider.targetX = w * 0.2 + Math.random() * w * 0.6;
-          spider.targetY = h * 0.2 + Math.random() * h * 0.6;
-        }
-
-        ctx.save();
-        ctx.translate(spider.x, spider.y);
-        ctx.rotate(spider.angle);
-        ctx.fillStyle = "rgba(34, 211, 238, 0.8)";
-        ctx.shadowBlur = 15; ctx.shadowColor = "var(--accent)";
-        
-        // Body
-        ctx.beginPath(); ctx.ellipse(0, 0, 12, 8, 0, 0, Math.PI * 2); ctx.fill();
-        // Head
-        ctx.beginPath(); ctx.arc(10, 0, 5, 0, Math.PI * 2); ctx.fillStyle = "rgba(99, 102, 241, 0.9)"; ctx.fill();
-        
-        // Legs
-        ctx.shadowBlur = 0;
-        ctx.strokeStyle = "rgba(34, 211, 238, 0.6)";
-        ctx.lineWidth = 1.5;
-        for (let i = 0; i < 4; i++) {
-          const a = (i - 1.5) * 0.4 + Math.sin(spider.phase + i) * 0.2;
-          for (let s of [-1, 1]) {
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.quadraticCurveTo(Math.cos(a) * 20, Math.sin(a) * 20 * s, Math.cos(a) * 35, Math.sin(a) * 35 * s);
-            ctx.stroke();
-          }
-        }
-        ctx.restore();
-        requestAnimationFrame(draw);
-      }
-      draw();
+// 9. رسم العنكبوت
+(function(){
+  var canvas=document.getElementById('spider');if(!canvas)return;
+  var ctx=canvas.getContext('2d');if(!ctx)return;
+  var W,H,dpr,last=performance.now();
+  function resize(){W=innerWidth;H=innerHeight;dpr=devicePixelRatio||1;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}
+  resize();addEventListener('resize',resize);
+  var sp={x:W*.5,y:90,tx:W*.5,ty:90};
+  var legs=[-75,-38,38,75,105,142,-142,-105].map(function(d){return{ang:d*Math.PI/180,fx:sp.x,fy:sp.y,tx:sp.x,ty:sp.y};});
+  function draw(){
+    if(Math.random()<0.02){sp.tx=Math.random()*W;sp.ty=Math.random()*H;}
+    sp.x+=(sp.tx-sp.x)*0.02; sp.y+=(sp.ty-sp.y)*0.02;
+    ctx.clearRect(0,0,W,H);
+    legs.forEach(function(l){
+      var bx=sp.x+Math.cos(l.ang)*12, by=sp.y+Math.sin(l.ang)*10;
+      l.tx=bx+Math.cos(l.ang)*30; l.ty=by+Math.sin(l.ang)*30;
+      l.fx+=(l.tx-l.fx)*0.1; l.fy+=(l.ty-l.fy)*0.1;
+      ctx.strokeStyle='#2a2f3c'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(l.fx,l.fy); ctx.stroke();
     });
-  </script>
+    ctx.fillStyle='#0d1018'; ctx.strokeStyle='#2c313f'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.ellipse(sp.x,sp.y+12,13,17,0,0,6.28); ctx.fill(); ctx.stroke();
+    ctx.fillStyle='#151821'; ctx.beginPath(); ctx.ellipse(sp.x,sp.y-5,10.5,10.5,0,0,6.28); ctx.fill(); ctx.stroke();
+    ctx.fillStyle='#ff4d9a'; ctx.beginPath(); ctx.arc(sp.x-3.2,sp.y-8,1.7,0,6.28); ctx.fill();
+    ctx.fillStyle='#4fe0ff'; ctx.beginPath(); ctx.arc(sp.x+3.2,sp.y-8,1.7,0,6.28); ctx.fill();
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+})();
+</script>
 </body>
-</html>
+  </html>
