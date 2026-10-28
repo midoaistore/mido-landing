@@ -4,943 +4,293 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mido AI Store - Deep Search</title>
-  <meta name="description" content="Deep Search powered by Mido AI Store - Find products, prices, and suppliers across global markets." />
-
-  <!-- Meta Pixel -->
+  <meta name="theme-color" content="#0b0f14" />
   <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1805920357103132');
-    fbq('track', 'PageView');
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1805920357103132'); fbq('track', 'PageView');
   </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1805920357103132&ev=PageView&noscript=1"/>
-  </noscript>
-
   <style>
-    :root {
-      --bg: #0b0f14;
-      --bg-2: #11161d;
-      --panel: #151b24;
-      --panel-2: #1b2330;
-      --border: #232c3a;
-      --text: #e8eef7;
-      --muted: #93a1b5;
-      --accent: #22d3ee;
-      --accent-2: #6366f1;
-      --good: #22c55e;
-      --warn: #f59e0b;
-      --bad: #ef4444;
-      --radius: 14px;
-      --shadow: 0 10px 30px rgba(0,0,0,0.45);
-    }
-
+    :root { --bg: #0b0f14; --panel: #151b24; --panel-2: #1b2330; --border: #232c3a; --text: #e8eef7; --muted: #93a1b5; --accent: #22d3ee; --accent-2: #6366f1; --good: #22c55e; --bad: #ef4444; --radius: 14px; --shadow: 0 10px 30px rgba(0,0,0,0.45); }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    body { font-family: "Segoe UI", Tahoma, sans-serif; background: radial-gradient(1200px 600px at 50% -10%, #14202e 0%, var(--bg) 55%); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; line-height: 1.6; overflow-x: hidden; }
+    
+    header { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; background: rgba(11,15,20,0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; flex-wrap: wrap; gap: 10px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; }
+    .brand .logo { background: linear-gradient(135deg, var(--accent), var(--accent-2)); width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: #04121a; }
+    .controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .access-badge { background: rgba(34,211,238,0.1); border: 1px solid var(--accent); color: var(--accent); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; text-decoration: none; transition: 0.2s; }
+    .access-badge:hover { background: var(--accent); color: #000; }
+    select { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; outline: none; }
+    
+    main { flex: 1; max-width: 1000px; margin: 0 auto; width: 100%; padding: 30px 20px; position: relative; z-index: 2; }
+    .stats-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 24px; }
+    .stat-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; text-align: center; box-shadow: var(--shadow); }
+    .stat-card .num { font-size: 1.4rem; font-weight: 800; color: var(--accent); }
+    .stat-card .lbl { font-size: 0.75rem; color: var(--muted); }
+    .stat-card.bad .num { color: var(--bad); } .stat-card.good .num { color: var(--good); }
 
-    body {
-      font-family: "Segoe UI", Tahoma, system-ui, -apple-system, sans-serif;
-      background: radial-gradient(1200px 600px at 50% -10%, #14202e 0%, var(--bg) 55%);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
+    .header-info { text-align: center; margin-bottom: 20px; }
+    .header-info h1 { font-size: 1.6rem; color: #fff; margin-bottom: 8px; }
+    .verified-badge { display: inline-block; background: rgba(34,211,238,0.1); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
 
-    #spider-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.55;
-    }
+    .search-container { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); margin-bottom: 20px; }
+    .search-box { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .search-box input { flex: 1; min-width: 200px; background: var(--panel-2); border: 1px solid var(--border); padding: 14px; border-radius: 10px; color: #fff; outline: none; font-size: 1rem; }
+    .btn { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 700; transition: 0.2s; font-family: inherit; }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04121a; border: none; }
+    .btn:hover { filter: brightness(1.1); } .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    header, main, footer { position: relative; z-index: 1; }
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-pill { background: rgba(34,211,238,0.05); border: 1px solid var(--border); color: var(--muted); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+    .skill-pill:hover { border-color: var(--accent); color: #fff; }
+    .skill-pill.active { background: var(--accent); color: #04121a; font-weight: bold; border-color: var(--accent); }
 
-    /* HEADER */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 16px 22px;
-      background: rgba(11, 15, 20, 0.75);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      flex-wrap: wrap;
-    }
+    .protection-rings { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 20px 0; }
+    .ring { background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: 0.4px;
-    }
+    .pipeline { display: flex; justify-content: space-between; margin: 24px 0; opacity: 0.4; transition: 0.3s; }
+    .pipeline.active { opacity: 1; }
+    .step { text-align: center; font-size: 0.8rem; flex: 1; position: relative; }
+    .step::after { content: ''; position: absolute; top: 15px; left: 50%; width: 100%; height: 2px; background: var(--border); z-index: -1; }
+    .step:last-child::after { display: none; }
+    .step.active { color: var(--accent); font-weight: bold; }
+    .step.active .circle { border-color: var(--accent); background: rgba(34,211,238,0.2); box-shadow: 0 0 10px var(--accent); }
+    .step .circle { width: 32px; height: 32px; border-radius: 50%; background: var(--panel-2); border: 2px solid var(--border); display: grid; place-items: center; margin: 0 auto 8px; transition: 0.3s; }
 
-    .brand .logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #04121a;
-      font-size: 1.2rem;
-      box-shadow: 0 6px 18px rgba(34, 211, 238, 0.35);
-    }
+    #status { text-align: center; margin-bottom: 15px; color: var(--accent); font-weight: bold; min-height: 24px; }
+    .results { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); font-size: 0.97rem; line-height: 1.7; display: none; }
+    .results.visible { display: block; }
+    .results h2 { color: var(--accent); font-size: 1.2rem; border-bottom: 1px solid var(--border); padding-bottom: 8px; margin: 20px 0 10px; }
+    .results h3 { color: #fff; margin: 15px 0 10px; }
+    .results table { width: 100%; border-collapse: collapse; margin: 15px 0; display: block; overflow-x: auto; }
+    .results th, .results td { border: 1px solid var(--border); padding: 10px; text-align: start; vertical-align: top; }
+    .results th { background: var(--panel-2); color: var(--accent); }
+    .results ul, .results ol { padding-inline-start: 24px; margin: 10px 0; }
+    
+    .report-actions { display: flex; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); flex-wrap: wrap; }
 
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    footer { border-top: 1px solid var(--border); padding: 20px; display: flex; justify-content: space-between; align-items: center; background: var(--bg); font-size: 0.9rem; color: var(--muted); position: relative; z-index: 2; flex-wrap: wrap; gap: 10px; }
+    footer a { color: var(--muted); text-decoration: none; margin-inline-start: 15px; cursor: pointer; transition: 0.2s; } footer a:hover { color: var(--accent); }
+    .admin-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; opacity: 0.7; transition: 0.2s; }
 
-    select, .btn {
-      background: var(--panel-2);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 9px 12px;
-      font-size: 0.92rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
-    }
-
-    select:hover, .btn:hover { border-color: var(--accent); }
-
-    .btn.primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #04121a;
-      font-weight: 700;
-      border: none;
-    }
-
-    .btn.primary:hover { filter: brightness(1.08); }
-
-    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
-
-    /* MAIN */
-    main {
-      flex: 1;
-      width: 100%;
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 34px 20px 60px;
-    }
-
-    .hero { text-align: center; margin-bottom: 26px; }
-
-    .hero h1 {
-      font-size: clamp(1.55rem, 4vw, 2.3rem);
-      font-weight: 800;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, #fff, var(--accent));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p { color: var(--muted); font-size: 0.98rem; }
-
-    /* SEARCH BOX */
-    .search-box {
-      display: flex;
-      gap: 10px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 10px;
-      box-shadow: var(--shadow);
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
-
-    .search-box input {
-      flex: 1;
-      min-width: 200px;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--text);
-      font-size: 1rem;
-      padding: 10px 12px;
-      font-family: inherit;
-    }
-
-    .search-box input::placeholder { color: var(--muted); }
-
-    .actions-row {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-    }
-
-    /* STATUS */
-    .status {
-      margin: 18px 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-      min-height: 22px;
-    }
-
-    .status.error { color: var(--bad); }
-    .status.success { color: var(--good); }
-
-    .spinner {
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      border: 2px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      vertical-align: middle;
-      margin-inline-end: 8px;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* RESULTS */
-    .results {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-      line-height: 1.75;
-      font-size: 0.97rem;
-      overflow-wrap: break-word;
-      word-break: break-word;
-    }
-
-    .results:empty { display: none; }
-
-    .results h1, .results h2, .results h3 {
-      margin: 18px 0 10px;
-      color: #fff;
-      line-height: 1.35;
-    }
-
-    .results h1 { font-size: 1.4rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
-    .results h2 { font-size: 1.2rem; color: var(--accent); }
-    .results h3 { font-size: 1.05rem; color: var(--accent-2); }
-
-    .results p { margin: 8px 0; }
-    .results ul, .results ol { margin: 8px 0; padding-inline-start: 24px; }
-    .results li { margin: 4px 0; }
-
-    .results a {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px dashed rgba(34, 211, 238, 0.4);
-    }
-    .results a:hover { color: #fff; border-bottom-color: var(--accent); }
-
-    .results strong { color: #fff; }
-    .results code {
-      background: var(--panel-2);
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-size: 0.9em;
-      color: var(--accent);
-    }
-
-    .results table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 12px 0;
-      font-size: 0.92rem;
-      display: block;
-      overflow-x: auto;
-    }
-
-    .results table thead, .results table tbody {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
-
-    .results th, .results td {
-      border: 1px solid var(--border);
-      padding: 8px 10px;
-      text-align: start;
-      vertical-align: top;
-    }
-
-    .results th { background: var(--panel-2); color: var(--accent); font-weight: 700; }
-
-    .results blockquote {
-      border-inline-start: 3px solid var(--accent);
-      padding-inline-start: 12px;
-      color: var(--muted);
-      margin: 10px 0;
-    }
-
-    .results hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 16px 0;
-    }
-
-    /* PREVIEW BUTTON */
-    .preview-open-btn {
-      display: none;
-      margin-top: 14px;
-      width: 100%;
-      background: linear-gradient(135deg, var(--accent-2), var(--accent));
-      color: #04121a;
-      font-weight: 700;
-      border: none;
-      padding: 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.95rem;
-      transition: filter 0.2s;
-    }
-    .preview-open-btn.visible { display: block; }
-    .preview-open-btn:hover { filter: brightness(1.08); }
-
-    /* FOOTER */
-    footer {
-      padding: 18px 22px;
-      border-top: 1px solid var(--border);
-      background: rgba(11, 15, 20, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    footer .links { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-
-    footer .links a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      cursor: pointer;
-    }
-
-    footer .links a:hover { color: var(--accent); }
-
-    .admin-key-btn {
-      background: transparent;
-      border: none;
-      font-size: 1.1rem;
-      cursor: pointer;
-      padding: 4px 8px;
-      border-radius: 8px;
-      transition: background 0.2s;
-      opacity: 0.6;
-    }
-
-    .admin-key-btn:hover { opacity: 1; background: var(--panel-2); }
-    .admin-key-btn.active { opacity: 1; filter: drop-shadow(0 0 6px var(--accent)); }
-
-    /* MODAL */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 100;
-    }
-
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px); }
     .modal-backdrop.open { display: flex; }
-
-    .modal {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      max-width: 620px;
-      width: 100%;
-      max-height: 85vh;
-      overflow-y: auto;
-      padding: 26px;
-      box-shadow: var(--shadow);
-    }
-
-    .modal.modal-wide { max-width: 920px; }
-
-    .modal h2 {
-      margin-bottom: 14px;
-      color: var(--accent);
-      font-size: 1.25rem;
-    }
-
-    .modal p, .modal li { margin: 8px 0; color: var(--text); font-size: 0.95rem; }
-    .modal ul { padding-inline-start: 22px; }
-
-    .modal .close-btn {
-      margin-top: 18px;
-      width: 100%;
-    }
-
-    .modal input[type="password"], .modal input[type="text"] {
-      width: 100%;
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 11px 13px;
-      color: var(--text);
-      font-size: 1rem;
-      margin-top: 10px;
-      font-family: inherit;
-    }
-
-    .modal input:focus { outline: none; border-color: var(--accent); }
-
-    .modal .hint { font-size: 0.83rem; color: var(--muted); margin-top: 8px; }
-
-    /* REPORT PREVIEW */
-    .report-preview {
-      max-height: 60vh;
-      overflow-y: auto;
-      padding: 8px 4px;
-      line-height: 1.7;
-    }
-
-    .report-preview .report-section { margin-bottom: 18px; }
-
-    .report-preview .report-section-title {
-      color: var(--accent);
-      font-size: 1.1rem;
-      margin: 12px 0 8px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .report-preview .report-empty {
-      color: var(--muted);
-      text-align: center;
-      padding: 20px;
-    }
-
-    .report-preview table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 10px 0;
-      font-size: 0.9rem;
-    }
-
-    .report-preview th, .report-preview td {
-      border: 1px solid var(--border);
-      padding: 8px 10px;
-      text-align: start;
-      vertical-align: top;
-    }
-
-    .report-preview th { background: var(--panel-2); color: var(--accent); }
-
-    .report-preview ul, .report-preview ol { padding-inline-start: 24px; margin: 8px 0; }
-    .report-preview li { margin: 4px 0; }
-    .report-preview p { margin: 8px 0; }
-
-    .report-preview h2, .report-preview h3 {
-      color: #fff;
-      margin: 14px 0 8px;
-    }
-
-    .report-preview a { color: var(--accent); text-decoration: none; }
-    .report-preview a:hover { color: #fff; }
-    .report-preview code {
-      background: var(--panel-2);
-      padding: 2px 6px;
-      border-radius: 6px;
-      color: var(--accent);
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 620px) {
-      header { padding: 12px 14px; }
-      main { padding: 22px 14px 40px; }
-      .search-box { padding: 8px; }
-      .results { padding: 16px; font-size: 0.93rem; }
-      footer { justify-content: center; text-align: center; }
-    }
+    .modal { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); max-width: 700px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 24px; box-shadow: var(--shadow); }
+    .modal h2 { margin-bottom: 16px; color: var(--accent); }
+    .modal input { width: 100%; background: var(--panel-2); border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: #fff; margin: 10px 0; font-size: 1rem; }
+    .modal p { margin-bottom: 10px; font-size: 0.95rem; line-height: 1.7; }
+    .report-preview { max-height: 60vh; overflow-y: auto; padding: 10px 0; border-top: 1px solid var(--border); margin-top: 10px; }
+    #spider-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.3; }
+    #toast { position: fixed; bottom: 20px; right: 20px; background: var(--panel-2); border: 1px solid var(--accent); padding: 12px 24px; border-radius: 8px; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 999; color: #fff; font-weight: bold; }
+    @media (max-width: 600px) { .stats-board { grid-template-columns: repeat(2, 1fr); } .step { font-size: 0.7rem; } .step::after { display: none; } }
   </style>
 </head>
-
 <body>
   <canvas id="spider-canvas"></canvas>
-
   <header>
-    <div class="brand">
-      <div class="logo">🕷️</div>
-      <span>Mido AI Store</span>
-    </div>
+    <div class="brand"><div class="logo">🕷️</div> Mido AI Store</div>
     <div class="controls">
-      <select id="lang-select" aria-label="Language">
-        <option value="ar">العربية</option>
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-        <option value="de">Deutsch</option>
-        <option value="ja">日本語</option>
-        <option value="zh">简体中文</option>
-        <option value="es">Español</option>
-        <option value="pt">Português</option>
+      <a class="access-badge" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" data-i18n="access_badge">⚡ Get Access — $6</a>
+      <select id="lang-select">
+        <option value="ar">العربية</option><option value="en">English</option><option value="zh">简体中文</option>
+        <option value="fr">Français</option><option value="de">Deutsch</option><option value="ja">日本語</option>
+        <option value="es">Español</option><option value="pt">Português</option>
       </select>
-      <select id="currency-select" aria-label="Currency / Country">
-        <option value="US">USD ($) - United States</option>
-        <option value="EG">EGP (ج.م) - Egypt</option>
-        <option value="SA">SAR (ر.س) - Saudi Arabia</option>
-        <option value="AE">AED (د.إ) - UAE</option>
-        <option value="GB">GBP (£) - United Kingdom</option>
-        <option value="EU">EUR (€) - Eurozone</option>
-        <option value="CN">CNY (¥) - China</option>
-        <option value="JP">JPY (¥) - Japan</option>
-        <option value="BR">BRL (R$) - Brazil</option>
-        <option value="MX">MXN ($) - Mexico</option>
+      <select id="currency-select">
+        <option value="US">USD ($)</option><option value="CN">CNY (¥)</option><option value="EG">EGP (ج.م)</option>
+        <option value="SA">SAR (ر.س)</option><option value="EU">EUR (€)</option><option value="GB">GBP (£)</option>
       </select>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <h1 data-i18n="hero_title">Deep Search</h1>
-      <p data-i18n="hero_subtitle">Find products, prices, and suppliers across global markets.</p>
-    </section>
-
-    <div class="search-box">
-      <input
-        id="search-input"
-        type="text"
-        data-i18n-placeholder="search_placeholder"
-        placeholder="What are you looking for today?"
-        autocomplete="off"
-      />
-      <button id="search-btn" class="btn primary" data-i18n="search_btn">Search</button>
+    <div class="stats-board">
+      <div class="stat-card"><div class="num" id="stat-visitors">0</div><div class="lbl" data-i18n="visitors">Visitors</div></div>
+      <div class="stat-card"><div class="num" id="stat-searches">0</div><div class="lbl" data-i18n="today_searches">Searches</div></div>
+      <div class="stat-card good"><div class="num" id="stat-success">0</div><div class="lbl" data-i18n="success">Success</div></div>
+      <div class="stat-card bad"><div class="num" id="stat-failure">0</div><div class="lbl" data-i18n="failure">Failure</div></div>
+      <div class="stat-card"><div class="num" id="stat-remaining">100</div><div class="lbl" data-i18n="remaining">Remaining</div></div>
     </div>
 
-    <div class="actions-row">
-      <button id="clear-btn" class="btn" data-i18n="clear_btn">Clear</button>
+    <div class="header-info">
+      <h1 data-i18n="hero_title">Deep Search AI</h1>
+      <div class="verified-badge" data-i18n="verified_badge">⚡ Verified Research • 5-40s</div>
     </div>
 
-    <div id="status" class="status"></div>
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="What are you looking for today?" data-i18n-placeholder="search_placeholder" />
+        <button class="btn primary" id="search-btn" data-i18n="search_btn">Search 🔍</button>
+      </div>
+      <div class="skills-grid" id="skills-container">
+        <div class="skill-pill active" data-skill="deep" data-i18n="skill_deep">Deep Search</div>
+        <div class="skill-pill" data-skill="summary" data-i18n="skill_summary">Summary</div>
+        <div class="skill-pill" data-skill="compare" data-i18n="skill_compare">Compare</div>
+        <div class="skill-pill" data-skill="recommend" data-i18n="skill_recommend">Recommend</div>
+        <div class="skill-pill" data-skill="price" data-i18n="skill_price">Price Check</div>
+        <div class="skill-pill" data-skill="save" data-i18n="skill_save">Save Report</div>
+        <div class="skill-pill" data-skill="fact" data-i18n="skill_fact">Fact Check</div>
+        <div class="skill-pill" data-skill="proscons" data-i18n="skill_proscons">Pros & Cons</div>
+        <div class="skill-pill" data-skill="guide" data-i18n="skill_guide">Buying Guide</div>
+        <div class="skill-pill" data-skill="localprice" data-i18n="skill_localprice">Local Price</div>
+        <div class="skill-pill" data-skill="audit" data-i18n="skill_audit">Source Audit</div>
+        <div class="skill-pill" data-skill="risk" data-i18n="skill_risk">Risk Check</div>
+        <div class="skill-pill" data-skill="extract" data-i18n="skill_extract">Extract Facts</div>
+        <div class="skill-pill" data-skill="outline" data-i18n="skill_outline">Content Outline</div>
+        <div class="skill-pill" data-skill="matrix" data-i18n="skill_matrix">Decision Matrix</div>
+      </div>
+    </div>
+
+    <div class="protection-rings">
+      <div class="ring"><span style="color:var(--good);">🛡️</span> <span data-i18n="ring_1">CORS Shield</span></div>
+      <div class="ring"><span style="color:var(--good);">🛡️</span> <span data-i18n="ring_2">XSS Guard</span></div>
+      <div class="ring"><span style="color:var(--good);">🛡️</span> <span data-i18n="ring_3">Evidence Rules</span></div>
+      <div class="ring"><span style="color:var(--good);">🛡️</span> <span data-i18n="ring_4">Language Lock</span></div>
+      <div class="ring"><span style="color:var(--good);">🛡️</span> <span data-i18n="ring_5">Admin Secure</span></div>
+    </div>
+
+    <div class="pipeline" id="pipeline">
+      <div class="step" id="step-1"><div class="circle">1</div><span data-i18n="step_1">Source</span></div>
+      <div class="step" id="step-2"><div class="circle">2</div><span data-i18n="step_2">Analysis</span></div>
+      <div class="step" id="step-3"><div class="circle">3</div><span data-i18n="step_3">Filter</span></div>
+      <div class="step" id="step-4"><div class="circle">4</div><span data-i18n="step_4">Risk</span></div>
+      <div class="step" id="step-5"><div class="circle">5</div><span data-i18n="step_5">Report</span></div>
+    </div>
+
+    <div id="status"></div>
     <div id="results" class="results"></div>
-    <button id="preview-open-btn" class="preview-open-btn" data-i18n="preview_open">
-      View Full Report Preview
-    </button>
+    
+    <div class="report-actions" id="report-actions" style="display:none">
+      <button class="btn" id="copy-btn" data-i18n="copy_btn">📋 Copy Report</button>
+      <button class="btn" id="download-btn" data-i18n="download_btn">⬇️ Download (.md)</button>
+      <button class="btn primary" id="preview-btn" data-i18n="preview_btn">👁️ Full Report Preview</button>
+    </div>
   </main>
 
   <footer>
-    <span>© <span id="year"></span> Mido AI Store</span>
-    <div class="links">
+    <div>© <span id="year"></span> Mido AI Store</div>
+    <div>
       <a data-modal="privacy" data-i18n="privacy">Privacy Policy</a>
       <a data-modal="refund" data-i18n="refund">Refund Policy</a>
-      <button id="admin-key-btn" class="admin-key-btn" title="Admin Key">🔑</button>
+      <button id="admin-key-btn" class="admin-btn" title="Admin/Pro Key">🔑</button>
     </div>
   </footer>
 
-  <!-- Privacy Modal -->
-  <div class="modal-backdrop" id="modal-privacy">
-    <div class="modal">
-      <h2 data-i18n="privacy_title">Privacy Policy</h2>
-      <p data-i18n="privacy_body">
-        We respect your privacy. We do not store your search queries on our servers.
-        We use Meta Pixel to measure campaign performance. No personal data is sold
-        to third parties. For questions, contact us via our official channels.
-      </p>
-      <button class="btn primary close-btn" data-close="privacy" data-i18n="close">Close</button>
-    </div>
-  </div>
-
-  <!-- Refund Modal -->
-  <div class="modal-backdrop" id="modal-refund">
-    <div class="modal">
-      <h2 data-i18n="refund_title">Refund Policy</h2>
-      <p data-i18n="refund_body">
-        Digital products are non-refundable once delivered, unless there is a
-        technical failure on our side. Refund requests must be submitted within
-        7 days of purchase with proof of issue. Refunds are processed within
-        5-10 business days.
-      </p>
-      <button class="btn primary close-btn" data-close="refund" data-i18n="close">Close</button>
-    </div>
-  </div>
-
-  <!-- Admin Key Modal -->
   <div class="modal-backdrop" id="modal-admin">
     <div class="modal">
-      <h2 data-i18n="admin_title">Admin Access</h2>
-      <p data-i18n="admin_hint">Enter your admin key to unlock unlimited searches.</p>
-      <input id="admin-key-input" type="password" placeholder="Admin Key" autocomplete="off" />
-      <p class="hint" data-i18n="admin_note">
-        The key is stored locally in your browser only. It is never sent anywhere except to our API for verification.
-      </p>
-      <button id="admin-save-btn" class="btn primary close-btn" data-i18n="save">Save</button>
-      <button class="btn close-btn" data-close="admin" data-i18n="cancel">Cancel</button>
+      <h2 data-i18n="admin_title">Unlock Pro Access</h2>
+      <p data-i18n="admin_hint">Enter your Admin Key or Gumroad License Key to bypass limits.</p>
+      <input type="password" id="admin-key-input" placeholder="GUM-XXXX-XXXX" />
+      <p style="font-size:0.8rem; color:var(--muted);" data-i18n="admin_note">The key is saved locally in your browser only.</p>
+      <button class="btn primary" id="admin-save-btn" style="width:100%; margin-top:10px;" data-i18n="save">Activate</button>
+      <button class="btn" onclick="document.getElementById('modal-admin').classList.remove('open')" style="width:100%; margin-top:8px;" data-i18n="cancel">Cancel</button>
     </div>
   </div>
-
-  <!-- Full Report Preview Modal -->
+  <div class="modal-backdrop" id="modal-privacy">
+    <div class="modal">
+      <h2 data-i18n="privacy">Privacy Policy</h2>
+      <p data-i18n="privacy_body">We respect your privacy...</p>
+      <button class="btn" onclick="document.getElementById('modal-privacy').classList.remove('open')" style="width:100%; margin-top:20px;" data-i18n="close">Close</button>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="modal-refund">
+    <div class="modal">
+      <h2 data-i18n="refund">Refund Policy</h2>
+      <p data-i18n="refund_body">Digital products are non-refundable...</p>
+      <button class="btn" onclick="document.getElementById('modal-refund').classList.remove('open')" style="width:100%; margin-top:20px;" data-i18n="close">Close</button>
+    </div>
+  </div>
   <div class="modal-backdrop" id="modal-preview">
-    <div class="modal modal-wide">
+    <div class="modal">
       <h2 data-i18n="preview_title">Full Report Preview</h2>
-      <div id="report-preview" class="report-preview"></div>
-      <button class="btn primary close-btn" data-close="preview" data-i18n="close">Close</button>
+      <div id="report-preview-content" class="report-preview"></div>
+      <button class="btn" onclick="document.getElementById('modal-preview').classList.remove('open')" style="width:100%; margin-top:10px;" data-i18n="close">Close</button>
     </div>
   </div>
+  <div id="toast">Copied!</div>
 
   <script>
-    // ============================================================
-    // CONFIG
-    // ============================================================
-    const WORKER_URL = "https://mido-ai-store.YOUR-SUBDOMAIN.workers.dev";
-    // ⚠️ Replace with your actual Cloudflare Worker URL.
+    const WORKER_URL = "https://mido-deepsearch.midoaistore.workers.dev";
+    const STORAGE_KEY = "mido_admin_key", LANG_KEY = "mido_lang", CUR_KEY = "mido_currency";
+    let currentLang = localStorage.getItem(LANG_KEY) || "ar", currentCurrency = localStorage.getItem(CUR_KEY) || "US";
+    let isSearching = false, lastAnswerMarkdown = "", lastQuery = "", selectedSkill = "deep";
 
-    const STORAGE_KEY = "mido_admin_key";
-    const LANG_KEY = "mido_lang";
-    const CUR_KEY = "mido_currency";
-
-    // ============================================================
-    // TRANSLATIONS
-    // ============================================================
     const TRANSLATIONS = {
       ar: {
-        hero_title: "البحث العميق",
-        hero_subtitle: "اعثر على المنتجات والأسعار والموردين في الأسواق العالمية.",
-        search_placeholder: "ما الذي تبحث عنه اليوم؟",
-        search_btn: "بحث",
-        clear_btn: "مسح",
-        searching: "جاري البحث...",
-        empty_query: "الرجاء إدخال كلمة بحث.",
-        no_results: "لا توجد نتائج.",
-        error_generic: "حدث خطأ. حاول مرة أخرى.",
-        rate_limit: "تجاوزت الحد المسموح. أدخل مفتاح الأدمن أو حاول لاحقاً.",
-        privacy: "سياسة الخصوصية",
-        refund: "سياسة الاسترداد",
-        privacy_title: "سياسة الخصوصية",
-        privacy_body: "نحن نحترم خصوصيتك. لا نخزن استعلامات البحث على خوادمنا. نستخدم Meta Pixel لقياس أداء الحملات. لا يتم بيع أي بيانات شخصية لأطراف ثالثة. للاستفسارات، تواصل معنا عبر قنواتنا الرسمية.",
-        refund_title: "سياسة الاسترداد",
-        refund_body: "المنتجات الرقمية غير قابلة للاسترداد بعد التسليم، إلا في حالة وجود عطل تقني من جانبنا. يجب تقديم طلبات الاسترداد خلال 7 أيام من الشراء مع إثبات المشكلة. تتم معالجة المبالغ المستردة خلال 5-10 أيام عمل.",
-        close: "إغلاق",
-        admin_title: "وصول الأدمن",
-        admin_hint: "أدخل مفتاح الأدمن لفتح عمليات بحث غير محدودة.",
-        admin_note: "يُخزَّن المفتاح محلياً في متصفحك فقط. لا يُرسَل إلى أي مكان سوى واجهة الـ API للتحقق.",
-        save: "حفظ",
-        cancel: "إلغاء",
-        admin_saved: "تم حفظ مفتاح الأدمن.",
-        admin_removed: "تم إزالة مفتاح الأدمن.",
-        preview_open: "عرض معاينة التقرير الكامل",
-        preview_title: "معاينة التقرير الكامل",
-        preview_empty: "لا يوجد تقرير متاح بعد. قم بالبحث أولاً.",
-        powered_by: "مدعوم بواسطة الذكاء الاصطناعي"
+        hero_title: "البحث العميق", access_badge: "⚡ احصل على الوصول — $6", visitors: "زوار", today_searches: "عمليات بحث", success: "نجاح", failure: "فشل", remaining: "متبقي", verified_badge: "⚡ بحث موثق • 5-40 ثانية", search_placeholder: "ما الذي تبحث عنه اليوم؟", search_btn: "بحث", step_1: "المصادر", step_2: "التحليل", step_3: "الفلترة", step_4: "المخاطر", step_5: "التقرير", ring_1: "حماية CORS", ring_2: "حماية XSS", ring_3: "قواعد الأدلة", ring_4: "قفل اللغة", ring_5: "أمان الأدمن", skill_deep: "بحث عميق", skill_summary: "ملخص", skill_compare: "مقارنة", skill_recommend: "توصية", skill_price: "فحص السعر", skill_save: "حفظ التقرير", skill_fact: "فحص الحقائق", skill_proscons: "إيجابيات وسلبيات", skill_guide: "دليل الشراء", skill_localprice: "السعر المحلي", skill_audit: "تدقيق المصادر", skill_risk: "فحص المخاطر", skill_extract: "استخراج الحقائق", skill_outline: "مخطط المحتوى", skill_matrix: "مصفوفة القرار", privacy: "سياسة الخصوصية", refund: "سياسة الاسترداد", privacy_body: "نحن نحترم خصوصيتك. لا نخزن استعلامات البحث على خوادمنا. نستخدم Meta Pixel لقياس أداء الحملات.", refund_body: "المنتجات الرقمية غير قابلة للاسترداد بعد التسليم، إلا في حالة وجود عطل تقني من جانبنا.", close: "إغلاق", save: "تفعيل", cancel: "إلغاء", admin_title: "تفعيل الوصول الكامل", admin_hint: "أدخل مفتاح الأدمن أو ترخيص Gumroad.", admin_note: "يُخزَّن المفتاح محلياً في متصفحك فقط.", copy_btn: "نسخ التقرير", download_btn: "تحميل (.md)", preview_btn: "معاينة التقرير", preview_title: "معاينة التقرير الكامل", searching: "جاري البحث والتحليل...", empty_query: "أدخل كلمة بحث.", error_generic: "حدث خطأ.", rate_limit: "تجاوزت الحد المسموح."
       },
       en: {
-        hero_title: "Deep Search",
-        hero_subtitle: "Find products, prices, and suppliers across global markets.",
-        search_placeholder: "What are you looking for today?",
-        search_btn: "Search",
-        clear_btn: "Clear",
-        searching: "Searching...",
-        empty_query: "Please enter a search query.",
-        no_results: "No results found.",
-        error_generic: "Something went wrong. Please try again.",
-        rate_limit: "Rate limit exceeded. Enter admin key or try later.",
-        privacy: "Privacy Policy",
-        refund: "Refund Policy",
-        privacy_title: "Privacy Policy",
-        privacy_body: "We respect your privacy. We do not store your search queries on our servers. We use Meta Pixel to measure campaign performance. No personal data is sold to third parties. For questions, contact us via our official channels.",
-        refund_title: "Refund Policy",
-        refund_body: "Digital products are non-refundable once delivered, unless there is a technical failure on our side. Refund requests must be submitted within 7 days of purchase with proof of issue. Refunds are processed within 5-10 business days.",
-        close: "Close",
-        admin_title: "Admin Access",
-        admin_hint: "Enter your admin key to unlock unlimited searches.",
-        admin_note: "The key is stored locally in your browser only. It is never sent anywhere except to our API for verification.",
-        save: "Save",
-        cancel: "Cancel",
-        admin_saved: "Admin key saved.",
-        admin_removed: "Admin key removed.",
-        preview_open: "View Full Report Preview",
-        preview_title: "Full Report Preview",
-        preview_empty: "No report available yet. Run a search first.",
-        powered_by: "Powered by AI"
-      },
-      fr: {
-        hero_title: "Recherche approfondie",
-        hero_subtitle: "Trouvez des produits, des prix et des fournisseurs sur les marchés mondiaux.",
-        search_placeholder: "Que recherchez-vous aujourd'hui ?",
-        search_btn: "Rechercher",
-        clear_btn: "Effacer",
-        searching: "Recherche en cours...",
-        empty_query: "Veuillez saisir une requête.",
-        no_results: "Aucun résultat trouvé.",
-        error_generic: "Une erreur s'est produite. Veuillez réessayer.",
-        rate_limit: "Limite atteinte. Entrez la clé admin ou réessayez plus tard.",
-        privacy: "Politique de confidentialité",
-        refund: "Politique de remboursement",
-        privacy_title: "Politique de confidentialité",
-        privacy_body: "Nous respectons votre vie privée. Nous ne stockons pas vos requêtes sur nos serveurs. Nous utilisons Meta Pixel pour mesurer les performances des campagnes. Aucune donnée personnelle n'est vendue à des tiers. Pour toute question, contactez-nous via nos canaux officiels.",
-        refund_title: "Politique de remboursement",
-        refund_body: "Les produits numériques ne sont pas remboursables une fois livrés, sauf en cas de défaillance technique de notre part. Les demandes de remboursement doivent être soumises dans les 7 jours suivant l'achat avec preuve du problème. Les remboursements sont traités sous 5 à 10 jours ouvrables.",
-        close: "Fermer",
-        admin_title: "Accès administrateur",
-        admin_hint: "Entrez votre clé admin pour débloquer des recherches illimitées.",
-        admin_note: "La clé est stockée localement dans votre navigateur uniquement. Elle n'est jamais envoyée ailleurs qu'à notre API pour vérification.",
-        save: "Enregistrer",
-        cancel: "Annuler",
-        admin_saved: "Clé admin enregistrée.",
-        admin_removed: "Clé admin supprimée.",
-        preview_open: "Afficher l'aperçu complet du rapport",
-        preview_title: "Aperçu complet du rapport",
-        preview_empty: "Aucun rapport disponible pour le moment. Lancez d'abord une recherche.",
-        powered_by: "Propulsé par l'IA"
-      },
-      de: {
-        hero_title: "Tiefensuche",
-        hero_subtitle: "Finden Sie Produkte, Preise und Lieferanten auf globalen Märkten.",
-        search_placeholder: "Wonach suchen Sie heute?",
-        search_btn: "Suchen",
-        clear_btn: "Löschen",
-        searching: "Suche läuft...",
-        empty_query: "Bitte geben Sie eine Suchanfrage ein.",
-        no_results: "Keine Ergebnisse gefunden.",
-        error_generic: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
-        rate_limit: "Limit erreicht. Admin-Schlüssel eingeben oder später versuchen.",
-        privacy: "Datenschutzrichtlinie",
-        refund: "Rückerstattungsrichtlinie",
-        privacy_title: "Datenschutzrichtlinie",
-        privacy_body: "Wir respektieren Ihre Privatsphäre. Wir speichern Ihre Suchanfragen nicht auf unseren Servern. Wir verwenden Meta Pixel zur Messung der Kampagnenleistung. Es werden keine personenbezogenen Daten an Dritte verkauft. Bei Fragen kontaktieren Sie uns über unsere offiziellen Kanäle.",
-        refund_title: "Rückerstattungsrichtlinie",
-        refund_body: "Digitale Produkte sind nach der Lieferung nicht erstattungsfähig, es sei denn, es liegt ein technischer Fehler unsererseits vor. Rückerstattungsanträge müssen innerhalb von 7 Tagen nach dem Kauf mit Nachweis des Problems eingereicht werden. Rückerstattungen werden innerhalb von 5-10 Werktagen bearbeitet.",
-        close: "Schließen",
-        admin_title: "Admin-Zugang",
-        admin_hint: "Geben Sie Ihren Admin-Schlüssel ein, um unbegrenzte Suchen freizuschalten.",
-        admin_note: "Der Schlüssel wird nur lokal in Ihrem Browser gespeichert. Er wird nur zur Überprüfung an unsere API gesendet.",
-        save: "Speichern",
-        cancel: "Abbrechen",
-        admin_saved: "Admin-Schlüssel gespeichert.",
-        admin_removed: "Admin-Schlüssel entfernt.",
-        preview_open: "Vollständige Berichtsvorschau anzeigen",
-        preview_title: "Vollständige Berichtsvorschau",
-        preview_empty: "Noch kein Bericht verfügbar. Führen Sie zuerst eine Suche durch.",
-        powered_by: "Unterstützt durch KI"
-      },
-      ja: {
-        hero_title: "ディープサーチ",
-        hero_subtitle: "世界市場の商品、価格、サプライヤーを検索します。",
-        search_placeholder: "今日は何をお探しですか？",
-        search_btn: "検索",
-        clear_btn: "クリア",
-        searching: "検索中...",
-        empty_query: "検索キーワードを入力してください。",
-        no_results: "結果が見つかりませんでした。",
-        error_generic: "エラーが発生しました。もう一度お試しください。",
-        rate_limit: "制限に達しました。管理者キーを入力するか、後でもう一度お試しください。",
-        privacy: "プライバシーポリシー",
-        refund: "返金ポリシー",
-        privacy_title: "プライバシーポリシー",
-        privacy_body: "私たちはあなたのプライバシーを尊重します。検索クエリをサーバーに保存しません。Meta Pixel を使用してキャンペーンのパフォーマンスを測定します。個人データが第三者に販売されることはありません。ご質問は公式チャネルからお問い合わせください。",
-        refund_title: "返金ポリシー",
-        refund_body: "デジタル製品は、当社側の技術的な障害がない限り、納品後の返金はできません。返金リクエストは購入から7日以内に問題の証明とともに提出する必要があります。返金は5〜10営業日以内に処理されます。",
-        close: "閉じる",
-        admin_title: "管理者アクセス",
-        admin_hint: "管理者キーを入力して無制限の検索をアンロックします。",
-        admin_note: "キーはブラウザにのみローカル保存されます。検証のためAPIにのみ送信されます。",
-        save: "保存",
-        cancel: "キャンセル",
-        admin_saved: "管理者キーを保存しました。",
-        admin_removed: "管理者キーを削除しました。",
-        preview_open: "レポート全体のプレビューを表示",
-        preview_title: "レポート全体のプレビュー",
-        preview_empty: "まだレポートがありません。先に検索を実行してください。",
-        powered_by: "AIによる"
+        hero_title: "Deep Search AI", access_badge: "⚡ Get Access — $6", visitors: "Visitors", today_searches: "Searches", success: "Success", failure: "Failure", remaining: "Remaining", verified_badge: "⚡ Verified Research • 5-40s", search_placeholder: "What are you looking for today?", search_btn: "Search", step_1: "Source", step_2: "Analysis", step_3: "Filter", step_4: "Risk", step_5: "Report", ring_1: "CORS Shield", ring_2: "XSS Guard", ring_3: "Evidence Rules", ring_4: "Language Lock", ring_5: "Admin Secure", skill_deep: "Deep Search", skill_summary: "Summary", skill_compare: "Compare", skill_recommend: "Recommend", skill_price: "Price Check", skill_save: "Save Report", skill_fact: "Fact Check", skill_proscons: "Pros & Cons", skill_guide: "Buying Guide", skill_localprice: "Local Price", skill_audit: "Source Audit", skill_risk: "Risk Check", skill_extract: "Extract Facts", skill_outline: "Content Outline", skill_matrix: "Decision Matrix", privacy: "Privacy Policy", refund: "Refund Policy", privacy_body: "We respect your privacy. We do not store your search queries on our servers. We use Meta Pixel to measure campaign performance.", refund_body: "Digital products are non-refundable once delivered, unless there is a technical failure on our side.", close: "Close", save: "Activate", cancel: "Cancel", admin_title: "Unlock Pro Access", admin_hint: "Enter your Admin Key or Gumroad License Key to bypass limits.", admin_note: "The key is saved locally in your browser only.", copy_btn: "Copy Report", download_btn: "Download (.md)", preview_btn: "Preview Report", preview_title: "Full Report Preview", searching: "Searching and analyzing...", empty_query: "Please enter a query.", error_generic: "An error occurred.", rate_limit: "Rate limit exceeded."
       },
       zh: {
-        hero_title: "深度搜索",
-        hero_subtitle: "在全球市场中查找产品、价格和供应商。",
-        search_placeholder: "今天您想找什么？",
-        search_btn: "搜索",
-        clear_btn: "清除",
-        searching: "搜索中...",
-        empty_query: "请输入搜索关键词。",
-        no_results: "未找到结果。",
-        error_generic: "出现错误，请重试。",
-        rate_limit: "已达到限制。请输入管理员密钥或稍后再试。",
-        privacy: "隐私政策",
-        refund: "退款政策",
-        privacy_title: "隐私政策",
-        privacy_body: "我们尊重您的隐私。我们不会在服务器上存储您的搜索查询。我们使用 Meta Pixel 来衡量广告活动效果。不会向第三方出售任何个人数据。如有疑问，请通过我们的官方渠道联系我们。",
-        refund_title: "退款政策",
-        refund_body: "数字产品交付后不可退款，除非是我方技术故障。退款申请必须在购买后 7 天内提交并附上问题证明。退款将在 5-10 个工作日内处理。",
-        close: "关闭",
-        admin_title: "管理员访问",
-        admin_hint: "输入管理员密钥以解锁无限搜索。",
-        admin_note: "密钥仅存储在您的浏览器中。除用于验证的 API 外，绝不会发送到其他地方。",
-        save: "保存",
-        cancel: "取消",
-        admin_saved: "管理员密钥已保存。",
-        admin_removed: "管理员密钥已移除。",
-        preview_open: "查看完整报告预览",
-        preview_title: "完整报告预览",
-        preview_empty: "暂无报告。请先执行搜索。",
-        powered_by: "由 AI 提供支持"
+        hero_title: "深度搜索", access_badge: "⚡ 获取访问 — $6", visitors: "今日访客", today_searches: "搜索次数", success: "成功", failure: "失败", remaining: "剩余次数", verified_badge: "⚡ 已验证研究 • 5-40秒", search_placeholder: "今天您想找什么？", search_btn: "搜索", step_1: "来源", step_2: "分析", step_3: "筛选", step_4: "风险", step_5: "报告", ring_1: "CORS 保护", ring_2: "XSS 防护", ring_3: "证据规则", ring_4: "语言锁定", ring_5: "管理员安全", skill_deep: "深度搜索", skill_summary: "摘要", skill_compare: "对比", skill_recommend: "推荐", skill_price: "价格检查", skill_save: "保存报告", skill_fact: "事实核查", skill_proscons: "优缺点", skill_guide: "购买指南", skill_localprice: "本地价格", skill_audit: "来源审计", skill_risk: "风险检查", skill_extract: "提取事实", skill_outline: "内容大纲", skill_matrix: "决策矩阵", privacy: "隐私政策", refund: "退款政策", privacy_body: "我们尊重您的隐私。我们不会在服务器上存储您的搜索查询。我们使用 Meta Pixel 来衡量广告活动效果。", refund_body: "数字产品交付后不可退款，除非是我方技术故障。", close: "关闭", save: "激活", cancel: "取消", admin_title: "解锁专业版", admin_hint: "输入管理员密钥或 Gumroad 许可证。", admin_note: "密钥仅存储在您的浏览器中。", copy_btn: "复制报告", download_btn: "下载 (.md)", preview_btn: "预览报告", preview_title: "完整报告预览", searching: "正在搜索和分析...", empty_query: "请输入关键词。", error_generic: "出现错误。", rate_limit: "已达到限制。"
+      },
+      fr: {
+        hero_title: "Recherche Profonde", access_badge: "⚡ Obtenir l'accès — $6", visitors: "Visiteurs", today_searches: "Recherches", success: "Succès", failure: "Échec", remaining: "Restant", verified_badge: "⚡ Recherche Vérifiée • 5-40s", search_placeholder: "Que recherchez-vous aujourd'hui ?", search_btn: "Rechercher", step_1: "Source", step_2: "Analyse", step_3: "Filtre", step_4: "Risque", step_5: "Rapport", ring_1: "Bouclier CORS", ring_2: "Garde XSS", ring_3: "Règles de preuve", ring_4: "Verrou de langue", ring_5: "Admin Sécurisé", skill_deep: "Recherche Profonde", skill_summary: "Résumé", skill_compare: "Comparer", skill_recommend: "Recommander", skill_price: "Vérif Prix", skill_save: "Sauver", skill_fact: "Vérif Faits", skill_proscons: "Pour & Contre", skill_guide: "Guide d'achat", skill_localprice: "Prix Local", skill_audit: "Audit Source", skill_risk: "Vérif Risque", skill_extract: "Extraire", skill_outline: "Plan", skill_matrix: "Matrice", privacy: "Confidentialité", refund: "Remboursement", privacy_body: "Nous respectons votre vie privée. Nous ne stockons pas vos requêtes sur nos serveurs. Nous utilisons Meta Pixel pour mesurer les performances.", refund_body: "Les produits numériques ne sont pas remboursables une fois livrés, sauf en cas de défaillance technique de notre part.", close: "Fermer", save: "Activer", cancel: "Annuler", admin_title: "Accès Pro", admin_hint: "Entrez votre clé Admin ou Licence Gumroad.", admin_note: "La clé est stockée localement dans votre navigateur uniquement.", copy_btn: "Copier", download_btn: "Télécharger", preview_btn: "Aperçu", preview_title: "Aperçu Complet", searching: "Recherche et analyse...", empty_query: "Entrez une requête.", error_generic: "Erreur.", rate_limit: "Limite atteinte."
+      },
+      de: {
+        hero_title: "Tiefensuche", access_badge: "⚡ Zugang erhalten — $6", visitors: "Besucher", today_searches: "Suchanfragen", success: "Erfolg", failure: "Fehler", remaining: "Verbleibend", verified_badge: "⚡ Verifizierte Recherche • 5-40s", search_placeholder: "Wonach suchen Sie heute?", search_btn: "Suchen", step_1: "Quelle", step_2: "Analyse", step_3: "Filter", step_4: "Risiko", step_5: "Bericht", ring_1: "CORS-Schild", ring_2: "XSS-Schutz", ring_3: "Evidenzregeln", ring_4: "Sprachsperre", ring_5: "Admin Sicher", skill_deep: "Tiefensuche", skill_summary: "Zusammenfassung", skill_compare: "Vergleichen", skill_recommend: "Empfehlen", skill_price: "Preisprüfung", skill_save: "Speichern", skill_fact: "Faktenprüfung", skill_proscons: "Vor & Nachteile", skill_guide: "Kaufberatung", skill_localprice: "Lokaler Preis", skill_audit: "Quellenprüfung", skill_risk: "Risikoprüfung", skill_extract: "Extrahieren", skill_outline: "Gliederung", skill_matrix: "Entscheidungsmatrix", privacy: "Datenschutz", refund: "Rückerstattung", privacy_body: "Wir respektieren Ihre Privatsphäre. Wir speichern Ihre Suchanfragen nicht auf unseren Servern. Wir verwenden Meta Pixel zur Messung der Kampagnenleistung.", refund_body: "Digitale Produkte sind nach der Lieferung nicht erstattungsfähig, es sei denn, es liegt ein technischer Fehler unsererseits vor.", close: "Schließen", save: "Aktivieren", cancel: "Abbrechen", admin_title: "Pro-Zugang", admin_hint: "Geben Sie Ihren Admin-Schlüssel oder Gumroad-Lizenz ein.", admin_note: "Der Schlüssel wird nur lokal in Ihrem Browser gespeichert.", copy_btn: "Kopieren", download_btn: "Herunterladen", preview_btn: "Vorschau", preview_title: "Berichtsvorschau", searching: "Suche läuft...", empty_query: "Anfrage eingeben.", error_generic: "Fehler.", rate_limit: "Limit erreicht."
+      },
+      ja: {
+        hero_title: "ディープサーチ", access_badge: "⚡ アクセス取得 — $6", visitors: "訪問者", today_searches: "検索数", success: "成功", failure: "失敗", remaining: "残り", verified_badge: "⚡ 検証済みリサーチ • 5-40秒", search_placeholder: "今日は何をお探しですか？", search_btn: "検索", step_1: "ソース", step_2: "分析", step_3: "フィルター", step_4: "リスク", step_5: "レポート", ring_1: "CORSシールド", ring_2: "XSSガード", ring_3: "証拠ルール", ring_4: "言語ロック", ring_5: "管理者セキュア", skill_deep: "ディープサーチ", skill_summary: "要約", skill_compare: "比較", skill_recommend: "推奨", skill_price: "価格チェック", skill_save: "保存", skill_fact: "事実確認", skill_proscons: "長所と短所", skill_guide: "購入ガイド", skill_localprice: "現地価格", skill_audit: "ソース監査", skill_risk: "リスクチェック", skill_extract: "事実抽出", skill_outline: "アウトライン", skill_matrix: "決定マトリックス", privacy: "プライバシー", refund: "返金ポリシー", privacy_body: "私たちはあなたのプライバシーを尊重します。検索クエリをサーバーに保存しません。Meta Pixel を使用してキャンペーンのパフォーマンスを測定します。", refund_body: "デジタル製品は、当社側の技術的な障害がない限り、納品後の返金はできません。", close: "閉じる", save: "有効化", cancel: "キャンセル", admin_title: "プロアクセス", admin_hint: "管理者キーまたはGumroadライセンスを入力してください。", admin_note: "キーはブラウザにのみローカル保存されます。", copy_btn: "コピー", download_btn: "ダウンロード", preview_btn: "プレビュー", preview_title: "レポートプレビュー", searching: "検索中...", empty_query: "キーワードを入力してください。", error_generic: "エラーが発生しました。", rate_limit: "制限に達しました。"
       },
       es: {
-        hero_title: "Búsqueda Profunda",
-        hero_subtitle: "Encuentra productos, precios y proveedores en los mercados globales.",
-        search_placeholder: "¿Qué estás buscando hoy?",
-        search_btn: "Buscar",
-        clear_btn: "Limpiar",
-        searching: "Buscando...",
-        empty_query: "Por favor, introduce una consulta de búsqueda.",
-        no_results: "No se encontraron resultados.",
-        error_generic: "Algo salió mal. Por favor, inténtalo de nuevo.",
-        rate_limit: "Límite alcanzado. Introduce la clave de admin o inténtalo más tarde.",
-        privacy: "Política de privacidad",
-        refund: "Política de reembolso",
-        privacy_title: "Política de privacidad",
-        privacy_body: "Respetamos tu privacidad. No almacenamos tus consultas de búsqueda en nuestros servidores. Usamos Meta Pixel para medir el rendimiento de las campañas. No se venden datos personales a terceros. Para preguntas, contáctanos a través de nuestros canales oficiales.",
-        refund_title: "Política de reembolso",
-        refund_body: "Los productos digitales no son reembolsables una vez entregados, salvo en caso de fallo técnico por nuestra parte. Las solicitudes de reembolso deben enviarse dentro de los 7 días posteriores a la compra con prueba del problema. Los reembolsos se procesan en 5-10 días hábiles.",
-        close: "Cerrar",
-        admin_title: "Acceso de administrador",
-        admin_hint: "Introduce tu clave de admin para desbloquear búsquedas ilimitadas.",
-        admin_note: "La clave se almacena localmente en tu navegador. Nunca se envía a otro lugar que no sea nuestra API para verificación.",
-        save: "Guardar",
-        cancel: "Cancelar",
-        admin_saved: "Clave de admin guardada.",
-        admin_removed: "Clave de admin eliminada.",
-        preview_open: "Ver vista previa del informe completo",
-        preview_title: "Vista previa del informe completo",
-        preview_empty: "Aún no hay informe. Realiza una búsqueda primero.",
-        powered_by: "Impulsado por IA"
+        hero_title: "Búsqueda Profunda", access_badge: "⚡ Obtener Acceso — $6", visitors: "Visitantes", today_searches: "Búsquedas", success: "Éxito", failure: "Fallo", remaining: "Restante", verified_badge: "⚡ Investigación Verificada • 5-40s", search_placeholder: "¿Qué estás buscando hoy?", search_btn: "Buscar", step_1: "Fuente", step_2: "Análisis", step_3: "Filtro", step_4: "Riesgo", step_5: "Informe", ring_1: "Escudo CORS", ring_2: "Guardia XSS", ring_3: "Reglas de Evidencia", ring_4: "Bloqueo de Idioma", ring_5: "Admin Seguro", skill_deep: "Búsqueda Profunda", skill_summary: "Resumen", skill_compare: "Comparar", skill_recommend: "Recomendar", skill_price: "Verificar Precio", skill_save: "Guardar", skill_fact: "Verificar Hechos", skill_proscons: "Pros y Contras", skill_guide: "Guía de Compra", skill_localprice: "Precio Local", skill_audit: "Auditoría", skill_risk: "Verificar Riesgo", skill_extract: "Extraer", skill_outline: "Esquema", skill_matrix: "Matriz de Decisión", privacy: "Privacidad", refund: "Reembolso", privacy_body: "Respetamos tu privacidad. No almacenamos tus consultas de búsqueda en nuestros servidores. Usamos Meta Pixel para medir el rendimiento de las campañas.", refund_body: "Los productos digitales no son reembolsables una vez entregados, salvo en caso de fallo técnico por nuestra parte.", close: "Cerrar", save: "Activar", cancel: "Cancelar", admin_title: "Acceso Pro", admin_hint: "Introduce tu clave de Admin o Licencia de Gumroad.", admin_note: "La clave se almacena localmente en tu navegador.", copy_btn: "Copiar", download_btn: "Descargar", preview_btn: "Vista Previa", preview_title: "Vista Previa", searching: "Buscando...", empty_query: "Ingrese consulta.", error_generic: "Error.", rate_limit: "Límite alcanzado."
       },
       pt: {
-        hero_title: "Pesquisa Profunda",
-        hero_subtitle: "Encontre produtos, preços e fornecedores nos mercados globais.",
-        search_placeholder: "O que você está procurando hoje?",
-        search_btn: "Pesquisar",
-        clear_btn: "Limpar",
-        searching: "Pesquisando...",
-        empty_query: "Por favor, insira uma consulta de pesquisa.",
-        no_results: "Nenhum resultado encontrado.",
-        error_generic: "Algo deu errado. Tente novamente.",
-        rate_limit: "Limite atingido. Insira a chave de admin ou tente mais tarde.",
-        privacy: "Política de Privacidade",
-        refund: "Política de Reembolso",
-        privacy_title: "Política de Privacidade",
-        privacy_body: "Respeitamos sua privacidade. Não armazenamos suas consultas de pesquisa em nossos servidores. Usamos o Meta Pixel para medir o desempenho das campanhas. Nenhum dado pessoal é vendido a terceiros. Para dúvidas, entre em contato através dos nossos canais oficiais.",
-        refund_title: "Política de Reembolso",
-        refund_body: "Produtos digitais não são reembolsáveis após a entrega, exceto em caso de falha técnica da nossa parte. As solicitações de reembolso devem ser enviadas dentro de 7 dias após a compra com prova do problema. Os reembolsos são processados em 5-10 dias úteis.",
-        close: "Fechar",
-        admin_title: "Acesso de Administrador",
-        admin_hint: "Insira sua chave de admin para desbloquear pesquisas ilimitadas.",
-        admin_note: "A chave é armazenada localmente no seu navegador. Ela nunca é enviada a nenhum lugar, exceto à nossa API para verificação.",
-        save: "Salvar",
-        cancel: "Cancelar",
-        admin_saved: "Chave de admin salva.",
-        admin_removed: "Chave de admin removida.",
-        preview_open: "Ver pré-visualização do relatório completo",
-        preview_title: "Pré-visualização do relatório completo",
-        preview_empty: "Nenhum relatório disponível ainda. Faça uma pesquisa primeiro.",
-        powered_by: "Desenvolvido por IA"
+        hero_title: "Pesquisa Profunda", access_badge: "⚡ Obter Acesso — $6", visitors: "Visitantes", today_searches: "Pesquisas", success: "Sucesso", failure: "Falha", remaining: "Restante", verified_badge: "⚡ Pesquisa Verificada • 5-40s", search_placeholder: "O que você está procurando hoje?", search_btn: "Pesquisar", step_1: "Fonte", step_2: "Análise", step_3: "Filtro", step_4: "Risco", step_5: "Relatório", ring_1: "Escudo CORS", ring_2: "Guarda XSS", ring_3: "Regras de Evidência", ring_4: "Bloqueio de Idioma", ring_5: "Admin Seguro", skill_deep: "Pesquisa Profunda", skill_summary: "Resumo", skill_compare: "Comparar", skill_recommend: "Recomendar", skill_price: "Verificar Preço", skill_save: "Salvar", skill_fact: "Verificar Fatos", skill_proscons: "Prós e Contras", skill_guide: "Guia de Compra", skill_localprice: "Preço Local", skill_audit: "Auditoria", skill_risk: "Verificar Risco", skill_extract: "Extrair", skill_outline: "Esboço", skill_matrix: "Matriz de Decisão", privacy: "Privacidade", refund: "Reembolso", privacy_body: "Respeitamos sua privacidade. Não armazenamos suas consultas de pesquisa em nossos servidores. Usamos o Meta Pixel para medir o desempenho das campanhas.", refund_body: "Produtos digitais não são reembolsáveis após a entrega, exceto em caso de falha técnica da nossa parte.", close: "Fechar", save: "Ativar", cancel: "Cancelar", admin_title: "Acesso Pro", admin_hint: "Insira sua chave de Admin ou Licença do Gumroad.", admin_note: "A chave é armazenada localmente no seu navegador.", copy_btn: "Copiar", download_btn: "Baixar", preview_btn: "Pré-visualizar", preview_title: "Pré-visualização", searching: "Pesquisando...", empty_query: "Insira consulta.", error_generic: "Erro.", rate_limit: "Limite atingido."
       }
     };
-
-    // ============================================================
-    // STATE
-    // ============================================================
-    let currentLang = localStorage.getItem(LANG_KEY) || "ar";
-    let currentCurrency = localStorage.getItem(CUR_KEY) || "US";
-    let isSearching = false;
-    let lastAnswerMarkdown = "";
-
-    // ============================================================
+        // ============================================================
     // DOM REFS
     // ============================================================
-    const langSelect = document.getElementById("lang-select");
-    const currencySelect = document.getElementById("currency-select");
     const searchInput = document.getElementById("search-input");
     const searchBtn = document.getElementById("search-btn");
-    const clearBtn = document.getElementById("clear-btn");
     const statusEl = document.getElementById("status");
     const resultsEl = document.getElementById("results");
-    const previewOpenBtn = document.getElementById("preview-open-btn");
-    const previewBody = document.getElementById("report-preview");
-    const adminKeyBtn = document.getElementById("admin-key-btn");
+    const reportActionsEl = document.getElementById("report-actions");
     const adminKeyInput = document.getElementById("admin-key-input");
-    const adminSaveBtn = document.getElementById("admin-save-btn");
-    const yearEl = document.getElementById("year");
+    const previewContent = document.getElementById("report-preview-content");
 
     // ============================================================
-    // I18N
+    // HELPERS & TRANSLATIONS
     // ============================================================
-    function t(key) {
-      return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) ||
-             TRANSLATIONS.en[key] || key;
+    function t(key) { 
+      return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) || TRANSLATIONS.en[key] || key; 
     }
 
     function applyTranslations() {
       document.documentElement.lang = currentLang;
       document.documentElement.dir = (currentLang === "ar") ? "rtl" : "ltr";
-
       document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        el.textContent = t(key);
+        el.textContent = t(el.getAttribute("data-i18n"));
       });
-
       document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-        const key = el.getAttribute("data-i18n-placeholder");
-        el.setAttribute("placeholder", t(key));
+        el.setAttribute("placeholder", t(el.getAttribute("data-i18n-placeholder")));
       });
     }
 
-    function setLang(lang) {
-      if (!TRANSLATIONS[lang]) lang = "en";
-      currentLang = lang;
-      localStorage.setItem(LANG_KEY, lang);
-      langSelect.value = lang;
-      applyTranslations();
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.style.opacity = "1";
+      setTimeout(() => { toast.style.opacity = "0"; }, 2500);
     }
 
-    // ============================================================
-    // MARKDOWN RENDERER (V2 - fixed tables)
-    // ============================================================
     function escapeHtml(str) {
       return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
     }
 
+    // ============================================================
+    // MARKDOWN RENDERER (V2 - Fixed Tables)
+    // ============================================================
     function inlineFormat(text) {
       let s = escapeHtml(text);
-      s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
+      s = s.replace(/`([^`]+)`/g, "<code style='background:var(--panel-2);padding:2px 6px;border-radius:4px;color:var(--accent);'>$1</code>");
       s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-      s = s.replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>");
-      s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
-        '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-      s = s.replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,
-        '$1<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>');
+      s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" style="color:var(--accent);">$1</a>');
       return s;
     }
 
@@ -953,55 +303,34 @@
       const t = line.trim();
       if (!isTableRow(t)) return false;
       const cells = t.slice(1, -1).split("|").map(c => c.trim());
-      if (cells.length === 0) return false;
       return cells.every(c => /^:?-{1,}:?$/.test(c));
     }
 
     function parseTableCells(line) {
-      const t = line.trim();
-      const inner = t.slice(1, -1);
-      return inner.split("|").map(c => c.trim());
-    }
-
-    function parseAlign(cell) {
-      const t = cell.trim();
-      const left = t.startsWith(":");
-      const right = t.endsWith(":");
-      if (left && right) return "center";
-      if (right) return "right";
-      if (left) return "left";
-      return "left";
+      return line.trim().slice(1, -1).split("|").map(c => c.trim());
     }
 
     function renderTable(headerCells, aligns, bodyRows) {
       let html = "<table><thead><tr>";
       for (let i = 0; i < headerCells.length; i++) {
-        const align = aligns[i] || "left";
-        html += `<th style="text-align:${align}">${inlineFormat(headerCells[i])}</th>`;
+        html += `<th style="text-align:${aligns[i] || 'left'}">${inlineFormat(headerCells[i])}</th>`;
       }
       html += "</tr></thead><tbody>";
       for (const row of bodyRows) {
         html += "<tr>";
         for (let i = 0; i < headerCells.length; i++) {
-          const cell = row[i] !== undefined ? row[i] : "";
-          const align = aligns[i] || "left";
-          html += `<td style="text-align:${align}">${inlineFormat(cell)}</td>`;
+          html += `<td style="text-align:${aligns[i] || 'left'}">${inlineFormat(row[i] || "")}</td>`;
         }
         html += "</tr>";
       }
-      html += "</tbody></table>";
-      return html;
+      return html + "</tbody></table>";
     }
 
     function markdownToHtml(md) {
       if (!md) return "";
       const lines = String(md).replace(/\r\n/g, "\n").split("\n");
       const out = [];
-      let i = 0;
-      let inUl = false;
-      let inOl = false;
-      let inCode = false;
-      let codeBuf = [];
+      let i = 0, inUl = false, inOl = false, inCode = false, codeBuf = [];
 
       function closeLists() {
         if (inUl) { out.push("</ul>"); inUl = false; }
@@ -1009,529 +338,362 @@
       }
 
       while (i < lines.length) {
-        const line = lines[i];
-        const trimmed = line.trim();
+        const line = lines[i], trimmed = line.trim();
 
         if (trimmed.startsWith("```")) {
-          if (!inCode) {
-            closeLists();
-            inCode = true;
-            codeBuf = [];
-          } else {
-            out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
-            inCode = false;
-            codeBuf = [];
-          }
-          i++;
-          continue;
+          if (!inCode) { closeLists(); inCode = true; codeBuf = []; } 
+          else { out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>"); inCode = false; }
+          i++; continue;
         }
         if (inCode) { codeBuf.push(line); i++; continue; }
-
         if (trimmed === "") { closeLists(); i++; continue; }
 
-        // TABLE
         if (isTableRow(line) && i + 1 < lines.length && isSeparatorRow(lines[i + 1])) {
           closeLists();
           const headerCells = parseTableCells(line);
-          const sepCells = parseTableCells(lines[i + 1]);
-          const aligns = sepCells.map(parseAlign);
+          const sepCells = parseTableCells(lines[i + 1]).map(c => {
+            if (c.startsWith(":") && c.endsWith(":")) return "center";
+            if (c.endsWith(":")) return "right";
+            return "left";
+          });
           const bodyRows = [];
           i += 2;
           while (i < lines.length && isTableRow(lines[i])) {
             bodyRows.push(parseTableCells(lines[i]));
             i++;
           }
-          out.push(renderTable(headerCells, aligns, bodyRows));
+          out.push(renderTable(headerCells, sepCells, bodyRows));
           continue;
         }
 
         const h = trimmed.match(/^(#{1,6})\s+(.*)$/);
-        if (h) {
-          closeLists();
-          const level = h[1].length;
-          out.push(`<h${level}>${inlineFormat(h[2])}</h${level}>`);
-          i++;
-          continue;
-        }
-
-        if (/^(\-{3,}|\*{3,}|_{3,})$/.test(trimmed)) {
-          closeLists();
-          out.push("<hr>");
-          i++;
-          continue;
-        }
-
-        if (/^>\s?/.test(trimmed)) {
-          closeLists();
-          out.push("<blockquote>" + inlineFormat(trimmed.replace(/^>\s?/, "")) + "</blockquote>");
-          i++;
-          continue;
-        }
-
+        if (h) { closeLists(); out.push(`<h${h[1].length}>${inlineFormat(h[2])}</h${h[1].length}>`); i++; continue; }
+        if (/^(\-{3,}|\*{3,}|_{3,})$/.test(trimmed)) { closeLists(); out.push("<hr style='border:none;border-top:1px solid var(--border);margin:15px 0;'>"); i++; continue; }
+        if (/^>\s?/.test(trimmed)) { closeLists(); out.push("<blockquote style='border-left:3px solid var(--accent);padding-left:10px;'>" + inlineFormat(trimmed.replace(/^>\s?/, "")) + "</blockquote>"); i++; continue; }
+        
         const ulMatch = trimmed.match(/^[-*+]\s+(.*)$/);
-        if (ulMatch) {
-          if (inOl) { out.push("</ol>"); inOl = false; }
-          if (!inUl) { out.push("<ul>"); inUl = true; }
-          out.push("<li>" + inlineFormat(ulMatch[1]) + "</li>");
-          i++;
-          continue;
-        }
-
+        if (ulMatch) { if (inOl) { out.push("</ol>"); inOl = false; } if (!inUl) { out.push("<ul>"); inUl = true; } out.push("<li>" + inlineFormat(ulMatch[1]) + "</li>"); i++; continue; }
+        
         const olMatch = trimmed.match(/^\d+\.\s+(.*)$/);
-        if (olMatch) {
-          if (inUl) { out.push("</ul>"); inUl = false; }
-          if (!inOl) { out.push("<ol>"); inOl = true; }
-          out.push("<li>" + inlineFormat(olMatch[1]) + "</li>");
-          i++;
-          continue;
-        }
+        if (olMatch) { if (inUl) { out.push("</ul>"); inUl = false; } if (!inOl) { out.push("<ol>"); inOl = true; } out.push("<li>" + inlineFormat(olMatch[1]) + "</li>"); i++; continue; }
 
-        closeLists();
-        out.push("<p>" + inlineFormat(trimmed) + "</p>");
-        i++;
+        closeLists(); out.push("<p>" + inlineFormat(trimmed) + "</p>"); i++;
       }
-
       if (inCode) out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
-      closeLists();
-      return out.join("\n");
+      closeLists(); return out.join("\n");
+    }
+
+    function populateReportPreview(md) {
+      if (!md) { 
+        previewContent.innerHTML = `<p style="color:var(--muted);text-align:center;padding:20px;">${t("search_placeholder")}</p>`; 
+        return; 
+      }
+      previewContent.innerHTML = markdownToHtml(md);
     }
 
     // ============================================================
-    // REPORT PREVIEW POPULATOR
+    // STATS FETCHING
     // ============================================================
-    function populateReportPreview(answerMarkdown) {
-      if (!previewBody) return;
-
-      if (!answerMarkdown || !answerMarkdown.trim()) {
-        previewBody.innerHTML = `<p class="report-empty">${escapeHtml(t("preview_empty"))}</p>`;
-        return;
-      }
-
-      // Split by ## sections
-      const sections = [];
-      let current = { title: "__intro__", body: [] };
-      const lines = answerMarkdown.split("\n");
-      for (const line of lines) {
-        const m = line.match(/^##\s+(.*)$/);
-        if (m) {
-          if (current.body.length > 0 || current.title !== "__intro__") {
-            sections.push(current);
-          }
-          current = { title: m[1].trim(), body: [] };
-        } else {
-          current.body.push(line);
+    async function fetchStats() {
+      try {
+        const res = await fetch(WORKER_URL + "/stats");
+        if (res.ok) {
+          const d = await res.json();
+          document.getElementById("stat-visitors").textContent = d.visitors || 0;
+          document.getElementById("stat-searches").textContent = d.searches || 0;
+          document.getElementById("stat-success").textContent = d.success || 0;
+          document.getElementById("stat-failure").textContent = d.failure || 0;
         }
-      }
-      if (current.body.length > 0 || current.title !== "__intro__") {
-        sections.push(current);
-      }
-
-      const rendered = sections.map(sec => {
-        const bodyMd = sec.body.join("\n").trim();
-        if (!bodyMd) return "";
-        const titleHtml = sec.title === "__intro__"
-          ? ""
-          : `<h2 class="report-section-title">${inlineFormat(sec.title)}</h2>`;
-        return `<section class="report-section">${titleHtml}${markdownToHtml(bodyMd)}</section>`;
-      }).filter(Boolean);
-
-      if (rendered.length === 0) {
-        previewBody.innerHTML = `<section class="report-section">${markdownToHtml(answerMarkdown)}</section>`;
-      } else {
-        previewBody.innerHTML = rendered.join("\n");
-      }
+      } catch (e) { console.warn("Stats unavailable"); }
     }
 
     // ============================================================
-    // STATUS
-    // ============================================================
-    function setStatus(msg, type = "") {
-      statusEl.className = "status" + (type ? " " + type : "");
-      if (type === "loading") {
-        statusEl.innerHTML = '<span class="spinner"></span>' + escapeHtml(msg);
-      } else {
-        statusEl.textContent = msg;
-      }
-    }
-
-    function clearStatus() {
-      statusEl.textContent = "";
-      statusEl.className = "status";
-    }
-
-    // ============================================================
-    // SEARCH
+    // MAIN SEARCH LOGIC
     // ============================================================
     async function performSearch() {
       if (isSearching) return;
-
       const query = searchInput.value.trim();
-      if (!query) {
-        setStatus(t("empty_query"), "error");
-        return;
+      if (!query) { 
+        statusEl.textContent = t("empty_query"); 
+        statusEl.style.color = "var(--bad)"; 
+        return; 
       }
 
       isSearching = true;
       searchBtn.disabled = true;
+      lastQuery = query;
       resultsEl.innerHTML = "";
-      previewOpenBtn.classList.remove("visible");
-      lastAnswerMarkdown = "";
-      setStatus(t("searching"), "loading");
+      resultsEl.classList.remove("visible");
+      reportActionsEl.style.display = "none";
+      statusEl.textContent = t("searching");
+      statusEl.style.color = "var(--accent)";
 
-      if (window.fbq) {
-        try { fbq("track", "InitiateCheckout"); } catch (e) {}
-      }
+      // Pipeline Animation
+      let step = 1; 
+      document.querySelectorAll(".step").forEach(el => el.classList.remove("active"));
+      document.getElementById("pipeline").classList.add("active");
+      const interval = setInterval(() => {
+        document.getElementById("step-" + step)?.classList.add("active");
+        step = step < 5 ? step + 1 : 1;
+      }, 1500);
 
-      const adminKey = localStorage.getItem(STORAGE_KEY) || "";
+      // Meta Pixel
+      if (window.fbq) try { fbq("track", "InitiateCheckout"); } catch (e) {}
+
       const headers = { "Content-Type": "application/json" };
-      if (adminKey) headers["X-Admin-Key"] = adminKey;
+      const key = localStorage.getItem(STORAGE_KEY);
+      if (key) headers["X-Admin-Key"] = key;
 
-      const body = {
-        query: query,
-        country: currentCurrency,
-        lang: currentLang
-      };
+      // Inject selected skill into query so the Worker knows the intent
+      const finalQuery = selectedSkill !== "deep" ? `[Skill: ${selectedSkill}] ${query}` : query;
 
       try {
         const res = await fetch(WORKER_URL, {
           method: "POST",
           headers: headers,
-          body: JSON.stringify(body)
+          body: JSON.stringify({ query: finalQuery, country: currentCurrency, lang: currentLang })
         });
 
-        const raw = await res.text();
-        let data = null;
-        try { data = JSON.parse(raw); } catch (e) { data = null; }
+        clearInterval(interval);
+        document.querySelectorAll(".step").forEach(el => el.classList.remove("active"));
+        document.getElementById("step-5").classList.add("active");
+
+        const data = await res.json().catch(() => null);
+
+        if (res.status === 401) {
+          statusEl.textContent = data?.message || "Invalid License Key.";
+          statusEl.style.color = "var(--bad)";
+          localStorage.removeItem(STORAGE_KEY);
+          updateAdminBtn();
+          return;
+        }
 
         if (res.status === 429) {
-          setStatus(t("rate_limit"), "error");
+          statusEl.textContent = data?.message || t("rate_limit");
+          statusEl.style.color = "var(--bad)";
+          if (data?.upgrade_url) {
+            const a = document.createElement("a"); 
+            a.href = data.upgrade_url; a.target = "_blank";
+            a.textContent = " Upgrade Now"; a.style.color = "var(--accent)"; a.style.fontWeight = "bold";
+            statusEl.appendChild(a);
+          }
           return;
         }
 
-        if (!res.ok) {
-          const msg = (data && (data.error || data.message)) || t("error_generic");
-          setStatus(msg, "error");
+        if (!res.ok || !data?.answer) {
+          statusEl.textContent = data?.error || t("error_generic");
+          statusEl.style.color = "var(--bad)";
           return;
         }
 
-        const answer = (data && (data.answer || data.result || data.content)) || "";
-        if (!answer) {
-          setStatus(t("no_results"), "error");
-          return;
-        }
+        // Success
+        statusEl.textContent = "";
+        lastAnswerMarkdown = data.answer;
+        resultsEl.innerHTML = markdownToHtml(data.answer);
+        resultsEl.classList.add("visible");
+        reportActionsEl.style.display = "flex";
 
-        lastAnswerMarkdown = answer;
-        resultsEl.innerHTML = markdownToHtml(answer);
-        populateReportPreview(answer);
-        previewOpenBtn.classList.add("visible");
-        clearStatus();
-
-        if (window.fbq) {
-          try { fbq("track", "Lead"); } catch (e) {}
+        // Update remaining quota if provided
+        if (data.meta && data.meta.remaining_quota !== undefined && data.meta.remaining_quota !== null) {
+          document.getElementById("stat-remaining").textContent = data.meta.remaining_quota;
         }
+        
+        fetchStats(); // Refresh global stats
+        if (window.fbq) try { fbq("track", "Lead"); } catch (e) {}
+
       } catch (err) {
+        clearInterval(interval);
         console.error(err);
-        setStatus(t("error_generic"), "error");
+        statusEl.textContent = t("error_generic");
+        statusEl.style.color = "var(--bad)";
       } finally {
-        isSearching = false;
-        searchBtn.disabled = false;
+        isSearching = false; 
+        searchBtn.disabled = false; 
+        document.getElementById("pipeline").classList.remove("active");
       }
     }
 
-    function clearAll() {
-      searchInput.value = "";
-      resultsEl.innerHTML = "";
-      previewBody.innerHTML = "";
-      previewOpenBtn.classList.remove("visible");
-      lastAnswerMarkdown = "";
-      clearStatus();
-      searchInput.focus();
-    }
-
     // ============================================================
-    // MODALS
-    // ============================================================
-    function openModal(name) {
-      const el = document.getElementById("modal-" + name);
-      if (el) el.classList.add("open");
-    }
-
-    function closeModal(name) {
-      const el = document.getElementById("modal-" + name);
-      if (el) el.classList.remove("open");
-    }
-
-    // ============================================================
-    // ADMIN KEY
+    // ADMIN & ACTIONS
     // ============================================================
     function updateAdminBtn() {
-      const key = localStorage.getItem(STORAGE_KEY);
-      if (key) {
-        adminKeyBtn.classList.add("active");
-        adminKeyBtn.title = "Admin Key Active (click to remove)";
-      } else {
-        adminKeyBtn.classList.remove("active");
-        adminKeyBtn.title = "Admin Key";
-      }
+      const btn = document.getElementById("admin-key-btn");
+      btn.style.filter = localStorage.getItem(STORAGE_KEY) ? "drop-shadow(0 0 6px var(--accent))" : "none";
+      btn.style.opacity = localStorage.getItem(STORAGE_KEY) ? "1" : "0.7";
     }
 
-    function openAdminModal() {
-      const existing = localStorage.getItem(STORAGE_KEY);
-      adminKeyInput.value = existing || "";
-      openModal("admin");
-      setTimeout(() => adminKeyInput.focus(), 100);
-    }
-
-    function saveAdminKey() {
-      const val = adminKeyInput.value.trim();
-      if (val) {
-        localStorage.setItem(STORAGE_KEY, val);
-        setStatus(t("admin_saved"), "success");
-      } else {
-        localStorage.removeItem(STORAGE_KEY);
-        setStatus(t("admin_removed"), "success");
-      }
+    // ============================================================
+    // INITIALIZATION
+    // ============================================================
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      
+      // Set defaults
+      document.getElementById("lang-select").value = currentLang;
+      document.getElementById("currency-select").value = currentCurrency;
+      
+      applyTranslations();
       updateAdminBtn();
-      closeModal("admin");
-      setTimeout(() => { if (!isSearching) clearStatus(); }, 2500);
-    }
+      fetchStats();
+      populateReportPreview("");
 
-    // ============================================================
-    // SPIDER CANVAS
-    // ============================================================
-    function initSpiderCanvas() {
+      // --- Event Listeners ---
+      document.getElementById("lang-select").addEventListener("change", e => { 
+        currentLang = e.target.value; 
+        localStorage.setItem(LANG_KEY, currentLang); 
+        applyTranslations(); 
+      });
+      
+      document.getElementById("currency-select").addEventListener("change", e => { 
+        currentCurrency = e.target.value; 
+        localStorage.setItem(CUR_KEY, currentCurrency); 
+      });
+      
+      searchBtn.addEventListener("click", performSearch);
+      searchInput.addEventListener("keydown", e => { if (e.key === "Enter") performSearch(); });
+
+      // Skills selection
+      document.querySelectorAll(".skill-pill").forEach(p => {
+        p.addEventListener("click", () => {
+          document.querySelectorAll(".skill-pill").forEach(x => x.classList.remove("active"));
+          p.classList.add("active");
+          selectedSkill = p.dataset.skill;
+        });
+      });
+
+      // Report Actions
+      document.getElementById("copy-btn").addEventListener("click", () => {
+        if (!lastAnswerMarkdown) return;
+        navigator.clipboard.writeText(lastAnswerMarkdown).then(() => showToast("Copied!"));
+      });
+
+      document.getElementById("download-btn").addEventListener("click", () => {
+        if (!lastAnswerMarkdown) return;
+        const content = `# Mido Deep Search\nQuery: ${lastQuery}\n\n---\n\n${lastAnswerMarkdown}`;
+        const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
+        const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `report-${Date.now()}.md`;
+        a.click(); URL.revokeObjectURL(a.href);
+      });
+
+      document.getElementById("preview-btn").addEventListener("click", () => {
+        populateReportPreview(lastAnswerMarkdown);
+        document.getElementById("modal-preview").classList.add("open");
+      });
+
+      // Modals
+      document.getElementById("admin-key-btn").addEventListener("click", () => {
+        adminKeyInput.value = localStorage.getItem(STORAGE_KEY) || "";
+        document.getElementById("modal-admin").classList.add("open");
+      });
+
+      document.getElementById("admin-save-btn").addEventListener("click", () => {
+        const val = adminKeyInput.value.trim();
+        if (val) localStorage.setItem(STORAGE_KEY, val);
+        else localStorage.removeItem(STORAGE_KEY);
+        updateAdminBtn();
+        document.getElementById("modal-admin").classList.remove("open");
+        showToast("Key Saved!");
+      });
+
+      document.querySelectorAll("[data-modal]").forEach(el => {
+        el.addEventListener("click", () => document.getElementById(el.getAttribute("data-modal").replace('modal-', 'modal-')).classList.add("open"));
+      });
+
+      // Close modals on background click
+      document.querySelectorAll(".modal-backdrop").forEach(bd => {
+        bd.addEventListener("click", e => { if (e.target === bd) bd.classList.remove("open"); });
+      });
+
+      // ============================================================
+      // CANVAS SPIDER ANIMATION
+      // ============================================================
       const canvas = document.getElementById("spider-canvas");
-      if (!canvas) return;
       const ctx = canvas.getContext("2d");
       let w, h, particles = [];
-      const spider = {
-        x: 0, y: 0, angle: 0,
-        targetX: 0, targetY: 0,
-        legsPhase: 0
-      };
+      let spider = { x: 0, y: 0, targetX: 0, targetY: 0, angle: 0, phase: 0 };
 
       function resize() {
-        w = canvas.width = window.innerWidth * window.devicePixelRatio;
-        h = canvas.height = window.innerHeight * window.devicePixelRatio;
-        canvas.style.width = window.innerWidth + "px";
-        canvas.style.height = window.innerHeight + "px";
-        if (spider.x === 0 && spider.y === 0) {
-          spider.x = w / 2;
-          spider.y = h / 2;
-          spider.targetX = w / 2;
-          spider.targetY = h / 2;
-        }
-        initParticles();
-      }
-
-      function initParticles() {
-        particles = [];
-        const count = Math.min(60, Math.floor((w * h) / (90000 * window.devicePixelRatio)));
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4,
-            r: (Math.random() * 1.6 + 0.6) * window.devicePixelRatio
-          });
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        if (!spider.x) { 
+          spider.x = w / 2; spider.y = h / 2; 
+          spider.targetX = w / 2; spider.targetY = h / 2; 
         }
       }
+      window.addEventListener("resize", resize);
+      resize();
 
-      function drawWeb() {
-        ctx.strokeStyle = "rgba(34, 211, 238, 0.09)";
-        ctx.lineWidth = 1;
-        const cx = spider.x;
-        const cy = spider.y;
-        const radius = 220 * window.devicePixelRatio;
-        const rings = 5;
-        const spokes = 12;
+      for (let i = 0; i < 30; i++) {
+        particles.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5 });
+      }
 
-        for (let s = 0; s < spokes; s++) {
-          const a = (Math.PI * 2 * s) / spokes + spider.legsPhase * 0.05;
-          ctx.beginPath();
-          ctx.moveTo(cx, cy);
-          ctx.lineTo(cx + Math.cos(a) * radius, cy + Math.sin(a) * radius);
-          ctx.stroke();
-        }
-        for (let r = 1; r <= rings; r++) {
-          const rr = (radius / rings) * r;
-          ctx.beginPath();
-          for (let s = 0; s <= spokes; s++) {
-            const a = (Math.PI * 2 * s) / spokes + spider.legsPhase * 0.05;
-            const x = cx + Math.cos(a) * rr;
-            const y = cy + Math.sin(a) * rr;
-            if (s === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
+      function draw() {
+        if (document.hidden) { requestAnimationFrame(draw); return; } // Pause when tab hidden
+        ctx.clearRect(0, 0, w, h);
+
+        // Draw Web lines between close particles
+        ctx.strokeStyle = "rgba(34, 211, 238, 0.05)";
+        ctx.beginPath();
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            if (dx * dx + dy * dy < 15000) {
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+            }
           }
-          ctx.stroke();
         }
-      }
+        ctx.stroke();
 
-      function drawSpider() {
-        const scale = window.devicePixelRatio;
-        const bodyR = 9 * scale;
+        // Draw Particles
+        ctx.fillStyle = "rgba(147, 161, 181, 0.3)";
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+          ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2); ctx.fill();
+        });
+
+        // Draw Spider
+        spider.phase += 0.05;
+        const dx = spider.targetX - spider.x, dy = spider.targetY - spider.y;
+        spider.x += dx * 0.02; spider.y += dy * 0.02;
+        if (Math.abs(dx) + Math.abs(dy) > 10) spider.angle = Math.atan2(dy, dx);
+        if (Math.random() < 0.01) {
+          spider.targetX = w * 0.2 + Math.random() * w * 0.6;
+          spider.targetY = h * 0.2 + Math.random() * h * 0.6;
+        }
+
         ctx.save();
         ctx.translate(spider.x, spider.y);
         ctx.rotate(spider.angle);
-
-        ctx.fillStyle = "rgba(34, 211, 238, 0.85)";
-        ctx.shadowColor = "rgba(34, 211, 238, 0.9)";
-        ctx.shadowBlur = 18 * scale;
-        ctx.beginPath();
-        ctx.ellipse(0, 0, bodyR * 1.3, bodyR, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(bodyR * 1.15, 0, bodyR * 0.55, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(99, 102, 241, 0.95)";
-        ctx.fill();
-
+        ctx.fillStyle = "rgba(34, 211, 238, 0.8)";
+        ctx.shadowBlur = 15; ctx.shadowColor = "var(--accent)";
+        
+        // Body
+        ctx.beginPath(); ctx.ellipse(0, 0, 12, 8, 0, 0, Math.PI * 2); ctx.fill();
+        // Head
+        ctx.beginPath(); ctx.arc(10, 0, 5, 0, Math.PI * 2); ctx.fillStyle = "rgba(99, 102, 241, 0.9)"; ctx.fill();
+        
+        // Legs
         ctx.shadowBlur = 0;
-        ctx.strokeStyle = "rgba(34, 211, 238, 0.75)";
-        ctx.lineWidth = 1.6 * scale;
-        ctx.lineCap = "round";
-        const legCount = 4;
-        for (let i = 0; i < legCount; i++) {
-          const baseA = (i - (legCount - 1) / 2) * 0.42;
-          const swing = Math.sin(spider.legsPhase + i) * 0.22;
-          for (const side of [-1, 1]) {
-            const a = baseA + swing * side;
-            const len = bodyR * 2.6;
-            const midX = Math.cos(a) * len * 0.55;
-            const midY = Math.sin(a) * len * 0.55 * side;
-            const endX = Math.cos(a) * len + Math.cos(a + 0.6 * side) * len * 0.35;
-            const endY = Math.sin(a) * len * side + Math.sin(a + 0.6 * side) * len * 0.35;
+        ctx.strokeStyle = "rgba(34, 211, 238, 0.6)";
+        ctx.lineWidth = 1.5;
+        for (let i = 0; i < 4; i++) {
+          const a = (i - 1.5) * 0.4 + Math.sin(spider.phase + i) * 0.2;
+          for (let s of [-1, 1]) {
             ctx.beginPath();
-            ctx.moveTo(bodyR * 0.4, side * bodyR * 0.2);
-            ctx.quadraticCurveTo(midX, midY, endX, endY);
+            ctx.moveTo(0, 0);
+            ctx.quadraticCurveTo(Math.cos(a) * 20, Math.sin(a) * 20 * s, Math.cos(a) * 35, Math.sin(a) * 35 * s);
             ctx.stroke();
           }
         }
         ctx.restore();
+        requestAnimationFrame(draw);
       }
-
-      function drawParticles() {
-        for (const p of particles) {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0 || p.x > w) p.vx *= -1;
-          if (p.y < 0 || p.y > h) p.vy *= -1;
-          ctx.beginPath();
-          ctx.fillStyle = "rgba(147, 161, 181, 0.35)";
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-
-      function animate() {
-        spider.legsPhase += 0.06;
-        const dx = spider.targetX - spider.x;
-        const dy = spider.targetY - spider.y;
-        spider.x += dx * 0.012;
-        spider.y += dy * 0.012;
-        if (Math.abs(dx) + Math.abs(dy) > 1) {
-          spider.angle = Math.atan2(dy, dx);
-        }
-        if (Math.random() < 0.006) {
-          spider.targetX = w * (0.15 + Math.random() * 0.7);
-          spider.targetY = h * (0.15 + Math.random() * 0.7);
-        }
-
-        ctx.clearRect(0, 0, w, h);
-        drawParticles();
-        drawWeb();
-        drawSpider();
-        requestAnimationFrame(animate);
-      }
-
-      window.addEventListener("resize", resize);
-      resize();
-      animate();
-    }
-
-    // ============================================================
-    // EVENT WIRING
-    // ============================================================
-    function wireEvents() {
-      langSelect.addEventListener("change", e => setLang(e.target.value));
-
-      currencySelect.addEventListener("change", e => {
-        currentCurrency = e.target.value;
-        localStorage.setItem(CUR_KEY, currentCurrency);
-      });
-
-      searchBtn.addEventListener("click", performSearch);
-      clearBtn.addEventListener("click", clearAll);
-
-      searchInput.addEventListener("keydown", e => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          performSearch();
-        }
-      });
-
-      previewOpenBtn.addEventListener("click", () => {
-        if (!lastAnswerMarkdown) {
-          populateReportPreview("");
-        } else {
-          populateReportPreview(lastAnswerMarkdown);
-        }
-        openModal("preview");
-      });
-
-      adminKeyBtn.addEventListener("click", openAdminModal);
-      adminSaveBtn.addEventListener("click", saveAdminKey);
-      adminKeyInput.addEventListener("keydown", e => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          saveAdminKey();
-        }
-      });
-
-      document.querySelectorAll("[data-modal]").forEach(el => {
-        el.addEventListener("click", () => openModal(el.getAttribute("data-modal")));
-      });
-
-      document.querySelectorAll("[data-close]").forEach(el => {
-        el.addEventListener("click", () => closeModal(el.getAttribute("data-close")));
-      });
-
-      document.querySelectorAll(".modal-backdrop").forEach(bd => {
-        bd.addEventListener("click", e => {
-          if (e.target === bd) bd.classList.remove("open");
-        });
-      });
-
-      document.addEventListener("keydown", e => {
-        if (e.key === "Escape") {
-          document.querySelectorAll(".modal-backdrop.open").forEach(m => m.classList.remove("open"));
-        }
-      });
-    }
-
-    // ============================================================
-    // INIT
-    // ============================================================
-    function init() {
-      yearEl.textContent = new Date().getFullYear();
-
-      if (!TRANSLATIONS[currentLang]) currentLang = "ar";
-      langSelect.value = currentLang;
-      currencySelect.value = currentCurrency;
-
-      applyTranslations();
-      updateAdminBtn();
-      wireEvents();
-      initSpiderCanvas();
-
-      // Initial empty preview
-      populateReportPreview("");
-
-      setTimeout(() => searchInput.focus(), 250);
-    }
-
-    document.addEventListener("DOMContentLoaded", init);
+      draw();
+    });
   </script>
 </body>
-                                                                  </html>
+</html>
