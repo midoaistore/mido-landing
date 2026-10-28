@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; connect-src 'self' https://mido-deepsearch.midoaistore.workers.dev; img-src 'self' data: https://www.facebook.com https://raw.githubusercontent.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://midoaistore.gumroad.com">
 <title>Mido Deep Search — Verified Research in 5-40 Seconds</title>
-<meta name="description" content="Mido Deep Search checks local and international sources and turns one question into a practical verified research report in 5-40 seconds.">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <!-- Meta Pixel Code -->
@@ -28,7 +26,6 @@ src="https://www.facebook.com/tr?id=1805920357103132&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 
 <style>
-/* التنسيقات العامة */
 :root{--bg:#0a0a0f;--card:#12121a;--border:#232733;--text:#fff;--muted:rgba(255,255,255,.55);--accent:#7c5cff;--green:#00ffa3;--cyan:#00d4ff}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter','Cairo',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;min-height:100vh}
@@ -38,7 +35,6 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 #spider{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5}
 .main{position:relative;z-index:2}
 
-/* القائمة واللغة */
 .lang-switcher{position:relative}
 .lang-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);font-size:13px}
 .lang-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:260px;max-width:calc(100vw - 24px);max-height:min(70vh,420px);overflow-y:auto;background:#151b27;border:2px solid #53628a;border-radius:14px;padding:8px;z-index:120;box-shadow:0 16px 40px rgba(0,0,0,.7)}
@@ -47,7 +43,6 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .lang-option:hover,.lang-option.active{background:rgba(124,92,255,.15);color:#c4b5fd}
 .flag-icon{font-size:1.2rem}
 
-/* الهيدر والأزرار */
 header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(10,10,15,.92);border-bottom:1px solid var(--border)}
 .nav{display:flex;align-items:center;justify-content:space-between;padding:11px 0;gap:10px;flex-wrap:wrap}
 .logo{font-weight:800;font-size:1.1rem}.logo span{color:var(--accent)}
@@ -63,7 +58,6 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rg
 .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(1turn)}}
 
-/* الأقسام */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;padding:16px 0}
 .stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:11px;text-align:center}
 .stat .v{font-size:19px;font-weight:800}.stat .l{font-size:10px;color:var(--muted);margin-top:2px}
@@ -138,11 +132,9 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 .action-btns{display:flex;gap:8px;margin-top:12px;justify-content:flex-end;flex-wrap:wrap}
 .action-btn{background:#1a1a24;color:var(--text);border:1px solid var(--border);padding:8px 12px;border-radius:8px;font-size:12px;display:inline-flex;align-items:center;gap:6px;transition:.2s}
 .action-btn:hover{border-color:var(--accent);background:rgba(124,92,255,.15)}
-@media(max-width:640px){.search-row{flex-direction:column}.search-row input,.currency-select,#go{width:100%;min-width:0}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.search-row{flex-direction:column}.search-row input,.currency-select,#go,#pasteBtn{width:100%;min-width:0}.stats{grid-template-columns:repeat(2,1fr)}}
 .admin-trigger{opacity:0.15;cursor:pointer;font-size:14px;transition:0.3s;display:inline-block;margin-top:10px}
 .admin-trigger:hover,.admin-trigger.active{opacity:1;color:var(--green);filter:drop-shadow(0 0 6px var(--green))}
-
-/* Cookies Banner */
 .cookie-banner{position:fixed;bottom:20px;left:20px;right:20px;max-width:400px;background:#151b27;border:1px solid var(--border);padding:16px;border-radius:14px;z-index:999;box-shadow:0 10px 30px rgba(0,0,0,.5);display:none;font-size:13px}
 .cookie-banner.show{display:block}
 .cookie-banner p{margin-bottom:12px;color:var(--muted);line-height:1.5}
@@ -169,7 +161,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
           <div class="lang-option" data-l="pt" data-f="🇵🇹" data-n="Português"><span class="flag-icon">🇵🇹</span> Português</div>
         </div>
       </div>
-      <span class="badge">V10.4 | Live</span>
+      <span class="badge">V10.5 | Live</span>
       <a class="btn btn-w" id="navBuy" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" data-i18n="nav_buy">Get Access — $6</a>
     </div>
   </div>
@@ -185,8 +177,8 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 
 <section class="hero wrap">
   <div class="pill" data-i18n="pill">⚡ Verified research • 5-40s • Local + Global</div>
-  <h1 data-i18n-html="hero_title">Get a fully structured <span class="g">research report</span> — not just links</h1>
-  <p class="lead" data-i18n="hero_desc">A 5-stage verified pipeline with local and international sources, clear recommendation, and real pricing context — in about 5-40 seconds.</p>
+  <h1 data-i18n-html="hero_title">Get a fully structured <span class="g">research report</span></h1>
+  <p class="lead" data-i18n="hero_desc">A 5-stage verified pipeline with local and international sources, clear recommendation, and real pricing context.</p>
   <div class="cta-row">
     <a href="#demo" class="btn btn-p" data-i18n="cta_try">Try Free Demo</a>
   </div>
@@ -216,6 +208,10 @@ footer a:hover{color:var(--accent);text-decoration:underline}
         <option value="AE">🇦🇪 AED (د.إ)</option>
         <option value="GB">🇬🇧 GBP (£)</option>
         <option value="FR">🇫🇷 EUR (€)</option>
+        <option value="DE">🇩🇪 EUR (€)</option>
+        <option value="JP">🇯🇵 JPY (¥)</option>
+        <option value="CN">🇨🇳 CNY (¥)</option>
+        <option value="IN">🇮🇳 INR (₹)</option>
       </select>
       <button type="button" class="btn btn-ghost" id="pasteBtn" title="Paste">📋 Paste</button>
       <button type="button" class="btn btn-w" id="go" data-i18n="search_btn">Search 🔍</button>
@@ -237,7 +233,6 @@ footer a:hover{color:var(--accent);text-decoration:underline}
   </div>
 </section>
 
-<!-- Asimov Safety Laws (Restored) -->
 <section class="sec wrap" id="laws">
   <h2 class="sec-t" data-i18n="laws_title">Asimov Safety Laws</h2>
   <p class="sec-s" data-i18n="laws_sub">These rules guide the engine so output stays useful, honest, and safe for real decisions.</p>
@@ -252,7 +247,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 </section>
 
 <footer class="wrap">
-  <p data-i18n="footer">© 2026 Mido AI Store • V10.4</p>
+  <p data-i18n="footer">© 2026 Mido AI Store • V10.5</p>
   <p style="margin-top:4px;font-size:11px" data-i18n="footer2">Live sources. Always verify final local prices.</p>
   <div style="margin-top:10px;font-size:11px;opacity:.8;display:flex;gap:10px;justify-content:center">
     <a href="#" class="policy-link" data-policy="privacy">Privacy Policy</a> | 
@@ -263,7 +258,6 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 </footer>
 </div>
 
-<!-- Cookie Banner -->
 <div class="cookie-banner" id="cookieBanner">
   <p>We use cookies to analyze traffic and improve your experience. By clicking "Accept", you consent to our use of cookies.</p>
   <div class="cookie-btns">
@@ -272,7 +266,6 @@ footer a:hover{color:var(--accent);text-decoration:underline}
   </div>
 </div>
 
-<!-- Modal: Policies -->
 <div class="modal" id="policyModal">
   <div class="modal-bg" onclick="document.getElementById('policyModal').classList.remove('open')"></div>
   <div class="modal-box">
@@ -293,7 +286,6 @@ var WORKER_URL='https://mido-deepsearch.midoaistore.workers.dev';
 var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
 var skill='deep_search', currentLang='en', searching=false, lastReportText='', adminKey='';
 
-// 1. إدارة مفتاح الأدمن
 try {
   var urlParams = new URLSearchParams(location.search);
   if (urlParams.has('admin')) {
@@ -305,64 +297,46 @@ try {
   }
 } catch(e) { adminKey = ''; }
 
-// 2. السياسات (الخصوصية، الحقوق، والاسترداد)
 var POLICY_T = {
-  en:{
-    privacy:{title:'Privacy Policy',html:`<p><strong>Last updated: 2026</strong></p><p>We collect only the data needed to operate Mido Deep Search. Queries are sent to Tavily and Groq to generate reports. We use Meta Pixel to measure campaign performance. No personal data is sold to third parties.</p><p>Contact: support@midoaistore.com</p>`},
-    terms:{title:'Terms of Use',html:`<p><strong>Last updated: 2026</strong></p><p>By using Mido Deep Search, you agree to use the service for lawful purposes only. You may not abuse the API, bypass rate limits, or use the service to generate harmful content. We reserve the right to terminate access for violations.</p><p>Contact: support@midoaistore.com</p>`},
-    refund:{title:'Refund Policy',html:`<p><strong>Last updated: 2026</strong></p><p>This is a digital product with immediate access.</p><h4>1. 7-Day Refund Guarantee</h4><p>Refund requests must be submitted within <strong>7 days</strong> of purchase with proof of issue.</p><h4>2. Gumroad Processing</h4><p>Refunds are processed via Gumroad within 5-10 business days.</p><p>Contact: support@midoaistore.com</p>`}
-  },
-  ar:{
-    privacy:{title:'سياسة الخصوصية',html:`<p><strong>آخر تحديث: 2026</strong></p><p>نجمع فقط البيانات اللازمة لتشغيل Mido Deep Search. تُرسل الاستعلامات إلى Tavily وGroq لإنشاء التقارير. نستخدم Meta Pixel لقياس أداء الحملات. لا يتم بيع أي بيانات شخصية لأطراف ثالثة.</p><p>للتواصل: support@midoaistore.com</p>`},
-    terms:{title:'حقوق الاستخدام',html:`<p><strong>آخر تحديث: 2026</strong></p><p>باستخدامك لـ Mido Deep Search، فإنك توافق على استخدام الخدمة للأغراض المشروعة فقط. يُمنع إساءة استخدام واجهة الـ API، أو تجاوز حدود الاستخدام، أو استخدام الخدمة لتوليد محتوى ضار. نحتفظ بالحق في إنهاء الوصول في حالة الانتهاك.</p><p>للتواصل: support@midoaistore.com</p>`},
-    refund:{title:'سياسة الاسترداد',html:`<p><strong>آخر تحديث: 2026</strong></p><p>هذا منتج رقمي مع وصول فوري.</p><h4>1. ضمان استرداد خلال 7 أيام</h4><p>يجب تقديم طلبات الاسترداد خلال <strong>7 أيام</strong> من تاريخ الشراء مع إثبات المشكلة.</p><h4>2. معالجة Gumroad</h4><p>تتم معالجة المبالغ المستردة عبر Gumroad خلال 5-10 أيام عمل.</p><p>للتواصل: support@midoaistore.com</p>`}
-  }
+  en:{ privacy:{title:'Privacy Policy',html:`<p>We collect only the data needed to operate Mido Deep Search. Queries are sent to Tavily and Groq. We use Meta Pixel to measure campaign performance. No personal data is sold.</p><p>Contact: support@midoaistore.com</p>`}, terms:{title:'Terms of Use',html:`<p>By using Mido Deep Search, you agree to use the service for lawful purposes only. You may not abuse the API or use the service to generate harmful content.</p><p>Contact: support@midoaistore.com</p>`}, refund:{title:'Refund Policy',html:`<p>This is a digital product with immediate access.</p><h4>7-Day Refund Guarantee</h4><p>Refund requests must be submitted within <strong>7 days</strong> of purchase with proof of issue.</p><p>Contact: support@midoaistore.com</p>`} },
+  ar:{ privacy:{title:'سياسة الخصوصية',html:`<p>نجمع فقط البيانات اللازمة لتشغيل Mido Deep Search. تُرسل الاستعلامات إلى Tavily وGroq. نستخدم Meta Pixel لقياس أداء الحملات. لا يتم بيع أي بيانات شخصية.</p><p>للتواصل: support@midoaistore.com</p>`}, terms:{title:'حقوق الاستخدام',html:`<p>باستخدامك للخدمة، توافق على استخدامها للأغراض المشروعة فقط. يُمنع إساءة استخدام الـ API أو توليد محتوى ضار.</p><p>للتواصل: support@midoaistore.com</p>`}, refund:{title:'سياسة الاسترداد',html:`<p>هذا منتج رقمي مع وصول فوري.</p><h4>ضمان استرداد خلال 7 أيام</h4><p>يجب تقديم طلبات الاسترداد خلال <strong>7 أيام</strong> من تاريخ الشراء مع إثبات المشكلة.</p><p>للتواصل: support@midoaistore.com</p>`} }
 };
-// دمج باقي اللغات
 ['fr','de','ja','zh','es','pt'].forEach(function(l){ POLICY_T[l] = POLICY_T.en; });
+
+window.acceptCookies = function() { localStorage.setItem('mido_cookie_consent', 'true'); document.getElementById('cookieBanner').classList.remove('show'); };
+if (!localStorage.getItem('mido_cookie_consent')) { setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 2000); }
 
 document.querySelectorAll('.policy-link').forEach(function(link) {
   link.addEventListener('click', function(e) {
-    e.preventDefault();
-    var type = this.getAttribute('data-policy');
-    var p = POLICY_T[currentLang] || POLICY_T.en;
-    var item = p[type] || POLICY_T.en[type];
-    document.getElementById('policyTitle').textContent = item.title;
-    document.getElementById('policyContent').innerHTML = item.html;
-    document.getElementById('policyModal').classList.add('open');
+    e.preventDefault(); var type = this.getAttribute('data-policy'); var p = POLICY_T[currentLang] || POLICY_T.en; var item = p[type] || POLICY_T.en[type];
+    document.getElementById('policyTitle').textContent = item.title; document.getElementById('policyContent').innerHTML = item.html; document.getElementById('policyModal').classList.add('open');
   });
 });
 
-// 3. موافقة الكوكيز
-window.acceptCookies = function() {
-  localStorage.setItem('mido_cookie_consent', 'true');
-  document.getElementById('cookieBanner').classList.remove('show');
-};
-if (!localStorage.getItem('mido_cookie_consent')) {
-  setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 2000);
-}
-
-// 4. الترجمات الشاملة (بما فيها قوانين أسيموف)
 var T = {
-  en: { 
-    nav_buy:'Get Access — $6', pill:'⚡ Verified research • 5-40s', hero_title:'Get a fully structured <span class="g">research report</span>', hero_desc:'A 5-stage verified pipeline in 5-40s.', cta_try:'Try Free Demo', t1:'✓ 1 free trial', t2:'✓ 100 free/day', t3:'✓ API keys after purchase', st_visitors:'Visitors', st_searches:'Searches today', st_ok:'Successful', st_fail:'Failed', st_left:'Free left today', skills_title:'Research Skills', skills_sub:'Select a skill before searching.', demo_title:'Live Demo', demo_sub:'Real engine. Stages light up.', ph:'Best noise-cancelling headphones under $150', search_btn:'Search 🔍', meta1:'Free: 1 / visitor', meta2:'Daily cap: 100', s1:'Source Search', s1d:'Tavily live sources', s2:'Thesis Build', s2d:'Core argument', s3:'Reduce & Rank', s3d:'Strongest signals', s4:'Risk Check', s4d:'Local + global', s5:'Final Report', s5d:'5-40 seconds', 
-    laws_title:'Asimov Safety Laws', laws_sub:'These rules guide the engine so output stays useful, honest, and safe for real decisions.', laws_trust:'Why this matters: Mido is designed to reduce confident-but-wrong answers by forcing source checks.', law1_t:'Do not harm with false confidence', law1_s:'Never present guesses as proven facts.', law1_d:'If evidence is weak, the report must say so. The engine prefers ranked sources and scored evidence instead of fluent but unsupported claims.', law2_t:'Serve the research goal first', law2_s:'Optimize for decisions, not chat.', law2_d:'The output is structured for action: summary, comparison, and recommendation.', law3_t:'Protect system and user limits', law3_s:'Fair use and server-side trial protection.', law3_d:'Free usage is limited per visitor and per day on the server, not only in the browser.', law4_t:'Respect local market reality', law4_s:'Include local pricing context when possible.', law4_d:'For questions like product buying, the report connects international reviews with local price ranges.',
-    rings_title:'Five Protection Rings', rings_sub:'Tap any ring to read the full explanation.', ring1_t:'Ring 1 — Source Verification', ring1_s:'Collect and score live sources.', ring1_d:'Gathers multiple sources.', ring2_t:'Ring 2 — Thesis Construction', ring2_s:'Build a logical core argument.', ring2_d:'Forms a clear thesis.', ring3_t:'Ring 3 — Reduce & Rank', ring3_s:'Keep only the strongest evidence.', ring3_d:'Compresses to best sources.', ring4_t:'Ring 4 — Risk Check', ring4_s:'Validate market risks.', ring4_d:'Checks practical issues.', ring5_t:'Ring 5 — Confidence Calibration', ring5_s:'Generate the final report.', ring5_d:'Produces structured output.', footer:'© 2026 Mido AI Store • V10.4', footer2:'Live sources. Verify prices.', searching:'Searching...', prog_complete:'Completed', actual_time:'Time', prog_used:'sources', err_net:'Network issue.', err_trial:'Free trial used.', err_daily:'Daily limit reached.', copy_btn:'Copy', share_btn:'Share', download_btn:'Download', copied:'Copied!', download_ok:'Downloaded', share_ok:'Shared' 
-  },
-  ar: { 
-    nav_buy:'احصل على الأداة — $6', pill:'⚡ بحث موثق • 5-40 ثانية', hero_title:'احصل على <span class="g">تقرير بحث منظم</span>', hero_desc:'خط أنابيب موثق من 5 مراحل خلال 5-40 ثانية.', cta_try:'جرب البحث', t1:'✓ تجربة واحدة', t2:'✓ 100 بحث مجاني', t3:'✓ مفاتيح API', st_visitors:'الزوار', st_searches:'بحث اليوم', st_ok:'ناجح', st_fail:'فاشل', st_left:'متبقي اليوم', skills_title:'مهارات البحث', skills_sub:'اختر المهارة قبل البحث.', demo_title:'تجربة حية', demo_sub:'محرك حقيقي. المراحل تضيء.', ph:'أفضل سماعات إلغاء ضوضاء تحت 150 دولار', search_btn:'بحث 🔍', meta1:'مجاني: 1 / زائر', meta2:'الحد اليومي: 100', s1:'بحث المصادر', s1d:'مصادر Tavily', s2:'بناء الأطروحة', s2d:'الحجة الأساسية', s3:'تقليص وترتيب', s3d:'أقوى الإشارات', s4:'تقييم المخاطر', s4d:'محلي + عالمي', s5:'التقرير النهائي', s5d:'5-40 ثانية', 
-    laws_title:'قوانين أسيموف للسلامة', laws_sub:'قواعد توجّه المحرك ليبقى مفيدًا وصادقًا وآمنًا لقراراتك الحقيقية.', laws_trust:'لماذا هذا مهم؟ Mido مصمم لتقليل الإجابات الواثقة الخاطئة عبر إجبار التحقق من المصادر.', law1_t:'لا ضرر بالثقة الكاذبة', law1_s:'لا تُعرض التخمينات كحقائق مثبتة.', law1_d:'إذا كان الدليل ضعيفًا يجب أن يقول التقرير ذلك. المحرك يفضّل المصادر المرتبة والأدلة ذات الدرجة.', law2_t:'خدمة هدف البحث أولًا', law2_s:'تحسين القرار لا الدردشة.', law2_d:'المخرجات منظمة للتنفيذ: ملخص ومقارنة وتوصية.', law3_t:'حماية النظام وحدود الاستخدام', law3_s:'استخدام عادل وحماية تجربة من الخادم.', law3_d:'التجربة المجانية محدودة لكل زائر ولكل يوم على الخادم وليس المتصفح فقط.', law4_t:'احترام واقع السوق المحلي', law4_s:'إدراج سياق الأسعار المحلية عند الإمكان.', law4_d:'لأسئلة الشراء يحاول التقرير ربط المراجعات الدولية بنطاقات الأسعار المحلية.',
-    rings_title:'حلقات الحماية الخمس', rings_sub:'اضغط أي حلقة لقراءة الشرح.', ring1_t:'الحلقة 1 — التحقق', ring1_s:'جمع وتقييم مصادر.', ring1_d:'يجمع العنكبوت مصادر متعددة.', ring2_t:'الحلقة 2 — الأطروحة', ring2_s:'بناء حجة منطقية.', ring2_d:'يشكّل أطروحة واضحة.', ring3_t:'الحلقة 3 — التقليص', ring3_s:'الإبقاء على أقوى الأدلة.', ring3_d:'يضغط المحرك لأهم المصادر.', ring4_t:'الحلقة 4 — المخاطر', ring4_s:'التحقق من مخاطر السوق.', ring4_d:'يفحص واقعية السعر.', ring5_t:'الحلقة 5 — الثقة', ring5_s:'توليد التقرير النهائي.', ring5_d:'يُنتج المخرج المنظم.', footer:'© 2026 Mido AI Store • V10.4', footer2:'مصادر حية. تحقق من الأسعار.', searching:'جاري البحث...', prog_complete:'اكتمل البحث', actual_time:'الوقت', prog_used:'مصادر', err_net:'مشكلة شبكة.', err_trial:'التجربة مستخدمة.', err_daily:'تم استهلاك الحد.', copy_btn:'نسخ', share_btn:'مشاركة', download_btn:'تنزيل', copied:'تم النسخ!', download_ok:'تم التنزيل', share_ok:'تمت المشاركة' 
-  }
+  en: { nav_buy:'Get Access — $6', pill:'⚡ Verified research • 5-40s', hero_title:'Get a fully structured <span class="g">research report</span>', hero_desc:'A 5-stage verified pipeline in 5-40s.', cta_try:'Try Free Demo', t1:'✓ 1 free trial', t2:'✓ 100 free/day', t3:'✓ API keys after purchase', st_visitors:'Visitors', st_searches:'Searches today', st_ok:'Successful', st_fail:'Failed', st_left:'Free left today', skills_title:'Research Skills', skills_sub:'Select a skill before searching.', demo_title:'Live Demo', demo_sub:'Real engine. Stages light up.', ph:'Best noise-cancelling headphones under $150', search_btn:'Search 🔍', meta1:'Free: 1 / visitor', meta2:'Daily cap: 100', s1:'Source Search', s1d:'Tavily live sources', s2:'Thesis Build', s2d:'Core argument', s3:'Reduce & Rank', s3d:'Strongest signals', s4:'Risk Check', s4d:'Local + global', s5:'Final Report', s5d:'5-40 seconds', laws_title:'Asimov Safety Laws', laws_sub:'These rules guide the engine.', laws_trust:'Mido reduces confident-but-wrong answers.', law1_t:'Do not harm with false confidence', law1_s:'Never present guesses as facts.', law1_d:'If evidence is weak, the report must say so.', law2_t:'Serve the research goal first', law2_s:'Optimize for decisions.', law2_d:'Output is structured for action.', law3_t:'Protect system limits', law3_s:'Fair use and server-side protection.', law3_d:'Free usage is limited per visitor.', law4_t:'Respect local market', law4_s:'Include local pricing.', law4_d:'Connects reviews with local prices.', rings_title:'Five Protection Rings', rings_sub:'Tap any ring to read.', ring1_t:'Ring 1 — Source Verification', ring1_s:'Collect live sources.', ring1_d:'Gathers multiple sources.', ring2_t:'Ring 2 — Thesis Construction', ring2_s:'Build core argument.', ring2_d:'Forms a clear thesis.', ring3_t:'Ring 3 — Reduce & Rank', ring3_s:'Keep strongest evidence.', ring3_d:'Compresses to best sources.', ring4_t:'Ring 4 — Risk Check', ring4_s:'Validate risks.', ring4_d:'Checks practical issues.', ring5_t:'Ring 5 — Calibration', ring5_s:'Generate final report.', ring5_d:'Produces structured output.', footer:'© 2026 Mido AI Store • V10.5', footer2:'Live sources. Verify prices.', searching:'Searching...', prog_complete:'Completed', actual_time:'Time', prog_used:'sources', err_net:'Network issue.', err_trial:'Free trial used.', err_daily:'Daily limit reached.', copy_btn:'Copy', share_btn:'Share', download_btn:'Download', copied:'Copied!', download_ok:'Downloaded', share_ok:'Shared' },
+  ar: { nav_buy:'احصل على الأداة — $6', pill:'⚡ بحث موثق • 5-40 ثانية', hero_title:'احصل على <span class="g">تقرير بحث منظم</span>', hero_desc:'خط أنابيب موثق من 5 مراحل خلال 5-40 ثانية.', cta_try:'جرب البحث', t1:'✓ تجربة واحدة', t2:'✓ 100 بحث مجاني', t3:'✓ مفاتيح API', st_visitors:'الزوار', st_searches:'بحث اليوم', st_ok:'ناجح', st_fail:'فاشل', st_left:'متبقي اليوم', skills_title:'مهارات البحث', skills_sub:'اختر المهارة قبل البحث.', demo_title:'تجربة حية', demo_sub:'محرك حقيقي. المراحل تضيء.', ph:'أفضل سماعات إلغاء ضوضاء تحت 150 دولار', search_btn:'بحث 🔍', meta1:'مجاني: 1 / زائر', meta2:'الحد اليومي: 100', s1:'بحث المصادر', s1d:'مصادر Tavily', s2:'بناء الأطروحة', s2d:'الحجة الأساسية', s3:'تقليص وترتيب', s3d:'أقوى الإشارات', s4:'تقييم المخاطر', s4d:'محلي + عالمي', s5:'التقرير النهائي', s5d:'5-40 ثانية', laws_title:'قوانين أسيموف للسلامة', laws_sub:'قواعد توجّه المحرك ليبقى مفيدًا.', laws_trust:'Mido مصمم لتقليل الإجابات الخاطئة.', law1_t:'لا ضرر بالثقة الكاذبة', law1_s:'لا تُعرض التخمينات كحقائق.', law1_d:'إذا كان الدليل ضعيفًا يجب أن يقول التقرير ذلك.', law2_t:'خدمة هدف البحث أولًا', law2_s:'تحسين القرار لا الدردشة.', law2_d:'المخرجات منظمة للتنفيذ.', law3_t:'حماية النظام', law3_s:'استخدام عادل وحماية من الخادم.', law3_d:'التجربة محدودة لكل زائر على الخادم.', law4_t:'احترام السوق المحلي', law4_s:'إدراج سياق الأسعار المحلية.', law4_d:'ربط المراجعات الدولية بأسعار محلية.', rings_title:'حلقات الحماية الخمس', rings_sub:'اضغط أي حلقة لقراءة الشرح.', ring1_t:'الحلقة 1 — التحقق', ring1_s:'جمع وتقييم مصادر.', ring1_d:'يجمع العنكبوت مصادر متعددة.', ring2_t:'الحلقة 2 — الأطروحة', ring2_s:'بناء حجة منطقية.', ring2_d:'يشكّل أطروحة واضحة.', ring3_t:'الحلقة 3 — التقليص', ring3_s:'الإبقاء على أقوى الأدلة.', ring3_d:'يضغط المحرك لأهم المصادر.', ring4_t:'الحلقة 4 — المخاطر', ring4_s:'التحقق من مخاطر السوق.', ring4_d:'يفحص واقعية السعر.', ring5_t:'الحلقة 5 — الثقة', ring5_s:'توليد التقرير النهائي.', ring5_d:'يُنتج المخرج المنظم.', footer:'© 2026 Mido AI Store • V10.5', footer2:'مصادر حية. تحقق من الأسعار.', searching:'جاري البحث...', prog_complete:'اكتمل البحث', actual_time:'الوقت', prog_used:'مصادر', err_net:'مشكلة شبكة.', err_trial:'التجربة مستخدمة.', err_daily:'تم استهلاك الحد.', copy_btn:'نسخ', share_btn:'مشاركة', download_btn:'تنزيل', copied:'تم النسخ!', download_ok:'تم التنزيل', share_ok:'تمت المشاركة' },
+  fr: { nav_buy:'Accès — $6', pill:'⚡ Recherche vérifiée • 5-40s', hero_title:'Obtenez un <span class="g">rapport structuré</span>', hero_desc:'Un pipeline vérifié en 5 étapes en 5-40s.', cta_try:'Essai gratuit', t1:'✓ 1 essai gratuit', t2:'✓ 100 gratuits/jour', t3:'✓ Clés API après achat', st_visitors:'Visiteurs', st_searches:'Recherches', st_ok:'Réussies', st_fail:'Échouées', st_left:'Restantes', skills_title:'Compétences', skills_sub:'Choisissez un skill.', demo_title:'Démo en direct', demo_sub:'Moteur réel. Les étapes s\'allument.', ph:'Meilleurs casques ANC sous 150 $', search_btn:'Rechercher 🔍', meta1:'Gratuit: 1', meta2:'Plafond: 100', s1:'Recherche de sources', s1d:'Sources en direct', s2:'Construction de thèse', s2d:'Argument central', s3:'Réduire et classer', s3d:'Signaux forts', s4:'Contrôle des risques', s4d:'Local + global', s5:'Rapport final', s5d:'5-40 secondes', laws_title:'Lois de sécurité d\'Asimov', laws_sub:'Ces règles guident le moteur.', laws_trust:'Mido réduit les fausses réponses.', law1_t:'Ne pas nuire par fausse confiance', law1_s:'Ne pas présenter des suppositions comme des faits.', law1_d:'Si la preuve est faible, le rapport doit le dire.', law2_t:'Servir l\'objectif', law2_s:'Optimiser la décision.', law2_d:'Sortie structurée : résumé, comparaison et recommandation.', law3_t:'Protéger le système', law3_s:'Usage équitable et protection serveur.', law3_d:'Les limites s\'appliquent côté serveur.', law4_t:'Respecter le marché local', law4_s:'Inclure le contexte de prix local.', law4_d:'Le rapport relie avis internationaux et prix locaux.', rings_title:'Cinq anneaux de protection', rings_sub:'Touchez un anneau.', ring1_t:'Anneau 1 — Vérification', ring1_s:'Collecter des sources.', ring1_d:'Plusieurs sources avec scores.', ring2_t:'Anneau 2 — Thèse', ring2_s:'Construire l\'argument.', ring2_d:'Le système forme une thèse.', ring3_t:'Anneau 3 — Réduire', ring3_s:'Garder les meilleures preuves.', ring3_d:'Compression vers les sources utiles.', ring4_t:'Anneau 4 — Risques', ring4_s:'Valider les risques.', ring4_d:'Réalisme des prix et disponibilité.', ring5_t:'Anneau 5 — Confiance', ring5_s:'Générer le rapport final.', ring5_d:'Produit la recommandation finale.', footer:'© 2026 Mido AI Store • V10.5', footer2:'Sources en direct. Vérifiez les prix.', searching:'Recherche...', prog_complete:'Terminé', actual_time:'Temps', prog_used:'sources', err_net:'Erreur réseau.', err_trial:'Essai utilisé.', err_daily:'Limite atteinte.', copy_btn:'Copier', share_btn:'Partager', download_btn:'Télécharger', copied:'Copié!', download_ok:'Téléchargé', share_ok:'Partagé' },
+  de: { nav_buy:'Zugang — $6', pill:'⚡ Verifizierte Recherche • 5-40s', hero_title:'Erhalten Sie einen <span class="g">strukturierten Bericht</span>', hero_desc:'5-stufige verifizierte Pipeline in 5-40s.', cta_try:'Kostenlos testen', t1:'✓ 1 Test / Besucher', t2:'✓ 100 / Tag', t3:'✓ API-Keys nach Kauf', st_visitors:'Besucher', st_searches:'Suchen heute', st_ok:'Erfolgreich', st_fail:'Fehlgeschlagen', st_left:'Frei übrig', skills_title:'Recherche-Skills', skills_sub:'Skill vor der Suche wählen.', demo_title:'Live-Demo', demo_sub:'Echte Engine. Stufen leuchten auf.', ph:'Beste ANC-Kopfhörer unter 150 $', search_btn:'Suchen 🔍', meta1:'Gratis: 1', meta2:'Limit: 100', s1:'Quellensuche', s1d:'Live-Quellen', s2:'These', s2d:'Kernargument', s3:'Reduzieren', s3d:'Stärkste Signale', s4:'Risikocheck', s4d:'Lokal + global', s5:'Endbericht', s5d:'5-40 Sekunden', laws_title:'Asimov-Sicherheitsgesetze', laws_sub:'Regeln für nützliche Ausgabe.', laws_trust:'Mido reduziert falsche Antworten.', law1_t:'Kein Schaden', law1_s:'Vermutungen nicht als Fakten.', law1_d:'Bei schwacher Evidenz muss der Bericht das sagen.', law2_t:'Forschungsziel', law2_s:'Für Entscheidungen optimieren.', law2_d:'Strukturierte Ausgabe.', law3_t:'System schützen', law3_s:'Fair Use und serverseitiger Schutz.', law3_d:'Gratis-Limits gelten serverseitig.', law4_t:'Lokale Marktrealität', law4_s:'Lokalen Preiskontext einbeziehen.', law4_d:'Kauf-Fragen verbinden Reviews mit Preisen.', rings_title:'Fünf Schutzringe', rings_sub:'Ring antippen für Details.', ring1_t:'Ring 1 — Quellenprüfung', ring1_s:'Live-Quellen sammeln.', ring1_d:'Mehrere Live-Quellen mit Scores.', ring2_t:'Ring 2 — These', ring2_s:'Logisches Kernargument.', ring2_d:'Klare These zu Optionen.', ring3_t:'Ring 3 — Reduzieren', ring3_s:'Nur stärkste Evidenz behalten.', ring3_d:'Komprimierung auf nützlichste Quellen.', ring4_t:'Ring 4 — Risikocheck', ring4_s:'Markt-Risiken prüfen.', ring4_d:'Preisrealismus und Verfügbarkeit.', ring5_t:'Ring 5 — Konfidenz', ring5_s:'Finalen Bericht erzeugen.', ring5_d:'Kurzfassung und Empfehlung.', footer:'© 2026 Mido AI Store • V10.5', footer2:'Live-Quellen. Preise prüfen.', searching:'Suche...', prog_complete:'Abgeschlossen', actual_time:'Zeit', prog_used:'Quellen', err_net:'Netzwerkproblem.', err_trial:'Test genutzt.', err_daily:'Tageslimit erreicht.', copy_btn:'Kopieren', share_btn:'Teilen', download_btn:'Herunterladen', copied:'Kopiert!', download_ok:'Heruntergeladen', share_ok:'Geteilt' },
+  ja: { nav_buy:'アクセス — $6', pill:'⚡ 検証済み調査 • 5-40秒', hero_title:'完全な<span class="g">構造化レポート</span>を取得', hero_desc:'5段階の検証パイプラインを5-40秒で提供。', cta_try:'無料で試す', t1:'✓ 訪問者1回無料', t2:'✓ 1日100回無料', t3:'✓ 購入後APIキー', st_visitors:'訪問者', st_searches:'本日の検索', st_ok:'成功', st_fail:'失敗', st_left:'残り無料', skills_title:'リサーチスキル', skills_sub:'検索前にスキルを選択。', demo_title:'ライブデモ', demo_sub:'実エンジン。ステージが点灯。', ph:'150ドル以下のベストANC', search_btn:'検索 🔍', meta1:'無料：訪問者1回', meta2:'1日上限：100', s1:'ソース検索', s1d:'Tavilyライブ', s2:'論旨構築', s2d:'核心', s3:'削減', s3d:'最強シグナル', s4:'リスク', s4d:'現地＋国際', s5:'最終レポート', s5d:'5-40秒', laws_title:'アシモフの安全法則', laws_sub:'有用・誠実な出力のためのルール。', laws_trust:'Midoは誤回答を減らす設計。', law1_t:'偽の自信で害を与えない', law1_s:'推測を事実としない。', law1_d:'証拠が弱い場合は明記。', law2_t:'調査目的優先', law2_s:'意思決定向けに最適化。', law2_d:'要約・比較・推奨の構造。', law3_t:'システム保護', law3_s:'公平利用とサーバー保護。', law3_d:'サーバー側で制限。', law4_t:'現地市場尊重', law4_s:'現地価格を含める。', law4_d:'国際レビューと現地価格を結ぶ。', rings_title:'5つの保護リング', rings_sub:'リングをタップして詳細。', ring1_t:'リング1 — ソース検証', ring1_s:'ライブソース収集。', ring1_d:'複数ソースにスコア付与。', ring2_t:'リング2 — 論旨', ring2_s:'論理的な核心。', ring2_d:'明確な論旨を形成。', ring3_t:'リング3 — 削減', ring3_s:'最強の証拠のみ。', ring3_d:'有用ソースに圧縮。', ring4_t:'リング4 — リスク', ring4_s:'市場リスク検証。', ring4_d:'価格の現実性確認。', ring5_t:'リング5 — 信頼度', ring5_s:'最終レポート生成。', ring5_d:'完了後に構造化出力。', footer:'© 2026 Mido AI Store • V10.5', footer2:'ライブソース。価格確認。', searching:'検索中...', prog_complete:'完了', actual_time:'時間', prog_used:'ソース', err_net:'ネットワーク問題。', err_trial:'無料使用済み。', err_daily:'上限到達。', copy_btn:'コピー', share_btn:'共有', download_btn:'ダウンロード', copied:'コピーしました!', download_ok:'ダウンロード完了', share_ok:'共有しました' },
+  zh: { nav_buy:'获取访问 — $6', pill:'⚡ 已验证研究 • 5-40秒', hero_title:'获取完整的<span class="g">结构化报告</span>', hero_desc:'五阶段验证流程，约5-40秒完成。', cta_try:'免费试用', t1:'✓ 每位访客1次免费', t2:'✓ 每天100次免费', t3:'✓ 购买后提供API密钥', st_visitors:'访客', st_searches:'今日搜索', st_ok:'成功', st_fail:'失败', st_left:'今日剩余', skills_title:'研究技能', skills_sub:'搜索前选择技能。', demo_title:'在线演示', demo_sub:'真实引擎。阶段会点亮。', ph:'150美元以下最佳降噪耳机', search_btn:'搜索 🔍', meta1:'免费：每位访客1次', meta2:'每日上限：100', s1:'来源搜索', s1d:'Tavily实时来源', s2:'论点构建', s2d:'核心论证', s3:'筛选排序', s3d:'最强信号', s4:'风险检查', s4d:'本地+国际', s5:'最终报告', s5d:'5-40秒', laws_title:'阿西莫夫安全法则', laws_sub:'这些规则引导引擎。', laws_trust:'Mido减少错误回答。', law1_t:'不以虚假信心造成伤害', law1_s:'不要把猜测说成事实。', law1_d:'如果证据不足，报告必须说明。', law2_t:'优先服务研究目标', law2_s:'为决策优化。', law2_d:'输出结构化：摘要、对比、推荐。', law3_t:'保护系统', law3_s:'公平使用与服务端保护。', law3_d:'免费额度在服务器侧限制。', law4_t:'尊重本地市场', law4_s:'尽可能纳入本地价格。', law4_d:'连接国际评测与本地价格。', rings_title:'五层保护环', rings_sub:'点击任意环查看说明。', ring1_t:'第1环 — 来源验证', ring1_s:'收集并评分来源。', ring1_d:'多个来源附加相关度分数。', ring2_t:'第2环 — 论点构建', ring2_s:'构建核心论点。', ring2_d:'形成清晰论点。', ring3_t:'第3环 — 筛选排序', ring3_s:'只保留最强证据。', ring3_d:'压缩到最有用来源。', ring4_t:'第4环 — 风险检查', ring4_s:'验证风险。', ring4_d:'检查价格与可获得性。', ring5_t:'第5环 — 置信校准', ring5_s:'生成最终报告。', ring5_d:'输出结构化结果。', footer:'© 2026 Mido AI Store • V10.5', footer2:'实时来源。请核实价格。', searching:'搜索中...', prog_complete:'完成', actual_time:'时间', prog_used:'来源', err_net:'网络问题。', err_trial:'试用已使用。', err_daily:'已达每日上限。', copy_btn:'复制', share_btn:'分享', download_btn:'下载', copied:'已复制!', download_ok:'已下载', share_ok:'已分享' },
+  es: { nav_buy:'Acceso — $6', pill:'⚡ Investigación verificada • 5-40s', hero_title:'Obtén un <span class="g">informe estructurado</span>', hero_desc:'Pipeline verificado de 5 etapas en 5-40s.', cta_try:'Prueba gratis', t1:'✓ 1 prueba / visitante', t2:'✓ 100 gratis / día', t3:'✓ Claves API tras la compra', st_visitors:'Visitantes', st_searches:'Búsquedas hoy', st_ok:'Exitosas', st_fail:'Fallidas', st_left:'Gratis restantes', skills_title:'Skills', skills_sub:'Elige un skill antes de buscar.', demo_title:'Demo en vivo', demo_sub:'Motor real. Etapas iluminadas.', ph:'Mejores auriculares ANC por menos de $150', search_btn:'Buscar 🔍', meta1:'Gratis: 1 / visitante', meta2:'Tope diario: 100', s1:'Búsqueda de fuentes', s1d:'Fuentes live', s2:'Construcción de tesis', s2d:'Argumento central', s3:'Reducir y ordenar', s3d:'Señales fuertes', s4:'Control de riesgos', s4d:'Local + global', s5:'Informe final', s5d:'5-40 segundos', laws_title:'Leyes de seguridad de Asimov', laws_sub:'Reglas para una salida útil y honesta.', laws_trust:'Mido reduce respuestas erróneas.', law1_t:'No dañar con falsa confianza', law1_s:'No presentar conjeturas como hechos.', law1_d:'Si la evidencia es débil, el informe debe decirlo.', law2_t:'Servir el objetivo', law2_s:'Optimizar la decisión.', law2_d:'Salida estructurada: resumen, comparación, recomendación.', law3_t:'Proteger el sistema', law3_s:'Uso justo y protección en servidor.', law3_d:'Los límites se aplican en el servidor.', law4_t:'Respetar el mercado local', law4_s:'Incluir contexto de precios locales.', law4_d:'Conecta reseñas con precios locales.', rings_title:'Cinco anillos de protección', rings_sub:'Toca un anillo para leer el detalle.', ring1_t:'Anillo 1 — Verificación', ring1_s:'Recoger fuentes live.', ring1_d:'Varias fuentes con puntuación.', ring2_t:'Anillo 2 — Tesis', ring2_s:'Construir el argumento.', ring2_d:'Tesis clara sobre opciones.', ring3_t:'Anillo 3 — Reducir', ring3_s:'Solo la evidencia más fuerte.', ring3_d:'Compresión a fuentes útiles.', ring4_t:'Anillo 4 — Riesgos', ring4_s:'Validar riesgos de mercado.', ring4_d:'Realismo de precios y disponibilidad.', ring5_t:'Anillo 5 — Confianza', ring5_s:'Generar el informe final.', ring5_d:'Resumen y recomendación final.', footer:'© 2026 Mido AI Store • V10.5', footer2:'Fuentes en vivo. Verifica precios.', searching:'Buscando...', prog_complete:'Completado', actual_time:'Tiempo', prog_used:'fuentes', err_net:'Problema de red.', err_trial:'Prueba usada.', err_daily:'Límite alcanzado.', copy_btn:'Copiar', share_btn:'Compartir', download_btn:'Descargar', copied:'¡Copiado!', download_ok:'Descargado', share_ok:'Compartido' },
+  pt: { nav_buy:'Acesso — $6', pill:'⚡ Pesquisa verificada • 5-40s', hero_title:'Obtenha um <span class="g">relatório estruturado</span>', hero_desc:'Pipeline verificado de 5 etapas em 5-40s.', cta_try:'Teste grátis', t1:'✓ 1 teste / visitante', t2:'✓ 100 grátis / dia', t3:'✓ Chaves API após compra', st_visitors:'Visitantes', st_searches:'Pesquisas hoje', st_ok:'Sucesso', st_fail:'Falhas', st_left:'Grátis restantes', skills_title:'Skills', skills_sub:'Escolha um skill antes de pesquisar.', demo_title:'Demo ao vivo', demo_sub:'Motor real. Etapas acesas.', ph:'Melhores fones ANC por menos de $150', search_btn:'Pesquisar 🔍', meta1:'Grátis: 1 / visitante', meta2:'Limite diário: 100', s1:'Busca de fontes', s1d:'Fontes live', s2:'Construção da tese', s2d:'Argumento central', s3:'Reduzir e rankear', s3d:'Sinais fortes', s4:'Checagem de risco', s4d:'Local + global', s5:'Relatório final', s5d:'5-40 segundos', laws_title:'Leis de segurança de Asimov', laws_sub:'Regras para saída útil e honesta.', laws_trust:'Mido reduz respostas erradas.', law1_t:'Não causar dano', law1_s:'Não apresentar palpites como fatos.', law1_d:'Se a evidência for fraca, o relatório deve dizer.', law2_t:'Servir o objetivo', law2_s:'Otimizar a decisão.', law2_d:'Saída estruturada: resumo, comparação, recomendação.', law3_t:'Proteger o sistema', law3_s:'Uso justo e proteção no servidor.', law3_d:'Limites aplicados no servidor.', law4_t:'Respeitar o mercado local', law4_s:'Incluir contexto de preços locais.', law4_d:'Conecta reviews com preços locais.', rings_title:'Cinco anéis de proteção', rings_sub:'Toque em um anel para ler o detalhe.', ring1_t:'Anel 1 — Verificação', ring1_s:'Coletar fontes live.', ring1_d:'Várias fontes com scores.', ring2_t:'Anel 2 — Tese', ring2_s:'Montar o argumento.', ring2_d:'Tese clara sobre opções.', ring3_t:'Anel 3 — Reduzir', ring3_s:'Só a evidência mais forte.', ring3_d:'Compressão para fontes úteis.', ring4_t:'Anel 4 — Riscos', ring4_s:'Validar riscos de mercado.', ring4_d:'Realismo de preço e disponibilidade.', ring5_t:'Anel 5 — Confiança', ring5_s:'Gerar o relatório final.', ring5_d:'Resumo e recomendação final.', footer:'© 2026 Mido AI Store • V10.5', footer2:'Fontes ao vivo. Verifique preços.', searching:'Pesquisando...', prog_complete:'Concluído', actual_time:'Tempo', prog_used:'fontes', err_net:'Erro de rede.', err_trial:'Teste usado.', err_daily:'Limite atingido.', copy_btn:'Copiar', share_btn:'Compartilhar', download_btn:'Baixar', copied:'Copiado!', download_ok:'Baixado', share_ok:'Compartilhado' }
 };
-// دمج باقي اللغات (نسخة تجريبية سريعة للـ Fallback)
-T.fr = T.en; T.de = T.en; T.ja = T.en; T.zh = T.en; T.es = T.en; T.pt = T.en;
 
-function D(){return T[currentLang]||T.en;}
-var SKILL_NAMES={ en:['Deep Search','Summarize','Compare','Recommend','Price Check','Save Report','Fact Check','Pros & Cons','Buying Guide','Local Price Check','Source Audit','Risk Check','Extract Facts','Outline','Decision Matrix'], ar:['بحث عميق','تلخيص','مقارنة','توصية','فحص السعر','حفظ التقرير','تدقيق الحقائق','الإيجابيات والسلبيات','دليل الشراء','فحص السعر المحلي','تدقيق المصادر','فحص المخاطر','استخراج الحقائق','إنشاء مخطط','مصفوفة القرار'] };
+var SKILL_NAMES={ 
+  en:['Deep Search','Summarize','Compare','Recommend','Price Check','Save Report','Fact Check','Pros & Cons','Buying Guide','Local Price Check','Source Audit','Risk Check','Extract Facts','Outline','Decision Matrix'], 
+  ar:['بحث عميق','تلخيص','مقارنة','توصية','فحص السعر','حفظ التقرير','تدقيق الحقائق','الإيجابيات والسلبيات','دليل الشراء','فحص السعر المحلي','تدقيق المصادر','فحص المخاطر','استخراج الحقائق','إنشاء مخطط','مصفوفة القرار'],
+  fr:['Recherche','Résumé','Comparer','Recommander','Prix','Enregistrer','Faits','Pour/Contre','Guide','Prix Local','Audit','Risques','Extraire','Plan','Matrice'],
+  de:['Tiefensuche','Zusammenfassen','Vergleichen','Empfehlen','Preis','Speichern','Fakten','Vor/Nachteile','Kaufratgeber','Lokaler Preis','Audit','Risiken','Extrahieren','Gliederung','Matrix'],
+  ja:['サーチ','要約','比較','推奨','価格','保存','事実','長所短所','ガイド','現地価格','監査','リスク','抽出','概要','マトリクス'],
+  zh:['深度搜索','摘要','对比','推荐','价格','保存','事实','优缺点','指南','本地价格','审计','风险','提取','大纲','矩阵'],
+  es:['Búsqueda','Resumir','Comparar','Recomendar','Precio','Guardar','Hechos','Pros/Contras','Guía','Precio Local','Auditar','Riesgos','Extraer','Esquema','Matriz'],
+  pt:['Busca','Resumir','Comparar','Recomendar','Preço','Salvar','Fatos','Prós/Contras','Guia','Preço Local','Auditar','Riscos','Extrair','Esquema','Matriz'] 
+};
 var SKILL_IDS=['deep_search','summarize','compare','recommend','price_check','save','fact_check','pros_cons','buying_guide','local_price_check','source_audit','risk_check','extract_facts','outline','decision_matrix'];
 
-// 5. محرك المارك داون
+function D(){return T[currentLang]||T.en;}
 function escapeHtml(str) { return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 function inlineMd(text) { let s = escapeHtml(text); s = s.replace(/`([^`]+)`/g, "<code>$1</code>"); s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>"); s = s.replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>"); return s; }
 function isTableRow(line) { const t = line.trim(); return t.startsWith("|") && t.endsWith("|") && (t.match(/\|/g) || []).length >= 2; }
@@ -372,11 +346,7 @@ function renderTable(headers, aligns, rows) {
   let html = "<table><thead><tr>";
   for (let i = 0; i < headers.length; i++) html += `<th style="text-align:${aligns[i]||'left'}">${inlineMd(headers[i])}</th>`;
   html += "</tr></thead><tbody>";
-  for (const row of rows) {
-    html += "<tr>";
-    for (let i = 0; i < headers.length; i++) html += `<td style="text-align:${aligns[i]||'left'}">${inlineMd(row[i] || "")}</td>`;
-    html += "</tr>";
-  }
+  for (const row of rows) { html += "<tr>"; for (let i = 0; i < headers.length; i++) html += `<td style="text-align:${aligns[i]||'left'}">${inlineMd(row[i] || "")}</td>`; html += "</tr>"; }
   return html + "</tbody></table>";
 }
 function parseMarkdown(md) {
@@ -412,26 +382,18 @@ function parseMarkdown(md) {
   closeLists(); return out.join("\n");
 }
 
-// 6. وظائف الواجهة
 function renderLaws(){
-  var d=D();
-  var items=[['01',d.law1_t,d.law1_s,d.law1_d],['02',d.law2_t,d.law2_s,d.law2_d],['03',d.law3_t,d.law3_s,d.law3_d],['04',d.law4_t,d.law4_s,d.law4_d]];
-  document.getElementById('lawsList').innerHTML=items.map(function(it,i){
-    return '<div class="xcard" data-xcard="law'+i+'"><div class="top"><span class="num">LAW '+it[0]+'</span><span class="chev">▼</span></div><h3>'+it[1]+'</h3><div class="short">'+it[2]+'</div><div class="detail">'+it[3]+'</div></div>';
-  }).join('');
+  var d=D(); var items=[['01',d.law1_t,d.law1_s,d.law1_d],['02',d.law2_t,d.law2_s,d.law2_d],['03',d.law3_t,d.law3_s,d.law3_d],['04',d.law4_t,d.law4_s,d.law4_d]];
+  document.getElementById('lawsList').innerHTML=items.map(function(it,i){ return '<div class="xcard" data-xcard="law'+i+'"><div class="top"><span class="num">LAW '+it[0]+'</span><span class="chev">▼</span></div><h3>'+it[1]+'</h3><div class="short">'+it[2]+'</div><div class="detail">'+it[3]+'</div></div>'; }).join('');
 }
 function renderRings(){
   var d=D(); var colors=['#ef4444','#7c5cff','#10b981','#f59e0b','#8b5cf6'];
   var items=[[d.ring1_t,d.ring1_s,d.ring1_d],[d.ring2_t,d.ring2_s,d.ring2_d],[d.ring3_t,d.ring3_s,d.ring3_d],[d.ring4_t,d.ring4_s,d.ring4_d],[d.ring5_t,d.ring5_s,d.ring5_d]];
-  document.getElementById('ringsList').innerHTML=items.map(function(it,i){
-    return '<div class="xcard ring-card" data-ring="'+i+'" data-xcard="ring'+i+'"><div class="top"><span class="num" style="color:'+colors[i]+'">RING 0'+(i+1)+'</span><span class="chev">▼</span></div><h3>'+it[0]+'</h3><div class="short">'+it[1]+'</div><div class="detail">'+it[2]+'</div></div>';
-  }).join('');
+  document.getElementById('ringsList').innerHTML=items.map(function(it,i){ return '<div class="xcard ring-card" data-ring="'+i+'" data-xcard="ring'+i+'"><div class="top"><span class="num" style="color:'+colors[i]+'">RING 0'+(i+1)+'</span><span class="chev">▼</span></div><h3>'+it[0]+'</h3><div class="short">'+it[1]+'</div><div class="detail">'+it[2]+'</div></div>'; }).join('');
 }
 function renderSkills(){
   var names=SKILL_NAMES[currentLang]||SKILL_NAMES.en;
-  document.getElementById('skills').innerHTML=SKILL_IDS.map(function(id,i){
-    return '<button type="button" class="skill'+(id===skill?' on':'')+'" data-skill="'+id+'">'+esc(names[i]||SKILL_NAMES.en[i])+'</button>';
-  }).join('');
+  document.getElementById('skills').innerHTML=SKILL_IDS.map(function(id,i){ return '<button type="button" class="skill'+(id===skill?' on':'')+'" data-skill="'+id+'">'+esc(names[i]||SKILL_NAMES.en[i])+'</button>'; }).join('');
 }
 function applyLang(lang){
   if(!T[lang]) lang='en'; currentLang=lang; try{localStorage.setItem('mido_lang',lang);}catch(e){}
@@ -451,38 +413,15 @@ document.addEventListener('click',function(e){if(!langMenu.contains(e.target)&&!
 langMenu.addEventListener('click',function(e){
   e.stopPropagation(); var opt=e.target.closest('.lang-option'); if(!opt)return;
   document.getElementById('flag').textContent=opt.getAttribute('data-f'); document.getElementById('langName').textContent=opt.getAttribute('data-n');
-  langMenu.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');}); opt.classList.add('active'); 
-  langMenu.classList.remove('open');
-  applyLang(opt.getAttribute('data-l')); 
+  langMenu.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');}); opt.classList.add('active'); langMenu.classList.remove('open'); applyLang(opt.getAttribute('data-l')); 
 });
 try{var saved=localStorage.getItem('mido_lang')||'en';var m=document.querySelector('.lang-option[data-l="'+saved+'"]');if(m){document.getElementById('flag').textContent=m.getAttribute('data-f');document.getElementById('langName').textContent=m.getAttribute('data-n');document.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');});m.classList.add('active');}applyLang(saved);}catch(e){applyLang('en');}
 
-document.addEventListener('click',function(e){
-  var card=e.target.closest('.xcard[data-xcard]');
-  if(card){
-    var was=card.classList.contains('open');
-    card.parentElement.querySelectorAll('.xcard').forEach(function(c){c.classList.remove('open','glow-on');});
-    if(!was){card.classList.add('open');}
-  }
-});
-document.getElementById('skills').addEventListener('click',function(e){
-  var b=e.target.closest('.skill'); if(!b)return;
-  document.querySelectorAll('.skill').forEach(function(x){x.classList.remove('on','glow-on');});
-  b.classList.add('on'); skill=b.getAttribute('data-skill')||'deep_search';
-});
+document.addEventListener('click',function(e){ var card=e.target.closest('.xcard[data-xcard]'); if(card){ var was=card.classList.contains('open'); card.parentElement.querySelectorAll('.xcard').forEach(function(c){c.classList.remove('open','glow-on');}); if(!was){card.classList.add('open');} } });
+document.getElementById('skills').addEventListener('click',function(e){ var b=e.target.closest('.skill'); if(!b)return; document.querySelectorAll('.skill').forEach(function(x){x.classList.remove('on','glow-on');}); b.classList.add('on'); skill=b.getAttribute('data-skill')||'deep_search'; });
 
-// زر اللصق (Paste)
-document.getElementById('pasteBtn').addEventListener('click', async function() {
-  try {
-    var text = await navigator.clipboard.readText();
-    document.getElementById('q').value = text;
-    toast('Pasted!');
-  } catch (err) {
-    toast('Paste failed. Please use Ctrl+V.');
-  }
-});
+document.getElementById('pasteBtn').addEventListener('click', async function() { try { var text = await navigator.clipboard.readText(); document.getElementById('q').value = text; } catch (err) {} });
 
-// 7. جلب الإحصائيات
 function vid(){try{var id=localStorage.getItem('mido_vid');if(!id){id='v_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('mido_vid',id);}return id;}catch(e){return 'v_'+Date.now();}}
 var VISITOR_ID=vid();
 
@@ -490,121 +429,65 @@ async function fetchStats(){
   try{
     var r=await fetch(WORKER_URL+'/stats',{cache:'no-store'}); if(!r.ok)return;
     var d=await r.json();
-    document.getElementById('stVisitors').textContent=d.total_visitors||0;
-    document.getElementById('stSearches').textContent=d.today_searches||0;
-    document.getElementById('stOk').textContent=d.successful_trials||0;
-    document.getElementById('stFail').textContent=d.failed_trials||0;
-    document.getElementById('stLeft').textContent=d.remaining_today!=null?d.remaining_today:'—';
+    document.getElementById('stVisitors').textContent=d.total_visitors||0; document.getElementById('stSearches').textContent=d.today_searches||0; document.getElementById('stOk').textContent=d.successful_trials||0; document.getElementById('stFail').textContent=d.failed_trials||0; document.getElementById('stLeft').textContent=d.remaining_today!=null?d.remaining_today:'—';
   }catch(e){}
 }
 fetchStats(); setInterval(fetchStats,30000);
 try{fetch(WORKER_URL+'/visit',{method:'POST',headers:{'Content-Type':'text/plain'},body:VISITOR_ID,cache:'no-store'}).catch(function(){});}catch(e){}
 
 function setStagesFromLogs(logs){
-  var maxStage = 0;
-  (logs||[]).forEach(function(l){ if(l.status==='done' || l.status==='complete') maxStage = Math.max(maxStage, l.stage||0); });
-  document.querySelectorAll('#stages .stage').forEach(function(el,i){
-    el.classList.toggle('on', i < maxStage || maxStage === 5); 
-  });
+  var maxStage = 0; (logs||[]).forEach(function(l){ if(l.status==='done' || l.status==='complete') maxStage = Math.max(maxStage, l.stage||0); });
+  document.querySelectorAll('#stages .stage').forEach(function(el,i){ el.classList.toggle('on', i < maxStage || maxStage === 5); });
 }
 
-// 8. محرك البحث
 var go=document.getElementById('go'), q=document.getElementById('q'), res=document.getElementById('res');
 async function doSearch(){
   var text=(q.value||'').trim(); if(!text||searching)return;
   searching=true; go.classList.add('loading','glow'); go.innerHTML='<span class="spin"></span> '+D().searching;
   var startTime=Date.now();
   res.innerHTML='<div class="progress-container"><div class="progress-label"><span>'+D().searching+'</span><span id="pct">0s</span></div><div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar" style="width:10%"></div></div><div class="progress-timer" id="timerInfo">...</div></div>';
-  
-  var timerInterval=setInterval(function(){
-    var elapsed=Math.floor((Date.now()-startTime)/1000);
-    var pb=document.getElementById('progBar'), pe=document.getElementById('pct');
-    if(pb && parseFloat(pb.style.width) < 85) pb.style.width = (parseFloat(pb.style.width) + 2) + '%';
-    if(pe) pe.textContent = elapsed + 's';
-    var ti=document.getElementById('timerInfo'); if(ti) ti.innerHTML='Elapsed: '+elapsed+'s...';
-  },500);
-
+  var timerInterval=setInterval(function(){ var elapsed=Math.floor((Date.now()-startTime)/1000); var pb=document.getElementById('progBar'), pe=document.getElementById('pct'); if(pb && parseFloat(pb.style.width) < 85) pb.style.width = (parseFloat(pb.style.width) + 2) + '%'; if(pe) pe.textContent = elapsed + 's'; var ti=document.getElementById('timerInfo'); if(ti) ti.innerHTML='Elapsed: '+elapsed+'s...'; },500);
   var outcome;
   try{
     var ctrl=new AbortController(); var to=setTimeout(function(){ctrl.abort();},60000);
-    var headers={'Content-Type':'application/json'};
-    if(adminKey) headers['X-Admin-Key']=adminKey;
+    var headers={'Content-Type':'application/json'}; if(adminKey) headers['X-Admin-Key']=adminKey;
     var reqBody={query:text, visitor_id:VISITOR_ID, skill:skill==='save'?'deep_search':skill, country:document.getElementById('countrySel').value, lang:currentLang};
-    var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify(reqBody),signal:ctrl.signal});
-    clearTimeout(to);
-    
+    var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify(reqBody),signal:ctrl.signal}); clearTimeout(to);
     if(r.status===429){var j={};try{j=await r.json();}catch(e){} throw new Error('trial_used');}
     if(!r.ok) throw new Error('http');
-    
-    var data=await r.json();
-    if(!data.ok && !data.success && data.reason) throw new Error(data.reason);
+    var data=await r.json(); if(!data.ok && !data.success && data.reason) throw new Error(data.reason);
     outcome={ok:true, answer:String(data.answer||data.deep_answer||''), sources:Array.isArray(data.sources)?data.sources:[], logs:Array.isArray(data.logs)?data.logs:[]};
   }catch(err){clearInterval(timerInterval);outcome={ok:false,msg:String(err&&err.message||err)};}
-  
   if(outcome.ok){
-    clearInterval(timerInterval);
-    var totalTime=Math.floor((Date.now()-startTime)/1000);
-    setStagesFromLogs(outcome.logs); 
-    document.querySelectorAll('.ring-card').forEach(function(c){c.classList.add('glow-on');});
-    
-    lastReportText=outcome.answer;
-    var formattedAns = parseMarkdown(outcome.answer);
-    
-    var src='';
-    if(outcome.sources&&outcome.sources.length){
-      src='<div class="srcs"><h4 style="font-size:14px;margin-bottom:8px;color:var(--muted)">'+outcome.sources.length+' Sources Verified</h4>'+outcome.sources.slice(0,10).map(function(s){return '<a class="src" href="'+s.url+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'Source')+'</h5><p>'+esc(String(s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
-    }
-    
-    var actions = '<div class="action-btns">'+
-      '<button class="action-btn" id="btnCopy">📋 '+D().copy_btn+'</button>'+
-      '<button class="action-btn" id="btnShare">🔗 '+D().share_btn+'</button>'+
-      '<button class="action-btn" id="btnDownload">💾 '+D().download_btn+'</button>'+
-      '</div>';
-
+    clearInterval(timerInterval); var totalTime=Math.floor((Date.now()-startTime)/1000); setStagesFromLogs(outcome.logs); 
+    document.querySelectorAll('.ring-card').forEach(function(c){c.classList.add('glow-on');}); lastReportText=outcome.answer; var formattedAns = parseMarkdown(outcome.answer);
+    var src=''; if(outcome.sources&&outcome.sources.length){ src='<div class="srcs"><h4 style="font-size:14px;margin-bottom:8px;color:var(--muted)">'+outcome.sources.length+' Sources Verified</h4>'+outcome.sources.slice(0,10).map(function(s){return '<a class="src" href="'+s.url+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'Source')+'</h5><p>'+esc(String(s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>'; }
+    var actions = '<div class="action-btns"><button class="action-btn" id="btnCopy">📋 '+D().copy_btn+'</button><button class="action-btn" id="btnShare">🔗 '+D().share_btn+'</button><button class="action-btn" id="btnDownload">💾 '+D().download_btn+'</button></div>';
     res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="ans">'+formattedAns+'</div>'+actions+src;
-    
     document.getElementById('btnCopy').onclick = function() { navigator.clipboard.writeText(outcome.answer).then(function(){ toast(D().copied); }); };
     document.getElementById('btnDownload').onclick = function() { var blob = new Blob([outcome.answer], {type: 'text/markdown'}); var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Mido_Report.md'; a.click(); toast(D().download_ok); };
     document.getElementById('btnShare').onclick = function() { if (navigator.share) { navigator.share({ title: 'Mido Deep Search', text: outcome.answer }).then(function(){ toast(D().share_ok); }); } else { navigator.clipboard.writeText(outcome.answer); toast(D().copied); } };
-
-    if(typeof fbq === 'function') fbq('track', 'Lead');
-    fetchStats();
+    if(typeof fbq === 'function') fbq('track', 'Lead'); fetchStats();
   }else{
-    var em=D().err_net;
-    if(outcome.msg==='trial_used'||String(outcome.msg).indexOf('trial')>-1)em=D().err_trial;
-    if(outcome.msg==='daily_cap')em=D().err_daily;
+    var em=D().err_net; if(outcome.msg==='trial_used'||String(outcome.msg).indexOf('trial')>-1)em=D().err_trial; if(outcome.msg==='daily_cap')em=D().err_daily;
     res.innerHTML='<div class="err"><b>'+esc(em)+'</b><br><br><a class="btn btn-w" href="'+BUY_URL+'" target="_blank" rel="noopener">'+D().nav_buy+'</a></div>';
   }
   searching=false; go.classList.remove('loading','glow'); go.textContent=D().search_btn;
 }
-go.addEventListener('click',function(){doSearch();});
-q.addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+go.addEventListener('click',function(){doSearch();}); q.addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
 
-// 9. إدارة مفتاح الأدمن
-var adminBtnEl = document.getElementById('adminBtn');
-if(adminKey) adminBtnEl.classList.add('active');
-adminBtnEl.addEventListener('click', function() {
-    var newKey = prompt("Admin Key (Leave empty to remove):", adminKey);
-    if (newKey === null) return; 
-    if (newKey.trim() === '') { 
-      adminKey=''; localStorage.removeItem('mido_admin_key'); adminBtnEl.classList.remove('active'); toast("Admin key removed."); 
-    } else { 
-      adminKey=newKey.trim(); localStorage.setItem('mido_admin_key', adminKey); adminBtnEl.classList.add('active'); toast("Admin key active."); 
-    }
-});
+var adminBtnEl = document.getElementById('adminBtn'); if(adminKey) adminBtnEl.classList.add('active');
+adminBtnEl.addEventListener('click', function() { var newKey = prompt("Admin Key (Leave empty to remove):", adminKey); if (newKey === null) return; if (newKey.trim() === '') { adminKey=''; localStorage.removeItem('mido_admin_key'); adminBtnEl.classList.remove('active'); toast("Admin key removed."); } else { adminKey=newKey.trim(); localStorage.setItem('mido_admin_key', adminKey); adminBtnEl.classList.add('active'); toast("Admin key active."); } });
 
-// 10. حركة العنكبوت الديناميكية القديمة (مفاصل وأصوات)
 (function(){
   var canvas=document.getElementById('spider');if(!canvas)return;
   var ctx=canvas.getContext('2d');if(!ctx)return;
-  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(prefersReduced){ canvas.style.display = 'none'; return; }
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; if(prefersReduced){ canvas.style.display = 'none'; return; }
   var W,H,dpr,last=performance.now(),actx=null;
   function resize(){W=innerWidth;H=innerHeight;dpr=devicePixelRatio||1;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}
   resize();addEventListener('resize',resize);
   function mkGrid(){var g=[];for(var r=0;r<4;r++)for(var c=0;c<6;c++)g.push({x:90+(c+.5)*((W-180)/6),y:120+(r+.5)*((H-180)/4)});return g;}
-  var targets=mkGrid();
-  var sp={x:W*.5,y:90,tx:targets[0].x,ty:targets[0].y};
+  var targets=mkGrid(); var sp={x:W*.5,y:90,tx:targets[0].x,ty:targets[0].y};
   var legs=[-75,-38,38,75,105,142,-142,-105].map(function(d){var a=d*Math.PI/180;return{ang:a,fx:sp.x+Math.cos(a)*30,fy:sp.y+Math.sin(a)*30,tx:sp.x+Math.cos(a)*30,ty:sp.y+Math.sin(a)*30};});
   var moving=false,moveTimer=0,L1=34,L2=34,LIM=46;
   function snd(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume().catch(function(){});var n=actx.currentTime,o=actx.createOscillator(),g=actx.createGain(),f=actx.createBiquadFilter();f.type='bandpass';f.frequency.value=2400;f.Q.value=1.4;o.type='square';o.frequency.setValueAtTime(2400,n);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.06,n+.004);g.gain.exponentialRampToValueAtTime(.0001,n+.07);o.connect(f);f.connect(g);g.connect(actx.destination);o.start(n);o.stop(n+.07);}catch(e){}}
@@ -612,30 +495,11 @@ adminBtnEl.addEventListener('click', function() {
     var dt=Math.min(50,now-last);last=now;
     if(moving){moveTimer-=dt/1000;if(moveTimer<=0){moving=false;targets.shift();if(!targets.length)targets=mkGrid();sp.tx=targets[0].x;sp.ty=targets[0].y;}}
     else{var dx=sp.tx-sp.x,dy=sp.ty-sp.y,dist=Math.hypot(dx,dy);if(dist<6){moving=true;moveTimer=1;snd();}else{var spd=Math.max(180,dist*3+30)*dt/1000;if(spd>=dist){sp.x=sp.tx;sp.y=sp.ty;}else{sp.x+=dx/dist*spd;sp.y+=dy/dist*spd;}}}
-    ctx.clearRect(0,0,W,H);
-    ctx.strokeStyle='rgba(214,217,224,.1)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(sp.x,0);ctx.lineTo(sp.x,sp.y-12);ctx.stroke();
-    legs.forEach(function(l,i){
-      var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10,dx=l.fx-bx,dy=l.fy-by;
-      var dist=Math.min(Math.hypot(dx,dy),L1+L2-.5);if(dist<.001)return;
-      var ca=(dist*dist-L1*L1-L2*L2)/(2*L1*L2),an=Math.acos(Math.max(-1,Math.min(1,ca)));
-      var kd=L1+L2*Math.cos(an),kh=L2*Math.sin(an),ba=Math.atan2(dy,dx)-Math.atan2(kh,kd);
-      var kx=bx+Math.cos(ba)*L1,ky=by+Math.sin(ba)*L1;
-      ctx.strokeStyle='#2a2f3c';ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(kx,ky);ctx.lineTo(l.fx,l.fy);ctx.stroke();
-      ctx.fillStyle='#0d1018';ctx.strokeStyle='#232733';ctx.beginPath();ctx.arc(kx,ky,2.8,0,6.28);ctx.fill();ctx.stroke();
-      ctx.fillStyle=i%2===0?'#8a90a0':'#6b7280';ctx.beginPath();ctx.arc(l.fx,l.fy,2.3,0,6.28);ctx.fill();
-    });
-    ctx.fillStyle='rgba(0,0,0,.35)';ctx.beginPath();ctx.ellipse(sp.x,sp.y+22,18,6,0,0,6.28);ctx.fill();
-    ctx.fillStyle='#0d1018';ctx.strokeStyle='#2c313f';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(sp.x,sp.y+12,13,17,0,0,6.28);ctx.fill();ctx.stroke();
-    ctx.fillStyle='#151821';ctx.beginPath();ctx.ellipse(sp.x,sp.y-5,10.5,10.5,0,0,6.28);ctx.fill();ctx.stroke();
-    ctx.fillStyle='#ff4d9a';ctx.beginPath();ctx.arc(sp.x-3.2,sp.y-8,1.7,0,6.28);ctx.fill();
-    ctx.fillStyle='#4fe0ff';ctx.beginPath();ctx.arc(sp.x+3.2,sp.y-8,1.7,0,6.28);ctx.fill();
+    ctx.clearRect(0,0,W,H); ctx.strokeStyle='rgba(214,217,224,.1)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(sp.x,0);ctx.lineTo(sp.x,sp.y-12);ctx.stroke();
+    legs.forEach(function(l,i){ var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10,dx=l.fx-bx,dy=l.fy-by; var dist=Math.min(Math.hypot(dx,dy),L1+L2-.5);if(dist<.001)return; var ca=(dist*dist-L1*L1-L2*L2)/(2*L1*L2),an=Math.acos(Math.max(-1,Math.min(1,ca))); var kd=L1+L2*Math.cos(an),kh=L2*Math.sin(an),ba=Math.atan2(dy,dx)-Math.atan2(kh,kd); var kx=bx+Math.cos(ba)*L1,ky=by+Math.sin(ba)*L1; ctx.strokeStyle='#2a2f3c';ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(kx,ky);ctx.lineTo(l.fx,l.fy);ctx.stroke(); ctx.fillStyle='#0d1018';ctx.strokeStyle='#232733';ctx.beginPath();ctx.arc(kx,ky,2.8,0,6.28);ctx.fill();ctx.stroke(); ctx.fillStyle=i%2===0?'#8a90a0':'#6b7280';ctx.beginPath();ctx.arc(l.fx,l.fy,2.3,0,6.28);ctx.fill(); });
+    ctx.fillStyle='rgba(0,0,0,.35)';ctx.beginPath();ctx.ellipse(sp.x,sp.y+22,18,6,0,0,6.28);ctx.fill(); ctx.fillStyle='#0d1018';ctx.strokeStyle='#2c313f';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(sp.x,sp.y+12,13,17,0,0,6.28);ctx.fill();ctx.stroke(); ctx.fillStyle='#151821';ctx.beginPath();ctx.ellipse(sp.x,sp.y-5,10.5,10.5,0,0,6.28);ctx.fill();ctx.stroke(); ctx.fillStyle='#ff4d9a';ctx.beginPath();ctx.arc(sp.x-3.2,sp.y-8,1.7,0,6.28);ctx.fill(); ctx.fillStyle='#4fe0ff';ctx.beginPath();ctx.arc(sp.x+3.2,sp.y-8,1.7,0,6.28);ctx.fill();
     if(moving){ctx.strokeStyle='rgba(255,77,154,.25)';ctx.beginPath();ctx.arc(sp.x,sp.y+3,10+(1-moveTimer)*18,0,6.28);ctx.stroke();}
-    legs.forEach(function(l,i){
-      var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10;
-      if(Math.hypot(l.fx-bx,l.fy-by)>LIM){var td=28+(i%3)*6+Math.random()*6;l.tx=sp.x+Math.cos(l.ang)*td;l.ty=sp.y+Math.sin(l.ang)*td;}
-      var dx=l.tx-l.fx,dy=l.ty-l.fy,d=Math.hypot(dx,dy);
-      if(d>.5){var mv=Math.min(d,420*dt/1000);l.fx+=dx/d*mv;l.fy+=dy/d*mv;if(d>3&&mv>=d-.1&&Math.random()<.85)snd();}
-    });
+    legs.forEach(function(l,i){ var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10; if(Math.hypot(l.fx-bx,l.fy-by)>LIM){var td=28+(i%3)*6+Math.random()*6;l.tx=sp.x+Math.cos(l.ang)*td;l.ty=sp.y+Math.sin(l.ang)*td;} var dx=l.tx-l.fx,dy=l.ty-l.fy,d=Math.hypot(dx,dy); if(d>.5){var mv=Math.min(d,420*dt/1000);l.fx+=dx/d*mv;l.fy+=dy/d*mv;if(d>3&&mv>=d-.1&&Math.random()<.85)snd();} });
     requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
