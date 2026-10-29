@@ -1173,7 +1173,7 @@ async function doSearch(){
   try{
     var ctrl=new AbortController();var to=setTimeout(function(){ctrl.abort();},55000);
     var savedAdminKey = adminKey;
-    var headers = {'Content-Type':'application/json','X-Visitor-Id':VISITOR_ID};
+    var headers = {'Content-Type':'application/json'};
     if(savedAdminKey) headers['X-Admin-Key'] = savedAdminKey;
     
     var reqBody = {query:text, visitor_id:VISITOR_ID, skill:skill, country:document.getElementById('countrySel').value, lang:currentLang};
