@@ -930,7 +930,7 @@ function applyLang(lang){
   document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){var k=el.getAttribute('data-i18n-placeholder');if(dict[k]!=null)el.placeholder=dict[k];});
   var go=document.getElementById('go');
   if(go&&!go.classList.contains('loading')) go.textContent=dict.search_btn;
-  renderLaws();renderRings();renderSugs();renderSkills();renderSavedReports();
+  renderLaws();renderRings();renderSugs();renderSkills();if(typeof LIB_TEXT!=='undefined')renderSavedReports();
 }
 function renderLaws(){
   var d=D();
@@ -1015,6 +1015,7 @@ function saveReport(text,title){
 }
 function openLibrary(){renderSavedReports();document.getElementById('reportLibrary').classList.add('open');document.getElementById('reportLibrary').setAttribute('aria-hidden','false');document.getElementById('libraryBackdrop').classList.add('open');}
 function closeLibrary(){document.getElementById('reportLibrary').classList.remove('open');document.getElementById('reportLibrary').setAttribute('aria-hidden','true');document.getElementById('libraryBackdrop').classList.remove('open');}
+renderSavedReports();
 
 document.getElementById('saveExample').addEventListener('click',function(){
   var d=D();
@@ -1037,8 +1038,8 @@ function safeUrl(value){try{var u=new URL(String(value||''),location.origin);ret
 var ACTION_TEXT={
   en:{copy:'Copy Report',download:'Download',save:'Save Report',share:'Share Report',pdf:'PDF',word:'Word',copied:'Report copied',downloaded:'Report downloaded',shared:'Share menu opened',pdfopened:'Print dialog opened — choose Save as PDF',worddownloaded:'Word file downloaded'},
   ar:{copy:'نسخ التقرير',download:'تنزيل التقرير',save:'حفظ التقرير',share:'مشاركة التقرير',pdf:'PDF',word:'Word',copied:'تم نسخ التقرير',downloaded:'تم تنزيل التقرير',shared:'تم فتح قائمة المشاركة',pdfopened:'تم فتح الطباعة — اختر حفظ بصيغة PDF',worddownloaded:'تم تنزيل ملف Word'},
-  fr:{copy:'Copier le rapport',download:'Télécharger',save:'Enregistrer',share:'Partager',pdf:'PDF',word:'Word',copied:'Rapport copié',downloaded:'Rapport téléchargé',shared:'Menu de partage ouvert',pdfopened:'Fenêtre d’impression ouverte — choisissez Enregistrer en PDF',worddownloaded:'Fichier Word téléchargé'},
-   de:{copy:'Bericht kopieren',download:'Herunterladen',save:'Bericht speichern',share:'Bericht teilen',pdf:'PDF',word:'Word',copied:'Bericht kopiert',downloaded:'Bericht heruntergeladen',shared:'Teilen geöffnet',pdfopened:'Druckdialog geöffnet — Als PDF speichern wählen',worddownloaded:'Word-Datei heruntergeladen'},
+   fr:{copy:'Copier le rapport',download:'Télécharger',save:'Enregistrer',share:'Partager',pdf:'PDF',word:'Word',copied:'Rapport copié',downloaded:'Rapport téléchargé',shared:'Menu de partage ouvert',pdfopened:'Fenêtre d’impression ouverte — choisissez Enregistrer en PDF',worddownloaded:'Fichier Word téléchargé'},
+  de:{copy:'Bericht kopieren',download:'Herunterladen',save:'Bericht speichern',share:'Bericht teilen',pdf:'PDF',word:'Word',copied:'Bericht kopiert',downloaded:'Bericht heruntergeladen',shared:'Teilen geöffnet',pdfopened:'Druckdialog geöffnet — Als PDF speichern wählen',worddownloaded:'Word-Datei heruntergeladen'},
   es:{copy:'Copiar informe',download:'Descargar',save:'Guardar informe',share:'Compartir informe',pdf:'PDF',word:'Word',copied:'Informe copiado',downloaded:'Informe descargado',shared:'Menú de compartir abierto',pdfopened:'Impresión abierta — elige Guardar como PDF',worddownloaded:'Archivo Word descargado'},
   pt:{copy:'Copiar relatório',download:'Baixar',save:'Salvar relatório',share:'Compartilhar',pdf:'PDF',word:'Word',copied:'Relatório copiado',downloaded:'Relatório baixado',shared:'Menu de compartilhamento aberto',pdfopened:'Impressão aberta — escolha Salvar como PDF',worddownloaded:'Arquivo Word baixado'},
   ja:{copy:'レポートをコピー',download:'ダウンロード',save:'レポートを保存',share:'レポートを共有',pdf:'PDF',word:'Word',copied:'コピーしました',downloaded:'ダウンロードしました',shared:'共有メニューを開きました',pdfopened:'印刷画面を開きました — PDFとして保存を選択してください',worddownloaded:'Wordファイルをダウンロードしました'},
