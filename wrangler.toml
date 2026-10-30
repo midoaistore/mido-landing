@@ -1,0 +1,15 @@
+name = "mido-deepsearch"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://midoaistore.github.io"
+GUMROAD_PRODUCT_ID = "dtqpvka"
+GUMROAD_URL = "https://midoaistore.gumroad.com/l/dtqpvka"
+
+[[kv_namespaces]]
+binding = "MIDO_KV"
+id = "REPLACE_WITH_YOUR_KV_ID"
+
+[triggers]
+crons = []
