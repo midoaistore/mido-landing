@@ -441,7 +441,7 @@ allowed.length === 0 || allowed.includes("*") || allowed.includes(origin) || ori
 return {
 "Access-Control-Allow-Origin": isAllowed ? origin || "*" : "null",
 "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-"Access-Control-Allow-Headers": "Content-Type, X-Admin-Key, X-Visitor-Id",
+"Access-Control-Allow-Headers": "Content-Type, X-Admin-Key, X-Visitor-Id, X-Visitor-ID, X-Country, X-Lang, X-Admin-Key-2"
 "Access-Control-Max-Age": "86400",
 Vary: "Origin"
 };
