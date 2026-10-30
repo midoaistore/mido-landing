@@ -750,7 +750,7 @@ window.openPolicy = function(e,type){
   document.getElementById('policyContent').innerHTML=item.html;
   document.getElementById('policyModal').classList.add('open');
 }
-
+  
 // تحويل المارك داون إلى HTML
 function parseMarkdown(md){
   md = typeof md === 'string' ? md : '';
@@ -765,6 +765,22 @@ function parseMarkdown(md){
       continue;
     }
     if(inCode){code.push(raw);continue;}
+    // جدول
+    if(/^\s*\|.*\|\s*$/.test(raw)){
+      var next = lines[i+1]||'';
+      if(/^\s*\|[\s\-:|]*\|\s*$/.test(next)){
+        closeList();
+        var header = raw.split('|').filter(function(s){return s.trim()!='';}).map(function(s){return s.trim();});
+        var thead = '<thead><tr>'+header.map(function(h){return '<th>'+inlineMd(esc(h))+'</th>';}).join('')+'</tr></thead>';
+        i++; var rows=[];
+        while(i+1<lines.length && /^\s*\|.*\|\s*$/.test(lines[i+1])){
+          i++; var r=lines[i].split('|').filter(function(s){return s.trim()!='';}).map(function(s){return '<td>'+inlineMd(esc(s.trim()))+'</td>';}).join('');
+          if(r) rows.push('<tr>'+r+'</tr>');
+        }
+        out.push('<table>'+thead+'<tbody>'+rows.join('')+'</tbody></table>');
+        continue;
+      }
+    }
     var line=esc(raw);
     if(!line.trim()){closeList();continue;}
     var m=line.match(/^###\s+(.*)$/); if(m){closeList();out.push('<h3>'+inlineMd(m[1])+'</h3>');continue;}
@@ -775,7 +791,7 @@ function parseMarkdown(md){
   }
   if(inCode) out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');
   closeList(); return out.join('');
-}
+  }
 function inlineMd(s){
   return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
 }
