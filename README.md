@@ -89,12 +89,13 @@
 ## 🔧 للمطورين - Worker V6.2
 
 ```bash
+```bash
 git clone https://github.com/midoaistore/mido-landing
 cd mido-landing/worker
 wrangler deploy
-Model: openai/gpt-oss-120b + openai/gpt-oss-20b • KV: MIDO_KV = edf6455846914f3a857f67c111b19bc5 • Endpoints: / , /stats , /visit , /spider
-👨‍💻 محمد انور • Cairo • Day 6/30 Build in Public • GitHub: @midoaistore • Threads: @midoaistore 
-لو عجبك - اعملي ⭐ Star فوق!
-📄 License
-MIT
-⭐ Star عشان تشوف V11 أول واحد!
+```
+
+**Tech:**
+- Model: openai/gpt-oss-120b + openai/gpt-oss-20b
+- KV: MIDO_KV = edf6455846914f3a857f67c111b19bc5
+- Endpoints: / , /stats , /visit , /spider
