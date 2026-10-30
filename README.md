@@ -9,7 +9,8 @@
 
 > اكتب: "أفضل لابتوب برمجة تحت 25000 جنيه" → هتاخد جدول مقارنة + 12 مصدر موثق + توصية Budget/Mid/Pro + تصدير PDF
 
-![Report Preview](https://raw.githubusercontent.com/midoaistore/mido-landing/main/images/report-preview-en-hud.png)
+![Report Preview]
+! ![Report Preview](report-preview-en-hud.png) 
 
 ---
 
