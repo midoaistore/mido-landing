@@ -12,7 +12,7 @@
 
 > اكتب: "أفضل لابتوب برمجة تحت 25000 جنيه" → هتاخد جدول مقارنة + 12 مصدر موثق + توصية Budget/Mid/Pro + تصدير P
 > 
-![Report Preview](https://raw.githubusercontent.com/midoaistore/mido-landing/main/images/report-preview-en-hud.png)
+![Report Preview](https://raw.githubusercontent.com/midoaistore/mido-landing/refs/heads/main/report-preview-en-hud.png
 ---
 
 ## 🕷️ ايه هو Mido؟ مش بحث عادي - ده Pipeline
