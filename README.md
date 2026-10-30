@@ -42,7 +42,7 @@
 | تلخيص | لخص مراجعات iPhone 15 |
 | مقارنة | قارن بين MacBook Air و Pro |
 | توصية | رشحلي لابتوب للبرمجة |
-| فحص السعر | سعر 【entity-Sony¦canonical_name=Sony】 WH-1000XM5 الحقيقي كام؟ |
+| فحص السعر | سعر سماعة سوني WH-1000XM5 الحقيقي كام؟ |
 | فحص السعر المحلي | سعره في مصر كام؟ |
 | تدقيق المصادر | المصادر دي موثوقة؟ |
 | تدقيق الحقائق | هل فعلا البطارية 40 ساعة؟ |
@@ -77,7 +77,7 @@
 | | دولي | مصر |
 |---|---|---|
 | **السعر** | **$6** مرة واحدة | **299 جنيه** |
-| **بتاخد** | Tavily API Key + Groq Key اعملهم بنفسك+ استخدام غير محدود + تحديثات | نفس الشيء |
+| **بتاخد** | Tavily API Key + Groq Key + استخدام غير محدود + تحديثات | نفس الشيء |
 
 **[👉 احصل على الوصول الكامل - $6 مرة واحدة](https://midoaistore.gumroad.com/l/dtqpvka)**
 
@@ -91,3 +91,12 @@
 git clone https://github.com/midoaistore/mido-landing
 cd mido-landing/worker
 wrangler deploy
+
+
+⭐ Star this repo - لو عجبك
+👨‍💻 محمد انور • Cairo • Day 6/30 Build in Public
+ في القاهرة - 30 يوم تحدي.
+• GitHub: @midoaistore • Threads: @midoaistore • Gumroad: midoaistore.gumroad.com  🚀 ايه الجاي؟ V11 - Knowledge Graph Map (زي المشروع اللي جاب 134k ⭐)
+Star عشان تشوف V11 أول واحد!
+📄 License
+MIT - استخدمه، عدله، بيعه - بس اذكر المصدر.
