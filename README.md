@@ -1,18 +1,16 @@
- 🧠 Mido DeepSearch V10.3 — حول سؤالك لقرار موثّق قبل ما تدفع
+# 🧠 Mido DeepSearch V10.3 — حول سؤالك لقرار موثّق قبل ما تدفع
 
-> **"مش محرك بحث عادي. ده 15 مهارة بحث عميق + 12 مصدر حي + تقرير PDF/Word في 35 ثانية - 
+> **"مش محرك بحث عادي. ده 15 مهارة بحث عميق + 12 مصدر حي + تقرير PDF/Word في 35 ثانية - معمول في القاهرة، من الموبايل."**
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-ميدو_لاندنج-7c5cff?style=for-the-badge)](https://midoaistore.github.io/mido-landing/)
-[![Buy Now](https://img.shields.io/badge/💳_Buy_Now-$6_One_Time-00ffa3?style=for-the-badge)](https://midoaistore.gumroad.com/l/dtqpvka)
-[![Worker V6.2](https://img.shields.io/badge/⚡_Worker-V6.2_gpt--oss--120b-ff4d9a?style=flat)](https://mido-deepsearch.midoaistore.workers.dev)
-[![15 Skills](https://img.shields.io/badge/🧩_Skills-15_Research_Skills-00d4ff?style=flat)](#-15-مهارة-بحث)
+[🌐 Live Demo](https://midoaistore.github.io/mido-landing/) • [💳 Buy $6](https://midoaistore.gumroad.com/l/dtqpvka) • [⚡ Worker V6.2](https://mido-deepsearch.midoaistore.workers.dev) • [🧩 15 Skills](#-15-مهارة-بحث)
 
 ### ⚡ جرّب قبل ما تشتري - تجربة مجانية واحدة / زائر
 **[👉 افتح اللاندنج وجرب دلوقتي - 35 ثانية بس](https://midoaistore.github.io/mido-landing/)**
 
-> اكتب: "أفضل لابتوب برمجة تحت 25000 جنيه" → هتاخد جدول مقارنة + 12 مصدر موثق + توصية Budget/Mid/Pro + تصدير P
-> 
-![Report Preview](https://raw.githubusercontent.com/midoaistore/mido-landing/refs/heads/main/report-preview-en-hud.png
+> اكتب: "أفضل لابتوب برمجة تحت 25000 جنيه" → هتاخد جدول مقارنة + 12 مصدر موثق + توصية Budget/Mid/Pro + تصدير PDF
+
+![Report Preview](https://raw.githubusercontent.com/midoaistore/mido-landing/main/images/report-preview-en-hud.png)
+
 ---
 
 ## 🕷️ ايه هو Mido؟ مش بحث عادي - ده Pipeline
@@ -23,9 +21,9 @@
 
 | مرحلة | بتعمل ايه |
 |---|---|
-| **1. Tavily Scout**  يجيب 10 مصادر حية  موثقةش 10) |
+| **1. Tavily Scout** | يجيب 12 مصدر حي موثق (مش 10) |
 | **2. Trust Ranker** | يرتبهم: 0.4 دومين + 0.3 حداثة + 0.2 استشهاد + 0.1 تكرار |
-| **3. Thesis Builder** | Groq `gpt-oss-120b` يبني الأطروحة (أسرع من llama-3.1 اللي وقف) |
+| **3. Thesis Builder** | Groq gpt-oss-120b يبني الأطروحة |
 | **4. Risk Checker** | يفحص فروق الأسعار $/EGP ومخاطر السوق المحلي |
 | **5. Report Weaver** | يطلعلك تقرير + جدول + توصية + PDF/Word |
 
@@ -35,8 +33,6 @@
 
 ## 🧩 15 مهارة بحث (بدل 6)
 
-اختار المهارة قبل ما تبحث - كل مهارة بتغير شكل التقرير:
-
 | المهارة | بتعمل ايه | مثال |
 |---|---|---|
 | **بحث عميق** | تقرير كامل بالأدلة | أفضل سماعات ANC تحت 150$ |
@@ -44,7 +40,7 @@
 | **مقارنة** | جدول مقارنة مباشر | قارن بين MacBook Air و Pro |
 | **توصية** | ترتيب + اختيار نهائي | رشحلي لابتوب للبرمجة |
 | **فحص السعر** | تدقيق أسعار ومصادرها | سعر 【entity-Sony¦canonical_name=Sony】 WH-1000XM5 الحقيقي كام؟ |
-| **فحص السعر المحلي** | أسعار مصريةللمصريين فقط واسعار موحدة لباقى الدول، بدون تحويل وهمي | سعره في مصر كام؟ |
+| **فحص السعر المحلي** | أسعار مصرية بس | سعره في مصر كام؟ |
 | **تدقيق المصادر** | هل المصدر قوي ولا ضعيف؟ | المصادر دي موثوقة؟ |
 | **تدقيق الحقائق** | Claim vs Evidence | هل فعلا البطارية 40 ساعة؟ |
 | **الإيجابيات والسلبيات** | تحليل متوازن | مميزات وعيوب Nothing Phone |
@@ -54,58 +50,51 @@
 | **إنشاء مخطط** | Outline منظم | اعملي مخطط لمقارنة |
 | **مصفوفة القرار** | Decision Matrix بدرجات | اعملي مصفوفة قرار |
 
-**+ حفظ التقرير + تصدير PDF/Word + مكتبة 50 تقرير محفوظة**
-
 ---
 
 ## ✨ ليه V10.3 مختلف؟
 
-- ✅ **Groq الجديد:** `openai/gpt-oss-120b` + `20b fallback` (بدل llama-3.1 اللي اتوقف)
-- ✅ **12 مصدر** (بدل 10) + Self-Check بيصلح التقرير لو فيه غلط
-- ✅ **PDF/Word تصدير** بنفس ستايل الطباعة A4
-- ✅ **مكتبة تقارير** LocalStorage - 50 تقرير محفوظ على جهازك
-- ✅ **RTL عربي + 8 لغات** (عربي، إنجليزي، فرنسي، ألماني، صيني برتغالي أسباني، ياباني)
-- ✅ **نسخ/حفظ/تحميل/مشاركة/طباعة** بضغطة واحدة
-- ✅ **Spider Viz** عنكبوت بيتحرك وبيعمل صوت وهو بيجيب المصادر
-- ✅ **5 حلقات حماية + Asimov** - ما يفتيش وما يخترعش أسعار
-- ✅ **1 تجربة / زائر + 100 بحث / يوم** - حماية من الـ VPN بالـ visitor_id
+- Groq الجديد: gpt-oss-120b + 20b fallback
+- 12 مصدر + Self-Check بيصلح التقرير لو فيه غلط
+- PDF/Word تصدير بنفس ستايل الطباعة A4
+- تقرير محفوظ LocalStorage - مكتبة 50 تقرير على جهازك
+- 8 لغات + RTL عربي
+- نسخ/حفظ/تحميل/مشاركة/طباعة بضغطة واحدة
+- Spider Viz عنكبوت بيتحرك وبيعمل صوت وهو بيجيب المصادر
+- 5 حلقات حماية + Asimov - ما يفتيش
+- 1 تجربة / زائر + 100 بحث / يوم - حماية من VPN
 
 ---
 
-## 🚀 جرّب دلوقتي - 35 ثانية
+## 🚀 جرّب دلوقتي
 
-1. **افتح:** https://midoaistore.github.io/mido-landing/
-2. **اختار مهارة:** مثلا "فحص السعر المحلي"
-3. **اكتب:** "أفضل مايك بودكاست تحت 3000 جنيه"
-4. **خد:** جدول + 12 مصدر + توصية + صدر PDF
-
-**مثال حي:** تقرير سماعات ANC بـ 8 سماعات (【entity-JBL¦canonical_name=JBL】 2400ج - 【entity-Sony¦canonical_name=Sony】 4470ج) موجود في اللاندنج!
+1. افتح: https://midoaistore.github.io/mido-landing/
+2. اختار مهارة: مثلا "فحص السعر المحلي"
+3. اكتب: "أفضل مايك بودكاست تحت 3000 جنيه"
+4. خد: جدول + 12 مصدر + توصية + صدر PDF
 
 ---
 
-## 💳 بسيط - $6 مرة واحدة 
+## 💳 بسيط - $6 مرة واحدة للأبد
 
-| | دولي | مصر |
+|  | دولي | مصر |
 |---|---|---|
 | **السعر** | **$6** مرة واحدة | **299 جنيه** |
-
-| **الدفع** | Gumroad (آمن) | Gumroad التلقائيشف التلقائي:** مصر → يظهر 299ج، أي دولة تانية → $6
+| **بتاخد** | Tavily API Key + Groq Key + استخدام غير محدود | نفس الشيء |
 
 **[👉 احصل على الوصول الكامل - $6](https://midoaistore.gumroad.com/l/dtqpvka)**
-
-> بعد الشراء: انت اللي بتنشئ مفاتيحك بنفسك (Tavily من app.tavily.com و Groq من console.groq.com/keys) - الدليل موجود.
 
 ---
 
 ## 🔧 للمطورين - Worker V6.2
 
 ```bash
-# الكلون
 git clone https://github.com/midoaistore/mido-landing
 cd mido-landing/worker
-
-# الـ KV ID 
-# edf6455846914f3a857f67c111b19bc5
-
-# الـ Deploy
-【entity-wrangler¦canonical_name=wrangler】 deploy
+wrangler deploy
+Model: openai/gpt-oss-120b + openai/gpt-oss-20b • KV: MIDO_KV = edf6455846914f3a857f67c111b19bc5 • Endpoints: / , /stats , /visit , /spider
+👨‍💻 محمد انور • Cairo • Day 6/30 Build in Public • GitHub: @midoaistore • Threads: @midoaistore 
+لو عجبك - اعملي ⭐ Star فوق!
+📄 License
+MIT
+⭐ Star عشان تشوف V11 أول واحد!
