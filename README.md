@@ -10,10 +10,9 @@
 ### ⚡ جرّب قبل ما تشتري - تجربة مجانية واحدة / زائر
 **[👉 افتح اللاندنج وجرب دلوقتي - 35 ثانية بس](https://midoaistore.github.io/mido-landing/)**
 
-> اكتب: "أفضل لابتوب برمجة تحت 25000 جنيه" → هتاخد جدول مقارنة + 12 مصدر موثق + توصية Budget/Mid/Pro + تصدير PDF
-
-![Report Preview](https://raw.githubusercontent.com/midoaistore/mido-landing/main/books-report-ar.png)
-
+> اكتب: "أفضل لابتوب برمجة تحت 25000 جنيه" → هتاخد جدول مقارنة + 12 مصدر موثق + توصية Budget/Mid/Pro + تصدير P
+> 
+![Report Preview](https://raw.githubusercontent.com/midoaistore/mido-landing/main/images/report-preview-en-hud.png)
 ---
 
 ## 🕷️ ايه هو Mido؟ مش بحث عادي - ده Pipeline
