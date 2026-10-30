@@ -1,96 +1,114 @@
-# Mido DeepSearch — محرك بحث عميق يبني تقارير حقيقية
+# 🧠 Mido DeepSearch V10.3 — حول سؤالك لقرار موثّق قبل ما تدفع
 
-> Verified research reports in 35-40 seconds. Local + international sources. Trust-scored.
+> **"مش محرك بحث عادي. ده 15 مهارة بحث عميق + 12 مصدر حي + تقرير PDF/Word في 35 ثانية - معمول في القاهرة، من الموبايل."**
 
-🌐 **Live:** https://midoaistore.github.io/mido-landing/  
-💳 **Buy:** https://midoaistore.gumroad.com/l/dtqpvka ($6 / 299 EGP)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-ميدو_لاندنج-7c5cff?style=for-the-badge)](https://midoaistore.github.io/mido-landing/)
+[![Buy Now](https://img.shields.io/badge/💳_Buy_Now-$6_One_Time-00ffa3?style=for-the-badge)](https://midoaistore.gumroad.com/l/dtqpvka)
+[![Worker V6.2](https://img.shields.io/badge/⚡_Worker-V6.2_gpt--oss--120b-ff4d9a?style=flat)](https://mido-deepsearch.midoaistore.workers.dev)
+[![15 Skills](https://img.shields.io/badge/🧩_Skills-15_Research_Skills-00d4ff?style=flat)](#-15-مهارة-بحث)
 
-![Top Books Every Digital Product Leader Should Read](books-report-en.png)
+### ⚡ جرّب قبل ما تشتري - تجربة مجانية واحدة / زائر
+**[👉 افتح اللاندنج وجرب دلوقتي - 35 ثانية بس](https://midoaistore.github.io/mido-landing/)**
 
-> **Example Live Report:** 8 books curated • Trust 4.5-4.9/5 • Verified in 35-40s • 10 Sources • Mido DeepSearch V4.4
+> اكتب: "أفضل لابتوب برمجة تحت 25000 جنيه" → هتاخد جدول مقارنة + 12 مصدر موثق + توصية Budget/Mid/Pro + تصدير PDF
 
----
-
-### 🕷️ ايه هو Mido؟
-
-Mido مش محرك بحث عادي. هو pipeline من 5 مراحل:
-
-1.  **Tavily Scout:** 10 مصادر موثقة حية
-2.  **Trust Ranker:** 0.4 domain + 0.3 recency + 0.2 citation + 0.1 overlap
-3.  **Thesis Builder:** Qwen3-235B يبني الأطروحة
-4.  **Risk Checker:** يفحص variance الأسعار $/EGP
-5.  **Report Weaver:** تقرير PDF + Spider Viz
-
-**النتيجة:** تقرير منظم + توصية واضحة + أسعار حقيقية في 35-40 ثانية.
+![Report Preview](https://raw.githubusercontent.com/midoaistore/mido-landing/main/books-report-ar.png)
 
 ---
 
-### 📄 مثال تقرير
+## 🕷️ ايه هو Mido؟ مش بحث عادي - ده Pipeline
 
-دوس **📄 معاينة التقرير الكامل** في اللاندنج - هتشوف:
+**المشكلة:** جوجل بيديك 10 لينكات. انت عايز قرار تشتري ولا لا.
 
-*   خلاصة 3 نقاط
-*   10 نقاط × Trust Score
-*   جدول مقارنة $/EGP
-*   توصية 3 مستويات (Budget / Mid / Pro)
-*   مصادر موثقة Score 0.76
+**الحل:** Mido بيعمل 5 مراحل في 35 ثانية:
 
-*موجود في اللاندنج:تقرير سماعات ANC بـ 8 سماعات (JBL 2400ج - Sony 4470ج)
-مع جدول كامل*
+| مرحلة | بتعمل ايه |
+|---|---|
+| **1. Tavily Scout** | يجيب 12 مصدر حي موثق (مش 10) |
+| **2. Trust Ranker** | يرتبهم: 0.4 دومين + 0.3 حداثة + 0.2 استشهاد + 0.1 تكرار |
+| **3. Thesis Builder** | Groq `gpt-oss-120b` يبني الأطروحة (أسرع من llama-3.1 اللي وقف) |
+| **4. Risk Checker** | يفحص فروق الأسعار $/EGP ومخاطر السوق المحلي |
+| **5. Report Weaver** | يطلعلك تقرير + جدول + توصية + PDF/Word |
 
-### ✨ المميزات
-
-*   10 مصادر موثوقة +Trust 0.7
-*   8 دول (لغة/عملة/مصادر)
-*   أسعار بالجنيه والدولار
-*   Spider Viz تفاعلي
-*   Asimov + القانون الرابع: ما تفتيش
-*   5 حلقات حماية
-*   API Keys بعد الشراء
+**النتيجة:** مش لينكات - قرار.
 
 ---
 
-### 💳 التسعير
+## 🧩 15 مهارة بحث (بدل 6)
 
-*   **دولي:** $6 مرة واحدة (مرة واحدة للأبد)
-*   **مصر:** 299 جنيه (مصر فقط)
-*   **بتحصل على:** Tavily API Key + Groq Key + استخدام غير محدود + تحديثات V4.4+
+اختار المهارة قبل ما تبحث - كل مهارة بتغير شكل التقرير:
 
-> الكشف التلقائي للموقع: مصر → يظهر 299ج، أي دولة تانية → يظهر $6
+| المهارة | بتعمل ايه | مثال |
+|---|---|---|
+| **بحث عميق** | تقرير كامل بالأدلة | أفضل سماعات ANC تحت 150$ |
+| **تلخيص** | 5-7 نقاط بالاستشهادات | لخص مراجعات iPhone 15 |
+| **مقارنة** | جدول مقارنة مباشر | قارن بين MacBook Air و Pro |
+| **توصية** | ترتيب + اختيار نهائي | رشحلي لابتوب للبرمجة |
+| **فحص السعر** | تدقيق أسعار ومصادرها | سعر 【entity-Sony¦canonical_name=Sony】 WH-1000XM5 الحقيقي كام؟ |
+| **فحص السعر المحلي** | أسعار مصرية بس، بدون تحويل وهمي | سعره في مصر كام؟ |
+| **تدقيق المصادر** | هل المصدر قوي ولا ضعيف؟ | المصادر دي موثوقة؟ |
+| **تدقيق الحقائق** | Claim vs Evidence | هل فعلا البطارية 40 ساعة؟ |
+| **الإيجابيات والسلبيات** | تحليل متوازن | مميزات وعيوب Nothing Phone |
+| **دليل الشراء** | من المعايير للاختيار | دليل شراء مايك بودكاست |
+| **فحص المخاطر** | ايه اللي ممكن يبوظ؟ | ايه مخاطر شراء مستعمل؟ |
+| **استخراج الحقائق** | حقائق موثقة بس | طلع الحقائق من المراجعات |
+| **إنشاء مخطط** | Outline منظم | اعملي مخطط لمقارنة |
+| **مصفوفة القرار** | Decision Matrix بدرجات | اعملي مصفوفة قرار |
 
-### 🚀 الاستخدام
+**+ حفظ التقرير + تصدير PDF/Word + مكتبة 50 تقرير محفوظة**
 
-**من اللاندنج:**
+---
 
-1.  افتح https://midoaistore.github.io/mido-landing/
-2.  اختر: بحث عميق / تلخيص سريع / جدول مقارنة
-3.  اكتب سؤالك
-4.  خد تقرير كامل
+## ✨ ليه V10.3 مختلف؟
 
-**للمطورين:**
+- ✅ **Groq الجديد:** `openai/gpt-oss-120b` + `20b fallback` (بدل llama-3.1 اللي اتوقف)
+- ✅ **12 مصدر** (بدل 10) + Self-Check بيصلح التقرير لو فيه غلط
+- ✅ **PDF/Word تصدير** بنفس ستايل الطباعة A4
+- ✅ **مكتبة تقارير** LocalStorage - 50 تقرير محفوظ على جهازك
+- ✅ **RTL عربي + 6 لغات** (عربي، إنجليزي، فرنسي، ألماني، إسباني، ياباني)
+- ✅ **نسخ/حفظ/تحميل/مشاركة/طباعة** بضغطة واحدة
+- ✅ **Spider Viz** عنكبوت بيتحرك وبيعمل صوت وهو بيجيب المصادر
+- ✅ **5 حلقات حماية + Asimov** - ما يفتيش وما يخترعش أسعار
+- ✅ **1 تجربة / زائر + 100 بحث / يوم** - حماية من الـ VPN بالـ visitor_id
+
+---
+
+## 🚀 جرّب دلوقتي - 3 ثواني
+
+1. **افتح:** https://midoaistore.github.io/mido-landing/
+2. **اختار مهارة:** مثلا "فحص السعر المحلي"
+3. **اكتب:** "أفضل مايك بودكاست تحت 3000 جنيه"
+4. **خد:** جدول + 12 مصدر + توصية + صدر PDF
+
+**مثال حي:** تقرير سماعات ANC بـ 8 سماعات (【entity-JBL¦canonical_name=JBL】 2400ج - 【entity-Sony¦canonical_name=Sony】 4470ج) موجود في اللاندنج!
+
+---
+
+## 💳 بسيط - $6 مرة واحدة للأبد
+
+| | دولي | مصر |
+|---|---|---|
+| **السعر** | **$6** مرة واحدة | **299 جنيه** |
+| **بتاخد** | Tavily API Key + Groq Key + استخدام غير محدود + تحديثات V10.3+ | نفس الشيء |
+| **الدفع** | Gumroad (آمن) | Gumroad |
+
+**الكشف التلقائي:** مصر → يظهر 299ج، أي دولة تانية → $6
+
+**[👉 احصل على الوصول الكامل - $6](https://midoaistore.gumroad.com/l/dtqpvka)**
+
+> بعد الشراء: انت اللي بتنشئ مفاتيحك بنفسك (Tavily من app.tavily.com و Groq من console.groq.com/keys) - الدليل موجود.
+
+---
+
+## 🔧 للمطورين - Worker V6.2
 
 ```bash
-npx skills add midoaistore/mido-deepsearch
+# الكلون
+git clone https://github.com/midoaistore/mido-landing
+cd mido-landing/worker
 
+# الـ KV ID بتاعك
+# edf6455846914f3a857f67c111b19bc5
 
----
-
-### 🔐 Asimov + المصري
-
-1. لا تضر إنساناً
-2. أطع الأوامر  
-3. احم نفسك
-4. المصري - ما تفتيش: لا تكشف بيانات خاصة أبداً
-
-### 📦 الملفات
-
-### 👨‍💻 محمد انور • Day 6/30 Build in Public
-
-GitHub: @midoaistore • Threads: @midoaistore
-
-### 📄 License
-MIT
-
----
-
-### ⭐ اعمل Star لو عجبك!
+# الـ Deploy
+【entity-wrangler¦canonical_name=wrangler】 deploy
