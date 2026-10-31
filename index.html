@@ -706,7 +706,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 'use strict';
 var WORKER_URL='https://mido-deepsearch.midoaistore.workers.dev';
 var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
-var skill='deep_search', currentLang='en', searching=false, lastReportText='', adminKey='';
+var skill='deep_search', currentLang='en', searching=false, lastReportText='', lastReportSources=[], lastReportQuery='', lastReportCountry='US', lastReportLang='en', adminKey='';
 
 // إزالة سر الأدمن من الرابط (أمنياً)
 if(/[?&]admin(?:=|&|$)/i.test(location.search)){history.replaceState(null,'',location.pathname+location.hash);}
@@ -750,7 +750,7 @@ window.openPolicy = function(e,type){
   document.getElementById('policyContent').innerHTML=item.html;
   document.getElementById('policyModal').classList.add('open');
 }
-  
+
 // تحويل المارك داون إلى HTML
 function parseMarkdown(md){
   md = typeof md === 'string' ? md : '';
@@ -765,22 +765,6 @@ function parseMarkdown(md){
       continue;
     }
     if(inCode){code.push(raw);continue;}
-    // جدول
-    if(/^\s*\|.*\|\s*$/.test(raw)){
-      var next = lines[i+1]||'';
-      if(/^\s*\|[\s\-:|]*\|\s*$/.test(next)){
-        closeList();
-        var header = raw.split('|').filter(function(s){return s.trim()!='';}).map(function(s){return s.trim();});
-        var thead = '<thead><tr>'+header.map(function(h){return '<th>'+inlineMd(esc(h))+'</th>';}).join('')+'</tr></thead>';
-        i++; var rows=[];
-        while(i+1<lines.length && /^\s*\|.*\|\s*$/.test(lines[i+1])){
-          i++; var r=lines[i].split('|').filter(function(s){return s.trim()!='';}).map(function(s){return '<td>'+inlineMd(esc(s.trim()))+'</td>';}).join('');
-          if(r) rows.push('<tr>'+r+'</tr>');
-        }
-        out.push('<table>'+thead+'<tbody>'+rows.join('')+'</tbody></table>');
-        continue;
-      }
-    }
     var line=esc(raw);
     if(!line.trim()){closeList();continue;}
     var m=line.match(/^###\s+(.*)$/); if(m){closeList();out.push('<h3>'+inlineMd(m[1])+'</h3>');continue;}
@@ -791,7 +775,7 @@ function parseMarkdown(md){
   }
   if(inCode) out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');
   closeList(); return out.join('');
-  }
+}
 function inlineMd(s){
   return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
 }
@@ -999,6 +983,8 @@ document.getElementById('skills').addEventListener('click',function(e){
   if(skill==='save'){
     toast(D().skill_save_hint);
     if(lastReportText){saveReport(lastReportText);}
+  }else if(lastReportText&&!searching){
+    transformCurrentReport(skill);
   }
 });
 document.getElementById('sugs').addEventListener('click',function(e){
@@ -1172,12 +1158,15 @@ async function doSearch(){
   go.classList.add('loading','glow');
   go.innerHTML='<span class="spin"></span> '+D().searching;
   var startTime=Date.now();
+  var activeStage=0;
   
   res.innerHTML='<div class="progress-container"><div class="progress-label"><span>'+D().searching+'</span><span id="pct">0s</span></div><div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar" style="width:10%"></div></div><div class="progress-timer" id="timerInfo">...</div></div>';
   
   setStages(0);
   var timerInterval=setInterval(function(){
     var elapsed=Math.floor((Date.now()-startTime)/1000);
+    var estimatedStage=Math.min(4,Math.floor(elapsed/2));
+    if(estimatedStage>activeStage){activeStage=estimatedStage;setStages(activeStage);}
     var pb=document.getElementById('progBar');
     var pe=document.getElementById('pct');
     if(pb && parseFloat(pb.style.width) < 85) pb.style.width = (parseFloat(pb.style.width) + 2) + '%';
@@ -1202,11 +1191,11 @@ async function doSearch(){
       var apiError=String(data.error||data.reason||'http');
       if(r.status===429 || apiError==='rate_limit_exceeded') throw new Error('rate_limit_exceeded');
       if(r.status===401 || apiError==='invalid_license') throw new Error('invalid_license');
-      throw new Error(apiError);
+      var providerErr=new Error(apiError);providerErr.providerMessage=String(data.message||'');throw providerErr;
     }
     if(data.ok===false || (data.success===false && (data.error||data.reason))) throw new Error(String(data.error||data.reason||'http'));
     outcome={ok:true,answer:String(data.answer||data.deep_answer||''),sources:Array.isArray(data.sources)?data.sources:(Array.isArray(data.top_sources)?data.top_sources:[]),logs:Array.isArray(data.logs)?data.logs:[],meta:data.meta||{}};
-  }catch(err){clearInterval(timerInterval);outcome={ok:false,msg:String(err&&err.message||err)};}
+  }catch(err){clearInterval(timerInterval);outcome={ok:false,msg:String(err&&err.message||err),detail:String(err&&err.providerMessage||'')};}
   
   if(outcome.ok){
     clearInterval(timerInterval);
@@ -1214,6 +1203,10 @@ async function doSearch(){
     if(outcome.logs.length){ applyLogs(outcome.logs); } else { setStages(4); }
     illuminateAllRings();
     lastReportText=outcome.answer;
+    lastReportSources=outcome.sources||[];
+    lastReportQuery=text;
+    lastReportCountry=document.getElementById('countrySel').value;
+    lastReportLang=currentLang;
     var formattedAns = parseMarkdown(outcome.answer);
     var src='';
     if(outcome.sources&&outcome.sources.length){
@@ -1232,9 +1225,44 @@ async function doSearch(){
     if(outcome.msg==='invalid_license')em=D().err_license||'Invalid license key.';
     if(outcome.msg==='search_failed')em=currentLang==='ar'?'خدمة البحث أو مزود الذكاء الاصطناعي غير متاح حاليًا. حاول لاحقًا.':'The search or AI provider is currently unavailable. Please try again later.';
     if(outcome.msg==='origin_not_allowed')em="Origin not allowed. Please check your settings.";
-    res.innerHTML='<div class="err"><b>'+esc(em)+'</b><br><br><a class="btn btn-w" href="'+BUY_URL+'" target="_blank" rel="noopener">'+D().buy_btn+'</a></div>';
+    var adminDetail=(adminKey&&outcome.detail)?'<br><small style="opacity:.8">'+esc(outcome.detail)+'</small>':'';
+    res.innerHTML='<div class="err"><b>'+esc(em)+'</b>'+adminDetail+'<br><br><a class="btn btn-w" href="'+BUY_URL+'" target="_blank" rel="noopener">'+D().buy_btn+'</a></div>';
   }
   searching=false;go.classList.remove('loading','glow');go.textContent=D().search_btn;
+}
+
+async function transformCurrentReport(targetSkill){
+  if(!lastReportText||searching)return;
+  searching=true;
+  go.classList.add('loading','glow');
+  go.innerHTML='<span class="spin"></span> '+D().searching;
+  var started=Date.now(), stage=0;
+  res.innerHTML='<div class="progress-container"><div class="progress-label"><span>'+D().searching+'</span><span id="pct">0s</span></div><div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar" style="width:18%"></div></div><div class="progress-timer" id="timerInfo">Using the same report and sources...</div></div>';
+  setStages(0);
+  var pulse=setInterval(function(){
+    stage=Math.min(4,stage+1);setStages(stage);
+    var elapsed=Math.floor((Date.now()-started)/1000),pb=document.getElementById('progBar'),pe=document.getElementById('pct');
+    if(pb)pb.style.width=Math.min(88,18+stage*16)+'%';if(pe)pe.textContent=elapsed+'s';
+  },700);
+  try{
+    var ctrl=new AbortController(),timeout=setTimeout(function(){ctrl.abort();},55000);
+    var headers={'Content-Type':'application/json'};if(adminKey)headers['X-Admin-Key']=adminKey;
+    var r=await fetch(WORKER_URL,{method:'POST',headers:headers,signal:ctrl.signal,body:JSON.stringify({
+      mode:'transform',query:lastReportQuery||q.value,base_answer:lastReportText,base_sources:lastReportSources,
+      visitor_id:VISITOR_ID,skill:targetSkill,country:document.getElementById('countrySel').value||lastReportCountry,lang:currentLang
+    })});
+    clearTimeout(timeout);var data={};try{data=await r.json();}catch(e){}
+    if(!r.ok){var err=new Error(String(data.error||'transform_failed'));err.providerMessage=String(data.message||'');throw err;}
+    lastReportText=String(data.answer||'');lastReportSources=Array.isArray(data.sources)?data.sources:lastReportSources;
+    illuminateAllRings();setStages(4);
+    var src='';if(lastReportSources.length)src='<div class="srcs">'+lastReportSources.slice(0,6).map(function(s){var href=safeUrl(s.url);return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
+    res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.35);text-align:center;font-size:12px;color:#c4b5fd">✓ Same report transformed with: '+esc(targetSkill)+'</div><div class="ans">'+parseMarkdown(lastReportText)+'</div>'+src+reportActions();
+  }catch(err){
+    var detail=(adminKey&&err&&err.providerMessage)?'<br><small style="opacity:.8">'+esc(err.providerMessage)+'</small>':'';
+    res.innerHTML='<div class="err"><b>'+esc(currentLang==='ar'?'تعذر تطبيق المهارة على التقرير الحالي.':'Could not apply this skill to the current report.')+'</b>'+detail+'</div>';
+  }finally{
+    clearInterval(pulse);searching=false;go.classList.remove('loading','glow');go.textContent=D().search_btn;
+  }
 }
 go.addEventListener('click',function(){glowPulse(go,600);doSearch();});
 q.addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
