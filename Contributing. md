@@ -1,0 +1,224 @@
+# Contributing to Mido Deep Search
+
+Thank you for your interest in improving Mido Deep Search.
+
+Mido Deep Search combines a static multilingual frontend, a Cloudflare Worker API, live web search, AI-generated reports, a local report library, and an interactive biological visualizer. Small changes can affect the contract between the frontend and the Worker, so contributions should be focused, tested, and documented.
+
+## Before you start
+
+Please read these files first:
+
+- `README.md` for the project overview and setup.
+- `SETUP.md` for Cloudflare, Tavily, Groq, and KV configuration.
+- `SKILL.md` for the reusable skill behavior and evidence rules.
+- `SECURITY.md` for responsible vulnerability reporting.
+- `worker.js` and `index.html` for the current request and response contract.
+
+For security vulnerabilities, do not open a public Issue. Follow `SECURITY.md` instead.
+
+## Types of contributions
+
+Useful contributions include:
+
+- Fixing reproducible bugs.
+- Improving accessibility, responsive behavior, or multilingual UI.
+- Correcting frontend and Worker compatibility issues.
+- Improving report rendering, citations, source validation, or export behavior.
+- Adding tests and validation tools.
+- Improving documentation and setup instructions.
+- Improving the bacterium visualizer without changing its integration contract.
+- Improving security, error handling, rate limiting, or deployment safety.
+
+Feature requests should explain the user problem, the expected behavior, and how the change fits the existing product.
+
+## Development setup
+
+Clone the repository and enter its root directory:
+
+```bash
+git clone https://github.com/midoaistore/mido-landing.git
+cd mido-landing
+```
+
+Run the static frontend locally:
+
+```bash
+python3 -m http.server 8080
+```
+
+Open `http://localhost:8080` in a browser. Use a local HTTP server instead of opening `index.html` through `file://`, because iframe and network behavior can differ between browsers.
+
+If you are working on the Worker, install or use a current Wrangler version and authenticate with Cloudflare as required by your local setup:
+
+```bash
+npx wrangler login
+npx wrangler dev
+```
+
+Do not commit `.env`, `.dev.vars`, provider keys, admin keys, Cloudflare tokens, Gumroad license keys, or any other secrets.
+
+## Required checks
+
+Before opening a Pull Request, run the checks available in the repository:
+
+```bash
+node --check worker.js
+```
+
+If you modify JavaScript embedded in `index.html` or `bacterium-lite.html`, extract the relevant script block and validate it with Node as well.
+
+Manually test the affected behavior in a browser. At minimum, check:
+
+- The page loads without console errors.
+- The frontend can reach the configured Worker.
+- Search requests contain `query`, `visitor_id`, `skill`, `country`, and `lang`.
+- The Worker response still contains the expected success or error fields.
+- Arabic RTL and at least one LTR language still render correctly.
+- The search stages and bacterium visualizer remain synchronized.
+- Report copy, save, download, print, and share actions still work when affected.
+- Admin credentials are entered through the UI and are not read from URL parameters or browser storage.
+
+If a check cannot be run, explain why in the Pull Request.
+
+## Frontend and Worker contract
+
+The frontend and Worker are one compatibility boundary. When changing one side, inspect and test the other side.
+
+The normal search request should preserve these fields unless the change explicitly updates the contract:
+
+```json
+{
+  "query": "...",
+  "visitor_id": "...",
+  "skill": "deep_search",
+  "country": "US",
+  "lang": "en"
+}
+```
+
+Successful responses should preserve the canonical fields:
+
+```json
+{
+  "ok": true,
+  "answer": "...",
+  "sources": [],
+  "logs": [],
+  "meta": {}
+}
+```
+
+If you add, remove, or rename a request or response field, update the documentation, frontend handling, compatibility fallbacks, and tests in the same change.
+
+## Skill changes
+
+The project uses stable skill IDs shared by the frontend and Worker:
+
+```text
+deep_search
+summarize
+compare
+recommend
+price_check
+save
+fact_check
+pros_cons
+buying_guide
+local_price_check
+source_audit
+risk_check
+extract_facts
+outline
+decision_matrix
+```
+
+A skill must change the report objective or output structure. Adding a label without changing the behavior is not enough.
+
+Skill-related changes must preserve these rules:
+
+- Do not invent prices, specifications, availability, or citations.
+- Keep source currency unless an explicit conversion policy applies.
+- Mark unsupported or conflicting information clearly.
+- Do not force a product category onto an unrelated query.
+- Keep citations traceable to the returned sources.
+- Preserve the requested output language.
+
+## Security requirements
+
+- Keep Tavily, Groq, Cloudflare, Gumroad, and admin secrets server-side.
+- Never add secrets to HTML, JavaScript committed to the repository, README files, screenshots, Issues, or Pull Requests.
+- Never read admin or provider secrets from query parameters.
+- Never persist secrets in `localStorage` or `sessionStorage`.
+- Validate external source URLs before rendering them.
+- Escape model output before inserting it into HTML.
+- Preserve the existing CSP, `noopener noreferrer`, referrer policy, and origin restrictions.
+- Do not weaken CORS or rate limiting to make local testing easier.
+
+Report suspected vulnerabilities privately using `SECURITY.md`.
+
+## Code and documentation style
+
+- Prefer small, focused changes over broad rewrites.
+- Preserve the existing visual language unless a redesign is explicitly approved.
+- Keep user-facing text translatable when adding UI copy.
+- Use stable, descriptive IDs for API fields and skills.
+- Explain non-obvious security or compatibility decisions in comments.
+- Keep documentation synchronized with actual code and deployment paths.
+- Avoid claiming unlimited usage, guaranteed accuracy, or provider capabilities that are not verified.
+
+## Pull Request process
+
+1. Create a branch from the latest `main` branch.
+2. Make one focused change per branch when possible.
+3. Run the relevant syntax, smoke, and manual checks.
+4. Update documentation and changelog entries when behavior changes.
+5. Open a Pull Request with a clear title and description.
+6. Respond to review feedback and update the branch if needed.
+
+Use a title such as:
+
+```text
+fix: preserve Worker response compatibility
+feat: add source audit report skill
+security: restrict debug endpoint access
+ docs: clarify Cloudflare secret setup
+```
+
+A Pull Request description should include:
+
+- What changed.
+- Why the change is needed.
+- Which files were changed.
+- How it was tested.
+- Any known limitations or follow-up work.
+- Whether the Worker/API contract changed.
+
+## Commit messages
+
+Use short, descriptive commit messages. Conventional prefixes are recommended:
+
+```text
+feat: add report source audit view
+fix: handle empty Worker response
+security: remove credential from URL flow
+docs: update deployment instructions
+test: validate skill identifiers
+refactor: split report action helpers
+```
+
+Do not include secrets or sensitive user data in commit messages.
+
+## Review expectations
+
+A contribution may be asked to change if it:
+
+- Breaks the frontend/Worker contract.
+- Introduces an untested security-sensitive path.
+- Exposes provider or admin credentials.
+- Adds unsupported claims to the product copy.
+- Breaks RTL, LTR, mobile layout, or existing translations.
+- Adds a skill that does not change report behavior.
+- Changes the UI without updating accessibility or keyboard behavior.
+- Removes evidence, uncertainty, citation, or price-safety rules.
+
+Thank you for helping make Mido Deep Search more useful, transparent, and maintainable.
