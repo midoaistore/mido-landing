@@ -1,128 +1,121 @@
-# ⚡ Mido DeepSearch - Setup in 3 Minutes
+# 🛠️ Mido Deep Search — Complete Setup Guide
 
-> You bought the skill for $6. Now get 3 FREE API keys to run unlimited reports.
+This guide will walk you through deploying both the **Cloudflare Worker (Backend)** and the **GitHub Pages (Frontend)**.
 
-### Total Cost: $0/month (free tiers) | Time: 3 minutes
+## 📋 Prerequisites
 
----
-
-## 🔑 Step 1: Tavily API (Search - 1000 free searches/month)
-
-1. Go to: https://tavily.com
-2. Click **Sign Up** (use Google - 10 seconds)
-3. Go to **API Keys** in dashboard
-4. Copy your key: `tvly-xxxxxxxxxxxxxxxx`
-5. Save it.
-
-**What it does:** Pulls 10 live sources for each report.
+Before you begin, ensure you have:
+1. **Node.js** and **npm** installed.
+2. A **Cloudflare Account** (Free tier is sufficient).
+3. A **GitHub Account**.
+4. API Keys for the following services:
+   - [Tavily API](https://tavily.com/) (Search)
+   - [Groq API](https://console.groq.com/) (LLM)
+   - [Gumroad API](https://gumroad.com/) (Licensing - Optional)
 
 ---
 
-## 🔑 Step 2: Groq API (Speed - 14,400 free requests/day)
+## 1. Backend Setup (Cloudflare Worker)
 
-1. Go to: https://console.groq.com
-2. Click **Log In** (Google)
-3. Left menu → **API Keys** → **Create API Key**
-4. Copy your key: `gsk_xxxxxxxxxxxxxxxx`
-5. Save it.
-
-**What it does:** Runs Trust Ranker + Scout at lightning speed.
-
----
-
-## 🔑 Step 3: Nebius API (Brain - $10 free credit)
-
-1. Go to: https://studio.nebius.com
-2. Sign Up with GitHub or Google
-3. Go to **API Keys** → **Create**
-4. Copy your key: `nebius-xxxxxxxx`
-5. You get $10 free = ~500 reports free.
-
-**What it does:** Runs Qwen3 for Thesis Builder + Report Weaver.
-
----
-
-## ⚙️ Step 4: Add Keys to Your Project
-
-Create a file named `.env` in your project root:
-
-```env
-TAVILY_API_KEY=tvly-xxxxxxxxxxxx
-GROQ_API_KEY=gsk_xxxxxxxxxxxx
-NEBIUS_API_KEY=nebius-xxxx
+### 1.1. Install Wrangler CLI
+```bash
+npm install -g wrangler
+wrangler login
 ```
 
-Or if using Claude Code / Skill:
+1.2. Configure wrangler.toml
+
+Create or modify your wrangler.toml file in the root directory. Ensure you have a KV Namespace bound to your Worker for rate-limiting and stats.
+
+```toml
+name = "mido-deepsearch"
+main = "worker.js"
+compatibility_date = "2023-10-01"
+
+[[kv_namespaces]]
+binding = "MIDO_KV"
+id = "your_kv_namespace_id_here" # Get this by running: wrangler kv:namespace create "MIDO_KV"
+```
+
+1.3. Add Environment Secrets (API Keys)
+
+Run the following commands in your terminal to securely add your API keys. These will be encrypted and stored in Cloudflare.
 
 ```bash
-export TAVILY_API_KEY="tvly-xxxx"
-export GROQ_API_KEY="gsk-xxxx"
-export NEBIUS_API_KEY="nebius-xxxx"
+wrangler secret put TAVILY_API_KEY
+# Paste your Tavily API Key
+
+wrangler secret put GROQ_API_KEY
+# Paste your Groq API Key
+
+wrangler secret put ADMIN_KEY
+# Create a strong password (e.g., Mido_Admin_2025!)
+
+wrangler secret put GUMROAD_PRODUCT_ID
+# Paste your Gumroad permalink (e.g., "dtqpvka")
+
+wrangler secret put ALLOWED_ORIGINS
+# Add your frontend URL (e.g., "https://midoaistore.github.io")
 ```
 
----
+1.4. Deploy the Worker
 
-## ✅ Step 5: Test It
-
-Ask your first question:
-
-```
-Best noise-cancelling headphones under $150 - verified reviews only
+```bash
+wrangler deploy
 ```
 
-You should get:
-- 10 sources scanned
-- Trust > 0.7 filter
-- D3 spider map
-- Final report in 35-40 seconds
-
-If you see the report → You're done! 🎉
+Take note of the deployed URL (e.g., https://mido-deepsearch.midoaistore.workers.dev).
 
 ---
 
-## 💰 How Much Does It Cost After Free Tier?
+2. Frontend Setup (GitHub Pages)
 
-One report = ~$0.02
+2.1. Update the Worker URL
 
-- Tavily: $0.005 per search (1000 free/month)
-- Groq: FREE forever (14k/day)
-- Nebius: $0.001 per 1K tokens ($10 free = 500 reports)
+Open index.html and search for the WORKER_API_URL constant. Update it with the URL of your deployed Worker:
 
-**100 reports = ~$2** - cheaper than ChatGPT Plus.
+```javascript
+const WORKER_API_URL = "https://mido-deepsearch.midoaistore.workers.dev/";
+```
 
----
+2.2. Deploy to GitHub Pages
 
-## 🆘 Troubleshooting
-
-**Error: Tavily key invalid?**
-→ Make sure it starts with `tvly-`
-
-**Error: Groq rate limit?**
-→ Wait 1 minute, free tier resets quickly.
-
-**Error: Nebius no credit?**
-→ Check billing in Nebius dashboard, $10 should be there.
-
-**Report says Trust < 0.7 for all sources?**
-→ Try a more specific question with year: "2026 best ..."
+1. Push your code to a GitHub repository.
+2. Go to Settings > Pages.
+3. Under "Build and deployment", select Deploy from a branch.
+4. Select the main branch and / (root) folder. Click Save.
+5. Your site will be live at https://<your-username>.github.io/<repo-name>/.
 
 ---
 
-## 📧 Need Help?
+3. Admin Key Security (Important)
 
-- GitHub Issues: midoaistore/mido-landing
-- Email: midoaistore@gmail.com
-- Built in Cairo - Response within 12h
+🚨 NEVER share URLs containing ?admin_key=...
+
+The index.html includes an IIFE (Immediately Invoked Function Expression) that automatically strips the admin key from the URL to prevent it from appearing in browser history or referrers.
+
+How to use the Admin Key safely:
+
+1. Open your website.
+2. Click the ⚙️ Settings icon in the top right corner.
+3. Paste your Admin Key and click Save.
+4. The key is stored securely in sessionStorage and sent via the X-Admin-Key header in API requests.
 
 ---
 
-### Why API Keys and Not Subscription?
+4. Testing the Setup
 
-1. **Privacy:** Your keys = your data stays with you
-2. **No Limits:** Generate 1000 reports/day, not 10
-3. **Cheap:** $6 once vs $30/month subscription tools
-4. **Future-proof:** If one API goes down, swap it
+1. Test Stats Endpoint:
+   Open in your browser: https://<your-worker-url>/stats
+   You should see a JSON response with daily statistics.
+2. Test the Frontend:
+   Open your GitHub Pages URL, type a query, and click Start Search.
+   The 3D Biological Engine should trigger, and the report should generate in under 35 seconds.
 
-**Welcome to real research. Links ≠ Decisions.**
+---
 
-— Mohamed Anwar | Mido AI Store | Day 7/30 Build in Public
+🆘 Troubleshooting
+
+· CORS Error: Ensure your ALLOWED_ORIGINS secret in the Worker matches your frontend URL exactly (without a trailing slash).
+· Bacterium Not Showing: Check the browser console. Ensure bacterium-lite.html is in the root directory and the path in the <iframe> is correct.
+· Rate Limit Issues: If testing, clear the mido_visitor_id from your browser's Local Storage to get a new ID.
