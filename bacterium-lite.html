@@ -27,11 +27,12 @@
 <body>
   <header class="hud">
     <div class="brand"><span>Mido DeepSearch Biological Engine V11</span><span class="ar" lang="ar" dir="rtl">محرك ميدو للبحث العميق V11</span></div>
-    <div class="title">🧬 Mido V11 Lite - 15 Organelles</div>
+    <div class="title" id="stageTitle">🧬 Mido V11 Lite - 15 Organelles</div>
     <div class="hint">Click = console.log agent | Mobile 60fps</div>
     <div class="controls"><button id="explode" type="button">Explode</button><button id="reset" type="button">Reset</button></div>
   </header>
   <div class="footer">BUILD IN PUBLIC · DAY 21/30 · CAIRO · 6-INCH PHONE</div>
+  
   <script type="module">
     import * as THREE from 'three';
 
@@ -151,6 +152,49 @@
     }
     renderer.domElement.addEventListener('pointerdown', select, { passive: true });
 
+    // ==========================================
+    // MIDO V11 STAGE SYNC (الربط مع صفحة الهبوط)
+    // ==========================================
+    const stageNames = ["Source Search", "Thesis Build", "Reduce & Rank", "Risk Check", "Final Report"];
+    const stageTitle = document.getElementById('stageTitle');
+
+    window.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'mido-stage') {
+        const stage = event.data.stage;
+        const isSearching = event.data.searching;
+
+        if (isSearching && stage >= 0 && stage <= 4) {
+            // تفعيل الانفجار التلقائي
+            setExploded(true);
+            
+            // تحديث عنوان الـ HUD داخل الـ iframe
+            if(stageTitle) stageTitle.textContent = `⚙️ ${stageNames[stage]}... (${stage + 1}/5)`;
+
+            // إضاءة وتكبير الوكيل المسؤول عن المرحلة الحالية
+            organelles.forEach((mesh, i) => {
+                if (i % 5 === stage) {
+                    mesh.material.emissiveIntensity = 1.4;
+                    mesh.scale.set(1.6, 1.6, 1.6);
+                } else {
+                    mesh.material.emissiveIntensity = 0.02;
+                    mesh.scale.set(0.8, 0.8, 0.8);
+                }
+            });
+        } else {
+            // العودة للحالة الطبيعية (بعد انتهاء البحث)
+            setExploded(false);
+            if(stageTitle) stageTitle.textContent = "🧬 Mido V11 Lite - 15 Organelles";
+            organelles.forEach((mesh) => {
+                mesh.material.emissiveIntensity = 0.08;
+                mesh.scale.set(1, 1, 1);
+            });
+        }
+      }
+    });
+
+    // ==========================================
+    // ANIMATION LOOP
+    // ==========================================
     const clock = new THREE.Clock();
     function animate() {
       requestAnimationFrame(animate);
@@ -187,7 +231,10 @@
       renderer.setSize(innerWidth, innerHeight);
       renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
     }, { passive: true });
-    console.log('Loaded - 15 organelles / 300 particles / 60fps');
+    console.log('Loaded - 15 organelles / 300 particles / 60fps | Listening for parent stages');
   </script>
+  
+  <!-- MIDO V11 CTA BUTTON -->
+  <a href="./" style="position:fixed;bottom:max(16px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#22d3ee,#a78bfa);color:#000;padding:12px 22px;border-radius:30px;font-weight:800;text-decoration:none;z-index:10;box-shadow:0 8px 30px rgba(34,211,238,.4);font-size:13px">🚀 Try Real Search → 35s / $6 Lifetime</a>
 </body>
-</html>
+  </html>
