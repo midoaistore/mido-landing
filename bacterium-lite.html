@@ -157,38 +157,78 @@
     // ==========================================
     const stageNames = ["Source Search", "Thesis Build", "Reduce & Rank", "Risk Check", "Final Report"];
     const stageTitle = document.getElementById('stageTitle');
+    const ballsPerStage = 3;
+    let activeStage = -1;
+    let activeBallOffset = 0;
+    let isSearching = false;
+    let ballPulseTimer = null;
+
+    // كل مرحلة تملك ثلاث كرات من أصل 15. الكرات المكتملة تبقى مضاءة،
+    // والكرة الحالية تبرز وتنبض، بينما الكرات القادمة تبقى خافتة.
+    function paintStageBalls(stage, searching) {
+      const safeStage = Math.max(0, Math.min(4, Number(stage) || 0));
+      const firstBall = safeStage * ballsPerStage;
+      organelles.forEach((mesh, i) => {
+        const completed = searching && i < firstBall;
+        const current = searching && i === firstBall + activeBallOffset;
+        if (completed) {
+          mesh.material.emissiveIntensity = 0.55;
+          mesh.scale.set(1.18, 1.18, 1.18);
+        } else if (current) {
+          mesh.material.emissiveIntensity = 1.65;
+          mesh.scale.set(1.85, 1.85, 1.85);
+        } else if (searching && i >= firstBall && i < firstBall + ballsPerStage) {
+          mesh.material.emissiveIntensity = 0.32;
+          mesh.scale.set(1.12, 1.12, 1.12);
+        } else if (searching) {
+          mesh.material.emissiveIntensity = 0.035;
+          mesh.scale.set(0.82, 0.82, 0.82);
+        } else {
+          mesh.material.emissiveIntensity = 0.08;
+          mesh.scale.set(1, 1, 1);
+        }
+      });
+    }
+
+    function stopBallPulse() {
+      if (ballPulseTimer !== null) {
+        clearInterval(ballPulseTimer);
+        ballPulseTimer = null;
+      }
+    }
+
+    function startBallPulse() {
+      stopBallPulse();
+      ballPulseTimer = window.setInterval(() => {
+        if (!isSearching || activeStage < 0) return;
+        activeBallOffset = (activeBallOffset + 1) % ballsPerStage;
+        paintStageBalls(activeStage, true);
+      }, 520);
+    }
 
     window.addEventListener('message', (event) => {
-      if (event.data && event.data.type === 'mido-stage') {
-        const stage = event.data.stage;
-        const isSearching = event.data.searching;
+      if (!event.data || event.data.type !== 'mido-stage') return;
+      const stage = Number(event.data.stage);
+      const searching = event.data.searching === true && stage >= 0 && stage <= 4;
 
-        if (isSearching && stage >= 0 && stage <= 4) {
-            // تفعيل الانفجار التلقائي
-            setExploded(true);
-            
-            // تحديث عنوان الـ HUD داخل الـ iframe
-            if(stageTitle) stageTitle.textContent = `⚙️ ${stageNames[stage]}... (${stage + 1}/5)`;
+      if (searching) {
+        const changedStage = stage !== activeStage || !isSearching;
+        activeStage = stage;
+        isSearching = true;
+        if (changedStage) activeBallOffset = 0;
 
-            // إضاءة وتكبير الوكيل المسؤول عن المرحلة الحالية
-            organelles.forEach((mesh, i) => {
-                if (i % 5 === stage) {
-                    mesh.material.emissiveIntensity = 1.4;
-                    mesh.scale.set(1.6, 1.6, 1.6);
-                } else {
-                    mesh.material.emissiveIntensity = 0.02;
-                    mesh.scale.set(0.8, 0.8, 0.8);
-                }
-            });
-        } else {
-            // العودة للحالة الطبيعية (بعد انتهاء البحث)
-            setExploded(false);
-            if(stageTitle) stageTitle.textContent = "🧬 Mido V11 Lite - 15 Organelles";
-            organelles.forEach((mesh) => {
-                mesh.material.emissiveIntensity = 0.08;
-                mesh.scale.set(1, 1, 1);
-            });
-        }
+        setExploded(true);
+        if(stageTitle) stageTitle.textContent = `⚙️ ${stageNames[stage]}... (${stage + 1}/5)`;
+        paintStageBalls(stage, true);
+        if (changedStage) startBallPulse();
+      } else {
+        isSearching = false;
+        activeStage = -1;
+        activeBallOffset = 0;
+        stopBallPulse();
+        setExploded(false);
+        if(stageTitle) stageTitle.textContent = "🧬 Mido V11 Lite - 15 Organelles";
+        paintStageBalls(0, false);
       }
     });
 
@@ -237,4 +277,4 @@
   <!-- MIDO V11 CTA BUTTON -->
   <a href="./" style="position:fixed;bottom:max(16px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#22d3ee,#a78bfa);color:#000;padding:12px 22px;border-radius:30px;font-weight:800;text-decoration:none;z-index:10;box-shadow:0 8px 30px rgba(34,211,238,.4);font-size:13px">🚀 Try Real Search → 35s / $6 Lifetime</a>
 </body>
-  </html>
+    </html>
