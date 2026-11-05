@@ -1,0 +1,41 @@
+# Mido Deep Search — Worker API Contract
+
+**Version:** 1.0
+**Worker Version:** V6.3
+**Base URL:** `https://mido-deepsearch.midoaistore.workers.dev`
+
+This document defines the contract between the `mido-landing` frontend and the Cloudflare Worker backend.
+
+## 1. Authentication & Rate Limiting
+
+### Admin Key (Optional)
+- **Header:** `X-Admin-Key: <ADMIN_KEY>`
+- **Purpose:** Grants unlimited search quota.
+- **Security:** Never pass the admin key via URL query parameters (e.g., `?admin_key=...`). The frontend must strip it immediately using `history.replaceState` and send it via this header.
+
+### Visitor ID (Free Tier)
+- **Header:** `X-Visitor-Id: <UUID>` (preferred) or Body field `visitor_id`.
+- **Purpose:** Used as the primary identity for the free tier (100 searches/day). If absent, falls back to client IP.
+
+### CORS
+- Only allowed origins configured in `ALLOWED_ORIGINS` environment variable can make requests.
+
+## 2. Endpoints
+
+### 2.1 `POST /` — Search & Report Generation
+Initiates a research pipeline and returns a structured report.
+
+**Request Headers:**
+- `Content-Type: application/json`
+- `X-Admin-Key` (optional)
+- `X-Visitor-Id` (optional)
+
+**Request Body:**
+```json
+{
+  "query": "Best programming laptop under 1500 USD",
+  "visitor_id": "v_12345",
+  "skill": "deep_search",
+  "country": "US",
+  "lang": "en"
+}
