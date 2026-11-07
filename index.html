@@ -21,262 +21,39 @@
 <meta name="twitter:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style media="print">
-/*
- * Mido Deep Search — Report Print & PDF Styles
- */
-
-@page {
-  size: A4;
-  margin: 16mm 14mm 18mm;
-}
-
-:root {
-  --print-ink: #111827;
-  --print-muted: #4b5563;
-  --print-line: #cbd5e1;
-  --print-soft: #f1f5f9;
-  --print-accent: #312e81;
-}
-
+@page { size: A4; margin: 16mm 14mm 18mm; }
+:root { --print-ink: #111827; --print-muted: #4b5563; --print-line: #cbd5e1; --print-soft: #f1f5f9; --print-accent: #312e81; }
 @media print {
-  html,
-  body {
-    width: 100%;
-    min-height: 100%;
-    background: #fff !important;
-    color: var(--print-ink) !important;
-    font-family: Arial, "Cairo", "Noto Sans Arabic", sans-serif !important;
-    font-size: 11pt;
-    line-height: 1.65;
-    direction: inherit;
-  }
-
-  body {
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
-  }
-
-  /* Hide the interactive landing-page chrome. */
-  header,
-  footer,
-  #spider,
-  .stats,
-  .hero,
-  #skills,
-  #laws,
-  #rings,
-  #pricing,
-  details,
-  .cta-row,
-  .trust,
-  .demo-meta,
-  .sugs,
-  .stages,
-  .progress-container,
-  .report-actions,
-  .toast,
-  .modal,
-  .btn,
-  button,
-  select,
-  input {
-    display: none !important;
-  }
-
-  .main,
-  .wrap,
-  .sec,
-  #demo,
-  .demo,
-  #res {
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    background: #fff !important;
-  }
-
-  #demo > .sec-t,
-  #demo > .sec-s,
-  #demo > h2,
-  #demo > p {
-    display: none !important;
-  }
-
-  #res {
-    margin-top: 0 !important;
-  }
-
-  #res > div:first-child {
-    color: var(--print-muted) !important;
-    background: #fff !important;
-    border: 0 !important;
-    border-bottom: 1px solid var(--print-line) !important;
-    border-radius: 0 !important;
-    padding: 0 0 8pt !important;
-    margin: 0 0 14pt !important;
-    text-align: start !important;
-  }
-
-  .ans {
-    display: block !important;
-    width: 100% !important;
-    color: var(--print-ink) !important;
-    background: #fff !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
-    white-space: normal !important;
-    overflow-wrap: anywhere;
-    word-break: normal;
-  }
-
-  .ans h1,
-  .ans h2,
-  .ans h3 {
-    color: var(--print-accent) !important;
-    line-height: 1.3;
-    break-after: avoid;
-    page-break-after: avoid;
-  }
-
-  .ans h1 {
-    font-size: 20pt;
-    margin: 0 0 12pt;
-  }
-
-  .ans h2 {
-    font-size: 15pt;
-    margin: 18pt 0 7pt;
-    border-bottom: 1px solid var(--print-line);
-    padding-bottom: 4pt;
-  }
-
-  .ans h3 {
-    font-size: 12.5pt;
-    margin: 13pt 0 5pt;
-  }
-
-  .ans p {
-    margin: 0 0 8pt;
-    orphans: 3;
-    widows: 3;
-  }
-
-  .ans ul,
-  .ans ol {
-    margin: 5pt 0 10pt;
-    padding-inline-start: 22pt;
-  }
-
-  .ans li {
-    margin: 0 0 4pt;
-  }
-
-  .ans strong {
-    color: var(--print-ink) !important;
-    font-weight: 700;
-  }
-
-  .ans pre,
-  .ans code {
-    font-family: "Courier New", monospace;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-  }
-
-  .ans pre {
-    background: var(--print-soft) !important;
-    border: 1px solid var(--print-line);
-    border-radius: 4pt;
-    padding: 8pt;
-    font-size: 8.5pt;
-    direction: ltr;
-    text-align: left;
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .ans table,
-  #res .srcs {
-    width: 100% !important;
-    margin: 10pt 0 14pt;
-  }
-
-  .ans table {
-    border-collapse: collapse;
-    table-layout: fixed;
-    font-size: 9pt;
-    break-inside: auto;
-    page-break-inside: auto;
-  }
-
-  .ans thead {
-    display: table-header-group;
-  }
-
-  .ans tr {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .ans th,
-  .ans td {
-    color: var(--print-ink) !important;
-    background: #fff !important;
-    border: 1px solid var(--print-line) !important;
-    padding: 5pt 6pt;
-    vertical-align: top;
-    overflow-wrap: anywhere;
-  }
-
-  .ans th {
-    background: var(--print-soft) !important;
-    font-weight: 700;
-  }
-
-  #res .srcs {
-    display: block !important;
-    border-top: 1px solid var(--print-line);
-    padding-top: 9pt;
-  }
-
-  #res .src {
-    display: block !important;
-    color: var(--print-ink) !important;
-    background: #fff !important;
-    border: 0 !important;
-    border-bottom: 1px solid #e5e7eb !important;
-    border-radius: 0 !important;
-    padding: 6pt 0 !important;
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  #res .src h5 {
-    color: var(--print-accent) !important;
-    font-size: 9.5pt;
-    margin: 0;
-  }
-
-  #res .src p {
-    color: var(--print-muted) !important;
-    font-size: 8.5pt;
-    margin: 2pt 0 0;
-  }
-
-  #res .src::after {
-    content: " — " attr(href);
-    color: var(--print-muted);
-    font-size: 7.5pt;
-    overflow-wrap: anywhere;
-  }
+  html, body { width: 100%; min-height: 100%; background: #fff !important; color: var(--print-ink) !important; font-family: Arial, "Cairo", "Noto Sans Arabic", sans-serif !important; font-size: 11pt; line-height: 1.65; direction: inherit; }
+  body { margin: 0 !important; padding: 0 !important; overflow: visible !important; }
+  header, footer, #spider, .stats, .hero, #skills, #laws, #rings, #pricing, details, .cta-row, .trust, .demo-meta, .sugs, .stages, .progress-container, .report-actions, .toast, .modal, .btn, button, select, input { display: none !important; }
+  .main, .wrap, .sec, #demo, .demo, #res { display: block !important; width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; border: 0 !important; box-shadow: none !important; background: #fff !important; }
+  #demo > .sec-t, #demo > .sec-s, #demo > h2, #demo > p { display: none !important; }
+  #res { margin-top: 0 !important; }
+  #res > div:first-child { color: var(--print-muted) !important; background: #fff !important; border: 0 !important; border-bottom: 1px solid var(--print-line) !important; border-radius: 0 !important; padding: 0 0 8pt !important; margin: 0 0 14pt !important; text-align: start !important; }
+  .ans { display: block !important; width: 100% !important; color: var(--print-ink) !important; background: #fff !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; white-space: normal !important; overflow-wrap: anywhere; word-break: normal; }
+  .ans h1, .ans h2, .ans h3 { color: var(--print-accent) !important; line-height: 1.3; break-after: avoid; page-break-after: avoid; }
+  .ans h1 { font-size: 20pt; margin: 0 0 12pt; }
+  .ans h2 { font-size: 15pt; margin: 18pt 0 7pt; border-bottom: 1px solid var(--print-line); padding-bottom: 4pt; }
+  .ans h3 { font-size: 12.5pt; margin: 13pt 0 5pt; }
+  .ans p { margin: 0 0 8pt; orphans: 3; widows: 3; }
+  .ans ul, .ans ol { margin: 5pt 0 10pt; padding-inline-start: 22pt; }
+  .ans li { margin: 0 0 4pt; }
+  .ans strong { color: var(--print-ink) !important; font-weight: 700; }
+  .ans pre, .ans code { font-family: "Courier New", monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .ans pre { background: var(--print-soft) !important; border: 1px solid var(--print-line); border-radius: 4pt; padding: 8pt; font-size: 8.5pt; direction: ltr; text-align: left; break-inside: avoid; page-break-inside: avoid; }
+  .ans table, #res .srcs { width: 100% !important; margin: 10pt 0 14pt; }
+  .ans table { border-collapse: collapse; table-layout: fixed; font-size: 9pt; break-inside: auto; page-break-inside: auto; }
+  .ans thead { display: table-header-group; }
+  .ans tr { break-inside: avoid; page-break-inside: avoid; }
+  .ans th, .ans td { color: var(--print-ink) !important; background: #fff !important; border: 1px solid var(--print-line) !important; padding: 5pt 6pt; vertical-align: top; overflow-wrap: anywhere; }
+  .ans th { background: var(--print-soft) !important; font-weight: 700; }
+  #res .srcs { display: block !important; border-top: 1px solid var(--print-line); padding-top: 9pt; }
+  #res .src { display: block !important; color: var(--print-ink) !important; background: #fff !important; border: 0 !important; border-bottom: 1px solid #e5e7eb !important; border-radius: 0 !important; padding: 6pt 0 !important; break-inside: avoid; page-break-inside: avoid; }
+  #res .src h5 { color: var(--print-accent) !important; font-size: 9.5pt; margin: 0; }
+  #res .src p { color: var(--print-muted) !important; font-size: 8.5pt; margin: 2pt 0 0; }
+  #res .src::after { content: " — " attr(href); color: var(--print-muted); font-size: 7.5pt; overflow-wrap: anywhere; }
 }
-
 </style>
 
 <!-- Meta Pixel Code -->
@@ -297,7 +74,6 @@ src="https://www.facebook.com/tr?id=1805920357103132&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 
 <style>
-/* التنسيقات العامة */
 :root{--bg:#0a0a0f;--card:#12121a;--border:#232733;--text:#fff;--muted:rgba(255,255,255,.55);--accent:#7c5cff;--green:#00ffa3;--cyan:#00d4ff}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter','Cairo',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;min-height:100vh}
@@ -306,16 +82,12 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
 #spider{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5}
 .main{position:relative;z-index:2}
-
-/* القائمة واللغة */
 .lang-switcher{position:relative}
 .lang-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);font-size:13px}
 .lang-dropdown{display:none;position:fixed;top:76px;left:50%;right:auto;transform:translateX(-50%);width:min(320px,calc(100vw - 24px));max-height:min(70vh,460px);overflow-y:auto;background:#151b27;border:2px solid #53628a;border-radius:14px;padding:8px;z-index:120;opacity:1;box-shadow:0 16px 40px rgba(0,0,0,.7)}
 .lang-dropdown.open{display:block}
 .lang-option{display:flex;align-items:center;gap:8px;padding:11px 13px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer}
 .lang-option:hover,.lang-option.active{background:rgba(124,92,255,.15);color:#c4b5fd}
-
-/* الهيدر والأزرار */
 header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(10,10,15,.92);border-bottom:1px solid var(--border)}
 .nav{display:flex;align-items:center;justify-content:space-between;padding:11px 0;gap:10px;flex-wrap:wrap}
 .logo{font-weight:800;font-size:1.1rem}.logo span{color:var(--accent)}
@@ -330,8 +102,6 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rg
 .btn.loading{opacity:.75;pointer-events:none}
 .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(1turn)}}
-
-/* الأقسام */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;padding:16px 0}
 .stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:11px;text-align:center}
 .stat .v{font-size:19px;font-weight:800}.stat .l{font-size:10px;color:var(--muted);margin-top:2px}
@@ -453,28 +223,39 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 @media(max-width:640px){.search-row{flex-direction:column}.search-row input,.currency-select,#go{width:100%;min-width:0}.stats{grid-template-columns:repeat(2,1fr)}}
 .admin-trigger{opacity:0.15;cursor:pointer;font-size:14px;transition:0.3s;display:inline-block;margin-top:10px}
 .admin-trigger:hover{opacity:1;color:var(--green)}
+/* ✅ V3.1: Admin active state */
+.admin-trigger.admin-active{opacity:1;color:var(--green);text-shadow:0 0 8px rgba(0,255,163,.5)}
 </style>
 </head>
-  <body>
+<body>
 
-<!-- 1. كود البكتيريا (الخلفية) -->
+<!-- 1. الخلفية (البكتيريا) — لا تغيير -->
 <div id="bio-hero" style="position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:-1; pointer-events:none; opacity:0.6;">
   <iframe id="bioFrame" src="./bacterium-lite.html" style="width:100%; height:100%; border:0; pointer-events:none;" loading="eager"></iframe>
 </div>
 
-<!-- 2. كود إخفاء مفتاح الأدمن من الرابط -->
+<!-- ✅ V3.1 FIX (Patch 2): Migration-only URL cleanup.
+     الـ admin key مش بيتحفظ من الـ URL كطريقة تشغيل عادية.
+     ده migration أمني لمرة واحدة: لو حد فتح رابط قديم فيه ?admin_key=xxx،
+     بنحفظ الـ key في sessionStorage وبعدين نمسحه فورًا من الـ URL.
+     بعد كده الـ admin يدخل من زرار 🔑 (admin modal) — لا URL. -->
 <script>
-  (function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has('admin_key')) {
-          sessionStorage.setItem('mido_admin_key', urlParams.get('admin_key'));
-          urlParams.delete('admin_key');
-          window.history.replaceState({}, document.title, window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : ''));
-      }
-  })();
+(function() {
+  try {
+    var urlParams = new URLSearchParams(window.location.search);
+    var migratedKey = urlParams.get('admin_key') || urlParams.get('admin') || urlParams.get('key') || '';
+    if (migratedKey) {
+      sessionStorage.setItem('mido_admin_key', migratedKey);
+      urlParams.delete('admin_key');
+      urlParams.delete('admin');
+      urlParams.delete('key');
+      var qs = urlParams.toString();
+      history.replaceState({}, document.title, window.location.pathname + (qs ? '?' + qs : '') + window.location.hash);
+    }
+  } catch (e) { /* في حالة sessionStorage محظور */ }
+})();
 </script>
 
-<!-- هنا كود الـ Canvas الخاص بك -->
 <canvas id="spider"></canvas>
 <canvas id="spider"></canvas>
 <button type="button" class="library-toggle" id="libraryToggle">▤ Saved Reports</button>
@@ -483,6 +264,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
   <div class="library-head"><h3 id="libraryTitle">Saved Reports</h3><div class="library-tools"><button type="button" id="clearReports">Clear all</button><button type="button" id="closeLibrary" aria-label="Close">×</button></div></div>
   <div class="library-list" id="savedReportsList"></div>
 </aside>
+
 <div class="main">
 <header>
   <div class="wrap nav">
@@ -658,7 +440,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
   <p data-i18n="footer">© 2026 Mido AI Store • Deep Search Agent V10.3</p>
   <p style="margin-top:4px;font-size:11px" data-i18n="footer2">Live sources. Always verify final local prices.</p>
   <div style="margin-top:10px;font-size:11px;opacity:.8">
-    <a href="#" onclick="openPolicy(event, 'privacy')">Privacy Policy</a> | 
+    <a href="#" onclick="openPolicy(event, 'privacy')">Privacy Policy</a> |
     <a href="#" onclick="openPolicy(event, 'refund')">Refund Policy</a>
   </div>
   <span id="adminBtn" class="admin-trigger" title="Admin Login">🔑</span>
@@ -719,6 +501,27 @@ footer a:hover{color:var(--accent);text-decoration:underline}
   </div>
 </div>
 
+<!-- ✅ V3.1 FIX (Patch 3): Admin Login Modal — لا يظهر الـ key في URL أبدًا -->
+<div class="modal" id="adminModal">
+  <div class="modal-bg" onclick="document.getElementById('adminModal').classList.remove('open')"></div>
+  <div class="modal-box" style="max-width:440px">
+    <div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:14px;align-items:center">
+      <h3 id="adminModalTitle" style="font-size:16px;font-weight:800">🔑 Admin Login</h3>
+      <button type="button" class="btn btn-ghost" id="adminModalClose">Close</button>
+    </div>
+    <p id="adminModalHint" style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+      Enter your admin key. It is stored only in this browser session and never sent in the URL.
+    </p>
+    <input id="adminKeyInput" type="password" placeholder="Admin key" autocomplete="off" spellcheck="false"
+      style="width:100%;padding:12px;border-radius:10px;background:#0a0a0f;border:1px solid var(--border);color:#fff;font-size:13px;margin-bottom:8px;outline:none"/>
+    <div id="adminKeyStatus" style="font-size:12px;margin-bottom:14px;color:var(--muted);min-height:18px;line-height:1.5"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button type="button" class="btn btn-p" id="adminKeySave" style="flex:1;min-width:140px">Save & Validate</button>
+      <button type="button" class="btn btn-ghost" id="adminKeyLogout">Logout</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -728,7 +531,10 @@ var WORKER_URL='https://mido-deepsearch.midoaistore.workers.dev';
 var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
 var skill='deep_search', currentLang='en', searching=false, lastReportText='', lastReportSources=[], lastReportQuery='', lastReportCountry='US', lastReportLang='en', adminKey='';
 
-// إزالة سر الأدمن من الرابط (أمنياً)
+// ✅ V3.1 FIX (Patch 1): قراءة الـ admin key من sessionStorage عند بدء الصفحة
+try{adminKey=sessionStorage.getItem('mido_admin_key')||'';}catch(e){adminKey='';}
+
+// إزالة سر الأدمن من الرابط (احتياط إضافي - الأمان الحقيقي في الـ script اللي فوق)
 if(/[?&]admin(?:=|&|$)/i.test(location.search)){history.replaceState(null,document.title,location.pathname+location.hash);}
 
 // تتبع البيكسل عند الضغط على زر الشراء
@@ -750,6 +556,62 @@ function toast(msg){
   t.textContent=msg; t.classList.add('show');
   setTimeout(function(){ t.classList.remove('show'); }, 2200);
 }
+
+// ✅ V3.1: نصوص admin modal (مترجمة للعربية والإنجليزية، الباقي بيرجع للإنجليزية)
+var ADMIN_TEXT = {
+  en: {
+    title:'🔑 Admin Login',
+    hint:'Enter your admin key. It is stored only in this browser session and never sent in the URL.',
+    placeholder:'Admin key',
+    save:'Save & Validate',
+    logout:'Logout',
+    close:'Close',
+    no_key:'⚠️ No admin key in this session',
+    active:'✅ Session key active (masked)',
+    validating:'🔄 Validating with /me...',
+    valid:'✅ Valid key. Session: ',
+    invalid:'❌ ',
+    removed:'Admin key removed.',
+    saved:'Admin key saved for this session.',
+    network:'❌ Network error: ',
+    empty_base:'Admin key must be sent as the X-Admin-Key header, never in the URL.'
+  },
+  ar: {
+    title:'🔑 تسجيل دخول الأدمن',
+    hint:'أدخل مفتاح الأدمن. يُخزن فقط في جلسة المتصفح ولا يُرسل في الرابط أبدًا.',
+    placeholder:'مفتاح الأدمن',
+    save:'حفظ وتحقق',
+    logout:'تسجيل خروج',
+    close:'إغلاق',
+    no_key:'⚠️ لا يوجد مفتاح أدمن في هذه الجلسة',
+    active:'✅ مفتاح جلسة نشط (مخفي)',
+    validating:'🔄 جاري التحقق عبر /me...',
+    valid:'✅ مفتاح صحيح. النوع: ',
+    invalid:'❌ ',
+    removed:'تم إزالة مفتاح الأدمن.',
+    saved:'تم حفظ المفتاح لهذه الجلسة.',
+    network:'❌ خطأ في الشبكة: ',
+    empty_base:'مفتاح الأدمن يُرسل عبر header X-Admin-Key فقط، وليس في الرابط.'
+  }
+};
+function adminText(key){
+  var d=ADMIN_TEXT[currentLang]||ADMIN_TEXT.en;
+  return d[key]||ADMIN_TEXT.en[key];
+}
+
+// ✅ V3.1: تحديث شكل زرار 🔑 حسب حالة الجلسة
+function updateAdminBadge(){
+  var el=document.getElementById('adminBtn');
+  if(!el) return;
+  if(adminKey){
+    el.classList.add('admin-active');
+    el.title='Admin session active — click to manage';
+  }else{
+    el.classList.remove('admin-active');
+    el.title='Admin Login';
+  }
+}
+updateAdminBadge();
 
 // سياسات مترجمة ثابتة؛ المحتوى داخلي ولا يأتي من المستخدم أو الخادم.
 var POLICY_T = {
@@ -850,7 +712,7 @@ var T = {
     modal_sources_title:'Top Sources', modal_sources_list:'1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Local market listings',
     modal_rec_title:'Final Recommendation', modal_rec_text:'Pick Sony WH-CH720N if budget allows. Pick JBL Tune 770NC for best value.',
     v_best:'Best overall', v_budget:'Best budget', v_solid:'Solid alt', v_entry:'Entry pick',
-    searching:'Searching...', err_net:'Network issue. Try again.', err_trial:'Free trial already used.', err_daily:'Daily free limit reached.', err_license:'Invalid license key.' ,
+    searching:'Searching...', err_net:'Network issue. Try again.', err_trial:'Free trial already used.', err_daily:'Daily free limit reached.', err_license:'Invalid license key.',
     sug1:'Best laptop for coding under 25000 EGP', sug2:'Best podcast mic under 3000 EGP', sug3:'Cheapest home internet in Egypt',
     saved_ok:'Report saved on this device', saved_empty:'No report to save yet', skill_save_hint:'Save skill selected',
     prog_sources:'Sources reviewed', prog_elapsed:'Elapsed', prog_remaining:'Remaining', prog_complete:'Research completed',
@@ -950,6 +812,19 @@ function applyLang(lang){
   document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){var k=el.getAttribute('data-i18n-placeholder');if(dict[k]!=null)el.placeholder=dict[k];});
   var go=document.getElementById('go');
   if(go&&!go.classList.contains('loading')) go.textContent=dict.search_btn;
+  // ✅ V3.1: تحديث نصوص admin modal عند تغيير اللغة
+  var t=document.getElementById('adminModalTitle');
+  if(t){t.textContent=adminText('title');}
+  var h=document.getElementById('adminModalHint');
+  if(h){h.textContent=adminText('hint');}
+  var i=document.getElementById('adminKeyInput');
+  if(i){i.placeholder=adminText('placeholder');}
+  var s=document.getElementById('adminKeySave');
+  if(s){s.textContent=adminText('save');}
+  var l=document.getElementById('adminKeyLogout');
+  if(l){l.textContent=adminText('logout');}
+  var c=document.getElementById('adminModalClose');
+  if(c){c.textContent=adminText('close');}
   renderLaws();renderRings();renderSugs();renderSkills();if(typeof LIB_TEXT!=='undefined')renderSavedReports();
 }
 function renderLaws(){
@@ -1140,11 +1015,38 @@ async function fetchStats(){
     document.getElementById('stSearches').textContent=d.today_searches||0;
     document.getElementById('stOk').textContent=d.successful_trials||0;
     document.getElementById('stFail').textContent=d.failed_trials||0;
-    document.getElementById('stLeft').textContent=d.remaining_today!=null?d.remaining_today:'—';
+    // ✅ V3.1: ما نلمسش stLeft هنا — fetchMyQuota() بيتولى الأمر بكوتا شخصية
   }catch(e){}
 }
 fetchStats();setInterval(fetchStats,30000);
 try{fetch(WORKER_URL+'/visit',{method:'POST',headers:{'Content-Type':'text/plain'},body:VISITOR_ID,cache:'no-store'}).catch(function(){});}catch(e){}
+
+// ✅ V3.1 FIX (Patch 4): جلب الكوتا الشخصية من /me بدل العام من /stats
+async function fetchMyQuota(){
+  try{
+    var headers = {'Content-Type':'application/json'};
+    if(adminKey) headers['X-Admin-Key'] = adminKey;
+    var r = await fetch(WORKER_URL+'/me',{method:'POST',headers:headers,body:JSON.stringify({visitor_id:VISITOR_ID}),cache:'no-store'});
+
+    // لو الـ admin key اتلغى من السيرفر (رفض 401)، نمسحه محليًا
+    if(r.status === 401){
+      try{sessionStorage.removeItem('mido_admin_key');}catch(e){}
+      adminKey='';
+      updateAdminBadge();
+      return;
+    }
+    if(!r.ok) return;
+    var d = await r.json();
+    if(!d.ok) return;
+    var leftEl = document.getElementById('stLeft');
+    if(leftEl && d.remaining != null && d.remaining >= 0){
+      leftEl.textContent = d.remaining;
+      leftEl.title = d.user_type + ' · ' + d.remaining + '/' + d.limit + ' left today';
+    }
+  }catch(e){}
+}
+fetchMyQuota();
+setInterval(fetchMyQuota, 60000);
 
 function setStages(n){
   document.querySelectorAll('#stages .stage').forEach(function(el,i){
@@ -1154,7 +1056,6 @@ function setStages(n){
   document.querySelectorAll('.ring-card').forEach(function(el,i){
     if(i<=n){el.classList.add('glow-on');} else el.classList.remove('glow-on');
   });
-  // إرسال المرحلة الحالية إلى محرك bacterium داخل iframe.
   try{if(typeof notifyBio==='function')notifyBio(Math.max(0,Math.min(4,n)),true);}catch(e){}
 }
 function illuminateAllRings(){
@@ -1181,9 +1082,9 @@ async function doSearch(){
   go.innerHTML='<span class="spin"></span> '+D().searching;
   var startTime=Date.now();
   var activeStage=0;
-  
+
   res.innerHTML='<div class="progress-container"><div class="progress-label"><span>'+D().searching+'</span><span id="pct">0s</span></div><div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar" style="width:10%"></div></div><div class="progress-timer" id="timerInfo">...</div></div>';
-  
+
   setStages(0);
   var timerInterval=setInterval(function(){
     var elapsed=Math.floor((Date.now()-startTime)/1000);
@@ -1203,22 +1104,35 @@ async function doSearch(){
     var savedAdminKey = adminKey;
     var headers = {'Content-Type':'application/json'};
     if(savedAdminKey) headers['X-Admin-Key'] = savedAdminKey;
-    
+
     var reqBody = {query:text, visitor_id:VISITOR_ID, skill:skill, country:document.getElementById('countrySel').value, lang:currentLang};
     var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify(reqBody),signal:ctrl.signal});
-    
+
     clearTimeout(to);
     var data={};try{data=await r.json();}catch(e){}
+
+    // ✅ V3.1 FIX: قراءة الكوتا من X-RateLimit headers بعد كل بحث
+    try{
+      var remH = r.headers.get('X-RateLimit-Remaining');
+      var limH = r.headers.get('X-RateLimit-Limit');
+      if(remH !== null && remH !== '-1'){
+        var leftEl = document.getElementById('stLeft');
+        if(leftEl){ leftEl.textContent = remH; if(limH) leftEl.title = remH + '/' + limH + ' left today'; }
+      }
+    }catch(e){}
+
     if(!r.ok){
       var apiError=String(data.error||data.reason||'http');
       if(r.status===429 || apiError==='rate_limit_exceeded') throw new Error('rate_limit_exceeded');
       if(r.status===401 || apiError==='invalid_license') throw new Error('invalid_license');
+      if(apiError==='admin_key_in_url') throw new Error('admin_key_in_url');
+      if(apiError==='missing_api_key') throw new Error('missing_api_key');
       var providerErr=new Error(apiError);providerErr.providerMessage=String(data.message||'');throw providerErr;
     }
     if(data.ok===false || (data.success===false && (data.error||data.reason))) throw new Error(String(data.error||data.reason||'http'));
     outcome={ok:true,answer:String(data.answer||data.deep_answer||''),sources:Array.isArray(data.sources)?data.sources:(Array.isArray(data.top_sources)?data.top_sources:[]),logs:Array.isArray(data.logs)?data.logs:[],meta:data.meta||{}};
   }catch(err){clearInterval(timerInterval);outcome={ok:false,msg:String(err&&err.message||err),detail:String(err&&err.providerMessage||'')};}
-  
+
   if(outcome.ok){
     clearInterval(timerInterval);
     var totalTime=Math.floor((Date.now()-startTime)/1000);
@@ -1235,12 +1149,13 @@ async function doSearch(){
       src='<div class="srcs">'+outcome.sources.slice(0,6).map(function(s){var href=safeUrl(s.url); return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
     }
     res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="ans">'+formattedAns+'</div>'+src+reportActions();
-    
+
     if(typeof fbq === 'function') fbq('track', 'Lead');
 
     if(skill==='save') saveReport(outcome.answer);
     try{if(typeof notifyBio==='function')notifyBio(4,false);}catch(e){}
     fetchStats();
+    fetchMyQuota(); // ✅ V3.1: تحديث الكوتا فورًا
   }else{
     var em=D().err_net;
     if(outcome.msg==='trial_used'||String(outcome.msg).indexOf('trial')>-1)em=D().err_trial;
@@ -1248,6 +1163,9 @@ async function doSearch(){
     if(outcome.msg==='invalid_license')em=D().err_license||'Invalid license key.';
     if(outcome.msg==='search_failed')em=currentLang==='ar'?'خدمة البحث أو مزود الذكاء الاصطناعي غير متاح حاليًا. حاول لاحقًا.':'The search or AI provider is currently unavailable. Please try again later.';
     if(outcome.msg==='origin_not_allowed')em="Origin not allowed. Please check your settings.";
+    // ✅ V3.1: معالجة أخطاء جديدة من worker v7.1
+    if(outcome.msg==='admin_key_in_url')em=currentLang==='ar'?'مفتاح الأدمن يجب أن يُرسل في header X-Admin-Key، وليس في الرابط. اضغط 🔑 لتسجيل الدخول.':'Admin key must not be in the URL. Use the 🔑 button to log in.';
+    if(outcome.msg==='missing_api_key')em=currentLang==='ar'?'خطأ في إعداد الخادم. يرجى التواصل مع الدعم.':'Server configuration error. Please contact support.';
     var adminDetail=(adminKey&&outcome.detail)?'<br><small style="opacity:.8">'+esc(outcome.detail)+'</small>':'';
     res.innerHTML='<div class="err"><b>'+esc(em)+'</b>'+adminDetail+'<br><br><a class="btn btn-w" href="'+BUY_URL+'" target="_blank" rel="noopener">'+D().buy_btn+'</a></div>';
   }
@@ -1275,8 +1193,23 @@ async function transformCurrentReport(targetSkill){
       visitor_id:VISITOR_ID,skill:targetSkill,country:document.getElementById('countrySel').value||lastReportCountry,lang:currentLang
     })});
     clearTimeout(timeout);var data={};try{data=await r.json();}catch(e){}
+    // ✅ V3.1: تحديث الكوتا من headers
+    try{
+      var remH = r.headers.get('X-RateLimit-Remaining');
+      if(remH !== null && remH !== '-1'){
+        var leftEl = document.getElementById('stLeft');
+        if(leftEl){ leftEl.textContent = remH; }
+      }
+    }catch(e){}
+
     if(!r.ok){var err=new Error(String(data.error||'transform_failed'));err.providerMessage=String(data.message||'');throw err;}
-    lastReportText=String(data.answer||'');lastReportSources=Array.isArray(data.sources)?data.sources:lastReportSources;
+
+    // ✅ V3.1: حماية من رد فارغ يكسر السلسلة
+    var newText = String(data.answer||'');
+    if(!newText) throw new Error('transform_empty');
+
+    lastReportText=newText;
+    lastReportSources=Array.isArray(data.sources)?data.sources:lastReportSources;
     illuminateAllRings();setStages(4);
     var src='';if(lastReportSources.length)src='<div class="srcs">'+lastReportSources.slice(0,6).map(function(s){var href=safeUrl(s.url);return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
     res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.35);text-align:center;font-size:12px;color:#c4b5fd">✓ Same report transformed with: '+esc(targetSkill)+'</div><div class="ans">'+parseMarkdown(lastReportText)+'</div>'+src+reportActions();
@@ -1306,13 +1239,84 @@ document.getElementById('closeModal').addEventListener('click',function(){modal.
 document.getElementById('modalBg').addEventListener('click',function(){modal.classList.remove('open');});
 document.getElementById('navBuy').addEventListener('click',function(){glowPulse(this,700);});
 
+// ✅ V3.1 FIX (Patch 3): Admin Login Modal — يستبدل prompt() القديم
 document.getElementById('adminBtn').addEventListener('click', function() {
-    var currentKey = adminKey;
-    var newKey = prompt("Enter Admin Key (Leave empty to remove):", currentKey);
-    if (newKey === null) return; 
-    if (newKey.trim() === '') { adminKey=''; toast("Admin key removed."); }
-    else { adminKey=newKey.trim(); toast("Admin key active for this session."); }
+  var m = document.getElementById('adminModal');
+  var input = document.getElementById('adminKeyInput');
+  var status = document.getElementById('adminKeyStatus');
+  if(adminKey){
+    input.value = adminKey;
+    status.textContent = adminText('active');
+    status.style.color = '#6ee7b7';
+  }else{
+    input.value = '';
+    status.textContent = adminText('no_key');
+    status.style.color = '#fbbf24';
+  }
+  m.classList.add('open');
+  setTimeout(function(){ input.focus(); }, 100);
 });
+
+document.getElementById('adminModalClose').addEventListener('click', function() {
+  document.getElementById('adminModal').classList.remove('open');
+});
+
+document.getElementById('adminKeySave').addEventListener('click', async function() {
+  var input = document.getElementById('adminKeyInput');
+  var status = document.getElementById('adminKeyStatus');
+  var val = (input.value || '').trim();
+
+  if(!val){
+    try{sessionStorage.removeItem('mido_admin_key');}catch(e){}
+    adminKey = '';
+    updateAdminBadge();
+    toast(adminText('removed'));
+    document.getElementById('adminModal').classList.remove('open');
+    return;
+  }
+
+  status.textContent = adminText('validating');
+  status.style.color = '#a5b4fc';
+
+  try {
+    var r = await fetch(WORKER_URL + '/me', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Key': val },
+      body: JSON.stringify({ visitor_id: VISITOR_ID })
+    });
+    var data = {};
+    try { data = await r.json(); } catch(e) {}
+
+    if(r.ok && data.ok){
+      try{sessionStorage.setItem('mido_admin_key', val);}catch(e){}
+      adminKey = val;
+      updateAdminBadge();
+      status.textContent = adminText('valid') + (data.user_type || 'admin');
+      status.style.color = '#6ee7b7';
+      toast(adminText('saved'));
+      fetchMyQuota(); // تحديث فوري للكوتا
+      setTimeout(function(){ document.getElementById('adminModal').classList.remove('open'); }, 800);
+    }else{
+      status.textContent = adminText('invalid') + (data.message || data.error || 'Invalid key');
+      status.style.color = '#fca5a5';
+    }
+  } catch (err) {
+    status.textContent = adminText('network') + (err.message || 'unknown');
+    status.style.color = '#fca5a5';
+  }
+});
+
+document.getElementById('adminKeyLogout').addEventListener('click', function() {
+  try{sessionStorage.removeItem('mido_admin_key');}catch(e){}
+  adminKey = '';
+  updateAdminBadge();
+  toast(adminText('removed'));
+  document.getElementById('adminModal').classList.remove('open');
+  fetchMyQuota();
+});
+
+// ✅ V3.1: تحديث admin badge عند فتح المودال من زر خارجي (احتياط)
+document.getElementById('adminModal').addEventListener('transitionend', updateAdminBadge);
 
 (function(){
   var canvas=document.getElementById('spider');if(!canvas)return;
@@ -1361,20 +1365,19 @@ document.getElementById('adminBtn').addEventListener('click', function() {
   requestAnimationFrame(draw);
 })();
 })();
-  // 3. كود الربط مع المحرك البيولوجي
-  var bioFrame = document.getElementById('bioFrame');
-  function notifyBio(stage, isSearching) {
-    try {
-      if (bioFrame && bioFrame.contentWindow) {
-        bioFrame.contentWindow.postMessage({ type: 'mido-stage', stage: stage, searching: isSearching }, '*');
-      }
-    } catch (e) {}
-    if (isSearching) document.body.classList.add('searching');
-    else if (stage === 4 || stage === -1) setTimeout(function() { document.body.classList.remove('searching'); }, 2500);
-  }
-  
-  // إعادة ضبط المحرك بعد تحميله؛ مراحل البحث تصل إليه من setStages.
-  if (bioFrame) bioFrame.addEventListener('load', function(){ notifyBio(4, false); }, { once: true });
+
+// 3. كود الربط مع المحرك البيولوجي
+var bioFrame = document.getElementById('bioFrame');
+function notifyBio(stage, isSearching) {
+  try {
+    if (bioFrame && bioFrame.contentWindow) {
+      bioFrame.contentWindow.postMessage({ type: 'mido-stage', stage: stage, searching: isSearching }, '*');
+    }
+  } catch (e) {}
+  if (isSearching) document.body.classList.add('searching');
+  else if (stage === 4 || stage === -1) setTimeout(function() { document.body.classList.remove('searching'); }, 2500);
+}
+if (bioFrame) bioFrame.addEventListener('load', function(){ notifyBio(4, false); }, { once: true });
 </script>
 </body>
   </html>
