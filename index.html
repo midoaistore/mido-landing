@@ -1,549 +1,1382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Mido Deep Search - Biological Engine V11</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@400;600;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; connect-src 'self' https://mido-deepsearch.midoaistore.workers.dev; img-src 'self' data: https://www.facebook.com https://raw.githubusercontent.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://midoaistore.gumroad.com">
+<title>Mido Deep Search — Verified Research in 5-40 Seconds</title>
+<meta name="description" content="Mido Deep Search checks local and international sources and turns one question into a practical verified research report in 5-40 seconds.">
+<meta property="og:title" content="Mido Deep Search — Verified Research in 5-40 Seconds">
+<meta property="og:description" content="Research products, courses, markets and decisions using verified local and international sources.">
+<meta property="og:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
+<meta property="og:url" content="https://midoaistore.github.io/mido-landing/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mido Deep Search">
+<meta name="twitter:description" content="From one question to a verified research report in 5-40 seconds.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/midoaistore/mido-landing/main/report-preview-en.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style media="print">
+@page { size: A4; margin: 16mm 14mm 18mm; }
+:root { --print-ink: #111827; --print-muted: #4b5563; --print-line: #cbd5e1; --print-soft: #f1f5f9; --print-accent: #312e81; }
+@media print {
+  html, body { width: 100%; min-height: 100%; background: #fff !important; color: var(--print-ink) !important; font-family: Arial, "Cairo", "Noto Sans Arabic", sans-serif !important; font-size: 11pt; line-height: 1.65; direction: inherit; }
+  body { margin: 0 !important; padding: 0 !important; overflow: visible !important; }
+  header, footer, #spider, .stats, .hero, #skills, #laws, #rings, #pricing, details, .cta-row, .trust, .demo-meta, .sugs, .stages, .progress-container, .report-actions, .toast, .modal, .btn, button, select, input { display: none !important; }
+  .main, .wrap, .sec, #demo, .demo, #res { display: block !important; width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; border: 0 !important; box-shadow: none !important; background: #fff !important; }
+  #demo > .sec-t, #demo > .sec-s, #demo > h2, #demo > p { display: none !important; }
+  #res { margin-top: 0 !important; }
+  #res > div:first-child { color: var(--print-muted) !important; background: #fff !important; border: 0 !important; border-bottom: 1px solid var(--print-line) !important; border-radius: 0 !important; padding: 0 0 8pt !important; margin: 0 0 14pt !important; text-align: start !important; }
+  .ans { display: block !important; width: 100% !important; color: var(--print-ink) !important; background: #fff !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; white-space: normal !important; overflow-wrap: anywhere; word-break: normal; }
+  .ans h1, .ans h2, .ans h3 { color: var(--print-accent) !important; line-height: 1.3; break-after: avoid; page-break-after: avoid; }
+  .ans h1 { font-size: 20pt; margin: 0 0 12pt; }
+  .ans h2 { font-size: 15pt; margin: 18pt 0 7pt; border-bottom: 1px solid var(--print-line); padding-bottom: 4pt; }
+  .ans h3 { font-size: 12.5pt; margin: 13pt 0 5pt; }
+  .ans p { margin: 0 0 8pt; orphans: 3; widows: 3; }
+  .ans ul, .ans ol { margin: 5pt 0 10pt; padding-inline-start: 22pt; }
+  .ans li { margin: 0 0 4pt; }
+  .ans strong { color: var(--print-ink) !important; font-weight: 700; }
+  .ans pre, .ans code { font-family: "Courier New", monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .ans pre { background: var(--print-soft) !important; border: 1px solid var(--print-line); border-radius: 4pt; padding: 8pt; font-size: 8.5pt; direction: ltr; text-align: left; break-inside: avoid; page-break-inside: avoid; }
+  .ans table, #res .srcs { width: 100% !important; margin: 10pt 0 14pt; }
+  .ans table { border-collapse: collapse; table-layout: fixed; font-size: 9pt; break-inside: auto; page-break-inside: auto; }
+  .ans thead { display: table-header-group; }
+  .ans tr { break-inside: avoid; page-break-inside: avoid; }
+  .ans th, .ans td { color: var(--print-ink) !important; background: #fff !important; border: 1px solid var(--print-line) !important; padding: 5pt 6pt; vertical-align: top; overflow-wrap: anywhere; }
+  .ans th { background: var(--print-soft) !important; font-weight: 700; }
+  #res .srcs { display: block !important; border-top: 1px solid var(--print-line); padding-top: 9pt; }
+  #res .src { display: block !important; color: var(--print-ink) !important; background: #fff !important; border: 0 !important; border-bottom: 1px solid #e5e7eb !important; border-radius: 0 !important; padding: 6pt 0 !important; break-inside: avoid; page-break-inside: avoid; }
+  #res .src h5 { color: var(--print-accent) !important; font-size: 9.5pt; margin: 0; }
+  #res .src p { color: var(--print-muted) !important; font-size: 8.5pt; margin: 2pt 0 0; }
+  #res .src::after { content: " — " attr(href); color: var(--print-muted); font-size: 7.5pt; overflow-wrap: anywhere; }
+}
+</style>
 
-    :root {
-      --bg: #020406;
-      --cyan: #00f3ff;
-      --purple: #9d4edd;
-      --green: #00ff88;
-      --text: #ffffff;
-      --text-dim: #8892b0;
-      --panel-bg: rgba(5, 10, 20, 0.85);
-      --border: rgba(0, 243, 255, 0.3);
-    }
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1805920357103132');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1805920357103132&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Space Grotesk', sans-serif;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .mono { font-family: 'JetBrains Mono', monospace; }
-
-    /* 3D Bacterium Background */
-    #bio-hero {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-      z-index: -1; pointer-events: none; opacity: 0.6;
-    }
-    #bioFrame { width: 100%; height: 100%; border: 0; pointer-events: none; }
-
-    /* Scroll Area */
-    .scroll-content { position: relative; z-index: 2; height: 600vh; pointer-events: none; }
-
-    /* HUD Header */
-    .hud { position: fixed; z-index: 10; pointer-events: none; }
-    .hud-header {
-      top: 0; left: 0; width: 100%; padding: 20px 40px;
-      display: flex; justify-content: space-between; align-items: center;
-      background: linear-gradient(to bottom, rgba(2,4,6,0.9), transparent);
-    }
-
-    .logo { font-weight: 700; font-size: 1.2rem; color: var(--cyan); letter-spacing: 2px; }
-    
-    .header-controls { display: flex; align-items: center; gap: 15px; pointer-events: auto; }
-    
-    .lang-selector, .btn-settings {
-      background: var(--panel-bg); color: var(--cyan); border: 1px solid var(--border);
-      padding: 8px 15px; border-radius: 8px; font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem; cursor: pointer; outline: none; backdrop-filter: blur(10px);
-      transition: all 0.3s;
-    }
-    .lang-selector:hover, .btn-settings:hover { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); }
-    .btn-settings { padding: 8px 12px; font-size: 1rem; }
-
-    /* Hero Section */
-    .hero {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      z-index: 20; text-align: center; width: 100%; max-width: 850px;
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: auto; padding: 0 20px;
-    }
-    .hero.hidden { opacity: 0; transform: translate(-50%, -80%) scale(0.9); pointer-events: none; }
-    
-    .hero h1 { 
-      font-size: 3.5rem; color: #fff; text-shadow: 0 0 30px rgba(0, 243, 255, 0.4); 
-      margin-bottom: 10px; letter-spacing: -1px;
-    }
-    
-    .hook-container { height: 40px; margin-bottom: 40px; display: flex; justify-content: center; align-items: center; }
-    .hero .hook-text {
-      color: var(--cyan); font-size: 1.2rem; font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 2px; text-transform: uppercase; font-weight: bold;
-    }
-    .cursor {
-      display: inline-block; width: 10px; height: 1.2rem; background-color: var(--cyan);
-      margin-left: 5px; animation: blink 1s step-end infinite; vertical-align: bottom;
-    }
-    @keyframes blink { 50% { opacity: 0; } }
-
-    .search-box {
-      display: flex; background: rgba(10, 15, 30, 0.8); border: 1px solid var(--border);
-      border-radius: 50px; padding: 8px; backdrop-filter: blur(15px);
-      box-shadow: 0 0 40px rgba(0, 243, 255, 0.1); transition: all 0.3s;
-    }
-    .search-box:focus-within { border-color: var(--cyan); box-shadow: 0 0 50px rgba(0, 243, 255, 0.3); }
-    .search-input {
-      flex: 1; background: transparent; border: none; outline: none; color: white;
-      font-size: 1.1rem; padding: 15px 25px; font-family: 'Space Grotesk', sans-serif;
-      min-width: 0;
-    }
-    .btn-search {
-      background: linear-gradient(135deg, var(--cyan), var(--green)); color: #000;
-      border: none; border-radius: 40px; padding: 15px 30px; font-size: 1.1rem;
-      font-weight: 700; cursor: pointer; transition: all 0.3s; display: flex;
-      align-items: center; justify-content: center; gap: 10px; white-space: nowrap;
-    }
-    .btn-search:hover { transform: scale(1.02); box-shadow: 0 0 30px rgba(0, 243, 255, 0.5); }
-
-    /* Sections */
-    .section {
-      height: 100vh; display: flex; flex-direction: column; justify-content: center;
-      padding-left: 10vw; opacity: 0; transform: translateY(50px); transition: all 0.6s ease-out;
-    }
-    .section.active { opacity: 1; transform: translateY(0); }
-    .section h2 { font-size: 3rem; color: #fff; margin-bottom: 20px; max-width: 600px; line-height: 1.1; }
-    .section h2 span { color: transparent; -webkit-text-stroke: 1px var(--cyan); }
-    .section p { font-size: 1.2rem; color: var(--text-dim); max-width: 450px; line-height: 1.7; }
-    .tag {
-      display: inline-block; padding: 6px 14px; background: rgba(0, 243, 255, 0.1);
-      color: var(--cyan); border: 1px solid var(--cyan); border-radius: 4px;
-      font-size: 0.75rem; margin-bottom: 20px; letter-spacing: 2px;
-    }
-
-    /* Scanline */
-    .scanlines {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: repeating-linear-gradient(to bottom, transparent, transparent 3px, rgba(0,0,0,0.2) 3px, rgba(0,0,0,0.2) 4px);
-      z-index: 5; pointer-events: none; opacity: 0.3;
-    }
-
-    /* Loader */
-    .loader {
-      display: none; width: 20px; height: 20px; border: 3px solid rgba(0,0,0,0.3);
-      border-top-color: #000; border-radius: 50%; animation: spin 1s linear infinite;
-    }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-
-    /* Modals */
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 100;
-      display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;
-    }
-    .modal-overlay.show { display: flex; opacity: 1; }
-    
-    .modal-content {
-      background: var(--panel-bg); border: 1px solid var(--border);
-      border-radius: 16px; padding: 30px; width: 90%; max-width: 500px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5); position: relative;
-      max-height: 90vh; display: flex; flex-direction: column;
-    }
-    #result-modal .modal-content { max-width: 900px; height: 90vh; }
-    
-    .modal-title { color: var(--cyan); font-size: 1.2rem; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-    .modal-close { background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
-    .modal-close:hover { color: var(--purple); }
-    
-    .input-field {
-      width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--border);
-      color: #fff; border-radius: 8px; margin-bottom: 15px; font-family: 'JetBrains Mono', monospace;
-    }
-    .btn-save { width: 100%; padding: 12px; background: var(--cyan); color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-
-    /* Markdown Content */
-    .markdown-body { overflow-y: auto; flex: 1; color: #d1d5db; line-height: 1.6; padding-right: 10px; margin-bottom: 15px; }
-    .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #fff; margin-top: 1.5em; margin-bottom: 0.5em; }
-    .markdown-body table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
-    .markdown-body th, .markdown-body td { border: 1px solid var(--border); padding: 10px; text-align: left; }
-    .markdown-body th { background: rgba(0, 243, 255, 0.1); color: var(--cyan); }
-    .markdown-body a { color: var(--green); text-decoration: none; }
-    .markdown-body a:hover { text-decoration: underline; }
-    .markdown-body ul, .markdown-body ol { margin-left: 20px; margin-bottom: 15px; }
-
-    /* Transform UI */
-    .transform-container {
-      margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border);
-      display: flex; gap: 10px; flex-wrap: wrap;
-    }
-    .transform-select {
-      flex: 1; min-width: 150px; padding: 12px; border-radius: 8px; background: #000;
-      color: #fff; border: 1px solid var(--cyan); font-family: 'Space Grotesk', sans-serif;
-    }
-    .btn-transform {
-      padding: 12px 20px; border-radius: 8px; background: var(--purple); color: #fff;
-      font-weight: bold; border: none; cursor: pointer; transition: 0.3s;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-    }
-    .btn-transform:hover { background: #b05eff; box-shadow: 0 0 15px rgba(157, 78, 221, 0.5); }
-
-    /* RTL Support */
-    body[dir="rtl"] .hud-header { flex-direction: row-reverse; }
-    body[dir="rtl"] .section { padding-left: 0; padding-right: 10vw; text-align: right; }
-    body[dir="rtl"] .search-box { flex-direction: row-reverse; }
-    body[dir="rtl"] .markdown-body table th, body[dir="rtl"] .markdown-body table td { text-align: right; }
-    body[dir="rtl"] .cursor { margin-left: 0; margin-right: 5px; }
-
-    /* Mobile Optimizations */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.2rem; }
-      .hero .hook-text { font-size: 0.9rem; letter-spacing: 1px; }
-      .btn-search { padding: 15px 20px; font-size: 1rem; }
-      .hud-header { padding: 15px; }
-      .logo { font-size: 1rem; }
-      .lang-selector, .btn-settings { font-size: 0.75rem; padding: 6px 10px; }
-      .section h2 { font-size: 2rem; }
-      .section p { font-size: 1rem; }
-      .modal-content { padding: 20px; width: 95%; }
-      .transform-container { flex-direction: column; }
-    }
-  </style>
-  
-  <script type="importmap">
-    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{--bg:#0a0a0f;--card:#12121a;--border:#232733;--text:#fff;--muted:rgba(255,255,255,.55);--accent:#7c5cff;--green:#00ffa3;--cyan:#00d4ff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Cairo',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+#spider{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5}
+.main{position:relative;z-index:2}
+.lang-switcher{position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);font-size:13px}
+.lang-dropdown{display:none;position:fixed;top:76px;left:50%;right:auto;transform:translateX(-50%);width:min(320px,calc(100vw - 24px));max-height:min(70vh,460px);overflow-y:auto;background:#151b27;border:2px solid #53628a;border-radius:14px;padding:8px;z-index:120;opacity:1;box-shadow:0 16px 40px rgba(0,0,0,.7)}
+.lang-dropdown.open{display:block}
+.lang-option{display:flex;align-items:center;gap:8px;padding:11px 13px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer}
+.lang-option:hover,.lang-option.active{background:rgba(124,92,255,.15);color:#c4b5fd}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(10,10,15,.92);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:11px 0;gap:10px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.1rem}.logo span{color:var(--accent)}
+.nav-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge{font-size:11px;padding:4px 10px;border-radius:999px;background:#1a1a24;border:1px solid var(--border);color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 18px;border-radius:999px;font-weight:700;font-size:13px;transition:.2s;border:1px solid transparent}
+.btn-w{background:#fff;color:#000}.btn-w:hover{background:#eaeaea}
+.btn-p{background:linear-gradient(135deg,var(--accent),#5b8cff);color:#fff}
+.btn-ghost{background:#1a1a24;color:#fff;border-color:var(--border)}
+.btn.glow,.glow-on{box-shadow:0 0 0 2px rgba(124,92,255,.55),0 0 22px rgba(124,92,255,.4)!important;border-color:rgba(124,92,255,.6)!important;animation:pg 1s ease-in-out infinite}
+@keyframes pg{50%{box-shadow:0 0 0 3px rgba(0,255,163,.45),0 0 26px rgba(0,255,163,.3)}}
+.btn.loading{opacity:.75;pointer-events:none}
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(1turn)}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;padding:16px 0}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:11px;text-align:center}
+.stat .v{font-size:19px;font-weight:800}.stat .l{font-size:10px;color:var(--muted);margin-top:2px}
+.stat.live{border-color:rgba(0,255,163,.3)}
+.hero{text-align:center;padding:42px 0 24px}
+.pill{display:inline-flex;padding:5px 12px;border-radius:999px;background:#12121a;border:1px solid var(--border);color:var(--muted);font-size:12px;margin-bottom:12px}
+.hero h1{font-size:clamp(1.55rem,4vw,2.5rem);line-height:1.22;font-weight:800;margin-bottom:12px}
+.hero h1 .g{background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{max-width:640px;margin:0 auto 16px;color:var(--muted);font-size:14.5px}
+.cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.trust{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.sec{padding:34px 0}
+.sec-t{text-align:center;font-size:1.4rem;font-weight:800;margin-bottom:6px}
+.sec-s{text-align:center;color:var(--muted);font-size:13px;max-width:620px;margin:0 auto 18px}
+.skills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:980px;margin:0 auto}
+.skill{padding:8px 14px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);font-size:12px;color:var(--muted);cursor:pointer;transition:.2s}
+.skill:hover,.skill.on{background:rgba(124,92,255,.15);border-color:rgba(124,92,255,.5);color:#c4b5fd}
+.demo{background:linear-gradient(180deg,#12121a,#0a0a0f);border:1px solid var(--border);border-radius:20px;padding:18px;max-width:860px;margin:0 auto}
+.search-row{display:flex;gap:8px;flex-wrap:wrap}
+.search-row input{flex:1;min-width:240px;height:60px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);padding:0 15px;color:#fff;font-size:14px;outline:none}
+.search-row input:focus{border-color:var(--accent)}
+.sugs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.sug{padding:5px 11px;border-radius:999px;border:1px solid var(--border);background:#0a0a0f;font-size:11px;color:var(--muted);cursor:pointer}
+.demo-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:11px;padding-top:11px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)}
+#res{margin-top:12px;min-height:40px}
+.progress-container{margin-top:16px;padding:16px;border-radius:16px;background:#0a0a0f;border:1px solid var(--border)}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
+.progress-bar-outer{height:6px;width:100%;background:#1a1a24;border-radius:99px;overflow:hidden}
+.progress-bar-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:99px;transition:width .5s ease-out}
+.progress-timer{margin-top:8px;font-size:11px;color:var(--muted);text-align:center}
+.log{border-radius:12px;border:1px solid var(--border);background:#0a0a0f;padding:12px}
+.steps{display:grid;gap:6px}
+.step{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.step.done,.step.active{color:#fff}
+.step .n{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;border:1px solid var(--border);background:#12121a}
+.step.done .n{background:var(--accent);border-color:var(--accent)}
+.step.active .n{border-color:var(--green);box-shadow:0 0 12px rgba(0,255,163,.5)}
+.ans{margin-top:10px;border-radius:14px;border:1px solid rgba(124,92,255,.3);background:rgba(124,92,255,.08);padding:14px;font-size:13px;white-space:pre-wrap;word-break:break-word}
+.ans h1,.ans h2,.ans h3{margin-top:12px;margin-bottom:6px;color:var(--cyan)}
+.ans p{margin-bottom:8px}
+.ans ul,.ans ol{padding-inline-start:20px;margin-bottom:8px}
+.ans li{margin-bottom:4px}
+.ans strong{color:var(--green)}
+.report-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.report-actions .btn{min-width:125px}
+.library-toggle{position:fixed;right:18px;bottom:18px;z-index:145;padding:11px 14px;border-radius:999px;background:linear-gradient(135deg,var(--accent),#5b8cff);color:#fff;font-size:12px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.report-library{position:fixed;top:0;right:0;bottom:0;width:min(390px,92vw);z-index:155;background:#111522;border-left:1px solid #35405b;box-shadow:-18px 0 45px rgba(0,0,0,.45);transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column;padding:18px}
+.report-library.open{transform:translateX(0)}
+[dir="ltr"] .report-library{right:auto;left:0;border-left:0;border-right:1px solid #35405b;transform:translateX(-105%);box-shadow:18px 0 45px rgba(0,0,0,.45)}
+[dir="ltr"] .report-library.open{transform:translateX(0)}
+.library-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.library-head h3{font-size:16px}.library-tools{display:flex;gap:6px;align-items:center}.library-tools button{font-size:11px;color:#c4b5fd;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:#1a1f30}
+.library-list{overflow-y:auto;padding-top:12px;display:grid;gap:8px}.library-empty{color:var(--muted);font-size:12px;text-align:center;padding:30px 10px}
+.saved-card{border:1px solid var(--border);background:#171c2a;border-radius:12px;padding:10px}.saved-card:hover{border-color:rgba(124,92,255,.65)}
+.saved-card h4{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.saved-card time{display:block;color:var(--muted);font-size:10px;margin-top:3px}.saved-card .saved-actions{display:flex;gap:6px;margin-top:8px}.saved-card .saved-actions button{font-size:11px;padding:5px 8px;border-radius:7px;background:#0d111c;border:1px solid var(--border)}
+.library-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:150}.library-backdrop.open{display:block}
+@media print{body{background:#fff!important;color:#111!important}.report-actions,.srcs{display:none!important}.ans{border:none!important;background:#fff!important;color:#111!important}.ans h1,.ans h2,.ans h3{color:#111!important}.ans strong{color:#111!important}.ans th,.ans td{border-color:#bbb!important}.ans th{background:#eee!important}}
+.ans table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px}
+.ans th,.ans td{border:1px solid var(--border);padding:6px}
+.ans th{background:#1a1a24}
+.err{margin-top:10px;border-radius:12px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.1);padding:12px;font-size:13px;color:#fecaca}
+.srcs{margin-top:10px;display:grid;gap:8px}
+.src{display:block;border-radius:12px;border:1px solid var(--border);background:#12121a;padding:10px}
+.src h5{font-size:12px}.src p{font-size:11px;color:var(--muted);margin-top:3px}
+.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px;margin-top:14px}
+.stage{background:#0a0a0f;border:1px solid var(--border);border-radius:14px;padding:11px;cursor:pointer;transition:.2s}
+.stage.on,.stage:hover{border-color:rgba(124,92,255,.5);background:#1a1a24}
+.stage.on{box-shadow:0 0 18px rgba(124,92,255,.18)}
+.stage .num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:#12121a;border:1px solid var(--border);margin-bottom:7px}
+.stage.on .num{background:var(--accent);border-color:var(--accent)}
+.stage h4{font-size:12px}.stage p{font-size:11px;color:var(--muted);margin-top:2px}
+.xcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:.2s}
+.xcard:hover,.xcard.open{border-color:rgba(124,92,255,.45)}
+.xcard.open{box-shadow:0 0 20px rgba(124,92,255,.15);background:#151522}
+.xcard .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.xcard .num{font-size:10px;letter-spacing:.08em;color:var(--accent);font-weight:700}
+.xcard h3{font-size:14px;margin-top:6px}
+.xcard .short{font-size:12px;color:var(--muted);margin-top:4px}
+.xcard .detail{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:rgba(255,255,255,.72);line-height:1.7}
+.xcard.open .detail{display:block}
+.xcard .chev{font-size:12px;color:var(--muted);transition:.2s}
+.xcard.open .chev{transform:rotate(180deg);color:#c4b5fd}
+.trust-note{margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(0,255,163,.06);border:1px solid rgba(0,255,163,.2);font-size:12.5px;color:rgba(255,255,255,.75);text-align:center}
+.report{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.report-h{padding:13px 15px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;background:linear-gradient(90deg,rgba(124,92,255,.12),rgba(0,212,255,.05))}
+.report-h h3{font-size:14.5px}
+.tag{font-size:10px;padding:3px 9px;border-radius:999px;background:#0a0a0f;border:1px solid var(--border);color:var(--muted)}
+.tag.g{color:var(--green);border-color:rgba(0,255,163,.3);background:rgba(0,255,163,.1)}
+.report-b{padding:15px}
+.qt{background:#0a0a0f;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px}
+.qt h4{font-size:12px;color:var(--green);margin-bottom:6px}
+.qt ul{padding-inline-start:18px;font-size:12.5px;color:var(--muted)}
+.qt li{margin-bottom:5px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+th,td{padding:8px;border-bottom:1px solid #1a1a24;text-align:start}
+th{font-size:10px;color:var(--muted);background:#0a0a0f}
+.recs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:10px}
+.rec{background:#0a0a0f;border:1px solid var(--border);border-radius:12px;padding:10px}
+.rec h5{font-size:12px}.rec p{font-size:11px;color:var(--muted);margin-top:3px}
+.rec .pr{color:var(--green);font-weight:700;font-size:12px;margin-top:4px;display:block}
+.price-box{max-width:480px;margin:0 auto;text-align:center;padding:22px;border-radius:18px;border:1px solid var(--border);background:linear-gradient(180deg,#12121a,#0a0a0f)}
+.price-box .pr{font-size:2.5rem;font-weight:800}
+.feats{text-align:start;margin:12px 0;list-style:none}
+.feats li{padding:7px 0;border-bottom:1px solid #1a1a24;font-size:13px;display:flex;gap:8px}
+.feats li:last-child{border-bottom:none}
+.ck{color:var(--green);font-weight:700}
+details{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 14px;margin-bottom:7px}
+summary{cursor:pointer;font-weight:600;font-size:13px;list-style:none}
+details p{margin-top:7px;font-size:12.5px;color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:20px 0;text-align:center;font-size:12px;color:var(--muted)}
+footer a:hover{color:var(--accent);text-decoration:underline}
+.modal{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;padding:14px}
+.modal.open{display:flex}
+.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.75)}
+.modal-box{position:relative;width:min(900px,100%);max-height:90vh;overflow:auto;background:#12121a;border:1px solid var(--border);border-radius:18px;padding:18px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a24;border:1px solid rgba(0,255,163,.35);color:#fff;padding:10px 16px;border-radius:999px;font-size:12.5px;z-index:300;display:none;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.toast.show{display:block}
+.currency-select{height:60px;min-width:145px;background:#0a0a0f;border:1px solid var(--border);color:#fff;padding:8px 12px;border-radius:999px;font-size:12px;outline:none;cursor:pointer}
+@media(max-width:640px){.search-row{flex-direction:column}.search-row input,.currency-select,#go{width:100%;min-width:0}.stats{grid-template-columns:repeat(2,1fr)}}
+.admin-trigger{opacity:0.15;cursor:pointer;font-size:14px;transition:0.3s;display:inline-block;margin-top:10px}
+.admin-trigger:hover{opacity:1;color:var(--green)}
+/* ✅ V3.1: Admin active state */
+.admin-trigger.admin-active{opacity:1;color:var(--green);text-shadow:0 0 8px rgba(0,255,163,.5)}
+</style>
 </head>
 <body>
 
-  <!-- 1. Bacterium Background -->
-  <div id="bio-hero">
-    <iframe id="bioFrame" src="./bacterium-lite.html" loading="lazy"></iframe>
+<!-- 1. الخلفية (البكتيريا) — لا تغيير -->
+<div id="bio-hero" style="position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:-1; pointer-events:none; opacity:0.6;">
+  <iframe id="bioFrame" src="./bacterium-lite.html" style="width:100%; height:100%; border:0; pointer-events:none;" loading="eager"></iframe>
+</div>
+
+<!-- ✅ V3.1 FIX (Patch 2): Migration-only URL cleanup.
+     الـ admin key مش بيتحفظ من الـ URL كطريقة تشغيل عادية.
+     ده migration أمني لمرة واحدة: لو حد فتح رابط قديم فيه ?admin_key=xxx،
+     بنحفظ الـ key في sessionStorage وبعدين نمسحه فورًا من الـ URL.
+     بعد كده الـ admin يدخل من زرار 🔑 (admin modal) — لا URL. -->
+<script>
+(function() {
+  try {
+    var urlParams = new URLSearchParams(window.location.search);
+    var migratedKey = urlParams.get('admin_key') || urlParams.get('admin') || urlParams.get('key') || '';
+    if (migratedKey) {
+      sessionStorage.setItem('mido_admin_key', migratedKey);
+      urlParams.delete('admin_key');
+      urlParams.delete('admin');
+      urlParams.delete('key');
+      var qs = urlParams.toString();
+      history.replaceState({}, document.title, window.location.pathname + (qs ? '?' + qs : '') + window.location.hash);
+    }
+  } catch (e) { /* في حالة sessionStorage محظور */ }
+})();
+</script>
+
+<canvas id="spider"></canvas>
+<button type="button" class="library-toggle" id="libraryToggle">▤ Saved Reports</button>
+<div class="library-backdrop" id="libraryBackdrop"></div>
+<aside class="report-library" id="reportLibrary" aria-hidden="true">
+  <div class="library-head"><h3 id="libraryTitle">Saved Reports</h3><div class="library-tools"><button type="button" id="clearReports">Clear all</button><button type="button" id="closeLibrary" aria-label="Close">×</button></div></div>
+  <div class="library-list" id="savedReportsList"></div>
+</aside>
+
+<div class="main">
+<header>
+  <div class="wrap nav">
+    <div class="logo">Mido <span>AI</span> Store</div>
+    <div class="nav-r">
+      <div class="lang-switcher">
+        <button type="button" class="lang-btn" id="langBtn"><span id="flag">🇺🇸</span> <span id="langName">English</span> ▼</button>
+        <div class="lang-dropdown" id="langMenu">
+          <div class="lang-option" data-l="ar" data-f="🇪🇬" data-n="مصر - عربي">🇪🇬 مصر - عربي</div>
+          <div class="lang-option" data-l="ar" data-f="🇸🇦" data-n="السعودية - عربي">🇸🇦 السعودية - عربي</div>
+          <div class="lang-option active" data-l="en" data-f="🇺🇸" data-n="USA - English">🇺🇸 USA - English</div>
+          <div class="lang-option" data-l="fr" data-f="🇫🇷" data-n="Français">🇫🇷 Français</div>
+          <div class="lang-option" data-l="de" data-f="🇩🇪" data-n="Deutsch">🇩🇪 Deutsch</div>
+          <div class="lang-option" data-l="ja" data-f="🇯🇵" data-n="日本語">🇯🇵 日本語</div>
+          <div class="lang-option" data-l="zh" data-f="🇨🇳" data-n="中文">🇨🇳 中文</div>
+          <div class="lang-option" data-l="es" data-f="🇪🇸" data-n="Español">🇪🇸 Español</div>
+          <div class="lang-option" data-l="pt" data-f="🇵🇹" data-n="Português">🇵🇹 Português</div>
+        </div>
+      </div>
+      <span class="badge">V10.3 | Live</span>
+      <a class="btn btn-w" id="navBuy" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" data-i18n="nav_buy">Get Access — $6</a>
+    </div>
   </div>
+</header>
 
-  <!-- 2. Admin Key Stripper -->
-  
-  <div class="scanlines"></div>
+<section class="wrap"><div class="stats">
+  <div class="stat live"><div class="v" id="stVisitors">—</div><div class="l" data-i18n="st_visitors">Visitors</div></div>
+  <div class="stat live"><div class="v" id="stSearches">—</div><div class="l" data-i18n="st_searches">Searches today</div></div>
+  <div class="stat"><div class="v" id="stOk">—</div><div class="l" data-i18n="st_ok">Successful</div></div>
+  <div class="stat"><div class="v" id="stFail">—</div><div class="l" data-i18n="st_fail">Failed</div></div>
+  <div class="stat"><div class="v" id="stLeft">—</div><div class="l" data-i18n="st_left">Free left today</div></div>
+</div></section>
 
-  <div class="hud hud-header">
-    <div class="logo mono">MIDO // V11</div>
-    <div class="header-controls">
-      <select class="lang-selector" onchange="setLanguage(this.value)">
-        <option value="en">🇺🇸 EN</option>
-        <option value="ar">🇪🇬 AR</option>
-        <option value="es">🇪🇸 ES</option>
-        <option value="fr">🇫🇷 FR</option>
-        <option value="de">🇩🇪 DE</option>
-        <option value="zh">🇨🇳 ZH</option>
-        <option value="ja">🇯🇵 JA</option>
-        <option value="ru">🇷🇺 RU</option>
+<section class="hero wrap">
+  <div class="pill" data-i18n="pill">⚡ Verified research • 5-40s • Local + Global</div>
+  <h1 data-i18n-html="hero_title">Get a fully structured <span class="g">research report</span> — not just links</h1>
+  <p class="lead" data-i18n="hero_desc">A 5-stage verified pipeline with local and international sources, clear recommendation, and real pricing context — in about 5-40 seconds.</p>
+  <div class="cta-row">
+    <a href="#demo" class="btn btn-p" data-i18n="cta_try">Try Free Demo</a>
+    <a href="#report" class="btn btn-ghost" data-i18n="cta_report">See Full Report</a>
+  </div>
+  <div class="trust">
+    <span data-i18n="t1">✓ 1 free trial / visitor</span>
+    <span data-i18n="t2">✓ 100 free searches / day</span>
+    <span data-i18n="t3">✓ API keys after purchase</span>
+  </div>
+</section>
+
+<section class="sec wrap">
+  <h2 class="sec-t" data-i18n="skills_title">Research Skills</h2>
+  <p class="sec-s" data-i18n="skills_sub">Select a skill before searching. Save stores the last report on this device.</p>
+  <div class="skills" id="skills"></div>
+</section>
+
+<section class="sec wrap" id="demo">
+  <h2 class="sec-t" data-i18n="demo_title">Live Demo</h2>
+  <p class="sec-s" data-i18n="demo_sub">Real engine. Stages light up while the spider crawls sources.</p>
+  <div class="demo">
+    <div class="search-row">
+      <input id="q" type="text" data-i18n-placeholder="ph" placeholder="Best noise-cancelling headphones under $150" value="Best noise-cancelling headphones under $150"/>
+      <select id="countrySel" class="currency-select" title="Currency">
+        <option value="US">🇺🇸 USD ($)</option>
+        <option value="EG">🇪🇬 EGP (ج.م)</option>
+        <option value="SA">🇸🇦 SAR (ر.س)</option>
+        <option value="AE">🇦🇪 AED (د.إ)</option>
+        <option value="GB">🇬🇧 GBP (£)</option>
+        <option value="FR">🇫🇷 EUR (€)</option>
+        <option value="DE">🇩🇪 EUR (€)</option>
+        <option value="JP">🇯🇵 JPY (¥)</option>
+        <option value="CN">🇨🇳 CNY (¥)</option>
+        <option value="IN">🇮🇳 INR (₹)</option>
       </select>
-      <button class="btn-settings" onclick="openSettings()" title="License Settings">⚙️</button>
+      <button type="button" class="btn btn-w" id="go" data-i18n="search_btn">Search 🔍</button>
     </div>
-  </div>
-
-  <div class="hero" id="hero-section">
-    <h1 id="txt-title">Mido Deep Search</h1>
-    <div class="hook-container">
-      <span class="hook-text" id="txt-hook"></span>
-      <span class="cursor"></span>
+    <div class="sugs" id="sugs"></div>
+    <div class="demo-meta">
+      <span data-i18n="meta1">Free: 1 / visitor</span>
+      <span data-i18n="meta2">Daily cap: 100</span>
+      <span style="color:#a5b4fc">Tavily → Analysis → Report</span>
     </div>
-    <div class="search-box">
-      <input type="text" class="search-input" id="search-input" placeholder="What do you want to research today?">
-      <button class="btn-search" id="start-btn" onclick="startSearch()">
-        <span id="btn-text">Start Search</span>
-        <div class="loader" id="btn-loader"></div>
-      </button>
+    <div class="stages" id="stages">
+      <div class="stage" data-i="0"><div class="num">1</div><h4 data-i18n="s1">Source Search</h4><p data-i18n="s1d">Tavily live sources</p></div>
+      <div class="stage" data-i="1"><div class="num">2</div><h4 data-i18n="s2">Thesis Build</h4><p data-i18n="s2d">Core argument</p></div>
+      <div class="stage" data-i="2"><div class="num">3</div><h4 data-i18n="s3">Reduce & Rank</h4><p data-i18n="s3d">Strongest signals</p></div>
+      <div class="stage" data-i="3"><div class="num">4</div><h4 data-i18n="s4">Risk Check</h4><p data-i18n="s4d">Local + global</p></div>
+      <div class="stage" data-i="4"><div class="num">5</div><h4 data-i18n="s5">Final Report</h4><p data-i18n="s5d">5-40 seconds</p></div>
     </div>
+    <div id="res"></div>
   </div>
+</section>
 
-  <div class="scroll-content">
-    <div class="section"><div class="tag mono" id="txt-t1">STAGE 01</div><h2 id="txt-h1">Tavily <span>Scout</span></h2><p id="txt-p1">Scanning trusted domains in parallel.</p></div>
-    <div class="section"><div class="tag mono" id="txt-t2">STAGE 02</div><h2 id="txt-h2">Trust <span>Ranker</span></h2><p id="txt-p2">Filtering sources. Only the strongest survive.</p></div>
-    <div class="section"><div class="tag mono" id="txt-t3">STAGE 03</div><h2 id="txt-h3">Thesis <span>Builder</span></h2><p id="txt-p3">Synthesizing ranked data into a thesis.</p></div>
-    <div class="section"><div class="tag mono" id="txt-t4">STAGE 04</div><h2 id="txt-h4">Risk <span>Checker</span></h2><p id="txt-p4">Detecting hallucinations before they spread.</p></div>
-    <div class="section"><div class="tag mono" id="txt-t5">STAGE 05</div><h2 id="txt-h5">Report <span>Weaver</span></h2><p id="txt-p5">Structured report generated successfully.</p></div>
-  </div>
+<section class="sec wrap" id="laws">
+  <h2 class="sec-t" data-i18n="laws_title">Asimov Safety Laws</h2>
+  <p class="sec-s" data-i18n="laws_sub">These rules guide the engine so output stays useful, honest, and safe for real decisions.</p>
+  <div id="lawsList"></div>
+  <div class="trust-note" data-i18n="laws_trust">Why this matters: Mido is designed to reduce confident-but-wrong answers by forcing source checks, ranking, and a final recommendation you can verify.</div>
+</section>
 
-  <!-- Settings Modal -->
-  <div class="modal-overlay" id="settings-modal">
-    <div class="modal-content">
-      <div class="modal-title"><span>System Authorization</span><button class="modal-close" onclick="closeSettings()">&times;</button></div>
-      <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 15px;">Enter your Admin Key or License Key securely.</p>
-      <input type="password" id="admin-key-input" class="input-field" placeholder="Enter Admin/License Key...">
-      <button class="btn-save" onclick="saveAdminKey()">Save Authorization</button>
-      <p id="key-status" style="margin-top: 10px; font-size: 0.8rem; text-align: center;"></p>
+<section class="sec wrap" id="rings">
+  <h2 class="sec-t" data-i18n="rings_title">Five Protection Rings</h2>
+  <p class="sec-s" data-i18n="rings_sub">Tap any ring to read the full explanation. During search, rings light up as the spider moves.</p>
+  <div id="ringsList"></div>
+</section>
+
+<section class="sec wrap" id="report">
+  <h2 class="sec-t" data-i18n="case_title">Real Report Example</h2>
+  <p class="sec-s" data-i18n-html="case_sub">Generated in <strong>35 seconds</strong> for: "Best noise-cancelling headphones under $150"</p>
+  <div class="report">
+    <div class="report-h">
+      <h3 data-i18n="case_h">Best Noise-Canceling Headphones Under $150</h3>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag g">35s</span><span class="tag">~0.76</span><span class="tag">V10.3</span></div>
     </div>
-  </div>
-
-  <!-- Result Modal -->
-  <div class="modal-overlay" id="result-modal">
-    <div class="modal-content">
-      <div class="modal-title"><span>Research Report</span><button class="modal-close" onclick="closeResult()">&times;</button></div>
-      <div class="markdown-body" id="report-content"></div>
-      
-      <!-- Transform UI (NEW) -->
-      <div class="transform-container">
-        <select id="transform-skill" class="transform-select">
-          <option value="deep_search">Deep Search (Default)</option>
-          <option value="summarize">Summarize</option>
-          <option value="compare">Compare</option>
-          <option value="recommend">Recommend</option>
-          <option value="price_check">Price Check</option>
-          <option value="fact_check">Fact Check</option>
-          <option value="pros_cons">Pros & Cons</option>
-          <option value="buying_guide">Buying Guide</option>
-          <option value="risk_check">Risk Check</option>
-          <option value="outline">Outline</option>
-          <option value="decision_matrix">Decision Matrix</option>
-        </select>
-        <button class="btn-transform" id="transform-btn" onclick="transformCurrentReport()">
-          Transform Report
-        </button>
+    <div class="report-b">
+      <div class="qt">
+        <h4 data-i18n="case_quick">Quick Take</h4>
+        <ul>
+          <li data-i18n-html="cq1"><strong>Sony WH-CH720N</strong> — best overall (source currency shown; verify current price).</li>
+          <li data-i18n-html="cq2"><strong>JBL Tune 770NC</strong> — best budget under ~$100.</li>
+          <li data-i18n-html="cq3"><strong>OneOdio Focus A6</strong> — entry option near ~$70.</li>
+        </ul>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th data-i18n="th1">Model</th><th>USD</th><th>ANC</th><th data-i18n="th2">Battery</th></tr></thead>
+          <tbody>
+            <tr><td>JBL Tune 770NC</td><td>$79.99</td><td>4/5</td><td>30h</td></tr>
+            <tr><td><strong>Sony WH-CH720N</strong></td><td>$149</td><td>4.5/5</td><td>30h</td></tr>
+            <tr><td>Anker Space One</td><td>$79.99</td><td>4/5</td><td>30h</td></tr>
+            <tr><td>OneOdio Focus A6</td><td>$69.99</td><td>3.5/5</td><td>30h</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="recs">
+        <div class="rec"><h5 data-i18n="r1">Best Overall</h5><p>Sony WH-CH720N</p><span class="pr">≈ $149</span></div>
+        <div class="rec"><h5 data-i18n="r2">Best Budget</h5><p>JBL Tune 770NC</p><span class="pr">≈ $79.99</span></div>
+        <div class="rec"><h5 data-i18n="r3">Entry Option</h5><p>OneOdio Focus A6</p><span class="pr">≈ $69.99</span></div>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted)" data-i18n="case_sources">Illustrative example only. Prices are shown in the cited source currency and may be outdated.</p>
+      <div style="margin-top:14px;text-align:center;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button type="button" class="btn btn-p" id="openReport" data-i18n="full_preview">Full Report Preview</button>
+        <button type="button" class="btn btn-ghost" id="saveExample" data-i18n="save_example">Save This Report</button>
       </div>
     </div>
   </div>
+</section>
 
-  <script type="module">
-    // 1. Translations
-    const translations = {
-      en: { title: "Mido Deep Search", hook: "Stop Searching. Start Dissecting.", placeholder: "What do you want to research?", btn: "Start Search", t1: "STAGE 01", h1: "Tavily <span>Scout</span>", p1: "Scanning 12 domains in parallel.", t2: "STAGE 02", h2: "Trust <span>Ranker</span>", p2: "Filtering sources.", t3: "STAGE 03", h3: "Thesis <span>Builder</span>", p3: "Synthesizing data.", t4: "STAGE 04", h4: "Risk <span>Checker</span>", p4: "Detecting hallucinations.", t5: "STAGE 05", h5: "Report <span>Weaver</span>", p5: "Report generated." },
-      ar: { title: "ميدو ديپ سيرش", hook: "توقف عن البحث. ابدأ بتشريح الويب.", placeholder: "ماذا تريد أن تبحث عنه؟", btn: "ابدأ البحث", t1: "المرحلة 01", h1: "المستكشف <span>Tavily</span>", p1: "مسح 12 نطاقاً بالتوازي.", t2: "المرحلة 02", h2: "مصنف <span>الثقة</span>", p2: "تصفية المصادر.", t3: "المرحلة 03", h3: "باني <span>الأطروحة</span>", p3: "تجميع البيانات.", t4: "المرحلة 04", h4: "فاحص <span>المخاطر</span>", p4: "اكتشاف الهلوسة.", t5: "المرحلة 05", h5: "ناسج <span>التقارير</span>", p5: "تم إنشاء التقرير." },
-      es: { title: "Mido Deep Search", hook: "Deja de buscar. Empieza a diseccionar.", placeholder: "¿Qué quieres investigar?", btn: "Iniciar", t1: "ETAPA 01", h1: "Tavily <span>Scout</span>", p1: "Escaneando 12 dominios.", t2: "ETAPA 02", h2: "Ranking <span>Confianza</span>", p2: "Filtrando fuentes.", t3: "ETAPA 03", h3: "Constructor <span>Tesis</span>", p3: "Sintetizando datos.", t4: "ETAPA 04", h4: "Verificador <span>Riesgos</span>", p4: "Detectando alucinaciones.", t5: "ETAPA 05", h5: "Tejedor <span>Informes</span>", p5: "Informe generado." },
-      fr: { title: "Mido Deep Search", hook: "Arrêtez de chercher. Disséquez le Web.", placeholder: "Que voulez-vous rechercher ?", btn: "Démarrer", t1: "ÉTAPE 01", h1: "Tavily <span>Scout</span>", p1: "Scan de 12 domaines.", t2: "ÉTAPE 02", h2: "Classement <span>Confiance</span>", p2: "Filtrage des sources.", t3: "ÉTAPE 03", h3: "Créateur <span>Thèse</span>", p3: "Synthèse des données.", t4: "ÉTAPE 04", h4: "Vérificateur <span>Risques</span>", p4: "Détection des hallucinations.", t5: "ÉTAPE 05", h5: "Tisserand <span>Rapports</span>", p5: "Rapport généré." },
-      de: { title: "Mido Deep Search", hook: "Hör auf zu suchen. Seziere das Web.", placeholder: "Was möchten Sie recherchieren?", btn: "Suche starten", t1: "PHASE 01", h1: "Tavily <span>Scout</span>", p1: "Scannen von 12 Domänen.", t2: "PHASE 02", h2: "Vertrauens-<span>Ranking</span>", p2: "Filtern von Quellen.", t3: "PHASE 03", h3: "Thesen-<span>Builder</span>", p3: "Synthese der Daten.", t4: "PHASE 04", h4: "Risiko-<span>Prüfer</span>", p4: "Erkennung von Halluzinationen.", t5: "PHASE 05", h5: "Berichts-<span>Weber</span>", p5: "Bericht generiert." },
-      zh: { title: "Mido 深度搜索", hook: "停止搜索。开始解剖网络。", placeholder: "您想研究什么？", btn: "开始", t1: "阶段 01", h1: "Tavily <span>侦察</span>", p1: "并行扫描12个域。", t2: "阶段 02", h2: "信任<span>排名</span>", p2: "过滤来源。", t3: "阶段 03", h3: "论点<span>构建</span>", p3: "综合数据。", t4: "阶段 04", h4: "风险<span>检查</span>", p4: "检测幻觉。", t5: "阶段 05", h5: "报告<span>编织</span>", p5: "报告已生成。" },
-      ja: { title: "Mido ディープサーチ", hook: "検索をやめ、ウェブを解剖しよう。", placeholder: "何を調べますか？", btn: "開始", t1: "ステージ 01", h1: "Tavily <span>スカウト</span>", p1: "12のドメインをスキャン。", t2: "ステージ 02", h2: "信頼性<span>ランキング</span>", p2: "ソースをフィルタリング。", t3: "ステージ 03", h3: "論文<span>ビルダー</span>", p3: "データを統合。", t4: "ステージ 04", h4: "リスク<span>チェッカー</span>", p4: "幻覚を検出。", t5: "ステージ 05", h5: "レポート<span>ウィーバー</span>", p5: "レポート生成完了。" },
-      ru: { title: "Mido Deep Search", hook: "Хватит искать. Препарируйте сеть.", placeholder: "Что вы хотите исследовать?", btn: "Начать", t1: "ЭТАП 01", h1: "Tavily <span>Скаут</span>", p1: "Сканирование 12 доменов.", t2: "ЭТАП 02", h2: "Рейтинг <span>Доверия</span>", p2: "Фильтрация источников.", t3: "ЭТАП 03", h3: "Конструктор <span>Тезисов</span>", p3: "Синтез данных.", t4: "ЭТАП 04", h4: "Проверка <span>Рисков</span>", p4: "Обнаружение галлюцинаций.", t5: "ЭТАП 05", h5: "Плетение <span>Отчетов</span>", p5: "Отчет создан." }
-    };
+<section class="sec wrap" id="pricing">
+  <h2 class="sec-t" data-i18n="price_title">Simple pricing</h2>
+  <p class="sec-s" data-i18n="price_sub">One-time payment. No subscription.</p>
+  <div class="price-box">
+    <div class="pr">$6 <small style="font-size:14px;color:var(--muted);font-weight:500" data-i18n="once">one-time</small></div>
+    <p style="font-size:12px;color:var(--muted);margin:4px 0 8px" data-i18n="price_local">or equivalent in your local currency at checkout via Gumroad.</p>
+    <ul class="feats">
+      <li><span class="ck">✓</span> <span data-i18n="f1">Full Deep Search access</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f2">API keys: Tavily + Groq + Nebius</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f3">Verified local + global reports</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f4">Setup guide included</span></li>
+      <li><span class="ck">✓</span> <span data-i18n="f5">1 free trial before purchase</span></li>
+    </ul>
+    <a class="btn btn-w buy-btn-pixel" style="width:100%" href="https://midoaistore.gumroad.com/l/dtqpvka" target="_blank" rel="noopener" data-i18n="buy_btn">Get Full Access — $6</a>
+  </div>
+</section>
 
-    let currentLang = 'en';
-    let isSearching = false;
-    let typewriterTimeout = null;
+<section class="sec wrap" style="max-width:720px;margin-left:auto;margin-right:auto">
+  <h2 class="sec-t" data-i18n="faq_title">FAQ</h2>
+  <details open><summary data-i18n="fq1">How long does a real search take?</summary><p data-i18n="fa1">Typically 5-40 seconds to a verified report.</p></details>
+  <details><summary data-i18n="fq2">What do I get for $6?</summary><p data-i18n="fa2">Full access + Tavily, Groq, Nebius keys. One-time via Gumroad.</p></details>
+  <details><summary data-i18n="fq3">Free trial limits?</summary><p data-i18n="fa3">1 trial per visitor. Up to 100 free searches/day site-wide.</p></details>
+  <details><summary data-i18n="fq4">Are sources real?</summary><p data-i18n="fa4">Yes. The report appears after ranking documented sources.</p></details>
+</section>
 
-    // State for Transform
-    let lastQuery = "";
-    let lastAnswer = "";
-    let lastSources = [];
+<footer class="wrap">
+  <p data-i18n="footer">© 2026 Mido AI Store • Deep Search Agent V10.3</p>
+  <p style="margin-top:4px;font-size:11px" data-i18n="footer2">Live sources. Always verify final local prices.</p>
+  <div style="margin-top:10px;font-size:11px;opacity:.8">
+    <a href="#" onclick="openPolicy(event, 'privacy')">Privacy Policy</a> |
+    <a href="#" onclick="openPolicy(event, 'refund')">Refund Policy</a>
+  </div>
+  <span id="adminBtn" class="admin-trigger" title="Admin Login">🔑</span>
+</footer>
+</div>
 
-    // 2. Security & API Config
-    const WORKER_API_URL = "https://mido-deepsearch.midoaistore.workers.dev/"; // تأكد أن هذا الرابط صحيح
+<!-- Modal: Full Report -->
+<div class="modal" id="reportModal">
+  <div class="modal-bg" id="modalBg"></div>
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <div>
+        <h3 style="font-size:17px;font-weight:800" data-i18n="modal_title">Full Report — Headphones under $150</h3>
+        <p style="font-size:12px;color:var(--muted);margin-top:4px" data-i18n="modal_q">Query: Best noise-cancelling headphones under $150</p>
+      </div>
+      <button type="button" class="btn btn-ghost" id="closeModal" data-i18n="modal_close">Close</button>
+    </div>
+    <div class="qt" style="margin-top:14px">
+      <h4 data-i18n="modal_winner">Winner: Sony WH-CH720N</h4>
+      <p style="font-size:12.5px;color:var(--muted);margin-top:6px" data-i18n="modal_summary">Best overall ANC/comfort/battery. JBL Tune 770NC is best value. Ranked from SoundGuys, CNET, TechRadar and market listings.</p>
+    </div>
+    <div style="overflow-x:auto;margin-top:12px">
+      <table>
+        <thead><tr>
+          <th data-i18n="th1">Model</th><th data-i18n="th_price">Price</th><th>ANC</th><th data-i18n="th2">Battery</th><th data-i18n="th_comfort">Comfort</th><th data-i18n="th_verdict">Verdict</th>
+        </tr></thead>
+        <tbody>
+          <tr style="background:rgba(124,92,255,.08)"><td><strong>Sony WH-CH720N</strong></td><td>$149</td><td>4.5/5</td><td>30h</td><td>4.5/5</td><td data-i18n="v_best">Best overall</td></tr>
+          <tr><td>JBL Tune 770NC</td><td>$79.99</td><td>4/5</td><td>30h</td><td>4/5</td><td data-i18n="v_budget">Best budget</td></tr>
+          <tr><td>Anker Space One</td><td>$79.99</td><td>4/5</td><td>30h</td><td>4/5</td><td data-i18n="v_solid">Solid alt</td></tr>
+          <tr><td>OneOdio Focus A6</td><td>$69.99</td><td>3.5/5</td><td>30h</td><td>3.5/5</td><td data-i18n="v_entry">Entry pick</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px">
+      <div class="xcard" style="cursor:default">
+        <h3 data-i18n="modal_sources_title">Top Sources</h3>
+        <p style="margin-top:8px;font-size:12px;color:var(--muted)" data-i18n-html="modal_sources_list">1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Local market listings</p>
+      </div>
+      <div class="xcard" style="cursor:default">
+        <h3 data-i18n="modal_rec_title">Final Recommendation</h3>
+        <p style="margin-top:8px;font-size:12.5px;color:var(--muted)" data-i18n="modal_rec_text">Pick Sony WH-CH720N if budget allows. Pick JBL Tune 770NC for best value. Confirm live local prices before buying.</p>
+        <a href="https://midoaistore.gumroad.com/l/dtqpvka" class="btn btn-w buy-btn-pixel" target="_blank" rel="noopener" style="margin-top:12px" data-i18n="buy_btn">Get Full Access — $6</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-    window.getVisitorId = function() {
-      let vid = localStorage.getItem('mido_visitor_id');
-      if (!vid) { vid = crypto.randomUUID(); localStorage.setItem('mido_visitor_id', vid); }
-      return vid;
-    };
-let adminKeyMemory = ""; // متغير يعيش في الذاكرة فقط
+<!-- Modal: Policies -->
+<div class="modal" id="policyModal">
+  <div class="modal-bg" onclick="document.getElementById('policyModal').classList.remove('open')"></div>
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:15px">
+      <h3 style="font-size:18px;font-weight:800" id="policyTitle">Policy</h3>
+      <button type="button" class="btn btn-ghost" onclick="document.getElementById('policyModal').classList.remove('open')">Close</button>
+    </div>
+    <div id="policyContent" style="font-size:13px;color:var(--muted);line-height:1.8"></div>
+  </div>
+</div>
 
-window.openSettings = function() {
-  document.getElementById('admin-key-input').value = adminKeyMemory;
-  document.getElementById('settings-modal').classList.add('show');
-};
-window.closeSettings = function() { document.getElementById('settings-modal').classList.remove('show'); };
-window.saveAdminKey = function() {
-  const val = document.getElementById('admin-key-input').value.trim();
-  if (val) {
-    adminKeyMemory = val;
-    document.getElementById('key-status').innerText = "✅ Key saved in memory for this session.";
-    document.getElementById('key-status').style.color = "var(--green)";
-  } else {
-    adminKeyMemory = "";
-    document.getElementById('key-status').innerText = "⚠️ Key removed.";
-    document.getElementById('key-status').style.color = "#ffcc00";
+<!-- ✅ V3.1 FIX (Patch 3): Admin Login Modal — لا يظهر الـ key في URL أبدًا -->
+<div class="modal" id="adminModal">
+  <div class="modal-bg" onclick="document.getElementById('adminModal').classList.remove('open')"></div>
+  <div class="modal-box" style="max-width:440px">
+    <div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:14px;align-items:center">
+      <h3 id="adminModalTitle" style="font-size:16px;font-weight:800">🔑 Admin Login</h3>
+      <button type="button" class="btn btn-ghost" id="adminModalClose">Close</button>
+    </div>
+    <p id="adminModalHint" style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+      Enter your admin key. It is stored only in this browser session and never sent in the URL.
+    </p>
+    <input id="adminKeyInput" type="password" placeholder="Admin key" autocomplete="off" spellcheck="false"
+      style="width:100%;padding:12px;border-radius:10px;background:#0a0a0f;border:1px solid var(--border);color:#fff;font-size:13px;margin-bottom:8px;outline:none"/>
+    <div id="adminKeyStatus" style="font-size:12px;margin-bottom:14px;color:var(--muted);min-height:18px;line-height:1.5"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button type="button" class="btn btn-p" id="adminKeySave" style="flex:1;min-width:140px">Save & Validate</button>
+      <button type="button" class="btn btn-ghost" id="adminKeyLogout">Logout</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+var WORKER_URL='https://mido-deepsearch.midoaistore.workers.dev';
+var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
+var skill='deep_search', currentLang='en', searching=false, lastReportText='', lastReportSources=[], lastReportQuery='', lastReportCountry='US', lastReportLang='en', adminKey='';
+
+// ✅ V3.1 FIX (Patch 1): قراءة الـ admin key من sessionStorage عند بدء الصفحة
+try{adminKey=sessionStorage.getItem('mido_admin_key')||'';}catch(e){adminKey='';}
+
+// إزالة سر الأدمن من الرابط (احتياط إضافي - الأمان الحقيقي في الـ script اللي فوق)
+if(/[?&]admin(?:=|&|$)/i.test(location.search)){history.replaceState(null,document.title,location.pathname+location.hash);}
+
+// تتبع البيكسل عند الضغط على زر الشراء
+document.querySelectorAll('.buy-btn-pixel, #navBuy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    if(typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout');
+    }
+  });
+});
+
+function glowPulse(el, ms){
+  if(!el) return;
+  el.classList.add('glow-on');
+  setTimeout(function(){ el.classList.remove('glow-on'); }, ms||900);
+}
+function toast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
+
+// ✅ V3.1: نصوص admin modal (مترجمة للعربية والإنجليزية، الباقي بيرجع للإنجليزية)
+var ADMIN_TEXT = {
+  en: {
+    title:'🔑 Admin Login',
+    hint:'Enter your admin key. It is stored only in this browser session and never sent in the URL.',
+    placeholder:'Admin key',
+    save:'Save & Validate',
+    logout:'Logout',
+    close:'Close',
+    no_key:'⚠️ No admin key in this session',
+    active:'✅ Session key active (masked)',
+    validating:'🔄 Validating with /me...',
+    valid:'✅ Valid key. Session: ',
+    invalid:'❌ ',
+    removed:'Admin key removed.',
+    saved:'Admin key saved for this session.',
+    network:'❌ Network error: ',
+    empty_base:'Admin key must be sent as the X-Admin-Key header, never in the URL.'
+  },
+  ar: {
+    title:'🔑 تسجيل دخول الأدمن',
+    hint:'أدخل مفتاح الأدمن. يُخزن فقط في جلسة المتصفح ولا يُرسل في الرابط أبدًا.',
+    placeholder:'مفتاح الأدمن',
+    save:'حفظ وتحقق',
+    logout:'تسجيل خروج',
+    close:'إغلاق',
+    no_key:'⚠️ لا يوجد مفتاح أدمن في هذه الجلسة',
+    active:'✅ مفتاح جلسة نشط (مخفي)',
+    validating:'🔄 جاري التحقق عبر /me...',
+    valid:'✅ مفتاح صحيح. النوع: ',
+    invalid:'❌ ',
+    removed:'تم إزالة مفتاح الأدمن.',
+    saved:'تم حفظ المفتاح لهذه الجلسة.',
+    network:'❌ خطأ في الشبكة: ',
+    empty_base:'مفتاح الأدمن يُرسل عبر header X-Admin-Key فقط، وليس في الرابط.'
   }
-  setTimeout(window.closeSettings, 1500);
 };
-    
-    // 3. Typewriter Effect
-    function typeWriter(text, i = 0) {
-      const el = document.getElementById('txt-hook');
-      if (i === 0) el.innerText = '';
-      if (i < text.length) {
-        el.innerText += text.charAt(i);
-        typewriterTimeout = setTimeout(() => typeWriter(text, i + 1), 40);
-      }
+function adminText(key){
+  var d=ADMIN_TEXT[currentLang]||ADMIN_TEXT.en;
+  return d[key]||ADMIN_TEXT.en[key];
+}
+
+// ✅ V3.1: تحديث شكل زرار 🔑 حسب حالة الجلسة
+function updateAdminBadge(){
+  var el=document.getElementById('adminBtn');
+  if(!el) return;
+  if(adminKey){
+    el.classList.add('admin-active');
+    el.title='Admin session active — click to manage';
+  }else{
+    el.classList.remove('admin-active');
+    el.title='Admin Login';
+  }
+}
+updateAdminBadge();
+
+// سياسات مترجمة ثابتة؛ المحتوى داخلي ولا يأتي من المستخدم أو الخادم.
+var POLICY_T = {
+  en:{privacy:{title:'Privacy Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>We collect only the data needed to operate Mido Deep Search.</p><h4>1. Data We Collect</h4><ul><li>Search queries are sent to Tavily and Groq to create the report.</li><li>A random Visitor ID is stored in your browser to enforce the free-trial limit.</li><li>The selected country is used to choose research context and currency preference.</li></ul><h4>2. Tracking</h4><p>Meta Pixel may measure page views and purchase-button interactions. You can disable tracking in your browser or Meta settings.</p><h4>3. Third Parties</h4><p>Payments are handled by Gumroad. We do not receive your payment details.</p><p>Contact: support@midoaistore.com</p>`},refund:{title:'Refund Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>This is a digital product with immediate access.</p><h4>1. Free Trial</h4><p>One free search is provided so you can test the service before purchase.</p><h4>2. Creating Your API Keys</h4><p>After purchase, we do not send ready-made API keys. You create your own keys from your accounts: create a Tavily key at <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a>, and a Groq key at <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. The setup guide explains where to add them to the Worker.</p><h4>3. Refunds through Gumroad</h4><p>Refund requests can be submitted within one week (7 days) of purchase and are handled according to Gumroad's refund policy. If you were charged twice, include your Gumroad receipt when contacting support.</p><p>Contact: support@midoaistore.com</p>`}},
+  ar:{privacy:{title:'سياسة الخصوصية',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>نجمع فقط البيانات اللازمة لتشغيل Mido Deep Search.</p><h4>1. البيانات التي نجمعها</h4><ul><li>تُرسل أسئلة البحث إلى Tavily وGroq لإنشاء التقرير.</li><li>يُحفظ معرّف زائر عشوائي في المتصفح لتطبيق حد التجربة المجانية.</li><li>تُستخدم الدولة المختارة لتحديد سياق البحث وتفضيل العملة.</li></ul><h4>2. التتبع</h4><p>قد يستخدم Meta Pixel قياس زيارات الصفحة والنقر على زر الشراء. يمكنك تعطيل التتبع من المتصفح أو إعدادات Meta.</p><h4>3. الخدمات الخارجية</h4><p>تُعالج المدفوعات عبر Gumroad ولا نصل إلى بيانات الدفع.</p><p>للتواصل: support@midoaistore.com</p>`},refund:{title:'سياسة الاسترداد',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>هذا منتج رقمي مع وصول فوري.</p><h4>1. التجربة المجانية</h4><p>نوفر بحثًا مجانيًا واحدًا لتجربة الخدمة قبل الشراء.</p><h4>2. إنشاء مفاتيح API</h4><p>بعد الشراء لا نرسل مفاتيح API جاهزة. ينشئ المستخدم مفاتيحه بنفسه من حساباته: مفتاح Tavily من <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a>، ومفتاح Groq من <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. يوضح دليل الإعداد مكان إضافة المفاتيح داخل الـWorker.</p><h4>3. الاسترداد عبر Gumroad</h4><p>يمكن تقديم طلب الاسترداد خلال أسبوع واحد (7 أيام) من تاريخ الشراء، وتتم معالجة الطلب وفق سياسة الاسترداد الخاصة بمنصة Gumroad. وفي حالة الخصم المكرر، أرفق إيصال Gumroad عند التواصل مع الدعم.</p><p>للتواصل: support@midoaistore.com</p>`}},
+  fr:{privacy:{title:'Politique de confidentialité',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Nous collectons uniquement les données nécessaires au fonctionnement du service.</p><h4>1. Données collectées</h4><ul><li>Les requêtes sont envoyées à Tavily et Groq pour créer le rapport.</li><li>Un identifiant de visiteur aléatoire est conservé pour appliquer la limite d’essai.</li><li>Le pays choisi sert au contexte et à la préférence monétaire.</li></ul><h4>2. Suivi</h4><p>Meta Pixel peut mesurer les visites et les clics d’achat. Vous pouvez le désactiver dans votre navigateur ou les réglages Meta.</p><h4>3. Tiers</h4><p>Les paiements sont traités par Gumroad.</p><p>Contact : support@midoaistore.com</p>`},refund:{title:'Politique de remboursement',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Il s’agit d’un produit numérique à accès immédiat.</p><p>Après l’achat, les clés API ne sont pas fournies prêtes à l’emploi : l’utilisateur crée sa clé Tavily sur <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> et sa clé Groq sur <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. Le guide explique leur ajout au Worker.</p><p>Une demande de remboursement peut être envoyée dans la semaine (7 jours) suivant l’achat, conformément à la politique de Gumroad. Contactez-nous avec votre reçu Gumroad.</p>`}},
+  de:{privacy:{title:'Datenschutzrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Wir erheben nur Daten, die für den Betrieb des Dienstes erforderlich sind.</p><h4>Erhobene Daten</h4><p>Suchanfragen werden an Tavily und Groq gesendet. Eine zufällige Besucher-ID setzt das Testlimit durch. Das gewählte Land dient dem Suchkontext und der Währungspräferenz.</p><h4>Tracking und Drittanbieter</h4><p>Meta Pixel kann Besuche und Kaufklicks messen. Zahlungen werden von Gumroad verarbeitet.</p><p>Kontakt: support@midoaistore.com</p>`},refund:{title:'Rückerstattungsrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Bei diesem digitalen Produkt erfolgt der Zugriff sofort.</p><p>Nach dem Kauf werden keine fertigen API-Schlüssel gesendet. Der Nutzer erstellt seinen Tavily-Schlüssel unter <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> und seinen Groq-Schlüssel unter <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. Die Anleitung erklärt die Einrichtung im Worker.</p><p>Eine Rückerstattung kann innerhalb einer Woche (7 Tage) nach dem Kauf gemäß der Gumroad-Richtlinie beantragt werden. Bitte den Gumroad-Beleg beifügen.</p>`}},
+  ja:{privacy:{title:'プライバシーポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>サービス運営に必要なデータのみを収集します。</p><p>検索内容はレポート作成のためTavilyとGroqへ送信されます。無料試用制限のため匿名の訪問者IDを保存します。選択した国は検索コンテキストと通貨設定に使用します。支払いはGumroadが処理します。</p><p>連絡先：support@midoaistore.com</p>`},refund:{title:'返金ポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>即時アクセスのデジタル商品です。</p><p>購入後、完成済みのAPIキーは送付されません。ユーザーが <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> でTavilyキーを、<a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> でGroqキーを作成します。設定方法はガイドで説明します。</p><p>返金は購入から1週間（7日）以内に、Gumroadのポリシーに従って申請できます。領収書を添えてご連絡ください。</p>`}},
+  zh:{privacy:{title:'隐私政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>我们只收集运行服务所需的数据。</p><p>搜索问题会发送给Tavily和Groq以生成报告。我们保存随机访客ID以执行免费试用限制。选择的国家用于研究上下文和货币偏好。付款由Gumroad处理。</p><p>联系：support@midoaistore.com</p>`},refund:{title:'退款政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>这是即时提供访问权限的数字产品。</p><p>购买后不会提供现成的API密钥。用户需要在 <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> 创建Tavily密钥，并在 <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> 创建Groq密钥。设置指南会说明如何将密钥添加到Worker。</p><p>可在购买后一个星期（7天）内按照Gumroad退款政策提交退款申请，请附上Gumroad收据。</p>`}},
+  es:{privacy:{title:'Política de privacidad',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Solo recopilamos los datos necesarios para operar el servicio.</p><p>Las consultas se envían a Tavily y Groq para crear el informe. Guardamos un ID de visitante aleatorio para aplicar el límite de prueba. El país elegido define el contexto y la preferencia de moneda. Los pagos los procesa Gumroad.</p><p>Contacto: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Es un producto digital con acceso inmediato.</p><p>Después de la compra no se entregan claves API listas. El usuario crea su clave de Tavily en <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> y su clave de Groq en <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. La guía explica cómo añadirlas al Worker.</p><p>La solicitud de reembolso puede presentarse dentro de una semana (7 días) según la política de Gumroad. Incluya el recibo de Gumroad.</p>`}},
+  pt:{privacy:{title:'Política de privacidade',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Coletamos apenas os dados necessários para operar o serviço.</p><p>As consultas são enviadas à Tavily e à Groq para gerar o relatório. Guardamos um ID aleatório de visitante para aplicar o limite de teste. O país escolhido define o contexto e a preferência de moeda. Os pagamentos são processados pela Gumroad.</p><p>Contato: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Este é um produto digital com acesso imediato.</p><p>Após a compra, não são fornecidas chaves API prontas. O usuário cria a chave Tavily em <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> e a chave Groq em <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. O guia explica como adicioná-las ao Worker.</p><p>O pedido de reembolso pode ser enviado em até uma semana (7 dias), conforme a política da Gumroad. Inclua o recibo da Gumroad.</p>`}}
+};
+window.openPolicy = function(e,type){
+  e.preventDefault();
+  var p=POLICY_T[currentLang]||POLICY_T.en;
+  var item=p[type]||POLICY_T.en[type];
+  document.getElementById('policyTitle').textContent=item.title;
+  document.getElementById('policyContent').innerHTML=item.html;
+  document.getElementById('policyModal').classList.add('open');
+}
+
+// تحويل المارك داون إلى HTML
+function parseMarkdown(md){
+  md = typeof md === 'string' ? md : '';
+  var lines = md.replace(/\r\n?/g,'\n').split('\n');
+  var out=[], inList=false, inCode=false, code=[];
+  function closeList(){if(inList){out.push('</ul>');inList=false;}}
+  for(var i=0;i<lines.length;i++){
+    var raw=lines[i];
+    if(/^```/.test(raw.trim())){
+      if(inCode){out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');code=[];inCode=false;}
+      else {closeList();inCode=true;}
+      continue;
     }
+    if(inCode){code.push(raw);continue;}
+    var line=esc(raw);
+    if(!line.trim()){closeList();continue;}
+    var m=line.match(/^###\s+(.*)$/); if(m){closeList();out.push('<h3>'+inlineMd(m[1])+'</h3>');continue;}
+    m=line.match(/^##\s+(.*)$/); if(m){closeList();out.push('<h2>'+inlineMd(m[1])+'</h2>');continue;}
+    m=line.match(/^#\s+(.*)$/); if(m){closeList();out.push('<h1>'+inlineMd(m[1])+'</h1>');continue;}
+    m=line.match(/^[-*]\s+(.*)$/); if(m){if(!inList){out.push('<ul>');inList=true;}out.push('<li>'+inlineMd(m[1])+'</li>');continue;}
+    closeList(); out.push('<p>'+inlineMd(line)+'</p>');
+  }
+  if(inCode) out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');
+  closeList(); return out.join('');
+}
+function inlineMd(s){
+  return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
+}
 
-    window.setLanguage = function(lang) {
-      currentLang = lang;
-      const t = translations[lang];
-      document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-      
-      document.getElementById('txt-title').innerText = t.title;
-      document.getElementById('search-input').placeholder = t.placeholder;
-      if (!isSearching) document.getElementById('btn-text').innerText = t.btn;
-      
-      document.getElementById('txt-t1').innerText = t.t1; document.getElementById('txt-h1').innerHTML = t.h1; document.getElementById('txt-p1').innerText = t.p1;
-      document.getElementById('txt-t2').innerText = t.t2; document.getElementById('txt-h2').innerHTML = t.h2; document.getElementById('txt-p2').innerText = t.p2;
-      document.getElementById('txt-t3').innerText = t.t3; document.getElementById('txt-h3').innerHTML = t.h3; document.getElementById('txt-p3').innerText = t.p3;
-      document.getElementById('txt-t4').innerText = t.t4; document.getElementById('txt-h4').innerHTML = t.h4; document.getElementById('txt-p4').innerText = t.p4;
-      document.getElementById('txt-t5').innerText = t.t5; document.getElementById('txt-h5').innerHTML = t.h5; document.getElementById('txt-p5').innerText = t.p5;
+// قاموس الترجمات الشامل
+var T = {
+  en: {
+    nav_buy:'Get Access — $6', pill:'⚡ Verified research • 5-40s • Local + Global',
+    hero_title:'Turn one question into a <span class="g">verified decision</span> — before you spend',
+    hero_desc:'Ask once. Get live sources, a clear comparison, and an evidence-based recommendation in about 5-40 seconds.',
+    cta_try:'Try Free Demo', cta_report:'See Full Report',
+    t1:'✓ 1 free trial / visitor', t2:'✓ 100 free searches / day', t3:'✓ API keys after purchase',
+    st_visitors:'Visitors', st_searches:'Searches today', st_ok:'Successful', st_fail:'Failed', st_left:'Free left today',
+    skills_title:'Research Skills', skills_sub:'Select a skill before searching. Save stores the last report on this device.',
+    sk1:'Deep Search', sk2:'Summarize', sk3:'Compare', sk4:'Recommend', sk5:'Price Check', sk6:'Save Report',
+    demo_title:'Live Demo', demo_sub:'Real engine. Stages light up while the spider crawls sources.',
+    ph:'Best noise-cancelling headphones under $150', search_btn:'Search 🔍', meta1:'Free: 1 / visitor', meta2:'Daily cap: 100',
+    s1:'Source Search', s1d:'Tavily live sources', s2:'Thesis Build', s2d:'Core argument', s3:'Reduce & Rank', s3d:'Strongest signals', s4:'Risk Check', s4d:'Local + global', s5:'Final Report', s5d:'5-40 seconds',
+    laws_title:'Asimov Safety Laws', laws_sub:'These rules guide the engine so output stays useful, honest, and safe for real decisions.',
+    laws_trust:'Why this matters: Mido is designed to reduce confident-but-wrong answers by forcing source checks, ranking, and a final recommendation you can verify.',
+    law1_t:'Do not harm with false confidence', law1_s:'Never present guesses as proven facts.', law1_d:'If evidence is weak, the report must say so. The engine prefers ranked sources and scored evidence instead of fluent but unsupported claims.',
+    law2_t:'Serve the research goal first', law2_s:'Optimize for decisions, not chat.', law2_d:'The output is structured for action: summary, comparison, and recommendation.',
+    law3_t:'Protect system and user limits', law3_s:'Fair use and server-side trial protection.', law3_d:'Free usage is limited per visitor and per day on the server, not only in the browser.',
+    law4_t:'Respect local market reality', law4_s:'Include local pricing context when possible.', law4_d:'For questions like product buying, the report connects international reviews with local price ranges.',
+    rings_title:'Five Protection Rings', rings_sub:'Tap any ring to read the full explanation. During search, rings light up as the spider moves.',
+    ring1_t:'Ring 1 — Source Verification', ring1_s:'Collect and score live sources (Tavily).', ring1_d:'The spider gathers multiple live sources and attaches relevance scores.',
+    ring2_t:'Ring 2 — Thesis Construction', ring2_s:'Build a logical core argument.', ring2_d:'The system forms a clear thesis: what options exist, what criteria matter, and what decision the user is trying to make.',
+    ring3_t:'Ring 3 — Reduce & Rank', ring3_s:'Keep only the strongest evidence.', ring3_d:'From a larger candidate set, the engine compresses down to the most useful sources.',
+    ring4_t:'Ring 4 — Risk Check', ring4_s:'Validate market and context risks.', ring4_d:'Checks practical issues: price realism, local availability signals, and whether a recommendation may be too optimistic.',
+    ring5_t:'Ring 5 — Confidence Calibration', ring5_s:'Generate the final verified report.', ring5_d:'Produces the structured output only after previous rings complete: quick take, comparison table, and a final recommendation.',
+    case_title:'Real Report Example', case_sub:'Generated in <strong>35 seconds</strong> for: "Best noise-cancelling headphones under $150"',
+    case_h:'Best Noise-Canceling Headphones Under $150', case_quick:'Quick Take',
+    cq1:'<strong>Sony WH-CH720N</strong> — best overall (source currency shown; verify current price).',
+    cq2:'<strong>JBL Tune 770NC</strong> — best budget under ~$100.',
+    cq3:'<strong>OneOdio Focus A6</strong> — entry option near ~$70.',
+    th1:'Model', th2:'Battery', th_price:'Price', th_comfort:'Comfort', th_verdict:'Verdict',
+    r1:'Best Overall', r2:'Best Budget', r3:'Entry Option',
+    case_sources:'Illustrative example only. Prices are shown in the cited source currency and may be outdated.',
+    full_preview:'Full Report Preview', save_example:'Save This Report',
+    price_title:'Simple pricing', price_sub:'One-time payment. No subscription.', once:'one-time',
+    price_local:'or equivalent in your local currency at checkout via Gumroad.',
+    f1:'Full Deep Search access', f2:'API keys: Tavily + Groq + Nebius', f3:'Verified local + global reports', f4:'Setup guide included', f5:'1 free trial before purchase',
+    buy_btn:'Get Full Access — $6',
+    faq_title:'FAQ', fq1:'How long does a real search take?', fa1:'Typically 5-40 seconds to a verified report.',
+    fq2:'What do I get for $6?', fa2:'Full access + Tavily, Groq, Nebius keys. One-time via Gumroad.',
+    fq3:'Free trial limits?', fa3:'1 trial per visitor. Up to 100 free searches/day site-wide.',
+    fq4:'Are sources real?', fa4:'Yes. The report appears after ranking documented sources.',
+    footer:'© 2026 Mido AI Store • Deep Search Agent V10.3', footer2:'Live sources. Always verify final local prices.',
+    modal_title:'Full Report — Headphones under $150', modal_q:'Query: Best noise-cancelling headphones under $150', modal_close:'Close',
+    modal_winner:'Winner: Sony WH-CH720N',
+    modal_summary:'Best overall ANC/comfort/battery. JBL Tune 770NC is best value.',
+    modal_sources_title:'Top Sources', modal_sources_list:'1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Local market listings',
+    modal_rec_title:'Final Recommendation', modal_rec_text:'Pick Sony WH-CH720N if budget allows. Pick JBL Tune 770NC for best value.',
+    v_best:'Best overall', v_budget:'Best budget', v_solid:'Solid alt', v_entry:'Entry pick',
+    searching:'Searching...', err_net:'Network issue. Try again.', err_trial:'Free trial already used.', err_daily:'Daily free limit reached.', err_license:'Invalid license key.',
+    sug1:'Best laptop for coding under 25000 EGP', sug2:'Best podcast mic under 3000 EGP', sug3:'Cheapest home internet in Egypt',
+    saved_ok:'Report saved on this device', saved_empty:'No report to save yet', skill_save_hint:'Save skill selected',
+    prog_sources:'Sources reviewed', prog_elapsed:'Elapsed', prog_remaining:'Remaining', prog_complete:'Research completed',
+    prog_used:'sources reviewed', answer:'Answer', sources:'Sources', actual_time:'Actual time'
+  },
+  ar: {
+    nav_buy:'احصل على الأداة — $6', pill:'⚡ بحث موثق • 5-40 ثانية • مصادر محلية وعالمية',
+    hero_title:'حوّل سؤالك إلى <span class="g">قرار موثّق</span> — قبل أن تدفع',
+    hero_desc:'اسأل مرة واحدة لتحصل على مصادر حية، ومقارنة واضحة، وتوصية مبنية على الأدلة خلال حوالي 5-40 ثانية.',
+    cta_try:'جرب البحث المجاني', cta_report:'شاهد التقرير الكامل',
+    t1:'✓ تجربة واحدة / زائر', t2:'✓ 100 بحث مجاني / يوم', t3:'✓ مفاتيح API بعد الشراء',
+    st_visitors:'الزوار', st_searches:'بحث اليوم', st_ok:'ناجح', st_fail:'فاشل', st_left:'متبقي اليوم',
+    skills_title:'مهارات البحث', skills_sub:'اختر المهارة قبل البحث. مهارة الحفظ تخزّن آخر تقرير على هذا الجهاز.',
+    sk1:'بحث عميق', sk2:'تلخيص', sk3:'مقارنة', sk4:'توصية', sk5:'فحص السعر', sk6:'حفظ التقرير',
+    demo_title:'تجربة حية', demo_sub:'محرك حقيقي. المراحل تضيء أثناء زحف العنكبوت على المصادر.',
+    ph:'أفضل سماعات إلغاء ضوضاء تحت 150 دولار', search_btn:'بحث 🔍', meta1:'مجاني: 1 / زائر', meta2:'الحد اليومي: 100',
+    s1:'بحث المصادر', s1d:'مصادر Tavily الحية', s2:'بناء الأطروحة', s2d:'الحجة الأساسية', s3:'تقليص وترتيب', s3d:'أقوى الإشارات', s4:'تقييم المخاطر', s4d:'محلي + عالمي', s5:'التقرير النهائي', s5d:'5-40 ثانية',
+    laws_title:'قوانين أسيموف للسلامة', laws_sub:'قواعد توجّه المحرك ليبقى مفيدًا وصادقًا وآمنًا لقراراتك الحقيقية.',
+    laws_trust:'لماذا هذا مهم؟ Mido مصمم لتقليل الإجابات الواثقة الخاطئة عبر إجبار التحقق من المصادر والترتيب ثم توصية نهائية يمكنك مراجعتها.',
+    law1_t:'لا ضرر بالثقة الكاذبة', law1_s:'لا تُعرض التخمينات كحقائق مثبتة.', law1_d:'إذا كان الدليل ضعيفًا يجب أن يقول التقرير ذلك. المحرك يفضّل المصادر المرتبة والأدلة ذات الدرجة.',
+    law2_t:'خدمة هدف البحث أولًا', law2_s:'تحسين القرار لا الدردشة.', law2_d:'المخرجات منظمة للتنفيذ: ملخص ومقارنة وتوصية.',
+    law3_t:'حماية النظام وحدود الاستخدام', law3_s:'استخدام عادل وحماية تجربة من الخادم.', law3_d:'التجربة المجانية محدودة لكل زائر ولكل يوم على الخادم وليس المتصفح فقط.',
+    law4_t:'احترام واقع السوق المحلي', law4_s:'إدراج سياق الأسعار المحلية عند الإمكان.', law4_d:'لأسئلة الشراء يحاول التقرير ربط المراجعات الدولية بنطاقات الأسعار المحلية.',
+    rings_title:'حلقات الحماية الخمس', rings_sub:'اضغط أي حلقة لقراءة الشرح الكامل. أثناء البحث تضيء الحلقات مع حركة العنكبوت.',
+    ring1_t:'الحلقة 1 — التحقق من المصدر', ring1_s:'جمع وتقييم مصادر حية (Tavily).', ring1_d:'يجمع العنكبوت مصادر حية متعددة ويربطها بدرجات صلة.',
+    ring2_t:'الحلقة 2 — بناء الأطروحة', ring2_s:'بناء حجة منطقية أساسية.', ring2_d:'يشكّل النظام أطروحة واضحة: ما الخيارات؟ ما المعايير؟ وما القرار المطلوب؟',
+    ring3_t:'الحلقة 3 — التقليص والترتيب', ring3_s:'الإبقاء على أقوى الأدلة فقط.', ring3_d:'من مجموعة مرشحة أكبر يضغط المحرك إلى أهم المصادر.',
+    ring4_t:'الحلقة 4 — تقييم المخاطر', ring4_s:'التحقق من مخاطر السوق والسياق.', ring4_d:'يفحص واقعية السعر وإشارات التوفر المحلي.',
+    ring5_t:'الحلقة 5 — معايرة الثقة', ring5_s:'توليد التقرير النهائي الموثق.', ring5_d:'يُنتج المخرج المنظم بعد اكتمال الحلقات السابقة.',
+    case_title:'مثال تقرير حقيقي', case_sub:'تم إنشاؤه خلال <strong>35 ثانية</strong> لسؤال: أفضل سماعات إلغاء ضوضاء تحت 150$',
+    case_h:'أفضل سماعات إلغاء ضوضاء تحت 150$', case_quick:'الخلاصة السريعة',
+    cq1:'<strong>Sony WH-CH720N</strong> — الأفضل إجمالًا (سعر تقديري).',
+    cq2:'<strong>JBL Tune 770NC</strong> — الأفضل اقتصاديًا تحت 100$.',
+    cq3:'<strong>OneOdio Focus A6</strong> — خيار دخول قرب 70$.',
+    th1:'الموديل', th2:'البطارية', th_price:'السعر', th_comfort:'الراحة', th_verdict:'الحكم',
+    r1:'الأفضل إجمالًا', r2:'الأفضل اقتصاديًا', r3:'خيار دخول',
+    case_sources:'مثال توضيحي فقط. الأسعار معروضة بعملة المصدر وقد تكون غير محدثة.',
+    full_preview:'معاينة التقرير الكامل', save_example:'حفظ هذا التقرير',
+    price_title:'تسعير بسيط', price_sub:'دفعة واحدة. بدون اشتراك.', once:'مرة واحدة',
+    price_local:'أو ما يعادلها بعملتك المحلية عند الدفع عبر Gumroad.',
+    f1:'وصول كامل للبحث العميق', f2:'مفاتيح API: Tavily + Groq + Nebius', f3:'تقارير موثقة محلية وعالمية', f4:'دليل الإعداد مشمول', f5:'تجربة مجانية واحدة قبل الشراء',
+    buy_btn:'احصل على الوصول الكامل — $6',
+    faq_title:'أسئلة شائعة', fq1:'كم يستغرق البحث الحقيقي؟', fa1:'عادة 5-40 ثانية حتى التقرير الموثق.',
+    fq2:'ماذا أحصل مقابل 6$؟', fa2:'وصول كامل + مفاتيح Tavily وGroq وNebius. دفعة واحدة عبر Gumroad.',
+    fq3:'حدود التجربة المجانية؟', fa3:'تجربة واحدة لكل زائر. حتى 100 بحث مجاني يوميًا للموقع.',
+    fq4:'هل المصادر حقيقية؟', fa4:'نعم. يظهر التقرير بعد ترتيب مصادر موثقة.',
+    footer:'© 2026 Mido AI Store • Deep Search Agent V10.3', footer2:'مصادر حية. تحقق دائمًا من الأسعار المحلية النهائية.',
+    modal_title:'التقرير الكامل — سماعات تحت 150$', modal_q:'السؤال: أفضل سماعات إلغاء ضوضاء تحت 150$', modal_close:'إغلاق',
+    modal_winner:'الفائز: Sony WH-CH720N',
+    modal_summary:'أفضل توازن لإلغاء الضوضاء والراحة والبطارية. JBL Tune 770NC الأفضل قيمة.',
+    modal_sources_title:'أقوى المصادر', modal_sources_list:'1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. قوائم السوق المحلية',
+    modal_rec_title:'التوصية النهائية', modal_rec_text:'اختر Sony WH-CH720N إن سمحت الميزانية. واختر JBL Tune 770NC لأفضل قيمة.',
+    v_best:'الأفضل إجمالًا', v_budget:'الأفضل اقتصاديًا', v_solid:'بديل قوي', v_entry:'خيار دخول',
+    searching:'جاري البحث...', err_net:'مشكلة شبكة. حاول مجددًا.', err_trial:'التجربة المجانية مستخدمة.', err_daily:'تم استهلاك الحد اليومي.',
+    sug1:'أفضل لابتوب برمجة تحت 25000ج', sug2:'أفضل مايك بودكاست تحت 3000ج', sug3:'أرخص إنترنت منزلي في مصر',
+    saved_ok:'تم حفظ التقرير على هذا الجهاز', saved_empty:'لا يوجد تقرير للحفظ بعد', skill_save_hint:'تم اختيار مهارة الحفظ',
+    prog_sources:'مصدرًا تمت مراجعته', prog_elapsed:'الوقت المنقضي', prog_remaining:'المتبقي', prog_complete:'اكتمل البحث',
+    prog_used:'مصادر تمت مراجعتها', answer:'الإجابة', sources:'المصادر', actual_time:'الوقت الفعلي'
+  },
+  fr: { nav_buy:"Obtenir l'accès — $6",pill:"⚡ Recherche vérifiée • 5-40s • Sources locales + mondiales",hero_title:"Obtenez un <span class=\"g\">rapport structuré</span> — pas seulement des liens",hero_desc:"Pipeline vérifié en 5 étapes avec sources locales et internationales — en environ 5-40 secondes.",cta_try:"Essai gratuit",cta_report:"Voir le rapport complet",t1:"✓ 1 essai gratuit / visiteur",t2:"✓ 100 recherches gratuites / jour",t3:"✓ Clés API après achat",st_visitors:"Visiteurs",st_searches:"Recherches aujourd'hui",st_ok:"Réussies",st_fail:"Échouées",st_left:"Restantes gratuites",skills_title:"Compétences de recherche",skills_sub:"Choisissez une compétence avant de chercher.",sk1:"Recherche approfondie",sk2:"Résumer",sk3:"Comparer",sk4:"Recommander",sk5:"Vérifier le prix",sk6:"Enregistrer",demo_title:"Démo en direct",demo_sub:"Moteur réel. Les étapes s'allument pendant la recherche.",ph:"Meilleurs casques ANC sous 150 $",search_btn:"Rechercher 🔍",meta1:"Gratuit : 1 / visiteur",meta2:"Plafond : 100",s1:"Recherche de sources",s1d:"Sources live",s2:"Construction de thèse",s2d:"Argument central",s3:"Réduire et classer",s3d:"Signaux forts",s4:"Contrôle des risques",s4d:"Local + mondial",s5:"Rapport final",s5d:"5-40 secondes",laws_title:"Lois de sécurité d'Asimov",laws_sub:"Ces règles guident le moteur.",laws_trust:"Pourquoi c'est important : Mido réduit les réponses fausses.",law1_t:"Ne pas nuire par fausse confiance",law1_s:"Ne pas présenter des suppositions comme des faits.",law1_d:"Si la preuve est faible, le rapport doit le dire.",law2_t:"Servir d'abord l'objectif",law2_s:"Optimiser la décision.",law2_d:"Sortie structurée : résumé, comparaison et recommandation.",law3_t:"Protéger le système",law3_s:"Usage équitable et protection côté serveur.",law3_d:"Les limites s'appliquent côté serveur par visiteur et par jour.",law4_t:"Respecter le marché local",law4_s:"Inclure le contexte de prix local.",law4_d:"Le rapport relie avis internationaux et prix locaux.",rings_title:"Cinq anneaux de protection",rings_sub:"Touchez un anneau pour lire l'explication complète.",ring1_t:"Anneau 1 — Vérification",ring1_s:"Collecter et noter des sources (Tavily).",ring1_d:"Plusieurs sources live avec scores de pertinence.",ring2_t:"Anneau 2 — Thèse",ring2_s:"Construire un argument logique.",ring2_d:"Le système forme une thèse claire.",ring3_t:"Anneau 3 — Réduire",ring3_s:"Garder seulement les preuves les plus fortes.",ring3_d:"Compression vers les sources les plus utiles.",ring4_t:"Anneau 4 — Risques",ring4_s:"Valider risques de marché.",ring4_d:"Réalisme des prix et disponibilité locale.",ring5_t:"Anneau 5 — Confiance",ring5_s:"Générer le rapport final vérifié.",ring5_d:"Produit le résumé et la recommandation finale.",case_title:"Exemple de rapport réel",case_sub:"Généré en <strong>35 secondes</strong>",case_h:"Meilleurs casques ANC sous 150 $",case_quick:"Résumé rapide",cq1:"<strong>Sony WH-CH720N</strong> — meilleur choix global.",cq2:"<strong>JBL Tune 770NC</strong> — meilleur budget.",cq3:"<strong>OneOdio Focus A6</strong> — option d'entrée.",th1:"Modèle",th2:"Batterie",th_price:"Prix",th_comfort:"Confort",th_verdict:"Verdict",r1:"Meilleur global",r2:"Meilleur budget",r3:"Entrée de gamme",case_sources:"Sources : SoundGuys, CNET, TechRadar.",full_preview:"Aperçu complet",save_example:"Enregistrer ce rapport",price_title:"Tarification simple",price_sub:"Paiement unique.",once:"unique",price_local:"ou équivalent en devise locale via Gumroad.",f1:"Accès complet Deep Search",f2:"Clés API : Tavily + Groq + Nebius",f3:"Rapports vérifiés locaux + internationaux",f4:"Guide d'installation inclus",f5:"1 essai gratuit avant achat",buy_btn:"Accès complet — $6",faq_title:"FAQ",fq1:"Combien de temps ?",fa1:"En général 5-40 secondes.",fq2:"Que comprend 6 $ ?",fa2:"Accès complet + clés Tavily, Groq, Nebius.",fq3:"Limites ?",fa3:"1 essai par visiteur. Jusqu'à 100/jour.",fq4:"Sources réelles ?",fa4:"Oui, après classement de sources documentées.",footer:"© 2026 Mido AI Store",footer2:"Sources live. Vérifiez les prix locaux.",modal_title:"Rapport complet",modal_q:"Question",modal_close:"Fermer",modal_winner:"Gagnant",modal_summary:"Résumé",modal_sources_title:"Principales sources",modal_sources_list:"Sources",modal_rec_title:"Recommandation finale",modal_rec_text:"Texte",v_best:"Meilleur global",v_budget:"Meilleur budget",v_solid:"Alternative solide",v_entry:"Entrée",searching:"Recherche...",err_net:"Problème réseau.",err_trial:"Essai déjà utilisé.",err_daily:"Limite atteinte.",sug1:"Meilleur laptop",sug2:"Meilleur micro",sug3:"Internet le moins cher",saved_ok:"Rapport enregistré",saved_empty:"Aucun rapport",skill_save_hint:"Compétence Enregistrer",prog_sources:"sources",prog_elapsed:"Écoulé",prog_remaining:"Restant",prog_complete:"Terminé",prog_used:"sources",answer:"Réponse",sources:"Sources",actual_time:"Temps réel"},
+  de: { nav_buy:"Zugang — $6",pill:"⚡ Verifizierte Recherche • 5-40s • Lokal + Global",hero_title:"Erhalten Sie einen <span class=\"g\">strukturierten Bericht</span>",hero_desc:"5-stufige verifizierte Pipeline in etwa 5-40 Sekunden.",cta_try:"Kostenlos testen",cta_report:"Vollbericht",t1:"✓ 1 Test / Besucher",t2:"✓ 100 Suchen / Tag",t3:"✓ API-Keys nach Kauf",st_visitors:"Besucher",st_searches:"Suchen heute",st_ok:"Erfolgreich",st_fail:"Fehlgeschlagen",st_left:"Frei übrig",skills_title:"Recherche-Skills",skills_sub:"Skill vor der Suche wählen.",sk1:"Deep Search",sk2:"Zusammenfassen",sk3:"Vergleichen",sk4:"Empfehlen",sk5:"Preis prüfen",sk6:"Bericht speichern",demo_title:"Live-Demo",demo_sub:"Echte Engine. Stufen leuchten während der Suche.",ph:"Beste ANC-Kopfhörer unter 150 $",search_btn:"Suchen 🔍",meta1:"Gratis: 1 / Besucher",meta2:"Tageslimit: 100",s1:"Quellensuche",s1d:"Tavily Live-Quellen",s2:"These",s2d:"Kernargument",s3:"Reduzieren",s3d:"Stärkste Signale",s4:"Risikocheck",s4d:"Lokal + global",s5:"Endbericht",s5d:"5-40 Sekunden",laws_title:"Asimov-Sicherheitsgesetze",laws_sub:"Regeln für nützliche und ehrliche Ausgabe.",laws_trust:"Warum das zählt: Mido reduziert falsche Antworten.",law1_t:"Kein Schaden",law1_s:"Vermutungen nicht als Fakten.",law1_d:"Bei schwacher Evidenz muss der Bericht das sagen.",law2_t:"Forschungsziel",law2_s:"Für Entscheidungen optimieren.",law2_d:"Strukturierte Ausgabe: Kurzfassung, Vergleich, Empfehlung.",law3_t:"System schützen",law3_s:"Fair Use und serverseitiger Schutz.",law3_d:"Gratis-Limits gelten serverseitig pro Besucher und Tag.",law4_t:"Lokale Marktrealität",law4_s:"Lokalen Preiskontext einbeziehen.",law4_d:"Kauf-Fragen verbinden internationale Reviews mit lokalen Preisen.",rings_title:"Fünf Schutzringe",rings_sub:"Ring antippen für Details.",ring1_t:"Ring 1 — Quellenprüfung",ring1_s:"Live-Quellen sammeln (Tavily).",ring1_d:"Mehrere Live-Quellen mit Relevanz-Scores.",ring2_t:"Ring 2 — These",ring2_s:"Logisches Kernargument.",ring2_d:"Klare These zu Optionen und Kriterien.",ring3_t:"Ring 3 — Reduzieren",ring3_s:"Nur stärkste Evidenz behalten.",ring3_d:"Komprimierung auf nützlichste Quellen.",ring4_t:"Ring 4 — Risikocheck",ring4_s:"Markt-Risiken prüfen.",ring4_d:"Preisrealismus und Verfügbarkeit.",ring5_t:"Ring 5 — Konfidenz",ring5_s:"Finalen Bericht erzeugen.",ring5_d:"Kurzfassung und Empfehlung nach Abschluss.",case_title:"Echtes Berichtsbeispiel",case_sub:"In <strong>35 Sekunden</strong> erzeugt",case_h:"Beste ANC-Kopfhörer unter 150 $",case_quick:"Kurzfassung",cq1:"<strong>Sony WH-CH720N</strong> — bestes Gesamtpaket.",cq2:"<strong>JBL Tune 770NC</strong> — bestes Budget.",cq3:"<strong>OneOdio Focus A6</strong> — Einstieg.",th1:"Modell",th2:"Akku",th_price:"Preis",th_comfort:"Komfort",th_verdict:"Urteil",r1:"Gesamtsieger",r2:"Bestes Budget",r3:"Einstieg",case_sources:"Quellen: SoundGuys, CNET, TechRadar.",full_preview:"Vollbericht",save_example:"Bericht speichern",price_title:"Einfache Preise",price_sub:"Einmalzahlung.",once:"einmalig",price_local:"oder Gegenwert in Ihrer Währung via Gumroad.",f1:"Voller Deep-Search-Zugang",f2:"API-Keys: Tavily + Groq + Nebius",f3:"Verifizierte Berichte",f4:"Setup-Guide",f5:"1 Gratis-Test",buy_btn:"Voller Zugang — $6",faq_title:"FAQ",fq1:"Wie lange dauert eine Suche?",fa1:"Typisch 5-40 Sekunden.",fq2:"Was enthält 6 $?",fa2:"Voller Zugang + Keys.",fq3:"Gratis-Limits?",fa3:"1 Test pro Besucher. Bis 100/Tag.",fq4:"Echte Quellen?",fa4:"Ja, nach Ranking dokumentierter Quellen.",footer:"© 2026 Mido AI Store",footer2:"Live-Quellen. Preise prüfen.",modal_title:"Vollbericht",modal_q:"Anfrage",modal_close:"Schließen",modal_winner:"Sieger",modal_summary:"Zusammenfassung",modal_sources_title:"Top-Quellen",modal_sources_list:"Quellen",modal_rec_title:"Finale Empfehlung",modal_rec_text:"Text",v_best:"Gesamtsieger",v_budget:"Bestes Budget",v_solid:"Solide Alternative",v_entry:"Einstieg",searching:"Suche...",err_net:"Netzwerkproblem.",err_trial:"Test genutzt.",err_daily:"Tageslimit erreicht.",sug1:"Bestes Laptop",sug2:"Bestes Mikro",sug3:"Günstigstes Internet",saved_ok:"Bericht gespeichert",saved_empty:"Kein Bericht",skill_save_hint:"Save-Skill aktiv",prog_sources:"Quellen geprüft",prog_elapsed:"Verstrichen",prog_remaining:"Verbleibend",prog_complete:"Abgeschlossen",prog_used:"Quellen",answer:"Antwort",sources:"Quellen",actual_time:"Echte Zeit"},
+  ja: { nav_buy:"アクセス — $6",pill:"⚡ 検証済み調査 • 5-40秒",hero_title:"完全な<span class=\"g\">構造化レポート</span>を取得",hero_desc:"5段階の検証パイプラインを約5-40秒で提供。",cta_try:"無料で試す",cta_report:"完全レポート",t1:"✓ 訪問者1回無料",t2:"✓ 1日100回無料",t3:"✓ 購入後APIキー",st_visitors:"訪問者",st_searches:"本日の検索",st_ok:"成功",st_fail:"失敗",st_left:"残り無料",skills_title:"リサーチスキル",skills_sub:"検索前にスキルを選択。",sk1:"ディープサーチ",sk2:"要約",sk3:"比較",sk4:"推奨",sk5:"価格チェック",sk6:"レポート保存",demo_title:"ライブデモ",demo_sub:"実エンジン。検索中にステージが点灯。",ph:"150ドル以下のベストANCヘッドホン",search_btn:"検索 🔍",meta1:"無料：訪問者1回",meta2:"1日上限：100",s1:"ソース検索",s1d:"Tavilyライブ",s2:"論旨構築",s2d:"核心",s3:"削減",s3d:"最強シグナル",s4:"リスク",s4d:"現地＋国際",s5:"最終レポート",s5d:"5-40秒",laws_title:"アシモフの安全法則",laws_sub:"有用・誠実な出力のためのルール。",laws_trust:"重要な理由：Midoは誤回答を減らす設計。",law1_t:"偽の自信で害を与えない",law1_s:"推測を事実としない。",law1_d:"証拠が弱い場合は明記。",law2_t:"調査目的優先",law2_s:"意思決定向けに最適化。",law2_d:"要約・比較・推奨の構造。",law3_t:"システム保護",law3_s:"公平利用とサーバー保護。",law3_d:"サーバー側で制限。",law4_t:"現地市場尊重",law4_s:"現地価格を含める。",law4_d:"国際レビューと現地価格を結ぶ。",rings_title:"5つの保護リング",rings_sub:"リングをタップして詳細。",ring1_t:"リング1 — ソース検証",ring1_s:"ライブソース収集。",ring1_d:"複数ソースにスコア付与。",ring2_t:"リング2 — 論旨",ring2_s:"論理的な核心。",ring2_d:"明確な論旨を形成。",ring3_t:"リング3 — 削減",ring3_s:"最強の証拠のみ。",ring3_d:"有用ソースに圧縮。",ring4_t:"リング4 — リスク",ring4_s:"市場リスク検証。",ring4_d:"価格の現実性確認。",ring5_t:"リング5 — 信頼度",ring5_s:"最終レポート生成。",ring5_d:"完了後に構造化出力。",case_title:"実レポート例",case_sub:"<strong>35秒</strong>で生成",case_h:"150ドル以下のベストANC",case_quick:"クイックまとめ",cq1:"<strong>Sony WH-CH720N</strong> — 総合ベスト。",cq2:"<strong>JBL Tune 770NC</strong> — コスパ最強。",cq3:"<strong>OneOdio Focus A6</strong> — 入門。",th1:"モデル",th2:"バッテリー",th_price:"価格",th_comfort:"快適性",th_verdict:"判定",r1:"総合ベスト",r2:"コスパ",r3:"入門",case_sources:"ソース：SoundGuys、CNET、TechRadar。",full_preview:"レポート全体",save_example:"保存",price_title:"シンプル価格",price_sub:"一回払い。",once:"一回",price_local:"またはGumroadで現地通貨の同等額。",f1:"フルDeep Search",f2:"APIキー：Tavily + Groq + Nebius",f3:"検証済みレポート",f4:"セットアップガイド",f5:"購入前に1回無料",buy_btn:"フルアクセス — $6",faq_title:"FAQ",fq1:"所要時間は？",fa1:"通常5-40秒。",fq2:"$6に含まれる？",fa2:"フルアクセス＋キー。",fq3:"無料制限？",fa3:"訪問者1回。1日100回。",fq4:"ソースは本物？",fa4:"はい、文書ソース順位付け後。",footer:"© 2026 Mido AI Store",footer2:"ライブソース。価格確認。",modal_title:"完全レポート",modal_q:"質問",modal_close:"閉じる",modal_winner:"最優秀",modal_summary:"まとめ",modal_sources_title:"主要ソース",modal_sources_list:"ソース",modal_rec_title:"最終推奨",modal_rec_text:"テキスト",v_best:"総合ベスト",v_budget:"コスパ",v_solid:"堅実",v_entry:"入門",searching:"検索中...",err_net:"ネットワーク問題。",err_trial:"無料使用済み。",err_daily:"上限到達。",sug1:"プログラミング用ノートPC",sug2:"ポッドキャストマイク",sug3:"最安インターネット",saved_ok:"レポート保存済み",saved_empty:"保存するレポートなし",skill_save_hint:"保存スキル選択済み",prog_sources:"ソース確認",prog_elapsed:"経過",prog_remaining:"残り",prog_complete:"完了",prog_used:"ソース",answer:"回答",sources:"ソース",actual_time:"実時間"},
+  zh: { nav_buy:"获取访问 — $6",pill:"⚡ 已验证研究 • 5-40秒",hero_title:"获取完整的<span class=\"g\">结构化报告</span>",hero_desc:"五阶段验证流程，约5-40秒完成。",cta_try:"免费试用",cta_report:"查看完整报告",t1:"✓ 每位访客1次免费",t2:"✓ 每天100次免费搜索",t3:"✓ 购买后提供API密钥",st_visitors:"访客",st_searches:"今日搜索",st_ok:"成功",st_fail:"失败",st_left:"今日剩余",skills_title:"研究技能",skills_sub:"搜索前选择技能。",sk1:"深度搜索",sk2:"摘要",sk3:"对比",sk4:"推荐",sk5:"价格检查",sk6:"保存报告",demo_title:"在线演示",demo_sub:"真实引擎。搜索时阶段会点亮。",ph:"150美元以下最佳降噪耳机",search_btn:"搜索 🔍",meta1:"免费：每位访客1次",meta2:"每日上限：100",s1:"来源搜索",s1d:"Tavily实时来源",s2:"论点构建",s2d:"核心论证",s3:"筛选排序",s3d:"最强信号",s4:"风险检查",s4d:"本地+国际",s5:"最终报告",s5d:"5-40秒",laws_title:"阿西莫夫安全法则",laws_sub:"这些规则引导引擎。",laws_trust:"为什么重要：Mido减少错误回答。",law1_t:"不以虚假信心造成伤害",law1_s:"不要把猜测说成事实。",law1_d:"如果证据不足，报告必须说明。",law2_t:"优先服务研究目标",law2_s:"为决策优化。",law2_d:"输出结构化：摘要、对比、推荐。",law3_t:"保护系统",law3_s:"公平使用与服务端保护。",law3_d:"免费额度在服务器侧限制。",law4_t:"尊重本地市场",law4_s:"尽可能纳入本地价格。",law4_d:"连接国际评测与本地价格。",rings_title:"五层保护环",rings_sub:"点击任意环查看说明。",ring1_t:"第1环 — 来源验证",ring1_s:"收集并评分来源。",ring1_d:"多个来源附加相关度分数。",ring2_t:"第2环 — 论点构建",ring2_s:"构建核心论点。",ring2_d:"形成清晰论点。",ring3_t:"第3环 — 筛选排序",ring3_s:"只保留最强证据。",ring3_d:"压缩到最有用来源。",ring4_t:"第4环 — 风险检查",ring4_s:"验证风险。",ring4_d:"检查价格与可获得性。",ring5_t:"第5环 — 置信校准",ring5_s:"生成最终报告。",ring5_d:"输出结构化结果。",case_title:"真实报告示例",case_sub:"在<strong>35秒</strong>内生成",case_h:"150美元以下最佳降噪耳机",case_quick:"快速总结",cq1:"<strong>Sony WH-CH720N</strong> — 综合最佳。",cq2:"<strong>JBL Tune 770NC</strong> — 性价比最佳。",cq3:"<strong>OneOdio Focus A6</strong> — 入门选择。",th1:"型号",th2:"电池",th_price:"价格",th_comfort:"舒适度",th_verdict:"结论",r1:"综合最佳",r2:"性价比最佳",r3:"入门选择",case_sources:"来源：SoundGuys、CNET、TechRadar。",full_preview:"完整报告预览",save_example:"保存此报告",price_title:"简单定价",price_sub:"一次性付款。",once:"一次性",price_local:"或通过Gumroad以当地货币等值支付。",f1:"完整深度搜索访问",f2:"API密钥：Tavily + Groq + Nebius",f3:"已验证报告",f4:"包含设置指南",f5:"购买前1次免费试用",buy_btn:"获取完整访问 — $6",faq_title:"常见问题",fq1:"真实搜索需要多久？",fa1:"通常5-40秒。",fq2:"6美元包含什么？",fa2:"完整访问 + 密钥。",fq3:"免费试用限制？",fa3:"每位访客1次。每天最多100次。",fq4:"来源是否真实？",fa4:"是，排序文档来源后显示。",footer:"© 2026 Mido AI Store",footer2:"实时来源。请核实最终价格。",modal_title:"完整报告",modal_q:"问题",modal_close:"关闭",modal_winner:"优胜",modal_summary:"总结",modal_sources_title:"主要来源",modal_sources_list:"来源",modal_rec_title:"最终推荐",modal_rec_text:"文本",v_best:"综合最佳",v_budget:"性价比最佳",v_solid:"稳健备选",v_entry:"入门",searching:"搜索中...",err_net:"网络问题。",err_trial:"试用已使用。",err_daily:"已达每日上限。",sug1:"适合编程的笔记本",sug2:"最佳播客麦克风",sug3:"最便宜的家庭宽带",saved_ok:"报告已保存",saved_empty:"没有可保存的报告",skill_save_hint:"已选择保存技能",prog_sources:"已审查来源",prog_elapsed:"已用时间",prog_remaining:"剩余",prog_complete:"完成",prog_used:"来源",answer:"回答",sources:"来源",actual_time:"实际时间"},
+  es: { nav_buy:"Obtener acceso — $6",pill:"⚡ Investigación verificada • 5-40s",hero_title:"Obtén un <span class=\"g\">informe estructurado</span>",hero_desc:"Pipeline verificado de 5 etapas en unos 5-40 segundos.",cta_try:"Prueba gratis",cta_report:"Ver informe completo",t1:"✓ 1 prueba / visitante",t2:"✓ 100 búsquedas gratis / día",t3:"✓ Claves API tras la compra",st_visitors:"Visitantes",st_searches:"Búsquedas hoy",st_ok:"Exitosas",st_fail:"Fallidas",st_left:"Gratis restantes",skills_title:"Skills de investigación",skills_sub:"Elige un skill antes de buscar.",sk1:"Búsqueda profunda",sk2:"Resumir",sk3:"Comparar",sk4:"Recomendar",sk5:"Revisar precio",sk6:"Guardar informe",demo_title:"Demo en vivo",demo_sub:"Motor real. Las etapas se iluminan durante la búsqueda.",ph:"Mejores auriculares ANC por menos de $150",search_btn:"Buscar 🔍",meta1:"Gratis: 1 / visitante",meta2:"Tope diario: 100",s1:"Búsqueda de fuentes",s1d:"Fuentes live",s2:"Construcción de tesis",s2d:"Argumento central",s3:"Reducir y ordenar",s3d:"Señales fuertes",s4:"Control de riesgos",s4d:"Local + global",s5:"Informe final",s5d:"5-40 segundos",laws_title:"Leyes de seguridad de Asimov",laws_sub:"Reglas para una salida útil y honesta.",laws_trust:"Por qué importa: Mido reduce respuestas erróneas.",law1_t:"No dañar con falsa confianza",law1_s:"No presentar conjeturas como hechos.",law1_d:"Si la evidencia es débil, el informe debe decirlo.",law2_t:"Servir el objetivo de investigación",law2_s:"Optimizar la decisión.",law2_d:"Salida estructurada: resumen, comparación, recomendación.",law3_t:"Proteger el sistema",law3_s:"Uso justo y protección en servidor.",law3_d:"Los límites se aplican en el servidor.",law4_t:"Respetar el mercado local",law4_s:"Incluir contexto de precios locales.",law4_d:"Conecta reseñas internacionales con precios locales.",rings_title:"Cinco anillos de protección",rings_sub:"Toca un anillo para leer el detalle.",ring1_t:"Anillo 1 — Verificación",ring1_s:"Recoger fuentes live.",ring1_d:"Varias fuentes con puntuación.",ring2_t:"Anillo 2 — Tesis",ring2_s:"Construir el argumento.",ring2_d:"Tesis clara sobre opciones.",ring3_t:"Anillo 3 — Reducir",ring3_s:"Solo la evidencia más fuerte.",ring3_d:"Compresión a fuentes útiles.",ring4_t:"Anillo 4 — Riesgos",ring4_s:"Validar riesgos de mercado.",ring4_d:"Realismo de precios y disponibilidad.",ring5_t:"Anillo 5 — Confianza",ring5_s:"Generar el informe final.",ring5_d:"Resumen y recomendación final.",case_title:"Ejemplo de informe real",case_sub:"Generado en <strong>35 segundos</strong>",case_h:"Mejores auriculares ANC bajo $150",case_quick:"Resumen rápido",cq1:"<strong>Sony WH-CH720N</strong> — mejor global.",cq2:"<strong>JBL Tune 770NC</strong> — mejor presupuesto.",cq3:"<strong>OneOdio Focus A6</strong> — entrada.",th1:"Modelo",th2:"Batería",th_price:"Precio",th_comfort:"Comodidad",th_verdict:"Veredicto",r1:"Mejor global",r2:"Mejor presupuesto",r3:"Entrada",case_sources:"Fuentes: SoundGuys, CNET, TechRadar.",full_preview:"Vista completa",save_example:"Guardar este informe",price_title:"Precio simple",price_sub:"Pago único.",once:"único",price_local:"o equivalente en moneda local vía Gumroad.",f1:"Acceso completo",f2:"Claves API: Tavily + Groq + Nebius",f3:"Informes verificados",f4:"Guía de configuración",f5:"1 prueba gratis",buy_btn:"Acceso completo — $6",faq_title:"FAQ",fq1:"¿Cuánto tarda?",fa1:"Normalmente 5-40 segundos.",fq2:"¿Qué incluye $6?",fa2:"Acceso completo + claves.",fq3:"¿Límites?",fa3:"1 por visitante. Hasta 100/día.",fq4:"¿Fuentes reales?",fa4:"Sí, tras rankear fuentes documentadas.",footer:"© 2026 Mido AI Store",footer2:"Fuentes en vivo. Verifica precios.",modal_title:"Informe completo",modal_q:"Consulta",modal_close:"Cerrar",modal_winner:"Ganador",modal_summary:"Resumen",modal_sources_title:"Fuentes",modal_sources_list:"Fuentes",modal_rec_title:"Recomendación",modal_rec_text:"Texto",v_best:"Mejor global",v_budget:"Mejor presupuesto",v_solid:"Alternativa",v_entry:"Entrada",searching:"Buscando...",err_net:"Problema de red.",err_trial:"Prueba usada.",err_daily:"Límite alcanzado.",sug1:"Mejor portátil",sug2:"Mejor micrófono",sug3:"Internet más barato",saved_ok:"Informe guardado",saved_empty:"No hay informe",skill_save_hint:"Skill Guardar",prog_sources:"fuentes",prog_elapsed:"Transcurrido",prog_remaining:"Restante",prog_complete:"Completado",prog_used:"fuentes",answer:"Respuesta",sources:"Fuentes",actual_time:"Tiempo real"},
+  pt: { nav_buy:"Obter acesso — $6",pill:"⚡ Pesquisa verificada • 5-40s",hero_title:"Obtenha um <span class=\"g\">relatório estruturado</span>",hero_desc:"Pipeline verificado de 5 etapas em cerca de 5-40 segundos.",cta_try:"Teste grátis",cta_report:"Ver relatório completo",t1:"✓ 1 teste / visitante",t2:"✓ 100 pesquisas grátis / dia",t3:"✓ Chaves API após compra",st_visitors:"Visitantes",st_searches:"Pesquisas hoje",st_ok:"Sucesso",st_fail:"Falhas",st_left:"Grátis restantes",skills_title:"Skills de pesquisa",skills_sub:"Escolha um skill antes de pesquisar.",sk1:"Busca profunda",sk2:"Resumir",sk3:"Comparar",sk4:"Recomendar",sk5:"Checar preço",sk6:"Salvar relatório",demo_title:"Demo ao vivo",demo_sub:"Motor real. As etapas acendem durante a pesquisa.",ph:"Melhores fones ANC por menos de $150",search_btn:"Pesquisar 🔍",meta1:"Grátis: 1 / visitante",meta2:"Limite diário: 100",s1:"Busca de fontes",s1d:"Fontes live",s2:"Construção da tese",s2d:"Argumento central",s3:"Reduzir e rankear",s3d:"Sinais fortes",s4:"Checagem de risco",s4d:"Local + global",s5:"Relatório final",s5d:"5-40 segundos",laws_title:"Leis de segurança de Asimov",laws_sub:"Regras para saída útil e honesta.",laws_trust:"Por que importa: Mido reduz respostas erradas.",law1_t:"Não causar dano",law1_s:"Não apresentar palpites como fatos.",law1_d:"Se a evidência for fraca, o relatório deve dizer.",law2_t:"Servir o objetivo",law2_s:"Otimizar a decisão.",law2_d:"Saída estruturada: resumo, comparação, recomendação.",law3_t:"Proteger o sistema",law3_s:"Uso justo e proteção no servidor.",law3_d:"Limites aplicados no servidor.",law4_t:"Respeitar o mercado local",law4_s:"Incluir contexto de preços locais.",law4_d:"Conecta reviews internacionais com preços locais.",rings_title:"Cinco anéis de proteção",rings_sub:"Toque um anel para ler o detalhe.",ring1_t:"Anel 1 — Verificação",ring1_s:"Coletar fontes live.",ring1_d:"Várias fontes com scores.",ring2_t:"Anel 2 — Tese",ring2_s:"Montar o argumento.",ring2_d:"Tese clara sobre opções.",ring3_t:"Anel 3 — Reduzir",ring3_s:"Só a evidência mais forte.",ring3_d:"Compressão para fontes úteis.",ring4_t:"Anel 4 — Riscos",ring4_s:"Validar riscos de mercado.",ring4_d:"Realismo de preço e disponibilidade.",ring5_t:"Anel 5 — Confiança",ring5_s:"Gerar o relatório final.",ring5_d:"Resumo e recomendação final.",case_title:"Exemplo de relatório real",case_sub:"Gerado em <strong>35 segundos</strong>",case_h:"Melhores fones ANC abaixo de $150",case_quick:"Resumo rápido",cq1:"<strong>Sony WH-CH720N</strong> — melhor geral.",cq2:"<strong>JBL Tune 770NC</strong> — melhor custo.",cq3:"<strong>OneOdio Focus A6</strong> — entrada.",th1:"Modelo",th2:"Bateria",th_price:"Preço",th_comfort:"Conforto",th_verdict:"Veredito",r1:"Melhor geral",r2:"Melhor custo",r3:"Entrada",case_sources:"Fontes: SoundGuys, CNET, TechRadar.",full_preview:"Prévia completa",save_example:"Salvar este relatório",price_title:"Preço simples",price_sub:"Pagamento único.",once:"único",price_local:"ou equivalente em moeda local via Gumroad.",f1:"Acesso completo",f2:"Chaves API: Tavily + Groq + Nebius",f3:"Relatórios verificados",f4:"Guia de configuração",f5:"1 teste grátis",buy_btn:"Acesso completo — $6",faq_title:"FAQ",fq1:"Quanto tempo?",fa1:"Normalmente 5-40 segundos.",fq2:"O que inclui $6?",fa2:"Acesso completo + chaves.",fq3:"Limites?",fa3:"1 por visitante. Até 100/dia.",fq4:"Fontes reais?",fa4:"Sim, após rankear fontes documentadas.",footer:"© 2026 Mido AI Store",footer2:"Fontes ao vivo. Verifique preços.",modal_title:"Relatório completo",modal_q:"Consulta",modal_close:"Fechar",modal_winner:"Vencedor",modal_summary:"Resumo",modal_sources_title:"Fontes",modal_sources_list:"Fontes",modal_rec_title:"Recomendação",modal_rec_text:"Texto",v_best:"Melhor geral",v_budget:"Melhor custo",v_solid:"Alternativa sólida",v_entry:"Entrada",searching:"Pesquisando...",err_net:"Problema de rede.",err_trial:"Teste usado.",err_daily:"Limite atingido.",sug1:"Melhor notebook",sug2:"Melhor microfone",sug3:"Internet mais barata",saved_ok:"Relatório salvo",saved_empty:"Nenhum relatório",skill_save_hint:"Skill Salvar",prog_sources:"fontes",prog_elapsed:"Decorrido",prog_remaining:"Restante",prog_complete:"Concluído",prog_used:"fontes",answer:"Resposta",sources:"Fontes",actual_time:"Tempo real"}
+};
 
-      clearTimeout(typewriterTimeout);
-      typeWriter(t.hook);
-    }
+function D(){return T[currentLang]||T.en;}
+var SKILL_NAMES={
+  en:['Deep Search','Summarize','Compare','Recommend','Price Check','Save Report','Fact Check','Pros & Cons','Buying Guide','Local Price Check','Source Audit','Risk Check','Extract Facts','Outline','Decision Matrix'],
+  ar:['بحث عميق','تلخيص','مقارنة','توصية','فحص السعر','حفظ التقرير','تدقيق الحقائق','الإيجابيات والسلبيات','دليل الشراء','فحص السعر المحلي','تدقيق المصادر','فحص المخاطر','استخراج الحقائق','إنشاء مخطط','مصفوفة القرار'],
+  fr:['Recherche approfondie','Résumé','Comparer','Recommander','Vérifier le prix','Enregistrer','Vérifier les faits','Pour et contre','Guide d’achat','Prix local','Audit des sources','Risques','Extraire les faits','Plan détaillé','Matrice de décision'],
+  de:['Tiefensuche','Zusammenfassen','Vergleichen','Empfehlen','Preisprüfung','Bericht speichern','Fakten prüfen','Vor- und Nachteile','Kaufratgeber','Lokaler Preis','Quellenprüfung','Risiken prüfen','Fakten extrahieren','Gliederung','Entscheidungsmatrix'],
+  es:['Búsqueda profunda','Resumir','Comparar','Recomendar','Revisar precio','Guardar informe','Verificar hechos','Pros y contras','Guía de compra','Precio local','Auditar fuentes','Revisar riesgos','Extraer hechos','Esquema','Matriz de decisión'],
+  pt:['Busca profunda','Resumir','Comparar','Recomendar','Verificar preço','Salvar relatório','Verificar fatos','Prós e contras','Guia de compra','Preço local','Auditar fontes','Verificar riscos','Extrair fatos','Esquema','Matriz de decisão'],
+  ja:['ディープサーチ','要約','比較','推奨','価格確認','レポート保存','事実確認','長所と短所','購入ガイド','現地価格','ソース監査','リスク確認','事実抽出','アウトライン','意思決定マトリクス'],
+  zh:['深度搜索','摘要','对比','推荐','价格检查','保存报告','事实核查','优缺点','购买指南','本地价格检查','来源审计','风险检查','提取事实','内容大纲','决策矩阵']
+};
+var SKILL_IDS=['deep_search','summarize','compare','recommend','price_check','save','fact_check','pros_cons','buying_guide','local_price_check','source_audit','risk_check','extract_facts','outline','decision_matrix'];
+function renderSkills(){
+  var names=SKILL_NAMES[currentLang]||SKILL_NAMES.en;
+  document.getElementById('skills').innerHTML=SKILL_IDS.map(function(id,i){
+    return '<button type="button" class="skill'+(i===0?' on':'')+'" data-skill="'+id+'">'+esc(names[i]||SKILL_NAMES.en[i])+'</button>';
+  }).join('');
+}
+function applyLang(lang){
+  if(!T[lang]) lang='en';
+  currentLang=lang;
+  try{localStorage.setItem('mido_lang',lang);}catch(e){}
+  var rtl=lang==='ar';
+  document.documentElement.lang=lang;
+  document.documentElement.dir=rtl?'rtl':'ltr';
+  document.body.style.fontFamily=rtl?"'Cairo','Inter',system-ui,sans-serif":"'Inter','Cairo',system-ui,sans-serif";
+  var dict=D();
+  document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(dict[k]!=null)el.textContent=dict[k];});
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(dict[k]!=null)el.innerHTML=dict[k];});
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){var k=el.getAttribute('data-i18n-placeholder');if(dict[k]!=null)el.placeholder=dict[k];});
+  var go=document.getElementById('go');
+  if(go&&!go.classList.contains('loading')) go.textContent=dict.search_btn;
+  // ✅ V3.1: تحديث نصوص admin modal عند تغيير اللغة
+  var t=document.getElementById('adminModalTitle');
+  if(t){t.textContent=adminText('title');}
+  var h=document.getElementById('adminModalHint');
+  if(h){h.textContent=adminText('hint');}
+  var i=document.getElementById('adminKeyInput');
+  if(i){i.placeholder=adminText('placeholder');}
+  var s=document.getElementById('adminKeySave');
+  if(s){s.textContent=adminText('save');}
+  var l=document.getElementById('adminKeyLogout');
+  if(l){l.textContent=adminText('logout');}
+  var c=document.getElementById('adminModalClose');
+  if(c){c.textContent=adminText('close');}
+  renderLaws();renderRings();renderSugs();renderSkills();if(typeof LIB_TEXT!=='undefined')renderSavedReports();
+}
+function renderLaws(){
+  var d=D();
+  var items=[['01',d.law1_t,d.law1_s,d.law1_d],['02',d.law2_t,d.law2_s,d.law2_d],['03',d.law3_t,d.law3_s,d.law3_d],['04',d.law4_t,d.law4_s,d.law4_d]];
+  document.getElementById('lawsList').innerHTML=items.map(function(it,i){
+    return '<div class="xcard" data-xcard="law'+i+'"><div class="top"><span class="num">LAW '+it[0]+'</span><span class="chev">▼</span></div><h3>'+it[1]+'</h3><div class="short">'+it[2]+'</div><div class="detail">'+it[3]+'</div></div>';
+  }).join('');
+}
+function renderRings(){
+  var d=D();
+  var colors=['#ef4444','#7c5cff','#10b981','#f59e0b','#8b5cf6'];
+  var items=[[d.ring1_t,d.ring1_s,d.ring1_d],[d.ring2_t,d.ring2_s,d.ring2_d],[d.ring3_t,d.ring3_s,d.ring3_d],[d.ring4_t,d.ring4_s,d.ring4_d],[d.ring5_t,d.ring5_s,d.ring5_d]];
+  document.getElementById('ringsList').innerHTML=items.map(function(it,i){
+    return '<div class="xcard ring-card" data-ring="'+i+'" data-xcard="ring'+i+'"><div class="top"><span class="num" style="color:'+colors[i]+'">RING 0'+(i+1)+'</span><span class="chev">▼</span></div><h3>'+it[0]+'</h3><div class="short">'+it[1]+'</div><div class="detail">'+it[2]+'</div></div>';
+  }).join('');
+}
+function renderSugs(){
+  var d=D();
+  document.getElementById('sugs').innerHTML=[d.sug1,d.sug2,d.sug3].map(function(s){return '<button type="button" class="sug">'+s+'</button>';}).join('');
+}
+document.addEventListener('click',function(e){
+  var card=e.target.closest('.xcard[data-xcard]');
+  if(card){
+    var was=card.classList.contains('open');
+    card.parentElement.querySelectorAll('.xcard').forEach(function(c){c.classList.remove('open','glow-on');});
+    if(!was){card.classList.add('open');glowPulse(card,1200);}
+    if(card.classList.contains('ring-card')) illuminateAllRings();
+  }
+});
+var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu');
+langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.toggle('open');glowPulse(langBtn,600);});
+document.addEventListener('click',function(e){if(!langMenu.contains(e.target)&&!langBtn.contains(e.target))langMenu.classList.remove('open');});
+langMenu.addEventListener('click',function(e){
+  e.stopPropagation();
+  var opt=e.target.closest('.lang-option');if(!opt)return;
+  document.getElementById('flag').textContent=opt.getAttribute('data-f');
+  document.getElementById('langName').textContent=opt.getAttribute('data-n');
+  langMenu.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');});
+  opt.classList.add('active');langMenu.classList.remove('open');
+  applyLang(opt.getAttribute('data-l'));
+  glowPulse(langBtn,800);
+});
+try{var saved=localStorage.getItem('mido_lang')||'en';var m=document.querySelector('.lang-option[data-l="'+saved+'"]');if(m){document.getElementById('flag').textContent=m.getAttribute('data-f');document.getElementById('langName').textContent=m.getAttribute('data-n');document.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');});m.classList.add('active');}applyLang(saved);}catch(e){applyLang('en');}
 
-    // 4. Search Function
-    window.startSearch = async function() {
-      const query = document.getElementById('search-input').value.trim();
-      if (!query) return alert("Please enter a search query!");
+document.getElementById('skills').addEventListener('click',function(e){
+  var b=e.target.closest('.skill');if(!b)return;
+  document.querySelectorAll('.skill').forEach(function(x){x.classList.remove('on','glow-on');});
+  b.classList.add('on');glowPulse(b,1000);
+  skill=b.getAttribute('data-skill')||'deep_search';
+  if(skill==='save'){
+    toast(D().skill_save_hint);
+    if(lastReportText){saveReport(lastReportText);}
+  }else if(lastReportText&&!searching){
+    transformCurrentReport(skill);
+  }
+});
+document.getElementById('sugs').addEventListener('click',function(e){
+  var b=e.target.closest('.sug');if(!b)return;document.getElementById('q').value=b.textContent;glowPulse(b,700);
+});
+var SAVED_REPORTS_KEY='mido_saved_reports_v1', MAX_SAVED_REPORTS=50;
+var LIB_TEXT={en:{title:'Saved Reports',clear:'Clear all',close:'Close',empty:'No saved reports yet.',open:'Open',delete:'Delete',deleted:'Report deleted',cleared:'Saved reports cleared'},ar:{title:'التقارير المحفوظة',clear:'حذف الكل',close:'إغلاق',empty:'لا توجد تقارير محفوظة بعد.',open:'فتح',delete:'حذف',deleted:'تم حذف التقرير',cleared:'تم حذف التقارير المحفوظة'},fr:{title:'Rapports enregistrés',clear:'Tout effacer',close:'Fermer',empty:'Aucun rapport enregistré.',open:'Ouvrir',delete:'Supprimer',deleted:'Rapport supprimé',cleared:'Rapports supprimés'},de:{title:'Gespeicherte Berichte',clear:'Alle löschen',close:'Schließen',empty:'Noch keine Berichte.',open:'Öffnen',delete:'Löschen',deleted:'Bericht gelöscht',cleared:'Gespeicherte Berichte gelöscht'},es:{title:'Informes guardados',clear:'Borrar todo',close:'Cerrar',empty:'Aún no hay informes.',open:'Abrir',delete:'Eliminar',deleted:'Informe eliminado',cleared:'Informes eliminados'},pt:{title:'Relatórios salvos',clear:'Apagar tudo',close:'Fechar',empty:'Nenhum relatório salvo.',open:'Abrir',delete:'Excluir',deleted:'Relatório excluído',cleared:'Relatórios excluídos'},ja:{title:'保存したレポート',clear:'すべて削除',close:'閉じる',empty:'保存されたレポートはありません。',open:'開く',delete:'削除',deleted:'削除しました',cleared:'保存レポートを削除しました'},zh:{title:'已保存报告',clear:'全部清除',close:'关闭',empty:'暂无保存的报告。',open:'打开',delete:'删除',deleted:'报告已删除',cleared:'已清除保存的报告'}};
+function libText(key){var d=LIB_TEXT[currentLang]||LIB_TEXT.en;return d[key]||LIB_TEXT.en[key];}
+function getSavedReports(){
+  try{
+    var raw=localStorage.getItem(SAVED_REPORTS_KEY);
+    if(raw){var arr=JSON.parse(raw);return Array.isArray(arr)?arr:[];}
+    var old=localStorage.getItem('mido_saved_report');
+    if(old){var migrated=[{id:'migrated-'+Date.now(),title:'Migrated report',text:old,createdAt:localStorage.getItem('mido_saved_at')||new Date().toISOString(),skill:'deep_search',lang:currentLang}];localStorage.setItem(SAVED_REPORTS_KEY,JSON.stringify(migrated));return migrated;}
+  }catch(e){}
+  return [];
+}
+function putSavedReports(list){try{localStorage.setItem(SAVED_REPORTS_KEY,JSON.stringify(list.slice(0,MAX_SAVED_REPORTS)));}catch(e){toast(D().err_net);}}
+function renderSavedReports(){
+  var list=document.getElementById('savedReportsList');if(!list)return;var items=getSavedReports();
+  document.getElementById('libraryTitle').textContent=libText('title');document.getElementById('libraryToggle').textContent='▤ '+libText('title');document.getElementById('clearReports').textContent=libText('clear');document.getElementById('closeLibrary').title=libText('close');
+  if(!items.length){list.innerHTML='<div class="library-empty">'+esc(libText('empty'))+'</div>';return;}
+  list.innerHTML=items.map(function(item){var date='';try{date=new Date(item.createdAt).toLocaleString(currentLang||'en');}catch(e){date=item.createdAt||'';}return '<article class="saved-card" data-report-id="'+esc(item.id)+'"><h4>'+esc(item.title||'Mido Report')+'</h4><time>'+esc(date)+'</time><div class="saved-actions"><button type="button" data-library-action="open">'+esc(libText('open'))+'</button><button type="button" data-library-action="delete">'+esc(libText('delete'))+'</button></div></article>';}).join('');
+}
+function saveReport(text,title){
+  if(!text){toast(D().saved_empty);return;}
+  var items=getSavedReports(),now=new Date().toISOString();
+  var item={id:(window.crypto&&window.crypto.randomUUID)?window.crypto.randomUUID():'r_'+Date.now().toString(36)+Math.random().toString(36).slice(2),title:String(title||(q&&q.value)||'Mido Deep Search Report').trim().slice(0,120),text:String(text),createdAt:now,skill:skill,lang:currentLang};
+  items=items.filter(function(x){return x.text!==item.text;});items.unshift(item);putSavedReports(items);renderSavedReports();toast(D().saved_ok);
+}
+function openLibrary(){renderSavedReports();document.getElementById('reportLibrary').classList.add('open');document.getElementById('reportLibrary').setAttribute('aria-hidden','false');document.getElementById('libraryBackdrop').classList.add('open');}
+function closeLibrary(){document.getElementById('reportLibrary').classList.remove('open');document.getElementById('reportLibrary').setAttribute('aria-hidden','true');document.getElementById('libraryBackdrop').classList.remove('open');}
+renderSavedReports();
 
-      const btn = document.getElementById('start-btn');
-      const text = document.getElementById('btn-text');
-      const loader = document.getElementById('btn-loader');
-      const hero = document.getElementById('hero-section');
-
-      if (isSearching) return;
-      isSearching = true;
-      
-      // Save query for potential transform
-      lastQuery = query;
-
-      text.innerText = currentLang === 'ar' ? "جاري البحث..." : "Searching...";
-      loader.style.display = "block";
-      btn.style.background = "var(--purple)";
-      btn.style.color = "white";
-      
-      hero.classList.add('hidden');
-      
-      // Notify Bio Engine
-      if(window.bioFrame && window.bioFrame.contentWindow) {
-          window.bioFrame.contentWindow.postMessage({ type: 'mido-stage', stage: 0, searching: true }, '*');
-      }
-
-      window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-
-      const headers = { 'Content-Type': 'application/json', 'X-Visitor-Id': window.getVisitorId() };
-      if (adminKeyMemory) headers['X-Admin-Key'] = adminKeyMemory;
-
-      const body = { query: query, lang: currentLang, visitor_id: window.getVisitorId(), mode: "search" };
-
-      try {
-        const response = await fetch(WORKER_API_URL, {
-          method: 'POST', headers: headers, body: JSON.stringify(body)
-        });
-
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.message || data.error || "Search failed");
-
-        window.showResult(data.answer, data.sources);
-
-      } catch (error) {
-        console.error("API Error:", error);
-        alert(`Error: ${error.message}`);
-        if(window.bioFrame && window.bioFrame.contentWindow) {
-            window.bioFrame.contentWindow.postMessage({ type: 'mido-stage', stage: -1, searching: false }, '*');
-        }
-      } finally {
-        isSearching = false;
-        text.innerText = translations[currentLang].btn;
-        loader.style.display = "none";
-        btn.style.background = "linear-gradient(135deg, var(--cyan), var(--green))";
-        btn.style.color = "#000";
-        
-        setTimeout(() => {
-          if(window.scrollY < window.innerHeight) hero.classList.remove('hidden');
-        }, 1000);
-      }
-    }
-
-    // 5. Show Result & Transform Logic
-    window.showResult = function(markdownText, sources) {
-      const modal = document.getElementById('result-modal');
-      const content = document.getElementById('report-content');
-      
-      // Save state for Transform
-      lastAnswer = markdownText;
-      lastSources = sources;
-
-      let htmlContent = marked.parse(markdownText);
-
-      if (sources && sources.length > 0) {
-        htmlContent += `<hr style="border-color: var(--border); margin: 20px 0;">`;
-        htmlContent += `<h3 style="color: var(--cyan);">Sources</h3><ul>`;
-        sources.forEach(s => {
-          htmlContent += `<li style="margin-bottom: 8px;"><a href="${s.url}" target="_blank">${s.title || s.url}</a></li>`;
-        });
-        htmlContent += `</ul>`;
-      }
-
-      content.innerHTML = htmlContent;
-      modal.classList.add('show');
-      
-      // Notify Bio Engine
-      if(window.bioFrame && window.bioFrame.contentWindow) {
-          window.bioFrame.contentWindow.postMessage({ type: 'mido-stage', stage: 4, searching: false }, '*');
-      }
-    }
-
-    window.closeResult = function() { 
-        document.getElementById('result-modal').classList.remove('show'); 
-    };
-
-    // 6. Transform Report Function (NEW)
-    window.transformCurrentReport = async function() {
-      if (!lastAnswer) return alert("No report to transform!");
-      
-      const newSkill = document.getElementById('transform-skill').value;
-      const btn = document.getElementById('transform-btn');
-      const originalText = btn.innerText;
-      
-      btn.innerText = "Transforming...";
-      btn.disabled = true;
-      btn.style.opacity = "0.7";
-
-      const headers = { 'Content-Type': 'application/json', 'X-Visitor-Id': window.getVisitorId() };
-      const adminKey = localStorage.getItem('mido_admin_key');
-      if (adminKey) headers['X-Admin-Key'] = adminKey;
-
-      const body = {
-        query: lastQuery,
-        lang: currentLang,
-        visitor_id: window.getVisitorId(),
-        mode: "transform", // تفعيل وضع التحويل
-        skill: newSkill,
-        base_answer: lastAnswer,
-        base_sources: lastSources
-      };
-
-      try {
-        const response = await fetch(WORKER_API_URL, {
-          method: 'POST', headers: headers, body: JSON.stringify(body)
-        });
-
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.message || "Transform failed");
-
-        window.showResult(data.answer, data.sources);
-        
-      } catch (error) {
-        alert(`Transform Error: ${error.message}`);
-      } finally {
-        btn.innerText = originalText;
-        btn.disabled = false;
-        btn.style.opacity = "1";
-      }
-    }
-
-    // Enter key listener
-    document.getElementById('search-input').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') window.startSearch();
+document.getElementById('saveExample').addEventListener('click',function(){
+  var d=D();
+  var txt=[d.case_h,d.case_quick,d.cq1.replace(/<[^>]+>/g,''),d.cq2.replace(/<[^>]+>/g,''),d.cq3.replace(/<[^>]+>/g,''),d.modal_rec_text].join('\n');
+  lastReportText=txt;saveReport(txt);glowPulse(this,900);
+});
+document.getElementById('libraryToggle').addEventListener('click',openLibrary);
+document.getElementById('closeLibrary').addEventListener('click',closeLibrary);
+document.getElementById('libraryBackdrop').addEventListener('click',closeLibrary);
+document.getElementById('clearReports').addEventListener('click',function(){if(!getSavedReports().length)return;localStorage.removeItem(SAVED_REPORTS_KEY);renderSavedReports();toast(libText('cleared'));});
+document.getElementById('savedReportsList').addEventListener('click',function(e){
+  var b=e.target.closest('[data-library-action]');if(!b)return;var card=b.closest('.saved-card');if(!card)return;var id=card.getAttribute('data-report-id'),items=getSavedReports(),item=items.find(function(x){return x.id===id;});if(!item)return;
+  if(b.getAttribute('data-library-action')==='delete'){putSavedReports(items.filter(function(x){return x.id!==id;}));renderSavedReports();toast(libText('deleted'));return;}
+  lastReportText=item.text;res.innerHTML='<div class="ans">'+parseMarkdown(item.text)+'</div>'+reportActions();closeLibrary();
+});
+function vid(){try{var id=localStorage.getItem('mido_vid');if(!id){id='v_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('mido_vid',id);}return id;}catch(e){return 'v_'+Date.now();}}
+var VISITOR_ID=vid();
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function safeUrl(value){try{var u=new URL(String(value||''),location.origin);return (u.protocol==='http:'||u.protocol==='https:')?u.href:'#';}catch(e){return '#';}}
+var ACTION_TEXT={
+  en:{copy:'Copy Report',download:'Download',save:'Save Report',share:'Share Report',pdf:'PDF',word:'Word',copied:'Report copied',downloaded:'Report downloaded',shared:'Share menu opened',pdfopened:'Print dialog opened — choose Save as PDF',worddownloaded:'Word file downloaded'},
+  ar:{copy:'نسخ التقرير',download:'تنزيل التقرير',save:'حفظ التقرير',share:'مشاركة التقرير',pdf:'PDF',word:'Word',copied:'تم نسخ التقرير',downloaded:'تم تنزيل التقرير',shared:'تم فتح قائمة المشاركة',pdfopened:'تم فتح الطباعة — اختر حفظ بصيغة PDF',worddownloaded:'تم تنزيل ملف Word'},
+  fr:{copy:'Copier le rapport',download:'Télécharger',save:'Enregistrer',share:'Partager',pdf:'PDF',word:'Word',copied:'Rapport copié',downloaded:'Rapport téléchargé',shared:'Menu de partage ouvert',pdfopened:'Fenêtre d’impression ouverte — choisissez Enregistrer en PDF',worddownloaded:'Fichier Word téléchargé'},
+  de:{copy:'Bericht kopieren',download:'Herunterladen',save:'Bericht speichern',share:'Bericht teilen',pdf:'PDF',word:'Word',copied:'Bericht kopiert',downloaded:'Bericht heruntergeladen',shared:'Teilen geöffnet',pdfopened:'Druckdialog geöffnet — Als PDF speichern wählen',worddownloaded:'Word-Datei heruntergeladen'},
+  es:{copy:'Copiar informe',download:'Descargar',save:'Guardar informe',share:'Compartir informe',pdf:'PDF',word:'Word',copied:'Informe copiado',downloaded:'Informe descargado',shared:'Menú de compartir abierto',pdfopened:'Impresión abierta — elige Guardar como PDF',worddownloaded:'Archivo Word descargado'},
+  pt:{copy:'Copiar relatório',download:'Baixar',save:'Salvar relatório',share:'Compartilhar',pdf:'PDF',word:'Word',copied:'Relatório copiado',downloaded:'Relatório baixado',shared:'Menu de compartilhamento aberto',pdfopened:'Impressão aberta — escolha Salvar como PDF',worddownloaded:'Arquivo Word baixado'},
+  ja:{copy:'レポートをコピー',download:'ダウンロード',save:'レポートを保存',share:'レポートを共有',pdf:'PDF',word:'Word',copied:'コピーしました',downloaded:'ダウンロードしました',shared:'共有メニューを開きました',pdfopened:'印刷画面を開きました — PDFとして保存を選択してください',worddownloaded:'Wordファイルをダウンロードしました'},
+  zh:{copy:'复制报告',download:'下载',save:'保存报告',share:'分享报告',pdf:'PDF',word:'Word',copied:'报告已复制',downloaded:'报告已下载',shared:'已打开分享菜单',pdfopened:'已打开打印 — 请选择另存为 PDF',worddownloaded:'Word 文件已下载'}
+};
+function actionText(key){var d=ACTION_TEXT[currentLang]||ACTION_TEXT.en;return d[key]||ACTION_TEXT.en[key];}
+function reportActions(){
+  return '<div class="report-actions" aria-label="Report actions">'+
+    '<button type="button" class="btn btn-ghost" data-report-action="copy">⧉ '+esc(actionText('copy'))+'</button>'+
+    '<button type="button" class="btn btn-ghost" data-report-action="download">⇩ '+esc(actionText('download'))+'</button>'+
+    '<button type="button" class="btn btn-ghost" data-report-action="pdf">PDF</button>'+
+    '<button type="button" class="btn btn-ghost" data-report-action="word">Word</button>'+
+    '<button type="button" class="btn btn-ghost" data-report-action="share">↗ '+esc(actionText('share'))+'</button>'+
+    '<button type="button" class="btn btn-p" data-report-action="save">▣ '+esc(actionText('save'))+'</button>'+
+    '</div>';
+}
+function fallbackCopy(text){
+  var area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');
+  area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();
+  var ok=false;try{ok=document.execCommand('copy');}catch(e){}document.body.removeChild(area);return ok;
+}
+function copyReport(){
+  if(!lastReportText){toast(D().saved_empty);return;}
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(lastReportText).then(function(){toast(actionText('copied'));}).catch(function(){if(fallbackCopy(lastReportText))toast(actionText('copied'));});
+  }else if(fallbackCopy(lastReportText)){toast(actionText('copied'));}else toast(D().err_net);
+}
+function downloadReport(){
+  if(!lastReportText){toast(D().saved_empty);return;}
+  var blob=new Blob([lastReportText],{type:'text/plain;charset=utf-8'});
+  var url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='mido-deep-search-report-'+new Date().toISOString().slice(0,10)+'.txt';
+  document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast(actionText('downloaded'));
+}
+function shareReport(){
+  if(!lastReportText){toast(D().saved_empty);return;}
+  var title='Mido Deep Search Report';
+  if(navigator.share){
+    navigator.share({title:title,text:lastReportText}).then(function(){toast(actionText('shared'));}).catch(function(err){
+      if(err&&err.name!=='AbortError') fallbackShare();
     });
+  }else fallbackShare();
+}
+function exportReportHTML(){
+  if(!lastReportText)return '';
+  var ans=parseMarkdown(lastReportText);
+  var sources=document.querySelector('#res .srcs');
+  return ans+(sources?sources.outerHTML:'');
+}
+function exportPDF(){
+  if(!lastReportText){toast(D().saved_empty);return;}
+  var w=window.open('','_blank');
+  if(!w){toast(D().err_net);return;}
+  var dir=document.documentElement.dir||'rtl',html=exportReportHTML();
+  w.document.write('<!doctype html><html dir="'+dir+'" lang="'+(document.documentElement.lang||'ar')+'"><head><meta charset="utf-8"><title>Mido Deep Search Report</title><style>body{font-family:Arial,Cairo,sans-serif;line-height:1.7;padding:28px;color:#111}h1,h2,h3{margin:18px 0 8px}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border:1px solid #aaa;padding:7px;text-align:start}th{background:#eee}.src{display:block;color:#0645ad;margin:8px 0;text-decoration:none}.src p{color:#444}</style></head><body><h1>Mido Deep Search</h1>'+html+'</body></html>');
+  w.document.close();w.onload=function(){setTimeout(function(){w.focus();w.print();},250);};
+  toast(actionText('pdfopened'));
+}
+function exportWord(){
+  if(!lastReportText){toast(D().saved_empty);return;}
+  var dir=document.documentElement.dir||'rtl',html=exportReportHTML();
+  var doc='<!doctype html><html dir="'+dir+'"><head><meta charset="utf-8"><style>body{font-family:Arial,Cairo,sans-serif;line-height:1.7}table{width:100%;border-collapse:collapse}th,td{border:1px solid #aaa;padding:6px}th{background:#eee}</style></head><body><h1>Mido Deep Search</h1>'+html+'</body></html>';
+  var blob=new Blob(['\ufeff',doc],{type:'application/msword'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='mido-deep-search-report-'+new Date().toISOString().slice(0,10)+'.doc';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast(actionText('worddownloaded'));
+}
+function fallbackShare(){
+  var text=encodeURIComponent(lastReportText),url='https://wa.me/?text='+text;
+  window.open(url,'_blank','noopener,noreferrer');
+  toast(actionText('shared'));
+}
+async function fetchStats(){
+  try{
+    var r=await fetch(WORKER_URL+'/stats',{cache:'no-store'});if(!r.ok)return;
+    var d=await r.json();
+    document.getElementById('stVisitors').textContent=d.total_visitors||0;
+    document.getElementById('stSearches').textContent=d.today_searches||0;
+    document.getElementById('stOk').textContent=d.successful_trials||0;
+    document.getElementById('stFail').textContent=d.failed_trials||0;
+    // ✅ V3.1: ما نلمسش stLeft هنا — fetchMyQuota() بيتولى الأمر بكوتا شخصية
+  }catch(e){}
+}
+fetchStats();setInterval(fetchStats,30000);
+try{fetch(WORKER_URL+'/visit',{method:'POST',headers:{'Content-Type':'text/plain'},body:VISITOR_ID,cache:'no-store'}).catch(function(){});}catch(e){}
 
-    // Bio Engine Reference
-    window.bioFrame = document.getElementById('bioFrame');
+// ✅ V3.1 FIX (Patch 4): جلب الكوتا الشخصية من /me بدل العام من /stats
+async function fetchMyQuota(){
+  try{
+    var headers = {'Content-Type':'application/json'};
+    if(adminKey) headers['X-Admin-Key'] = adminKey;
+    var r = await fetch(WORKER_URL+'/me',{method:'POST',headers:headers,body:JSON.stringify({visitor_id:VISITOR_ID}),cache:'no-store'});
 
-    // Scroll animations
-    window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach((sec) => {
-        const rect = sec.getBoundingClientRect();
-        if(rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.2) sec.classList.add('active');
-        else sec.classList.remove('active');
-      });
+    // لو الـ admin key اتلغى من السيرفر (رفض 401)، نمسحه محليًا
+    if(r.status === 401){
+      try{sessionStorage.removeItem('mido_admin_key');}catch(e){}
+      adminKey='';
+      updateAdminBadge();
+      return;
+    }
+    if(!r.ok) return;
+    var d = await r.json();
+    if(!d.ok) return;
+    var leftEl = document.getElementById('stLeft');
+    if(leftEl && d.remaining != null && d.remaining >= 0){
+      leftEl.textContent = d.remaining;
+      leftEl.title = d.user_type + ' · ' + d.remaining + '/' + d.limit + ' left today';
+    }
+  }catch(e){}
+}
+fetchMyQuota();
+setInterval(fetchMyQuota, 60000);
+
+function setStages(n){
+  document.querySelectorAll('#stages .stage').forEach(function(el,i){
+    el.classList.toggle('on', i<=n);
+    if(i===n) glowPulse(el,800);
+  });
+  document.querySelectorAll('.ring-card').forEach(function(el,i){
+    if(i<=n){el.classList.add('glow-on');} else el.classList.remove('glow-on');
+  });
+  try{if(typeof notifyBio==='function')notifyBio(Math.max(0,Math.min(4,n)),true);}catch(e){}
+}
+function illuminateAllRings(){
+  document.querySelectorAll('.ring-card').forEach(function(card){card.classList.add('glow-on');});
+}
+function applyLogs(logs){
+  var max=0;
+  (Array.isArray(logs)?logs:[]).forEach(function(log){
+    var n=Number(log.ring||log.stage||0);
+    if(n>max && (log.status==='done'||log.status==='complete'||log.completed===true)) max=n;
+  });
+  if(max>0) setStages(Math.min(4,max-1));
+}
+document.getElementById('stages').addEventListener('click',function(e){
+  var st=e.target.closest('.stage');if(!st)return;glowPulse(st,1000);
+});
+
+var go=document.getElementById('go'),q=document.getElementById('q'),res=document.getElementById('res');
+
+async function doSearch(){
+  var text=(q.value||'').trim();if(!text||searching)return;
+  searching=true;
+  go.classList.add('loading','glow');
+  go.innerHTML='<span class="spin"></span> '+D().searching;
+  var startTime=Date.now();
+  var activeStage=0;
+
+  res.innerHTML='<div class="progress-container"><div class="progress-label"><span>'+D().searching+'</span><span id="pct">0s</span></div><div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar" style="width:10%"></div></div><div class="progress-timer" id="timerInfo">...</div></div>';
+
+  setStages(0);
+  var timerInterval=setInterval(function(){
+    var elapsed=Math.floor((Date.now()-startTime)/1000);
+    var estimatedStage=Math.min(4,Math.floor(elapsed/2));
+    if(estimatedStage>activeStage){activeStage=estimatedStage;setStages(activeStage);}
+    var pb=document.getElementById('progBar');
+    var pe=document.getElementById('pct');
+    if(pb && parseFloat(pb.style.width) < 85) pb.style.width = (parseFloat(pb.style.width) + 2) + '%';
+    if(pe) pe.textContent = elapsed + 's';
+    var ti=document.getElementById('timerInfo');
+    if(ti) ti.innerHTML=D().prog_elapsed+': '+elapsed+'s...';
+  },500);
+
+  var outcome;
+  try{
+    var ctrl=new AbortController();var to=setTimeout(function(){ctrl.abort();},55000);
+    var savedAdminKey = adminKey;
+    var headers = {'Content-Type':'application/json'};
+    if(savedAdminKey) headers['X-Admin-Key'] = savedAdminKey;
+
+    var reqBody = {query:text, visitor_id:VISITOR_ID, skill:skill, country:document.getElementById('countrySel').value, lang:currentLang};
+    var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify(reqBody),signal:ctrl.signal});
+
+    clearTimeout(to);
+    var data={};try{data=await r.json();}catch(e){}
+
+    // ✅ V3.1 FIX: قراءة الكوتا من X-RateLimit headers بعد كل بحث
+    try{
+      var remH = r.headers.get('X-RateLimit-Remaining');
+      var limH = r.headers.get('X-RateLimit-Limit');
+      if(remH !== null && remH !== '-1'){
+        var leftEl = document.getElementById('stLeft');
+        if(leftEl){ leftEl.textContent = remH; if(limH) leftEl.title = remH + '/' + limH + ' left today'; }
+      }
+    }catch(e){}
+
+    if(!r.ok){
+      var apiError=String(data.error||data.reason||'http');
+      if(r.status===429 || apiError==='rate_limit_exceeded') throw new Error('rate_limit_exceeded');
+      if(r.status===401 || apiError==='invalid_license') throw new Error('invalid_license');
+      if(apiError==='admin_key_in_url') throw new Error('admin_key_in_url');
+      if(apiError==='missing_api_key') throw new Error('missing_api_key');
+      var providerErr=new Error(apiError);providerErr.providerMessage=String(data.message||'');throw providerErr;
+    }
+    if(data.ok===false || (data.success===false && (data.error||data.reason))) throw new Error(String(data.error||data.reason||'http'));
+    outcome={ok:true,answer:String(data.answer||data.deep_answer||''),sources:Array.isArray(data.sources)?data.sources:(Array.isArray(data.top_sources)?data.top_sources:[]),logs:Array.isArray(data.logs)?data.logs:[],meta:data.meta||{}};
+  }catch(err){clearInterval(timerInterval);outcome={ok:false,msg:String(err&&err.message||err),detail:String(err&&err.providerMessage||'')};}
+
+  if(outcome.ok){
+    clearInterval(timerInterval);
+    var totalTime=Math.floor((Date.now()-startTime)/1000);
+    if(outcome.logs.length){ applyLogs(outcome.logs); } else { setStages(4); }
+    illuminateAllRings();
+    lastReportText=outcome.answer;
+    lastReportSources=outcome.sources||[];
+    lastReportQuery=text;
+    lastReportCountry=document.getElementById('countrySel').value;
+    lastReportLang=currentLang;
+    var formattedAns = parseMarkdown(outcome.answer);
+    var src='';
+    if(outcome.sources&&outcome.sources.length){
+      src='<div class="srcs">'+outcome.sources.slice(0,6).map(function(s){var href=safeUrl(s.url); return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
+    }
+    res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="ans">'+formattedAns+'</div>'+src+reportActions();
+
+    if(typeof fbq === 'function') fbq('track', 'Lead');
+
+    if(skill==='save') saveReport(outcome.answer);
+    try{if(typeof notifyBio==='function')notifyBio(4,false);}catch(e){}
+    fetchStats();
+    fetchMyQuota(); // ✅ V3.1: تحديث الكوتا فورًا
+  }else{
+    var em=D().err_net;
+    if(outcome.msg==='trial_used'||String(outcome.msg).indexOf('trial')>-1)em=D().err_trial;
+    if(outcome.msg==='rate_limit_exceeded'||outcome.msg==='daily_cap')em=D().err_daily;
+    if(outcome.msg==='invalid_license')em=D().err_license||'Invalid license key.';
+    if(outcome.msg==='search_failed')em=currentLang==='ar'?'خدمة البحث أو مزود الذكاء الاصطناعي غير متاح حاليًا. حاول لاحقًا.':'The search or AI provider is currently unavailable. Please try again later.';
+    if(outcome.msg==='origin_not_allowed')em="Origin not allowed. Please check your settings.";
+    // ✅ V3.1: معالجة أخطاء جديدة من worker v7.1
+    if(outcome.msg==='admin_key_in_url')em=currentLang==='ar'?'مفتاح الأدمن يجب أن يُرسل في header X-Admin-Key، وليس في الرابط. اضغط 🔑 لتسجيل الدخول.':'Admin key must not be in the URL. Use the 🔑 button to log in.';
+    if(outcome.msg==='missing_api_key')em=currentLang==='ar'?'خطأ في إعداد الخادم. يرجى التواصل مع الدعم.':'Server configuration error. Please contact support.';
+    var adminDetail=(adminKey&&outcome.detail)?'<br><small style="opacity:.8">'+esc(outcome.detail)+'</small>':'';
+    res.innerHTML='<div class="err"><b>'+esc(em)+'</b>'+adminDetail+'<br><br><a class="btn btn-w" href="'+BUY_URL+'" target="_blank" rel="noopener">'+D().buy_btn+'</a></div>';
+  }
+  searching=false;go.classList.remove('loading','glow');go.textContent=D().search_btn;
+}
+
+async function transformCurrentReport(targetSkill){
+  if(!lastReportText||searching)return;
+  searching=true;
+  go.classList.add('loading','glow');
+  go.innerHTML='<span class="spin"></span> '+D().searching;
+  var started=Date.now(), stage=0;
+  res.innerHTML='<div class="progress-container"><div class="progress-label"><span>'+D().searching+'</span><span id="pct">0s</span></div><div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar" style="width:18%"></div></div><div class="progress-timer" id="timerInfo">Using the same report and sources...</div></div>';
+  setStages(0);
+  var pulse=setInterval(function(){
+    stage=Math.min(4,stage+1);setStages(stage);
+    var elapsed=Math.floor((Date.now()-started)/1000),pb=document.getElementById('progBar'),pe=document.getElementById('pct');
+    if(pb)pb.style.width=Math.min(88,18+stage*16)+'%';if(pe)pe.textContent=elapsed+'s';
+  },700);
+  try{
+    var ctrl=new AbortController(),timeout=setTimeout(function(){ctrl.abort();},55000);
+    var headers={'Content-Type':'application/json'};if(adminKey)headers['X-Admin-Key']=adminKey;
+    var r=await fetch(WORKER_URL,{method:'POST',headers:headers,signal:ctrl.signal,body:JSON.stringify({
+      mode:'transform',query:lastReportQuery||q.value,base_answer:lastReportText,base_sources:lastReportSources,
+      visitor_id:VISITOR_ID,skill:targetSkill,country:document.getElementById('countrySel').value||lastReportCountry,lang:currentLang
+    })});
+    clearTimeout(timeout);var data={};try{data=await r.json();}catch(e){}
+    // ✅ V3.1: تحديث الكوتا من headers
+    try{
+      var remH = r.headers.get('X-RateLimit-Remaining');
+      if(remH !== null && remH !== '-1'){
+        var leftEl = document.getElementById('stLeft');
+        if(leftEl){ leftEl.textContent = remH; }
+      }
+    }catch(e){}
+
+    if(!r.ok){var err=new Error(String(data.error||'transform_failed'));err.providerMessage=String(data.message||'');throw err;}
+
+    // ✅ V3.1: حماية من رد فارغ يكسر السلسلة
+    var newText = String(data.answer||'');
+    if(!newText) throw new Error('transform_empty');
+
+    lastReportText=newText;
+    lastReportSources=Array.isArray(data.sources)?data.sources:lastReportSources;
+    illuminateAllRings();setStages(4);
+    var src='';if(lastReportSources.length)src='<div class="srcs">'+lastReportSources.slice(0,6).map(function(s){var href=safeUrl(s.url);return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
+    res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.35);text-align:center;font-size:12px;color:#c4b5fd">✓ Same report transformed with: '+esc(targetSkill)+'</div><div class="ans">'+parseMarkdown(lastReportText)+'</div>'+src+reportActions();
+  }catch(err){
+    var detail=(adminKey&&err&&err.providerMessage)?'<br><small style="opacity:.8">'+esc(err.providerMessage)+'</small>':'';
+    res.innerHTML='<div class="err"><b>'+esc(currentLang==='ar'?'تعذر تطبيق المهارة على التقرير الحالي.':'Could not apply this skill to the current report.')+'</b>'+detail+'</div>';
+  }finally{
+    clearInterval(pulse);searching=false;go.classList.remove('loading','glow');go.textContent=D().search_btn;
+  }
+}
+go.addEventListener('click',function(){glowPulse(go,600);doSearch();});
+q.addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+res.addEventListener('click',function(e){
+  var b=e.target.closest('[data-report-action]');if(!b)return;
+  var action=b.getAttribute('data-report-action');
+  if(action==='copy')copyReport();
+  else if(action==='download')downloadReport();
+  else if(action==='save')saveReport(lastReportText);
+  else if(action==='share')shareReport();
+  else if(action==='pdf')exportPDF();
+  else if(action==='word')exportWord();
+});
+
+var modal=document.getElementById('reportModal');
+document.getElementById('openReport').addEventListener('click',function(){modal.classList.add('open');glowPulse(this,800);});
+document.getElementById('closeModal').addEventListener('click',function(){modal.classList.remove('open');});
+document.getElementById('modalBg').addEventListener('click',function(){modal.classList.remove('open');});
+document.getElementById('navBuy').addEventListener('click',function(){glowPulse(this,700);});
+
+// ✅ V3.1 FIX (Patch 3): Admin Login Modal — يستبدل prompt() القديم
+document.getElementById('adminBtn').addEventListener('click', function() {
+  var m = document.getElementById('adminModal');
+  var input = document.getElementById('adminKeyInput');
+  var status = document.getElementById('adminKeyStatus');
+  if(adminKey){
+    input.value = adminKey;
+    status.textContent = adminText('active');
+    status.style.color = '#6ee7b7';
+  }else{
+    input.value = '';
+    status.textContent = adminText('no_key');
+    status.style.color = '#fbbf24';
+  }
+  m.classList.add('open');
+  setTimeout(function(){ input.focus(); }, 100);
+});
+
+document.getElementById('adminModalClose').addEventListener('click', function() {
+  document.getElementById('adminModal').classList.remove('open');
+});
+
+document.getElementById('adminKeySave').addEventListener('click', async function() {
+  var input = document.getElementById('adminKeyInput');
+  var status = document.getElementById('adminKeyStatus');
+  var val = (input.value || '').trim();
+
+  if(!val){
+    try{sessionStorage.removeItem('mido_admin_key');}catch(e){}
+    adminKey = '';
+    updateAdminBadge();
+    toast(adminText('removed'));
+    document.getElementById('adminModal').classList.remove('open');
+    return;
+  }
+
+  status.textContent = adminText('validating');
+  status.style.color = '#a5b4fc';
+
+  try {
+    var r = await fetch(WORKER_URL + '/me', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Key': val },
+      body: JSON.stringify({ visitor_id: VISITOR_ID })
     });
+    var data = {};
+    try { data = await r.json(); } catch(e) {}
 
-    // Initialize
-    window.setLanguage('en');
-  </script>
+    if(r.ok && data.ok){
+      try{sessionStorage.setItem('mido_admin_key', val);}catch(e){}
+      adminKey = val;
+      updateAdminBadge();
+      status.textContent = adminText('valid') + (data.user_type || 'admin');
+      status.style.color = '#6ee7b7';
+      toast(adminText('saved'));
+      fetchMyQuota(); // تحديث فوري للكوتا
+      setTimeout(function(){ document.getElementById('adminModal').classList.remove('open'); }, 800);
+    }else{
+      status.textContent = adminText('invalid') + (data.message || data.error || 'Invalid key');
+      status.style.color = '#fca5a5';
+    }
+  } catch (err) {
+    status.textContent = adminText('network') + (err.message || 'unknown');
+    status.style.color = '#fca5a5';
+  }
+});
+
+document.getElementById('adminKeyLogout').addEventListener('click', function() {
+  try{sessionStorage.removeItem('mido_admin_key');}catch(e){}
+  adminKey = '';
+  updateAdminBadge();
+  toast(adminText('removed'));
+  document.getElementById('adminModal').classList.remove('open');
+  fetchMyQuota();
+});
+
+// ✅ V3.1: تحديث admin badge عند فتح المودال من زر خارجي (احتياط)
+document.getElementById('adminModal').addEventListener('transitionend', updateAdminBadge);
+
+(function(){
+  var canvas=document.getElementById('spider');if(!canvas)return;
+  var ctx=canvas.getContext('2d');if(!ctx)return;
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(prefersReduced){ canvas.style.display = 'none'; return; }
+  var W,H,dpr,last=performance.now(),actx=null;
+  function resize(){W=innerWidth;H=innerHeight;dpr=devicePixelRatio||1;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}
+  resize();addEventListener('resize',resize);
+  function mkGrid(){var g=[];for(var r=0;r<4;r++)for(var c=0;c<6;c++)g.push({x:90+(c+.5)*((W-180)/6),y:120+(r+.5)*((H-180)/4)});return g;}
+  var targets=mkGrid();
+  var sp={x:W*.5,y:90,tx:targets[0].x,ty:targets[0].y};
+  var legs=[-75,-38,38,75,105,142,-142,-105].map(function(d){var a=d*Math.PI/180;return{ang:a,fx:sp.x+Math.cos(a)*30,fy:sp.y+Math.sin(a)*30,tx:sp.x+Math.cos(a)*30,ty:sp.y+Math.sin(a)*30};});
+  var moving=false,moveTimer=0,L1=34,L2=34,LIM=46;
+  function snd(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume().catch(function(){});var n=actx.currentTime,o=actx.createOscillator(),g=actx.createGain(),f=actx.createBiquadFilter();f.type='bandpass';f.frequency.value=2400;f.Q.value=1.4;o.type='square';o.frequency.setValueAtTime(2400,n);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.06,n+.004);g.gain.exponentialRampToValueAtTime(.0001,n+.07);o.connect(f);f.connect(g);g.connect(actx.destination);o.start(n);o.stop(n+.07);}catch(e){}}
+  function draw(now){
+    var dt=Math.min(50,now-last);last=now;
+    if(moving){moveTimer-=dt/1000;if(moveTimer<=0){moving=false;targets.shift();if(!targets.length)targets=mkGrid();sp.tx=targets[0].x;sp.ty=targets[0].y;}}
+    else{var dx=sp.tx-sp.x,dy=sp.ty-sp.y,dist=Math.hypot(dx,dy);if(dist<6){moving=true;moveTimer=1;snd();}else{var spd=Math.max(180,dist*3+30)*dt/1000;if(spd>=dist){sp.x=sp.tx;sp.y=sp.ty;}else{sp.x+=dx/dist*spd;sp.y+=dy/dist*spd;}}}
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(214,217,224,.1)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(sp.x,0);ctx.lineTo(sp.x,sp.y-12);ctx.stroke();
+    legs.forEach(function(l,i){
+      var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10,dx=l.fx-bx,dy=l.fy-by;
+      var dist=Math.min(Math.hypot(dx,dy),L1+L2-.5);if(dist<.001)return;
+      var ca=(dist*dist-L1*L1-L2*L2)/(2*L1*L2),an=Math.acos(Math.max(-1,Math.min(1,ca)));
+      var kd=L1+L2*Math.cos(an),kh=L2*Math.sin(an),ba=Math.atan2(dy,dx)-Math.atan2(kh,kd);
+      var kx=bx+Math.cos(ba)*L1,ky=by+Math.sin(ba)*L1;
+      ctx.strokeStyle='#2a2f3c';ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(kx,ky);ctx.lineTo(l.fx,l.fy);ctx.stroke();
+      ctx.fillStyle='#0d1018';ctx.strokeStyle='#232733';ctx.beginPath();ctx.arc(kx,ky,2.8,0,6.28);ctx.fill();ctx.stroke();
+      ctx.fillStyle=i%2===0?'#8a90a0':'#6b7280';ctx.beginPath();ctx.arc(l.fx,l.fy,2.3,0,6.28);ctx.fill();
+    });
+    ctx.fillStyle='rgba(0,0,0,.35)';ctx.beginPath();ctx.ellipse(sp.x,sp.y+22,18,6,0,0,6.28);ctx.fill();
+    ctx.fillStyle='#0d1018';ctx.strokeStyle='#2c313f';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(sp.x,sp.y+12,13,17,0,0,6.28);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#151821';ctx.beginPath();ctx.ellipse(sp.x,sp.y-5,10.5,10.5,0,0,6.28);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#ff4d9a';ctx.beginPath();ctx.arc(sp.x-3.2,sp.y-8,1.7,0,6.28);ctx.fill();
+    ctx.fillStyle='#4fe0ff';ctx.beginPath();ctx.arc(sp.x+3.2,sp.y-8,1.7,0,6.28);ctx.fill();
+    if(moving){ctx.strokeStyle='rgba(255,77,154,.25)';ctx.beginPath();ctx.arc(sp.x,sp.y+3,10+(1-moveTimer)*18,0,6.28);ctx.stroke();}
+    legs.forEach(function(l,i){
+      var bx=sp.x+Math.cos(l.ang)*12,by=sp.y+Math.sin(l.ang)*10;
+      if(Math.hypot(l.fx-bx,l.fy-by)>LIM){var td=28+(i%3)*6+Math.random()*6;l.tx=sp.x+Math.cos(l.ang)*td;l.ty=sp.y+Math.sin(l.ang)*td;}
+      var dx=l.tx-l.fx,dy=l.ty-l.fy,d=Math.hypot(dx,dy);
+      if(d>.5){var mv=Math.min(d,420*dt/1000);l.fx+=dx/d*mv;l.fy+=dy/d*mv;if(d>3&&mv>=d-.1&&Math.random()<.85)snd();}
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+})();
+
+// 3. كود الربط مع المحرك البيولوجي
+var bioFrame = document.getElementById('bioFrame');
+function notifyBio(stage, isSearching) {
+  try {
+    if (bioFrame && bioFrame.contentWindow) {
+      bioFrame.contentWindow.postMessage({ type: 'mido-stage', stage: stage, searching: isSearching }, '*');
+    }
+  } catch (e) {}
+  if (isSearching) document.body.classList.add('searching');
+  else if (stage === 4 || stage === -1) setTimeout(function() { document.body.classList.remove('searching'); }, 2500);
+}
+if (bioFrame) bioFrame.addEventListener('load', function(){ notifyBio(4, false); }, { once: true });
+</script>
 </body>
   </html>
