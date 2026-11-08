@@ -221,8 +221,6 @@
 
   <!-- 2. Admin Key Stripper -->
   
-  </script>
-
   <div class="scanlines"></div>
 
   <div class="hud hud-header">
@@ -334,26 +332,27 @@
       if (!vid) { vid = crypto.randomUUID(); localStorage.setItem('mido_visitor_id', vid); }
       return vid;
     };
+let adminKeyMemory = ""; // متغير يعيش في الذاكرة فقط
 
-    window.openSettings = function() {
-      document.getElementById('admin-key-input').value = localStorage.getItem('mido_admin_key') || '';
-      document.getElementById('settings-modal').classList.add('show');
-    };
-    window.closeSettings = function() { document.getElementById('settings-modal').classList.remove('show'); };
-    window.saveAdminKey = function() {
-      const val = document.getElementById('admin-key-input').value.trim();
-      if (val) {
-        localStorage.setItem('mido_admin_key', val);
-        document.getElementById('key-status').innerText = "✅ Key saved securely.";
-        document.getElementById('key-status').style.color = "var(--green)";
-      } else {
-        localStorage.removeItem('mido_admin_key');
-        document.getElementById('key-status').innerText = "⚠️ Key removed.";
-        document.getElementById('key-status').style.color = "var(--yellow)";
-      }
-      setTimeout(window.closeSettings, 1500);
-    };
-
+window.openSettings = function() {
+  document.getElementById('admin-key-input').value = adminKeyMemory;
+  document.getElementById('settings-modal').classList.add('show');
+};
+window.closeSettings = function() { document.getElementById('settings-modal').classList.remove('show'); };
+window.saveAdminKey = function() {
+  const val = document.getElementById('admin-key-input').value.trim();
+  if (val) {
+    adminKeyMemory = val;
+    document.getElementById('key-status').innerText = "✅ Key saved in memory for this session.";
+    document.getElementById('key-status').style.color = "var(--green)";
+  } else {
+    adminKeyMemory = "";
+    document.getElementById('key-status').innerText = "⚠️ Key removed.";
+    document.getElementById('key-status').style.color = "#ffcc00";
+  }
+  setTimeout(window.closeSettings, 1500);
+};
+    
     // 3. Typewriter Effect
     function typeWriter(text, i = 0) {
       const el = document.getElementById('txt-hook');
@@ -414,8 +413,7 @@
       window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
 
       const headers = { 'Content-Type': 'application/json', 'X-Visitor-Id': window.getVisitorId() };
-      const adminKey = localStorage.getItem('mido_admin_key');
-      if (adminKey) headers['X-Admin-Key'] = adminKey;
+      if (adminKeyMemory) headers['X-Admin-Key'] = adminKeyMemory;
 
       const body = { query: query, lang: currentLang, visitor_id: window.getVisitorId(), mode: "search" };
 
