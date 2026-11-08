@@ -244,13 +244,14 @@ footer a:hover{color:var(--accent);text-decoration:underline}
   try {
     var urlParams = new URLSearchParams(window.location.search);
     var migratedKey = urlParams.get('admin_key') || urlParams.get('admin') || urlParams.get('key') || '';
-    if (migratedKey) {
-      sessionStorage.setItem('mido_admin_key', migratedKey);
-      urlParams.delete('admin_key');
-      urlParams.delete('admin');
-      urlParams.delete('key');
-      var qs = urlParams.toString();
-      history.replaceState({}, document.title, window.location.pathname + (qs ? '?' + qs : '') + window.location.hash);
+    if (migratedKey) sessionStorage.setItem('mido_admin_key', migratedKey);
+    urlParams.delete('admin_key');
+    urlParams.delete('admin');
+    urlParams.delete('key');
+    var qs = urlParams.toString();
+    var cleanUrl = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
+    if (cleanUrl !== window.location.pathname + window.location.search + window.location.hash) {
+      history.replaceState({}, document.title, cleanUrl);
     }
   } catch (e) { /* في حالة sessionStorage محظور */ }
 })();
@@ -528,7 +529,7 @@ footer a:hover{color:var(--accent);text-decoration:underline}
 'use strict';
 var WORKER_URL='https://mido-deepsearch.midoaistore.workers.dev';
 var BUY_URL='https://midoaistore.gumroad.com/l/dtqpvka';
-var skill='deep_search', currentLang='en', searching=false, lastReportText='', lastReportSources=[], lastReportQuery='', lastReportCountry='US', lastReportLang='en', adminKey='';
+var skill='deep_search', selectedSkills=['deep_search'], currentLang='en', searching=false, lastReportText='', lastReportSources=[], lastReportQuery='', lastReportCountry='US', lastReportLang='en', adminKey='';
 
 // ✅ V3.1 FIX (Patch 1): قراءة الـ admin key من sessionStorage عند بدء الصفحة
 try{adminKey=sessionStorage.getItem('mido_admin_key')||'';}catch(e){adminKey='';}
@@ -794,7 +795,7 @@ var SKILL_IDS=['deep_search','summarize','compare','recommend','price_check','sa
 function renderSkills(){
   var names=SKILL_NAMES[currentLang]||SKILL_NAMES.en;
   document.getElementById('skills').innerHTML=SKILL_IDS.map(function(id,i){
-    return '<button type="button" class="skill'+(i===0?' on':'')+'" data-skill="'+id+'">'+esc(names[i]||SKILL_NAMES.en[i])+'</button>';
+    return '<button type="button" class="skill'+(selectedSkills.indexOf(id)!==-1?' on':'')+'" data-skill="'+id+'">'+esc(names[i]||SKILL_NAMES.en[i])+'</button>';
   }).join('');
 }
 function applyLang(lang){
@@ -871,14 +872,15 @@ try{var saved=localStorage.getItem('mido_lang')||'en';var m=document.querySelect
 
 document.getElementById('skills').addEventListener('click',function(e){
   var b=e.target.closest('.skill');if(!b)return;
-  document.querySelectorAll('.skill').forEach(function(x){x.classList.remove('on','glow-on');});
+  var chosen=b.getAttribute('data-skill')||'deep_search';
+  var pos=selectedSkills.indexOf(chosen);
+  if(pos===-1) selectedSkills.push(chosen); else if(selectedSkills.length>1) selectedSkills.splice(pos,1);
+  skill=selectedSkills[0]||'deep_search';
+  document.querySelectorAll('.skill').forEach(function(x){x.classList.toggle('on',selectedSkills.indexOf(x.getAttribute('data-skill'))!==-1);x.classList.remove('glow-on');});
   b.classList.add('on');glowPulse(b,1000);
-  skill=b.getAttribute('data-skill')||'deep_search';
-  if(skill==='save'){
+  if(chosen==='save'){
     toast(D().skill_save_hint);
     if(lastReportText){saveReport(lastReportText);}
-  }else if(lastReportText&&!searching){
-    transformCurrentReport(skill);
   }
 });
 document.getElementById('sugs').addEventListener('click',function(e){
@@ -1104,7 +1106,7 @@ async function doSearch(){
     var headers = {'Content-Type':'application/json'};
     if(savedAdminKey) headers['X-Admin-Key'] = savedAdminKey;
 
-    var reqBody = {query:text, visitor_id:VISITOR_ID, skill:skill, country:document.getElementById('countrySel').value, lang:currentLang};
+    var reqBody = {query:text, visitor_id:VISITOR_ID, skill:skill, skills:selectedSkills.slice(), country:document.getElementById('countrySel').value, lang:currentLang};
     var r=await fetch(WORKER_URL,{method:'POST',headers:headers,body:JSON.stringify(reqBody),signal:ctrl.signal});
 
     clearTimeout(to);
