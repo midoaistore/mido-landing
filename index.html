@@ -220,15 +220,7 @@
   </div>
 
   <!-- 2. Admin Key Stripper -->
-  <script>
-    (function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('admin_key')) {
-            sessionStorage.setItem('mido_admin_key', urlParams.get('admin_key'));
-            urlParams.delete('admin_key');
-            window.history.replaceState({}, document.title, window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : ''));
-        }
-    })();
+  
   </script>
 
   <div class="scanlines"></div>
