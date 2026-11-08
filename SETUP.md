@@ -1,5 +1,5 @@
 # 🛠️ Mido Deep Search — Setup Guide
-
+> ⚠️ **Note (v1.0):** The `?admin_key=` URL parameter is deprecated. Enter the admin key only via the Settings panel (⚙️). A future release will remove URL handling entirely. 
 This guide walks you through deploying the Cloudflare Worker (backend) and the static frontend.
 
 ## Prerequisites
