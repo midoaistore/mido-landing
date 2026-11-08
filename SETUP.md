@@ -1,121 +1,107 @@
-# 🛠️ Mido Deep Search — Complete Setup Guide
+# 🛠️ Mido Deep Search — Setup Guide
 
-This guide will walk you through deploying both the **Cloudflare Worker (Backend)** and the **GitHub Pages (Frontend)**.
+This guide walks you through deploying the Cloudflare Worker (backend) and the static frontend.
 
-## 📋 Prerequisites
+## Prerequisites
 
-Before you begin, ensure you have:
-1. **Node.js** and **npm** installed.
-2. A **Cloudflare Account** (Free tier is sufficient).
-3. A **GitHub Account**.
-4. API Keys for the following services:
-   - [Tavily API](https://tavily.com/) (Search)
-   - [Groq API](https://console.groq.com/) (LLM)
-   - [Gumroad API](https://gumroad.com/) (Licensing - Optional)
+- Node.js and npm installed
+- A Cloudflare account (free tier is sufficient)
+- A static hosting service: GitHub Pages, Cloudflare Pages, Netlify, or Vercel
+- API keys for: Tavily (search), Groq (LLM)
+- Optional: Gumroad product permalink (only if you want license validation)
 
 ---
 
-## 1. Backend Setup (Cloudflare Worker)
+## 1. Backend — Cloudflare Worker
 
-### 1.1. Install Wrangler CLI
+### 1.1 Install and log in
+
 ```bash
 npm install -g wrangler
 wrangler login
-```
+1.2 Create the KV namespace
+wrangler kv namespace create MIDO_KV
 
-1.2. Configure wrangler.toml
-
-Create or modify your wrangler.toml file in the root directory. Ensure you have a KV Namespace bound to your Worker for rate-limiting and stats.
-
-```toml
+Copy the returned id into wrangler.toml:
 name = "mido-deepsearch"
 main = "worker.js"
 compatibility_date = "2023-10-01"
 
 [[kv_namespaces]]
 binding = "MIDO_KV"
-id = "your_kv_namespace_id_here" # Get this by running: wrangler kv:namespace create "MIDO_KV"
-```
+id = "PASTE_YOUR_KV_NAMESPACE_ID"
+1.3 Add secrets
 
-1.3. Add Environment Secrets (API Keys)
-
-Run the following commands in your terminal to securely add your API keys. These will be encrypted and stored in Cloudflare.
-
-```bash
+Run each command below and paste the value when prompted. Secrets are encrypted and stored by Cloudflare — never commit them to GitHub
 wrangler secret put TAVILY_API_KEY
-# Paste your Tavily API Key
-
 wrangler secret put GROQ_API_KEY
-# Paste your Groq API Key
-
 wrangler secret put ADMIN_KEY
-# Create a strong password (e.g., Mido_Admin_2025!)
-
-wrangler secret put GUMROAD_PRODUCT_ID
-# Paste your Gumroad permalink (e.g., "dtqpvka")
-
 wrangler secret put ALLOWED_ORIGINS
-# Add your frontend URL (e.g., "https://midoaistore.github.io")
-```
+wrangler secret put GUMROAD_PRODUCT_ID
+Notes:
 
-1.4. Deploy the Worker
+· ADMIN_KEY — generate a strong value, e.g. openssl rand -base64 32.
+· ALLOWED_ORIGINS — your frontend origin exactly as it appears in the browser, with no trailing slash. Example: https://your-username.github.io.
+· GUMROAD_PRODUCT_ID — optional. Skip if you do not need license validation.
 
-```bash
+1.4 Deploy
 wrangler deploy
-```
-
-Take note of the deployed URL (e.g., https://mido-deepsearch.midoaistore.workers.dev).
+Note the deployed URL: https://<worker-name>.<your-subdomain>.workers.dev.
 
 ---
 
-2. Frontend Setup (GitHub Pages)
+2. Frontend
 
-2.1. Update the Worker URL
+2.1 Point the frontend at YOUR Worker
 
-Open index.html and search for the WORKER_API_URL constant. Update it with the URL of your deployed Worker:
+Open index.html and find:
+const WORKER_API_URL = "";
+Replace the empty string with your deployed Worker URL, for example:
+const WORKER_API_URL = "https://mido-deepsearch.your-subdomain.workers.dev/";
+This step is mandatory. If you leave it empty, the frontend will show a configuration error and will not send requests to the original author's Worker.
 
-```javascript
-const WORKER_API_URL = "https://mido-deepsearch.midoaistore.workers.dev/";
-```
+2.2 Deploy the static files
 
-2.2. Deploy to GitHub Pages
+Upload the files to any static host:
 
-1. Push your code to a GitHub repository.
-2. Go to Settings > Pages.
-3. Under "Build and deployment", select Deploy from a branch.
-4. Select the main branch and / (root) folder. Click Save.
-5. Your site will be live at https://<your-username>.github.io/<repo-name>/.
+· GitHub Pages: Settings → Pages → Deploy from branch → main → / (root)
+· Cloudflare Pages, Netlify, or Vercel: drag and drop the folder
+· Or open index.html directly in a browser — no build step required
 
----
-
-3. Admin Key Security (Important)
-
-🚨 NEVER share URLs containing ?admin_key=...
-
-The index.html includes an IIFE (Immediately Invoked Function Expression) that automatically strips the admin key from the URL to prevent it from appearing in browser history or referrers.
-
-How to use the Admin Key safely:
-
-1. Open your website.
-2. Click the ⚙️ Settings icon in the top right corner.
-3. Paste your Admin Key and click Save.
-4. The key is stored securely in sessionStorage and sent via the X-Admin-Key header in API requests.
+Your site will be live at the URL provided by your host.
 
 ---
 
-4. Testing the Setup
+3. Admin Key — secure usage
 
-1. Test Stats Endpoint:
-   Open in your browser: https://<your-worker-url>/stats
-   You should see a JSON response with daily statistics.
-2. Test the Frontend:
-   Open your GitHub Pages URL, type a query, and click Start Search.
-   The 3D Biological Engine should trigger, and the report should generate in under 35 seconds.
+· Enter the admin key only through the Settings panel (⚙️) in the UI.
+· The key is sent as the X-Admin-Key request header and is never written to localStorage, sessionStorage, cookies, or the URL.
+· The Worker does not accept the admin key via ?admin_key= query parameters.
+· After reloading the page you will need to re-enter the key. This is intentional.
+
+---
+
+4. Testing
+
+1. Test the Worker:
+curl https://<your-worker-url>/stats
+You should receive a JSON response with daily statistics.
+2. Test the frontend: open your site, run a query, and confirm the 3D engine renders and the report completes. Typical time is 15–40 seconds depending on query complexity and network.
 
 ---
 
 🆘 Troubleshooting
 
-· CORS Error: Ensure your ALLOWED_ORIGINS secret in the Worker matches your frontend URL exactly (without a trailing slash).
-· Bacterium Not Showing: Check the browser console. Ensure bacterium-lite.html is in the root directory and the path in the <iframe> is correct.
-· Rate Limit Issues: If testing, clear the mido_visitor_id from your browser's Local Storage to get a new ID.
+· CORS error — ALLOWED_ORIGINS must match your frontend origin exactly, including https:// and without a trailing slash.
+· "Worker not configured" — edit WORKER_API_URL in index.html.
+· Bacterium not showing — ensure bacterium-lite.html sits in the same folder as index.html; check the browser console for 404.
+· Rate limit during testing — clear mido_visitor_id from Local Storage in your browser's developer tools.
+
+---
+
+🔐 If a secret was ever exposed
+
+Rotate it immediately, even if you see no signs of misuse:
+wrangler secret put TAVILY_API_KEY
+wrangler secret put GROQ_API_KEY
+wrangler secret put ADMIN_KEY
