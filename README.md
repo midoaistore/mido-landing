@@ -48,7 +48,8 @@ Is the current price of this product verified? Show the currency, date, and sour
 A five-stage research pipeline
 
 Mido does not rely on a decorative timer alone. The interface visualizes the workflow through five protection rings and the interactive bacterium-lite.html engine.
-``mermaid
+
+```mermaid
 flowchart LR
     A[User question] --> B[Source search]
     B --> C[Thesis build]
@@ -410,3 +411,5 @@ Links
 · Security policy
 · Issues
 · GitHub repository
+
+
