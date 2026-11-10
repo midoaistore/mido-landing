@@ -1,21 +1,44 @@
-MIT License
-
 Copyright (c) 2026 Mido AI Store
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+SOURCE AVAILABLE — NON-COMMERCIAL USE ONLY
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+(a) Read, study, and audit the source code.
+(b) Use the Software for personal, educational, or non-commercial
+    research purposes.
+(c) Modify the Software for personal use only.
+(d) Share unmodified copies with clear attribution to Mido AI Store.
+
+The following are NOT permitted without prior written consent from
+Mido AI Store:
+
+(a) Commercial use of any kind.
+(b) Redistribution for profit or sale.
+(c) Offering the Software (or a derivative) as a paid service.
+(d) Sublicensing or reselling.
+(e) Removing or altering copyright notices.
+
+COMMERCIAL LICENSING
+
+Commercial use, resale, integration into paid products, or any use
+beyond personal and non-commercial research requires a separate
+written commercial license.
+
+For commercial licensing: support@midoaistore.com
+
+PURCHASE AND PERSONAL USE
+
+A personal-use license for the deployed service is available at:
+https://midoaistore.gumroad.com/l/dtqpvka
+
+NO WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE USE OF THE
 SOFTWARE.
