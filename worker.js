@@ -717,8 +717,8 @@ export default {
         used = current ? parseInt(current, 10) : 0;
       } catch (e) {}
 
-      const safeLimit = quota === Infinity ? 999999 : quota;
-      const remaining = quota === Infinity ? 999999 : Math.max(0, quota - used);
+      const safeLimit = quota === Infinity ? 100 : quota;
+      const remaining = quota === Infinity ? 100 : Math.max(0, quota - used);
 
       return jsonResponse({
         ok: true,
