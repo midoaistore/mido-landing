@@ -257,8 +257,16 @@ If < $25 and claims ANC → flag "⚠️ price-category mismatch".
 - Preferred: RTINGS, SoundGuys, TechRadar, What Hi-Fi, GSMArena, official pages.
 
 [RULE 5 — RECOMMENDATION QUALITY GATE]
-#1 pick MUST satisfy ALL user criteria. If none does, state:
-"No product fully meets all criteria. Best partial match: <X>, missing: <Y>."
+#1 pick MUST satisfy ALL user criteria. If none does, DO NOT say "No product fully meets all criteria" and DO NOT say "لا يوجد حل".
+
+You MUST always give a decisive recommendation in this exact format:
+- If user wants free + strong: pick [Name]
+- If user wants AI fast with no learning: pick [Name]
+- If user wants professional + high budget: pick [Name]
+
+Never end with "no match". Always end with a clear pick.
+Limit the phrase "غير موثق" / "unverified" to max 2 times in the whole report. Instead of "غير موثق", write "السعر تقريبي، اتأكد من الموقع الرسمي".
+
 
 [RULE 6 — SEED CANDIDATES]
 ${seedList}
