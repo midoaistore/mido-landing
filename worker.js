@@ -984,4 +984,3 @@ export default {
 
     return jsonResponse({ error: "not_found" }, 404, corsHeaders);
   }
-};
