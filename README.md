@@ -360,15 +360,16 @@ Source Available — Commercial Use Allowed (Single-Developer License). See LICE
 You may read, audit, and use the code for personal or commercial projects. You may customize and self-host it. You may not resell, redistribute, or offer the software's source code as a paid competing service to others.
 
 · Commercial licensing inquiries: support@midoaistore.com
-· Personal use of the deployed service: midoaistore.gumroad.com/l/dtqpvka
+· Personal use of the deployed service: 
 
-Links
+https://midoaistore.gumroad.com/l/dtqpvka
 
-· Live demo
-· Product page
-· Worker API Contract
-· Changelog
-· Contributing
-· Security policy
-· Issues
-· GitHub repository
+## Links
+
+- [Live demo](https://midoaistore.github.io/mido-landing/)
+- [Product page](https://midoaistore.gumroad.com/l/dtqpvka)
+- [Worker API Contract](worker-api.md)
+- [Changelog](Changelog.md)
+- [Security policy](SECURITY.md)
+- [Issues](https://github.com/midoaistore/mido-landing/issues)
+- [GitHub repository](https://github.com/midoaistore/mido-landing)
