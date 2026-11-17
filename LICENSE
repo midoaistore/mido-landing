@@ -1,38 +1,31 @@
 Copyright (c) 2026 Mido AI Store
 
-SOURCE AVAILABLE — NON-COMMERCIAL USE ONLY
+SOURCE AVAILABLE — SINGLE-DEVELOPER COMMERCIAL LICENSE
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 "Software"), to:
 
 (a) Read, study, and audit the source code.
-(b) Use the Software for personal, educational, or non-commercial
-    research purposes.
-(c) Modify the Software for personal use only.
-(d) Share unmodified copies with clear attribution to Mido AI Store.
+(b) Use the Software for personal AND commercial purposes (including
+    integrating it into your own products, client projects, or SaaS
+    applications).
+(c) Modify the Software to suit your needs.
+(d) Self-host the Software on your own domains and infrastructure.
 
 The following are NOT permitted without prior written consent from
 Mido AI Store:
 
-(a) Commercial use of any kind.
-(b) Redistribution for profit or sale.
-(c) Offering the Software (or a derivative) as a paid service.
-(d) Sublicensing or reselling.
-(e) Removing or altering copyright notices.
+(a) Redistribution or resale of the Software (or a derivative) as a 
+    source code template, boilerplate, or standalone product.
+(b) Sublicensing, reselling, or distributing the source code to other
+    developers to build their own competing products.
+(c) Removing or altering copyright notices.
+(d) Offering the Software's *source code* as a paid service to others.
 
-COMMERCIAL LICENSING
-
-Commercial use, resale, integration into paid products, or any use
-beyond personal and non-commercial research requires a separate
-written commercial license.
-
-For commercial licensing: support@midoaistore.com
-
-PURCHASE AND PERSONAL USE
-
-A personal-use license for the deployed service is available at:
-https://midoaistore.gumroad.com/l/dtqpvka
+This license is granted for a SINGLE DEVELOPER. If you are an agency
+or a team, you must purchase a license for each developer who will 
+interact with the source code.
 
 NO WARRANTY
 
