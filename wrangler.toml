@@ -9,7 +9,7 @@ GUMROAD_URL = "https://midoaistore.gumroad.com/l/dtqpvka"
 
 [[kv_namespaces]]
 binding = "MIDO_KV"
-id = "edf6455846914f3a857f67c111b19bc5"
+id = "PASTE_YOUR_KV_NAMESPACE_ID"
 
 [triggers]
 crons = []
