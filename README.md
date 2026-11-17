@@ -1,5 +1,4 @@
 
-``markdown
 # Mido Deep Search
 
 > **Do not collect dozens of links. Build a decision you can defend.**
