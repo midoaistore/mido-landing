@@ -1,0 +1,6 @@
+.env
+skills-lock.json
+.DS_Store 
+wrangler.toml
+node_modules/
+dist/
