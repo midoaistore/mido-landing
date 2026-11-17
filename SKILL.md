@@ -1,6 +1,6 @@
 # Mido Deep Search — AI Skill Definition
 
-**Version:** 6.0.0 (Aligned with Worker V6.3, Frontend V10.3, and Contract v2.0)
+**Version:** 1.0.3 (Aligned with Worker V6.3, Frontend V10.3, and Contract v2.0)
 **Author:** Mido AI Store
 **Platform:** Cloudflare Workers + GitHub Pages
 
@@ -48,7 +48,7 @@ The frontend supports 8 UI languages via a dynamic translation dictionary: Engli
 - **Language Rule:** The final report language follows the **query language**, not the UI language. If a user has an Arabic UI but asks a question in English, the report will be generated in English.
 
 ## 7. Security & Licensing
-- **License:** Source Available (Non-Commercial). Commercial use or resale requires explicit written permission.
+- **License:** Source Available — Commercial Use Allowed (Single-Developer License). Commercial use is permitted for the buyer's own projects, but resale or redistribution of the source code is strictly prohibited.
 - **Admin Key:** Must never be passed via URL. It is sent via `X-Admin-Key` header and validated against `POST /me` before being stored in `sessionStorage`.
 - **Secrets:** Tavily, Groq, and Admin keys are strictly kept in Cloudflare Secrets and never exposed to the browser.
 
@@ -59,3 +59,4 @@ Responses from `POST /` return a JSON object containing:
 - `sources`: Array of source objects (title, url, snippet, score).
 - `logs`: Array of stages (with `status: "reused"` for transform mode).
 - `meta`: Detailed execution data (language, quota, elapsed time, user type).
+- 
