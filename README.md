@@ -360,6 +360,7 @@ Source Available — Commercial Use Allowed (Single-Developer License). See LICE
 You may read, audit, and use the code for personal or commercial projects. You may customize and self-host it. You may not resell, redistribute, or offer the software's source code as a paid competing service to others.
 
 · Commercial licensing inquiries: support@midoaistore.com
+
 · Personal use of the deployed service: 
 
 https://midoaistore.gumroad.com/l/dtqpvka
