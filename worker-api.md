@@ -100,8 +100,6 @@ mode string ❌ search or transform Default: search
 2.1.3 Request Body — Transform Mode
 
 Reuses an existing report and its sources without performing a new Tavily search. Does NOT consume rate limit.
-
-```json
 {
   "mode": "transform",
   "query": "same as original",
@@ -114,25 +112,16 @@ Reuses an existing report and its sources without performing a new Tavily search
   "country": "US",
   "lang": "en"
 }
-```
-
 Field Type Required Constraints
 base_answer string ✅ (transform only) Max 10,000 chars
 base_sources array ⚠️ recommended Max 12 items
-
 Each source item:
-
-```json
 {
   "title": "String, max 200 chars",
   "url": "String, max 1000 chars",
   "snippet": "String, max 700 chars (or 'content' — both accepted)"
 }
-```
-
 2.1.4 Success Response (200) — Search Mode
-
-```json
 {
   "ok": true,
   "report_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -176,11 +165,7 @@ Each source item:
     "self_check": "PASS"
   }
 }
-```
-
 2.1.5 Success Response (200) — Transform Mode
-
-```json
 {
   "ok": true,
   "report_id": "...",
@@ -203,8 +188,6 @@ Each source item:
     "...": "(same fields as search mode)"
   }
 }
-```
-
 Key differences in transform mode:
 
 · logs[0].status = "reused" (not "done")
@@ -213,7 +196,6 @@ Key differences in transform mode:
 · Rate limit NOT consumed (remaining_quota unchanged)
 
 2.1.6 Error Responses
-
 Status Error Trigger
 400 empty_query query missing or empty
 400 invalid_json Malformed JSON body
@@ -223,10 +205,7 @@ Status Error Trigger
 429 rate_limit_exceeded Daily quota exhausted
 500 search_failed Tavily or Groq failure (search mode)
 500 transform_failed Groq failure (transform mode)
-
 Example error body:
-
-```json
 {
   "error": "rate_limit_exceeded",
   "message": "Free daily limit of 100 searches reached. Purchase a license for 200 searches/day.",
@@ -235,15 +214,11 @@ Example error body:
   "user_type": "free",
   "upgrade_url": "https://midoaistore.gumroad.com/l/dtqpvka"
 }
-```
-
 2.2 GET /stats — Daily Statistics
 
 Site-wide usage statistics for the current UTC day.
 
 Response (200)
-
-```json
 {
   "date": "2026-11-10",
   "total_visitors": 42,
@@ -256,8 +231,6 @@ Response (200)
   "success": 15,
   "failure": 2
 }
-```
-
 Field notes:
 
 · Both new (total_visitors, today_searches, successful_trials, failed_trials, remaining_today) and legacy (visitors, searches, success, failure) field names are provided for backward compatibility.
@@ -265,35 +238,23 @@ Field notes:
 · If KV is unavailable, returns { "error": "stats_unavailable" } with status 200.
 
 Frontend mapping:
-
 UI Element Reads from
 #stVisitors total_visitors
 #stSearches today_searches
 #stOk successful_trials
 #stFail failed_trials
 #stLeft NOT from /stats — uses /me instead
-
----
-
 2.3 POST /visit — Global Visitor Counter
 
 Increments the daily visitors counter. Called once per page load by the frontend.
 
 Request
-
-```http
 POST /visit
 Content-Type: text/plain (body content ignored)
-```
-
 Body may contain visitor_id but is currently ignored.
 
 Response (200)
-
-```json
 { "ok": true, "success": true }
-```
-
 Behavior:
 
 · Increments stats:YYYY-MM-DD:visitors in KV
@@ -308,21 +269,11 @@ Behavior:
 Added in Contract v2.0. Read-only endpoint used by the frontend to display personal quota and validate admin sessions.
 
 Request Headers
-
-```http
 Content-Type: application/json
 X-Admin-Key: <optional>
-```
-
 Request Body
-
-```json
 { "visitor_id": "v_abc123" }
-```
-
 Response (200) — Free User
-
-```json
 {
   "ok": true,
   "user_type": "free",
@@ -331,11 +282,7 @@ Response (200) — Free User
   "used": 13,
   "is_admin": false
 }
-```
-
 Response (200) — Paid User
-
-```json
 {
   "ok": true,
   "user_type": "paid",
@@ -344,11 +291,7 @@ Response (200) — Paid User
   "used": 15,
   "is_admin": false
 }
-```
-
 Response (200) — Admin
-
-```json
 {
   "ok": true,
   "user_type": "admin",
@@ -357,18 +300,12 @@ Response (200) — Admin
   "used": 0,
   "is_admin": true
 }
-```
-
 Response (401) — Invalid Admin Key
-
-```json
 {
   "ok": false,
   "error": "invalid_license",
   "message": "Invalid or expired license key."
 }
-```
-
 Critical properties:
 
 · Read-only — does NOT increment the rate counter
@@ -396,7 +333,6 @@ Returns an HTML page with:
 3. Skills (15 stable IDs)
 
 Shared between frontend (index.html) and Worker (worker.js). Any change requires updating both sides.
-
 # Skill ID Objective
 1 deep_search Complete evidence-based research report
 2 summarize Concise, faithful summary
@@ -413,7 +349,6 @@ Shared between frontend (index.html) and Worker (worker.js). Any change requires
 13 extract_facts Extract only verifiable facts
 14 outline Clear structured outline from supported information
 15 decision_matrix Transparent decision matrix with criteria and scoring
-
 Normalization: Unknown skill values are silently normalized to deep_search.
 
 Behavior: Each skill has its own goal (in SKILL_CONFIG) and output format (in buildOutputFormat). The Worker injects the skill directive into all three prompts (plan, report, transform).
@@ -423,7 +358,6 @@ Behavior: Each skill has its own goal (in SKILL_CONFIG) and output format (in bu
 4. Languages
 
 4.1 Supported Languages
-
 Code Language
 ar Arabic
 en English
@@ -434,23 +368,17 @@ pt Portuguese
 ja Japanese
 zh Simplified Chinese
 it Italian (Worker only — not in current frontend)
-
 4.2 Language Resolution Logic
 
 The frontend sends lang (UI language). The Worker then:
-
-```javascript
 const detectedLang = detectLanguage(query, "en");
 const effectiveLang = normalizeLanguage(detectedLang !== clientLang ? detectedLang : clientLang);
-```
-
 UI Language Query Language Detected Effective Report Language
 ar (Arabic) ar ar Arabic
 ar English en English
 en Arabic ar Arabic
 en English en English
 ar Ambiguous short ("Sony") en (fallback) English
-
 Design principle: The report language follows the query language, not the UI language. This prevents English queries on Arabic UI from producing Arabic reports.
 
 Mismatch flag: When detectedLang !== clientLang, the response sets meta.lang_mismatch: true.
@@ -467,24 +395,20 @@ Mismatch flag: When detectedLang !== clientLang, the response sets meta.lang_mis
 5. Rate Limiting
 
 5.1 Limits by User Type
-
 User Type Daily Limit Identity Key
 free 100 v:<visitor_id> or ip:<CF-Connecting-IP>
 paid 200 paid:<last-12-of-license>
 admin ∞ "admin"
-
 5.2 Reset Schedule
 
 Daily at 00:00 UTC. KV keys use the YYYY-MM-DD prefix.
 
 5.3 Consumption Rules
-
 Operation Consumes? Reason
 POST / — search mode ✅ Yes Full research pipeline
 POST / — transform mode ❌ No Reuses existing evidence
 POST /me ❌ No Read-only check
 POST /visit ❌ No Global counter only
-
 Transform mode exemption rationale: The user is not requesting new evidence — they are re-presenting the same report through a different skill lens. This prevents token waste when a user cycles between skills on the same report.
 
 5.4 Frontend Protection (Client-Side)
@@ -503,28 +427,21 @@ Combined result: Users can explore all 15 skills on one report with only 1 API c
 6. Environment Variables
 
 6.1 Secrets (via wrangler secret put)
-
 Name Purpose
 TAVILY_API_KEY Tavily API authentication
 GROQ_API_KEY Groq API authentication
 ADMIN_KEY Admin bypass key
-
 6.2 Variables (via wrangler.toml [vars])
-
 Name Purpose Example
 GUMROAD_PRODUCT_ID Gumroad product permalink dtqpvka
 GUMROAD_URL Public purchase URL https://midoaistore.gumroad.com/l/dtqpvka
 ALLOWED_ORIGINS CORS whitelist https://midoaistore.github.io
 GROQ_MODEL Primary model override openai/gpt-oss-120b
 GROQ_MODEL_SECONDARY Fallback model override openai/gpt-oss-20b
-
 6.3 KV Bindings
-
 Binding Purpose
 MIDO_KV Rate limits, stats counters, license cache
-
 6.4 Named KV Keys
-
 Pattern TTL Purpose
 rate:YYYY-MM-DD:<identity> 2 days Rate limit counter
 stats:YYYY-MM-DD:visitors 30 days Global visitor counter
@@ -532,13 +449,9 @@ stats:YYYY-MM-DD:searches 30 days Global search counter
 stats:YYYY-MM-DD:success 30 days Successful search counter
 stats:YYYY-MM-DD:failure 30 days Failed search counter
 license:<key> 24 hours Gumroad license cache
-
----
-
 7. Error Codes Reference
 
 7.1 Codes Emitted by Worker
-
 Code Endpoint HTTP Status Meaning
 empty_query POST / 400 Missing or empty query
 invalid_json POST / 400 Body is not valid JSON
@@ -550,11 +463,9 @@ search_failed POST / 500 Tavily or Groq error (search mode)
 transform_failed POST / 500 Groq error (transform mode)
 not_found any 404 Unknown endpoint
 stats_unavailable GET /stats 200 (in body) KV read failure
-
 7.2 Codes Handled Defensively by Frontend
 
 These may appear if the Worker evolves or is misconfigured. The frontend handles them but they are not currently emitted:
-
 Code Frontend Behavior
 admin_key_in_url Shows message asking user to use 🔑 button
 missing_api_key Shows "Server configuration error"
@@ -564,7 +475,6 @@ origin_not_allowed Shows CORS error message
 8. Compatibility Matrix
 
 Full verification that worker.js v6.3 is compatible with index.html v10.3.
-
 Feature Frontend Worker Status
 POST / search Sends all fields Accepts all fields ✅ Compatible
 POST / transform Sends mode, base_answer, base_sources Handles transform mode ✅ Compatible
@@ -580,11 +490,6 @@ Logs format Reads log.ring \|\| log.stage Returns stage ✅ Compatible
 Legacy response fields Not used, safe to exist success, deep_answer, top_sources ✅ Compatible
 Transform cache Client-side cache N/A ✅ Frontend-only
 Admin session validation Calls /me with key Returns 200 or 401 ✅ Compatible
-
-No outstanding compatibility gaps.
-
----
-
 9. Security Requirements
 
 9.1 Secrets Management
@@ -705,5 +610,7 @@ Before deploying to production:
 ☐ Test admin key validation via /me
 ☐ Verify index.html WORKER_URL matches deployed Worker URL
 ☐ Confirm CORS preflight (OPTIONS) returns correct headers
+
+---
 
 End of Contract v2.0
