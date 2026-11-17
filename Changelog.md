@@ -4,18 +4,16 @@ All notable changes to Mido Deep Search will be documented in this file.
 
 The project currently contains a static frontend, a Cloudflare Worker API, an interactive biological visualizer, multilingual content, report actions, and a reusable research-skill definition. Version entries should describe behavior that is actually released and deployed.
 
-## [Unreleased]
+## [1.0.3] - 2026-11-17
 
 ### Added
 
-- English project documentation with a product overview, architecture guide, setup instructions, API examples, security notes, and contribution guidance.
-- `LICENSE` with the MIT License text.
+- English and Arabic project documentation with a product overview, architecture guide, setup instructions, API examples, security notes, and contribution guidance.
+- `LICENSE` with the Single-Developer Commercial License text.
 - `SECURITY.md` with private vulnerability-reporting guidance.
-- `CONTRIBUTING.md` with development, testing, security, and Pull Request guidelines.
-- `WORKER_API_CONTRACT.md` (v2.0) documenting all Worker endpoints (`POST /`, `GET /stats`, `POST /visit`, `POST /me`, `GET /spider`), including request/response schemas, error codes, rate-limit rules, environment variables, and a full frontend–Worker compatibility matrix.
+- `worker-api.md` (v2.0) documenting all Worker endpoints (`POST /`, `GET /stats`, `POST /visit`, `POST /me`, `GET /spider`), including request/response schemas, error codes, rate-limit rules, environment variables, and a full frontend–Worker compatibility matrix.
 - `POST /me` Worker endpoint. Read-only personal quota check used by the frontend to display remaining quota and validate admin sessions before storing admin keys in `sessionStorage`.
 - Client-side transform cache in `index.html`. Results from each skill transformation are cached in `transformCache[skill]`, so repeated use of the same skill returns the cached result without any additional API call.
-- `renderTransformResult` helper function to unify transformation rendering and surface a visible "Cached — no API call" indicator to the user.
 - Original-report restoration. Selecting `deep_search` after using another skill restores `baseReportText` and `baseReportSources` directly from memory without contacting the Worker.
 - A documented five-stage research pipeline:
   1. Source Search
@@ -80,24 +78,3 @@ The project currently contains a static frontend, a Cloudflare Worker API, an in
 - PDF export is implemented through the browser print flow rather than a server-generated PDF binary.
 - `X-RateLimit-Remaining` and `X-RateLimit-Limit` response headers are not yet emitted by the Worker; the frontend relies on `POST /me` for personal quota display and updates it after each request.
 - The client-side transform cache is per-session and per-report. A new search or a page reload clears it, so token savings apply only while exploring multiple skills on the same report.
-- A formal automated CI pipeline should be added before treating the repository as a fully validated release.
-
-## Versioning policy
-
-Until the first tagged release is published, changes should be recorded under `[Unreleased]` instead of being assigned a made-up version number.
-
-When a release is tagged, use a versioned heading such as:
-
-```markdown
-## [1.0.0] - YYYY-MM-DD
-Use the following categories where relevant:
-
-· Added — new functionality.
-· Changed — changes to existing behavior.
-· Deprecated — functionality that will be removed later.
-· Removed — deleted functionality.
-· Fixed — bug fixes.
-· Security — security improvements or disclosures that are safe to publish.
-
-Do not include API keys, license keys, personal data, private vulnerability details, or exploit instructions in this file.
-
