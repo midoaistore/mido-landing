@@ -1,3 +1,5 @@
+
+``markdown
 # Mido Deep Search
 
 > **Do not collect dozens of links. Build a decision you can defend.**
@@ -14,7 +16,7 @@
   <a href="https://github.com/midoaistore/mido-landing/stargazers">
     <img src="https://img.shields.io/github/stars/midoaistore/mido-landing?style=for-the-badge&logo=github&label=Stars" alt="GitHub stars">
   </a>
-  <img src="https://img.shields.io/badge/license-Source%20Available-7c3aed?style=for-the-badge" alt="Source Available License">
+  <img src="https://img.shields.io/badge/license-Single%20Developer%20Commercial-7c3aed?style=for-the-badge" alt="Commercial License">
 </p>
 
 ![Mido Deep Search report preview](report-preview-en-hud.png)
@@ -45,6 +47,8 @@ Mido searches live sources, organizes the evidence, compares alternatives, separ
 Best wireless noise-cancelling headphones under $150, using reliable sources only.
 Compare the MacBook Air and MacBook Pro for programming, including the limitations that could make the recommendation unsuitable.
 Is the current price of this product verified? Show the currency, date, and source. Do not convert it to another currency.
+```
+
 A five-stage research pipeline
 
 Mido does not rely on a decorative timer alone. The interface visualizes the workflow through five protection rings and the interactive bacterium-lite.html engine.
@@ -170,11 +174,11 @@ worker.js                  Cloudflare Worker API
 wrangler.toml              Worker deployment configuration
 SETUP.md                   Setup and deployment guide
 SKILL.md                   Reusable skill definition
-WORKER_API_CONTRACT.md     Complete Worker API contract (v2.0)
+worker-api.md              Complete Worker API contract (v2.0)
 CHANGELOG.md               Version history and change log
 CONTRIBUTING.md            Contribution guidelines
 SECURITY.md                Private vulnerability reporting
-LICENSE                    Source Available license (non-commercial)
+LICENSE                    Single-Developer Commercial License
 report-preview-en-hud.png  Report preview image
 ```
 
@@ -197,11 +201,7 @@ Start a simple static server from the repository root:
 python3 -m http.server 8080
 ```
 
-Then open:
-
-```text
-http://localhost:8080
-```
+Then open: http://localhost:8080
 
 Do not open index.html directly through file:// when testing the iframe and network requests. Some browsers block these operations for security reasons.
 
@@ -243,19 +243,13 @@ Run this from the repository root:
 npx wrangler deploy
 ```
 
-After deployment, update WORKER_URL in index.html if the Worker address has changed.
+After deployment, update WORKER_API_URL in index.html if the Worker address has changed.
 
 Request and response contract
 
-See WORKER_API_CONTRACT.md for the complete contract. The summary below covers the essentials.
+See worker-api.md for the complete contract. The summary below covers the essentials.
 
 Search request
-
-```http
-POST /
-Content-Type: application/json
-Origin: https://midoaistore.github.io
-```
 
 ```json
 {
@@ -268,11 +262,6 @@ Origin: https://midoaistore.github.io
 ```
 
 Transform request (skill reuse on existing report)
-
-```http
-POST /
-Content-Type: application/json
-```
 
 ```json
 {
@@ -293,11 +282,6 @@ Transform mode does not consume daily quota.
 
 Personal quota check
 
-```http
-POST /me
-Content-Type: application/json
-```
-
 ```json
 { "visitor_id": "v_example" }
 ```
@@ -315,31 +299,12 @@ Response:
 }
 ```
 
-Short successful search response
-
-```json
-{
-  "ok": true,
-  "report_id": "example-id",
-  "answer": "...",
-  "sources": [],
-  "logs": [],
-  "meta": {
-    "skill": "deep_search",
-    "sources_count": 0,
-    "elapsed_ms": 0,
-    "remaining_quota": 99,
-    "user_type": "free"
-  }
-}
-```
-
 The frontend and Worker use the same skill IDs. If the contract changes, update both sides and test them together.
 
 Security and privacy
 
 · Never pass admin_key through a URL.
-· Never store API keys in localStorage or sessionStorage.
+· Never store provider API keys in localStorage or sessionStorage.
 · The admin key is validated through POST /me before being stored in sessionStorage; the Worker returns 401 for invalid keys and the frontend clears the session immediately.
 · Never expose Tavily or Groq keys in browser code.
 · Keep provider secrets inside Cloudflare Secrets.
@@ -394,11 +359,11 @@ Contributions are welcome. Before opening a Pull Request, read CONTRIBUTING.md a
 
 License
 
-Source Available — Non-Commercial Use Only. See LICENSE for full terms.
+Source Available — Commercial Use Allowed (Single-Developer License). See LICENSE for full terms.
 
-You may read, audit, and use the code for personal or non-commercial research. Commercial use, resale, or offering the Software as a paid service requires a separate written license.
+You may read, audit, and use the code for personal or commercial projects. You may customize and self-host it. You may not resell, redistribute, or offer the software's source code as a paid competing service to others.
 
-· Commercial licensing: support@midoaistore.com
+· Commercial licensing inquiries: support@midoaistore.com
 · Personal use of the deployed service: midoaistore.gumroad.com/l/dtqpvka
 
 Links
@@ -412,4 +377,4 @@ Links
 · Issues
 · GitHub repository
 
-
+```
