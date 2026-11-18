@@ -1,25 +1,21 @@
 /**
  * Mido AI Store - Deep Search Worker
- * Version: V6.3
+ * Version: V7.1
  * Platform: Cloudflare Workers | KV: MIDO_KV
  * APIs: Tavily (search) + Groq (LLM) + Gumroad (licensing)
  * ============================================================================
  *
- * CHANGELOG V6.0 -> V6.3:
- *  - [FIX]  Gumroad: product_permalink instead of product_id (CRITICAL)
- *  - [NEW]  Response now includes `sources` and `logs` for frontend
- *  - [NEW]  /stats includes total_visitors, today_searches, successful_trials,
- *           failed_trials, remaining_today (plus legacy fields)
- *  - [NEW]  /visit endpoint for explicit visit tracking
- *  - [NEW]  visitor_id used as primary rate-limit identity (VPN-resistant)
- *  - [FIX]  Removed duplicate visitors counter inside search (handled by /visit)
- *  - [KEPT] All V6.0 features: Gumroad cache, admin key, refund/dispute,
- *           Category Guard, Seed Candidates, Language Detection, Self-Check,
- *           Two-pass prompt, Model fallback, Price Sanity
- *  - [NEW] Transform mode reuses an existing report and sources for another skill
- *  - [NEW] POST /me for personal quota check (read-only, no increment)
- *  - [FIX] Transform mode does not consume rate limit
- *  - [FIX] Report language always follows query language
+ * CHANGELOG V7.0 -> V7.1:
+ *  - [CHANGE] RULE 5 is now an explicit, always-on clear recommendation,
+ *             while still forbidding invented facts.
+ *  - [CHANGE] Free tier: 1 trial per visitor per day + 100 global free
+ *             searches/day ceiling (two independent counters).
+ *  - [CHANGE] Transform mode (skills applied to an existing report) no longer
+ *             touches the rate limiter, so all 15 skills can be used on the
+ *             same report without consuming quota.
+ *  - [CHANGE] Markdown tables are reinforced in the prompt and normalized
+ *             post-generation (missing separator rows are inserted).
+ *  - [KEPT]   Everything else from V7.0 (licensing, security, fallbacks).
  * ============================================================================
  */
 
@@ -31,27 +27,44 @@ const CONFIG = {
   GROQ_MODEL_SECONDARY: "openai/gpt-oss-20b",
   MAX_QUERY_LENGTH: 500,
   MAX_SEARCH_RESULTS: 12,
+  TAVILY_FETCH_RESULTS: 15,
+  CONTEXT_CHAR_BUDGET: 9000,
+  SNIPPET_MIN_CHARS: 220,
+  SNIPPET_MAX_CHARS: 650,
+  TAVILY_SUMMARY_MAX_CHARS: 600,
   MAX_TOKENS: 2800,
   MAX_TOKENS_PLAN: 500,
   TEMPERATURE: 0.2,
   TEMPERATURE_PLAN: 0.1,
-  RATE_LIMIT_FREE: 100,
+  // New free-tier limits (V7.1)
+  FREE_TRIAL_PER_VISITOR: 1,
+  FREE_GLOBAL_DAILY_LIMIT: 100,
   RATE_LIMIT_PAID: 200,
   LICENSE_CACHE_TTL: 86400,
   REQUEST_TIMEOUT_MS: 45000
 };
+
+// --- Free-tier limit resolvers (env overrides are optional) ---
+function getFreePerVisitorLimit(env) {
+  const n = parseInt(env && env.FREE_PER_VISITOR_LIMIT, 10);
+  return Number.isFinite(n) && n > 0 ? n : CONFIG.FREE_TRIAL_PER_VISITOR;
+}
+function getFreeGlobalDailyLimit(env) {
+  const n = parseInt(env && env.FREE_DAILY_LIMIT, 10);
+  return Number.isFinite(n) && n > 0 ? n : CONFIG.FREE_GLOBAL_DAILY_LIMIT;
+}
 
 // ============================================================================
 // LANGUAGE DETECTION
 // ============================================================================
 
 const LANG_STOPWORDS = {
-  en: ["the","and","is","are","was","were","with","for","from","this","that","which","have","has","been","will","would","can","could","should","best","price","battery"],
-  fr: ["le","la","les","et","est","sont","pour","avec","dans","sur","une","des","du","ce","cette","qui","que","mais","ou","meilleur","prix","batterie"],
-  de: ["der","die","das","und","ist","sind","mit","für","von","auf","eine","einen","einem","nicht","auch","aber","oder","beste","preis","akku"],
-  es: ["el","la","los","las","y","es","son","para","con","en","una","del","que","pero","o","mejor","precio","batería"],
-  pt: ["o","a","os","as","e","é","são","para","com","em","uma","do","que","mas","ou","melhor","preço","bateria"],
-  it: ["il","lo","la","i","gli","le","e","è","sono","per","con","in","una","del","che","ma","o","migliore","prezzo","batteria"]
+  en: ["the", "and", "is", "are", "was", "were", "with", "for", "from", "this", "that", "which", "have", "has", "been", "will", "would", "can", "could", "should", "best", "price", "battery"],
+  fr: ["le", "la", "les", "et", "est", "sont", "pour", "avec", "dans", "sur", "une", "des", "du", "ce", "cette", "qui", "que", "mais", "ou", "meilleur", "prix", "batterie"],
+  de: ["der", "die", "das", "und", "ist", "sind", "mit", "für", "von", "auf", "eine", "einen", "einem", "nicht", "auch", "aber", "oder", "beste", "preis", "akku"],
+  es: ["el", "la", "los", "las", "y", "es", "son", "para", "con", "en", "una", "del", "que", "pero", "o", "mejor", "precio", "batería"],
+  pt: ["o", "a", "os", "as", "e", "é", "são", "para", "com", "em", "uma", "do", "que", "mas", "ou", "melhor", "preço", "bateria"],
+  it: ["il", "lo", "la", "i", "gli", "le", "e", "è", "sono", "per", "con", "in", "una", "del", "che", "ma", "o", "migliore", "prezzo", "batteria"]
 };
 
 const LANG_CHAR_PATTERNS = {
@@ -76,11 +89,9 @@ function normalizeLanguage(value) {
   const lang = String(value || "en").trim().toLowerCase().split(/[-_]/)[0];
   return SUPPORTED_LANGS.has(lang) ? lang : "en";
 }
-
 function languageName(lang) {
   return LANGUAGE_NAMES[normalizeLanguage(lang)] || "English";
 }
-
 function detectLanguage(text, fallback = "en") {
   if (!text || typeof text !== "string") return fallback;
   const sample = text.slice(0, 800);
@@ -90,9 +101,7 @@ function detectLanguage(text, fallback = "en") {
     charScores[lang] = matches ? matches.length : 0;
   }
   if (charScores.ja >= 2) return "ja";
-  for (const lang of ["ar", "ko", "ru"]) {
-    if (charScores[lang] >= 5) return lang;
-  }
+  for (const lang of ["ar", "ko", "ru"]) if (charScores[lang] >= 5) return lang;
   if (charScores.zh >= 5) return "zh";
   const lower = sample.toLowerCase();
   const words = lower.split(/[\s\p{P}]+/u).filter(Boolean);
@@ -130,37 +139,33 @@ const SEED_CANDIDATES = [
   "EarFun Air Pro 4", "EarFun Air Pro 4+", "Soundcore Liberty 4 NC",
   "Soundcore Space A40", "Nothing Ear (a)", "Nothing Ear (2024)",
   "CMF Buds Pro 2", "QCY MeloBuds Pro", "QCY HT05", "Baseus Bowie MA10",
-  "Baseus Bowie M2s", "Edifier NeoBuds Pro 2", "JBL Live Beam 3",
-  "JBL Tour Pro 3", "1MORE Aero", "1MORE ComfoBuds Pro 2",
   "Anker Soundcore Life P3i", "Realme Buds Air 6 Pro",
   "Xiaomi Redmi Buds 6 Pro", "Huawei FreeBuds 6i"
 ];
 
-// ============================================================================
+const EARBUD_QUERY_RE = /(\bearbuds?\b|\bTWS\b|\btrue wireless\b|\bANC\b|\bnoise[- ]cancell?ing\b)/i;
+function isEarbudQuery(query) { return EARBUD_QUERY_RE.test(String(query || "")); }
 
 const SKILL_CONFIG = {
-  deep_search: {goal: "Run a complete evidence-based research report."},
-  summarize: {goal: "Compress the evidence into a concise, faithful summary."},
-  compare: {goal: "Compare the strongest valid options against the user's criteria."},
-  recommend: {goal: "Rank options and give one transparent recommendation with trade-offs."},
-  price_check: {goal: "Audit sourced prices, currency, date, and availability without conversion."},
-  save: {goal: "Produce a clean complete report suitable for saving."},
-  fact_check: {goal: "Check important claims against sources and label their status."},
-  pros_cons: {goal: "Present a balanced evidence-based pros and cons analysis."},
-  buying_guide: {goal: "Create a practical buying guide from criteria to final choice."},
-  local_price_check: {goal: "Focus on local availability and locally sourced prices; never invent or convert."},
-  source_audit: {goal: "Audit source quality, relevance, recency, independence, and conflicts."},
-  risk_check: {goal: "Identify limitations, risks, missing evidence, and failure conditions."},
-  extract_facts: {goal: "Extract only verifiable facts and mark missing facts as unverified."},
-  outline: {goal: "Create a clear structured outline using only supported information."},
-  decision_matrix: {goal: "Build a transparent decision matrix with criteria, evidence, and scoring rationale."}
+  deep_search: { goal: "Run a complete evidence-based research report." },
+  summarize: { goal: "Compress the evidence into a concise, faithful summary." },
+  compare: { goal: "Compare the strongest valid options against the user's criteria." },
+  recommend: { goal: "Rank options and give one transparent recommendation with trade-offs." },
+  price_check: { goal: "Audit sourced prices, currency, date, and availability without conversion." },
+  save: { goal: "Produce a clean complete report suitable for saving." },
+  fact_check: { goal: "Check important claims against sources and label their status." },
+  local_price_check: { goal: "Focus on local availability and locally sourced prices; never invent or convert." },
+  source_audit: { goal: "Audit source quality, relevance, recency, independence, and conflicts." },
+  risk_check: { goal: "Identify limitations, risks, missing evidence, and failure conditions." },
+  extract_facts: { goal: "Extract only verifiable facts and mark missing facts as unverified." },
+  outline: { goal: "Create a clear structured outline using only supported information." },
+  decision_matrix: { goal: "Build a transparent decision matrix with criteria, evidence, and scoring rationale." }
 };
 
 function normalizeSkill(value) {
   const key = String(value || "deep_search").toLowerCase().replace(/[^a-z_]/g, "").slice(0, 32);
   return Object.prototype.hasOwnProperty.call(SKILL_CONFIG, key) ? key : "deep_search";
 }
-
 function buildSkillDirective(skill) {
   const cfg = SKILL_CONFIG[skill] || SKILL_CONFIG.deep_search;
   return `SELECTED SKILL: ${skill}\nSKILL OBJECTIVE: ${cfg.goal}\nDo not drift into a different report type. Preserve all evidence, citation, price, language, and uncertainty rules.`;
@@ -169,20 +174,20 @@ function buildSkillDirective(skill) {
 function buildOutputFormat(skill) {
   const formats = {
     summarize: `## Short Summary\n5-7 concise bullets with citations [n].\n\n## Evidence Notes\nOnly the most important supporting facts, with [n].\n\n## Caveats\nMissing or conflicting evidence.`,
-    compare: `## Short Summary\n3 lines max.\n\n## Comparison Table\n| Option | Criteria | Sourced Price | Strengths | Weaknesses | Sources |\n|---|---|---|---|---|---|\n\n## Verdict\nExplain the ranking and trade-offs with [n].\n\n## Caveats\nUnverified or conflicting data.`,
+    compare: `## Short Summary\n3 lines max.\n\n## Comparison Table\n| Option | Criteria | Sourced Price | Strengths | Weaknesses | Sources |\n|---|---|---|---|---|---|\n| ... | ... | ... | ... | ... | [n] |\n\n## Verdict\nExplain the ranking and trade-offs with [n].\n\n## Caveats\nUnverified or conflicting data.`,
     recommend: `## Short Summary\n3 lines max.\n\n## Ranked Options\nList the ranking and decision criteria with [n].\n\n## Final Recommendation\nOne clear pick, why it wins, and what it does not satisfy.\n\n## Caveats\nRisks and missing evidence.`,
-    price_check: `## Short Summary\n3 lines max.\n\n## Price Table\n| Option | Price as sourced | Currency | Date/availability | Source |\n|---|---|---|---|---|\n\n## Price Findings\nNever convert or estimate. Use unverified when needed.\n\n## Caveats`,
-    local_price_check: `## Short Summary\n3 lines max.\n\n## Local Availability and Price Table\n| Option | Local price as sourced | Currency | Seller/market | Date | Sources |\n|---|---|---|---|---|---|\n\n## Local Market Findings\nNo conversion or invented local prices.\n\n## Caveats`,
-    fact_check: `## Claims Checked\n| Claim | Status: supported/contradicted/unverified | Evidence | Sources |\n|---|---|---|---|\n\n## Overall Assessment\n\n## Caveats`,
-    pros_cons: `## Short Summary\n3 lines max.\n\n## Comparison Table\n| Option | Pros | Cons | Evidence |\n|---|---|---|---|\n\n## Balanced Conclusion\n\n## Caveats`,
-    buying_guide: `## Short Summary\n3 lines max.\n\n## What to Look For\n\n## Options Table\n| Option | Best for | Sourced Price | Strengths | Trade-offs | Sources |\n|---|---|---|---|---|---|\n\n## Final Recommendation\n\n## Caveats`,
-    source_audit: `## Source Audit\n| Source | Relevance | Authority | Recency | Independence | Notes |\n|---|---|---|---|---|---|\n\n## Evidence Conclusion\n\n## Caveats`,
-    risk_check: `## Risk Summary\n\n## Risk Register\n| Risk or limitation | Evidence | Severity | Mitigation | Sources |\n|---|---|---|---|---|\n\n## Recommendation Under Risk\n\n## Caveats`,
+    price_check: `## Short Summary\n3 lines max.\n\n## Price Table\n| Option | Price as sourced | Currency | Date/availability | Source |\n|---|---|---|---|---|\n| ... | ... | ... | ... | [n] |\n\n## Price Findings\nNever convert or estimate. Use unverified when needed.\n\n## Caveats`,
+    local_price_check: `## Short Summary\n3 lines max.\n\n## Local Availability and Price Table\n| Option | Local price as sourced | Currency | Seller/market | Date | Sources |\n|---|---|---|---|---|---|\n| ... | ... | ... | ... | ... | [n] |\n\n## Local Market Findings\nNo conversion or invented local prices.\n\n## Caveats`,
+    fact_check: `## Claims Checked\n| Claim | Status: supported/contradicted/unverified | Evidence | Sources |\n|---|---|---|---|\n| ... | ... | ... | [n] |\n\n## Overall Assessment\n\n## Caveats`,
+    pros_cons: `## Short Summary\n3 lines max.\n\n## Comparison Table\n| Option | Pros | Cons | Evidence |\n|---|---|---|---|\n| ... | ... | ... | [n] |\n\n## Balanced Conclusion\n\n## Caveats`,
+    buying_guide: `## Short Summary\n3 lines max.\n\n## What to Look For\n\n## Options Table\n| Option | Best for | Sourced Price | Strengths | Trade-offs | Sources |\n|---|---|---|---|---|---|\n| ... | ... | ... | ... | ... | [n] |\n\n## Final Recommendation\n\n## Caveats`,
+    source_audit: `## Source Audit\n| Source | Relevance | Authority | Recency | Independence | Notes |\n|---|---|---|---|---|---|\n| ... | ... | ... | ... | ... | [n] |\n\n## Evidence Conclusion\n\n## Caveats`,
+    risk_check: `## Risk Summary\n\n## Risk Register\n| Risk or limitation | Evidence | Severity | Mitigation | Sources |\n|---|---|---|---|---|\n| ... | ... | ... | ... | [n] |\n\n## Recommendation Under Risk\n\n## Caveats`,
     extract_facts: `## Verified Facts\n- fact [n]\n\n## Unverified or Conflicting Facts\n- item [n]\n\n## Source Notes`,
     outline: `## Research Outline\n1. Topic and scope [n]\n2. Key criteria [n]\n3. Evidence sections [n]\n4. Decision or conclusion [n]\n\n## Caveats`,
-    decision_matrix: `## Decision Criteria\n\n## Decision Matrix\n| Option | Criterion | Evidence | Assessment | Sources |\n|---|---|---|---|---|\n\n## Decision\nExplain the choice and weighting transparently.\n\n## Caveats`
+    decision_matrix: `## Decision Criteria\n\n## Decision Matrix\n| Option | Criterion | Evidence | Assessment | Sources |\n|---|---|---|---|---|\n| ... | ... | ... | ... | [n] |\n\n## Decision\nExplain the choice and weighting transparently.\n\n## Caveats`
   };
-  return formats[skill] || `## Short Summary\n(3 lines max)\n\n## Comparison Table\n| Option | Price as sourced | Key criteria | Sources |\n|---|---|---|---|\n\n## Key Findings\n- finding [n]\n\n## Final Recommendation\nOne clear pick or explicit no full match.\n\n## Caveats\nUnverified specs, price conflicts, and source limitations.`;
+  return formats[skill] || `## Short Summary\n(3 lines max)\n\n## Comparison Table\n| Option | Price as sourced | Key criteria | Sources |\n|---|---|---|---|\n| ... | ... | ... | [n] |\n\n## Key Findings\n- finding [n]\n\n## Final Recommendation\nOne clear pick.\n\n## Caveats\nUnverified specs, price conflicts, and source limitations.`;
 }
 
 // ============================================================================
@@ -206,15 +211,41 @@ Plan according to the selected skill:
 3. Which known models to check first.
 4. What "recommendation" means for this query.
 
-Seed candidates: ${SEED_CANDIDATES.slice(0, 12).join(", ")}
+${isEarbudQuery(query) ? "Seed candidates: " + SEED_CANDIDATES.slice(0, 12).join(", ") : ""}
 
 Output ONLY the plan, under 150 words.`;
 }
 
-function buildReportPrompt(query, lang, country, plan, skill) {
-  const seedList = SEED_CANDIDATES.map((c, i) => `${i + 1}. ${c}`).join("\n");
+function buildReportPrompt(query, lang, country, plan, skill, sourceCount = CONFIG.MAX_SEARCH_RESULTS) {
   const outputLanguage = languageName(lang);
-  return `You are "Mido Deep Search", a rigorous product-research analyst.
+  const earbuds = isEarbudQuery(query);
+  const seedList = SEED_CANDIDATES.map((c, i) => `${i + 1}. ${c}`).join("\n");
+
+  const categoryRule = earbuds
+    ? `[RULE 1 — CATEGORY GUARD]
+Identify the exact category requested by the user and include only items in that category.
+The query is about TRUE WIRELESS STEREO (TWS) earbuds / ANC:
+- ANC must be EXPLICITLY stated in source specs or a reputable review.
+- NEVER infer ANC from a product name.
+- ENC-only is NOT ANC. Exclude.`
+    : `[RULE 1 — CATEGORY GUARD]
+Identify the exact category or topic requested by the user and include only items that belong to it.
+Exclude irrelevant items. Do not force any other product category into the report.`;
+
+  const priceRule = earbuds
+    ? `[RULE 2 — PRICE SANITY]
+Real ANC TWS typically cost >= $25 USD.
+If < $25 and claims ANC → flag "⚠️ price-category mismatch".`
+    : `[RULE 2 — PRICE SANITY]
+If a sourced price looks implausible for the category, flag it instead of presenting it as fact.`;
+
+  const candidateRule = earbuds
+    ? `[RULE 6 — SEED CANDIDATES]
+${seedList}`
+    : `[RULE 6 — CANDIDATES]
+Use only options that appear in the numbered sources. Do not add outside candidates.`;
+
+  return `You are "Mido Deep Search", a rigorous research analyst.
 
 OUTPUT LANGUAGE: ${outputLanguage} (code ${normalizeLanguage(lang)})
 
@@ -230,52 +261,50 @@ ${plan}
 
 ${buildSkillDirective(skill)}
 
+You are given ${sourceCount} numbered sources, [1] to [${sourceCount}]. Consider all of them.
+Never state or imply that you reviewed more sources than were provided.
+
 ================================================================
 CRITICAL RULES — VIOLATION = FAILED OUTPUT
 ================================================================
 
-[RULE 1 — CATEGORY GUARD]
-Identify the exact category requested by the user and include only items in that category.
-If the query specifically requests TRUE WIRELESS STEREO (TWS) earbuds with ANC:
-- ANC must be EXPLICITLY stated in source specs or a reputable review.
-- NEVER infer ANC from a product name.
-- ENC-only is NOT ANC. Exclude.
-For other categories, do not force earbuds or ANC into the report. Exclude irrelevant products.
+${categoryRule}
 
-[RULE 2 — PRICE SANITY]
-Real ANC TWS typically cost >= $25 USD.
-If < $25 and claims ANC → flag "⚠️ price-category mismatch".
+${priceRule}
 
 [RULE 3 — EVIDENCE v2]
-- NEVER invent prices/specs/models.
+- NEVER invent prices, specs, models, statistics, or percentages.
+- Every number (percentage, price, count, date) must appear in the numbered source you cite for it. Copy it exactly and cite [n].
+- Do NOT use numbers that appear only in the "TAVILY SUMMARY" block. It is for orientation only.
+- Cite only source numbers that exist ([1] to [${sourceCount}]). Use the plain [n] format.
 - NEVER convert currencies.
-- NEVER create price range wider than 3x.
-- Unknown → "unverified", do NOT guess.
+- NEVER create a price range wider than 3x.
+- Unknown → write "unverified". Do NOT guess.
 
 [RULE 4 — SOURCE DIVERSITY]
-- Each recommended product: >= 2 independent sources.
-- Preferred: RTINGS, SoundGuys, TechRadar, What Hi-Fi, GSMArena, official pages.
+- Each recommended item needs >= 2 independent sources when available. If only one source supports it, say so.
+- Prefer official pages, peer-reviewed or primary sources, and established review sites.
 
-[RULE 5 — RECOMMENDATION QUALITY GATE]
-#1 pick MUST satisfy ALL user criteria. If none does, DO NOT say "No product fully meets all criteria" and DO NOT say "لا يوجد حل".
+[RULE 5 — CLEAR RECOMMENDATION — ALWAYS]
+- ALWAYS give ONE clear, decisive recommendation. Never answer with "it depends" or "no clear winner".
+- State exactly WHY the pick wins, using the cited evidence [n].
+- If the top option does not satisfy every user criterion, still name it as the best choice and list exactly which criteria are missing or unverified.
+- Never invent facts to force a pick. If data is missing, label it "unverified", but still make the recommendation.
+- Weak or single-source evidence must be labelled in the Caveats section.
 
-You MUST always give a decisive recommendation in this exact format:
-- If user wants free + strong: pick [Name]
-- If user wants AI fast with no learning: pick [Name]
-- If user wants professional + high budget: pick [Name]
-
-Never end with "no match". Always end with a clear pick.
-Limit the phrase "غير موثق" / "unverified" to max 2 times in the whole report. Instead of "غير موثق", write "السعر تقريبي، اتأكد من الموقع الرسمي".
-
-
-[RULE 6 — SEED CANDIDATES]
-${seedList}
+${candidateRule}
 
 [RULE 7 — LANGUAGE]
 Respond ENTIRELY in ${outputLanguage}. Do not switch to Arabic unless the output language is Arabic.
 
 [RULE 8 — OUTPUT FORMAT — STRICT]
 ${buildOutputFormat(skill)}
+
+[RULE 9 — MARKDOWN TABLES — STRICT]
+- Every table MUST include: a header row, a separator row (|---|---|...), and at least one data row.
+- Every row MUST have the same number of columns as the header.
+- Do NOT leave a table body empty. If a cell has no data, write "unverified".
+- Do NOT put a pipe character inside a cell value.
 
 ================================================================
 Now produce the FULL report. Every claim must cite [n].
@@ -294,9 +323,10 @@ CHECKLIST:
 4. No prices, specifications, or availability claims are invented; missing information is marked unverified.
 5. No price range is wider than 3x unless the sources clearly support it.
 6. Each recommended product has >= 2 sources.
-7. Recommendation satisfies all criteria or states what is missing.
-8. Response is entirely in ${outputLanguage}.
-9. Output follows the selected skill format.
+7. The report contains ONE clear recommendation with a stated reason (even if some criteria are missing).
+8. Every Markdown table has a header row, a separator row, and at least one data row, with matching column counts.
+9. Response is entirely in ${outputLanguage}.
+10. Output follows the selected skill format.
 
 If any check fails, list the failure codes (e.g., "FAIL-1, FAIL-4").`;
 }
@@ -322,6 +352,7 @@ STRICT TRANSFORMATION RULES:
 4. Respond entirely in ${outputLanguage}.
 5. Follow this exact output format:
 ${buildOutputFormat(skill)}
+6. Every Markdown table must include a header row, a separator row, and at least one data row, with matching column counts.
 
 Return only the transformed report. Do not describe these instructions.`;
 }
@@ -392,7 +423,7 @@ async function tavilySearch(env, query) {
     search_depth: "advanced",
     include_answer: true,
     include_raw_content: false,
-    max_results: CONFIG.MAX_SEARCH_RESULTS
+    max_results: CONFIG.TAVILY_FETCH_RESULTS
   };
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), CONFIG.REQUEST_TIMEOUT_MS);
@@ -464,10 +495,10 @@ async function verifyGumroadLicense(env, licenseKey) {
 
 async function resolveLicense(env, key) {
   if (!key) return { type: "none", valid: false };
-  if (env.ADMIN_KEY && key === env.ADMIN_KEY) {
+  if (env.ADMIN_KEY && safeEqual(key, env.ADMIN_KEY)) {
     return { type: "admin", valid: true, quota: Infinity };
   }
-  const cacheKey = `license:${key}`;
+  const cacheKey = `license:${(await sha256Hex(key)).slice(0, 32)}`;
   try {
     const cached = await env.MIDO_KV.get(cacheKey);
     if (cached) {
@@ -511,7 +542,7 @@ function buildCorsHeaders(origin, allowedOrigins) {
 function jsonResponse(data, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { "Content-Type": "application/json; charset=utf-8", ...extraHeaders }
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", ...extraHeaders }
   });
 }
 
@@ -526,29 +557,111 @@ function sanitizeQuery(q) {
   return q.trim().slice(0, CONFIG.MAX_QUERY_LENGTH);
 }
 
+function safeEqual(a, b) {
+  const x = new TextEncoder().encode(String(a));
+  const y = new TextEncoder().encode(String(b));
+  let diff = x.length ^ y.length;
+  const len = Math.max(x.length, y.length);
+  for (let i = 0; i < len; i++) diff |= (x[i] || 0) ^ (y[i] || 0);
+  return diff === 0;
+}
+
+async function sha256Hex(text) {
+  const data = new TextEncoder().encode(String(text));
+  const digest = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+function escapeRegExp(s) {
+  return String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 // ============================================================================
-// RATE LIMITING (visitor_id preferred, IP fallback)
+// RATE LIMITING
+//  - Free:  1 trial per visitor per day  +  100 global free searches/day
+//  - Paid:  200 per license per day
+//  - Admin: unlimited
+//  - Transform mode: never touches any counter.
 // ============================================================================
 
-async function checkRateLimit(env, identity, quota, increment = true) {
-  if (quota === Infinity) return { allowed: true, remaining: Infinity, limit: Infinity };
+async function checkPaidRateLimit(env, identity, quota) {
   const today = new Date().toISOString().slice(0, 10);
-  const key = `rate:${today}:${identity}`;
+  const key = `rate:paid:${today}:${identity}`;
   try {
     const current = await env.MIDO_KV.get(key);
     const count = current ? parseInt(current, 10) : 0;
     if (count >= quota) {
       return { allowed: false, remaining: 0, limit: quota };
     }
-    if (increment) {
-      await env.MIDO_KV.put(key, String(count + 1), { expirationTtl: 86400 * 2 });
-      return { allowed: true, remaining: quota - count - 1, limit: quota };
-    }
-    return { allowed: true, remaining: quota - count, limit: quota };
+    await env.MIDO_KV.put(key, String(count + 1), { expirationTtl: 86400 * 2 });
+    return { allowed: true, remaining: quota - count - 1, limit: quota };
   } catch (e) {
-    console.error("Rate limit KV error:", e);
+    console.error("Paid rate limit KV error:", e);
     return { allowed: true, remaining: -1, limit: quota };
   }
+}
+
+async function checkFreeRateLimit(env, identity) {
+  const today = new Date().toISOString().slice(0, 10);
+  const perVisitor = getFreePerVisitorLimit(env);
+  const globalDaily = getFreeGlobalDailyLimit(env);
+  const visitorKey = `rate:free:visitor:${today}:${identity}`;
+  const globalKey = `rate:free:global:${today}`;
+  try {
+    const v = parseInt((await env.MIDO_KV.get(visitorKey)) || "0", 10);
+    if (v >= perVisitor) {
+      return {
+        allowed: false,
+        reason: "visitor_limit",
+        remaining: 0,
+        limit: perVisitor,
+        global_remaining: Math.max(0, globalDaily - parseInt((await env.MIDO_KV.get(globalKey)) || "0", 10)),
+        global_limit: globalDaily
+      };
+    }
+    const g = parseInt((await env.MIDO_KV.get(globalKey)) || "0", 10);
+    if (g >= globalDaily) {
+      return {
+        allowed: false,
+        reason: "global_limit",
+        remaining: Math.max(0, perVisitor - v),
+        limit: perVisitor,
+        global_remaining: 0,
+        global_limit: globalDaily
+      };
+    }
+    await env.MIDO_KV.put(visitorKey, String(v + 1), { expirationTtl: 86400 * 2 });
+    await env.MIDO_KV.put(globalKey, String(g + 1), { expirationTtl: 86400 * 2 });
+    return {
+      allowed: true,
+      remaining: perVisitor - v - 1,
+      limit: perVisitor,
+      global_remaining: globalDaily - g - 1,
+      global_limit: globalDaily
+    };
+  } catch (e) {
+    console.error("Free rate limit KV error:", e);
+    return { allowed: true, remaining: -1, limit: perVisitor, global_remaining: -1, global_limit: globalDaily };
+  }
+}
+
+async function getFreeUsage(env, identity) {
+  const today = new Date().toISOString().slice(0, 10);
+  const perVisitor = getFreePerVisitorLimit(env);
+  const globalDaily = getFreeGlobalDailyLimit(env);
+  const visitorKey = `rate:free:visitor:${today}:${identity}`;
+  const globalKey = `rate:free:global:${today}`;
+  let v = 0, g = 0;
+  try { v = parseInt((await env.MIDO_KV.get(visitorKey)) || "0", 10); } catch (e) {}
+  try { g = parseInt((await env.MIDO_KV.get(globalKey)) || "0", 10); } catch (e) {}
+  return {
+    used: v,
+    limit: perVisitor,
+    remaining: Math.max(0, perVisitor - v),
+    global_used: g,
+    global_limit: globalDaily,
+    global_remaining: Math.max(0, globalDaily - g)
+  };
 }
 
 // ============================================================================
@@ -572,23 +685,27 @@ async function incrementStat(env, field) {
 async function getStats(env) {
   try {
     const today = new Date().toISOString().slice(0, 10);
-    const [v, s, ok, fail] = await Promise.all([
+    const [v, s, ok, fail, freeGlobal] = await Promise.all([
       env.MIDO_KV.get(`stats:${today}:visitors`),
       env.MIDO_KV.get(`stats:${today}:searches`),
       env.MIDO_KV.get(`stats:${today}:success`),
-      env.MIDO_KV.get(`stats:${today}:failure`)
+      env.MIDO_KV.get(`stats:${today}:failure`),
+      env.MIDO_KV.get(`rate:free:global:${today}`)
     ]);
     const visitors = parseInt(v || "0", 10);
     const searches = parseInt(s || "0", 10);
     const success = parseInt(ok || "0", 10);
     const failure = parseInt(fail || "0", 10);
+    const freeUsed = parseInt(freeGlobal || "0", 10);
     return {
       date: today,
       total_visitors: visitors,
       today_searches: searches,
       successful_trials: success,
       failed_trials: failure,
-      remaining_today: Math.max(0, CONFIG.RATE_LIMIT_FREE - searches),
+      free_searches_today: freeUsed,
+      free_daily_limit: getFreeGlobalDailyLimit(env),
+      remaining_today: Math.max(0, getFreeGlobalDailyLimit(env) - freeUsed),
       visitors,
       searches,
       success,
@@ -603,22 +720,58 @@ async function getStats(env) {
 // CONTEXT BUILDER
 // ============================================================================
 
-function buildSearchContext(results, tavilyAnswer) {
+function normalizeUrlKey(url) {
+  try {
+    const u = new URL(url);
+    return (u.hostname.replace(/^www\./, "") + u.pathname.replace(/\/+$/, "")).toLowerCase();
+  } catch (e) {
+    return String(url || "").trim().toLowerCase();
+  }
+}
+
+function prepareSources(rawResults, { dedupe = true } = {}) {
+  const list = Array.isArray(rawResults) ? rawResults : [];
+  const seen = new Set();
+  const unique = [];
+  for (const r of list) {
+    if (!r) continue;
+    if (dedupe) {
+      const key = normalizeUrlKey(r.url);
+      if (key && seen.has(key)) continue;
+      if (key) seen.add(key);
+    }
+    unique.push(r);
+    if (unique.length >= CONFIG.MAX_SEARCH_RESULTS) break;
+  }
+  const count = unique.length || 1;
+  const overheadPerSource = 160;
+  const perSource = Math.floor(
+    (CONFIG.CONTEXT_CHAR_BUDGET - CONFIG.TAVILY_SUMMARY_MAX_CHARS) / count
+  ) - overheadPerSource;
+  const snippetLimit = Math.max(
+    CONFIG.SNIPPET_MIN_CHARS,
+    Math.min(CONFIG.SNIPPET_MAX_CHARS, perSource)
+  );
+  return unique.map((r, i) => ({
+    title: String(r.title || `Source ${i + 1}`).slice(0, 200),
+    url: String(r.url || "").slice(0, 1000),
+    content: String(r.content || r.snippet || "").slice(0, snippetLimit),
+    score: typeof r.score === "number" ? r.score : null
+  }));
+}
+
+function buildSearchContext(sources, tavilyAnswer) {
   let ctx = "";
   if (tavilyAnswer) {
-    ctx += `TAVILY SUMMARY (reference only):\n${tavilyAnswer}\n\n---\n\n`;
+    ctx += `TAVILY SUMMARY (orientation only, do not take numbers from it):\n${String(tavilyAnswer).slice(0, CONFIG.TAVILY_SUMMARY_MAX_CHARS)}\n\n---\n\n`;
   }
-  if (!results || results.length === 0) {
+  if (!sources || sources.length === 0) {
     return ctx + "NO SEARCH RESULTS AVAILABLE.";
   }
-  ctx += results.map((r, i) => {
-    const idx = i + 1;
-    const title = r.title || "Untitled";
-    const url = r.url || "";
-    const content = (r.content || "").slice(0, 700);
-    return `[${idx}] ${title}\nURL: ${url}\nSNIPPET: ${content}`;
+  ctx += sources.map((r, i) => {
+    return `[${i + 1}] ${r.title || "Untitled"}\nURL: ${r.url || ""}\nSNIPPET: ${r.content || ""}`;
   }).join("\n\n---\n\n");
-  return ctx.slice(0, 5200);
+  return ctx;
 }
 
 // ============================================================================
@@ -650,6 +803,94 @@ function flagPriceSanityIssues(answer) {
   );
 }
 
+// Ensures every Markdown table block has a separator row after its header.
+// Does not touch anything outside table blocks.
+function normalizeMarkdownTables(answer) {
+  if (!answer) return answer;
+  const lines = answer.split("\n");
+  const out = [];
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    if (trimmed.startsWith("|")) {
+      const block = [];
+      while (i < lines.length && lines[i].trim().startsWith("|")) {
+        block.push(lines[i]);
+        i++;
+      }
+      if (block.length >= 1) {
+        const headerPipes = (block[0].match(/\|/g) || []).length;
+        const cols = Math.max(1, headerPipes - 1);
+        const hasSep =
+          block.length >= 2 && /^\s*\|[\s:|-]+\|\s*$/.test(block[1]);
+        if (!hasSep) {
+          block.splice(1, 0, "|" + " --- |".repeat(cols));
+        }
+        out.push(...block);
+      }
+    } else {
+      out.push(line);
+      i++;
+    }
+  }
+  return out.join("\n");
+}
+
+// ============================================================================
+// CITATION + NUMBER VERIFICATION
+// ============================================================================
+
+function normalizeCitations(answer) {
+  if (!answer) return answer;
+  return answer.replace(/[【〔](\d{1,2})[】〕]/g, "[$1]");
+}
+
+const NUMBER_CLAIM_RE = /(?:[$€£]\s?\d[\d,]*(?:\.\d+)?)|(?:\d{1,3}(?:\.\d+)?\s?%)/g;
+
+function stripThousands(text) {
+  return String(text || "").replace(/(\d),(?=\d{3}(?!\d))/g, "$1");
+}
+
+function numberAppearsIn(token, haystack) {
+  const isPercent = /%\s*$/.test(token);
+  const num = stripThousands(token.replace(/[^\d.,]/g, "")).replace(/\.$/, "");
+  if (!num) return true;
+  const body = escapeRegExp(num);
+  const pattern = isPercent
+    ? new RegExp(`(?<![\\d.])${body}(?:\\.0+)?\\s?(?:%|percent|per cent)`, "i")
+    : new RegExp(`(?<![\\d.])${body}(?:\\.0+)?(?![\\d]|\\.\\d)`);
+  return pattern.test(haystack);
+}
+
+function verifyReportNumbers(answer, sources) {
+  const texts = (sources || []).map((s) => stripThousands(`${s.title || ""} ${s.content || ""}`));
+  let checked = 0;
+  let flagged = 0;
+  if (!answer || texts.length === 0) {
+    return { answer, checked, flagged };
+  }
+  const out = answer.split("\n").map((line) => {
+    const trimmed = line.trim();
+    if (!trimmed || /^\|?[\s:|-]+\|?$/.test(trimmed)) return line;
+    const cited = [];
+    line.replace(/\[(\d{1,2}(?:\s*,\s*\d{1,2})*)\]/g, (m, group) => {
+      group.split(",").forEach((n) => cited.push(parseInt(n, 10)));
+      return m;
+    });
+    const pool = cited.length
+      ? cited.filter((n) => n >= 1 && n <= texts.length).map((n) => texts[n - 1])
+      : texts;
+    return line.replace(NUMBER_CLAIM_RE, (match) => {
+      checked++;
+      if (pool.some((t) => numberAppearsIn(match, t))) return match;
+      flagged++;
+      return `${match} ⚠️(unverified)`;
+    });
+  });
+  return { answer: out.join("\n"), checked, flagged };
+}
+
 // ============================================================================
 // MAIN HANDLER
 // ============================================================================
@@ -675,15 +916,13 @@ export default {
       return jsonResponse({ ok: true, success: true }, 200, corsHeaders);
     }
 
-    // ---- POST /me (personal quota check — read-only, no increment) ----
+    // ---- POST /me ----
     if (url.pathname === "/me" && request.method === "POST") {
       const clientKey = request.headers.get("X-Admin-Key") || "";
       const ip = request.headers.get("CF-Connecting-IP") || "unknown";
       let body = {};
-      try { body = await request.json(); } catch (e) {}
+      try { body = await request.json(); } catch (e) { }
       const visitorId = String(body?.visitor_id || "").slice(0, 64);
-
-      let identity, quota, userType;
 
       if (clientKey) {
         const license = await resolveLicense(env, clientKey);
@@ -695,38 +934,50 @@ export default {
           }, 401, corsHeaders);
         }
         if (license.type === "admin") {
-          identity = "admin";
-          quota = Infinity;
-          userType = "admin";
-        } else {
-          identity = `paid:${clientKey.slice(-12)}`;
-          quota = CONFIG.RATE_LIMIT_PAID;
-          userType = "paid";
+          return jsonResponse({
+            ok: true,
+            user_type: "admin",
+            remaining: 999999,
+            limit: 999999,
+            used: 0,
+            unlimited: true,
+            is_admin: true
+          }, 200, corsHeaders);
         }
-      } else {
-        identity = visitorId ? `v:${visitorId}` : `ip:${ip}`;
-        quota = CONFIG.RATE_LIMIT_FREE;
-        userType = "free";
+        // Paid
+        const identity = `paid:${(await sha256Hex(clientKey)).slice(0, 16)}`;
+        const today = new Date().toISOString().slice(0, 10);
+        const key = `rate:paid:${today}:${identity}`;
+        let used = 0;
+        try {
+          const current = await env.MIDO_KV.get(key);
+          used = current ? parseInt(current, 10) : 0;
+        } catch (e) { }
+        return jsonResponse({
+          ok: true,
+          user_type: "paid",
+          remaining: Math.max(0, CONFIG.RATE_LIMIT_PAID - used),
+          limit: CONFIG.RATE_LIMIT_PAID,
+          used: used,
+          unlimited: false,
+          is_admin: false
+        }, 200, corsHeaders);
       }
 
-      const today = new Date().toISOString().slice(0, 10);
-      const key = `rate:${today}:${identity}`;
-      let used = 0;
-      try {
-        const current = await env.MIDO_KV.get(key);
-        used = current ? parseInt(current, 10) : 0;
-      } catch (e) {}
-
-      const safeLimit = quota === Infinity ? 100 : quota;
-      const remaining = quota === Infinity ? 100 : Math.max(0, quota - used);
-
+      // Free
+      const identity = visitorId ? `v:${visitorId}` : `ip:${ip}`;
+      const usage = await getFreeUsage(env, identity);
       return jsonResponse({
         ok: true,
-        user_type: userType,
-        remaining: remaining,
-        limit: safeLimit,
-        used: used,
-        is_admin: userType === "admin"
+        user_type: "free",
+        remaining: usage.remaining,
+        limit: usage.limit,
+        used: usage.used,
+        global_remaining: usage.global_remaining,
+        global_limit: usage.global_limit,
+        global_used: usage.global_used,
+        unlimited: false,
+        is_admin: false
       }, 200, corsHeaders);
     }
 
@@ -740,7 +991,7 @@ export default {
 <p><strong>IP:</strong> ${escapeHtml(ip.slice(0, 50))}</p>
 <p><strong>UA:</strong> ${escapeHtml(ua.slice(0, 200))}</p>
 <p><strong>Time:</strong> ${new Date().toISOString()}</p>
-<p><strong>Worker:</strong> v6.3</p></body></html>`;
+<p><strong>Worker:</strong> v7.1</p></body></html>`;
       return new Response(html, {
         status: 200,
         headers: { "Content-Type": "text/html; charset=utf-8", ...corsHeaders }
@@ -769,7 +1020,7 @@ export default {
 
       if (!query) return jsonResponse({ error: "empty_query" }, 400, corsHeaders);
 
-      let identity, quota, userType, licenseMeta = null;
+      let identity, userType, quota, licenseMeta = null;
 
       if (clientKey) {
         const license = await resolveLicense(env, clientKey);
@@ -785,7 +1036,7 @@ export default {
           quota = Infinity;
           userType = "admin";
         } else {
-          identity = `paid:${clientKey.slice(-12)}`;
+          identity = `paid:${(await sha256Hex(clientKey)).slice(0, 16)}`;
           quota = CONFIG.RATE_LIMIT_PAID;
           userType = "paid";
           licenseMeta = {
@@ -795,21 +1046,48 @@ export default {
         }
       } else {
         identity = visitorId ? `v:${visitorId}` : `ip:${ip}`;
-        quota = CONFIG.RATE_LIMIT_FREE;
         userType = "free";
       }
 
       // ---- RATE LIMIT ----
+      // Transform mode (skills applied to an existing report) NEVER consumes quota
+      // and NEVER blocks a user who already has a report — even a free user.
       const isTransform = mode === "transform";
-      const rl = await checkRateLimit(env, identity, quota, !isTransform);
+      let rl;
+      if (isTransform) {
+        rl = { allowed: true, remaining: null, limit: null, transform: true };
+      } else if (userType === "admin") {
+        rl = { allowed: true, remaining: Infinity, limit: Infinity };
+      } else if (userType === "paid") {
+        rl = await checkPaidRateLimit(env, identity, quota);
+      } else {
+        rl = await checkFreeRateLimit(env, identity);
+      }
+
       if (!rl.allowed) {
+        if (rl.reason === "global_limit") {
+          return jsonResponse({
+            error: "rate_limit_exceeded",
+            reason: "global_free_ceiling",
+            message: "All free trials for today have been used. Please try again tomorrow or purchase a license for 200 searches/day.",
+            remaining: 0,
+            limit: rl.limit,
+            global_remaining: 0,
+            global_limit: rl.global_limit,
+            user_type: userType,
+            upgrade_url: env.GUMROAD_URL || null
+          }, 429, corsHeaders);
+        }
         return jsonResponse({
           error: "rate_limit_exceeded",
+          reason: "visitor_free_trial_used",
           message: userType === "paid"
             ? `Daily limit of ${CONFIG.RATE_LIMIT_PAID} searches reached. Resets at midnight UTC.`
-            : `Free daily limit of ${CONFIG.RATE_LIMIT_FREE} searches reached. Purchase a license for ${CONFIG.RATE_LIMIT_PAID} searches/day.`,
+            : "You have used your free trial for today. Purchase a license for 200 searches/day — and use all 15 skills on the same report without any extra quota.",
           remaining: 0,
           limit: rl.limit,
+          global_remaining: rl.global_remaining ?? null,
+          global_limit: rl.global_limit ?? null,
           user_type: userType,
           upgrade_url: userType === "free" ? (env.GUMROAD_URL || null) : null
         }, 429, corsHeaders);
@@ -822,16 +1100,19 @@ export default {
 
       const startedAt = Date.now();
 
-      // ---- TRANSFORM EXISTING REPORT (no new Tavily search) ----
+      // ---- TRANSFORM EXISTING REPORT (no new Tavily search, no quota) ----
       if (mode === "transform") {
         const baseAnswer = String(body?.base_answer || "").slice(0, 10000);
-        const baseSources = Array.isArray(body?.base_sources)
-          ? body.base_sources.slice(0, 12).map((s, i) => ({
-              title: String(s?.title || `Source ${i + 1}`).slice(0, 200),
-              url: String(s?.url || "").slice(0, 1000),
-              content: String(s?.snippet || s?.content || "").slice(0, 700)
+        const baseSources = prepareSources(
+          Array.isArray(body?.base_sources)
+            ? body.base_sources.slice(0, CONFIG.MAX_SEARCH_RESULTS).map((s) => ({
+              title: s?.title,
+              url: s?.url,
+              content: String(s?.snippet || s?.content || "")
             }))
-          : [];
+            : [],
+          { dedupe: false }
+        );
         if (!baseAnswer) return jsonResponse({ error: "missing_base_report" }, 400, corsHeaders);
         try {
           const sourceContext = buildSearchContext(baseSources, "");
@@ -839,13 +1120,16 @@ export default {
             { role: "system", content: buildTransformPrompt(query, effectiveLang, country, skill) },
             { role: "user", content: `EXISTING REPORT:\n\n${baseAnswer}\n\nEXISTING SOURCES:\n\n${sourceContext}\n\nTransform this same report now.` }
           ], { temperature: CONFIG.TEMPERATURE, max_tokens: CONFIG.MAX_TOKENS });
+
+          let finalTransformed = normalizeMarkdownTables(transformed);
+
           await incrementStat(env, "success");
           const sources = baseSources.map((s, i) => ({ id: i + 1, title: s.title, url: s.url, snippet: s.content, score: null }));
           return jsonResponse({
             ok: true,
             report_id: crypto.randomUUID(),
             created_at: new Date().toISOString(),
-            answer: transformed,
+            answer: finalTransformed,
             sources,
             logs: [
               { stage: 1, status: "reused", name: "Existing Sources", count: sources.length },
@@ -858,9 +1142,12 @@ export default {
               query, lang: effectiveLang, lang_detected: detectedLang, lang_client: clientLang,
               lang_mismatch: detectedLang !== clientLang, country, skill,
               mode: "transform", reused_sources: true, sources_count: sources.length,
-              elapsed_ms: Date.now() - startedAt, remaining_quota: rl.remaining,
-              quota_limit: rl.limit, user_type: userType, license: licenseMeta,
-              is_admin: userType === "admin", worker_version: "6.3"
+              elapsed_ms: Date.now() - startedAt,
+              remaining_quota: null,
+              quota_limit: null,
+              quota_consumed: false,
+              user_type: userType, license: licenseMeta,
+              is_admin: userType === "admin", worker_version: "7.1"
             }
           }, 200, corsHeaders);
         } catch (e) {
@@ -869,20 +1156,29 @@ export default {
           return jsonResponse({
             error: "transform_failed",
             message: userType === "admin" ? (e.message || "Unknown error") : "Report transformation temporarily unavailable.",
-            remaining_quota: rl.remaining
+            remaining_quota: null
           }, 500, corsHeaders);
         }
       }
 
       try {
-        const { results, answer: tavilyAnswer } = await tavilySearch(env, query);
+        const { results: rawResults, answer: tavilyAnswer } = await tavilySearch(env, query);
+        const results = prepareSources(rawResults);
+        if (results.length === 0) {
+          await incrementStat(env, "failure");
+          return jsonResponse({
+            error: "no_sources_found",
+            message: "No usable sources were found for this question. Try rephrasing it.",
+            remaining_quota: rl.remaining
+          }, 502, corsHeaders);
+        }
         const context = buildSearchContext(results, tavilyAnswer);
 
         let plan = "";
         try {
           plan = await groqCompleteWithFallback(env, [
             { role: "system", content: buildPlanPrompt(query, effectiveLang, skill) },
-            { role: "user", content: `SEARCH SNIPPETS:\n\n${context.slice(0, 6000)}\n\nProduce the short plan.` }
+            { role: "user", content: `SEARCH SNIPPETS:\n\n${context.slice(0, 9500)}\n\nProduce the short plan.` }
           ], { temperature: CONFIG.TEMPERATURE_PLAN, max_tokens: CONFIG.MAX_TOKENS_PLAN });
         } catch (e) {
           console.warn("Plan pass failed:", e.message);
@@ -890,8 +1186,8 @@ export default {
         }
 
         let answer = await groqCompleteWithFallback(env, [
-          { role: "system", content: buildReportPrompt(query, effectiveLang, country, plan, skill) },
-          { role: "user", content: `SEARCH RESULTS:\n\n${context}\n\nNow produce the final report. Cite [n].` }
+          { role: "system", content: buildReportPrompt(query, effectiveLang, country, plan, skill, results.length) },
+          { role: "user", content: `SOURCES PROVIDED: ${results.length} (numbered [1] to [${results.length}]).\n\nSEARCH RESULTS:\n\n${context}\n\nNow produce the final report. Cite [n].` }
         ], { temperature: CONFIG.TEMPERATURE, max_tokens: CONFIG.MAX_TOKENS });
 
         let selfCheck = "";
@@ -906,7 +1202,7 @@ export default {
         }
 
         const selfCheckClean = (selfCheck || "").trim().toUpperCase();
-        if (selfCheckClean.startsWith("FAIL")) {
+        if (selfCheckClean && !selfCheckClean.startsWith("PASS") && selfCheckClean !== "SKIPPED") {
           try {
             answer = await groqCompleteWithFallback(env, [
               { role: "system", content: `Fix a report based on QA failures. Keep same structure/language.` },
@@ -917,8 +1213,12 @@ export default {
           }
         }
 
+        answer = normalizeCitations(answer);
         answer = filterBlacklistedProducts(answer, query);
-        answer = flagPriceSanityIssues(answer);
+        if (isEarbudQuery(query)) answer = flagPriceSanityIssues(answer);
+        answer = normalizeMarkdownTables(answer);
+        const verification = verifyReportNumbers(answer, results);
+        answer = verification.answer;
 
         const elapsed = Date.now() - startedAt;
         const reportId = crypto.randomUUID();
@@ -929,7 +1229,7 @@ export default {
           id: i + 1,
           title: String(r.title || "").slice(0, 200),
           url: String(r.url || ""),
-          snippet: String(r.content || "").slice(0, 300),
+          snippet: String(r.content || "").slice(0, 500),
           score: typeof r.score === "number" ? r.score : null
         }));
 
@@ -960,13 +1260,18 @@ export default {
             country,
             skill,
             sources_count: results.length,
+            sources_in_report: results.length,
+            numbers_checked: verification.checked,
+            numbers_unverified: verification.flagged,
             elapsed_ms: elapsed,
             remaining_quota: rl.remaining,
             quota_limit: rl.limit,
+            global_remaining: rl.global_remaining ?? null,
+            global_limit: rl.global_limit ?? null,
             user_type: userType,
             license: licenseMeta,
             is_admin: userType === "admin",
-            worker_version: "6.3",
+            worker_version: "7.1",
             self_check: selfCheckClean.slice(0, 200)
           }
         }, 200, corsHeaders);
