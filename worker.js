@@ -55,17 +55,41 @@
                                                                         return Number.isFinite(n) && n > 0 ? n : CONFIG.FREE_GLOBAL_DAILY_LIMIT;
                                                                         }
 
-                                                                        // Detects whether a query is about buying/comparing products, so the report
-                                                                        // format can adapt instead of forcing a price column everywhere.
-                                                                        function isShoppingQuery(query) {
-                                                                          if (!query) return false;
-                                                                            const q = String(query).toLowerCase();
-                                                                              if (/\b(best|cheap|cheapest|buy|price|pricing|under|below|budget|review|vs|versus|compare|deal|discount|sale|affordable|top)\b/i.test(q)) return true;
-                                                                                if (/[$€£¥₹]\s*\d/.test(query)) return true;
-                                                                                  if (/(أفضل|أرخص|شراء|سعر|أسعار|تحت|مقارنة|مراجعة|رخيص|تخفيض|عرض)/.test(query)) return true;
-                                                                                    if (/\b(headphones?|earbuds?|laptops?|phones?|mics?|microphones?|cameras?|monitors?|keyboards?|mice|mouses?|tablets?|smartwatch(?:es)?|watches?|tvs?|speakers?|cars?)\b/i.test(q)) return true;
-                                                                                      return false;
-                                                                                      }
+                                                                        // Stricter shopping detection: only triggers on real buying signals.
+// "top", "compare", "review", "best", "vs" alone are TOO generic and are
+// used in research/trend queries too — they must NOT trigger the price column.
+function isShoppingQuery(query) {
+  if (!query) return false;
+  const q = String(query).toLowerCase();
+
+  // 1. Currency + number → definitely shopping
+  if (/[$€£¥₹]\s*\d/.test(query)) return true;
+
+  // 2. Strong English shopping verbs / price bounds
+  if (/\b(buy|purchase|cheapest|cheaper|affordable|discount|coupon|on sale|deal)\b/i.test(q)) return true;
+  if (/\b(under|below)\s*[$€£¥₹\d]/i.test(q)) return true;
+
+  // 3. Strong Arabic shopping verbs / price bounds
+  if (/(شراء|أسعار|سعر|رخيص|أرخص|تخفيض|عرض\s|تحت\s*\d)/i.test(query)) return true;
+
+  // 4. Product category nouns (English)
+  if (/\b(headphones?|earbuds?|laptops?|phones?|smartphones?|mics?|microphones?|cameras?|monitors?|keyboards?|mice|mouses?|tablets?|smartwatch(?:es)?|watches?|tvs?|speakers?|cars?|vehicles?|gpus?|cpus?|graphics cards?)\b/i.test(q)) return true;
+
+  // 5. Product category nouns (Arabic)
+  if (/(لابتوب|موبايل|هاتف|سماعة|سماعات|مايك|كاميرا|شاشة|كيبورد|ماوس|تابلت|ساعة ذكية|تلفزيون|سيارة|كرت شاشة)/.test(query)) return true;
+
+  return false;
+}
+                                                                        
+                                                                        
+                                                                          
+                                                                            
+                                                                              
+                                                                                
+                                                                                  
+                                                                                
+                                                                                      
+                                                                                      
 
                                                                                       // ============================================================================
                                                                                       // LANGUAGE DETECTION
