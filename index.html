@@ -1190,7 +1190,7 @@ function renderTransformResult(targetSkill, fromCache){
   if(lastReportSources&&lastReportSources.length){
     src='<div class="srcs">'+lastReportSources.slice(0,12).map(function(s,i){
       var href=safeUrl(s.url);
-      return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';
+      return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+(i+1)+'. '+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';
     }).join('')+'</div>';
   }
   var header='';
