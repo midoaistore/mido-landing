@@ -1160,7 +1160,7 @@ async function doSearch(){
     var formattedAns = parseMarkdown(outcome.answer);
     var src='';
     if(outcome.sources&&outcome.sources.length){
-      src='<div class="srcs">'+outcome.sources.src='<div class="srcs">'+lastReportSources.slice(0,12).map(function(s,i){var href=safeUrl(s.url); return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+(i+1)+'. '+esc(s.title||'')+'</h5>+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
+      src='<div class="srcs">'+outcome.sources.slice(0,6).map(function(s){var href=safeUrl(s.url); return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
     }
     res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="ans">'+formattedAns+'</div>'+src+reportActions();
 
@@ -1188,7 +1188,7 @@ async function doSearch(){
 function renderTransformResult(targetSkill, fromCache){
   var src='';
   if(lastReportSources&&lastReportSources.length){
-    src='<div class="srcs">'+lastReportSources.slice(0,12).map(function(s,i){
+    src='<div class="srcs">'+lastReportSources.slice(0,6).map(function(s){
       var href=safeUrl(s.url);
       return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';
     }).join('')+'</div>';
