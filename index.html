@@ -565,14 +565,14 @@ function updateAdminBadge(){
 updateAdminBadge();
 
 var POLICY_T = {
-  en:{privacy:{title:'Privacy Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>We collect only the data needed to operate Mido Deep Search.</p><h4>1. Data We Collect</h4><ul><li>Search queries are sent to Tavily and Groq to create the report.</li><li>A random Visitor ID is stored in your browser to enforce the free-trial limit.</li><li>The selected country is used to choose research context and currency preference.</li></ul><h4>2. Tracking</h4><p>Meta Pixel may measure page views and purchase-button interactions. You can disable tracking in your browser or Meta settings.</p><h4>3. Third Parties</h4><p>Payments are handled by Gumroad. We do not receive your payment details.</p><p>Contact: support@midoaistore.com</p>`},refund:{title:'Refund Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>This is a digital product with immediate access.</p><h4>1. Free Trial</h4><p>One free search is provided so you can test the service before purchase.</p><h4>2. Creating Your API Keys</h4><p>After purchase, we do not send ready-made API keys. You create your own keys from your accounts: create a Tavily key at <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a>, and a Groq key at <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. The setup guide explains where to add them to the Worker.</p><h4>3. Refunds through Gumroad</h4><p>Refund requests can be submitted within one week (7 days) of purchase and are handled according to Gumroad's refund policy. If you were charged twice, include your Gumroad receipt when contacting support.</p><p>Contact: support@midoaistore.com</p>`}},
-  ar:{privacy:{title:'سياسة الخصوصية',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>نجمع فقط البيانات اللازمة لتشغيل Mido Deep Search.</p><h4>1. البيانات التي نجمعها</h4><ul><li>تُرسل أسئلة البحث إلى Tavily وGroq لإنشاء التقرير.</li><li>يُحفظ معرّف زائر عشوائي في المتصفح لتطبيق حد التجربة المجانية.</li><li>تُستخدم الدولة المختارة لتحديد سياق البحث وتفضيل العملة.</li></ul><h4>2. التتبع</h4><p>قد يستخدم Meta Pixel قياس زيارات الصفحة والنقر على زر الشراء. يمكنك تعطيل التتبع من المتصفح أو إعدادات Meta.</p><h4>3. الخدمات الخارجية</h4><p>تُعالج المدفوعات عبر Gumroad ولا نصل إلى بيانات الدفع.</p><p>للتواصل: support@midoaistore.com</p>`},refund:{title:'سياسة الاسترداد',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>هذا منتج رقمي مع وصول فوري.</p><h4>1. التجربة المجانية</h4><p>نوفر بحثًا مجانيًا واحدًا لتجربة الخدمة قبل الشراء.</p><h4>2. إنشاء مفاتيح API</h4><p>بعد الشراء لا نرسل مفاتيح API جاهزة. ينشئ المستخدم مفاتيحه بنفسه من حساباته: مفتاح Tavily من <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a>، ومفتاح Groq من <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. يوضح دليل الإعداد مكان إضافة المفاتيح داخل الـWorker.</p><h4>3. الاسترداد عبر Gumroad</h4><p>يمكن تقديم طلب الاسترداد خلال أسبوع واحد (7 أيام) من تاريخ الشراء، وتتم معالجة الطلب وفق سياسة الاسترداد الخاصة بمنصة Gumroad. وفي حالة الخصم المكرر، أرفق إيصال Gumroad عند التواصل مع الدعم.</p><p>للتواصل: support@midoaistore.com</p>`}},
-  fr:{privacy:{title:'Politique de confidentialité',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Nous collectons uniquement les données nécessaires au fonctionnement du service.</p><h4>1. Données collectées</h4><ul><li>Les requêtes sont envoyées à Tavily et Groq pour créer le rapport.</li><li>Un identifiant de visiteur aléatoire est conservé pour appliquer la limite d’essai.</li><li>Le pays choisi sert au contexte et à la préférence monétaire.</li></ul><h4>2. Suivi</h4><p>Meta Pixel peut mesurer les visites et les clics d’achat. Vous pouvez le désactiver dans votre navigateur ou les réglages Meta.</p><h4>3. Tiers</h4><p>Les paiements sont traités par Gumroad.</p><p>Contact : support@midoaistore.com</p>`},refund:{title:'Politique de remboursement',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Il s’agit d’un produit numérique à accès immédiat.</p><p>Après l’achat, les clés API ne sont pas fournies prêtes à l’emploi : l’utilisateur crée sa clé Tavily sur <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> et sa clé Groq sur <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. Le guide explique leur ajout au Worker.</p><p>Une demande de remboursement peut être envoyée dans la semaine (7 jours) suivant l’achat, conformément à la politique de Gumroad. Contactez-nous avec votre reçu Gumroad.</p>`}},
-  de:{privacy:{title:'Datenschutzrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Wir erheben nur Daten, die für den Betrieb des Dienstes erforderlich sind.</p><h4>Erhobene Daten</h4><p>Suchanfragen werden an Tavily und Groq gesendet. Eine zufällige Besucher-ID setzt das Testlimit durch. Das gewählte Land dient dem Suchkontext und der Währungspräferenz.</p><h4>Tracking und Drittanbieter</h4><p>Meta Pixel kann Besuche und Kaufklicks messen. Zahlungen werden von Gumroad verarbeitet.</p><p>Kontakt: support@midoaistore.com</p>`},refund:{title:'Rückerstattungsrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Bei diesem digitalen Produkt erfolgt der Zugriff sofort.</p><p>Nach dem Kauf werden keine fertigen API-Schlüssel gesendet. Der Nutzer erstellt seinen Tavily-Schlüssel unter <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> und seinen Groq-Schlüssel unter <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. Die Anleitung erklärt die Einrichtung im Worker.</p><p>Eine Rückerstattung kann innerhalb einer Woche (7 Tage) nach dem Kauf gemäß der Gumroad-Richtlinie beantragt werden. Bitte den Gumroad-Beleg beifügen.</p>`}},
-  ja:{privacy:{title:'プライバシーポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>サービス運営に必要なデータのみを収集します。</p><p>検索内容はレポート作成のためTavilyとGroqへ送信されます。無料試用制限のため匿名の訪問者IDを保存します。選択した国は検索コンテキストと通貨設定に使用します。支払いはGumroadが処理します。</p><p>連絡先：support@midoaistore.com</p>`},refund:{title:'返金ポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>即時アクセスのデジタル商品です。</p><p>購入後、完成済みのAPIキーは送付されません。ユーザーが <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> でTavilyキーを、<a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> でGroqキーを作成します。設定方法はガイドで説明します。</p><p>返金は購入から1週間（7日）以内に、Gumroadのポリシーに従って申請できます。領収書を添えてご連絡ください。</p>`}},
-  zh:{privacy:{title:'隐私政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>我们只收集运行服务所需的数据。</p><p>搜索问题会发送给Tavily和Groq以生成报告。我们保存随机访客ID以执行免费试用限制。选择的国家用于研究上下文和货币偏好。付款由Gumroad处理。</p><p>联系：support@midoaistore.com</p>`},refund:{title:'退款政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>这是即时提供访问权限的数字产品。</p><p>购买后不会提供现成的API密钥。用户需要在 <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> 创建Tavily密钥，并在 <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> 创建Groq密钥。设置指南会说明如何将密钥添加到Worker。</p><p>可在购买后一个星期（7天）内按照Gumroad退款政策提交退款申请，请附上Gumroad收据。</p>`}},
-  es:{privacy:{title:'Política de privacidad',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Solo recopilamos los datos necesarios para operar el servicio.</p><p>Las consultas se envían a Tavily y Groq para crear el informe. Guardamos un ID de visitante aleatorio para aplicar el límite de prueba. El país elegido define el contexto y la preferencia de moneda. Los pagos los procesa Gumroad.</p><p>Contacto: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Es un producto digital con acceso inmediato.</p><p>Después de la compra no se entregan claves API listas. El usuario crea su clave de Tavily en <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> y su clave de Groq en <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. La guía explica cómo añadirlas al Worker.</p><p>La solicitud de reembolso puede presentarse dentro de una semana (7 días) según la política de Gumroad. Incluya el recibo de Gumroad.</p>`}},
-  pt:{privacy:{title:'Política de privacidade',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Coletamos apenas os dados necessários para operar o serviço.</p><p>As consultas são enviadas à Tavily e à Groq para gerar o relatório. Guardamos um ID aleatório de visitante para aplicar o limite de teste. O país escolhido define o contexto e a preferência de moeda. Os pagamentos são processados pela Gumroad.</p><p>Contato: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Este é um produto digital com acesso imediato.</p><p>Após a compra, não são fornecidas chaves API prontas. O usuário cria a chave Tavily em <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> e a chave Groq em <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. O guia explica como adicioná-las ao Worker.</p><p>O pedido de reembolso pode ser enviado em até uma semana (7 dias), conforme a política da Gumroad. Inclua o recibo da Gumroad.</p>`}}
+  en:{privacy:{title:'Privacy Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>We collect only the data needed to operate Mido Deep Search.</p><h4>1. Data We Collect</h4><ul><li>Search queries are sent to Tavily and Groq to create the report.</li><li>A random Visitor ID is stored in your browser to enforce the free-trial limit.</li><li>The selected country is used to choose research context and currency preference.</li></ul><h4>2. Tracking</h4><p>Meta Pixel may measure page views and purchase-button interactions. You can disable tracking in your browser or Meta settings.</p><h4>3. Third Parties</h4><p>Payments are handled by Gumroad. We do not receive your payment details.</p><p>Contact: support@midoaistore.com</p>`},refund:{title:'Refund Policy',html:`<p><strong>Last updated: October 2026</strong></p><p>This is a digital product with immediate access.</p><h4>1. Free Trial</h4><p>One free search is provided so you can test the service before purchase.</p><h4>2. Creating Your API Keys</h4><p>After purchase, we do not send ready-made API keys. You create your own keys from your accounts: create a Tavily key at <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a>, and a Groq key at <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. The setup guide explains where to add them to the Worker.</p><h4>3. Refunds through Gumroad</h4><p>7-day guarantee if we do not resolve a technical issue, handled in accordance with Gumroad's refund policy. If you were charged twice, include your Gumroad receipt when contacting support.</p><p>Contact: support@midoaistore.com</p>`}},
+  ar:{privacy:{title:'سياسة الخصوصية',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>نجمع فقط البيانات اللازمة لتشغيل Mido Deep Search.</p><h4>1. البيانات التي نجمعها</h4><ul><li>تُرسل أسئلة البحث إلى Tavily وGroq لإنشاء التقرير.</li><li>يُحفظ معرّف زائر عشوائي في المتصفح لتطبيق حد التجربة المجانية.</li><li>تُستخدم الدولة المختارة لتحديد سياق البحث وتفضيل العملة.</li></ul><h4>2. التتبع</h4><p>قد يستخدم Meta Pixel قياس زيارات الصفحة والنقر على زر الشراء. يمكنك تعطيل التتبع من المتصفح أو إعدادات Meta.</p><h4>3. الخدمات الخارجية</h4><p>تُعالج المدفوعات عبر Gumroad ولا نصل إلى بيانات الدفع.</p><p>للتواصل: support@midoaistore.com</p>`},refund:{title:'سياسة الاسترداد',html:`<p><strong>آخر تحديث: أكتوبر 2026</strong></p><p>هذا منتج رقمي مع وصول فوري.</p><h4>1. التجربة المجانية</h4><p>نوفر بحثًا مجانيًا واحدًا لتجربة الخدمة قبل الشراء.</p><h4>2. إنشاء مفاتيح API</h4><p>بعد الشراء لا نرسل مفاتيح API جاهزة. ينشئ المستخدم مفاتيحه بنفسه من حساباته: مفتاح Tavily من <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a>، ومفتاح Groq من <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. يوضح دليل الإعداد مكان إضافة المفاتيح داخل الـWorker.</p><h4>3. الاسترداد عبر Gumroad</h4><p>ضمان 7 أيام إن لم نحلّ مشكلة تقنية، وفق سياسة الاسترداد الخاصة بمنصة Gumroad. وفي حالة الخصم المكرر، أرفق إيصال Gumroad عند التواصل مع الدعم.</p><p>للتواصل: support@midoaistore.com</p>`}},
+  fr:{privacy:{title:'Politique de confidentialité',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Nous collectons uniquement les données nécessaires au fonctionnement du service.</p><h4>1. Données collectées</h4><ul><li>Les requêtes sont envoyées à Tavily et Groq pour créer le rapport.</li><li>Un identifiant de visiteur aléatoire est conservé pour appliquer la limite d’essai.</li><li>Le pays choisi sert au contexte et à la préférence monétaire.</li></ul><h4>2. Suivi</h4><p>Meta Pixel peut mesurer les visites et les clics d’achat. Vous pouvez le désactiver dans votre navigateur ou les réglages Meta.</p><h4>3. Tiers</h4><p>Les paiements sont traités par Gumroad.</p><p>Contact : support@midoaistore.com</p>`},refund:{title:'Politique de remboursement',html:`<p><strong>Dernière mise à jour : octobre 2026</strong></p><p>Il s’agit d’un produit numérique à accès immédiat.</p><p>Après l’achat, les clés API ne sont pas fournies prêtes à l’emploi : l’utilisateur crée sa clé Tavily sur <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> et sa clé Groq sur <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. Le guide explique leur ajout au Worker.</p><p>Garantie de 7 jours si nous ne résolvons pas un problème technique, conformément à la politique de Gumroad. Contactez-nous avec votre reçu Gumroad.</p>`}},
+  de:{privacy:{title:'Datenschutzrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Wir erheben nur Daten, die für den Betrieb des Dienstes erforderlich sind.</p><h4>Erhobene Daten</h4><p>Suchanfragen werden an Tavily und Groq gesendet. Eine zufällige Besucher-ID setzt das Testlimit durch. Das gewählte Land dient dem Suchkontext und der Währungspräferenz.</p><h4>Tracking und Drittanbieter</h4><p>Meta Pixel kann Besuche und Kaufklicks messen. Zahlungen werden von Gumroad verarbeitet.</p><p>Kontakt: support@midoaistore.com</p>`},refund:{title:'Rückerstattungsrichtlinie',html:`<p><strong>Letzte Aktualisierung: Oktober 2026</strong></p><p>Bei diesem digitalen Produkt erfolgt der Zugriff sofort.</p><p>Nach dem Kauf werden keine fertigen API-Schlüssel gesendet. Der Nutzer erstellt seinen Tavily-Schlüssel unter <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> und seinen Groq-Schlüssel unter <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. Die Anleitung erklärt die Einrichtung im Worker.</p><p>7-Tage-Garantie, falls wir ein technisches Problem nicht lösen können, gemäß der Gumroad-Richtlinie. Bitte den Gumroad-Beleg beifügen.</p>`}},
+  ja:{privacy:{title:'プライバシーポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>サービス運営に必要なデータのみを収集します。</p><p>検索内容はレポート作成のためTavilyとGroqへ送信されます。無料試用制限のため匿名の訪問者IDを保存します。選択した国は検索コンテキストと通貨設定に使用します。支払いはGumroadが処理します。</p><p>連絡先：support@midoaistore.com</p>`},refund:{title:'返金ポリシー',html:`<p><strong>最終更新：2026年10月</strong></p><p>即時アクセスのデジタル商品です。</p><p>購入後、完成済みのAPIキーは送付されません。ユーザーが <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> でTavilyキーを、<a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> でGroqキーを作成します。設定方法はガイドで説明します。</p><p>技術的な問題を解決できない場合はGumroadのポリシーに基づき7日間保証が適用されます。領収書を添えてご連絡ください。</p>`}},
+  zh:{privacy:{title:'隐私政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>我们只收集运行服务所需的数据。</p><p>搜索问题会发送给Tavily和Groq以生成报告。我们保存随机访客ID以执行免费试用限制。选择的国家用于研究上下文和货币偏好。付款由Gumroad处理。</p><p>联系：support@midoaistore.com</p>`},refund:{title:'退款政策',html:`<p><strong>更新日期：2026年10月</strong></p><p>这是即时提供访问权限的数字产品。</p><p>购买后不会提供现成的API密钥。用户需要在 <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> 创建Tavily密钥，并在 <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> 创建Groq密钥。设置指南会说明如何将密钥添加到Worker。</p><p>如果我们未能解决技术问题，可在Gumroad政策范围内享受7天保障。请附上Gumroad收据。</p>`}},
+  es:{privacy:{title:'Política de privacidad',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Solo recopilamos los datos necesarios para operar el servicio.</p><p>Las consultas se envían a Tavily y Groq para crear el informe. Guardamos un ID de visitante aleatorio para aplicar el límite de prueba. El país elegido define el contexto y la preferencia de moneda. Los pagos los procesa Gumroad.</p><p>Contacto: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última actualización: octubre de 2026</strong></p><p>Es un producto digital con acceso inmediato.</p><p>Después de la compra no se entregan claves API listas. El usuario crea su clave de Tavily en <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> y su clave de Groq en <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. La guía explica cómo añadirlas al Worker.</p><p>Garantía de 7 días si no resolvemos un problema técnico, según la política de Gumroad. Incluya el recibo de Gumroad.</p>`}},
+  pt:{privacy:{title:'Política de privacidade',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Coletamos apenas os dados necessários para operar o serviço.</p><p>As consultas são enviadas à Tavily e à Groq para gerar o relatório. Guardamos um ID aleatório de visitante para aplicar o limite de teste. O país escolhido define o contexto e a preferência de moeda. Os pagamentos são processados pela Gumroad.</p><p>Contato: support@midoaistore.com</p>`},refund:{title:'Política de reembolso',html:`<p><strong>Última atualização: outubro de 2026</strong></p><p>Este é um produto digital com acesso imediato.</p><p>Após a compra, não são fornecidas chaves API prontas. O usuário cria a chave Tavily em <a href="https://app.tavily.com" target="_blank" rel="noopener noreferrer">app.tavily.com</a> e a chave Groq em <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>. O guia explica como adicioná-las ao Worker.</p><p>Garantia de 7 dias se não resolvermos um problema técnico, conforme a política da Gumroad. Inclua o recibo da Gumroad.</p>`}}
 };
 window.openPolicy = function(e,type){
   e.preventDefault();
@@ -786,6 +786,135 @@ var T = {
   es: { nav_buy:"Obtener acceso — $19",pill:"⚡ Investigación verificada • 5-40s",hero_title:"Obtén un <span class=\"g\">informe estructurado</span>",hero_desc:"Pipeline verificado de 5 etapas en unos 5-40 segundos.",cta_try:"Prueba gratis",cta_report:"Ver informe completo",t1:"✓ 1 prueba / visitante",t2:"✓ 100 búsquedas gratis / día",t3:"✓ Usted crea sus propias claves",st_visitors:"Visitantes",st_searches:"Búsquedas hoy",st_ok:"Exitosas",st_fail:"Fallidas",st_left:"Gratis restantes",skills_title:"Skills de investigación",skills_sub:"Elige un skill antes de buscar.",sk1:"Búsqueda profunda",sk2:"Resumir",sk3:"Comparar",sk4:"Recomendar",sk5:"Revisar precio",sk6:"Guardar informe",demo_title:"Demo en vivo",demo_sub:"Motor real. Las etapas se iluminan durante la búsqueda.",ph:"Mejores auriculares ANC por menos de $150",search_btn:"Buscar 🔍",meta1:"Gratis: 1 / visitante",meta2:"Tope diario: 100",s1:"Búsqueda de fuentes",s1d:"Fuentes live",s2:"Construcción de tesis",s2d:"Argumento central",s3:"Reducir y ordenar",s3d:"Señales fuertes",s4:"Control de riesgos",s4d:"Local + global",s5:"Informe final",s5d:"5-40 segundos",laws_title:"Leyes de seguridad de Asimov",laws_sub:"Reglas para una salida útil y honesta.",laws_trust:"Por qué importa: Mido reduce respuestas erróneas.",law1_t:"No dañar con falsa confianza",law1_s:"No presentar conjeturas como hechos.",law1_d:"Si la evidencia es débil, el informe debe decirlo.",law2_t:"Servir el objetivo de investigación",law2_s:"Optimizar la decisión.",law2_d:"Salida estructurada: resumen, comparación, recomendación.",law3_t:"Proteger el sistema",law3_s:"Uso justo y protección en servidor.",law3_d:"Los límites se aplican en el servidor.",law4_t:"Respetar el mercado local",law4_s:"Incluir contexto de precios locales.",law4_d:"Conecta reseñas internacionales con precios locales.",rings_title:"Cinco anillos de protección",rings_sub:"Toca un anillo para leer el detalle.",ring1_t:"Anillo 1 — Verificación",ring1_s:"Recoger fuentes live.",ring1_d:"Varias fuentes con puntuación.",ring2_t:"Anillo 2 — Tesis",ring2_s:"Construir el argumento.",ring2_d:"Tesis clara sobre opciones.",ring3_t:"Anillo 3 — Reducir",ring3_s:"Solo la evidencia más fuerte.",ring3_d:"Compresión a fuentes útiles.",ring4_t:"Anillo 4 — Riesgos",ring4_s:"Validar riesgos de mercado.",ring4_d:"Realismo de precios y disponibilidad.",ring5_t:"Anillo 5 — Confianza",ring5_s:"Generar el informe final.",ring5_d:"Resumen y recomendación final.",case_title:"Ejemplo de informe real",case_sub:"Generado en <strong>35 segundos</strong>",case_h:"Mejores auriculares ANC bajo $150",case_quick:"Resumen rápido",cq1:"<strong>Sony WH-CH720N</strong> — mejor global.",cq2:"<strong>JBL Tune 770NC</strong> — mejor presupuesto.",cq3:"<strong>OneOdio Focus A6</strong> — entrada.",th1:"Modelo",th2:"Batería",th_price:"Precio",th_comfort:"Comodidad",th_verdict:"Veredicto",r1:"Mejor global",r2:"Mejor presupuesto",r3:"Entrada",case_sources:"Fuentes: SoundGuys, CNET, TechRadar.",full_preview:"Vista completa",save_example:"Guardar este informe",price_title:"Precio simple",price_sub:"Pago único.",once:"único",price_local:"o equivalente en moneda local vía Gumroad.",f1:"Acceso completo",f2:"Usted crea sus claves Groq + Tavily (planes gratuitos disponibles)",f3:"Informes verificados",f4:"Guía de configuración",f5:"1 prueba gratis",buy_btn:"Acceso completo — $19",faq_title:"FAQ",fq1:"¿Cuánto tarda?",fa1:"Normalmente 5-40 segundos.",fq2:"¿Qué incluye $19?",fa2:"Código completo + guía. Usted crea sus propias claves Groq + Tavily (planes gratuitos disponibles). Pago único vía Gumroad.",fq3:"¿Límites?",fa3:"1 por visitante. Hasta 100/día.",fq4:"¿Fuentes reales?",fa4:"Sí, tras rankear fuentes documentadas.",footer:"© 2026 Mido AI Store",footer2:"Fuentes en vivo. Verifica precios.",modal_title:"Informe completo",modal_q:"Consulta",modal_close:"Cerrar",modal_winner:"Ganador",modal_summary:"Resumen",modal_sources_title:"Fuentes",modal_sources_list:"Fuentes",modal_rec_title:"Recomendación",modal_rec_text:"Texto",v_best:"Mejor global",v_budget:"Mejor presupuesto",v_solid:"Alternativa",v_entry:"Entrada",searching:"Buscando...",err_net:"Problema de red.",err_trial:"Prueba usada.",err_daily:"Límite alcanzado.",err_license:"Clave de licencia no válida.",sug1:"Mejor portátil",sug2:"Mejor micrófono",sug3:"Internet más barato",saved_ok:"Informe guardado",saved_empty:"No hay informe",skill_save_hint:"Skill Guardar",prog_sources:"fuentes",prog_elapsed:"Transcurrido",prog_remaining:"Restante",prog_complete:"Completado",prog_used:"fuentes",answer:"Respuesta",sources:"Fuentes",actual_time:"Tiempo real"},
   pt: { nav_buy:"Obter acesso — $19",pill:"⚡ Pesquisa verificada • 5-40s",hero_title:"Obtenha um <span class=\"g\">relatório estruturado</span>",hero_desc:"Pipeline verificado de 5 etapas em cerca de 5-40 segundos.",cta_try:"Teste grátis",cta_report:"Ver relatório completo",t1:"✓ 1 teste / visitante",t2:"✓ 100 pesquisas grátis / dia",t3:"✓ Você cria suas próprias chaves",st_visitors:"Visitantes",st_searches:"Pesquisas hoje",st_ok:"Sucesso",st_fail:"Falhas",st_left:"Grátis restantes",skills_title:"Skills de pesquisa",skills_sub:"Escolha um skill antes de pesquisar.",sk1:"Busca profunda",sk2:"Resumir",sk3:"Comparar",sk4:"Recomendar",sk5:"Checar preço",sk6:"Salvar relatório",demo_title:"Demo ao vivo",demo_sub:"Motor real. As etapas acendem durante a pesquisa.",ph:"Melhores fones ANC por menos de $150",search_btn:"Pesquisar 🔍",meta1:"Grátis: 1 / visitante",meta2:"Limite diário: 100",s1:"Busca de fontes",s1d:"Fontes live",s2:"Construção da tese",s2d:"Argumento central",s3:"Reduzir e rankear",s3d:"Sinais fortes",s4:"Checagem de risco",s4d:"Local + global",s5:"Relatório final",s5d:"5-40 segundos",laws_title:"Leis de segurança de Asimov",laws_sub:"Regras para saída útil e honesta.",laws_trust:"Por que importa: Mido reduz respostas erradas.",law1_t:"Não causar dano",law1_s:"Não apresentar palpites como fatos.",law1_d:"Se a evidência for fraca, o relatório deve dizer.",law2_t:"Servir o objetivo",law2_s:"Otimizar a decisão.",law2_d:"Saída estruturada: resumo, comparação, recomendação.",law3_t:"Proteger o sistema",law3_s:"Uso justo e proteção no servidor.",law3_d:"Limites aplicados no servidor.",law4_t:"Respeitar o mercado local",law4_s:"Incluir contexto de preços locais.",law4_d:"Conecta reviews internacionais com preços locais.",rings_title:"Cinco anéis de proteção",rings_sub:"Toque um anel para ler o detalhe.",ring1_t:"Anel 1 — Verificação",ring1_s:"Coletar fontes live.",ring1_d:"Várias fontes com scores.",ring2_t:"Anel 2 — Tese",ring2_s:"Montar o argumento.",ring2_d:"Tese clara sobre opções.",ring3_t:"Anel 3 — Reduzir",ring3_s:"Só a evidência mais forte.",ring3_d:"Compressão para fontes úteis.",ring4_t:"Anel 4 — Riscos",ring4_s:"Validar riscos de mercado.",ring4_d:"Realismo de preço e disponibilidade.",ring5_t:"Anel 5 — Confiança",ring5_s:"Gerar o relatório final.",ring5_d:"Resumo e recomendação final.",case_title:"Exemplo de relatório real",case_sub:"Gerado em <strong>35 segundos</strong>",case_h:"Melhores fones ANC abaixo de $150",case_quick:"Resumo rápido",cq1:"<strong>Sony WH-CH720N</strong> — melhor geral.",cq2:"<strong>JBL Tune 770NC</strong> — melhor custo.",cq3:"<strong>OneOdio Focus A6</strong> — entrada.",th1:"Modelo",th2:"Bateria",th_price:"Preço",th_comfort:"Conforto",th_verdict:"Veredito",r1:"Melhor geral",r2:"Melhor custo",r3:"Entrada",case_sources:"Fontes: SoundGuys, CNET, TechRadar.",full_preview:"Prévia completa",save_example:"Salvar este relatório",price_title:"Preço simples",price_sub:"Pagamento único.",once:"único",price_local:"ou equivalente em moeda local via Gumroad.",f1:"Acesso completo",f2:"Você cria suas chaves Groq + Tavily (planos gratuitos disponíveis)",f3:"Relatórios verificados",f4:"Guia de configuração",f5:"1 teste grátis",buy_btn:"Acesso completo — $19",faq_title:"FAQ",fq1:"Quanto tempo?",fa1:"Normalmente 5-40 segundos.",fq2:"O que inclui $19?",fa2:"Código completo + guia. Você cria suas próprias chaves Groq + Tavily (planos gratuitos disponíveis). Pagamento único via Gumroad.",fq3:"Limites?",fa3:"1 por visitante. Até 100/dia.",fq4:"Fontes reais?",fa4:"Sim, após rankear fontes documentadas.",footer:"© 2026 Mido AI Store",footer2:"Fontes ao vivo. Verifique preços.",modal_title:"Relatório completo",modal_q:"Consulta",modal_close:"Fechar",modal_winner:"Vencedor",modal_summary:"Resumo",modal_sources_title:"Fontes",modal_sources_list:"Fontes",modal_rec_title:"Recomendação",modal_rec_text:"Texto",v_best:"Melhor geral",v_budget:"Melhor custo",v_solid:"Alternativa sólida",v_entry:"Entrada",searching:"Pesquisando...",err_net:"Problema de rede.",err_trial:"Teste usado.",err_daily:"Limite atingido.",err_license:"Chave de licença inválida.",sug1:"Melhor notebook",sug2:"Melhor microfone",sug3:"Internet mais barata",saved_ok:"Relatório salvo",saved_empty:"Nenhum relatório",skill_save_hint:"Skill Salvar",prog_sources:"fontes",prog_elapsed:"Decorrido",prog_remaining:"Restante",prog_complete:"Concluído",prog_used:"fontes",answer:"Resposta",sources:"Fontes",actual_time:"Tempo real"}
 };
+
+// Translation fixes
+(function(){
+  var fix = {
+    en: {
+      case_title: "Example Report",
+      err_daily: "Your free search was used, or today's free limit was reached.",
+      t2: "✓ Free searches capped at 100/day (all visitors)",
+      meta2: "Daily cap (all visitors): 100",
+      st_left: "Your free searches left",
+      nav_buy: "Get Source Code — $19",
+      buy_btn: "Get the Source Code — $19",
+      f1: "Full source code (frontend + Cloudflare Worker)"
+    },
+    ar: {
+      case_title: "مثال على تقرير",
+      err_daily: "تم استخدام بحثك المجاني، أو انتهى الحد المجاني لليوم.",
+      t2: "✓ سقف يومي 100 بحث مجاني (لكل الزوار)",
+      meta2: "السقف اليومي (لكل الزوار): 100",
+      st_left: "متبقي لك من البحث المجاني",
+      nav_buy: "احصل على الكود المصدري — $19",
+      buy_btn: "احصل على الكود المصدري — $19",
+      f1: "الكود المصدري الكامل (واجهة + Cloudflare Worker)"
+    },
+    fr: {
+      case_title: "Exemple de rapport",
+      case_sources: "Exemple illustratif uniquement. Les prix sont indiqués dans la devise de la source citée et peuvent être obsolètes.",
+      err_daily: "Votre recherche gratuite a été utilisée, ou la limite gratuite du jour est atteinte.",
+      modal_title: "Rapport complet — Casques sous 150 $",
+      modal_q: "Requête : meilleurs casques à réduction de bruit sous 150 $",
+      modal_winner: "Gagnant : Sony WH-CH720N",
+      modal_summary: "Meilleur équilibre réduction de bruit, confort et autonomie. Le JBL Tune 770NC offre le meilleur rapport qualité-prix.",
+      modal_sources_list: "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Annonces du marché local",
+      modal_rec_text: "Choisissez le Sony WH-CH720N si le budget le permet. Choisissez le JBL Tune 770NC pour le meilleur rapport qualité-prix.",
+      t2: "✓ Recherches gratuites plafonnées à 100/jour (tous visiteurs)",
+      meta2: "Plafond quotidien (tous visiteurs) : 100",
+      st_left: "Recherches gratuites restantes",
+      nav_buy: "Obtenir le code source — $19",
+      buy_btn: "Obtenir le code source — $19",
+      f1: "Code source complet (frontend + Cloudflare Worker)"
+    },
+    de: {
+      case_title: "Beispielbericht",
+      case_sources: "Nur ein Beispiel. Preise werden in der Währung der zitierten Quelle angezeigt und können veraltet sein.",
+      err_daily: "Ihre kostenlose Suche wurde genutzt, oder das heutige Gratis-Limit ist erreicht.",
+      modal_title: "Vollständiger Bericht — Kopfhörer unter 150 $",
+      modal_q: "Anfrage: Beste Noise-Cancelling-Kopfhörer unter 150 $",
+      modal_winner: "Sieger: Sony WH-CH720N",
+      modal_summary: "Bestes Gesamtpaket aus Geräuschunterdrückung, Komfort und Akku. Der JBL Tune 770NC bietet das beste Preis-Leistungs-Verhältnis.",
+      modal_sources_list: "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Lokale Marktangebote",
+      modal_rec_text: "Wählen Sie den Sony WH-CH720N, wenn das Budget es zulässt. Wählen Sie den JBL Tune 770NC für das beste Preis-Leistungs-Verhältnis.",
+      t2: "✓ Kostenlose Suchen auf 100/Tag begrenzt (alle Besucher)",
+      meta2: "Tageslimit (alle Besucher): 100",
+      st_left: "Verbleibende Gratissuchen",
+      nav_buy: "Quellcode erhalten — $19",
+      buy_btn: "Quellcode erhalten — $19",
+      f1: "Vollständiger Quellcode (Frontend + Cloudflare Worker)"
+    },
+    es: {
+      case_title: "Informe de ejemplo",
+      case_sources: "Solo un ejemplo ilustrativo. Los precios se muestran en la moneda de la fuente citada y pueden estar desactualizados.",
+      err_daily: "Ya usaste tu búsqueda gratuita, o se alcanzó el límite gratuito de hoy.",
+      modal_title: "Informe completo — Auriculares por menos de $150",
+      modal_q: "Consulta: mejores auriculares con cancelación de ruido por menos de $150",
+      modal_winner: "Ganador: Sony WH-CH720N",
+      modal_summary: "Mejor equilibrio de cancelación de ruido, comodidad y batería. El JBL Tune 770NC ofrece la mejor relación calidad-precio.",
+      modal_sources_list: "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Anuncios del mercado local",
+      modal_rec_text: "Elige el Sony WH-CH720N si el presupuesto lo permite. Elige el JBL Tune 770NC para la mejor relación calidad-precio.",
+      t2: "✓ Búsquedas gratis limitadas a 100/día (todos los visitantes)",
+      meta2: "Tope diario (todos los visitantes): 100",
+      st_left: "Tus búsquedas gratis restantes",
+      nav_buy: "Obtener código fuente — $19",
+      buy_btn: "Obtener el código fuente — $19",
+      f1: "Código fuente completo (frontend + Cloudflare Worker)"
+    },
+    pt: {
+      case_title: "Relatório de exemplo",
+      case_sources: "Apenas um exemplo ilustrativo. Os preços aparecem na moeda da fonte citada e podem estar desatualizados.",
+      err_daily: "Você já usou sua pesquisa grátis, ou o limite grátis de hoje foi atingido.",
+      modal_title: "Relatório completo — Fones abaixo de $150",
+      modal_q: "Consulta: melhores fones com cancelamento de ruído abaixo de $150",
+      modal_winner: "Vencedor: Sony WH-CH720N",
+      modal_summary: "Melhor equilíbrio entre cancelamento de ruído, conforto e bateria. O JBL Tune 770NC tem o melhor custo-benefício.",
+      modal_sources_list: "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. Anúncios do mercado local",
+      modal_rec_text: "Escolha o Sony WH-CH720N se o orçamento permitir. Escolha o JBL Tune 770NC pelo melhor custo-benefício.",
+      t2: "✓ Pesquisas grátis limitadas a 100/dia (todos os visitantes)",
+      meta2: "Limite diário (todos os visitantes): 100",
+      st_left: "Suas pesquisas grátis restantes",
+      nav_buy: "Obter código-fonte — $19",
+      buy_btn: "Obter o código-fonte — $19",
+      f1: "Código-fonte completo (frontend + Cloudflare Worker)"
+    },
+    ja: {
+      case_title: "レポート例",
+      case_sources: "あくまで例示です。価格は引用元の通貨で表示され、最新でない場合があります。",
+      err_daily: "無料検索を使用済みか、本日の無料枠の上限に達しました。",
+      modal_title: "完全レポート — 150ドル以下のヘッドホン",
+      modal_q: "質問：150ドル以下のベストノイズキャンセリングヘッドホン",
+      modal_winner: "最優秀：Sony WH-CH720N",
+      modal_summary: "ノイズキャンセリング・快適性・バッテリーのバランスが最良。JBL Tune 770NCはコスパが最も高い。",
+      modal_sources_list: "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. 現地市場の掲載情報",
+      modal_rec_text: "予算が許せばSony WH-CH720Nを。コスパ重視ならJBL Tune 770NCを選んでください。",
+      t2: "✓ 無料検索は1日100回まで（全訪問者）",
+      meta2: "1日上限（全訪問者）：100",
+      st_left: "残りの無料検索回数",
+      nav_buy: "ソースコードを入手 — $19",
+      buy_btn: "ソースコードを入手 — $19",
+      f1: "完全なソースコード（フロントエンド + Cloudflare Worker）"
+    },
+    zh: {
+      case_title: "报告示例",
+      case_sources: "仅为示例。价格以所引用来源的货币显示，可能已过时。",
+      err_daily: "您的免费搜索已使用，或今日免费额度已达上限。",
+      modal_title: "完整报告 — 150美元以下耳机",
+      modal_q: "问题：150美元以下最佳降噪耳机",
+      modal_winner: "优胜：Sony WH-CH720N",
+      modal_summary: "降噪、舒适度和电池的综合表现最佳。JBL Tune 770NC 性价比最高。",
+      modal_sources_list: "1. SoundGuys (0.75)<br>2. CNET (0.76)<br>3. TechRadar (0.76)<br>4. 本地市场报价",
+      modal_rec_text: "预算允许时选择 Sony WH-CH720N。追求性价比选择 JBL Tune 770NC。",
+      t2: "✓ 免费搜索上限为每天100次（所有访客）",
+      meta2: "每日上限（所有访客）：100",
+      st_left: "剩余免费搜索次数",
+      nav_buy: "获取源代码 — $19",
+      buy_btn: "获取源代码 — $19",
+      f1: "完整源代码（前端 + Cloudflare Worker）"
+    }
+  };
+  Object.keys(fix).forEach(function(l){ if(T[l]) Object.assign(T[l], fix[l]); });
+})();
 
 function D(){return T[currentLang]||T.en;}
 var SKILL_NAMES={
@@ -1013,7 +1142,7 @@ function exportWord(){
   a.href=url;a.download='mido-deep-search-report-'+new Date().toISOString().slice(0,10)+'.doc';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast(actionText('worddownloaded'));
 }
 function fallbackShare(){
-  var text=encodeURIComponent(lastReportText),url='https://wa.me/?text='+text;
+  var text=encodeURIComponent(lastReportText),url='[https://wa.me/?text='+text](https://wa.me/?text='+text);
   window.open(url,'_blank','noopener,noreferrer');
   toast(actionText('shared'));
 }
@@ -1051,7 +1180,7 @@ async function fetchMyQuota(){
         leftEl.title = (d.user_type || 'admin') + ' · Unlimited';
       } else {
         leftEl.textContent = d.remaining;
-        leftEl.title = (d.user_type || 'free') + ' · ' + d.remaining + '/' + d.limit + ' left today';
+        leftEl.title = (d.user_type || 'free') + ' · ' + d.remaining + '/' + d.limit + (currentLang==='ar'?' مرة واحدة لكل زائر':' once per visitor');
       }
     }
   }catch(e){}
@@ -1127,7 +1256,7 @@ async function doSearch(){
       var limH = r.headers.get('X-RateLimit-Limit');
       if(remH !== null && remH !== '-1'){
         var leftEl = document.getElementById('stLeft');
-        if(leftEl){ leftEl.textContent = remH; if(limH) leftEl.title = remH + '/' + limH + ' left today'; }
+        if(leftEl){ leftEl.textContent = remH; if(limH) leftEl.title = remH + '/' + limH + (currentLang==='ar'?' مرة واحدة لكل زائر':' once per visitor'); }
       }
     }catch(e){}
 
@@ -1160,7 +1289,7 @@ async function doSearch(){
     var formattedAns = parseMarkdown(outcome.answer);
     var src='';
     if(outcome.sources&&outcome.sources.length){
-      src='<div class="srcs">'+outcome.sources.slice(0,6).map(function(s){var href=safeUrl(s.url); return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
+      src='<div class="srcs">'+outcome.sources.slice(0,12).map(function(s,i){var href=safeUrl(s.url); return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>['+(i+1)+'] '+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';}).join('')+'</div>';
     }
     res.innerHTML='<div style="margin-bottom:12px;padding:10px;border-radius:10px;background:rgba(0,255,163,.1);border:1px solid rgba(0,255,163,.3);text-align:center;font-size:12px;color:#6ee7b7">✅ '+D().prog_complete+' - '+D().actual_time+': '+totalTime+'s | '+outcome.sources.length+' '+D().prog_used+'</div><div class="ans">'+formattedAns+'</div>'+src+reportActions();
 
@@ -1188,9 +1317,9 @@ async function doSearch(){
 function renderTransformResult(targetSkill, fromCache){
   var src='';
   if(lastReportSources&&lastReportSources.length){
-    src='<div class="srcs">'+lastReportSources.slice(0,6).map(function(s){
+    src='<div class="srcs">'+lastReportSources.slice(0,12).map(function(s,i){
       var href=safeUrl(s.url);
-      return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>'+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';
+      return '<a class="src" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer"><h5>['+(i+1)+'] '+esc(s.title||'')+'</h5><p>'+esc(String(s.content||s.snippet||'').slice(0,160))+'</p></a>';
     }).join('')+'</div>';
   }
   var header='';
